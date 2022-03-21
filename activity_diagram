@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-03-21T17:04:13.690Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.3 Safari/605.1.15" etag="a-8fW00SPMkQdi72Hdsu" version="17.1.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-03-21T17:07:22.002Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.3 Safari/605.1.15" etag="O_CmVWrhdgs9Pm6jAIof" version="17.1.3" type="github">
   <diagram name="Page-1" id="0783ab3e-0a74-02c8-0abd-f7b4e66b4bec">
-    <mxGraphModel dx="2111" dy="897" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1963" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -156,8 +156,8 @@
         </mxCell>
         <mxCell id="iRJ_3XPwo3pVOuQBt7kB-106" value="" style="endArrow=none;startArrow=none;endFill=0;startFill=0;endSize=8;html=1;verticalAlign=bottom;labelBackgroundColor=none;strokeWidth=3;rounded=0;" edge="1" parent="1">
           <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="-60" y="920" as="sourcePoint" />
-            <mxPoint x="560" y="920" as="targetPoint" />
+            <mxPoint x="-220" y="920" as="sourcePoint" />
+            <mxPoint x="780" y="920" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="iRJ_3XPwo3pVOuQBt7kB-125" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="iRJ_3XPwo3pVOuQBt7kB-109">
@@ -309,6 +309,11 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="iRJ_3XPwo3pVOuQBt7kB-197" value="[wants to look at the match]" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="iRJ_3XPwo3pVOuQBt7kB-159">
+          <mxGeometry x="-0.8677" y="-4" relative="1" as="geometry">
+            <mxPoint x="37" y="-24" as="offset" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="iRJ_3XPwo3pVOuQBt7kB-161" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="iRJ_3XPwo3pVOuQBt7kB-156" target="iRJ_3XPwo3pVOuQBt7kB-132">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
@@ -320,7 +325,7 @@
         <mxCell id="iRJ_3XPwo3pVOuQBt7kB-156" value="" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-50.06" y="1690" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="iRJ_3XPwo3pVOuQBt7kB-172" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0.25;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="iRJ_3XPwo3pVOuQBt7kB-163" target="iRJ_3XPwo3pVOuQBt7kB-167">
+        <mxCell id="iRJ_3XPwo3pVOuQBt7kB-172" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="iRJ_3XPwo3pVOuQBt7kB-163" target="iRJ_3XPwo3pVOuQBt7kB-167">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="iRJ_3XPwo3pVOuQBt7kB-173" value="[is not part of a flat]" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="iRJ_3XPwo3pVOuQBt7kB-172">
@@ -338,7 +343,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="iRJ_3XPwo3pVOuQBt7kB-167" value="show user profile" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;arcSize=50;" vertex="1" parent="1">
-          <mxGeometry x="830" y="1110" width="100" height="40" as="geometry" />
+          <mxGeometry x="830" y="1100" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="iRJ_3XPwo3pVOuQBt7kB-169" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" target="iRJ_3XPwo3pVOuQBt7kB-170" source="iRJ_3XPwo3pVOuQBt7kB-171">
           <mxGeometry relative="1" as="geometry">
@@ -412,6 +417,15 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="iRJ_3XPwo3pVOuQBt7kB-198" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="iRJ_3XPwo3pVOuQBt7kB-190" target="iRJ_3XPwo3pVOuQBt7kB-163">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="740" y="1460" />
+              <mxPoint x="480" y="1460" />
+              <mxPoint x="480" y="1120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="iRJ_3XPwo3pVOuQBt7kB-190" value="" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="720" y="1410" width="40" height="40" as="geometry" />
         </mxCell>
@@ -420,6 +434,9 @@
         </mxCell>
         <mxCell id="iRJ_3XPwo3pVOuQBt7kB-194" value="account settings" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;arcSize=50;" vertex="1" parent="1">
           <mxGeometry x="770" y="1510" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iRJ_3XPwo3pVOuQBt7kB-199" value="search settings" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="-340" y="1040" width="100" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
