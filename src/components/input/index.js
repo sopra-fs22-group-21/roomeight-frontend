@@ -1,8 +1,15 @@
 import React from 'react';
-import { View, TextInput } from 'react-native';
+import { TextInput, Text } from 'react-native';
+import { Box } from '../theme';
 import styles from './style'
 
 export const Input = (props) => 
-    <View>
-        <TextInput style={styles.input} {...props.children}/>
-    </View>
+    <Box>
+        <Text style={styles.label}>{props.label}</Text>
+        <StyledTextInput {...props}/>
+    </Box>
+
+export const InputLabel = (props) =>
+        <Text style={styles.label}>{props.label}</Text>
+
+export const StyledTextInput = (props) => <TextInput style={{...styles.input, ...props.style}} {...props}/>

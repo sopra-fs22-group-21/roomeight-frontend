@@ -2,17 +2,22 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import styles from './style'
 
-export const Heading = (props) => 
-    <View style={styles.textBox}>
+export const Heading = (props) => {
+return props.hidden ? <Box/> : (
+    <Box style={global.textBox}>
         <Text style={{...styles.heading, ...props.style}}>{props.children}</Text>
-    </View>
+    </Box>
+)};
 
 export const Title = (props) => 
-    <View style={styles.textBox}>
-        <Text style={{...styles.title, ...props.style}}>{props.children}</Text>
-    </View>
+        <Box style={styles.textBox}>
+            <Text style={{...styles.title, ...props.style}}>{props.children}</Text>
+        </Box>
 
 export const TextBlock = (props) => 
-    <View style={styles.textBox}>
+    <Box style={styles.textBox}>
         <Text style={{...styles.text, ...props.style}}>{props.children}</Text>
-    </View>
+    </Box>
+
+export const Box = (props) => 
+    <View style={styles.textBox}>{props.children}</View>

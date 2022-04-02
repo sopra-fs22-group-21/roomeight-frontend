@@ -2,19 +2,19 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     heading: {
       fontFamily: 'SourceSans3Bold',
-      fontSize: 36,
+      fontSize: 42,
       lineHeight: 45,
-      color: "#404040" //true gray
+      color: "#404040" //true gray,
     },
     title: {
       fontFamily: 'SourceSans3Bold',
-      fontSize: 24,
+      fontSize: 26,
       lineHeight: 30,
       color: "#404040" 
     },
     text: {
       fontFamily: 'SourceSans3Regular',
-      fontSize: 16,
+      fontSize: 18,
       color: "black" 
     },
     textBox: {
