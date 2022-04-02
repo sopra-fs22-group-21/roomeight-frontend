@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from './src/redux/reducers';
+import rootReducer from './src/redux/reducers/rootReducer';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
