@@ -1,4 +1,6 @@
 import { StyleSheet } from "react-native";
+import Icon from '../../../../../assets/logo/'
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -15,9 +17,6 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     providerButton: {
-        borderColor: 'lightgray',
-        borderWidth: 1,
-        borderStyle: 'solid',
         padding: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',

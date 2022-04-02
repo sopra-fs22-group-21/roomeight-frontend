@@ -1,14 +1,20 @@
 import React from 'react'
 import {View, Text, TouchableOpacity} from 'react-native'
 import styles from './style'
+import Room8Logo from '../../../../../assets/logo/room8.svg'
 
-export default function AuthenticationMenu({authPage, setAuthPage, setDetailsPage}){
+export default function AuthenticationMenu({authPage, setAuthPage}){
     return(
         <View style={styles.container}>
+            <View>
+                <Room8Logo width={193} fill="#000" />
+            </View>
+
             <View style={styles.containerMain}>
-                <Text style={styles.headerText}>{authPage == 0 ? 'sign in' : 'sign up'}</Text>
+                <Text style={styles.headerText}>{authPage == 0 ? 'log in' : 'sign up'}</Text>
                 <TouchableOpacity style={styles.providerButton}
-                                  onPress={() => setDetailsPage(true)}>
+                              onPress={() => navigation.navigate('signup')}
+                >
                     <Text style={styles.providerButtonText}>Sign Up with Email</Text>
                     <View />
                 </TouchableOpacity>
