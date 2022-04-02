@@ -40,6 +40,8 @@ export default function App() {
     SourceSans3SemiBold: require('./assets/fonts/SourceSans3-SemiBold.ttf'),
     SourceSans3SemiBoldItalic: require('./assets/fonts/SourceSans3-SemiBoldItalic.ttf'),
   });
+
+  if(!loaded) return null;
   
   return (
     <Provider store={store}>

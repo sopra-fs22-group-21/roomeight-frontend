@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
       backgroundColor:"#fff",
       padding: 40,
       marginTop: 40,
+      height: "100%"
     },
     inner: {
       flex: 1,
