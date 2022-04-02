@@ -46,17 +46,11 @@ const styles = StyleSheet.create({
       padding: 30,
     },
     heading: {
-      fontFamily: 'SSRegular',
-      fontStyle: "normal",
-      fontWeight: "700",
+      fontFamily: 'SourceSans3Bold',
       fontSize: 36,
       lineHeight: 45,
-      color: "#000000"
+      color: "#404040" //true gray
     }
-
-
-
-
 
   });
 
