@@ -5,6 +5,7 @@ import { View, ScrollView, Button } from 'react-native';
 import { TextBlock, Heading, Title, Box } from '../../components/theme';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { Input } from '../../components/input';
+import { PrimaryButton } from '../../components/button';
 //import DateInput from '../../components/dateInput';
 //<DateInput label={en.signup.birthday} onChange={(date) => setBirthday(date)}/>
 
@@ -29,7 +30,7 @@ const Signup = (props) => {
           <Box/>
           <Input label={en.signup.firstname}  autoCapitalize="words" onChangeText={(text) => setFirstName(text)}/>
           <Input label={en.signup.lastname}  autoCapitalize="words" onChangeText={(text) => setLastName(text)}/>
-          <Button title="Sign up"/>
+          <PrimaryButton onPress={() => alert("Success")}>Sign Up</PrimaryButton>
           <Button title="Already have an account"/>
         </KeyboardAwareScrollView>
       </View>
