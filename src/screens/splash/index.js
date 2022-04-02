@@ -1,12 +1,11 @@
-import M8Logo from '../../../assets/logo/m8.svg';
-import { View, Text } from 'react-native';
-import { SvgUri } from 'react-native-svg';
+import M8Logo from '../../../assets/logo/M8Logo.js';
+import { View, Text, Button } from 'react-native';
+import styles from './styles';
 
-export default function SplashScreen() {
+export default function SplashScreen({ navigation }) {
     return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Splash</Text>
-        <SvgUri width={200} height={200} uri="http://thenewcode.com/assets/images/thumbnails/homer-simpson.svg"/>
+        <View style={styles.container}>
+        <M8Logo width={100} height={100}/>
         </View>
     );
 }

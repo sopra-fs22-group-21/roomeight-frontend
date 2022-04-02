@@ -10,7 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //const store = createStore(rootReducer, applyMiddleware(thunk));
 
-if(firebase.app.length === 0){
+if(firebase.apps.length === 0){
   firebase.initializeApp(firebaseConfig);
 } else {
   firebase.app();
