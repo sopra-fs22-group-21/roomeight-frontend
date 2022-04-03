@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import SplashScreen from '../../screens/splash';
 import Signup from '../../screens/signup';
+import Profiles from '../../screens/Profiles';
 
 const Stack = createStackNavigator()
 
@@ -18,7 +18,8 @@ export default function Route() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Signup" component={Signup} />
+                <Stack.Screen name="Profiles" component={Profiles} />
+                <Stack.Screen name="Signup" component={Signup} options={ { headerShown: false } }/>
             </Stack.Navigator>
         </NavigationContainer>
     )

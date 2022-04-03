@@ -1,16 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import firebase from 'firebase/compat/app';
 import {firebaseConfig} from './firebase/firebase-config.js';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
 import Route from './src/navigation/main';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
-import thunk from 'redux-thunk';
-import rootReducer from './src/redux/reducers/rootReducer';
+import configureStore from './src/redux/configureStore.js';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
 
 if(firebase.apps.length === 0){
   firebase.initializeApp(firebaseConfig);
@@ -18,8 +13,7 @@ if(firebase.apps.length === 0){
   firebase.app();
 }
 
-
-const Stack = createNativeStackNavigator();
+const store = configureStore();
 
 export default function App() {
   const [loaded] = useFonts({
