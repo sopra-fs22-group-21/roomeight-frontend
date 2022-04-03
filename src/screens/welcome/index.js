@@ -1,34 +1,36 @@
-import React from 'react'
-import {View, Text, TouchableOpacity} from 'react-native'
-import styles from './style'
-import Room8Logo from '../../../../../assets/logo/room8.svg'
+import React from "react";
+import { View, TouchableOpacity } from "react-native";
+import styles from "./style";
+import en from "../../resources/strings/en.json";
+import Room8Logo from "../../../assets/logo/Room8Logo.js";
+import {Heading, Title } from "../../components/theme";
+import Signup from "../signup";
+import Route from "../../navigation/main";
 
-export default function AuthenticationMenu({authPage, setAuthPage}){
-    return(
-        <View style={styles.container}>
-            <View>
-                <Room8Logo width={193} fill="#000" />
-            </View>
 
-            <View style={styles.containerMain}>
-                <Text style={styles.headerText}>{authPage == 0 ? 'log in' : 'sign up'}</Text>
-                <TouchableOpacity style={styles.providerButton}
-                              onPress={() => navigation.navigate('signup')}
-                >
-                    <Text style={styles.providerButtonText}>Sign Up with Email</Text>
-                    <View />
-                </TouchableOpacity>
-            </View>
+function Welcome({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <View>
+        <Room8Logo />
+      </View>
+      <Title>{en.welcome.message}</Title>
 
-            <TouchableOpacity style={styles.containerBottomButton}
-                              onPress={() => authPage == 0 ? setAuthPage(1) : setAuthPage(0)}>
+      <TouchableOpacity
+        style={styles.providerButton}
+        onPress={() => navigation.navigate("Signup")}
+      >
+        <Heading>{en.welcome.signup}</Heading>
+      </TouchableOpacity>
 
-                {authPage == 0 ?
-                    <Text>Don't have an account? <Text style={styles.bottomButtonText}>Sign up</Text></Text>
-                    :
-                    <Text>Already have an account? <Text style={styles.bottomButtonText}>Log In</Text></Text>
-                }
-            </TouchableOpacity>
-        </View>
-    )
+      <Heading>{en.welcome.or}</Heading>
+
+      {/* <TouchableOpacity>
+        style={styles.providerButton}
+        onPress={() => navigation.navigate("Login")} */}
+        <Heading>{en.welcome.login}</Heading>
+      {/* </TouchableOpacity> */}
+    </View>
+  );
 }
+export default Welcome;

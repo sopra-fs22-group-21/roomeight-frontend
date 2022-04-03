@@ -2,7 +2,7 @@
     "welcome": {
         "message":"sign up to find a new wave of living",
         "signup": "Sign up with Email",
-        "or": "or",
+        "or": "____________or___________",
         "login" : "Log In"
     },
     "signup": {

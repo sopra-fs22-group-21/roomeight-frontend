@@ -1,24 +1,35 @@
-import React, { useEffect } from 'react'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Signup from '../../screens/signup';
+import React, { useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Welcome from "../../screens/welcome";
+import Signup from "../../screens/signup";
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 export default function Route() {
-
-    /* const linking = {
+  /* const linking = {
         prefixes: ['https://www.roomeight.ch', 'https://roomeight.ch'],
         config: {
             screens: { }
         }
-    }; */
+    }; 
+    
+*/
 
-    return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Signup" component={Signup} options={{headerShown:false}} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
