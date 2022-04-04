@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './style';
 import en from '../../resources/strings/en.json';
-import { postUserprofile } from '../../redux/actions/postUserprofileAction';
+import { postUserprofile } from '../../redux/actions/postUserprofile';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import {
     View,
@@ -34,7 +34,7 @@ const Signup = ({ navigation }) => {
         /(\b(0041|0)|\B\+41)(\s?\(0\))?(\s)?[1-9]{2}(\s)?[0-9]{3}(\s)?[0-9]{2}(\s)?[0-9]{2}\b/;
 
     const { loading, userProfile, error } = useSelector(
-        (state) => state.postUserprofileReducer
+        (state) => state.userprofileState
     );
     const dispatch = useDispatch();
 
@@ -139,14 +139,14 @@ const Signup = ({ navigation }) => {
                     />
 
                     <PrimaryButton
-                        disabled={
+                        /* disabled={
                             !emailValid ||
                             !passwordValid ||
                             !repeatValid ||
                             user.firsName == '' ||
                             user.lastName == '' ||
                             !birthdayValid
-                        }
+                        } */
                         onPress={() => {
                             dispatch(postUserprofile(user));
                             console.log('posting');

@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Welcome from '../../screens/welcome';
 import Signup from '../../screens/signup';
 import Login from '../../screens/login';
+import Profile from '../../screens/Profile';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,11 @@ export default function Route() {
                 <Stack.Screen
                     name="Login"
                     component={Login}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Profile"
+                    component={Profile}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

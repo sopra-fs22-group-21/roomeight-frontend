@@ -6,11 +6,7 @@ import Route from './src/navigation/main';
 import { useFonts } from 'expo-font';
 import configureStore from './src/redux/configureStore.js';
 
-if (firebase.apps.length === 0) {
-    firebase.initializeApp(firebaseConfig);
-} else {
-    firebase.app();
-}
+
 
 const store = configureStore();
 
