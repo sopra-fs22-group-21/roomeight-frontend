@@ -48,49 +48,50 @@ const Signup = ({ navigation }) => {
                     <Input
                         label={en.signup.email}
                         valid={emailValid}
-                        error={emailValid===false}
+                        error={emailValid === false}
                         onEndEditing={() =>
-                            setEmailValid(
-                                emailRegex.test(user.email)
-                            )
+                            setEmailValid(emailRegex.test(user.email))
                         }
                         keyboardType="email-address"
                         autoCapitalize="none"
                         onChangeText={(text) => {
-                            setUser({ ...user, email: text })
-                            if(emailRegex.test(text)) setEmailValid(true)
-                            else setEmailValid(null)
-                        }
-                        }
+                            setUser({ ...user, email: text });
+                            if (emailRegex.test(text)) setEmailValid(true);
+                            else setEmailValid(null);
+                        }}
                     />
                     <Input
                         label={en.signup.password}
                         valid={passwordValid}
-                        error={passwordValid===false}
+                        error={passwordValid === false}
                         onEndEditing={() =>
-                            setPasswordValid(
-                                password.length >= 8
-                            )
+                            setPasswordValid(password.length >= 8)
                         }
                         onChangeText={(text) => {
                             setPassword(text);
-                            if(text.length>=8) setPasswordValid(true)
-                            else setPasswordValid(null)
+                            if (text.length >= 8) setPasswordValid(true);
+                            else setPasswordValid(null);
                         }}
                         secureTextEntry={true}
                     />
                     <Input
                         label={en.signup.repeatPassword}
                         valid={repeatValid}
-                        error={repeatValid===false}
+                        error={repeatValid === false}
                         onEndEditing={() =>
-                            setRepeatValid(password == user.password && passwordValid)
+                            setRepeatValid(
+                                password == user.password && passwordValid
+                            )
                         }
                         secureTextEntry={true}
                         onChangeText={(text) => {
-                            setUser({ ...user, password: text })
-                            if(text.length >= password.length && password != text) setRepeatValid(false);
-                            else if(text == password) setRepeatValid(true);
+                            setUser({ ...user, password: text });
+                            if (
+                                text.length >= password.length &&
+                                password != text
+                            )
+                                setRepeatValid(false);
+                            else if (text == password) setRepeatValid(true);
                             else setRepeatValid(null);
                         }}
                     />
@@ -115,21 +116,21 @@ const Signup = ({ navigation }) => {
                         label={en.signup.phone}
                         keyboardType="phone-pad"
                         valid={phoneValid}
-                        error={phoneValid===false}
+                        error={phoneValid === false}
                         dataDetectorTypes="phoneNumber"
                         onEndEditing={() =>
                             setPhoneValid(phoneRegex.test(user.phoneNumber))
                         }
                         onChangeText={(text) => {
-                            setUser({ ...user, phoneNumber: text })
-                            if(phoneRegex.test(text)) setPhoneValid(true)
-                            else setPhoneValid(null)
+                            setUser({ ...user, phoneNumber: text });
+                            if (phoneRegex.test(text)) setPhoneValid(true);
+                            else setPhoneValid(null);
                         }}
                     />
                     <DateInput
                         label={en.signup.birthday}
                         valid={birthdayValid}
-                        error={birthdayValid===false}
+                        error={birthdayValid === false}
                         dataDetectorTypes="calendarEvent"
                         onChange={(date, valid) => {
                             setUser({ ...user, birthday: date });
@@ -142,8 +143,8 @@ const Signup = ({ navigation }) => {
                             !emailValid ||
                             !passwordValid ||
                             !repeatValid ||
-                            user.firsName=="" ||
-                            user.lastName=="" ||
+                            user.firsName == '' ||
+                            user.lastName == '' ||
                             !birthdayValid
                         }
                         onPress={() => {

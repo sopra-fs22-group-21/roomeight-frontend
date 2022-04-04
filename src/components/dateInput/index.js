@@ -44,7 +44,11 @@ export const DateInput = (props) => {
         if (valid) {
             props.onChange(dt, true);
         } else {
-            if((d && d!='' && !isDay(d)) || (!isMonth(m) && m && m!='') && (!isYear(y) && y && y!='')) props.onChange(null, false);
+            if (
+                (d && d != '' && !isDay(d)) ||
+                (!isMonth(m) && m && m != '' && !isYear(y) && y && y != '')
+            )
+                props.onChange(null, false);
             else props.onChange(null, null);
         }
         setYear(y);
@@ -69,7 +73,7 @@ export const DateInput = (props) => {
                     onChangeText={(text) => {
                         if (isDay(text)) {
                             changeDate(text, month, year);
-                            if(text.length == 2) monthInput.current.focus();
+                            if (text.length == 2) monthInput.current.focus();
                         }
                     }}
                     onEndEditing={(event) => {
@@ -100,8 +104,8 @@ export const DateInput = (props) => {
                     onChangeText={(text) => {
                         if (isMonth(text)) {
                             changeDate(day, text, year);
-                            if(text.length == 2) yearInput.current.focus()
-                        }  
+                            if (text.length == 2) yearInput.current.focus();
+                        }
                     }}
                     onEndEditing={(event) => {
                         let num = event.nativeEvent.text;
