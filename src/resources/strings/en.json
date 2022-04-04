@@ -1,19 +1,19 @@
 {
-  "welcome": {
-    "message": "sign up to find a new wave of living",
-    "signup": "Sign up with Email",
-    "or": "or",
-    "login": "Log In"
-  },
-  "signup": {
-    "welcome": "Welcome to roomeight",
-    "title": "Sign Up",
-    "enterDetails": "Please enter your details below",
-    "email": "Email",
-    "password": "Password",
-    "firstname": "First Name",
-    "lastname": "Last Name",
-    "birthday": "Birthday",
-    "phone": "Phone number"
-  }
+    "welcome": {
+        "message": "sign up to find a new wave of living",
+        "signup": "Sign up with Email",
+        "or": "or",
+        "login": "Log In"
+    },
+    "signup": {
+        "welcome": "Welcome to roomeight",
+        "title": "Sign Up",
+        "enterDetails": "Please enter your details below",
+        "email": "Email",
+        "password": "Password",
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "birthday": "Birthday",
+        "phone": "Phone number"
+    }
 }
