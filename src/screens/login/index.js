@@ -6,8 +6,11 @@ import { TextBlock, Heading, Title, Box } from '../../components/theme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Input } from '../../components/input';
 import { PrimaryButton } from '../../components/button';
+import { loginUser } from '../../redux/actions/loginUser';
+import { useDispatch } from 'react-redux';
 
 const Login = ({ navigation }) => {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     return (
@@ -30,7 +33,12 @@ const Login = ({ navigation }) => {
                     secureTextEntry={true}
                     onChangeText={(text) => setPassword(text)}
                 />
-                <PrimaryButton onPress={() => alert('Success')}>
+                <PrimaryButton
+                    onPress={() => {
+                        dispatch(loginUser(email, password));
+                        navigation.navigate('Profile');
+                    }}
+                >
                     Log In
                 </PrimaryButton>
                 <Button
