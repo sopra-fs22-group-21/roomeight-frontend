@@ -1,38 +1,38 @@
 import {
-    GET_USERS_REQUEST,
-    GET_USERS_SUCCESS,
-    GET_USERS_FAILURE,
-} from '../constants';
+    POST_USERPROFILE_REQUEST,
+    POST_USERPROFILE_SUCCESS,
+    POST_USERPROFILE_FAILURE,
+} from '../constants/index';
+
 
 const initialState = {
-    userProfiles: [],
+    userProfile: {},
     loading: true,
     error: null,
 };
 
-const userProfilesReducer = (state = initialState, action) => {
+const postUserprofile = (state = initialState, action) => {
     switch (action.type) {
-        case GET_USERS_REQUEST:
+        case POST_USERPROFILE_REQUEST:
             return {
                 ...state,
                 loading: true,
             };
-        case GET_USERS_SUCCESS:
+        case POST_USERPROFILE_SUCCESS:
             return {
                 ...state,
-                userProfiles: action.payload,
+                userProfile: action.payload,
                 loading: false,
             };
-        case GET_USERS_FAILURE:
+        case POST_USERPROFILE_FAILURE:
             return {
                 ...state,
-                userProfiles: [],
+                userProfile: {},
                 loading: false,
                 error: action.payload,
             };
         default:
             return state;
     }
-};
-
-export default userProfilesReducer;
+}
+export default postUserprofile;

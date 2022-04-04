@@ -1,7 +1,7 @@
 /**
  * User model
  */
-class User {
+class Userprofile {
     constructor(data = {}) {
         this.firstName = null;
         this.lastName = null;
