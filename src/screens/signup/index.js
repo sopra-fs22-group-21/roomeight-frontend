@@ -51,7 +51,9 @@ const Signup = ({ navigation }) => {
                         label={en.signup.email}
                         valid={emailValid}
                         onEndEditing={() =>
-                            setEmailValid(emailRegex.test(user.email) || user.email=="")
+                            setEmailValid(
+                                emailRegex.test(user.email) || user.email == ''
+                            )
                         }
                         keyboardType="email-address"
                         autoCapitalize="none"
@@ -63,7 +65,9 @@ const Signup = ({ navigation }) => {
                         label={en.signup.password}
                         valid={passwordValid}
                         onEndEditing={() =>
-                            setPasswordValid(password.length >= 8 || password=="")
+                            setPasswordValid(
+                                password.length >= 8 || password == ''
+                            )
                         }
                         onChangeText={(text) => setPassword(text)}
                         secureTextEntry={true}
@@ -72,7 +76,10 @@ const Signup = ({ navigation }) => {
                         label={en.signup.repeatPassword}
                         valid={repeatValid}
                         onEndEditing={() =>
-                            setRepeatValid(password == user.password && passwordValid || user.password == "")
+                            setRepeatValid(
+                                (password == user.password && passwordValid) ||
+                                    user.password == ''
+                            )
                         }
                         secureTextEntry={true}
                         onChangeText={(text) =>
