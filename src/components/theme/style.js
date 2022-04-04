@@ -19,6 +19,15 @@ const styles = StyleSheet.create({
     },
     textBox: {
       paddingBottom: 20,
+    },
+    semiBold: {
+      fontFamily: 'SourceSans3SemiBold',
+      fontSize: 22,
+      lineHeight: 30,
+      color: "#404040" 
+    },
+    padding: {
+      padding: 10,
     }
 
   });

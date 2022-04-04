@@ -3,34 +3,34 @@ import { View, TouchableOpacity } from "react-native";
 import styles from "./style";
 import en from "../../resources/strings/en.json";
 import Room8Logo from "../../../assets/logo/Room8Logo.js";
-import {TextBlock, Title } from "../../components/theme";
-import Signup from "../signup";
-import Route from "../../navigation/main";
+import {TextBlock, Box, SemiBold, Padding } from "../../components/theme";
 
 
 function Welcome({ navigation }) {
   return (
     <View style={styles.container}>
-      <View>
-        <Room8Logo/>
-      </View>
+      <Box>
+        <View>
+          <Room8Logo/>
+        </View>
+      </Box>
       <TextBlock>{en.welcome.message}</TextBlock>
 
-      <TouchableOpacity
-        style={styles.providerButton}
-        onPress={() => navigation.navigate("Signup")}
-      >
-        <Title>{en.welcome.signup}</Title>
-      </TouchableOpacity>
+      <View style={styles.options}>
+        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+          <SemiBold>{en.welcome.signup}</SemiBold>
+        </TouchableOpacity>
+        
+        <View style={styles.or}>
+          <View style={styles.line}/>
+            <SemiBold>{en.welcome.or}</SemiBold>
+          <View style={styles.line}/>
+        </View>
 
-      <Title>{en.welcome.or}</Title>
-
-      <TouchableOpacity
-        style={styles.providerButton}
-        onPress={() => navigation.navigate("Login")}
-        >
-        <Title>{en.welcome.login}</Title>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <SemiBold>{en.welcome.login}</SemiBold>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

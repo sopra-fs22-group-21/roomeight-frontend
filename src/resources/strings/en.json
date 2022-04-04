@@ -1,8 +1,8 @@
 {
     "welcome": {
         "message":"sign up to find a new wave of living",
-        "signup": "Sign up with Email",
-        "or": "_________or_________",
+        "signup": "Sign Up with Email",
+        "or": "or",
         "login" : "Log In"
     },
     "signup": {
@@ -18,11 +18,11 @@
         
     },
     "login": {
-        "l_welcome": "Welcome to roomeight",
+        "welcome": "Welcome to roomeight",
         "title": "Log In",
-        "l_enterDetails": "Please enter your details below",
-        "l_email": "Email",
-        "l_password": "Password"
+        "enterDetails": "Please enter your details below",
+        "email": "Email",
+        "password": "Password"
         
     }
 }

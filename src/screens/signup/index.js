@@ -9,7 +9,7 @@ import { PrimaryButton } from '../../components/button';
 //import DateInput from '../../components/dateInput';
 //<DateInput label={en.signup.birthday} onChange={(date) => setBirthday(date)}/>
 
-const Signup = (props) => {
+const Signup = ( { navigation } ) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -31,7 +31,7 @@ const Signup = (props) => {
           <Input label={en.signup.firstname}  autoCapitalize="words" onChangeText={(text) => setFirstName(text)}/>
           <Input label={en.signup.lastname}  autoCapitalize="words" onChangeText={(text) => setLastName(text)}/>
           <PrimaryButton onPress={() => alert("Success")}>Sign Up</PrimaryButton>
-          <Button title="Already have an account"/>
+          <Button title="Already have an account" onPress={() => navigation.navigate("Login")}/>
         </KeyboardAwareScrollView>
       </View>
   )

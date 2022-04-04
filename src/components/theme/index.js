@@ -4,20 +4,26 @@ import styles from './style'
 
 export const Heading = (props) => {
 return props.hidden ? <Box/> : (
-    <Box style={global.textBox}>
+    <Box>
         <Text style={{...styles.heading, ...props.style}}>{props.children}</Text>
     </Box>
 )};
 
 export const Title = (props) => 
-        <Box style={styles.textBox}>
+        <Box>
             <Text style={{...styles.title, ...props.style}}>{props.children}</Text>
         </Box>
 
 export const TextBlock = (props) => 
-    <Box style={styles.textBox}>
+    <Box>
         <Text style={{...styles.text, ...props.style}}>{props.children}</Text>
     </Box>
 
 export const Box = (props) => 
-    <View style={styles.textBox}>{props.children}</View>
+    <View style={{...styles.textBox, ...props.style}}>{props.children}</View>
+
+export const SemiBold = (props) => 
+    <Text style={{...styles.semiBold, ...props.style}}>{props.children}</Text>
+
+export const Padding = (props) =>
+    <View style={{...styles.padding, ...props.style}}>{props.children}</View>
