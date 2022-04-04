@@ -23,6 +23,7 @@ const Signup = ({ navigation }) => {
     const [repeat, setRepeat] = useState('');
     const [emailValid, setEmailValid] = useState(null);
     const [passwordValid, setPasswordValid] = useState(null);
+    const [password, setPassword] = useState(null);
     const [repeatValid, setRepeatValid] = useState(null);
     const [firstNameValid, setFirstNameValid] = useState(null);
     const [lastNameValid, setLastNameValid] = useState(null);
@@ -48,10 +49,9 @@ const Signup = ({ navigation }) => {
                     <TextBlock>{en.signup.enterDetails}</TextBlock>
                     <Input
                         label={en.signup.email}
-                        error={emailValid === false}
                         valid={emailValid}
                         onEndEditing={() =>
-                            setEmailValid(emailRegex.test(user.email))
+                            setEmailValid(emailRegex.test(user.email) || user.email=="")
                         }
                         keyboardType="email-address"
                         autoCapitalize="none"
@@ -61,19 +61,18 @@ const Signup = ({ navigation }) => {
                     />
                     <Input
                         label={en.signup.password}
-                        error={passwordValid === false}
                         valid={passwordValid}
                         onEndEditing={() =>
-                            setPasswordValid(password.length >= 8)
+                            setPasswordValid(password.length >= 8 || password=="")
                         }
+                        onChangeText={(text) => setPassword(text)}
                         secureTextEntry={true}
                     />
                     <Input
                         label={en.signup.repeatPassword}
-                        error={repeatValid === false}
                         valid={repeatValid}
                         onEndEditing={() =>
-                            setRepeatValid(password == repeat && passwordValid)
+                            setRepeatValid(password == user.password && passwordValid || user.password == "")
                         }
                         secureTextEntry={true}
                         onChangeText={(text) =>
@@ -83,9 +82,6 @@ const Signup = ({ navigation }) => {
                     <Box />
                     <Input
                         label={en.signup.firstname}
-                        error={firstNameValid === false}
-                        valid={firstNameValid}
-                        onEndEditing={() => setFirstNameValid(firstName != '')}
                         autoCapitalize="words"
                         onChangeText={(text) =>
                             setUser({ ...user, firstName: text })
@@ -93,8 +89,6 @@ const Signup = ({ navigation }) => {
                     />
                     <Input
                         label={en.signup.lastname}
-                        error={lastNameValid === false}
-                        valid={lastNameValid}
                         onEndEditing={() => setLastNameValid(lastName != '')}
                         autoCapitalize="words"
                         onChangeText={(text) =>
@@ -103,9 +97,8 @@ const Signup = ({ navigation }) => {
                     />
                     <Input
                         label={en.signup.phone}
-                        error={phoneValid === false}
-                        valid={phoneValid}
                         keyboardType="phone-pad"
+                        valid={phoneValid}
                         dataDetectorTypes="phoneNumber"
                         onEndEditing={() =>
                             setPhoneValid(phoneRegex.test(phone))
@@ -116,7 +109,6 @@ const Signup = ({ navigation }) => {
                     />
                     <DateInput
                         label={en.signup.birthday}
-                        error={birthdayValid === false}
                         valid={birthdayValid}
                         dataDetectorTypes="calendarEvent"
                         onChange={(date, valid) => {
