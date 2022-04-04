@@ -137,6 +137,7 @@ const Signup = ({ navigation }) => {
                         onPress={() => {
                             dispatch(postUserprofile(user));
                             console.log('posting');
+                            console.log(user);
                         }}
                     >
                         Sign Up
@@ -145,9 +146,9 @@ const Signup = ({ navigation }) => {
                         title="Already have an account"
                         onPress={() => navigation.navigate('Login')}
                     />
-                    <Text>{loading}</Text>
-                    <Text>{userProfile}</Text>
-                    <Text>{error}</Text>
+                    <Text>isLoading: {loading.toString()}</Text>
+                    <Text>Userprofile: {JSON.stringify(userProfile)}</Text>
+                    <Text>Error: {JSON.stringify(error)}</Text>
                 </ScrollView>
             </KeyboardAvoidingView>
         </View>
