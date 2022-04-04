@@ -1,6 +1,6 @@
 {
     "welcome": {
-        "message":"sign up to find a new wave of living",
+        "message": "sign up to find a new wave of living",
         "signup": "Sign Up with Email",
         "or": "or",
         "login": "Log In"
@@ -16,7 +16,6 @@
         "lastname": "Last Name",
         "birthday": "Birthday",
         "phone": "Phone number"
-        
     },
     "login": {
         "welcome": "Welcome to roomeight",
@@ -24,6 +23,5 @@
         "enterDetails": "Please enter your details below",
         "email": "Email",
         "password": "Password"
-        
     }
 }

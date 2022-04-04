@@ -1,26 +1,26 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     primary: {
-      height: 40,
-      borderRadius: 20,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center"
+        height: 40,
+        borderRadius: 20,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     pressed: {
-      backgroundColor: "#0c6076"
+        backgroundColor: '#0c6076',
     },
     unpressed: {
-      backgroundColor: "#0E7490"
+        backgroundColor: '#0E7490',
     },
     disabled: {
-      backgroundColor: "#b0c8cf"
+        backgroundColor: '#b0c8cf',
     },
     label: {
-      fontFamily: 'SourceSans3Regular',
-      fontSize: 18,
-      color: "white", 
-    }
-  });
+        fontFamily: 'SourceSans3Regular',
+        fontSize: 18,
+        color: 'white',
+    },
+});
 
-  export default styles;
+export default styles;
