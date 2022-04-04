@@ -5,11 +5,11 @@ import styles from './style'
 
 export const PrimaryButton = (props) => 
         <Box>
-            <Pressable onPress={props.onPress} 
+            <Pressable {...props}
             style={({pressed}) => [
-                {
-                    backgroundColor: pressed ? "#0c6076" : "#0E7490",
-                }, styles.primary]}>
+                styles.primary, 
+                props.style, 
+                props.disabled ? styles.disabled : (pressed ? styles.pressed : styles.unpressed)]}>
                 <Text style={styles.label}>{props.children}</Text>
             </Pressable>
         </Box>

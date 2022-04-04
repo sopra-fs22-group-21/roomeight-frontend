@@ -11,6 +11,7 @@
         "enterDetails": "Please enter your details below",
         "email": "Email",
         "password": "Password",
+        "repeatPassword": "Repeat Password",
         "firstname": "First Name",
         "lastname": "Last Name",
         "birthday": "Birthday",

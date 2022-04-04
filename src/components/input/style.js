@@ -13,6 +13,14 @@ const styles = StyleSheet.create({
       fontSize: 18,
       lineHeight: 24,
       
+    },
+    error: {
+      borderWidth: 1,
+      borderColor: "red",
+    },
+    valid: {
+      borderWidth: 1,
+      borderColor: "green",
     }
 
   });

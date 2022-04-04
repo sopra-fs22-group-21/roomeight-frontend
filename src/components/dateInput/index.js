@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import dateFormat from 'dateformat';
 import styles from './style'
-import { InputLabel, StyledTextInput } from '../input';
+import { InputLabel, StyledTextInput , Input} from '../input';
 import { TextInput, View } from 'react-native';
 import { Box } from '../theme';
 
@@ -22,20 +22,21 @@ export const DateInput = (props) => {
   }
   const isYear = (value) => {
     return !isNaN(value) 
-              && value.length <=4
+              && value.length<=4
   }
 
   const changeDate = (d, m, y) => {
     // create date and validate
+    const notEmpty = y && y!="" && m && m!="" && d && d!=""
     const dt = new Date(Date.parse(y+'-'+m+'-'+d));
-    const correctNumbers = isYear(y) && isMonth(m) && isDay(d) && !isNaN(dt)
+    const correctNumbers = isYear(y) && isMonth(m) && isDay(d) && !isNaN(dt) &&  Number(y)>1900
     const beforeNow = dt<=new Date()
     const validFebruary = (d<30 || m!=2) && (d<29 || m!=2 || y%4==0)
-    const valid = correctNumbers && beforeNow && validFebruary;
+    const valid = notEmpty && correctNumbers && beforeNow && validFebruary;
     if(valid){
-      props.onChange(dt);
+      props.onChange(dt, true);
     } else {
-      props.onChange(null);
+      props.onChange(null, false);
     }
     setYear(y)
     setDay(d)
@@ -47,20 +48,23 @@ export const DateInput = (props) => {
       <InputLabel label={props.label}/>
       <View style={styles.row}>
         <StyledTextInput
-            {...props}
-            style={styles.day}
+            style={[styles.day, props.error ? styles.error : {}, props.style, props.valid ? styles.valid : {}]}
             placeholder="dd"
             keyboardType="number-pad"
             value={day}
             onChangeText={ (text) => {
-            if(isDay(text)) {
-                changeDate(text, month, year)
-            }
+              if(isDay(text)) {
+                  changeDate(text, month, year)
+              }
+            }}
+            onEndEditing={event => {
+              let num = event.nativeEvent.text;
+              if(Number(num)<10 && Number(num)>0 && num!="" && num.length<2) num = "0"+num;
+              changeDate(num, month, year);
             }}
         />
         <StyledTextInput
-            {...props}
-            style={styles.month}
+            style={[styles.month, props.error ? styles.error : {}, props.style, props.valid ? styles.valid : {}]}
             keyboardType="number-pad"
             placeholder="mm"
             value={month}
@@ -69,15 +73,21 @@ export const DateInput = (props) => {
                     changeDate(day, text, year)
                 }
             }}
+            onEndEditing={event => {
+              let num = event.nativeEvent.text;
+              if(Number(num)<10 && Number(num)>0 && num!="" && num.length<2) num = "0"+num;
+              changeDate(day, num, year)
+            }}
         />
         <StyledTextInput
-            {...props}
-            style={styles.year}
+            style={[styles.year, props.error ? styles.error : {}, props.style, props.valid ? styles.valid : {}]}
             placeholder="yyyy"
             keyboardType="number-pad"
             value={year}
-            onChange={ text => {
+            onChangeText={ text => {
+              if(isYear(text)){
                 changeDate(day, month, text)
+              }
             }}
         />
       </View>

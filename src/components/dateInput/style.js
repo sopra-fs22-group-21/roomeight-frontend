@@ -31,6 +31,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
         borderRadius: 4,
         width: "50%",
+    },
+    error: {
+      borderWidth: 1,
+      borderColor: "red",
+    },
+    valid: {
+        borderWidth: 1,
+        borderColor: "green",
     }
 
   });

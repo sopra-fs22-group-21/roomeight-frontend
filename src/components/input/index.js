@@ -12,4 +12,5 @@ export const Input = (props) =>
 export const InputLabel = (props) =>
         <Text style={styles.label}>{props.label}</Text>
 
-export const StyledTextInput = (props) => <TextInput style={{...styles.input, ...props.style}} {...props}/>
+export const StyledTextInput = (props) => 
+    <TextInput style={[styles.input, props.error ? styles.error : {}, props.valid ? styles.valid : {}, props.style]} {...props}/>
