@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './style';
 import en from '../../resources/strings/en.json';
+import { postUserprofile } from '../../redux/actions/postUserprofileAction'
+import { connect, useDispatch, useSelector } from 'react-redux';
 import {
     View,
     Button,
@@ -14,17 +16,11 @@ import { Input } from '../../components/input';
 import { PrimaryButton } from '../../components/button';
 import DateInput from '../../components/dateInput';
 import dateFormat from 'dateformat';
+import Userprofile from '../../models/Userprofile';
 
 const Signup = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [user, setUser] = useState(new Userprofile());
     const [repeat, setRepeat] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [birthday, setBirthday] = useState(null);
-    const [errortext, setErrortext] = useState('');
-    const [success, setSuccess] = useState(false);
     const [emailValid, setEmailValid] = useState(null);
     const [passwordValid, setPasswordValid] = useState(null);
     const [repeatValid, setRepeatValid] = useState(null);
@@ -38,6 +34,11 @@ const Signup = ({ navigation }) => {
     const phoneRegex =
         /(\b(0041|0)|\B\+41)(\s?\(0\))?(\s)?[1-9]{2}(\s)?[0-9]{3}(\s)?[0-9]{2}(\s)?[0-9]{2}\b/;
 
+    const { loading, userProfile, error } = useSelector(
+        (state) => state.postUserprofileReducer
+    );
+    const dispatch = useDispatch();
+
     return (
         <View style={styles.container}>
             <KeyboardAvoidingView style={styles.inner} behavior="height">
@@ -50,11 +51,11 @@ const Signup = ({ navigation }) => {
                         error={emailValid === false}
                         valid={emailValid}
                         onEndEditing={() =>
-                            setEmailValid(emailRegex.test(email))
+                            setEmailValid(emailRegex.test(user.email))
                         }
                         keyboardType="email-address"
                         autoCapitalize="none"
-                        onChangeText={(text) => setEmail(text)}
+                        onChangeText={(text) => setUser({...user, email: text })}
                     />
                     <Input
                         label={en.signup.password}
@@ -64,7 +65,6 @@ const Signup = ({ navigation }) => {
                             setPasswordValid(password.length >= 8)
                         }
                         secureTextEntry={true}
-                        onChangeText={(text) => setPassword(text)}
                     />
                     <Input
                         label={en.signup.repeatPassword}
@@ -74,7 +74,7 @@ const Signup = ({ navigation }) => {
                             setRepeatValid(password == repeat && passwordValid)
                         }
                         secureTextEntry={true}
-                        onChangeText={(text) => setRepeat(text)}
+                        onChangeText={(text) => setUser({...user, password: text})}
                     />
                     <Box />
                     <Input
@@ -83,7 +83,7 @@ const Signup = ({ navigation }) => {
                         valid={firstNameValid}
                         onEndEditing={() => setFirstNameValid(firstName != '')}
                         autoCapitalize="words"
-                        onChangeText={(text) => setFirstName(text)}
+                        onChangeText={(text) => setUser({...user, firstName: text})}
                     />
                     <Input
                         label={en.signup.lastname}
@@ -91,7 +91,7 @@ const Signup = ({ navigation }) => {
                         valid={lastNameValid}
                         onEndEditing={() => setLastNameValid(lastName != '')}
                         autoCapitalize="words"
-                        onChangeText={(text) => setLastName(text)}
+                        onChangeText={(text) => setUser({...user, lastName: text})}
                     />
                     <Input
                         label={en.signup.phone}
@@ -102,7 +102,7 @@ const Signup = ({ navigation }) => {
                         onEndEditing={() =>
                             setPhoneValid(phoneRegex.test(phone))
                         }
-                        onChangeText={(text) => setPhone(text)}
+                        onChangeText={(text) => setUser({...user, phone: text})}
                     />
                     <DateInput
                         label={en.signup.birthday}
@@ -110,7 +110,7 @@ const Signup = ({ navigation }) => {
                         valid={birthdayValid}
                         dataDetectorTypes="calendarEvent"
                         onChange={(date, valid) => {
-                            setBirthday(date);
+                            setUser({...user, birthday: date});
                             setBirthdayValid(valid);
                         }}
                     />
@@ -124,19 +124,19 @@ const Signup = ({ navigation }) => {
                             !lastNameValid ||
                             !birthdayValid
                         }
-                        onPress={() => alert('Success')}
-                    >
-                        Sign Up
-                    </PrimaryButton>
+                        onPress={() => {
+                                dispatch(postUserprofile(user));
+                                console.log('posting');  
+                            }
+                        }
+                    >Sign Up</PrimaryButton>
                     <Button
                         title="Already have an account"
                         onPress={() => navigation.navigate('Login')}
                     />
-                    <Text>
-                        {birthdayValid
-                            ? dateFormat(birthday, 'dd. mm. yyyy')
-                            : 'null'}
-                    </Text>
+                    <Text>{loading}</Text>
+                    <Text>{userProfile}</Text>
+                    <Text>{error}</Text>
                 </ScrollView>
             </KeyboardAvoidingView>
         </View>

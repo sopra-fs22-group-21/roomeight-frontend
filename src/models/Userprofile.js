@@ -14,4 +14,4 @@ class Userprofile {
         Object.assign(this, data);
     }
 }
-export default User;
+export default Userprofile;

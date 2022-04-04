@@ -11,7 +11,7 @@ const initialState = {
     error: null,
 };
 
-const postUserprofile = (state = initialState, action) => {
+const postUserprofileReducer = (state = initialState, action) => {
     switch (action.type) {
         case POST_USERPROFILE_REQUEST:
             return {
@@ -35,4 +35,4 @@ const postUserprofile = (state = initialState, action) => {
             return state;
     }
 }
-export default postUserprofile;
+export default postUserprofileReducer;
