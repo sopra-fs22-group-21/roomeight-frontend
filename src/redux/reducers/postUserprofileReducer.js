@@ -4,7 +4,6 @@ import {
     POST_USERPROFILE_FAILURE,
 } from '../constants/index';
 
-
 const initialState = {
     userProfile: {},
     loading: true,
@@ -34,5 +33,5 @@ const postUserprofileReducer = (state = initialState, action) => {
         default:
             return state;
     }
-}
+};
 export default postUserprofileReducer;

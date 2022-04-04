@@ -7,7 +7,6 @@ import apiClient from '../../helper/apiClient';
 
 const postUserprofileRequest = () => ({
     type: POST_USERPROFILE_REQUEST,
-
 });
 
 const postUserprofileSuccess = (userprofile) => ({
@@ -20,7 +19,6 @@ const postUserprofileFailure = (error) => ({
     payload: error,
 });
 
-
 export const postUserprofile = (userprofile) => (dispatch) => {
     dispatch(postUserprofileRequest());
 
@@ -32,4 +30,4 @@ export const postUserprofile = (userprofile) => (dispatch) => {
         .catch((error) => {
             dispatch(postUserprofileFailure(error));
         });
-}
+};

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './style';
 import en from '../../resources/strings/en.json';
-import { postUserprofile } from '../../redux/actions/postUserprofileAction'
+import { postUserprofile } from '../../redux/actions/postUserprofileAction';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import {
     View,
@@ -55,7 +55,9 @@ const Signup = ({ navigation }) => {
                         }
                         keyboardType="email-address"
                         autoCapitalize="none"
-                        onChangeText={(text) => setUser({...user, email: text })}
+                        onChangeText={(text) =>
+                            setUser({ ...user, email: text })
+                        }
                     />
                     <Input
                         label={en.signup.password}
@@ -74,7 +76,9 @@ const Signup = ({ navigation }) => {
                             setRepeatValid(password == repeat && passwordValid)
                         }
                         secureTextEntry={true}
-                        onChangeText={(text) => setUser({...user, password: text})}
+                        onChangeText={(text) =>
+                            setUser({ ...user, password: text })
+                        }
                     />
                     <Box />
                     <Input
@@ -83,7 +87,9 @@ const Signup = ({ navigation }) => {
                         valid={firstNameValid}
                         onEndEditing={() => setFirstNameValid(firstName != '')}
                         autoCapitalize="words"
-                        onChangeText={(text) => setUser({...user, firstName: text})}
+                        onChangeText={(text) =>
+                            setUser({ ...user, firstName: text })
+                        }
                     />
                     <Input
                         label={en.signup.lastname}
@@ -91,7 +97,9 @@ const Signup = ({ navigation }) => {
                         valid={lastNameValid}
                         onEndEditing={() => setLastNameValid(lastName != '')}
                         autoCapitalize="words"
-                        onChangeText={(text) => setUser({...user, lastName: text})}
+                        onChangeText={(text) =>
+                            setUser({ ...user, lastName: text })
+                        }
                     />
                     <Input
                         label={en.signup.phone}
@@ -102,7 +110,9 @@ const Signup = ({ navigation }) => {
                         onEndEditing={() =>
                             setPhoneValid(phoneRegex.test(phone))
                         }
-                        onChangeText={(text) => setUser({...user, phone: text})}
+                        onChangeText={(text) =>
+                            setUser({ ...user, phone: text })
+                        }
                     />
                     <DateInput
                         label={en.signup.birthday}
@@ -110,7 +120,7 @@ const Signup = ({ navigation }) => {
                         valid={birthdayValid}
                         dataDetectorTypes="calendarEvent"
                         onChange={(date, valid) => {
-                            setUser({...user, birthday: date});
+                            setUser({ ...user, birthday: date });
                             setBirthdayValid(valid);
                         }}
                     />
@@ -125,11 +135,12 @@ const Signup = ({ navigation }) => {
                             !birthdayValid
                         }
                         onPress={() => {
-                                dispatch(postUserprofile(user));
-                                console.log('posting');  
-                            }
-                        }
-                    >Sign Up</PrimaryButton>
+                            dispatch(postUserprofile(user));
+                            console.log('posting');
+                        }}
+                    >
+                        Sign Up
+                    </PrimaryButton>
                     <Button
                         title="Already have an account"
                         onPress={() => navigation.navigate('Login')}
