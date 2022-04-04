@@ -1,48 +1,37 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import styles from './style';
-import Room8Logo from '../../../../../assets/logo/room8.svg';
+import React from "react";
+import { View, TouchableOpacity } from "react-native";
+import styles from "./style";
+import en from "../../resources/strings/en.json";
+import Room8Logo from "../../../assets/logo/Room8Logo.js";
+import {TextBlock, Box, SemiBold, Padding } from "../../components/theme";
 
-export default function AuthenticationMenu({ authPage, setAuthPage }) {
-    return (
-        <View style={styles.container}>
-            <View>
-                <Room8Logo width={193} fill="#000" />
-            </View>
 
-            <View style={styles.containerMain}>
-                <Text style={styles.headerText}>
-                    {authPage == 0 ? 'log in' : 'sign up'}
-                </Text>
-                <TouchableOpacity
-                    style={styles.providerButton}
-                    onPress={() => navigation.navigate('signup')}
-                >
-                    <Text style={styles.providerButtonText}>
-                        Sign Up with Email
-                    </Text>
-                    <View />
-                </TouchableOpacity>
-            </View>
-
-            <TouchableOpacity
-                style={styles.containerBottomButton}
-                onPress={() =>
-                    authPage == 0 ? setAuthPage(1) : setAuthPage(0)
-                }
-            >
-                {authPage == 0 ? (
-                    <Text>
-                        Don't have an account?{' '}
-                        <Text style={styles.bottomButtonText}>Sign up</Text>
-                    </Text>
-                ) : (
-                    <Text>
-                        Already have an account?{' '}
-                        <Text style={styles.bottomButtonText}>Log In</Text>
-                    </Text>
-                )}
-            </TouchableOpacity>
+function Welcome({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Box>
+        <View>
+          <Room8Logo/>
         </View>
-    );
+      </Box>
+      <TextBlock>{en.welcome.message}</TextBlock>
+
+      <View style={styles.options}>
+        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+          <SemiBold>{en.welcome.signup}</SemiBold>
+        </TouchableOpacity>
+        
+        <View style={styles.or}>
+          <View style={styles.line}/>
+            <SemiBold>{en.welcome.or}</SemiBold>
+          <View style={styles.line}/>
+        </View>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <SemiBold>{en.welcome.login}</SemiBold>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
+export default Welcome;

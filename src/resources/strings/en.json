@@ -1,7 +1,7 @@
 {
     "welcome": {
-        "message": "sign up to find a new wave of living",
-        "signup": "Sign up with Email",
+        "message":"sign up to find a new wave of living",
+        "signup": "Sign Up with Email",
         "or": "or",
         "login": "Log In"
     },
@@ -11,9 +11,19 @@
         "enterDetails": "Please enter your details below",
         "email": "Email",
         "password": "Password",
+        "repeatPassword": "Repeat Password",
         "firstname": "First Name",
         "lastname": "Last Name",
         "birthday": "Birthday",
         "phone": "Phone number"
+        
+    },
+    "login": {
+        "welcome": "Welcome to roomeight",
+        "title": "Log In",
+        "enterDetails": "Please enter your details below",
+        "email": "Email",
+        "password": "Password"
+        
     }
 }

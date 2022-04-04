@@ -1,43 +1,37 @@
-import { StyleSheet } from 'react-native';
-import Icon from '../../../../../assets/logo/';
+import { StyleSheet } from "react-native";
+
 
 const styles = StyleSheet.create({
+
     container: {
+        flex: 1, 
+        backgroundColor:"#fff",
+        paddingTop: 60,
+        marginTop: 60,
+        height: "100%",
+        alignItems: "center",
+      },
+      options: {
         flex: 1,
-    },
-    containerMain: {
-        padding: 30,
-        flex: 1,
-    },
-    headerText: {
-        fontWeight: 'bold',
-        fontSize: 25,
-        marginBottom: 25,
-        color: 'darkslategray',
-        textAlign: 'center',
-    },
-    providerButton: {
-        padding: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    providerButtonText: {
-        paddingRight: 20,
-    },
-
-    containerBottomButton: {
-        backgroundColor: 'ghostwhite',
-        padding: 20,
-        alignItems: 'center',
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderColor: 'lightgray',
-    },
-    bottomButtonText: {
-        fontWeight: 'bold',
-        color: 'red',
-    },
-});
-
+        alignItems: "center",
+        paddingTop: 150,
+        
+      },
+      or:{
+        display: "flex",
+        flexWrap: "nowrap",
+        flexDirection: "row",
+        width: "100%",
+      },
+      line: {
+        width: "30%",
+        height: 1,
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: "auto",
+        marginBottom: "auto",
+        borderBottomColor: "black",
+        borderBottomWidth: 1,
+      },
+    });
 export default styles;

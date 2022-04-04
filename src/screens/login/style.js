@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     },
     inner: {
       flex: 1,
-      paddingBottom: 40,
     }
-});
 
-export default styles;
+  });
+
+  export default styles;
