@@ -23,10 +23,8 @@ const Signup = ({ navigation }) => {
     const [repeat, setRepeat] = useState('');
     const [emailValid, setEmailValid] = useState(null);
     const [passwordValid, setPasswordValid] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [password, setPassword] = useState('');
     const [repeatValid, setRepeatValid] = useState(null);
-    const [firstNameValid, setFirstNameValid] = useState(null);
-    const [lastNameValid, setLastNameValid] = useState(null);
     const [phoneValid, setPhoneValid] = useState(null);
     const [birthdayValid, setBirthdayValid] = useState(null);
 
@@ -50,45 +48,56 @@ const Signup = ({ navigation }) => {
                     <Input
                         label={en.signup.email}
                         valid={emailValid}
+                        error={emailValid===false}
                         onEndEditing={() =>
                             setEmailValid(
-                                emailRegex.test(user.email) || user.email == ''
+                                emailRegex.test(user.email)
                             )
                         }
                         keyboardType="email-address"
                         autoCapitalize="none"
-                        onChangeText={(text) =>
+                        onChangeText={(text) => {
                             setUser({ ...user, email: text })
+                            if(emailRegex.test(text)) setEmailValid(true)
+                            else setEmailValid(null)
+                        }
                         }
                     />
                     <Input
                         label={en.signup.password}
                         valid={passwordValid}
+                        error={passwordValid===false}
                         onEndEditing={() =>
                             setPasswordValid(
-                                password.length >= 8 || password == ''
+                                password.length >= 8
                             )
                         }
-                        onChangeText={(text) => setPassword(text)}
+                        onChangeText={(text) => {
+                            setPassword(text);
+                            if(text.length>=8) setPasswordValid(true)
+                            else setPasswordValid(null)
+                        }}
                         secureTextEntry={true}
                     />
                     <Input
                         label={en.signup.repeatPassword}
                         valid={repeatValid}
+                        error={repeatValid===false}
                         onEndEditing={() =>
-                            setRepeatValid(
-                                (password == user.password && passwordValid) ||
-                                    user.password == ''
-                            )
+                            setRepeatValid(password == user.password && passwordValid)
                         }
                         secureTextEntry={true}
-                        onChangeText={(text) =>
+                        onChangeText={(text) => {
                             setUser({ ...user, password: text })
-                        }
+                            if(text.length >= password.length && password != text) setRepeatValid(false);
+                            else if(text == password) setRepeatValid(true);
+                            else setRepeatValid(null);
+                        }}
                     />
                     <Box />
                     <Input
                         label={en.signup.firstname}
+                        valid={user.firstName && user.firstName != ''}
                         autoCapitalize="words"
                         onChangeText={(text) =>
                             setUser({ ...user, firstName: text })
@@ -96,7 +105,7 @@ const Signup = ({ navigation }) => {
                     />
                     <Input
                         label={en.signup.lastname}
-                        onEndEditing={() => setLastNameValid(lastName != '')}
+                        valid={user.lastName && user.lastName != ''}
                         autoCapitalize="words"
                         onChangeText={(text) =>
                             setUser({ ...user, lastName: text })
@@ -106,17 +115,21 @@ const Signup = ({ navigation }) => {
                         label={en.signup.phone}
                         keyboardType="phone-pad"
                         valid={phoneValid}
+                        error={phoneValid===false}
                         dataDetectorTypes="phoneNumber"
                         onEndEditing={() =>
-                            setPhoneValid(phoneRegex.test(phone))
+                            setPhoneValid(phoneRegex.test(user.phoneNumber))
                         }
-                        onChangeText={(text) =>
-                            setUser({ ...user, phone: text })
-                        }
+                        onChangeText={(text) => {
+                            setUser({ ...user, phoneNumber: text })
+                            if(phoneRegex.test(text)) setPhoneValid(true)
+                            else setPhoneValid(null)
+                        }}
                     />
                     <DateInput
                         label={en.signup.birthday}
                         valid={birthdayValid}
+                        error={birthdayValid===false}
                         dataDetectorTypes="calendarEvent"
                         onChange={(date, valid) => {
                             setUser({ ...user, birthday: date });
@@ -129,8 +142,8 @@ const Signup = ({ navigation }) => {
                             !emailValid ||
                             !passwordValid ||
                             !repeatValid ||
-                            !firstNameValid ||
-                            !lastNameValid ||
+                            user.firsName=="" ||
+                            user.lastName=="" ||
                             !birthdayValid
                         }
                         onPress={() => {

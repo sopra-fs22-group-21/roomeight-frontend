@@ -33,12 +33,10 @@ const styles = StyleSheet.create({
         width: '50%',
     },
     error: {
-        borderWidth: 1,
-        borderColor: 'red',
+        backgroundColor: "#fce6e6"
     },
     valid: {
-        borderWidth: 1,
-        borderColor: 'green',
+      backgroundColor: "#e6f5ef"
     },
 });
 

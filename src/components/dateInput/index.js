@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import dateFormat from 'dateformat';
 import styles from './style';
 import { InputLabel, StyledTextInput, Input } from '../input';
-import { TextInput, View } from 'react-native';
+import { TextInput, View, Text } from 'react-native';
 import { Box } from '../theme';
 
 export const DateInput = (props) => {
@@ -15,7 +15,6 @@ export const DateInput = (props) => {
     const [year, setYear] = useState(
         props.date ? dateFormat(props.date, 'yyyy') : ''
     );
-
     const isDay = (value) => {
         return !isNaN(value) && value.length <= 2 && Number(value) <= 31;
     };
@@ -25,6 +24,8 @@ export const DateInput = (props) => {
     const isYear = (value) => {
         return !isNaN(value) && value.length <= 4;
     };
+    const monthInput = useRef(null);
+    const yearInput = useRef(null);
 
     const changeDate = (d, m, y) => {
         // create date and validate
@@ -43,7 +44,8 @@ export const DateInput = (props) => {
         if (valid) {
             props.onChange(dt, true);
         } else {
-            props.onChange(null, false);
+            if((d && d!='' && !isDay(d)) || (!isMonth(m) && m && m!='') && (!isYear(y) && y && y!='')) props.onChange(null, false);
+            else props.onChange(null, null);
         }
         setYear(y);
         setDay(d);
@@ -54,7 +56,7 @@ export const DateInput = (props) => {
         <Box>
             <InputLabel label={props.label} />
             <View style={styles.row}>
-                <StyledTextInput
+                <TextInput
                     style={[
                         styles.day,
                         props.error ? styles.error : {},
@@ -67,6 +69,7 @@ export const DateInput = (props) => {
                     onChangeText={(text) => {
                         if (isDay(text)) {
                             changeDate(text, month, year);
+                            if(text.length == 2) monthInput.current.focus();
                         }
                     }}
                     onEndEditing={(event) => {
@@ -80,8 +83,11 @@ export const DateInput = (props) => {
                             num = '0' + num;
                         changeDate(num, month, year);
                     }}
+                    returnKeyType="next"
+                    blurOnSubmit={false}
                 />
-                <StyledTextInput
+                <TextInput
+                    ref={monthInput}
                     style={[
                         styles.month,
                         props.error ? styles.error : {},
@@ -94,7 +100,8 @@ export const DateInput = (props) => {
                     onChangeText={(text) => {
                         if (isMonth(text)) {
                             changeDate(day, text, year);
-                        }
+                            if(text.length == 2) yearInput.current.focus()
+                        }  
                     }}
                     onEndEditing={(event) => {
                         let num = event.nativeEvent.text;
@@ -107,14 +114,18 @@ export const DateInput = (props) => {
                             num = '0' + num;
                         changeDate(day, num, year);
                     }}
+                    returnKeyType="next"
+                    blurOnSubmit={false}
                 />
-                <StyledTextInput
+                <TextInput
+                    ref={yearInput}
                     style={[
                         styles.year,
                         props.error ? styles.error : {},
                         props.style,
                         props.valid ? styles.valid : {},
                     ]}
+                    {...props}
                     placeholder="yyyy"
                     keyboardType="number-pad"
                     value={year}
