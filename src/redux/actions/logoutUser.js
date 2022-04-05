@@ -3,7 +3,8 @@ import {
     LOGOUT_USER_SUCCESS,
     LOGOUT_USER_FAILURE,
 } from '../constants';
-import auth from '@react-native-firebase/auth';
+import { auth } from '../../../firebase/firebase-config';
+import { signOut } from 'firebase/auth';
 
 const logoutUserRequest = () => ({
     type: LOGOUT_USER_REQUEST,
@@ -22,7 +23,7 @@ const logoutUserFailure = (error) => ({
 export const logoutUser = () => (dispatch) => {
     dispatch(logoutUserRequest());
 
-    signInWithEmailAndPassword(auth, email, password)
+    signOut(auth)
         .then((response) => {
             dispatch(logoutUserSuccess(response.user));
         })
