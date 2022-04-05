@@ -6,11 +6,7 @@ const apiClient = () => {
         'https://b8585bf5-1579-433d-aec8-d6ad6bdfb349.mock.pstmn.io';
 
     const axiosInstance = axios.create({
-        baseURL: DEV_URL,
-        headers: {
-            crossOrigin: true,
-            'Access-Control-Allow-Origin': '*',
-        },
+        baseURL: API_URL,
         responseType: 'json',
     });
     return axiosInstance;
