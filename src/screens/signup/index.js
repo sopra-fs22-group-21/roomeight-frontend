@@ -50,12 +50,12 @@ const Signup = ({ navigation }) => {
                         valid={emailValid}
                         error={emailValid === false}
                         onEndEditing={() =>
-                            setEmailValid(emailRegex.test(user.email))
+                            setEmailValid(emailRegex.test(user.EmailAddress))
                         }
                         keyboardType="email-address"
                         autoCapitalize="none"
                         onChangeText={(text) => {
-                            setUser({ ...user, email: text });
+                            setUser({ ...user, EmailAddress: text });
                             if (emailRegex.test(text)) setEmailValid(true);
                             else setEmailValid(null);
                         }}
@@ -85,7 +85,7 @@ const Signup = ({ navigation }) => {
                         }
                         secureTextEntry={true}
                         onChangeText={(text) => {
-                            setUser({ ...user, password: text });
+                            setUser({ ...user, Password: text });
                             if (
                                 text.length >= password.length &&
                                 password != text
@@ -98,18 +98,18 @@ const Signup = ({ navigation }) => {
                     <Box />
                     <Input
                         label={en.signup.firstname}
-                        valid={user.firstName && user.firstName != ''}
+                        valid={user.firstName && user.FirstName != ''}
                         autoCapitalize="words"
                         onChangeText={(text) =>
-                            setUser({ ...user, firstName: text })
+                            setUser({ ...user, FirstName: text })
                         }
                     />
                     <Input
                         label={en.signup.lastname}
-                        valid={user.lastName && user.lastName != ''}
+                        valid={user.lastName && user.LastName != ''}
                         autoCapitalize="words"
                         onChangeText={(text) =>
-                            setUser({ ...user, lastName: text })
+                            setUser({ ...user, LastName: text })
                         }
                     />
                     <Input
@@ -117,12 +117,12 @@ const Signup = ({ navigation }) => {
                         keyboardType="phone-pad"
                         valid={phoneValid}
                         error={phoneValid === false}
-                        dataDetectorTypes="phoneNumber"
+                        dataDetectorTypes="PhoneNumber"
                         onEndEditing={() =>
-                            setPhoneValid(phoneRegex.test(user.phoneNumber))
+                            setPhoneValid(phoneRegex.test(user.PhoneNumber))
                         }
                         onChangeText={(text) => {
-                            setUser({ ...user, phoneNumber: text });
+                            setUser({ ...user, PhoneNumber: text });
                             if (phoneRegex.test(text)) setPhoneValid(true);
                             else setPhoneValid(null);
                         }}
@@ -133,7 +133,7 @@ const Signup = ({ navigation }) => {
                         error={birthdayValid === false}
                         dataDetectorTypes="calendarEvent"
                         onChange={(date, valid) => {
-                            setUser({ ...user, birthday: date });
+                            setUser({ ...user, Birthday: '' });
                             setBirthdayValid(valid);
                         }}
                     />

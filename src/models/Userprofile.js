@@ -4,12 +4,24 @@
  */
 class Userprofile {
     constructor(data = {}) {
-        this.FirstName = null;
-        this.LastName = null;
-        this.EmailAddress = null;
-        this.PhoneNumber = null;
-        this.Birthday = null;
-        this.Password = null;
+        this.FirstName = '';
+        this.LastName = '';
+        this.Description = '';
+        this.Biography = '';
+        this.Tags = '';
+        this.PictureReference = '';
+        this.Matches = '';
+        this.CreationDate = '';
+        this.OnlineStatus = '';
+        this.Birthday = '';
+        this.EmailAddress = '';
+        this.PhoneNumber = '';
+        this.Gender = '';
+        this.IsSearchingRoom = '';
+        this.IsAdvertisingRoom = '';
+        this.MoveInDate = '';
+        this.MoveOutDate = '';
+        this.Password = '';
         Object.assign(this, data);
     }
 }
