@@ -20,12 +20,13 @@ function Welcome({ navigation }) {
                 <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
                     <SemiBold>{en.welcome.signup}</SemiBold>
                 </TouchableOpacity>
-                
-                <TouchableOpacity onPress={() => {
-                    console.log("test")
-                    console.log(Constants.manifest.releaseChannel)
-                    
-                }}>
+
+                <TouchableOpacity
+                    onPress={() => {
+                        console.log('test');
+                        console.log(Constants.manifest.releaseChannel);
+                    }}
+                >
                     <SemiBold>test</SemiBold>
                 </TouchableOpacity>
 

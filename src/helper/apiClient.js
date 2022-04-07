@@ -1,9 +1,8 @@
 import axios from 'axios';
-import Constants from 'expo-constants'
+import Constants from 'expo-constants';
 
 const apiClient = () => {
-    console.log(Constants.manifest.releaseChannel)
-
+    console.log(Constants.manifest.releaseChannel);
 
     const API_URL = 'https://us-central1-roomeight-9cd94.cloudfunctions.net';
     const DEV_URL =
