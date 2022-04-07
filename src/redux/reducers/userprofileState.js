@@ -8,6 +8,9 @@ import {
     GET_USERS_SUCCESS,
     GET_USERS_FAILURE,
     GET_USERS_REQUEST,
+    LOGOUT_USER_FAILURE,
+    LOGOUT_USER_REQUEST,
+    LOGOUT_USER_SUCCESS,
 } from '../constants/index';
 
 const initialState = {
@@ -74,6 +77,26 @@ const userprofileState = (state = initialState, action) => {
                 loading: false,
             };
         case LOGIN_USER_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+            };
+        case LOGOUT_USER_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case LOGOUT_USER_SUCCESS:
+            return {
+                ...state,
+                userProfile: {
+                    ...state.userProfile,
+                    userId: action.payload.uid,
+                    userToken: action.payload.accessToken,
+                },
+                loading: false,
+            };
+        case LOGOUT_USER_FAILURE:
             return {
                 ...state,
                 error: action.payload,

@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import { Text, Button, View } from 'react-native';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { getUserProfiles } from '../../redux/actions/getUserprofiles';
+import { PrimaryButton } from '../../components/button';
+import styles from './style';
+import { logoutUser } from '../../redux/actions/logoutUser';
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
     useEffect(() => {
         dispatch(getUserProfiles());
         console.log('render');
@@ -19,9 +22,17 @@ const Profile = () => {
         console.log(userProfile);
     }
     return (
-        <View>
+        <View style={styles.container}>
             <Text>UserId</Text>
             <Text>{!loading && userProfile.userId}</Text>
+            <PrimaryButton
+                onPress={() => {
+                    dispatch(logoutUser());
+                    navigation.navigate('Welcome');
+                }}
+            >
+                Logout
+            </PrimaryButton>
         </View>
     );
 };
