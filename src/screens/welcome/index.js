@@ -20,16 +20,6 @@ function Welcome({ navigation }) {
                 <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
                     <SemiBold>{en.welcome.signup}</SemiBold>
                 </TouchableOpacity>
-
-                <TouchableOpacity
-                    onPress={() => {
-                        console.log('test');
-                        console.log(Constants.manifest.releaseChannel);
-                    }}
-                >
-                    <SemiBold>test</SemiBold>
-                </TouchableOpacity>
-
                 <View style={styles.or}>
                     <View style={styles.line} />
                     <SemiBold>{en.welcome.or}</SemiBold>
