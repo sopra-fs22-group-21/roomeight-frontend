@@ -89,11 +89,6 @@ const userprofileState = (state = initialState, action) => {
         case LOGOUT_USER_SUCCESS:
             return {
                 ...state,
-                userProfile: {
-                    ...state.userProfile,
-                    userId: action.payload.uid,
-                    userToken: action.payload.accessToken,
-                },
                 loading: false,
             };
         case LOGOUT_USER_FAILURE:

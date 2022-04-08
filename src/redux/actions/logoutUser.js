@@ -10,9 +10,8 @@ const logoutUserRequest = () => ({
     type: LOGOUT_USER_REQUEST,
 });
 
-const logoutUserSuccess = (user) => ({
+const logoutUserSuccess = () => ({
     type: LOGOUT_USER_SUCCESS,
-    payload: user,
 });
 
 const logoutUserFailure = (error) => ({
@@ -25,7 +24,7 @@ export const logoutUser = () => (dispatch) => {
 
     signOut(auth)
         .then((response) => {
-            dispatch(logoutUserSuccess(response.user));
+            dispatch(logoutUserSuccess());
         })
         .catch((error) => {
             dispatch(logoutUserFailure(error));
