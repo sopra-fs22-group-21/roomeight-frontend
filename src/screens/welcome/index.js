@@ -4,7 +4,6 @@ import styles from './style';
 import en from '../../resources/strings/en.json';
 import Room8Logo from '../../../assets/logo/Room8Logo.js';
 import { TextBlock, Box, SemiBold, Padding } from '../../components/theme';
-import Constants from 'expo-constants';
 
 function Welcome({ navigation }) {
     return (
