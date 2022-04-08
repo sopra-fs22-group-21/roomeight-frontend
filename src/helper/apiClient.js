@@ -17,20 +17,19 @@ const API_URL = (env = Constants.manifest.releaseChannel) => {
     return 'https://b8585bf5-1579-433d-aec8-d6ad6bdfb349.mock.pstmn.io';
 };
 
-async function userToken(){
+async function userToken() {
     const user = auth.currentUser;
     if (user) {
-        console.log("logged in");
-        const token = await user.getIdToken()
+        console.log('logged in');
+        const token = await user.getIdToken();
         return token;
-    }else{
-        console.log("no user")
+    } else {
+        console.log('no user');
         return null;
     }
-};
+}
 
 const apiClient = () => {
-
     const axiosInstance = axios.create({
         baseURL: API_URL(),
         responseType: 'json',
