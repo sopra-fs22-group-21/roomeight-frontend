@@ -6,7 +6,7 @@
         "login": "Log In"
     },
     "signup": {
-        "welcome": "Welcome to roomeight",
+        "heading": "Welcome to roomeight",
         "title": "Sign Up",
         "enterDetails": "Please enter your details below",
         "email": "Email",
@@ -18,10 +18,18 @@
         "phone": "Phone number"
     },
     "login": {
-        "welcome": "Welcome to roomeight",
+        "heading": "Welcome to roomeight",
         "title": "Log In",
         "enterDetails": "Please enter your details below",
         "email": "Email",
         "password": "Password"
+    },
+    "chooseStatus": {
+        "heading": "What's your plan?",
+        "title": "",
+        "select": "Please select what applies to you",
+        "room": "I'm looking for a room",
+        "roommate": "I'm looking for a new roommate",
+        "flat": "I want to access an existing flat profile"
     }
 }

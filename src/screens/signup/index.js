@@ -33,7 +33,7 @@ const Signup = ({ navigation }) => {
     const phoneRegex =
         /(\b(0041|0)|\B\+41)(\s?\(0\))?(\s)?[1-9]{2}(\s)?[0-9]{3}(\s)?[0-9]{2}(\s)?[0-9]{2}\b/;
 
-    const { loading, userProfile, error } = useSelector(
+    const { loading, userProfile, loggedIn, isComplete, error } = useSelector(
         (state) => state.userprofileState
     );
     const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const Signup = ({ navigation }) => {
         <View style={styles.container}>
             <KeyboardAvoidingView style={styles.inner} behavior="height">
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <Heading>{en.signup.welcome}</Heading>
+                    <Heading>{en.signup.heading}</Heading>
                     <Title>{en.signup.title}</Title>
                     <TextBlock>{en.signup.enterDetails}</TextBlock>
                     <Input
@@ -80,7 +80,7 @@ const Signup = ({ navigation }) => {
                         error={repeatValid === false}
                         onEndEditing={() =>
                             setRepeatValid(
-                                password == user.password && passwordValid
+                                password == user.Password && passwordValid
                             )
                         }
                         secureTextEntry={true}
@@ -98,7 +98,8 @@ const Signup = ({ navigation }) => {
                     <Box />
                     <Input
                         label={en.signup.firstname}
-                        valid={user.firstName && user.FirstName != ''}
+                        valid={user.FirstName && user.FirstName != ''}
+                        autoComplet="name-given"
                         autoCapitalize="words"
                         onChangeText={(text) =>
                             setUser({ ...user, FirstName: text })
@@ -106,7 +107,8 @@ const Signup = ({ navigation }) => {
                     />
                     <Input
                         label={en.signup.lastname}
-                        valid={user.lastName && user.LastName != ''}
+                        valid={user.LastName && user.LastName != ''}
+                        autoComplet="name-family"
                         autoCapitalize="words"
                         onChangeText={(text) =>
                             setUser({ ...user, LastName: text })
@@ -117,7 +119,7 @@ const Signup = ({ navigation }) => {
                         keyboardType="phone-pad"
                         valid={phoneValid}
                         error={phoneValid === false}
-                        dataDetectorTypes="PhoneNumber"
+                        dataDetectorTypes="phoneNumber"
                         onEndEditing={() =>
                             setPhoneValid(phoneRegex.test(user.PhoneNumber))
                         }
@@ -144,14 +146,15 @@ const Signup = ({ navigation }) => {
                             !emailValid ||
                             !passwordValid ||
                             !repeatValid ||
-                            user.firsName == '' ||
-                            user.lastName == '' ||
+                            user.FirstName == '' ||
+                            user.LastName == '' ||
                             !birthdayValid
                         } */
                         onPress={() => {
                             dispatch(postUserprofile(user));
                             console.log('posting');
-                            console.log(user);
+                            console.log(error);
+                            console.log(userProfile);
                         }}
                     >
                         Sign Up
@@ -162,7 +165,7 @@ const Signup = ({ navigation }) => {
                     />
                     <Text>isLoading: {loading.toString()}</Text>
                     <Text>Userprofile: {JSON.stringify(userProfile)}</Text>
-                    <Text>Error: {JSON.stringify(error)}</Text>
+                    <Text>Error: {error ? error.message : 'no error'}</Text>
                 </ScrollView>
             </KeyboardAvoidingView>
         </View>

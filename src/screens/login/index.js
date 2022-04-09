@@ -15,7 +15,7 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('');
     return (
         <View style={styles.container}>
-            <Heading>{en.login.welcome}</Heading>
+            <Heading>{en.login.heading}</Heading>
             <Title>{en.login.title}</Title>
             <KeyboardAwareScrollView
                 style={styles.inner}
@@ -40,7 +40,10 @@ const Login = ({ navigation }) => {
                 >
                     Log In
                 </PrimaryButton>
-                <Button title="Don't have an account yet" />
+                <Button
+                    title="Don't have an account yet"
+                    onPress={() => navigation.navigate('Signup')}
+                />
             </KeyboardAwareScrollView>
         </View>
     );

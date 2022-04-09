@@ -37,9 +37,11 @@ export const userAuthStateListener = () => (dispatch) => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             //user is logged in
+            console.log('logged in');
             dispatch(loginUserSuccess(user));
         } else {
             //no user logged in
+            console.log('Tried logging in but failed');
             dispatch(logoutUserSuccess());
         }
     });

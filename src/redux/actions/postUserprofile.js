@@ -26,14 +26,17 @@ export const postUserprofile = (userprofile) => (dispatch) => {
     apiClient()
         .post('/userprofiles', userprofile)
         .then((response) => {
+            console.log(
+                'postUserprofileSuccess: ' + JSON.stringify(response.data)
+            );
             dispatch(postUserprofileSuccess(response.data));
         })
+        .then(() => {
+            console.log('then logging in...');
+            dispatch(loginUser(userprofile.EmailAddress, userprofile.Password));
+        })
         .catch((error) => {
+            console.log('error posting userprofile');
             dispatch(postUserprofileFailure(error));
         });
-    //TODO: handle login after signup why doesnt this work??
-    /* .finally(() => {
-            console.log("finally")
-            dispatch(loginUser(userprofile.email, userprofile.password));
-        }); */
 };

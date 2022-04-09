@@ -12,12 +12,12 @@ const Profile = ({ navigation }) => {
     }, []);
 
     const dispatch = useDispatch();
-    const { loading, userProfile, error } = useSelector(
+    const { loading, userProfile, loggedIn, isComplete, error } = useSelector(
         (state) => state.userprofileState
     );
 
     if (!loading) {
-        console.log(loading);
+        console.log('loading: ' + loading);
         console.log(userProfile);
     }
     return (

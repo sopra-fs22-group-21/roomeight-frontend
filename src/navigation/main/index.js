@@ -9,6 +9,7 @@ import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { userAuthStateListener } from '../../redux/actions/loginUser';
 import M8Loader from '../../../assets/logo/M8Loader';
+import ChooseStatus from '../../screens/chooseStatus';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,7 @@ export default function Route() {
     }; 
     
 */
-    const { loading, userProfile, error } = useSelector(
+    const { loading, userProfile, loggedIn, isComplete, error } = useSelector(
         (state) => state.userprofileState
     );
     const dispatch = useDispatch();
@@ -34,37 +35,52 @@ export default function Route() {
     if (loading) {
         return <M8Loader height={100} width={100} />;
     }
+    console.log('logged in: ' + loggedIn);
+    console.log('user profile: ' + userProfile);
+    console.log('complete: ' + isComplete);
 
+    const loggedOutComponents = (
+        <>
+            <Stack.Screen
+                name="Welcome"
+                component={Welcome}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Signup"
+                component={Signup}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+            />
+        </>
+    );
+    const incompleteComponents = (
+        <Stack.Screen
+            name="ChooseStatus"
+            component={ChooseStatus}
+            options={{ headerShown: false }}
+        />
+    );
+
+    const completeComponents = (
+        <Stack.Screen
+            name="Profile"
+            component={Profile}
+            options={{ headerShown: false }}
+        />
+    );
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {Object.keys(userProfile).length === 0 ? (
-                    <>
-                        <Stack.Screen
-                            name="Welcome"
-                            component={Welcome}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                            name="Signup"
-                            component={Signup}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                            name="Login"
-                            component={Login}
-                            options={{ headerShown: false }}
-                        />
-                    </>
-                ) : (
-                    <>
-                        <Stack.Screen
-                            name="Profile"
-                            component={Profile}
-                            options={{ headerShown: false }}
-                        />
-                    </>
-                )}
+                {loggedIn
+                    ? isComplete
+                        ? completeComponents
+                        : incompleteComponents
+                    : loggedOutComponents}
             </Stack.Navigator>
         </NavigationContainer>
     );

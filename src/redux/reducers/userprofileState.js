@@ -12,10 +12,15 @@ import {
     LOGOUT_USER_REQUEST,
     LOGOUT_USER_SUCCESS,
     LOADING_STATE,
+    COMPLETE_USERPROFILE_REQUEST,
+    COMPLETE_USERPROFILE_SUCCESS,
+    COMPLETE_USERPROFILE_FAILURE,
 } from '../constants/index';
 
 const initialState = {
     userProfile: {},
+    loggedIn: false,
+    isComplete: false,
     loading: false,
     error: null,
 };
@@ -76,6 +81,7 @@ const userprofileState = (state = initialState, action) => {
                     auth: action.payload,
                 },
                 error: null,
+                loggedIn: true,
                 loading: false,
             };
         case LOGIN_USER_FAILURE:
@@ -97,6 +103,26 @@ const userprofileState = (state = initialState, action) => {
                 loading: false,
             };
         case LOGOUT_USER_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+                loading: false,
+            };
+
+        case COMPLETE_USERPROFILE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case COMPLETE_USERPROFILE_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                userProfile: {},
+                isComplete: true,
+                loading: false,
+            };
+        case COMPLETE_USERPROFILE_FAILURE:
             return {
                 ...state,
                 error: action.payload,

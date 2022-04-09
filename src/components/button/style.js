@@ -1,24 +1,41 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
-    primary: {
+    button: {
         height: 40,
-        borderRadius: 20,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    pressed: {
-        backgroundColor: '#0c6076',
-    },
-    unpressed: {
-        backgroundColor: '#0E7490',
-    },
-    disabled: {
-        backgroundColor: '#b0c8cf',
-    },
     label: {
         fontFamily: 'SourceSans3Regular',
         fontSize: 18,
+    },
+    primary: {
+        borderRadius: 20,
+        backgroundColor: '#0E7490',
+    },
+    primaryPressed: {
+        backgroundColor: '#0c6076',
+    },
+    primaryDisabled: {
+        backgroundColor: '#b0c8cf',
+    },
+    primaryLabel: {
+        color: 'white',
+    },
+    secondary: {
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: '#F9A8D4',
+        backgroundColor: 'white',
+    },
+    secondaryPressed: {
+        backgroundColor: '#F9A8D4',
+    },
+    secondaryLabel: {
+        color: '#F9A8D4',
+    },
+    secondaryPressedLabel: {
         color: 'white',
     },
 });

@@ -3,21 +3,62 @@ import { Pressable, Text } from 'react-native';
 import { Box } from '../theme';
 import styles from './style';
 
-export const PrimaryButton = (props) => (
+const BasicButton = (props) => (
     <Box>
         <Pressable
             {...props}
             style={({ pressed }) => [
-                styles.primary,
+                styles.button,
                 props.style,
+                styles,
                 props.disabled
-                    ? styles.disabled
+                    ? props.disabledStyle
                     : pressed
-                    ? styles.pressed
-                    : styles.unpressed,
+                    ? props.pressedStyle
+                    : '',
             ]}
         >
-            <Text style={styles.label}>{props.children}</Text>
+            {({ pressed }) => (
+                <Text
+                    style={[
+                        styles.label,
+                        props.textStyle,
+                        props.disabled
+                            ? props.disabledTextStyle
+                            : pressed
+                            ? props.pressedTextStyle
+                            : '',
+                    ]}
+                >
+                    {props.children}
+                </Text>
+            )}
         </Pressable>
     </Box>
+);
+
+export const PrimaryButton = (props) => (
+    <BasicButton
+        {...props}
+        style={styles.primary}
+        disabledStyle={styles.primaryDisabled}
+        pressedStyle={styles.primaryPressed}
+        textStyle={styles.primaryLabel}
+    >
+        {props.children}
+    </BasicButton>
+);
+
+export const SecondaryButton = (props) => (
+    <BasicButton
+        {...props}
+        style={styles.secondary}
+        disabledStyle={styles.secondaryDisabled}
+        pressedStyle={styles.secondaryPressed}
+        textStyle={styles.secondaryLabel}
+        disabledTextStyle={styles.secondaryDisabledLabel}
+        pressedTextStyle={styles.secondaryPressedLabel}
+    >
+        {props.children}
+    </BasicButton>
 );
