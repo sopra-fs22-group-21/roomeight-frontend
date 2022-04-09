@@ -40,7 +40,7 @@ const Signup = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <KeyboardAvoidingView style={styles.inner} behavior="height">
+            <KeyboardAvoidingView style={styles.inner} behavior="padding">
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <Heading>{en.signup.heading}</Heading>
                     <Title>{en.signup.title}</Title>
@@ -49,9 +49,12 @@ const Signup = ({ navigation }) => {
                         label={en.signup.email}
                         valid={emailValid}
                         error={emailValid === false}
-                        onEndEditing={() =>
-                            setEmailValid(emailRegex.test(user.EmailAddress))
-                        }
+                        onEndEditing={() => {
+                            if (user.EmailAddress != '')
+                                setEmailValid(
+                                    emailRegex.test(user.EmailAddress)
+                                );
+                        }}
                         keyboardType="email-address"
                         autoCapitalize="none"
                         onChangeText={(text) => {
@@ -64,9 +67,10 @@ const Signup = ({ navigation }) => {
                         label={en.signup.password}
                         valid={passwordValid}
                         error={passwordValid === false}
-                        onEndEditing={() =>
-                            setPasswordValid(password.length >= 8)
-                        }
+                        onEndEditing={() => {
+                            if (password != '')
+                                setPasswordValid(password.length >= 8);
+                        }}
                         onChangeText={(text) => {
                             setPassword(text);
                             if (text.length >= 8) setPasswordValid(true);
@@ -78,11 +82,12 @@ const Signup = ({ navigation }) => {
                         label={en.signup.repeatPassword}
                         valid={repeatValid}
                         error={repeatValid === false}
-                        onEndEditing={() =>
-                            setRepeatValid(
-                                password == user.Password && passwordValid
-                            )
-                        }
+                        onEndEditing={() => {
+                            if (user.Password != '')
+                                setRepeatValid(
+                                    password == user.Password && passwordValid
+                                );
+                        }}
                         secureTextEntry={true}
                         onChangeText={(text) => {
                             setUser({ ...user, Password: text });
@@ -120,9 +125,12 @@ const Signup = ({ navigation }) => {
                         valid={phoneValid}
                         error={phoneValid === false}
                         dataDetectorTypes="phoneNumber"
-                        onEndEditing={() =>
-                            setPhoneValid(phoneRegex.test(user.PhoneNumber))
-                        }
+                        onEndEditing={() => {
+                            if (user.PhoneNumber != '')
+                                setPhoneValid(
+                                    phoneRegex.test(user.PhoneNumber)
+                                );
+                        }}
                         onChangeText={(text) => {
                             setUser({ ...user, PhoneNumber: text });
                             if (phoneRegex.test(text)) setPhoneValid(true);
@@ -134,38 +142,40 @@ const Signup = ({ navigation }) => {
                         valid={birthdayValid}
                         error={birthdayValid === false}
                         dataDetectorTypes="calendarEvent"
-                        // TODO: set correct format for date yyyy-mm-dd
                         onChange={(date, valid) => {
-                            setUser({ ...user, Birthday: date });
+                            if (valid)
+                                setUser({
+                                    ...user,
+                                    Birthday: dateFormat(date, 'yyyy-mm-dd'),
+                                });
                             setBirthdayValid(valid);
                         }}
                     />
-
-                    <PrimaryButton
-                        /* disabled={
-                            !emailValid ||
-                            !passwordValid ||
-                            !repeatValid ||
-                            user.FirstName == '' ||
-                            user.LastName == '' ||
-                            !birthdayValid
-                        } */
-                        onPress={() => {
-                            dispatch(postUserprofile(user));
-                            console.log('posting');
-                            console.log(error);
-                            console.log(userProfile);
-                        }}
-                    >
-                        Sign Up
-                    </PrimaryButton>
+                    <Box>
+                        <PrimaryButton
+                            disabled={
+                                !emailValid ||
+                                !passwordValid ||
+                                !repeatValid ||
+                                user.FirstName == '' ||
+                                user.LastName == '' ||
+                                !birthdayValid ||
+                                !phoneValid
+                            }
+                            onPress={() => {
+                                dispatch(postUserprofile(user));
+                                console.log('posting');
+                                console.log(error);
+                                console.log(userProfile);
+                            }}
+                        >
+                            Sign Up
+                        </PrimaryButton>
+                    </Box>
                     <Button
                         title="Already have an account"
                         onPress={() => navigation.navigate('Login')}
                     />
-                    <Text>isLoading: {loading.toString()}</Text>
-                    <Text>Userprofile: {JSON.stringify(userProfile)}</Text>
-                    <Text>Error: {error ? error.message : 'no error'}</Text>
                 </ScrollView>
             </KeyboardAvoidingView>
         </View>

@@ -100,6 +100,7 @@ const userprofileState = (state = initialState, action) => {
                 ...state,
                 error: null,
                 userProfile: {},
+                loggedIn: false,
                 loading: false,
             };
         case LOGOUT_USER_FAILURE:

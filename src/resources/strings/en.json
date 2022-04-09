@@ -15,7 +15,9 @@
         "firstname": "First Name",
         "lastname": "Last Name",
         "birthday": "Birthday",
-        "phone": "Phone number"
+        "phone": "Phone number",
+        "next": "Next",
+        "signup": "Sign Up"
     },
     "login": {
         "heading": "Welcome to roomeight",

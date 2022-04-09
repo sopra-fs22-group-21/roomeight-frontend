@@ -4,37 +4,35 @@ import { Box } from '../theme';
 import styles from './style';
 
 const BasicButton = (props) => (
-    <Box>
-        <Pressable
-            {...props}
-            style={({ pressed }) => [
-                styles.button,
-                props.style,
-                styles,
-                props.disabled
-                    ? props.disabledStyle
-                    : pressed
-                    ? props.pressedStyle
-                    : '',
-            ]}
-        >
-            {({ pressed }) => (
-                <Text
-                    style={[
-                        styles.label,
-                        props.textStyle,
-                        props.disabled
-                            ? props.disabledTextStyle
-                            : pressed
-                            ? props.pressedTextStyle
-                            : '',
-                    ]}
-                >
-                    {props.children}
-                </Text>
-            )}
-        </Pressable>
-    </Box>
+    <Pressable
+        {...props}
+        style={({ pressed }) => [
+            styles.button,
+            props.style,
+            styles,
+            props.disabled
+                ? props.disabledStyle
+                : pressed
+                ? props.pressedStyle
+                : '',
+        ]}
+    >
+        {({ pressed }) => (
+            <Text
+                style={[
+                    styles.label,
+                    props.textStyle,
+                    props.disabled
+                        ? props.disabledTextStyle
+                        : pressed
+                        ? props.pressedTextStyle
+                        : '',
+                ]}
+            >
+                {props.children}
+            </Text>
+        )}
+    </Pressable>
 );
 
 export const PrimaryButton = (props) => (

@@ -30,14 +30,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     secondaryPressed: {
-        backgroundColor: '#F9A8D4',
+        backgroundColor: '#FBCFE8',
     },
     secondaryLabel: {
-        color: '#F9A8D4',
+        color: '#EC4899',
+        fontFamily: 'SourceSans3SemiBold',
+        fontSize: 16,
     },
-    secondaryPressedLabel: {
-        color: 'white',
-    },
+    secondaryPressedLabel: {},
 });
 
 export default styles;

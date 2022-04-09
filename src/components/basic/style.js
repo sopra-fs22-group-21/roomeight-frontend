@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     },
     inner: {
         flex: 1,
-        paddingTop: 90,
+        justifyContent: 'center',
+        paddingBottom: 100,
     },
 });
 

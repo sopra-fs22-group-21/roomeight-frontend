@@ -5,6 +5,7 @@ import { getUserProfiles } from '../../redux/actions/getUserprofiles';
 import { PrimaryButton } from '../../components/button';
 import styles from './style';
 import { logoutUser } from '../../redux/actions/logoutUser';
+import { Container } from '../../components/basic';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
@@ -21,7 +22,7 @@ const Profile = ({ navigation }) => {
         console.log(userProfile);
     }
     return (
-        <View style={styles.container}>
+        <Container>
             <Text>UserId</Text>
             <Text>{!loading && userProfile.userId}</Text>
             <PrimaryButton
@@ -38,7 +39,7 @@ const Profile = ({ navigation }) => {
             >
                 get
             </PrimaryButton>
-        </View>
+        </Container>
     );
 };
 

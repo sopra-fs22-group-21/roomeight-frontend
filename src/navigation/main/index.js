@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userAuthStateListener } from '../../redux/actions/loginUser';
 import M8Loader from '../../../assets/logo/M8Loader';
 import ChooseStatus from '../../screens/chooseStatus';
+import CompleteSingleProfile from '../../screens/completeSingleProfile';
 
 const Stack = createStackNavigator();
 
@@ -59,11 +60,18 @@ export default function Route() {
         </>
     );
     const incompleteComponents = (
-        <Stack.Screen
-            name="ChooseStatus"
-            component={ChooseStatus}
-            options={{ headerShown: false }}
-        />
+        <>
+            <Stack.Screen
+                name="ChooseStatus"
+                component={ChooseStatus}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="CompleteSingleProfile"
+                component={CompleteSingleProfile}
+                options={{ headerShown: false }}
+            />
+        </>
     );
 
     const completeComponents = (
