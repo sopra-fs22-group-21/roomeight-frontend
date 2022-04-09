@@ -32,10 +32,7 @@ export default function Route() {
     }, []);
 
     if (loading) {
-        return (
-            <M8Loader height={100} width={100} />
-        );
-       
+        return <M8Loader height={100} width={100} />;
     }
 
     return (
