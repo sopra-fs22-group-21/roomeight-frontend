@@ -4,6 +4,7 @@ import {
     POST_USERPROFILE_FAILURE,
 } from '../constants';
 import apiClient from '../../helper/apiClient';
+import { loginUser, userAuthStateListener } from './loginUser';
 
 const postUserprofileRequest = () => ({
     type: POST_USERPROFILE_REQUEST,
@@ -29,5 +30,10 @@ export const postUserprofile = (userprofile) => (dispatch) => {
         })
         .catch((error) => {
             dispatch(postUserprofileFailure(error));
-        });
+        })
+        //TODO: handle login after signup why doesnt this work??
+        /* .finally(() => {
+            console.log("finally")
+            dispatch(loginUser(userprofile.email, userprofile.password));
+        }); */
 };

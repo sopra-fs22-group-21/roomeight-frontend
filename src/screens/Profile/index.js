@@ -8,7 +8,6 @@ import { logoutUser } from '../../redux/actions/logoutUser';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
-        dispatch(getUserProfiles());
         console.log('render');
     }, []);
 
@@ -28,10 +27,16 @@ const Profile = ({ navigation }) => {
             <PrimaryButton
                 onPress={() => {
                     dispatch(logoutUser());
-                    navigation.navigate('Welcome');
                 }}
             >
                 Logout
+            </PrimaryButton>
+            <PrimaryButton
+                onPress={() => {
+                    dispatch(getUserProfiles());
+                }}
+            >
+                get
             </PrimaryButton>
         </View>
     );

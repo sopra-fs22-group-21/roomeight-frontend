@@ -11,16 +11,16 @@ import {
     LOGOUT_USER_FAILURE,
     LOGOUT_USER_REQUEST,
     LOGOUT_USER_SUCCESS,
+    LOADING_STATE,
 } from '../constants/index';
 
 const initialState = {
-    userProfile: {
-        userId: '',
-        userToken: '',
-    },
-    loading: true,
+    userProfile: {},
+    loading: false,
     error: null,
 };
+
+//TODO: error handling -> really set to null on every success?
 
 const userprofileState = (state = initialState, action) => {
     switch (action.type) {
@@ -33,6 +33,7 @@ const userprofileState = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
+                error: null,
                 userProfile: action.payload,
             };
         case GET_USERS_FAILURE:
@@ -53,6 +54,7 @@ const userprofileState = (state = initialState, action) => {
                     ...state.userProfile,
                     details: action.payload,
                 },
+                error: null,
                 loading: false,
             };
         case POST_USERPROFILE_FAILURE:
@@ -71,15 +73,16 @@ const userprofileState = (state = initialState, action) => {
                 ...state,
                 userProfile: {
                     ...state.userProfile,
-                    userId: action.payload.uid,
-                    userToken: action.payload.accessToken,
+                    auth: action.payload,
                 },
+                error: null,
                 loading: false,
             };
         case LOGIN_USER_FAILURE:
             return {
                 ...state,
                 error: action.payload,
+                loading: false,
             };
         case LOGOUT_USER_REQUEST:
             return {
@@ -89,12 +92,20 @@ const userprofileState = (state = initialState, action) => {
         case LOGOUT_USER_SUCCESS:
             return {
                 ...state,
+                error: null,
+                userProfile: {},
                 loading: false,
             };
         case LOGOUT_USER_FAILURE:
             return {
                 ...state,
                 error: action.payload,
+                loading: false,
+            };
+        case LOADING_STATE:
+            return {
+                ...state,
+                loading: true,
             };
         default:
             return state;
