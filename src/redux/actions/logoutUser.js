@@ -22,8 +22,7 @@ const logoutUserFailure = (error) => ({
 export const logoutUser = () => (dispatch) => {
     dispatch(logoutUserRequest());
 
-    signOut(auth)
-        .catch((error) => {
-            dispatch(logoutUserFailure(error));
-        });
+    signOut(auth).catch((error) => {
+        dispatch(logoutUserFailure(error));
+    });
 };

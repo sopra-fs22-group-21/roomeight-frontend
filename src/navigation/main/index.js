@@ -8,6 +8,7 @@ import Profile from '../../screens/Profile';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { userAuthStateListener } from '../../redux/actions/loginUser';
+import M8Loader from '../../../assets/logo/m8Loader';
 
 const Stack = createStackNavigator();
 
@@ -26,13 +27,15 @@ export default function Route() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("dispatch")
+        console.log('dispatch');
         dispatch(userAuthStateListener());
     }, []);
 
     if (loading) {
-        console.log('loading');
-        return <View> loading </View>;
+        return (
+            <M8Loader height={100} width={100} />
+        );
+       
     }
 
     return (

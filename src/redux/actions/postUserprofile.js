@@ -30,9 +30,9 @@ export const postUserprofile = (userprofile) => (dispatch) => {
         })
         .catch((error) => {
             dispatch(postUserprofileFailure(error));
-        })
-        //TODO: handle login after signup why doesnt this work??
-        /* .finally(() => {
+        });
+    //TODO: handle login after signup why doesnt this work??
+    /* .finally(() => {
             console.log("finally")
             dispatch(loginUser(userprofile.email, userprofile.password));
         }); */
