@@ -11,8 +11,6 @@ class Userprofile {
         this.Tags = '';
         this.PictureReference = '';
         this.Matches = '';
-        this.CreationDate = '';
-        this.OnlineStatus = '';
         this.Birthday = '';
         this.EmailAddress = '';
         this.PhoneNumber = '';

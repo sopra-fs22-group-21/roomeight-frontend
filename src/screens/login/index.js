@@ -36,7 +36,6 @@ const Login = ({ navigation }) => {
                 <PrimaryButton
                     onPress={() => {
                         dispatch(loginUser(email, password));
-                        navigation.navigate('Profile');
                     }}
                 >
                     Log In

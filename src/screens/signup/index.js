@@ -132,8 +132,9 @@ const Signup = ({ navigation }) => {
                         valid={birthdayValid}
                         error={birthdayValid === false}
                         dataDetectorTypes="calendarEvent"
+                        // TODO: set correct format for date yyyy-mm-dd
                         onChange={(date, valid) => {
-                            setUser({ ...user, Birthday: '' });
+                            setUser({ ...user, Birthday: date });
                             setBirthdayValid(valid);
                         }}
                     />
