@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import styles from './style';
+import { useDispatch } from 'react-redux';
 
 export const Heading = (props) => {
     return props.hidden ? (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './style';
 import en from '../../resources/strings/en.json';
-import { Input } from '../../components/input';
+import { Input, InputBox } from '../../components/input';
 import {
     TextBlock,
     Heading,
@@ -13,7 +13,6 @@ import {
 import { Button, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
 import DateInput from '../../components/dateInput';
 import dateFormat from 'dateformat';
-import { InputBox } from '../../components/inputBox';
 
 const CompleteSingleProfile = ({ navigation }) => {
     const [moveInDateValid, setmoveInDateValid] = useState(null);
