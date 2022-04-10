@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import styles from './style';
+import { useDispatch } from 'react-redux';
 
 export const Heading = (props) => {
     return props.hidden ? (
@@ -38,4 +39,21 @@ export const SemiBold = (props) => (
 
 export const Padding = (props) => (
     <View style={{ ...styles.padding, ...props.style }}>{props.children}</View>
+);
+
+export const Container = (props) => {
+    const dispatch = useDispatch();
+    return (
+        <View style={styles.container} {...props}>
+            {props.children}
+            {props.showLogout ? (
+                <Button title="Logout" onPress={() => dispatch(logoutUser())} />
+            ) : null}
+        </View>
+    );
+};
+export const Inner = (props) => (
+    <View style={styles.inner} {...props}>
+        {props.children}
+    </View>
 );

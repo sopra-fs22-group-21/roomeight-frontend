@@ -33,5 +33,24 @@
         "room": "I'm looking for a room",
         "roommate": "I'm looking for a new roommate",
         "flat": "I want to access an existing flat profile"
+    },
+    "completeSingleProfile": {
+        "heading": "Tell us something about you",
+        "title": "",
+        "gender": "Gender",
+        "moveInDate": "Move-In Date",
+        "tags": "Tags"
+    },
+    "tags": {
+        "work": "mainly working",
+        "pets": "bringing pets",
+        "party": "party person",
+        "smoker": "smoker",
+        "woko": "WOKO ready",
+        "juwo": "JUWO ready",
+        "student": "mainly student",
+        "plants": "bringing plants",
+        "art": "bringing art",
+        "sporty": "sporty"
     }
 }

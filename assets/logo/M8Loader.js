@@ -1,5 +1,5 @@
 import { View, Image } from 'react-native';
-import { Container } from '../../src/components/basic';
+import { Container } from '../../src/components/theme';
 
 const M8Loader = (props) => {
     return (
