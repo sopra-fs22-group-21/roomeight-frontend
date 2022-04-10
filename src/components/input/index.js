@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, Text } from 'react-native';
+import { TextInput, Text, View } from 'react-native';
 import { Box } from '../theme';
 import styles from './style';
 
