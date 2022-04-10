@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import styles from './style';
 import en from '../../resources/strings/en.json';
 import { Input } from '../../components/input';
-import { TextBlock, Heading, Box, Title, Container, Inner } from '../../components/theme';
+import {
+    TextBlock,
+    Heading,
+    Box,
+    Title,
+    Container,
+    Inner,
+} from '../../components/theme';
 import { Button, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
 import DateInput from '../../components/dateInput';
 import dateFormat from 'dateformat';

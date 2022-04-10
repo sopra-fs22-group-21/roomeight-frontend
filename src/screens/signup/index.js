@@ -10,7 +10,13 @@ import {
     KeyboardAvoidingView,
     Text,
 } from 'react-native';
-import { TextBlock, Heading, Title, Box, Container } from '../../components/theme';
+import {
+    TextBlock,
+    Heading,
+    Title,
+    Box,
+    Container,
+} from '../../components/theme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Input } from '../../components/input';
 import { PrimaryButton } from '../../components/button';

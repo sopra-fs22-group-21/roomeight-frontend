@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import { View, Button } from 'react-native';
 import styles from './style';
 import en from '../../resources/strings/en.json';
-import { TextBlock, Heading, Title, Box, Container } from '../../components/theme';
+import {
+    TextBlock,
+    Heading,
+    Title,
+    Box,
+    Container,
+} from '../../components/theme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Input } from '../../components/input';
 import { PrimaryButton } from '../../components/button';
