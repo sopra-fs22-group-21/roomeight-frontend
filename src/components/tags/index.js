@@ -1,24 +1,23 @@
-import React from 'react';
-import { TextInput, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import { InputBox } from '../input';
-import { Box } from '../theme';
 import styles from './style';
-import tags from '../../resources/icons/tags';
-import { Icon } from 'react-native-elements';
-import { Pressable } from 'react-native';
+import tagIcons from '../../resources/icons/tagIcons';
+import TagElement from '../tagelement';
 
 const Tags = (props) => {
-    const TagElement = (props) => (
-        <View style={styles.tagElement}>
-            <Pressable>
-                <Icon style={styles.icon} name={props.icon} size={20} />
-                <Text style={styles.text}>{props.name}</Text>
-            </Pressable>
-        </View>
-    );
-    const half = Math.ceil(props.tags.length / 2);
-    const left = props.tags.slice(0, half);
-    const right = props.tags.slice(-half);
+    const half = Math.ceil(tagIcons.length / 2);
+    const left = tagIcons.slice(0, half);
+    const right = tagIcons.slice(half,tagIcons.length);
+    const [tags, setTags] = useState({});
+
+    const toggleSelect = (selected) => {
+        const t = {...tags, ...selected};
+        const tArray = Object.entries(t);
+        props.onChange(tArray.filter((tag) => tag[1]===true).map((tag) => tag[0]));
+        setTags(t)
+    }
+
     return (
         <InputBox label={'Tags'}>
             <View style={styles.box}>
@@ -27,8 +26,8 @@ const Tags = (props) => {
                         {left.map((tag) => (
                             <TagElement
                                 key={tag.name}
-                                name={tag.name}
-                                icon={tag.icon}
+                                tag={tag}
+                                onChange={(selected) => toggleSelect(selected)}
                             />
                         ))}
                     </View>
@@ -38,8 +37,8 @@ const Tags = (props) => {
                         {right.map((tag) => (
                             <TagElement
                                 key={tag.name}
-                                name={tag.name}
-                                icon={tag.icon}
+                                tag={tag}
+                                onChange={(selected) => toggleSelect(selected)}
                             />
                         ))}
                     </View>

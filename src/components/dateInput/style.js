@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     },
     day: {
         backgroundColor: '#e7e5e4',
-        //height: 30,
+        height: 30,
         padding: 10,
         fontFamily: 'SourceSans3Regular',
         fontSize: 16,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     },
     month: {
         backgroundColor: '#e7e5e4',
-        //height: 30,
+        height: 30,
         padding: 10,
         fontFamily: 'SourceSans3Regular',
         fontSize: 16,
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     },
     year: {
         backgroundColor: '#e7e5e4',
-        //height: 30,
+        height: 30,
         padding: 10,
         fontFamily: 'SourceSans3Regular',
         fontSize: 16,

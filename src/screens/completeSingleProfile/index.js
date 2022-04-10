@@ -14,10 +14,10 @@ import { Button, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
 import DateInput from '../../components/dateInput';
 import dateFormat from 'dateformat';
 import Tags from '../../components/tags';
-import tags from '../../resources/icons/tags';
 
 const CompleteSingleProfile = ({ navigation }) => {
     const [moveInDateValid, setmoveInDateValid] = useState(null);
+    let selectedTags = [];
     return (
         <Container>
             <Heading>{en.chooseStatus.heading}</Heading>
@@ -41,7 +41,7 @@ const CompleteSingleProfile = ({ navigation }) => {
                         setmoveInDateValid(valid);
                     }}
                 />
-                <Tags tags={tags} />
+                <Tags onChange={(tags) => console.log(tags)}/>
             </Inner>
         </Container>
     );
