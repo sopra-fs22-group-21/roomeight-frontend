@@ -33,5 +33,12 @@
         "room": "I'm looking for a room",
         "roommate": "I'm looking for a new roommate",
         "flat": "I want to access an existing flat profile"
+    },
+    "completeSingleProfile": {
+        "heading": "Tell us something about you",
+        "title": "",
+        "gender": "Gender",
+        "moveInDate": "Move-In Date",
+        "tags": "Tags"
     }
 }

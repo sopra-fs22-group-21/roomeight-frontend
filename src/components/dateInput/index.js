@@ -5,7 +5,7 @@ import { InputLabel, StyledTextInput, Input } from '../input';
 import { TextInput, View, Text } from 'react-native';
 import { Box } from '../theme';
 
-export const DateInput = (props) => {
+const DateInput = (props) => {
     const [day, setDay] = useState(
         props.date ? dateFormat(props.date, 'dd') : ''
     );

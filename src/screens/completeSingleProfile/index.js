@@ -1,15 +1,41 @@
 import React, { useState } from 'react';
-import { View, Button } from 'react-native';
 import styles from './style';
 import en from '../../resources/strings/en.json';
-import { TextBlock, Heading, Title } from '../../components/theme';
-import { SecondaryButton } from '../../components/button';
-import { Container } from '../../components/basic';
+import { Input } from '../../components/input';
+import { TextBlock, Heading, Box, Title } from '../../components/theme';
+import { Button, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
+import { Container, Inner } from '../../components/basic';
+import DateInput from '../../components/dateInput';
+import dateFormat from 'dateformat';
+import { InputBox } from '../../components/inputBox';
 
 const CompleteSingleProfile = ({ navigation }) => {
+    const [moveInDateValid, setmoveInDateValid] = useState(null);
     return (
-        <Container showLogout>
-            <Heading></Heading>
+        <Container>
+            <Heading>{en.chooseStatus.heading}</Heading>
+            <Title>{en.chooseStatus.title}</Title>
+            <TextBlock>{en.chooseStatus.select}</TextBlock>
+            <Inner>
+                <InputBox label={en.completeSingleProfile.gender}>
+                    <Text>Hello</Text>
+                </InputBox>
+                <DateInput
+                    label={en.completeSingleProfile.moveInDate}
+                    valid={moveInDateValid}
+                    error={moveInDateValid === false}
+                    dataDetectorTypes="calendarEvent"
+                    onChange={(date, valid) => {
+                        if (valid)
+                            setUser({
+                                ...user,
+                                moveInDate: dateFormat(date, 'yyyy-mm-dd'),
+                            });
+                        setmoveInDateValid(valid);
+                    }}
+                />
+                <Text></Text>
+            </Inner>
         </Container>
     );
 };
