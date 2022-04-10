@@ -8,13 +8,14 @@ import { Input } from '../../components/input';
 import { PrimaryButton } from '../../components/button';
 import { loginUser } from '../../redux/actions/loginUser';
 import { useDispatch } from 'react-redux';
+import { Container } from '../../components/basic';
 
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     return (
-        <View style={styles.container}>
+        <Container>
             <Heading>{en.login.heading}</Heading>
             <Title>{en.login.title}</Title>
             <KeyboardAwareScrollView
@@ -45,7 +46,7 @@ const Login = ({ navigation }) => {
                     onPress={() => navigation.navigate('Signup')}
                 />
             </KeyboardAwareScrollView>
-        </View>
+        </Container>
     );
 };
 export default Login;

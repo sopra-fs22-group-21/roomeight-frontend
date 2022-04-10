@@ -17,6 +17,7 @@ import { PrimaryButton } from '../../components/button';
 import DateInput from '../../components/dateInput';
 import dateFormat from 'dateformat';
 import Userprofile from '../../models/Userprofile';
+import { Container } from '../../components/basic';
 
 const Signup = ({ navigation }) => {
     const [user, setUser] = useState(new Userprofile());
@@ -26,7 +27,7 @@ const Signup = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [repeatValid, setRepeatValid] = useState(null);
     const [phoneValid, setPhoneValid] = useState(null);
-    const [birthdayValid, setBirthdayValid] = useState(null);
+    const [birthdayValid, setbirthdayValid] = useState(null);
 
     const emailRegex =
         /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
@@ -39,7 +40,7 @@ const Signup = ({ navigation }) => {
     const dispatch = useDispatch();
 
     return (
-        <View style={styles.container}>
+        <Container>
             <KeyboardAvoidingView style={styles.inner} behavior="padding">
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <Heading>{en.signup.heading}</Heading>
@@ -50,15 +51,13 @@ const Signup = ({ navigation }) => {
                         valid={emailValid}
                         error={emailValid === false}
                         onEndEditing={() => {
-                            if (user.EmailAddress != '')
-                                setEmailValid(
-                                    emailRegex.test(user.EmailAddress)
-                                );
+                            if (user.email != '')
+                                setEmailValid(emailRegex.test(user.email));
                         }}
                         keyboardType="email-address"
                         autoCapitalize="none"
                         onChangeText={(text) => {
-                            setUser({ ...user, EmailAddress: text });
+                            setUser({ ...user, email: text });
                             if (emailRegex.test(text)) setEmailValid(true);
                             else setEmailValid(null);
                         }}
@@ -83,14 +82,14 @@ const Signup = ({ navigation }) => {
                         valid={repeatValid}
                         error={repeatValid === false}
                         onEndEditing={() => {
-                            if (user.Password != '')
+                            if (user.password != '')
                                 setRepeatValid(
-                                    password == user.Password && passwordValid
+                                    password == user.password && passwordValid
                                 );
                         }}
                         secureTextEntry={true}
                         onChangeText={(text) => {
-                            setUser({ ...user, Password: text });
+                            setUser({ ...user, password: text });
                             if (
                                 text.length >= password.length &&
                                 password != text
@@ -103,20 +102,20 @@ const Signup = ({ navigation }) => {
                     <Box />
                     <Input
                         label={en.signup.firstname}
-                        valid={user.FirstName && user.FirstName != ''}
+                        valid={user.firstName && user.firstName != ''}
                         autoComplet="name-given"
                         autoCapitalize="words"
                         onChangeText={(text) =>
-                            setUser({ ...user, FirstName: text })
+                            setUser({ ...user, firstName: text })
                         }
                     />
                     <Input
                         label={en.signup.lastname}
-                        valid={user.LastName && user.LastName != ''}
+                        valid={user.lastName && user.lastName != ''}
                         autoComplet="name-family"
                         autoCapitalize="words"
                         onChangeText={(text) =>
-                            setUser({ ...user, LastName: text })
+                            setUser({ ...user, lastName: text })
                         }
                     />
                     <Input
@@ -126,13 +125,13 @@ const Signup = ({ navigation }) => {
                         error={phoneValid === false}
                         dataDetectorTypes="phoneNumber"
                         onEndEditing={() => {
-                            if (user.PhoneNumber != '')
+                            if (user.phoneNumber != '')
                                 setPhoneValid(
-                                    phoneRegex.test(user.PhoneNumber)
+                                    phoneRegex.test(user.phoneNumber)
                                 );
                         }}
                         onChangeText={(text) => {
-                            setUser({ ...user, PhoneNumber: text });
+                            setUser({ ...user, phoneNumber: text });
                             if (phoneRegex.test(text)) setPhoneValid(true);
                             else setPhoneValid(null);
                         }}
@@ -146,9 +145,9 @@ const Signup = ({ navigation }) => {
                             if (valid)
                                 setUser({
                                     ...user,
-                                    Birthday: dateFormat(date, 'yyyy-mm-dd'),
+                                    birthday: dateFormat(date, 'yyyy-mm-dd'),
                                 });
-                            setBirthdayValid(valid);
+                            setbirthdayValid(valid);
                         }}
                     />
                     <Box>
@@ -157,8 +156,8 @@ const Signup = ({ navigation }) => {
                                 !emailValid ||
                                 !passwordValid ||
                                 !repeatValid ||
-                                user.FirstName == '' ||
-                                user.LastName == '' ||
+                                user.firstName == '' ||
+                                user.lastName == '' ||
                                 !birthdayValid ||
                                 !phoneValid
                             }
@@ -178,7 +177,7 @@ const Signup = ({ navigation }) => {
                     />
                 </ScrollView>
             </KeyboardAvoidingView>
-        </View>
+        </Container>
     );
 };
 export default Signup;

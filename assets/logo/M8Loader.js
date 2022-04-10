@@ -2,8 +2,10 @@ import { View, Image } from 'react-native';
 
 const M8Loader = (props) => {
     return (
+
         <View style={{
             alignSelf: 'center',
+            flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
         }}>

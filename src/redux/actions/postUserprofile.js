@@ -33,10 +33,12 @@ export const postUserprofile = (userprofile) => (dispatch) => {
         })
         .then(() => {
             console.log('then logging in...');
-            dispatch(loginUser(userprofile.EmailAddress, userprofile.Password));
+            dispatch(loginUser(userprofile.email, userprofile.password));
         })
         .catch((error) => {
             console.log('error posting userprofile');
+            console.log(error);
+            console.log(userprofile);
             dispatch(postUserprofileFailure(error));
         });
 };

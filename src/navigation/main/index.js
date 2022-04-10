@@ -83,7 +83,9 @@ export default function Route() {
     );
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator
+                screenOptions={{ cardStyle: { backgroundColor: 'white' } }}
+            >
                 {loggedIn
                     ? isComplete
                         ? completeComponents
