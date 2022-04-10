@@ -40,7 +40,10 @@ const Login = ({ navigation }) => {
                 >
                     Log In
                 </PrimaryButton>
-                <Button title="Don't have an account yet" />
+                <Button
+                    onPress={() => navigation.navigate('Signup')}
+                    title="Don't have an account yet"
+                />
             </KeyboardAwareScrollView>
         </View>
     );

@@ -6,11 +6,11 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useSelector } from 'react-redux';
 
 const API_URL = (env = Constants.manifest.releaseChannel) => {
-    if (__DEV__) {
-        return 'https://b8585bf5-1579-433d-aec8-d6ad6bdfb349.mock.pstmn.io';
-    } else {
-        return 'https://us-central1-roomeight-9cd94.cloudfunctions.net';
-    }
+    //if (__DEV__) {
+    //return 'https://b8585bf5-1579-433d-aec8-d6ad6bdfb349.mock.pstmn.io';
+    //} else {
+    return 'https://us-central1-roomeight-9cd94.cloudfunctions.net';
+    //}
 };
 
 async function userToken() {
