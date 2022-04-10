@@ -1,16 +1,12 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
-
     box: {
-        display: 'flex'
-
+        display: 'flex',
     },
     rowcontainer: {
         flexDirection: 'row',
-        alignItems: 'center'
-    
-    }
-
+        alignItems: 'center',
+    },
 });
 
 export default styles;
