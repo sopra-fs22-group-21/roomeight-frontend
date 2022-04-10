@@ -60,3 +60,14 @@ export const SecondaryButton = (props) => (
         {props.children}
     </BasicButton>
 );
+
+export const GenderButton = (props) => (
+    <BasicButton
+        {...props}
+        style={styles.gender}
+        disabledStyle={styles.genderDisables}
+        pressedStyle={styles.genderPressed}
+    >
+        {props.children}
+    </BasicButton>
+);

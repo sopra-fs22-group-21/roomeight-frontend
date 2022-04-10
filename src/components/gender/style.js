@@ -5,7 +5,11 @@ const styles = StyleSheet.create({
     },
     rowcontainer: {
         flexDirection: 'row',
-        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
+    underlined: {
+        borderBottomColor: 'black',
+        borderBottomWidth: 3,
     },
 });
 
