@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import styles from './style';
 import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../redux/actions/logoutUser';
 
 export const Heading = (props) => {
     return props.hidden ? (
@@ -44,7 +45,7 @@ export const Padding = (props) => (
 export const Container = (props) => {
     const dispatch = useDispatch();
     return (
-        <View style={styles.container} {...props}>
+        <View style={{ ...styles.container, ...props.style }} {...props}>
             {props.children}
             {props.showLogout ? (
                 <Button title="Logout" onPress={() => dispatch(logoutUser())} />

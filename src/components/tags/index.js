@@ -21,32 +21,30 @@ const Tags = (props) => {
     };
 
     return (
-        <InputBox label={'Tags'}>
-            <View style={styles.box}>
-                <View style={styles.column}>
-                    <View style={styles.tagContainer}>
-                        {left.map((tag) => (
-                            <TagElement
-                                key={tag.name}
-                                tag={tag}
-                                onChange={(selected) => toggleSelect(selected)}
-                            />
-                        ))}
-                    </View>
-                </View>
-                <View style={styles.column}>
-                    <View style={styles.tagContainer}>
-                        {right.map((tag) => (
-                            <TagElement
-                                key={tag.name}
-                                tag={tag}
-                                onChange={(selected) => toggleSelect(selected)}
-                            />
-                        ))}
-                    </View>
+        <View style={styles.box}>
+            <View style={styles.column}>
+                <View style={styles.tagContainer}>
+                    {left.map((tag) => (
+                        <TagElement
+                            key={tag.name}
+                            tag={tag}
+                            onChange={(selected) => toggleSelect(selected)}
+                        />
+                    ))}
                 </View>
             </View>
-        </InputBox>
+            <View style={styles.column}>
+                <View style={styles.tagContainer}>
+                    {right.map((tag) => (
+                        <TagElement
+                            key={tag.name}
+                            tag={tag}
+                            onChange={(selected) => toggleSelect(selected)}
+                        />
+                    ))}
+                </View>
+            </View>
+        </View>
     );
 };
 

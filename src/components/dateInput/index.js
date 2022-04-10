@@ -62,11 +62,12 @@ const DateInput = (props) => {
             <View style={styles.row}>
                 <TextInput
                     style={[
+                        styles.input,
                         styles.day,
                         props.error ? styles.error : {},
-                        props.style,
                         props.valid ? styles.valid : {},
                     ]}
+                    {...props}
                     placeholder="dd"
                     keyboardType="number-pad"
                     value={day}
@@ -93,11 +94,13 @@ const DateInput = (props) => {
                 <TextInput
                     ref={monthInput}
                     style={[
+                        styles.input,
                         styles.month,
                         props.error ? styles.error : {},
-                        props.style,
                         props.valid ? styles.valid : {},
+                        props.style,
                     ]}
+                    {...props}
                     keyboardType="number-pad"
                     placeholder="mm"
                     value={month}
@@ -123,13 +126,14 @@ const DateInput = (props) => {
                 />
                 <TextInput
                     ref={yearInput}
+                    {...props}
                     style={[
+                        styles.input,
                         styles.year,
                         props.error ? styles.error : {},
-                        props.style,
                         props.valid ? styles.valid : {},
+                        props.style,
                     ]}
-                    {...props}
                     placeholder="yyyy"
                     keyboardType="number-pad"
                     value={year}

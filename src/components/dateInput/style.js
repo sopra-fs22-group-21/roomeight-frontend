@@ -5,31 +5,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    day: {
+    input: {
         backgroundColor: '#e7e5e4',
-        height: 30,
         padding: 10,
         fontFamily: 'SourceSans3Regular',
         fontSize: 16,
         borderRadius: 4,
+    },
+    day: {
         width: '22%',
     },
     month: {
-        backgroundColor: '#e7e5e4',
-        height: 30,
-        padding: 10,
-        fontFamily: 'SourceSans3Regular',
-        fontSize: 16,
-        borderRadius: 4,
         width: '22%',
     },
     year: {
-        backgroundColor: '#e7e5e4',
-        height: 30,
-        padding: 10,
-        fontFamily: 'SourceSans3Regular',
-        fontSize: 16,
-        borderRadius: 4,
         width: '50%',
     },
     error: {

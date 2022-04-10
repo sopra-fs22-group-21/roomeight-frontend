@@ -1,15 +1,16 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
-    box: {
-        display: 'flex',
+    tab: {
+        backgroundColor: 'transparent',
+        paddingBottom: 5,
+        paddingTop: 0,
+        margin: 0,
     },
-    rowcontainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-    },
-    underlined: {
-        borderBottomColor: 'black',
-        borderBottomWidth: 3,
+    indicator: {
+        backgroundColor: 'black',
+        height: 2,
+        marginLeft: '7%',
+        width: '13%',
     },
 });
 
