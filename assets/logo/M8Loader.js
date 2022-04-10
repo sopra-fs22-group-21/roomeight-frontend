@@ -1,14 +1,10 @@
 import { View, Image } from 'react-native';
+import { Container } from '../../src/components/basic';
 
 const M8Loader = (props) => {
     return (
 
-        <View style={{
-            alignSelf: 'center',
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-        }}>
+        <Container>
             <Image
                 source={require('./m8Loader30.gif')}
                 style={{
@@ -18,7 +14,7 @@ const M8Loader = (props) => {
                     alignItems: 'center',
                 }}
             />
-        </View>
+        </Container>
     );
 };
 

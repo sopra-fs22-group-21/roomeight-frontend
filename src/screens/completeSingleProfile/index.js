@@ -7,6 +7,8 @@ import { SecondaryButton } from '../../components/button';
 import { Container } from '../../components/basic';
 
 const CompleteSingleProfile = ({ navigation }) => {
-    return <Container showLogout></Container>;
+    return <Container showLogout>
+        <Heading></Heading>
+    </Container>;
 };
 export default CompleteSingleProfile;
