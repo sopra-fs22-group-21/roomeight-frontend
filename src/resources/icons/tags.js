@@ -1,4 +1,5 @@
 import en from '../strings/en.json';
+// search icons here: https://oblador.github.io/react-native-vector-icons/
 
 const tags = [
     {
@@ -15,7 +16,7 @@ const tags = [
     },
     {
         name: en.tags.smoker,
-        icon: 'smoke',
+        icon: 'smoking-rooms',
     },
     {
         name: en.tags.woko,

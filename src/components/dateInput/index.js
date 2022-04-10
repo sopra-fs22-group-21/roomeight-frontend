@@ -58,7 +58,7 @@ const DateInput = (props) => {
 
     return (
         <Box>
-            <InputLabel label={props.label} />
+            <InputLabel>{props.label}</InputLabel>
             <View style={styles.row}>
                 <TextInput
                     style={[

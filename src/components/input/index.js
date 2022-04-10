@@ -11,7 +11,7 @@ export const Input = (props) => (
 );
 
 export const InputLabel = (props) => (
-    <Text style={styles.label}>{props.label}</Text>
+    <Text style={styles.label}>{props.children}</Text>
 );
 
 export const StyledTextInput = (props) => (
@@ -27,7 +27,7 @@ export const StyledTextInput = (props) => (
 );
 
 export const InputBox = (props) => (
-    <Box>
+    <Box style={props.style}>
         <InputLabel>{props.label}</InputLabel>
         <View style={styles.input}>{props.children}</View>
     </Box>
