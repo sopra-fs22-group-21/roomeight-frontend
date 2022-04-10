@@ -42,9 +42,8 @@ const styles = StyleSheet.create({
     genderDisabled: {},
     genderPressed: {
         borderBottomColor: 'black',
-        borderBottomWidth: 3,}
-
-
+        borderBottomWidth: 3,
+    },
 });
 
 export default styles;
