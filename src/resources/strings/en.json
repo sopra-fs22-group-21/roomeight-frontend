@@ -51,6 +51,11 @@
         "student": "mainly student",
         "plants": "bringing plants",
         "art": "bringing art",
-        "sporty": "sporty"
+        "sporty": "sporty",
+        "cooking": "like to cook",
+        "instruments": "instruments",
+        "cleanliness": "cleanliness",
+        "coffee": "coffee",
+        "wine": "wine"
     }
 }
