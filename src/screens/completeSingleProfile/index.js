@@ -41,7 +41,7 @@ const CompleteSingleProfile = ({ navigation }) => {
                         setmoveInDateValid(valid);
                     }}
                 />
-                <Tags onChange={(tags) => console.log(tags)}/>
+                <Tags onChange={(tags) => console.log(tags)} />
             </Inner>
         </Container>
     );

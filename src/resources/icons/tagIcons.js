@@ -97,4 +97,3 @@ const tagIcons = [
 ];
 
 export default tagIcons;
-

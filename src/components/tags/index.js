@@ -8,15 +8,17 @@ import TagElement from '../tagelement';
 const Tags = (props) => {
     const half = Math.ceil(tagIcons.length / 2);
     const left = tagIcons.slice(0, half);
-    const right = tagIcons.slice(half,tagIcons.length);
+    const right = tagIcons.slice(half, tagIcons.length);
     const [tags, setTags] = useState({});
 
     const toggleSelect = (selected) => {
-        const t = {...tags, ...selected};
+        const t = { ...tags, ...selected };
         const tArray = Object.entries(t);
-        props.onChange(tArray.filter((tag) => tag[1]===true).map((tag) => tag[0]));
-        setTags(t)
-    }
+        props.onChange(
+            tArray.filter((tag) => tag[1] === true).map((tag) => tag[0])
+        );
+        setTags(t);
+    };
 
     return (
         <InputBox label={'Tags'}>
