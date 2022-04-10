@@ -13,6 +13,7 @@ import {
 import { Button, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
 import DateInput from '../../components/dateInput';
 import dateFormat from 'dateformat';
+import { Gender } from '../../components/gender';
 
 const CompleteSingleProfile = ({ navigation }) => {
     const [moveInDateValid, setmoveInDateValid] = useState(null);
@@ -23,7 +24,7 @@ const CompleteSingleProfile = ({ navigation }) => {
             <TextBlock>{en.chooseStatus.select}</TextBlock>
             <Inner>
                 <InputBox label={en.completeSingleProfile.gender}>
-                    <Text>Hello</Text>
+                    <Gender />
                 </InputBox>
                 <DateInput
                     label={en.completeSingleProfile.moveInDate}
@@ -39,7 +40,6 @@ const CompleteSingleProfile = ({ navigation }) => {
                         setmoveInDateValid(valid);
                     }}
                 />
-                <Text></Text>
             </Inner>
         </Container>
     );
