@@ -5,7 +5,7 @@ import { getUserProfiles } from '../../redux/actions/getUserprofiles';
 import { PrimaryButton } from '../../components/button';
 import styles from './style';
 import { logoutUser } from '../../redux/actions/logoutUser';
-import { Container } from '../../components/basic';
+import { Container } from '../../components/theme';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {

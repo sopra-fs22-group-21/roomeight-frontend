@@ -25,3 +25,10 @@ export const StyledTextInput = (props) => (
         {...props}
     />
 );
+
+export const InputBox = (props) => (
+    <Box>
+        <InputLabel>{props.label}</InputLabel>
+        <View style={styles.input}>{props.children}</View>
+    </Box>
+);

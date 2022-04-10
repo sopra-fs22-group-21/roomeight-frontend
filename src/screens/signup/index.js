@@ -10,14 +10,13 @@ import {
     KeyboardAvoidingView,
     Text,
 } from 'react-native';
-import { TextBlock, Heading, Title, Box } from '../../components/theme';
+import { TextBlock, Heading, Title, Box, Container } from '../../components/theme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Input } from '../../components/input';
 import { PrimaryButton } from '../../components/button';
 import DateInput from '../../components/dateInput';
 import dateFormat from 'dateformat';
 import Userprofile from '../../models/Userprofile';
-import { Container } from '../../components/basic';
 
 const Signup = ({ navigation }) => {
     const [user, setUser] = useState(new Userprofile());
