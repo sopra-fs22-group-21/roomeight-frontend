@@ -37,7 +37,8 @@ const ChooseStatus = ({ navigation }) => {
                     <SecondaryButton
                         onPress={() =>
                             navigation.navigate('CompleteFlatProfile')
-                        }>
+                        }
+                    >
                         {en.chooseStatus.roommate}
                     </SecondaryButton>
                 </Box>

@@ -28,15 +28,15 @@ const CompleteFlatProfile = ({ navigation }) => {
     const [permanent, setPermanent] = useState(false);
     let selectedTags = [];
 
-    function changeToTemporary(){
-        setTemporary(true)
-        setPermanent(false)
-    };
-    
-    function changeToPermanent(){
-        setTemporary(false)
-        setPermanent(true)
-    };
+    function changeToTemporary() {
+        setTemporary(true);
+        setPermanent(false);
+    }
+
+    function changeToPermanent() {
+        setTemporary(false);
+        setPermanent(true);
+    }
 
     return (
         <Container showLogout>
@@ -59,20 +59,18 @@ const CompleteFlatProfile = ({ navigation }) => {
                             setmoveInDateValid(valid);
                         }}
                     />
-                    <InputLabel
-                        children={en.completeFlatProfile.duration}/>
-                    <Box style={styles.box}> 
+                    <InputLabel children={en.completeFlatProfile.duration} />
+                    <Box style={styles.box}>
                         <CheckBox
                             containerStyle={styles.choice}
                             wrapperStyle={styles.wrapper}
                             textStyle={styles.text}
-                            title={"Temporary"}
+                            title={'Temporary'}
                             checkedIcon="dot-circle-o"
                             uncheckedIcon="circle-o"
                             checked={temporary}
                             onPress={() => changeToTemporary()}
-                        >
-                        </CheckBox>
+                        ></CheckBox>
                         <CheckBox
                             containerStyle={styles.choice}
                             wrapperStyle={styles.wrapper}

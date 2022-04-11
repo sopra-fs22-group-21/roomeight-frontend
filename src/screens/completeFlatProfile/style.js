@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         color: '#0E7490',
-        height: '80%'
+        height: '80%',
     },
     text: {
         fontFamily: 'SourceSans3SemiBold',
         fontSize: 16,
-        lineHeight: 24
+        lineHeight: 24,
     },
 });
 
