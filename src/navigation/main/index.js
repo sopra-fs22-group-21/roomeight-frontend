@@ -11,6 +11,7 @@ import { userAuthStateListener } from '../../redux/actions/loginUser';
 import M8Loader from '../../../assets/logo/M8Loader';
 import ChooseStatus from '../../screens/chooseStatus';
 import CompleteSingleProfile from '../../screens/completeSingleProfile';
+import CompleteFlatProfile from '../../screens/completeFlatProfile';
 
 const Stack = createStackNavigator();
 
@@ -69,6 +70,11 @@ export default function Route() {
             <Stack.Screen
                 name="CompleteSingleProfile"
                 component={CompleteSingleProfile}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="CompleteFlatProfile"
+                component={CompleteFlatProfile}
                 options={{ headerShown: false }}
             />
         </>

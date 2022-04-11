@@ -57,5 +57,17 @@
         "cleanliness": "cleanliness",
         "coffee": "coffee",
         "wine": "wine"
+    },
+    "completeFlatProfile": {
+        "heading": "Tell us something about your flat",
+        "title": "",
+        "address": "Address",
+        "moveInDate": "Move-In Date",
+        "duration": "Duration",
+        "rent": "Rent",
+        "roomSize": "Room Size",
+        "tags": "We",
+        "nrRoommates": "Number of roommates",
+        "nrBathrooms": "Total Bathrooms"
     }
 }
