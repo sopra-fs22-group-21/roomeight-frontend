@@ -10,5 +10,6 @@ const configureStore = () => {
         composeWithDevTools(applyMiddleware(thunk))
     );
 };
+const store = configureStore();
 
-export default configureStore;
+export default store;

@@ -4,11 +4,9 @@ import { firebaseConfig } from './firebase/firebase-config.js';
 import { Provider } from 'react-redux';
 import Route from './src/navigation/main';
 import { useFonts } from 'expo-font';
-import configureStore from './src/redux/configureStore.js';
+import store from './src/redux/configureStore.js';
 
 
-
-const store = configureStore();
 
 export default function App() {
   const [loaded] = useFonts({
