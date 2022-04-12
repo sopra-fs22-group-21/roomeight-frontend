@@ -14,7 +14,7 @@
         "repeatPassword": "Repeat Password",
         "firstname": "First Name",
         "lastname": "Last Name",
-        "birthday": "birthday",
+        "birthday": "Birthday",
         "phone": "Phone number",
         "next": "Next",
         "signup": "Sign Up"
@@ -59,6 +59,23 @@
         "student": "mainly student",
         "plants": "bringing plants",
         "art": "bringing art",
-        "sporty": "sporty"
+        "sporty": "sporty",
+        "cooking": "like to cook",
+        "instruments": "instruments",
+        "cleanliness": "cleanliness",
+        "coffee": "coffee",
+        "wine": "wine"
+    },
+    "completeFlatProfile": {
+        "heading": "Tell us something about your flat",
+        "title": "",
+        "address": "Address",
+        "moveInDate": "Move-In Date",
+        "duration": "Duration",
+        "rent": "Rent",
+        "roomSize": "Room Size (m2)",
+        "tags": "We",
+        "nrRoommates": "Number of roommates",
+        "nrBathrooms": "Total Bathrooms"
     }
 }

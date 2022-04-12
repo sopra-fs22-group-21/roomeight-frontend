@@ -38,6 +38,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     secondaryPressedLabel: {},
+    gender: {},
+    genderDisabled: {},
+    genderPressed: {
+        borderBottomColor: 'black',
+        borderBottomWidth: 3,
+    },
 });
 
 export default styles;

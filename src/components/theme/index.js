@@ -45,7 +45,7 @@ export const Padding = (props) => (
 export const Container = (props) => {
     const dispatch = useDispatch();
     return (
-        <View style={styles.container} {...props}>
+        <View style={{ ...styles.container, ...props.style }} {...props}>
             {props.children}
             {props.showLogout ? (
                 <Button title="Logout" onPress={() => dispatch(logoutUser())} />
