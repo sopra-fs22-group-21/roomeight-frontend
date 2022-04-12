@@ -34,6 +34,14 @@
         "roommate": "I'm looking for a new roommate",
         "flat": "I want to access an existing flat profile"
     },
+    "addPictures": {
+        "heading": "Add some Pictures of yourself",
+        "title": "",
+        "select": "Please select a picture",
+        "upload": "Upload a picture",
+        "take": "Take a picture",
+        "next": "Next"
+    },
     "completeSingleProfile": {
         "heading": "Tell us something about you",
         "title": "",

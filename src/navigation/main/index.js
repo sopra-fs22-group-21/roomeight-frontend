@@ -11,6 +11,7 @@ import { userAuthStateListener } from '../../redux/actions/loginUser';
 import M8Loader from '../../../assets/logo/M8Loader';
 import ChooseStatus from '../../screens/chooseStatus';
 import CompleteSingleProfile from '../../screens/completeSingleProfile';
+import AddPictures from '../../screens/addPictures';
 
 const Stack = createStackNavigator();
 
@@ -62,6 +63,11 @@ export default function Route() {
     const incompleteComponents = (
         <>
             <Stack.Screen
+                name="addPictures"
+                component={AddPictures}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
                 name="ChooseStatus"
                 component={ChooseStatus}
                 options={{ headerShown: false }}
@@ -86,12 +92,11 @@ export default function Route() {
             <Stack.Navigator
                 screenOptions={{ cardStyle: { backgroundColor: 'white' } }}
             >
-                {
-                    //loggedIn
-                    //?
-                    isComplete ? completeComponents : incompleteComponents
-                    //: loggedOutComponents
-                }
+                {loggedIn
+                    ? isComplete
+                        ? completeComponents
+                        : incompleteComponents
+                    : loggedOutComponents}
             </Stack.Navigator>
         </NavigationContainer>
     );

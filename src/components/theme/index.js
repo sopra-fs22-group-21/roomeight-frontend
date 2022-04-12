@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import styles from './style';
 import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../redux/actions/logoutUser';
 
 export const Heading = (props) => {
     return props.hidden ? (
