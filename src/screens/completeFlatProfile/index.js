@@ -67,9 +67,9 @@ const CompleteFlatProfile = ({ navigation }) => {
                             wrapperStyle={styles.wrapper}
                             textStyle={styles.text}
                             title={'Temporary'}
-                            checkedIcon='dot-circle-o'
-                            uncheckedIcon='circle-o'
-                            color='#0E7490'
+                            checkedIcon="dot-circle-o"
+                            uncheckedIcon="circle-o"
+                            color="#0E7490"
                             checked={temporary}
                             onPress={() => changeToTemporary()}
                         ></CheckBox>
@@ -77,10 +77,10 @@ const CompleteFlatProfile = ({ navigation }) => {
                             containerStyle={styles.choice}
                             wrapperStyle={styles.wrapper}
                             textStyle={styles.text}
-                            title='Permanent'
-                            checkedIcon='dot-circle-o'
-                            uncheckedIcon='circle-o'
-                            color='#0E7490'
+                            title="Permanent"
+                            checkedIcon="dot-circle-o"
+                            uncheckedIcon="circle-o"
+                            color="#0E7490"
                             checked={permanent}
                             onPress={() => changeToPermanent()}
                         />
@@ -96,7 +96,7 @@ const CompleteFlatProfile = ({ navigation }) => {
                     <InputBox label={en.completeFlatProfile.tags}>
                         <Tags onChange={(tags) => console.log(tags)} />
                     </InputBox>
-                    <Dropdown/>
+                    <Dropdown />
                 </ScrollView>
             </KeyboardAvoidingView>
         </Container>
