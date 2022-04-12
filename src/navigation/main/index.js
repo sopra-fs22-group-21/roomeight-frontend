@@ -64,13 +64,13 @@ export default function Route() {
     const incompleteComponents = (
         <>
             <Stack.Screen
-                name="addPictures"
-                component={AddPictures}
+                name="ChooseStatus"
+                component={ChooseStatus}
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="ChooseStatus"
-                component={ChooseStatus}
+                name="addPictures"
+                component={AddPictures}
                 options={{ headerShown: false }}
             />
             <Stack.Screen
