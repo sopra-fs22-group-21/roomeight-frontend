@@ -15,10 +15,15 @@ import {
     COMPLETE_USERPROFILE_REQUEST,
     COMPLETE_USERPROFILE_SUCCESS,
     COMPLETE_USERPROFILE_FAILURE,
+    UPLOAD_IMAGE_REQUEST,
+    UPLOAD_IMAGE_SUCCESS,
+    UPLOAD_IMAGE_FAILURE,
 } from '../constants/index';
 
 const initialState = {
-    userProfile: {},
+    userProfile: {
+        pictureReference: [],
+    },
     loggedIn: false,
     isComplete: false,
     loading: false,
@@ -124,6 +129,30 @@ const userprofileState = (state = initialState, action) => {
                 loading: false,
             };
         case COMPLETE_USERPROFILE_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+                loading: false,
+            };
+        case UPLOAD_IMAGE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case UPLOAD_IMAGE_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                userProfile: {
+                    ...state.userProfile,
+                    pictureReference: [
+                        ...state.userProfile.pictureReference,
+                        action.payload,
+                    ],
+                },
+                loading: false,
+            };
+        case UPLOAD_IMAGE_FAILURE:
             return {
                 ...state,
                 error: action.payload,
