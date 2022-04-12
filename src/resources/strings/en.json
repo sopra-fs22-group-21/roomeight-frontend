@@ -65,7 +65,7 @@
         "moveInDate": "Move-In Date",
         "duration": "Duration",
         "rent": "Rent",
-        "roomSize": "Room Size",
+        "roomSize": "Room Size (m2)",
         "tags": "We",
         "nrRoommates": "Number of roommates",
         "nrBathrooms": "Total Bathrooms"

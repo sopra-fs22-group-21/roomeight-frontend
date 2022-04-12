@@ -14,9 +14,9 @@ import { Button, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
 import DateInput from '../../components/dateInput';
 import dateFormat from 'dateformat';
 import Tags from '../../components/tags';
-import { CheckBox } from 'react-native-elements';
+import Dropdown from '../../components/dropdownMenu';
 
-//TODO: backend
+//TODO: backend, regex
 
 const CompleteFlatProfile = ({ navigation }) => {
     const [moveInDateValid, setmoveInDateValid] = useState(null);
@@ -26,6 +26,7 @@ const CompleteFlatProfile = ({ navigation }) => {
     const [roomSize, setRoomSize] = useState(null);
     const [temporary, setTemporary] = useState(false);
     const [permanent, setPermanent] = useState(false);
+    const [RoomMates, setRoomMates] = useState(null);
     let selectedTags = [];
 
     function changeToTemporary() {
@@ -66,8 +67,9 @@ const CompleteFlatProfile = ({ navigation }) => {
                             wrapperStyle={styles.wrapper}
                             textStyle={styles.text}
                             title={'Temporary'}
-                            checkedIcon="dot-circle-o"
-                            uncheckedIcon="circle-o"
+                            checkedIcon='dot-circle-o'
+                            uncheckedIcon='circle-o'
+                            color='#0E7490'
                             checked={temporary}
                             onPress={() => changeToTemporary()}
                         ></CheckBox>
@@ -75,9 +77,10 @@ const CompleteFlatProfile = ({ navigation }) => {
                             containerStyle={styles.choice}
                             wrapperStyle={styles.wrapper}
                             textStyle={styles.text}
-                            title="Permanent"
-                            checkedIcon="dot-circle-o"
-                            uncheckedIcon="circle-o"
+                            title='Permanent'
+                            checkedIcon='dot-circle-o'
+                            uncheckedIcon='circle-o'
+                            color='#0E7490'
                             checked={permanent}
                             onPress={() => changeToPermanent()}
                         />
@@ -93,6 +96,7 @@ const CompleteFlatProfile = ({ navigation }) => {
                     <InputBox label={en.completeFlatProfile.tags}>
                         <Tags onChange={(tags) => console.log(tags)} />
                     </InputBox>
+                    <Dropdown/>
                 </ScrollView>
             </KeyboardAvoidingView>
         </Container>
