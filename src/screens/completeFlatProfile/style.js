@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         width: '50%',
     },
     blue: {
-        color: '#0E7490'
+        color: '#0E7490',
     },
     text: {
         fontFamily: 'SourceSans3SemiBold',
