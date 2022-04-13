@@ -25,9 +25,8 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '50%',
     },
-    wrapper: {
-        color: '#0E7490',
-        height: '80%',
+    blue: {
+        color: '#0E7490'
     },
     text: {
         fontFamily: 'SourceSans3SemiBold',

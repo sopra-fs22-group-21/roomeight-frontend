@@ -15,6 +15,8 @@ import DateInput from '../../components/dateInput';
 import dateFormat from 'dateformat';
 import Tags from '../../components/tags';
 import Dropdown from '../../components/dropdownMenu';
+import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
+import { Radio } from 'native-base';
 
 //TODO: backend, regex
 
@@ -28,6 +30,7 @@ const CompleteFlatProfile = ({ navigation }) => {
     const [permanent, setPermanent] = useState(false);
     const [RoomMates, setRoomMates] = useState(null);
     let selectedTags = [];
+    const [duration, setDuration] = useState(null);
 
     function changeToTemporary() {
         setTemporary(true);
@@ -83,7 +86,7 @@ const CompleteFlatProfile = ({ navigation }) => {
                             color="#0E7490"
                             checked={permanent}
                             onPress={() => changeToPermanent()}
-                        />
+                        ></CheckBox>
                     </Box>
                     <Input
                         label={en.completeFlatProfile.rent}
@@ -96,7 +99,6 @@ const CompleteFlatProfile = ({ navigation }) => {
                     <InputBox label={en.completeFlatProfile.tags}>
                         <Tags onChange={(tags) => console.log(tags)} />
                     </InputBox>
-                    <Dropdown />
                 </ScrollView>
             </KeyboardAvoidingView>
         </Container>
