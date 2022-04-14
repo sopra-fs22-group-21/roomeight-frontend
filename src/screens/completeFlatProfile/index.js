@@ -28,9 +28,9 @@ const CompleteFlatProfile = ({ navigation }) => {
     const [roomSize, setRoomSize] = useState(null);
     const [temporary, setTemporary] = useState(false);
     const [permanent, setPermanent] = useState(false);
-    const [RoomMates, setRoomMates] = useState(null);
+    const [nrRoommates, setNrRoommates] = useState(null);
+    const [nrBathrooms, setNrBathrooms] = useState(null);
     let selectedTags = [];
-    const [duration, setDuration] = useState(null);
 
     function changeToTemporary() {
         setTemporary(true);
@@ -90,15 +90,29 @@ const CompleteFlatProfile = ({ navigation }) => {
                     </Box>
                     <Input
                         label={en.completeFlatProfile.rent}
+                        keyboardType="number-pad"
+                        placeholder="CHF"
                         onChangeText={(text) => setRent(text)}
                     />
                     <Input
                         label={en.completeFlatProfile.roomSize}
+                        keyboardType="number-pad"
+                        placeholder="m2"
                         onChangeText={(text) => setRoomSize(text)}
                     />
                     <InputBox label={en.completeFlatProfile.tags}>
                         <Tags onChange={(tags) => console.log(tags)} />
                     </InputBox>
+                    <Input
+                        label={en.completeFlatProfile.nrRoommates}
+                        keyboardType="number-pad"
+                        onChangeText={(text) => setNrRoommates(text)}
+                    />
+                    <Input
+                        label={en.completeFlatProfile.nrBathrooms}
+                        keyboardType="number-pad"
+                        onChangeText={(text) => setNrBathrooms(text)}
+                    />
                 </ScrollView>
             </KeyboardAvoidingView>
         </Container>
