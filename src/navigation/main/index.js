@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Welcome from '../../screens/welcome';
 import Signup from '../../screens/signup';
 import Login from '../../screens/login';
-import Profile from '../../screens/Profile';
+import Profile from '../../screens/profile';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { userAuthStateListener } from '../../redux/actions/loginUser';
@@ -69,7 +69,7 @@ export default function Route() {
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="addPictures"
+                name="AddPictures"
                 component={AddPictures}
                 options={{ headerShown: false }}
             />

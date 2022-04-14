@@ -11,7 +11,7 @@ import {
 } from '../../components/theme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Input } from '../../components/input';
-import { PrimaryButton } from '../../components/button';
+import { PrimaryButton, SecondaryButton } from '../../components/button';
 import { loginUser } from '../../redux/actions/loginUser';
 import { useDispatch } from 'react-redux';
 
@@ -46,10 +46,9 @@ const Login = ({ navigation }) => {
                 >
                     Log In
                 </PrimaryButton>
-                <Button
-                    title="Don't have an account yet"
-                    onPress={() => navigation.navigate('Signup')}
-                />
+                <SecondaryButton onPress={() => navigation.navigate('Signup')}>
+                    Don't have an account yet
+                </SecondaryButton>
             </KeyboardAwareScrollView>
         </Container>
     );

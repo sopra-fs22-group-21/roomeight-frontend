@@ -37,10 +37,9 @@ const DateInput = (props) => {
             isDay(d) &&
             !isNaN(dt) &&
             Number(y) > 1900;
-        const beforeNow = dt <= new Date();
         const validFebruary =
             (d < 30 || m != 2) && (d < 29 || m != 2 || y % 4 == 0);
-        const valid = notEmpty && correctNumbers && beforeNow && validFebruary;
+        const valid = notEmpty && correctNumbers && validFebruary;
         if (valid) {
             props.onChange(dt, true);
         } else {

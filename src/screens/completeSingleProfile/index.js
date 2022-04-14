@@ -16,6 +16,7 @@ import dateFormat from 'dateformat';
 import Gender from '../../components/gender';
 import genders from '../../resources/strings/genders';
 import Tags from '../../components/tags';
+import { NavigationButtons } from '../../components/navigationButtons';
 
 const CompleteSingleProfile = ({ navigation }) => {
     const [moveInDateValid, setmoveInDateValid] = useState(null);
@@ -44,13 +45,17 @@ const CompleteSingleProfile = ({ navigation }) => {
                                     ...user,
                                     moveInDate: dateFormat(date, 'yyyy-mm-dd'),
                                 });
-                            setmoveInDateValid(valid);
+                            setmoveInDateValid(valid && date > new Date());
                         }}
                     />
 
                     <InputBox label={'Tags'}>
                         <Tags onChange={(tags) => console.log(tags)} />
                     </InputBox>
+                    <NavigationButtons
+                        onPressBack={() => navigation.goBack()}
+                        onPressNext={() => navigation.navigate('AddPictures')}
+                    />
                 </ScrollView>
             </KeyboardAvoidingView>
         </Container>

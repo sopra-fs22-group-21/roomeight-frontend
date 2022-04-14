@@ -94,6 +94,13 @@ const tagIcons = [
         type: 'material',
         isSelected: false,
     },
+    {
+        name: 'peaceful',
+        label: 'peaceful',
+        icon: 'self-improvement',
+        type: 'material',
+        isSelected: false,
+    },
 ];
 
 export default tagIcons;

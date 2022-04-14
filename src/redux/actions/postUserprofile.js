@@ -37,7 +37,7 @@ export const postUserprofile = (userprofile) => (dispatch) => {
         })
         .catch((error) => {
             console.log('error posting userprofile');
-            console.log(error);
+            console.log(error.message);
             console.log(userprofile);
             dispatch(postUserprofileFailure(error));
         });

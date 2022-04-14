@@ -3,6 +3,7 @@ import { View, Text, Button } from 'react-native';
 import styles from './style';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/actions/logoutUser';
+import { SecondaryButton } from '../button';
 
 export const Heading = (props) => {
     return props.hidden ? (
@@ -48,7 +49,9 @@ export const Container = (props) => {
         <View style={{ ...styles.container, ...props.style }} {...props}>
             {props.children}
             {props.showLogout ? (
-                <Button title="Logout" onPress={() => dispatch(logoutUser())} />
+                <SecondaryButton onPress={() => dispatch(logoutUser())}>
+                    Logout
+                </SecondaryButton>
             ) : null}
         </View>
     );

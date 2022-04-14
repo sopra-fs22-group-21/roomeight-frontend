@@ -7,7 +7,8 @@ import Constants from 'expo-constants';
 import ImageInput from '../../components/imageInput';
 import { useDispatch } from 'react-redux';
 import { uploadImages } from '../../redux/actions/uploadImage';
-
+import { NavigationButtons } from '../../components/navigationButtons';
+import { SecondaryButton } from '../../components/button';
 const AddPictures = ({ navigation }) => {
     const [images, setImages] = useState([]);
 
@@ -62,10 +63,13 @@ const AddPictures = ({ navigation }) => {
             <Title>{en.addPictures.heading}</Title>
             {first || <ImageInput onPress={() => PickImage()} />}
             {second || <ImageInput onPress={() => PickImage()} />}
-            <Button
+            <SecondaryButton
                 title="upload"
                 onPress={() => dispatch(uploadImages(images, 'userprofile'))}
-            />
+            >
+                Upload
+            </SecondaryButton>
+            <NavigationButtons onPressBack={() => navigation.goBack()} />
         </Container>
     );
 };
