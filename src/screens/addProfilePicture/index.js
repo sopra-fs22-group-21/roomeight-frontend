@@ -10,9 +10,11 @@ import {
     Container,
     Inner,
 } from '../../components/theme';
+import inputstyle from '../../components/input';
 import { Button, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
 import Gender from '../../components/gender';
 import genders from '../../resources/strings/genders';
+import { NavigationButtons } from '../../components/navigationButtons';
 
 const AddProfilePicture = ({ navigation }) => {
     const [gender, setGender] = useState(genders.notSet);
@@ -32,10 +34,15 @@ const AddProfilePicture = ({ navigation }) => {
                         />
                     </InputBox>
                     <Input
+                        //style={(inputstyle.Input, styles.textInput)}
                         label={en.addProfilePicture.whoIAm}
+                        multiline
                         onChangeText={(text) =>
                             setDescription({ ...user, description: text })
                         }
+                    />
+                    <NavigationButtons
+                        onPressNext={() => navigation.navigate('ChooseStatus')}
                     />
                 </ScrollView>
             </KeyboardAvoidingView>

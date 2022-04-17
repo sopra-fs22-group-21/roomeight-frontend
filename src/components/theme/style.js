@@ -40,6 +40,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingBottom: 100,
     },
+    screen: {
+        flex: 1,
+        padding: 0,
+    },
 });
 
 export default styles;

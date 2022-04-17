@@ -28,14 +28,6 @@ const CompleteSingleProfile = ({ navigation }) => {
             <Heading>{en.completeSingleProfile.heading}</Heading>
             <KeyboardAvoidingView style={styles.inner} behavior="padding">
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <InputBox label={en.completeSingleProfile.gender}>
-                        <Gender
-                            onChange={(g) => {
-                                setGender(g);
-                                console.log(g);
-                            }}
-                        />
-                    </InputBox>
                     <DateInput
                         label={en.completeSingleProfile.moveInDate}
                         valid={moveInDateValid}

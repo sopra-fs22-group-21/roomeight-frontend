@@ -14,9 +14,8 @@ import { Button, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
 import DateInput from '../../components/dateInput';
 import dateFormat from 'dateformat';
 import Tags from '../../components/tags';
-import Dropdown from '../../components/dropdownMenu';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
-import { Radio } from 'native-base';
+import { NavigationButtons } from '../../components/navigationButtons';
 
 //TODO: backend, regex
 
@@ -112,6 +111,10 @@ const CompleteFlatProfile = ({ navigation }) => {
                         label={en.completeFlatProfile.nrBathrooms}
                         keyboardType="number-pad"
                         onChangeText={(text) => setNrBathrooms(text)}
+                    />
+                    <NavigationButtons
+                        onPressBack={() => navigation.goBack()}
+                        onPressNext={() => navigation.navigate('AddPictures')}
                     />
                 </ScrollView>
             </KeyboardAvoidingView>

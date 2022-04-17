@@ -13,6 +13,7 @@ import { Input } from '../../components/input';
 import { loginUser } from '../../redux/actions/loginUser';
 import { useDispatch } from 'react-redux';
 import { SecondaryButton } from '../../components/button';
+import { NavigationButtons } from '../../components/navigationButtons';
 
 const ChooseStatus = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -43,13 +44,10 @@ const ChooseStatus = ({ navigation }) => {
                     </SecondaryButton>
                 </Box>
                 <Box>
-                    <SecondaryButton
-                        onPress={() => navigation.navigate('addProfilePicture')}
-                    >
-                        {en.chooseStatus.flat}
-                    </SecondaryButton>
+                    <SecondaryButton>{en.chooseStatus.flat}</SecondaryButton>
                 </Box>
             </Inner>
+            <NavigationButtons onPressBack={() => navigation.goBack()} />
         </Container>
     );
 };

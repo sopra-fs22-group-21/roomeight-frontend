@@ -55,7 +55,6 @@
     "completeSingleProfile": {
         "heading": "Tell us something about you",
         "title": "",
-        "gender": "Gender",
         "moveInDate": "Move-In Date",
         "tags": "Tags"
     },

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, Button } from 'react-native';
 import styles from './style';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/actions/logoutUser';
 import { SecondaryButton } from '../button';
+import NavBar from '../navbar';
 
 export const Heading = (props) => {
     return props.hidden ? (
@@ -62,3 +63,20 @@ export const Inner = (props) => (
         {props.children}
     </View>
 );
+
+export const Screen = (props) => {
+    const [navigationBar, setNavigation] = useState(null);
+    return (
+        <View style={{ ...styles.screen, ...props.style }} {...props}>
+            {props.children}
+            {props.showFooter ? (
+                <NavBar
+                    onChange={(navigationBar) => {
+                        setNavigation(navigationBar);
+                        console.log(g);
+                    }}
+                />
+            ) : null}
+        </View>
+    );
+};

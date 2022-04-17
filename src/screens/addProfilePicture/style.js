@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     textInput: {
-        height: 2,
+        height: 40,
     },
 });
 
