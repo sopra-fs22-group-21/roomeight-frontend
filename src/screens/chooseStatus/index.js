@@ -43,7 +43,11 @@ const ChooseStatus = ({ navigation }) => {
                     </SecondaryButton>
                 </Box>
                 <Box>
-                    <SecondaryButton>{en.chooseStatus.flat}</SecondaryButton>
+                    <SecondaryButton
+                        onPress={() => navigation.navigate('addProfilePicture')}
+                    >
+                        {en.chooseStatus.flat}
+                    </SecondaryButton>
                 </Box>
             </Inner>
         </Container>
