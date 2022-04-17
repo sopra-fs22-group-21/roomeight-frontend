@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         maxWidth: '100%',
         alignSelf: 'center',
         color: 'black',
-        botttom
+        botttom,
     },
     hstack: {
         color: '#404040',
