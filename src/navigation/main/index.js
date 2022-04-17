@@ -89,16 +89,16 @@ export default function Route() {
 
     const completeComponents = (
         <>
-        <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{ headerShown: false }}
-        />
-        <Stack.Screen
-            name="Discover"
-            component={Discover}
-            options={{ headerShown: false }}
-        />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Discover"
+                component={Discover}
+                options={{ headerShown: false }}
+            />
         </>
     );
     return (
