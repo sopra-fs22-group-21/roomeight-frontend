@@ -42,6 +42,16 @@
         "take": "Take a picture",
         "next": "Next"
     },
+    "addProfilePicture": {
+        "heading": "Complete your profile",
+        "title": "",
+        "select": "Please select a picture",
+        "upload": "Upload a picture",
+        "take": "Take a picture",
+        "next": "Next",
+        "gender": "Gender",
+        "whoIAm": "This is who I am (optional)"
+    },
     "completeSingleProfile": {
         "heading": "Tell us something about you",
         "title": "",

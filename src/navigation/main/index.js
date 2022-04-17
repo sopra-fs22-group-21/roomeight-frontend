@@ -13,6 +13,7 @@ import ChooseStatus from '../../screens/chooseStatus';
 import CompleteSingleProfile from '../../screens/completeSingleProfile';
 import AddPictures from '../../screens/addPictures';
 import CompleteFlatProfile from '../../screens/completeFlatProfile';
+import AddProfilePicture from '../../screens/addProfilePicture';
 
 const Stack = createStackNavigator();
 
@@ -81,6 +82,11 @@ export default function Route() {
             <Stack.Screen
                 name="CompleteFlatProfile"
                 component={CompleteFlatProfile}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="addProfilePicture"
+                component={AddProfilePicture}
                 options={{ headerShown: false }}
             />
         </>
