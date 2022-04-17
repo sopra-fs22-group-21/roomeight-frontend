@@ -13,6 +13,7 @@ import ChooseStatus from '../../screens/chooseStatus';
 import CompleteSingleProfile from '../../screens/completeSingleProfile';
 import AddPictures from '../../screens/addPictures';
 import CompleteFlatProfile from '../../screens/completeFlatProfile';
+import Discover from '../../screens/discover';
 
 const Stack = createStackNavigator();
 
@@ -87,22 +88,26 @@ export default function Route() {
     );
 
     const completeComponents = (
+        <>
         <Stack.Screen
             name="Profile"
             component={Profile}
             options={{ headerShown: false }}
         />
+        <Stack.Screen
+            name="Discover"
+            component={Discover}
+            options={{ headerShown: false }}
+        />
+        </>
     );
     return (
         <NavigationContainer>
             <Stack.Navigator
                 screenOptions={{ cardStyle: { backgroundColor: 'white' } }}
             >
-                {loggedIn
-                    ? isComplete
-                        ? completeComponents
-                        : incompleteComponents
-                    : loggedOutComponents}
+                {incompleteComponents}
+                {completeComponents}
             </Stack.Navigator>
         </NavigationContainer>
     );

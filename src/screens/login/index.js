@@ -14,6 +14,7 @@ import { Input } from '../../components/input';
 import { PrimaryButton, SecondaryButton } from '../../components/button';
 import { loginUser } from '../../redux/actions/loginUser';
 import { useDispatch } from 'react-redux';
+import { NavigationButtons } from '../../components/navigationButtons';
 
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -46,9 +47,6 @@ const Login = ({ navigation }) => {
                 >
                     Log In
                 </PrimaryButton>
-                <SecondaryButton onPress={() => navigation.navigate('Signup')}>
-                    Don't have an account yet
-                </SecondaryButton>
             </KeyboardAwareScrollView>
         </Container>
     );

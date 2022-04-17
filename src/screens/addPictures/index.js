@@ -63,13 +63,10 @@ const AddPictures = ({ navigation }) => {
             <Title>{en.addPictures.heading}</Title>
             {first || <ImageInput onPress={() => PickImage()} />}
             {second || <ImageInput onPress={() => PickImage()} />}
-            <SecondaryButton
-                title="upload"
-                onPress={() => dispatch(uploadImages(images, 'userprofile'))}
-            >
-                Upload
-            </SecondaryButton>
-            <NavigationButtons onPressBack={() => navigation.goBack()} />
+            <NavigationButtons onPressBack={() => navigation.goBack()} onPressNext={() => {
+                //dispatch(uploadImages(images, 'userprofile'));
+                navigation.navigate('Discover')
+            }} />
         </Container>
     );
 };

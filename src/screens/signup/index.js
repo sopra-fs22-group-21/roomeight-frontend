@@ -23,6 +23,7 @@ import { PrimaryButton, SecondaryButton } from '../../components/button';
 import DateInput from '../../components/dateInput';
 import dateFormat from 'dateformat';
 import Userprofile from '../../models/Userprofile';
+import { NavigationButtons } from '../../components/navigationButtons';
 
 const Signup = ({ navigation }) => {
     const [user, setUser] = useState(new Userprofile());
@@ -44,7 +45,7 @@ const Signup = ({ navigation }) => {
     const dispatch = useDispatch();
 
     return (
-        <Container>
+        <Container onPressBack={() => navigation.goBack()}>
             <KeyboardAvoidingView style={styles.inner} behavior="padding">
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <Heading>{en.signup.heading}</Heading>
@@ -175,11 +176,6 @@ const Signup = ({ navigation }) => {
                             Sign Up
                         </PrimaryButton>
                     </Box>
-                    <SecondaryButton
-                        onPress={() => navigation.navigate('Login')}
-                    >
-                        Already have an account
-                    </SecondaryButton>
                 </ScrollView>
             </KeyboardAvoidingView>
         </Container>

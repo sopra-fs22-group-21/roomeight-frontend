@@ -53,6 +53,9 @@ export const Container = (props) => {
                     Logout
                 </SecondaryButton>
             ) : null}
+            {props.showNavBar ?  
+                <NavBar navigation={props.navigation}/> : null
+            }
         </View>
     );
 };
