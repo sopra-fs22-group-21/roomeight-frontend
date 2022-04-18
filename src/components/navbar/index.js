@@ -5,9 +5,11 @@ import styles from './style';
 import { NativeBaseProvider, Center, HStack, Pressable } from 'native-base';
 import { Ionicons, FontAwesome } from 'react-native-vector-icons';
 import { Container } from '../../components/theme';
+import { useRoute } from '@react-navigation/native';
 
 const NavBar = ({ navigation }) => {
-    const [selected, setSelected] = useState(0);
+    const route = useRoute().name;
+    console.log(route);
 
     return (
         <NativeBaseProvider>
@@ -31,10 +33,10 @@ const NavBar = ({ navigation }) => {
                 >
                     <Pressable
                         //cursor="pointer"
-                        opacity={selected === 0 ? 1 : 0.5}
+                        opacity={route === 'Discover' ? 1 : 0.5}
                         py="2"
                         flex={1}
-                        onPress={() => setSelected(0)}
+                        onPress={() => {navigation.navigate('Discover')}}
                     >
                         <Center>
                             <Icon
@@ -47,10 +49,10 @@ const NavBar = ({ navigation }) => {
                     </Pressable>
                     <Pressable
                         //cursor="pointer"
-                        opacity={selected === 1 ? 1 : 0.5}
+                        opacity={route === 'Matches' ? 1 : 0.5}
                         py="3"
                         flex={1}
-                        onPress={() => setSelected(1)}
+                        onPress={() => navigation.navigate('Matches')}
                     >
                         <Center>
                             <Icon
@@ -58,7 +60,7 @@ const NavBar = ({ navigation }) => {
                                 as={
                                     <Ionicons
                                         name={
-                                            selected === 1
+                                            route === 'Matches'
                                                 ? 'heart'
                                                 : 'heart-outline'
                                         }
@@ -71,10 +73,10 @@ const NavBar = ({ navigation }) => {
                     </Pressable>
                     <Pressable
                         //cursor="pointer"
-                        opacity={selected === 2 ? 1 : 0.6}
+                        opacity={route === 'Chat' ? 1 : 0.6}
                         py="2"
                         flex={1}
-                        onPress={() => setSelected(2)}
+                        onPress={() => navigation.navigate('Chat')}
                     >
                         <Center>
                             <Icon
@@ -82,7 +84,7 @@ const NavBar = ({ navigation }) => {
                                 as={
                                     <Ionicons
                                         name={
-                                            selected === 2
+                                            route === 'Chat'
                                                 ? 'md-chatbubble'
                                                 : 'md-chatbubble-outline'
                                         }
@@ -95,10 +97,10 @@ const NavBar = ({ navigation }) => {
                     </Pressable>
                     <Pressable
                         //cursor="pointer"
-                        opacity={selected === 3 ? 1 : 0.5}
+                        opacity={route === 'Profile' ? 1 : 0.5}
                         py="2"
                         flex={1}
-                        onPress={() => setSelected(3)}
+                        onPress={() => navigation.navigate('Profile')}
                     >
                         <Center>
                             <Icon
@@ -106,7 +108,7 @@ const NavBar = ({ navigation }) => {
                                 as={
                                     <FontAwesome
                                         name={
-                                            selected === 3 ? 'user' : 'user-o'
+                                            route === 'Profile' ? 'user' : 'user-o'
                                         }
                                     />
                                 }

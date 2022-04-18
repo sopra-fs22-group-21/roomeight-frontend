@@ -65,18 +65,10 @@ export const Inner = (props) => (
 );
 
 export const Screen = (props) => {
-    const [navigationBar, setNavigation] = useState(null);
     return (
         <View style={{ ...styles.screen, ...props.style }} {...props}>
             {props.children}
-            {props.showFooter ? (
-                <NavBar
-                    onChange={(navigationBar) => {
-                        setNavigation(navigationBar);
-                        console.log(g);
-                    }}
-                />
-            ) : null}
+            {props.showFooter ? <NavBar navigation={props.navigation} /> : null}
         </View>
     );
 };

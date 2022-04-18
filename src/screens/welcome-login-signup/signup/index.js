@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './style';
-import en from '../../resources/strings/en.json';
-import { postUserprofile } from '../../redux/actions/postUserprofile';
+import en from '../../../resources/strings/en.json';
+import { postUserprofile } from '../../../redux/actions/postUserprofile';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import {
     View,
@@ -16,14 +16,14 @@ import {
     Title,
     Box,
     Container,
-} from '../../components/theme';
+} from '../../../components/theme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Input } from '../../components/input';
-import { PrimaryButton, SecondaryButton } from '../../components/button';
-import DateInput from '../../components/dateInput';
+import { Input } from '../../../components/input';
+import { PrimaryButton, SecondaryButton } from '../../../components/button';
+import DateInput from '../../../components/dateInput';
 import dateFormat from 'dateformat';
-import Userprofile from '../../models/Userprofile';
-import { NavigationButtons } from '../../components/navigationButtons';
+import Userprofile from '../../../models/Userprofile';
+import { NavigationButtons } from '../../../components/navigationButtons';
 
 const Signup = ({ navigation }) => {
     const [user, setUser] = useState(new Userprofile());

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { View, Button, Image } from 'react-native';
-import en from '../../resources/strings/en.json';
-import { TextBlock, Heading, Title, Container } from '../../components/theme';
+import en from '../../../resources/strings/en.json';
+import { TextBlock, Heading, Title, Container } from '../../../components/theme';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
-import ImageInput from '../../components/imageInput';
+import ImageInput from '../../../components/imageInput';
 import { useDispatch } from 'react-redux';
-import { uploadImages } from '../../redux/actions/uploadImage';
-import { NavigationButtons } from '../../components/navigationButtons';
-import { SecondaryButton } from '../../components/button';
+import { uploadImages } from '../../../redux/actions/uploadImage';
+import { NavigationButtons } from '../../../components/navigationButtons';
+import { SecondaryButton } from '../../../components/button';
 
 const AddPictures = ({ navigation }) => {
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState([])
 
     const dispatch = useDispatch();
     const PickImage = async () => {
@@ -59,6 +59,7 @@ const AddPictures = ({ navigation }) => {
             />
         );
     }
+    console.log(JSON.stringify(navigation.state))
     return (
         <Container>
             <Title>{en.addPictures.heading}</Title>
@@ -67,7 +68,7 @@ const AddPictures = ({ navigation }) => {
             <NavigationButtons
                 onPressBack={() => navigation.goBack()}
                 onPressNext={() => {
-                    //dispatch(uploadImages(images, 'userprofile'));
+                    dispatch(uploadImages(images, 'userprofile'));
                     navigation.navigate('Discover');
                 }}
             />
