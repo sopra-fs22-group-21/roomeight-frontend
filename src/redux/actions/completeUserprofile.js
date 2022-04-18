@@ -1,9 +1,9 @@
+import apiClient from '../../helper/apiClient';
 import {
+    COMPLETE_USERPROFILE_FAILURE,
     COMPLETE_USERPROFILE_REQUEST,
     COMPLETE_USERPROFILE_SUCCESS,
-    COMPLETE_USERPROFILE_FAILURE,
 } from '../constants';
-import apiClient from '../../helper/apiClient';
 
 const completeUserprofileRequest = () => ({
     type: COMPLETE_USERPROFILE_REQUEST,
@@ -19,6 +19,11 @@ const completeUserprofileFailure = (error) => ({
     payload: error,
 });
 
+/**
+ * to be done!
+ * @param {*} userprofile
+ * @returns
+ */
 export const completeUserprofile = (userprofile) => (dispatch) => {
     dispatch(completeUserprofileRequest());
 

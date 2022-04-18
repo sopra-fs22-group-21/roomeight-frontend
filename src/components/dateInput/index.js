@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
 import dateFormat from 'dateformat';
-import styles from './style';
-import { InputLabel, StyledTextInput, Input } from '../input';
-import { TextInput, View, Text } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { TextInput, View } from 'react-native';
+import { InputLabel } from '../input';
 import { Box } from '../theme';
+import styles from './style';
 
 const DateInput = (props) => {
     const [day, setDay] = useState(

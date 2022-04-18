@@ -1,9 +1,9 @@
+import apiClient from '../../helper/apiClient';
 import {
+    COMPLETE_FLATPROFILE_FAILURE,
     COMPLETE_FLATPROFILE_REQUEST,
     COMPLETE_FLATPROFILE_SUCCESS,
-    COMPLETE_FLATPROFILE_FAILURE,
 } from '../constants';
-import apiClient from '../../helper/apiClient';
 
 const completeFlatprofileRequest = () => ({
     type: COMPLETE_FLATPROFILE_REQUEST,
@@ -19,6 +19,11 @@ const completeFlatprofileFailure = (error) => ({
     payload: error,
 });
 
+/**
+ * to be done!
+ * @param {*} userprofile
+ * @returns
+ */
 export const completeFlatprofile = (userprofile) => (dispatch) => {
     dispatch(completeFlatprofileRequest());
 

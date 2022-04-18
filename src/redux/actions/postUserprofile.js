@@ -1,10 +1,10 @@
+import apiClient from '../../helper/apiClient';
 import {
+    POST_USERPROFILE_FAILURE,
     POST_USERPROFILE_REQUEST,
     POST_USERPROFILE_SUCCESS,
-    POST_USERPROFILE_FAILURE,
 } from '../constants';
-import apiClient from '../../helper/apiClient';
-import { loginUser, userAuthStateListener } from './loginUser';
+import { loginUser } from './authActions';
 
 const postUserprofileRequest = () => ({
     type: POST_USERPROFILE_REQUEST,
@@ -20,6 +20,17 @@ const postUserprofileFailure = (error) => ({
     payload: error,
 });
 
+/**
+ * Sends a post request to the backend to create a new userprofile
+ * @param {object} userprofile - JSON object with the request body
+ *
+ * @dispatches {@link postUserprofileRequest} on post request start
+ * @dispatches {@link postUserprofileSuccess} on post success
+ * @dispatches {@link postUserprofileFailure} on post failure with error payload
+ * @dispatches {@link loginUser} on post success to login the user after registration
+ *
+ * @see {@link apiClient} for more information on the post request
+ */
 export const postUserprofile = (userprofile) => (dispatch) => {
     dispatch(postUserprofileRequest());
 

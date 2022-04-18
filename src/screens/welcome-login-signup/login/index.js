@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
-import { View, Button } from 'react-native';
-import styles from './style';
-import en from '../../../resources/strings/en.json';
-import {
-    TextBlock,
-    Heading,
-    Title,
-    Box,
-    Container,
-} from '../../../components/theme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Input } from '../../../components/input';
-import { PrimaryButton, SecondaryButton } from '../../../components/button';
-import { loginUser } from '../../../redux/actions/loginUser';
 import { useDispatch } from 'react-redux';
-import { NavigationButtons } from '../../../components/navigationButtons';
+import { PrimaryButton } from '../../../components/button';
+import { Input } from '../../../components/input';
+import {
+    Container,
+    Heading,
+    TextBlock,
+    Title,
+} from '../../../components/theme';
+import { loginUser } from '../../../redux/actions/authActions';
+import en from '../../../resources/strings/en.json';
+import styles from './style';
 
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();

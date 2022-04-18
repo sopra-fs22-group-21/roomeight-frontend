@@ -1,22 +1,21 @@
-import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Welcome from '../../screens/welcome-login-signup/welcome';
-import Signup from '../../screens/welcome-login-signup/signup';
-import Login from '../../screens/welcome-login-signup/login';
-import Profile from '../../screens/profile';
-import { View } from 'react-native';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userAuthStateListener } from '../../redux/actions/loginUser';
 import M8Loader from '../../../assets/logo/M8Loader';
-import ChooseStatus from '../../screens/create-profile/chooseStatus';
-import CompleteSingleProfile from '../../screens/create-profile/completeSingleProfile';
-import AddPictures from '../../screens/create-profile/addPictures';
-import CompleteFlatProfile from '../../screens/create-profile/completeFlatProfile';
-import Discover from '../../screens/discover';
+import { userAuthStateListener } from '../../redux/actions/authActions';
 import Chat from '../../screens/chat';
-import Matches from '../../screens/matches';
+import AddPictures from '../../screens/create-profile/addPictures';
 import AddProfilePicture from '../../screens/create-profile/addProfilePicture';
+import ChooseStatus from '../../screens/create-profile/chooseStatus';
+import CompleteFlatProfile from '../../screens/create-profile/completeFlatProfile';
+import CompleteSingleProfile from '../../screens/create-profile/completeSingleProfile';
+import Discover from '../../screens/discover';
+import Matches from '../../screens/matches';
+import Profile from '../../screens/profile';
+import Login from '../../screens/welcome-login-signup/login';
+import Signup from '../../screens/welcome-login-signup/signup';
+import Welcome from '../../screens/welcome-login-signup/welcome';
 
 const Stack = createStackNavigator();
 
@@ -124,8 +123,11 @@ export default function Route() {
             <Stack.Navigator
                 screenOptions={{ cardStyle: { backgroundColor: 'white' } }}
             >
-                {incompleteComponents}
-                {completeComponents}
+                {loggedIn
+                    ? isComplete
+                        ? completeComponents
+                        : incompleteComponents
+                    : loggedOutComponents}
             </Stack.Navigator>
         </NavigationContainer>
     );

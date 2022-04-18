@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { TextInput, Text, View } from 'react-native';
-import styles from './style';
+import { Pressable, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { Pressable } from 'react-native';
+import styles from './style';
 
 const TagElement = (props) => {
     const [tag, setTag] = useState(props.tag);

@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Text, Button, View } from 'react-native';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { getUserProfiles } from '../../redux/actions/getUserprofiles';
+import { useEffect } from 'react';
+import { Text } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
-import styles from './style';
-import { logoutUser } from '../../redux/actions/logoutUser';
 import { Container, Screen } from '../../components/theme';
+import { logoutUser } from '../../redux/actions/authActions';
+import { getUserProfiles } from '../../redux/actions/getUserprofiles';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {

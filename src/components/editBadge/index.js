@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import styles from './style';
 import editIcons from '../../resources/icons/editIcons';
+import styles from './style';
 
 const editBadge = (props) => {
     switch (props.variant) {

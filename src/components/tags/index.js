@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { InputBox } from '../input';
-import styles from './style';
 import tagIcons from '../../resources/icons/tagIcons';
 import TagElement from '../tagelement';
+import styles from './style';
 
 const Tags = (props) => {
     const half = Math.ceil(tagIcons.length / 2);

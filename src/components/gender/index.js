@@ -1,13 +1,7 @@
 import { React, useState } from 'react';
-import { Box } from '../theme';
-import styles from './style';
-import { Pressable, View, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { InputBox } from '../input';
-import { GenderButton } from '../button';
-import { Tab, TabView } from 'react-native-elements/dist/tab/Tab';
+import { Tab } from 'react-native-elements/dist/tab/Tab';
 import genders from '../../resources/strings/genders';
+import styles from './style';
 
 const Gender = (props) => {
     const [index, setIndex] = useState(0);

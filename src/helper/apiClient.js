@@ -1,9 +1,6 @@
 import axios from 'axios';
 import Constants from 'expo-constants';
-import { CombinedState } from 'redux';
 import { auth } from '../../firebase/firebase-config';
-import { onAuthStateChanged } from 'firebase/auth';
-import { useSelector } from 'react-redux';
 
 const API_URL = (env = Constants.manifest.releaseChannel) => {
     //if (__DEV__) {

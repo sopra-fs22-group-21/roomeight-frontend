@@ -1,7 +1,7 @@
 import {
+    COMPLETE_FLATPROFILE_FAILURE,
     COMPLETE_FLATPROFILE_REQUEST,
     COMPLETE_FLATPROFILE_SUCCESS,
-    COMPLETE_FLATPROFILE_FAILURE,
 } from '../constants/index';
 
 const flatprofileState = (state = initialState, action) => {

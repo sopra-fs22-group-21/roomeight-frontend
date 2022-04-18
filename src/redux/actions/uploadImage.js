@@ -1,11 +1,10 @@
+import { ref, uploadBytesResumable } from 'firebase/storage';
+import { storage } from '../../../firebase/firebase-config';
 import {
+    UPLOAD_IMAGE_FAILURE,
     UPLOAD_IMAGE_REQUEST,
     UPLOAD_IMAGE_SUCCESS,
-    UPLOAD_IMAGE_FAILURE,
 } from '../constants';
-import { uploadBytesResumable, ref, getDownloadURL } from 'firebase/storage';
-import { storage } from '../../../firebase/firebase-config';
-import store from '../configureStore';
 
 const uploadImageRequest = () => ({
     type: UPLOAD_IMAGE_REQUEST,

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
-import styles from './style';
+import React from 'react';
+import { Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../redux/actions/logoutUser';
+import { logoutUser } from '../../redux/actions/authActions';
 import { SecondaryButton } from '../button';
 import NavBar from '../navbar';
+import styles from './style';
 
 export const Heading = (props) => {
     return props.hidden ? (

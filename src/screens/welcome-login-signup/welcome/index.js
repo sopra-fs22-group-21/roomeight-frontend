@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import styles from './style';
-import en from '../../../resources/strings/en.json';
+import { TouchableOpacity, View } from 'react-native';
 import Room8Logo from '../../../../assets/logo/Room8Logo.js';
-import { TextBlock, Box, SemiBold, Padding } from '../../../components/theme';
+import { Box, SemiBold, TextBlock } from '../../../components/theme';
+import en from '../../../resources/strings/en.json';
+import styles from './style';
 
 function Welcome({ navigation }) {
     return (

@@ -1,31 +1,16 @@
 import React, { useState } from 'react';
-import styles from './style';
-import en from '../../../resources/strings/en.json';
-import { Input, InputBox } from '../../../components/input';
-import {
-    TextBlock,
-    Heading,
-    Box,
-    Title,
-    Container,
-    Inner,
-} from '../../../components/theme';
-import inputstyle from '../../../components/input';
-import {
-    Button,
-    ScrollView,
-    KeyboardAvoidingView,
-    Text,
-    View,
-} from 'react-native';
-import Gender from '../../../components/gender';
-import genders from '../../../resources/strings/genders';
-import { NavigationButtons } from '../../../components/navigationButtons';
-import ProfilePictureInput from '../../../components/profilePictureInput';
-import { PickImage } from '../../../helper/imageHandler';
-import { uploadImages } from '../../../redux/actions/uploadImage';
+import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { useDispatch } from 'react-redux';
+import Gender from '../../../components/gender';
+import { Input, InputBox } from '../../../components/input';
+import { NavigationButtons } from '../../../components/navigationButtons';
+import PictureInput from '../../../components/pictureInput';
+import { Container, Heading } from '../../../components/theme';
+import { PickImage } from '../../../helper/imageHandler';
 import { addPictureReference } from '../../../redux/actions/addPictureReference';
+import en from '../../../resources/strings/en.json';
+import genders from '../../../resources/strings/genders';
+import styles from './style';
 
 const AddProfilePicture = ({ navigation }) => {
     const [gender, setGender] = useState(genders.notSet);
@@ -40,7 +25,7 @@ const AddProfilePicture = ({ navigation }) => {
             <KeyboardAvoidingView style={styles.inner} behavior="padding">
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={{ alignItems: 'center' }}>
-                        <ProfilePictureInput
+                        <PictureInput
                             onPressDelete={() => {
                                 setImage('');
                             }}

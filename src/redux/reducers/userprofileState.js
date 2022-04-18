@@ -1,24 +1,24 @@
 import {
-    POST_USERPROFILE_REQUEST,
-    POST_USERPROFILE_SUCCESS,
-    POST_USERPROFILE_FAILURE,
-    LOGIN_USER_REQUEST,
-    LOGIN_USER_SUCCESS,
-    LOGIN_USER_FAILURE,
-    GET_USERS_SUCCESS,
+    ADD_PICTURE_REFERENCE,
+    COMPLETE_USERPROFILE_FAILURE,
+    COMPLETE_USERPROFILE_REQUEST,
+    COMPLETE_USERPROFILE_SUCCESS,
     GET_USERS_FAILURE,
     GET_USERS_REQUEST,
+    GET_USERS_SUCCESS,
+    LOADING_STATE,
+    LOGIN_USER_FAILURE,
+    LOGIN_USER_REQUEST,
+    LOGIN_USER_SUCCESS,
     LOGOUT_USER_FAILURE,
     LOGOUT_USER_REQUEST,
     LOGOUT_USER_SUCCESS,
-    LOADING_STATE,
-    COMPLETE_USERPROFILE_REQUEST,
-    COMPLETE_USERPROFILE_SUCCESS,
-    COMPLETE_USERPROFILE_FAILURE,
+    POST_USERPROFILE_FAILURE,
+    POST_USERPROFILE_REQUEST,
+    POST_USERPROFILE_SUCCESS,
+    UPLOAD_IMAGE_FAILURE,
     UPLOAD_IMAGE_REQUEST,
     UPLOAD_IMAGE_SUCCESS,
-    UPLOAD_IMAGE_FAILURE,
-    ADD_PICTURE_REFERENCE,
 } from '../constants/index';
 
 const initialState = {
@@ -33,7 +33,12 @@ const initialState = {
 };
 
 //TODO: error handling -> really set to null on every success?
-
+/**
+ * reducer for the userprofile state
+ *
+ * @param {object} initialState
+ * @param {reduxAction} action action that got dispatched
+ */
 const userprofileState = (state = initialState, action) => {
     switch (action.type) {
         case GET_USERS_REQUEST:

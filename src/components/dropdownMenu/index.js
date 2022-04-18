@@ -1,5 +1,5 @@
-import en from '../../resources/strings/en.json';
 import { Select } from 'native-base';
+import en from '../../resources/strings/en.json';
 
 const Dropdown = () => {
     return (

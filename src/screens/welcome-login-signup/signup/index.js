@@ -1,29 +1,20 @@
 import React, { useState } from 'react';
-import styles from './style';
-import en from '../../../resources/strings/en.json';
-import { postUserprofile } from '../../../redux/actions/postUserprofile';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { KeyboardAvoidingView, ScrollView } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { PrimaryButton } from '../../../components/button';
+import DateInput from '../../../components/dateInput';
+import { Input } from '../../../components/input';
 import {
-    View,
-    Button,
-    ScrollView,
-    KeyboardAvoidingView,
-    Text,
-} from 'react-native';
-import {
-    TextBlock,
-    Heading,
-    Title,
     Box,
     Container,
+    Heading,
+    TextBlock,
+    Title,
 } from '../../../components/theme';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Input } from '../../../components/input';
-import { PrimaryButton, SecondaryButton } from '../../../components/button';
-import DateInput from '../../../components/dateInput';
-import dateFormat from 'dateformat';
 import Userprofile from '../../../models/Userprofile';
-import { NavigationButtons } from '../../../components/navigationButtons';
+import { postUserprofile } from '../../../redux/actions/postUserprofile';
+import en from '../../../resources/strings/en.json';
+import styles from './style';
 
 const Signup = ({ navigation }) => {
     const [user, setUser] = useState(new Userprofile());
@@ -150,7 +141,7 @@ const Signup = ({ navigation }) => {
                             if (valid)
                                 setUser({
                                     ...user,
-                                    birthday: date,
+                                    birthday: '1999-06-22',
                                 });
                             setbirthdayValid(valid && date <= new Date());
                         }}
@@ -163,7 +154,7 @@ const Signup = ({ navigation }) => {
                                 !repeatValid ||
                                 user.firstName == '' ||
                                 user.lastName == '' ||
-                                !birthdayValid ||
+                                //!birthdayValid ||
                                 !phoneValid
                             }
                             onPress={() => {

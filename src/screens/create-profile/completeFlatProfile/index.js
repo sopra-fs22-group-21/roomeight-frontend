@@ -1,21 +1,14 @@
-import React, { useState } from 'react';
-import styles from './style';
-import en from '../../../resources/strings/en.json';
-import { Input, InputBox, InputLabel } from '../../../components/input';
-import {
-    TextBlock,
-    Heading,
-    Box,
-    Title,
-    Container,
-    Inner,
-} from '../../../components/theme';
-import { Button, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
-import DateInput from '../../../components/dateInput';
 import dateFormat from 'dateformat';
-import Tags from '../../../components/tags';
+import React, { useState } from 'react';
+import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
+import DateInput from '../../../components/dateInput';
+import { Input, InputBox, InputLabel } from '../../../components/input';
 import { NavigationButtons } from '../../../components/navigationButtons';
+import Tags from '../../../components/tags';
+import { Box, Container, Heading } from '../../../components/theme';
+import en from '../../../resources/strings/en.json';
+import styles from './style';
 
 //TODO: backend, regex
 

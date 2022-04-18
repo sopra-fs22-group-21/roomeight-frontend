@@ -1,6 +1,5 @@
 import React from 'react';
 import { Pressable, Text } from 'react-native';
-import { Box } from '../theme';
 import styles from './style';
 
 const BasicButton = (props) => (

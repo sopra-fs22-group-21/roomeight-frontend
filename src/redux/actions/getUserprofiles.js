@@ -1,8 +1,8 @@
 import apiClient from '../../helper/apiClient';
 import {
+    GET_USERS_FAILURE,
     GET_USERS_REQUEST,
     GET_USERS_SUCCESS,
-    GET_USERS_FAILURE,
 } from '../constants';
 
 const getUserProfilesRequest = () => ({
@@ -19,6 +19,10 @@ const getUserProfilesFailure = (error) => ({
     payload: error,
 });
 
+/**
+ * to be done!
+ * @returns
+ */
 export const getUserProfiles = () => (dispatch) => {
     dispatch(getUserProfilesRequest());
 
