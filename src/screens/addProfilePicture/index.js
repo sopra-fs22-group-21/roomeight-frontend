@@ -11,7 +11,13 @@ import {
     Inner,
 } from '../../components/theme';
 import inputstyle from '../../components/input';
-import { Button, ScrollView, KeyboardAvoidingView, Text, View } from 'react-native';
+import {
+    Button,
+    ScrollView,
+    KeyboardAvoidingView,
+    Text,
+    View,
+} from 'react-native';
 import Gender from '../../components/gender';
 import genders from '../../resources/strings/genders';
 import { NavigationButtons } from '../../components/navigationButtons';
@@ -26,7 +32,7 @@ const AddProfilePicture = ({ navigation }) => {
             <Heading>{en.addProfilePicture.heading}</Heading>
             <KeyboardAvoidingView style={styles.inner} behavior="padding">
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <View style={{flex: 1, width: '100%'}}>
+                    <View style={{ flex: 1, width: '100%' }}>
                         <ProfilePictureInput />
                     </View>
                     <InputBox label={en.addProfilePicture.gender}>

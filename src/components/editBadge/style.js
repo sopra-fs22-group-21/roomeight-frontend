@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     icon: {
         padding: 3,
     },
-
 });
 
 export default styles;

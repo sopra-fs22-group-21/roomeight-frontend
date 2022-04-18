@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    placeholder:{
+    placeholder: {
         letterSpacing: 5,
         fontSize: 40,
         fontFamily: 'SourceSans3Light',
