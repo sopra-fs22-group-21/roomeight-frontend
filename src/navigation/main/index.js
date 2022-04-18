@@ -97,7 +97,7 @@ export default function Route() {
 
     const completeComponents = (
         <>
-            <Stack.Screen 
+            <Stack.Screen
                 name="Profile"
                 component={Profile}
                 options={{ headerShown: false, animationEnabled: false }}

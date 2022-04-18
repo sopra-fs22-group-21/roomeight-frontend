@@ -36,7 +36,9 @@ const NavBar = ({ navigation }) => {
                         opacity={route === 'Discover' ? 1 : 0.5}
                         py="2"
                         flex={1}
-                        onPress={() => {navigation.navigate('Discover')}}
+                        onPress={() => {
+                            navigation.navigate('Discover');
+                        }}
                     >
                         <Center>
                             <Icon
@@ -108,7 +110,9 @@ const NavBar = ({ navigation }) => {
                                 as={
                                     <FontAwesome
                                         name={
-                                            route === 'Profile' ? 'user' : 'user-o'
+                                            route === 'Profile'
+                                                ? 'user'
+                                                : 'user-o'
                                         }
                                     />
                                 }

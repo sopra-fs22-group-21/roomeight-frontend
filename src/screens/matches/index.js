@@ -6,9 +6,9 @@ import { Container, Screen } from '../../components/theme';
 const Matches = ({ navigation }) => {
     return (
         <Screen navigation={navigation} showFooter>
-        <Container>
-            <Text>Matches</Text>
-        </Container>
+            <Container>
+                <Text>Matches</Text>
+            </Container>
         </Screen>
     );
 };

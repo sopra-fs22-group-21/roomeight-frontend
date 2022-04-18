@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Button, Image } from 'react-native';
 import en from '../../../resources/strings/en.json';
-import { TextBlock, Heading, Title, Container } from '../../../components/theme';
+import {
+    TextBlock,
+    Heading,
+    Title,
+    Container,
+} from '../../../components/theme';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import ImageInput from '../../../components/imageInput';
@@ -11,7 +16,7 @@ import { NavigationButtons } from '../../../components/navigationButtons';
 import { SecondaryButton } from '../../../components/button';
 
 const AddPictures = ({ navigation }) => {
-    const [images, setImages] = useState([])
+    const [images, setImages] = useState([]);
 
     const dispatch = useDispatch();
     const PickImage = async () => {
@@ -59,7 +64,7 @@ const AddPictures = ({ navigation }) => {
             />
         );
     }
-    console.log(JSON.stringify(navigation.state))
+    console.log(JSON.stringify(navigation.state));
     return (
         <Container>
             <Title>{en.addPictures.heading}</Title>
