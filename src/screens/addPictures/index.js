@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { uploadImages } from '../../redux/actions/uploadImage';
 import { NavigationButtons } from '../../components/navigationButtons';
 import { SecondaryButton } from '../../components/button';
+
 const AddPictures = ({ navigation }) => {
     const [images, setImages] = useState([]);
 

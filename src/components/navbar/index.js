@@ -6,8 +6,9 @@ import { NativeBaseProvider, Center, HStack, Pressable } from 'native-base';
 import { Ionicons, FontAwesome } from 'react-native-vector-icons';
 import { Container } from '../../components/theme';
 
-const NavBar = (props, { navigation }) => {
-    const [selected, setSelected] = useState(1);
+const NavBar = ({ navigation }) => {
+    const [selected, setSelected] = useState(0);
+
     return (
         <NativeBaseProvider>
             <Container style={styles.container} />
@@ -26,16 +27,14 @@ const NavBar = (props, { navigation }) => {
                     alignItems="center"
                     safeAreaBottom
                     position="absolute"
+                    bottom="0"
                 >
                     <Pressable
                         //cursor="pointer"
-                        opacity={selected === 1 ? 1 : 0.5}
+                        opacity={selected === 0 ? 1 : 0.5}
                         py="2"
                         flex={1}
-                        onPress={() => {
-                            setSelected(1);
-                            navigation.navigate('Discover');
-                        }}
+                        onPress={() => setSelected(0)}
                     >
                         <Center>
                             <Icon
@@ -48,10 +47,10 @@ const NavBar = (props, { navigation }) => {
                     </Pressable>
                     <Pressable
                         //cursor="pointer"
-                        opacity={selected === 0 ? 1 : 0.5}
+                        opacity={selected === 1 ? 1 : 0.5}
                         py="3"
                         flex={1}
-                        onPress={() => setSelected(0)}
+                        onPress={() => setSelected(1)}
                     >
                         <Center>
                             <Icon
@@ -59,7 +58,7 @@ const NavBar = (props, { navigation }) => {
                                 as={
                                     <Ionicons
                                         name={
-                                            selected === 0
+                                            selected === 1
                                                 ? 'heart'
                                                 : 'heart-outline'
                                         }
