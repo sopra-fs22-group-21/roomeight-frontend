@@ -11,9 +11,10 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import ImageInput from '../../../components/imageInput';
 import { useDispatch } from 'react-redux';
-import { uploadImages } from '../../../redux/actions/uploadImage';
-import { NavigationButtons } from '../../../components/navigationButtons';
-import { SecondaryButton } from '../../../components/button';
+import { uploadImages } from '../../redux/actions/uploadImage';
+import { NavigationButtons } from '../../components/navigationButtons';
+import { SecondaryButton } from '../../components/button';
+import PictureInput from '../../components/profilePictureInput';
 
 const AddPictures = ({ navigation }) => {
     const [images, setImages] = useState([]);
@@ -68,6 +69,7 @@ const AddPictures = ({ navigation }) => {
     return (
         <Container>
             <Title>{en.addPictures.heading}</Title>
+            <PictureInput />
             {first || <ImageInput onPress={() => PickImage()} />}
             {second || <ImageInput onPress={() => PickImage()} />}
             <NavigationButtons
