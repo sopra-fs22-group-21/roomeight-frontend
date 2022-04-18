@@ -31,10 +31,11 @@ const uploadImageFailure = (error) => ({
 export const uploadImages =
     (uriList, profileType) => async (dispatch, getState) => {
         dispatch(uploadImageRequest());
+        let filteredList = uriList.filter((uri) => uri !== '');
         let count = 0;
-        uriList.forEach(async (uri) => {
+        filteredList.forEach(async (uri) => {
             count++;
-            console.log(uriList, count);
+            console.log(filteredList, count);
             const uid = getState().userprofileState.userProfile.auth.uid;
             const storageRef = ref(
                 storage,
