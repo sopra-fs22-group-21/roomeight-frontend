@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { View, Button, Image, FlatList } from 'react-native';
-import en from '../../resources/strings/en.json';
-import { TextBlock, Heading, Title, Container } from '../../components/theme';
+import en from '../../../resources/strings/en.json';
+import {
+    TextBlock,
+    Heading,
+    Title,
+    Container,
+} from '../../../components/theme';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImages } from '../../redux/actions/uploadImage';
-import { NavigationButtons } from '../../components/navigationButtons';
-import { SecondaryButton } from '../../components/button';
-import PictureInput from '../../components/profilePictureInput';
-import { PickImage } from '../../helper/imageHandler';
+import { uploadImages } from '../../../redux/actions/uploadImage';
+import { NavigationButtons } from '../../../components/navigationButtons';
+import { SecondaryButton } from '../../../components/button';
+import PictureInput from '../../../components/profilePictureInput';
+import { PickImage } from '../../../helper/imageHandler';
 
 const AddPictures = ({ navigation }) => {
     const userImages = useSelector(

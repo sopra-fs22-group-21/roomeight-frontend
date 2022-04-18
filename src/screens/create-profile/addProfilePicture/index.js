@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './style';
-import en from '../../resources/strings/en.json';
-import { Input, InputBox } from '../../components/input';
+import en from '../../../resources/strings/en.json';
+import { Input, InputBox } from '../../../components/input';
 import {
     TextBlock,
     Heading,
@@ -9,8 +9,8 @@ import {
     Title,
     Container,
     Inner,
-} from '../../components/theme';
-import inputstyle from '../../components/input';
+} from '../../../components/theme';
+import inputstyle from '../../../components/input';
 import {
     Button,
     ScrollView,
@@ -18,11 +18,11 @@ import {
     Text,
     View,
 } from 'react-native';
-import Gender from '../../components/gender';
-import genders from '../../resources/strings/genders';
-import { NavigationButtons } from '../../components/navigationButtons';
-import ProfilePictureInput from '../../components/profilePictureInput';
-import { PickImage } from '../../helper/imageHandler';
+import Gender from '../../../components/gender';
+import genders from '../../../resources/strings/genders';
+import { NavigationButtons } from '../../../components/navigationButtons';
+import ProfilePictureInput from '../../../components/profilePictureInput';
+import { PickImage } from '../../../helper/imageHandler';
 
 const AddProfilePicture = ({ navigation }) => {
     const [gender, setGender] = useState(genders.notSet);

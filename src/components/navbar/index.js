@@ -4,7 +4,7 @@ import { Box } from '../theme';
 import styles from './style';
 import { NativeBaseProvider, Center, HStack, Pressable } from 'native-base';
 import { Ionicons, FontAwesome } from 'react-native-vector-icons';
-import { Container } from '../../components/theme';
+import { Container } from '../theme';
 import { useRoute } from '@react-navigation/native';
 
 const NavBar = ({ navigation }) => {

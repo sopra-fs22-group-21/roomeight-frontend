@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import en from '../../resources/strings/en.json';
+import en from '../../../resources/strings/en.json';
 import {
     TextBlock,
     Heading,
@@ -7,13 +7,13 @@ import {
     Box,
     Container,
     Inner,
-} from '../../components/theme';
+} from '../../../components/theme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Input } from '../../components/input';
-import { loginUser } from '../../redux/actions/loginUser';
+import { Input } from '../../../components/input';
+import { loginUser } from '../../../redux/actions/loginUser';
 import { useDispatch } from 'react-redux';
-import { SecondaryButton } from '../../components/button';
-import { NavigationButtons } from '../../components/navigationButtons';
+import { SecondaryButton } from '../../../components/button';
+import { NavigationButtons } from '../../../components/navigationButtons';
 
 const ChooseStatus = ({ navigation }) => {
     const dispatch = useDispatch();

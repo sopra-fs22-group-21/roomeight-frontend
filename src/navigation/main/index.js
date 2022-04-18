@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Welcome from '../../screens/welcome';
-import Signup from '../../screens/signup';
-import Login from '../../screens/login';
+import Welcome from '../../screens/welcome-login-signup/welcome';
+import Signup from '../../screens/welcome-login-signup/signup';
+import Login from '../../screens/welcome-login-signup/login';
 import Profile from '../../screens/profile';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { userAuthStateListener } from '../../redux/actions/loginUser';
 import M8Loader from '../../../assets/logo/M8Loader';
-import ChooseStatus from '../../screens/chooseStatus';
-import CompleteSingleProfile from '../../screens/completeSingleProfile';
-import AddPictures from '../../screens/addPictures';
-import CompleteFlatProfile from '../../screens/completeFlatProfile';
+import ChooseStatus from '../../screens/create-profile/chooseStatus';
+import CompleteSingleProfile from '../../screens/create-profile/completeSingleProfile';
+import AddPictures from '../../screens/create-profile/addPictures';
+import CompleteFlatProfile from '../../screens/create-profile/completeFlatProfile';
 import Discover from '../../screens/discover';
 import Chat from '../../screens/chat';
 import Matches from '../../screens/matches';
-import AddProfilePicture from '../../screens/addProfilePicture';
+import AddProfilePicture from '../../screens/create-profile/addProfilePicture';
 
 const Stack = createStackNavigator();
 
