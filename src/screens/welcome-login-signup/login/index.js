@@ -45,7 +45,7 @@ const Login = ({ navigation }) => {
                         dispatch(loginUser(email, password));
                     }}
                 >
-                    Log In
+                    Login
                 </PrimaryButton>
             </KeyboardAwareScrollView>
         </Container>

@@ -27,20 +27,19 @@ const uploadImageFailure = (error) => ({
  * @param {array} uriList the list of uri's of the images to upload
  * @param {string} profileType either "userprofile" or "flatprofile"
  * @todo what happens if downloadurl fails? picture should get deleted?
+ * @todo better to store downloadurl or refrpath?
  */
 export const uploadImages =
     (uriList, profileType) => async (dispatch, getState) => {
         dispatch(uploadImageRequest());
         let filteredList = uriList.filter((uri) => uri !== '');
         let count = 0;
+        console.log(filteredList, count);
         filteredList.forEach(async (uri) => {
             count++;
-            console.log(filteredList, count);
             const uid = getState().userprofileState.userProfile.auth.uid;
-            const storageRef = ref(
-                storage,
-                `${profileType}s/${uid}/profilePicture${count}.jpg`
-            );
+            const refPath = `${profileType}s/${uid}/profilePicture${count}.jpg`;
+            const storageRef = ref(storage, refPath);
 
             const response = await fetch(uri);
             const blob = await response.blob();
@@ -59,14 +58,14 @@ export const uploadImages =
             uploadTask.on('state_changed', {
                 complete: () => {
                     console.log('upload complete!');
-                    getDownloadURL(storageRef)
-                        .then((url) => {
-                            dispatch(uploadImageSuccess(url));
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            dispatch(uploadImageFailure(error));
-                        });
+                    /* getDownloadURL(storageRef).then((url) => {
+                        console.log('download url: ', url);
+                        dispatch(uploadImageSuccess(url));
+                    }).catch((error) => {
+                        console.log('error getting download url: ', error);
+                        dispatch(uploadImageFailure(error));
+                    }); */
+                    dispatch(uploadImageSuccess(refPath));
                 },
                 error: (error) => {
                     console.log(error);

@@ -17,12 +17,11 @@ import PictureInput from '../../../components/profilePictureInput';
 import { PickImage } from '../../../helper/imageHandler';
 
 const AddPictures = ({ navigation }) => {
-    const userImages = useSelector(
-        (state) => state.userprofileState.userProfile.pictureReferences
+    const localPictureReferences = useSelector(
+        (state) => state.userprofileState.userProfile.localPictureReference
     );
-    const [images, setImages] = useState(
-        userImages ? userImages : ['', '', '', '']
-    );
+    console.log(localPictureReferences);
+    const [images, setImages] = useState(localPictureReferences);
 
     const dispatch = useDispatch();
 
@@ -40,7 +39,7 @@ const AddPictures = ({ navigation }) => {
     }
 
     useEffect(async () => {
-        if (Platform.OS !== 'web') {
+        if (Constants.platform.OS !== 'web') {
             const { status } =
                 await ImagePicker.requestMediaLibraryPermissionsAsync();
             if (status !== 'granted') {
@@ -96,7 +95,6 @@ const AddPictures = ({ navigation }) => {
                 onPressBack={() => navigation.goBack()}
                 onPressNext={() => {
                     dispatch(uploadImages(images, 'userprofile'));
-                    navigation.navigate('Discover');
                 }}
             />
         </Container>

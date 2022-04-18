@@ -23,12 +23,17 @@ import genders from '../../../resources/strings/genders';
 import { NavigationButtons } from '../../../components/navigationButtons';
 import ProfilePictureInput from '../../../components/profilePictureInput';
 import { PickImage } from '../../../helper/imageHandler';
+import { uploadImages } from '../../../redux/actions/uploadImage';
+import { useDispatch } from 'react-redux';
+import { addPictureReference } from '../../../redux/actions/addPictureReference';
 
 const AddProfilePicture = ({ navigation }) => {
     const [gender, setGender] = useState(genders.notSet);
     const [user, setDescription] = useState(null);
     const [image, setImage] = useState('');
+    const dispatch = useDispatch();
     let selectedTags = [];
+
     return (
         <Container showLogout>
             <Heading>{en.addProfilePicture.heading}</Heading>
@@ -65,7 +70,10 @@ const AddProfilePicture = ({ navigation }) => {
                         }
                     />
                     <NavigationButtons
-                        onPressNext={() => navigation.navigate('ChooseStatus')}
+                        onPressNext={() => {
+                            dispatch(addPictureReference(image));
+                            navigation.navigate('ChooseStatus');
+                        }}
                     />
                 </ScrollView>
             </KeyboardAvoidingView>

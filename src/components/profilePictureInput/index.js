@@ -32,7 +32,7 @@ const pictureInput = (props) => {
                                 {props.initials}
                             </Text>
                         </View>
-                        <EditBadge set={false} />
+                        <EditBadge variant={props.variant} set={false} />
                     </Pressable>
                 );
             }

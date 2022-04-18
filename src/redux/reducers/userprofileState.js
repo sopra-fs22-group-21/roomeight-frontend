@@ -18,11 +18,13 @@ import {
     UPLOAD_IMAGE_REQUEST,
     UPLOAD_IMAGE_SUCCESS,
     UPLOAD_IMAGE_FAILURE,
+    ADD_PICTURE_REFERENCE,
 } from '../constants/index';
 
 const initialState = {
     userProfile: {
         pictureReference: [],
+        localPictureReference: [],
     },
     loggedIn: false,
     isComplete: false,
@@ -149,6 +151,7 @@ const userprofileState = (state = initialState, action) => {
                         ...state.userProfile.pictureReference,
                         action.payload,
                     ],
+                    localPictureReference: [],
                 },
                 isComplete: true,
                 loading: false,
@@ -158,6 +161,17 @@ const userprofileState = (state = initialState, action) => {
                 ...state,
                 error: action.payload,
                 loading: false,
+            };
+        case ADD_PICTURE_REFERENCE:
+            return {
+                ...state,
+                userProfile: {
+                    ...state.userProfile,
+                    localPictureReference: [
+                        ...state.userProfile.localPictureReference,
+                        action.payload,
+                    ],
+                },
             };
         case LOADING_STATE:
             return {
