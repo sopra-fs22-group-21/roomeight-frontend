@@ -7,9 +7,9 @@ const editIcons = {
         type: 'material',
     },
     delete: {
-        name: 'delete',
+        name: 'cross',
         icon: 'cross',
-        type: 'Entypo',
+        type: 'entypo',
     },
     add: {
         name: 'add',

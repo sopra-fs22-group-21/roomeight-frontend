@@ -22,18 +22,31 @@ import Gender from '../../components/gender';
 import genders from '../../resources/strings/genders';
 import { NavigationButtons } from '../../components/navigationButtons';
 import ProfilePictureInput from '../../components/profilePictureInput';
+import { PickImage } from '../../helper/imageHandler';
 
 const AddProfilePicture = ({ navigation }) => {
     const [gender, setGender] = useState(genders.notSet);
     const [user, setDescription] = useState(null);
+    const [image, setImage] = useState('');
     let selectedTags = [];
     return (
         <Container showLogout>
             <Heading>{en.addProfilePicture.heading}</Heading>
             <KeyboardAvoidingView style={styles.inner} behavior="padding">
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <View style={{ flex: 1, width: '100%' }}>
-                        <ProfilePictureInput />
+                    <View style={{ alignItems: 'center' }}>
+                        <ProfilePictureInput
+                            onPressDelete={() => {
+                                setImage('');
+                            }}
+                            variant="profile"
+                            image={image}
+                            initials="JK"
+                            onPressSelect={async () => {
+                                const uri = await PickImage();
+                                setImage(uri);
+                            }}
+                        />
                     </View>
                     <InputBox label={en.addProfilePicture.gender}>
                         <Gender
