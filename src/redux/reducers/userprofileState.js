@@ -150,6 +150,7 @@ const userprofileState = (state = initialState, action) => {
                         action.payload,
                     ],
                 },
+                isComplete: true,
                 loading: false,
             };
         case UPLOAD_IMAGE_FAILURE:

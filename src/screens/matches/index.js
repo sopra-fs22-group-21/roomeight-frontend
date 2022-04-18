@@ -3,13 +3,13 @@ import { Text } from 'react-native';
 import NavBar from '../../components/navbar';
 import { Container, Screen } from '../../components/theme';
 
-const Discover = ({ navigation }) => {
+const Matches = ({ navigation }) => {
     return (
         <Screen navigation={navigation} showFooter>
             <Container>
-                <Text>Discover</Text>
+                <Text>Matches</Text>
             </Container>
         </Screen>
     );
 };
-export default Discover;
+export default Matches;

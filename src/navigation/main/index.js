@@ -14,6 +14,8 @@ import CompleteSingleProfile from '../../screens/completeSingleProfile';
 import AddPictures from '../../screens/addPictures';
 import CompleteFlatProfile from '../../screens/completeFlatProfile';
 import Discover from '../../screens/discover';
+import Chat from '../../screens/chat';
+import Matches from '../../screens/matches';
 import AddProfilePicture from '../../screens/addProfilePicture';
 
 const Stack = createStackNavigator();
@@ -98,12 +100,22 @@ export default function Route() {
             <Stack.Screen
                 name="Profile"
                 component={Profile}
-                options={{ headerShown: false }}
+                options={{ headerShown: false, animationEnabled: false }}
             />
             <Stack.Screen
                 name="Discover"
                 component={Discover}
-                options={{ headerShown: false }}
+                options={{ headerShown: false, animationEnabled: false }}
+            />
+            <Stack.Screen
+                name="Matches"
+                component={Matches}
+                options={{ headerShown: false, animationEnabled: false }}
+            />
+            <Stack.Screen
+                name="Chat"
+                component={Chat}
+                options={{ headerShown: false, animationEnabled: false }}
             />
         </>
     );
