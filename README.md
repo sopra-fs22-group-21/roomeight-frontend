@@ -3,17 +3,18 @@
 https://roomeight-client.herokuapp.com/
 
 ## Prerequisites and Installation
+
 For your local development environment, you will need Node.js. You can download it [here](https://nodejs.org). All other dependencies, including React, get installed with:
 
-```npm install```
+`npm install`
 
 Run this command before you start your application for the first time. Next, you can start the app with:
 
-```expo start```
+`expo start`
 
 Now you can open [http://localhost:19002](http://localhost:19002) to view the developer tools.
 
-From there you can choose where to view your app e.g ```run in web browser``` -> [http://localhost:19006](http://localhost:19006)
+From there you can choose where to view your app e.g `run in web browser` -> [http://localhost:19006](http://localhost:19006)
 
 Notice that the page will reload if you make any edits. You will also see any lint errors in the console (use Google Chrome).
 
