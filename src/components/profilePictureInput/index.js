@@ -18,17 +18,17 @@ const pictureInput = (props) => {
                 return (
                     <Pressable onPress={props.onPressDelete}>
                         <Image
-                            style={styles.image}
+                            style={styles.imageProfile}
                             source={{ uri: props.image }}
                         />
-                        <EditBadge set={true} />
+                        <EditBadge variant={props.variant} set={true} />
                     </Pressable>
                 );
             } else {
                 return (
                     <Pressable onPress={props.onPressSelect}>
-                        <View style={styles.background}>
-                            <Text style={styles.placeholder}>
+                        <View style={styles.backgroundProfile}>
+                            <Text style={styles.placeholderProfile}>
                                 {props.initials}
                             </Text>
                         </View>
@@ -44,7 +44,7 @@ const pictureInput = (props) => {
                             style={styles.imageAdditional}
                             source={{ uri: props.image }}
                         />
-                        <EditBadge set={true} />
+                        <EditBadge variant={props.variant} set={true} />
                     </Pressable>
                 );
             } else {
@@ -55,7 +55,7 @@ const pictureInput = (props) => {
                                 {props.initials}
                             </Text>
                         </View>
-                        <EditBadge set={false} />
+                        <EditBadge variant={props.variant} set={false} />
                     </Pressable>
                 );
             }

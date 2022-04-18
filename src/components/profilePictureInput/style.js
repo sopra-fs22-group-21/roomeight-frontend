@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import Colors from '../../resources/colors';
 
 const styles = StyleSheet.create({
-    background: {
+    backgroundProfile: {
         backgroundColor: Colors.secondary300,
         display: 'flex',
         borderRadius: 100,
@@ -11,12 +11,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    placeholder: {
+    placeholderProfile: {
         letterSpacing: 5,
         fontSize: 40,
         fontFamily: 'SourceSans3Light',
     },
-    image: {
+    imageProfile: {
         width: 120,
         aspectRatio: 1,
         borderRadius: 100,
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         borderRadius: 20,
         height: 150,
-        aspectRatio: 0.6,
+        aspectRatio: 0.7,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -36,9 +36,9 @@ const styles = StyleSheet.create({
         fontFamily: 'SourceSans3Light',
     },
     imageAdditional: {
-        width: 120,
-        aspectRatio: 1,
-        borderRadius: 100,
+        height: 150,
+        aspectRatio: 0.7,
+        borderRadius: 20,
     },
 });
 
