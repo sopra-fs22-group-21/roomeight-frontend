@@ -134,7 +134,7 @@ export default function Route() {
             <Stack.Navigator
                 screenOptions={{ cardStyle: { backgroundColor: 'white' } }}
             >
-                {getUserStatus(loggedIn, isComplete)}
+                {getUserStatus()}
             </Stack.Navigator>
         </NavigationContainer>
     );
