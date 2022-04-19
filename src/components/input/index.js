@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { Box } from '../theme';
-import styles from './style';
+import styles from './styles';
 
 export const Input = (props) => (
     <Box>

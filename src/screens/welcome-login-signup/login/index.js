@@ -11,7 +11,7 @@ import {
 } from '../../../components/theme';
 import { loginUser } from '../../../redux/actions/authActions';
 import en from '../../../resources/strings/en.json';
-import styles from './style';
+import styles from './styles';
 
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();

@@ -24,11 +24,11 @@ const completeFlatprofileFailure = (error) => ({
  * @param {*} userprofile
  * @returns
  */
-export const completeFlatprofile = (userprofile) => (dispatch) => {
+export const completeFlatprofile = (flatprofile) => (dispatch) => {
     dispatch(completeFlatprofileRequest());
 
     apiClient()
-        .put('/flatprofiles', flatprofile)
+        .patch('/flatprofiles', flatprofile)
         .then((response) => {
             console.log(
                 'completeFlatprofileSuccess: ' + JSON.stringify(response.data)

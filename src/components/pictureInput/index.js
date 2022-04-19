@@ -1,6 +1,6 @@
 import { Image, Pressable, Text, View } from 'react-native';
 import EditBadge from '../editBadge';
-import styles from './style';
+import styles from './styles';
 
 /**
  * Component to select an image from the device's gallery and display it.

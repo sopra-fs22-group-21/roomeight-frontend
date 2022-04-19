@@ -9,7 +9,7 @@ import {
 import { React } from 'react';
 import { FontAwesome, Ionicons } from 'react-native-vector-icons';
 import { Box, Container } from '../theme';
-import styles from './style';
+import styles from './styles';
 
 const NavBar = ({ navigation }) => {
     const route = useRoute().name;

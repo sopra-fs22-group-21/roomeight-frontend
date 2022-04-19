@@ -118,16 +118,23 @@ export default function Route() {
             />
         </>
     );
+
+    function getUserStatus(loggedIn, isComplete) {
+        if (loggedIn) {
+            if (isComplete) {
+                return completeComponents;
+            }
+            return incompleteComponents;
+        }
+        return loggedOutComponents;
+    }
+
     return (
         <NavigationContainer>
             <Stack.Navigator
                 screenOptions={{ cardStyle: { backgroundColor: 'white' } }}
             >
-                {loggedIn
-                    ? isComplete
-                        ? completeComponents
-                        : incompleteComponents
-                    : loggedOutComponents}
+                {getUserStatus(loggedIn, isComplete)}
             </Stack.Navigator>
         </NavigationContainer>
     );

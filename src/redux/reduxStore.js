@@ -14,6 +14,6 @@ const configureStore = () => {
         composeWithDevTools(applyMiddleware(thunk))
     );
 };
-const store = configureStore();
+const reduxStore = configureStore();
 
-export default store;
+export default reduxStore;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text } from 'react-native';
-import styles from './style';
+import styles from './styles';
 
 const BasicButton = (props) => (
     <Pressable

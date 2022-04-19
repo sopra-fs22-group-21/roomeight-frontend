@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import tagIcons from '../../resources/icons/tagIcons';
 import TagElement from '../tagelement';
-import styles from './style';
+import styles from './styles';
 
 const Tags = (props) => {
     const half = Math.ceil(tagIcons.length / 2);

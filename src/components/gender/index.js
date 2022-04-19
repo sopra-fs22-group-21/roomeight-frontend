@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import genders from '../../resources/strings/genders';
-import styles from './style';
+import styles from './styles';
 
 const Gender = (props) => {
     const [index, setIndex] = useState(0);

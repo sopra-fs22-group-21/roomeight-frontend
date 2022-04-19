@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
 import { InputLabel } from '../input';
 import { Box } from '../theme';
-import styles from './style';
+import styles from './styles';
 
 const DateInput = (props) => {
     const [day, setDay] = useState(

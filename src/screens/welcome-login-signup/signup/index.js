@@ -14,7 +14,7 @@ import {
 import Userprofile from '../../../models/Userprofile';
 import { postUserprofile } from '../../../redux/actions/postUserprofile';
 import en from '../../../resources/strings/en.json';
-import styles from './style';
+import styles from './styles';
 
 const Signup = ({ navigation }) => {
     const [user, setUser] = useState(new Userprofile());

@@ -1,4 +1,3 @@
-import { HStack } from 'native-base';
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {

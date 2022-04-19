@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { SecondaryButton } from '../../../components/button';
 import { NavigationButtons } from '../../../components/navigationButtons';
 import {
@@ -13,9 +12,6 @@ import {
 import en from '../../../resources/strings/en.json';
 
 const ChooseStatus = ({ navigation }) => {
-    const dispatch = useDispatch();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     return (
         <Container showLogout>
             <Heading>{en.chooseStatus.heading}</Heading>

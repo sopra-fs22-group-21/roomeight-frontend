@@ -8,7 +8,7 @@ import Tags from '../../../components/tags';
 import { Container, Heading } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
 import genders from '../../../resources/strings/genders';
-import styles from './style';
+import styles from './styles';
 
 const CompleteSingleProfile = ({ navigation }) => {
     const [moveInDateValid, setmoveInDateValid] = useState(null);

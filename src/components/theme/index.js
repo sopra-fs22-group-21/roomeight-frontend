@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/actions/authActions';
 import { SecondaryButton } from '../button';
 import NavBar from '../navbar';
-import styles from './style';
+import styles from './styles';
 
 export const Heading = (props) => {
     return props.hidden ? (

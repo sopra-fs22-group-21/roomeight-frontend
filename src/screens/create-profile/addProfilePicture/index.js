@@ -10,7 +10,7 @@ import { PickImage } from '../../../helper/imageHandler';
 import { addPictureReference } from '../../../redux/actions/addPictureReference';
 import en from '../../../resources/strings/en.json';
 import genders from '../../../resources/strings/genders';
-import styles from './style';
+import styles from './styles';
 
 const AddProfilePicture = ({ navigation }) => {
     const [gender, setGender] = useState(genders.notSet);

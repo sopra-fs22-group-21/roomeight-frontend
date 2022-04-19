@@ -8,7 +8,7 @@ import { NavigationButtons } from '../../../components/navigationButtons';
 import Tags from '../../../components/tags';
 import { Box, Container, Heading } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
-import styles from './style';
+import styles from './styles';
 
 //TODO: backend, regex
 

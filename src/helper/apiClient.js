@@ -2,7 +2,7 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 import { auth } from '../../firebase/firebase-config';
 
-const API_URL = (env = Constants.manifest.releaseChannel) => {
+const API_URL = (_env = Constants.manifest.releaseChannel) => {
     //if (__DEV__) {
     //   return 'https://b8585bf5-1579-433d-aec8-d6ad6bdfb349.mock.pstmn.io';
     //} else {
@@ -14,8 +14,7 @@ async function userToken() {
     const user = auth.currentUser;
     if (user) {
         console.log('logged in');
-        const token = await user.getIdToken();
-        return token;
+        return await user.getIdToken();
     } else {
         console.log('no user');
         return null;
