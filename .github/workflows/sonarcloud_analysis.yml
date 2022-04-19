@@ -5,7 +5,7 @@ on:
         branches:
             - main 
             - dev
-            - *-feature # every branch following <name>-feature naming convention
+            - '**-feature' # every branch following <name>-feature naming convention
 
 jobs:
     build:
