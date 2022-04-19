@@ -31,7 +31,7 @@ jobs:
                   EOF
 
             # login with .netrc file
-            - run: heroku config:set USE_NPM_INSTALL=true
+            - run: heroku config:set USE_NPM_INSTALL=true -a $HEROKU_APP_NAME 
             - run: heroku login
 
             # deploy code
