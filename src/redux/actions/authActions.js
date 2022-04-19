@@ -58,7 +58,7 @@ export const loginUser = (email, password) => (dispatch) => {
  */
 export const userAuthStateListener = () => (dispatch) => {
     dispatch({
-        type: LOADING_STATE,
+        type: Constants.LOADING_STATE,
     });
     onAuthStateChanged(auth, (user) => {
         if (user) {
