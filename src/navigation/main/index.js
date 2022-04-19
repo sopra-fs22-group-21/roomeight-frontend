@@ -119,7 +119,7 @@ export default function Route() {
         </>
     );
 
-    function getUserStatus(loggedIn, isComplete) {
+    function getUserStatus() {
         if (loggedIn) {
             if (isComplete) {
                 return completeComponents;

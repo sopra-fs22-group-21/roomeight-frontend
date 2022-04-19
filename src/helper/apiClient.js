@@ -14,7 +14,7 @@ async function userToken() {
     const user = auth.currentUser;
     if (user) {
         console.log('logged in');
-        return await user.getIdToken();
+        return user.getIdToken();
     } else {
         console.log('no user');
         return null;
