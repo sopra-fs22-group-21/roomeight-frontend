@@ -28,9 +28,9 @@ export default function Route() {
     }; 
     
 */
-    const { loading, userProfile, loggedIn, isComplete, error } = useSelector(
-        (state) => state.userprofileState
-    );
+    const { auth, loggedIn } = useSelector((state) => state.authState);
+    const loading = useSelector((state) => state.loadingState);
+    const { userprofile } = useSelector((state) => state.userprofileState);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -38,12 +38,12 @@ export default function Route() {
         dispatch(userAuthStateListener());
     }, []);
 
-    if (loading) {
+    /* if (loading) {
         return <M8Loader height={200} width={200} />;
-    }
+    } */
     console.log('logged in: ' + loggedIn);
-    console.log('user profile: ' + userProfile);
-    console.log('complete: ' + isComplete);
+    console.log('user profile: ' + userprofile);
+    console.log('complete: ' + userprofile.isComplete);
 
     const loggedOutComponents = (
         <>
@@ -121,7 +121,7 @@ export default function Route() {
 
     function getUserStatus() {
         if (loggedIn) {
-            if (isComplete) {
+            if (userprofile.isComplete) {
                 return completeComponents;
             }
             return incompleteComponents;

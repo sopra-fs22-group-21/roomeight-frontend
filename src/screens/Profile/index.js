@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
 import { Container, Screen } from '../../components/theme';
 import { logoutUser } from '../../redux/actions/authActions';
-import { getUserProfiles } from '../../redux/actions/getUserprofiles';
+import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
@@ -12,19 +12,19 @@ const Profile = ({ navigation }) => {
     }, []);
 
     const dispatch = useDispatch();
-    const { loading, userProfile, loggedIn, isComplete, error } = useSelector(
-        (state) => state.userprofileState
-    );
+    const { userprofile } = useSelector((state) => state.userprofileState);
+    const loading = useSelector((state) => state.loadingState);
 
     if (!loading) {
         console.log('loading: ' + loading);
-        console.log(userProfile);
+        console.log(userprofile);
     }
     return (
         <Screen navigation={navigation} showFooter>
             <Container>
-                <Text>UserId</Text>
-                <Text>{!loading && userProfile.userId}</Text>
+                <Text>
+                    {userprofile.firstName + ' ' + userprofile.lastName}
+                </Text>
                 <PrimaryButton
                     onPress={() => {
                         dispatch(logoutUser());
@@ -34,7 +34,7 @@ const Profile = ({ navigation }) => {
                 </PrimaryButton>
                 <PrimaryButton
                     onPress={() => {
-                        dispatch(getUserProfiles());
+                        dispatch(getCurrentUserprofile(auth.uid));
                     }}
                 >
                     get

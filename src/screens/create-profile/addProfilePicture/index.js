@@ -1,23 +1,31 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Gender from '../../../components/gender';
 import { Input, InputBox } from '../../../components/input';
 import { NavigationButtons } from '../../../components/navigationButtons';
 import PictureInput from '../../../components/pictureInput';
 import { Container, Heading } from '../../../components/theme';
 import { PickImage } from '../../../helper/imageHandler';
-import { addPictureReference } from '../../../redux/actions/addPictureReference';
+import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import en from '../../../resources/strings/en.json';
 import genders from '../../../resources/strings/genders';
 import styles from './styles';
 
 const AddProfilePicture = ({ navigation }) => {
     const [gender, setGender] = useState(genders.notSet);
-    const [user, setDescription] = useState(null);
+    const [description, setDescription] = useState(null);
     const [image, setImage] = useState('');
     const dispatch = useDispatch();
+
+    const { userprofile } = useSelector((state) => state.userprofileState);
     let selectedTags = [];
+
+    function getInitials() {
+        let firstLetter = userprofile.firstName.charAt(0);
+        let lastLetter = userprofile.lastName.charAt(0);
+        return firstLetter + lastLetter;
+    }
 
     return (
         <Container showLogout>
@@ -31,7 +39,7 @@ const AddProfilePicture = ({ navigation }) => {
                             }}
                             variant="profile"
                             image={image}
-                            initials="JK"
+                            initials={getInitials()}
                             onPressSelect={async () => {
                                 const uri = await PickImage();
                                 setImage(uri);
@@ -51,12 +59,33 @@ const AddProfilePicture = ({ navigation }) => {
                         label={en.addProfilePicture.whoIAm}
                         multiline
                         onChangeText={(text) =>
-                            setDescription({ ...user, description: text })
+                            setDescription({
+                                ...description,
+                                description: text,
+                            })
                         }
                     />
                     <NavigationButtons
                         onPressNext={() => {
-                            dispatch(addPictureReference(image));
+                            console.log(image);
+                            if (image) {
+                                const attributes = {
+                                    localPictureReference: [image],
+                                    gender: gender,
+                                    ...description,
+                                };
+                            } else {
+                                const attributes = {
+                                    gender: gender,
+                                    ...description,
+                                };
+                                dispatch(
+                                    setTransitAttributes(
+                                        attributes,
+                                        'userprofile'
+                                    )
+                                );
+                            }
                             navigation.navigate('ChooseStatus');
                         }}
                     />

@@ -4,42 +4,35 @@ import {
     signOut,
 } from 'firebase/auth';
 import { auth } from '../../../firebase/firebase-config';
-import {
-    LOADING_STATE,
-    LOGIN_USER_FAILURE,
-    LOGIN_USER_REQUEST,
-    LOGIN_USER_SUCCESS,
-    LOGOUT_USER_FAILURE,
-    LOGOUT_USER_REQUEST,
-    LOGOUT_USER_SUCCESS,
-} from '../constants';
+import * as Constants from '../constants';
+import { getCurrentUserprofile } from './getUserprofiles';
 
 // intermediary actions for redux
 
 const loginUserRequest = () => ({
-    type: LOGIN_USER_REQUEST,
+    type: Constants.LOGIN_USER_REQUEST,
 });
 
 const loginUserSuccess = (user) => ({
-    type: LOGIN_USER_SUCCESS,
+    type: Constants.LOGIN_USER_SUCCESS,
     payload: user,
 });
 
 const loginUserFailure = (error) => ({
-    type: LOGIN_USER_FAILURE,
+    type: Constants.LOGIN_USER_FAILURE,
     payload: error,
 });
 
 const logoutUserRequest = () => ({
-    type: LOGOUT_USER_REQUEST,
+    type: Constants.LOGOUT_USER_REQUEST,
 });
 
 const logoutUserSuccess = () => ({
-    type: LOGOUT_USER_SUCCESS,
+    type: Constants.LOGOUT_USER_SUCCESS,
 });
 
 const logoutUserFailure = (error) => ({
-    type: LOGOUT_USER_FAILURE,
+    type: Constants.LOGOUT_USER_FAILURE,
     payload: error,
 });
 
@@ -71,6 +64,7 @@ export const userAuthStateListener = () => (dispatch) => {
         if (user) {
             //user is logged in
             console.log('logged in');
+            dispatch(getCurrentUserprofile(user.uid));
             dispatch(loginUserSuccess(user));
         } else {
             //no user logged in

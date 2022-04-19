@@ -1,25 +1,47 @@
 import { ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase-config';
-import {
-    UPLOAD_IMAGE_FAILURE,
-    UPLOAD_IMAGE_REQUEST,
-    UPLOAD_IMAGE_SUCCESS,
-} from '../constants';
+import * as Constants from '../constants';
 
-const uploadImageRequest = () => ({
-    type: UPLOAD_IMAGE_REQUEST,
-});
+/**
+ * dispatches the correct type
+ *
+ * @param {'userprofile' | 'flatprofile'} profileType - either userprofile or flatprofile
+ * @dispatches one of {@link Constants.UPLOAD_IMAGE_REQUEST_USERPROFILE} | {@link Constants.UPLOAD_IMAGE_REQUEST_FLATPROFILE}
+ */
+const uploadImageRequest = (profileType) =>
+    profileType === 'userprofile'
+        ? {
+              type: Constants.UPLOAD_IMAGE_REQUEST_USERPROFILE,
+          }
+        : { type: Constants.UPLOAD_IMAGE_REQUEST_FLATPROFILE };
 
-const uploadImageSuccess = (url) => ({
-    type: UPLOAD_IMAGE_SUCCESS,
-    payload: url,
-});
+/**
+ * dispatches the correct type
+ *
+ * @param {'userprofile' | 'flatprofile'} profileType - either userprofile or flatprofile
+ * @dispatches one of {@link Constants.UPLOAD_IMAGE_SUCCESS_USERPROFILE} | {@link Constants.UPLOAD_IMAGE_SUCCESS_FLATPROFILE}
+ */
+const uploadImageSuccess = (url, profileType) =>
+    profileType === 'userprofile'
+        ? {
+              type: Constants.UPLOAD_IMAGE_SUCCESS_USERPROFILE,
+              payload: url,
+          }
+        : { type: Constants.UPLOAD_IMAGE_SUCCESS_FLATPROFILE, payload: url };
 
-const uploadImageFailure = (error) => ({
-    type: UPLOAD_IMAGE_FAILURE,
-    payload: error,
-});
-
+/**
+ * dispatches the correct type
+ *
+ * @param {'userprofile' | 'flatprofile'} profileType - either userprofile or flatprofile
+ * @dispatches one of {@link Constants.UPLOAD_IMAGE_FAILURE_USERPROFILE} | {@link Constants.UPLOAD_IMAGE_FAILURE_FLATPROFILE}
+ */
+const uploadImageFailure = (error, profileType) =>
+    profileType === 'userprofile'
+        ? {
+              type: Constants.UPLOAD_IMAGE_FAILURE_USERPROFILE,
+              payload: error,
+          }
+        : { type: Constants.UPLOAD_IMAGE_FAILURE_FLATPROFILE, payload: error };
 /**
  * Uploads an image to firebase and writes the download url to the redux store.
  *
@@ -30,13 +52,13 @@ const uploadImageFailure = (error) => ({
  */
 export const uploadImages =
     (uriList, profileType) => async (dispatch, getState) => {
-        dispatch(uploadImageRequest());
+        dispatch(uploadImageRequest(profileType));
         let filteredList = uriList.filter((uri) => uri !== '');
         let count = 0;
         console.log(filteredList, count);
         filteredList.forEach(async (uri) => {
             count++;
-            const uid = getState().userprofileState.userProfile.auth.uid;
+            const uid = getState().authState.auth.uid;
             const refPath = `${profileType}s/${uid}/profilePicture${count}.jpg`;
             const storageRef = ref(storage, refPath);
 
@@ -57,18 +79,11 @@ export const uploadImages =
             uploadTask.on('state_changed', {
                 complete: () => {
                     console.log('upload complete!');
-                    /* getDownloadURL(storageRef).then((url) => {
-                        console.log('download url: ', url);
-                        dispatch(uploadImageSuccess(url));
-                    }).catch((error) => {
-                        console.log('error getting download url: ', error);
-                        dispatch(uploadImageFailure(error));
-                    }); */
-                    dispatch(uploadImageSuccess(refPath));
+                    dispatch(uploadImageSuccess(refPath, profileType));
                 },
                 error: (error) => {
                     console.log(error);
-                    dispatch(uploadImageFailure(error));
+                    dispatch(uploadImageFailure(error, profileType));
                 },
             });
         });

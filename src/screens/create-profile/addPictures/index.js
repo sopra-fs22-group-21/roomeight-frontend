@@ -11,11 +11,11 @@ import { uploadImages } from '../../../redux/actions/uploadImage';
 import en from '../../../resources/strings/en.json';
 
 const AddPictures = ({ navigation }) => {
-    const localPictureReferences = useSelector(
-        (state) => state.userprofileState.userProfile.localPictureReference
+    const { transitUserprofile } = useSelector((state) => state.transitState);
+    console.log(transitUserprofile.localPictureReference);
+    const [images, setImages] = useState(
+        transitUserprofile.localPictureReference
     );
-    console.log(localPictureReferences);
-    const [images, setImages] = useState(localPictureReferences);
 
     const dispatch = useDispatch();
 

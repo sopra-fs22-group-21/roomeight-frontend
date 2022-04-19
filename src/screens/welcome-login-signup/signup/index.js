@@ -30,9 +30,7 @@ const Signup = ({ navigation }) => {
     const phoneRegex =
         /(\b(0041|0)|\B\+41)(\s?\(0\))?(\s)?[1-9]{2}(\s)?[0-9]{3}(\s)?[0-9]{2}(\s)?[0-9]{2}\b/;
 
-    const { loading, userProfile, loggedIn, isComplete, error } = useSelector(
-        (state) => state.userprofileState
-    );
+    const { userprofile } = useSelector((state) => state.userprofileState);
     const dispatch = useDispatch();
 
     return (
@@ -161,7 +159,7 @@ const Signup = ({ navigation }) => {
                                 dispatch(postUserprofile(user));
                                 console.log('posting');
                                 console.log(error);
-                                console.log(userProfile);
+                                console.log(userprofile);
                             }}
                         >
                             Sign Up

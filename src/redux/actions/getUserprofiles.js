@@ -1,37 +1,36 @@
 import apiClient from '../../helper/apiClient';
-import {
-    GET_USERS_FAILURE,
-    GET_USERS_REQUEST,
-    GET_USERS_SUCCESS,
-} from '../constants';
+import * as Constants from '../constants';
 
-const getUserProfilesRequest = () => ({
-    type: GET_USERS_REQUEST,
+const getCurrentUserprofileRequest = () => ({
+    type: Constants.GET_CURRENT_USER_REQUEST,
 });
 
-const getUserProfilesSuccess = (userProfiles) => ({
-    type: GET_USERS_SUCCESS,
-    payload: userProfiles,
+const getCurrentUserprofileSuccess = (response) => ({
+    type: Constants.GET_CURRENT_USER_SUCCESS,
+    payload: response,
 });
 
-const getUserProfilesFailure = (error) => ({
-    type: GET_USERS_FAILURE,
+const getCurrentUserprofileFailure = (error) => ({
+    type: Constants.GET_CURRENT_USER_FAILURE,
     payload: error,
 });
 
 /**
- * to be done!
- * @returns
+ * makes a request to the backend api to get the current userprofile
+ * @params {string} userId the uid of a user to set as pathvariable
+ * @dispatches {@link getCurrentUserprofileRequest} on request start
+ * @dispatches {@link getCurrentUserprofileSuccess} on request success with userprofile payload
+ * @dispatches {@link getCurrentUserprofileFailure} on request failure with error payload
  */
-export const getUserProfiles = () => (dispatch) => {
-    dispatch(getUserProfilesRequest());
+export const getCurrentUserprofile = (userId) => (dispatch) => {
+    dispatch(getCurrentUserprofileRequest());
 
     apiClient()
-        .get('/userprofiles')
+        .get(`/userprofiles/${userId}`)
         .then((response) => {
-            dispatch(getUserProfilesSuccess(response.data));
+            dispatch(getCurrentUserprofileSuccess(response.data));
         })
         .catch((error) => {
-            dispatch(getUserProfilesFailure(error));
+            dispatch(getCurrentUserprofileFailure(error));
         });
 };

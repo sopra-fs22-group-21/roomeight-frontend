@@ -9,9 +9,13 @@ import {
     TextBlock,
     Title,
 } from '../../../components/theme';
+import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
+import { useDispatch } from 'react-redux';
 import en from '../../../resources/strings/en.json';
 
 const ChooseStatus = ({ navigation }) => {
+    const dispatch = useDispatch();
+
     return (
         <Container showLogout>
             <Heading>{en.chooseStatus.heading}</Heading>
@@ -20,18 +24,30 @@ const ChooseStatus = ({ navigation }) => {
             <Inner>
                 <Box>
                     <SecondaryButton
-                        onPress={() =>
-                            navigation.navigate('CompleteSingleProfile')
-                        }
+                        onPress={() => {
+                            dispatch(
+                                setTransitAttributes(
+                                    { isSearchingRoom: true },
+                                    'userprofile'
+                                )
+                            );
+                            navigation.navigate('CompleteSingleProfile');
+                        }}
                     >
                         {en.chooseStatus.room}
                     </SecondaryButton>
                 </Box>
                 <Box>
                     <SecondaryButton
-                        onPress={() =>
-                            navigation.navigate('CompleteFlatProfile')
-                        }
+                        onPress={() => {
+                            dispatch(
+                                setTransitAttributes(
+                                    { isSearchingAdvertisingRoom: true },
+                                    'userprofile'
+                                )
+                            );
+                            navigation.navigate('CompleteFlatProfile');
+                        }}
                     >
                         {en.chooseStatus.roommate}
                     </SecondaryButton>
