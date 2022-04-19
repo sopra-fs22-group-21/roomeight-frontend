@@ -1,0 +1,23 @@
+name: sonarcloud analysis
+
+on:
+    push:
+        branches:
+            - main 
+            - dev
+            - *-feature # every branch following <name>-feature naming convention
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # auto-generated
+
+        steps:
+            # checkout repository code
+            - uses: actions/checkout@v1
+
+            # use github action to scan repository with sonarcloud
+            - name: SonarCloud Scan
+              uses: sonarsource/sonarcloud-github-action@master

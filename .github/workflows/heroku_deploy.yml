@@ -1,16 +1,14 @@
-name: Deploy Project
+name: Deploy Project to Heroku
 
 on:
     push:
         branches:
-            - main
+            - dev
 
 jobs:
     build:
         runs-on: ubuntu-latest
         env:
-            # uncomment both tokens for assignment 2-4
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # auto-generated
             HEROKU_KEY: ${{ secrets.HEROKU_API_KEY }}
             HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
@@ -19,10 +17,6 @@ jobs:
         steps:
             # checkout repository code
             - uses: actions/checkout@v1
-
-            # uncomment for assignment 2-4
-            - name: SonarCloud Scan
-              uses: sonarsource/sonarcloud-github-action@master
 
             # create .netrc file for heroku authentication
             # https://devcenter.heroku.com/articles/authentication
