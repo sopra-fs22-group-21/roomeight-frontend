@@ -15,6 +15,11 @@ import {
 import { logoutUser } from '../../redux/actions/authActions';
 import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 import styles from './styles';
+import { ScrollView } from 'react-native';
+import { InputLabel } from '../../components/input';
+import en from '../../resources/strings/en.json';
+import Tags from '../../components/tags';
+import modes from '../../resources/strings/modes';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
@@ -25,26 +30,30 @@ const Profile = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const loading = useSelector((state) => state.loadingState);
     const [index, setIndex] = useState(0);
+/*     const [mode, setMode] = useState(modes.single);
+    const modeOptions = [modes.single, modes.flat]; */
 
     if (!loading) {
         console.log('loading: ' + loading);
         console.log(userprofile);
     }
     return (
-        <Screen navigation={navigation} showFooter>
-            <Container>
+        <Screen navigation={navigation}>
+            <Container style={styles.biocontainer}>
                 <Name>
                     {userprofile.firstName + ' ' + userprofile.lastName}
                 </Name>
                 <Box style={styles.overview}>
                     <ProfilePicture />
                     <Container style={styles.bio}>
-                        <Text style={styles.text}>Hello friends </Text>
+                        <Text style={styles.text}>{userprofile.biography}</Text>
                     </Container>
                 </Box>
                 <Tab
                     value={index}
-                    onChange={(e) => setIndex(e)}
+                    onChange={(e) => {
+                        setIndex(e);
+                    }}
                     indicatorStyle={styles.indicator}
                     variant="primary"
                 >
@@ -67,22 +76,63 @@ const Profile = ({ navigation }) => {
                         }}
                     />
                 </Tab>
-
-                <PrimaryButton
-                    onPress={() => {
-                        dispatch(logoutUser());
-                    }}
-                >
-                    Logout
-                </PrimaryButton>
-                <PrimaryButton
-                    onPress={() => {
-                        dispatch(getCurrentUserprofile(auth.uid));
-                    }}
-                >
-                    get
-                </PrimaryButton>
             </Container>
+            {index === 0 ? (
+                <Container style={styles.container}>
+                    <ScrollView>
+                        <Box style={styles.scrolling}>
+                            <InputLabel>
+                            Address
+                            </InputLabel>
+                            <InputLabel>
+                                {en.singleProfile.description}
+                            </InputLabel>
+                            <Text style={styles.text}>
+                                {userprofile.description}
+                            </Text>
+                            <InputLabel>{en.singleProfile.tags}</InputLabel>
+                            <Tags />
+                        </Box>
+
+                        {/* <PrimaryButton
+                        onPress={() => {
+                            dispatch(logoutUser());
+                        }}
+                    >
+                        Logout
+                    </PrimaryButton>
+                    <PrimaryButton
+                        onPress={() => {
+                            dispatch(getCurrentUserprofile(auth.uid));
+                        }}
+                    >
+                        get
+                    </PrimaryButton> */}
+                    </ScrollView>
+                </Container>
+            ) : (
+                <Container style={styles.container}>
+                    <ScrollView>
+                        <Box style={styles.scrolling}>
+                            <InputLabel>
+                            {en.flatProfile.moveIn}
+                            </InputLabel>
+                            <Text style={styles.text}>
+                                {userprofile.moveInDate}
+                                {userprofile.moveOutDate}
+                            </Text>
+                            <InputLabel>
+                                {en.singleProfile.description}
+                            </InputLabel>
+                            <Text style={styles.text}>
+                                {userprofile.description}
+                            </Text>
+                            <InputLabel>{en.singleProfile.tags}</InputLabel>
+                            <Tags />
+                        </Box>
+                    </ScrollView>
+                </Container>
+            )}
         </Screen>
     );
 };
