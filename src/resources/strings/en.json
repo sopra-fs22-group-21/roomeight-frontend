@@ -87,12 +87,11 @@
         "nrRoommates": "Number of roommates",
         "nrBathrooms": "Total Bathrooms"
     },
-    "singleProfile":{
+    "singleProfile": {
         "description": "Description",
         "tags": "Tags"
     },
-    "flatProfile":{
+    "flatProfile": {
         "moveIn": "Move-In"
     }
-
 }

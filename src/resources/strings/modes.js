@@ -1,5 +1,5 @@
 const modes = {
     single: 'SINGLEPROFILE',
-    flat: 'FLATPROFILE'
+    flat: 'FLATPROFILE',
 };
 export default modes;

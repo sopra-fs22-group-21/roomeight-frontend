@@ -30,7 +30,7 @@ const Profile = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const loading = useSelector((state) => state.loadingState);
     const [index, setIndex] = useState(0);
-/*     const [mode, setMode] = useState(modes.single);
+    /*     const [mode, setMode] = useState(modes.single);
     const modeOptions = [modes.single, modes.flat]; */
 
     if (!loading) {
@@ -81,9 +81,7 @@ const Profile = ({ navigation }) => {
                 <Container style={styles.container}>
                     <ScrollView>
                         <Box style={styles.scrolling}>
-                            <InputLabel>
-                            Address
-                            </InputLabel>
+                            <InputLabel>Address</InputLabel>
                             <InputLabel>
                                 {en.singleProfile.description}
                             </InputLabel>
@@ -114,9 +112,7 @@ const Profile = ({ navigation }) => {
                 <Container style={styles.container}>
                     <ScrollView>
                         <Box style={styles.scrolling}>
-                            <InputLabel>
-                            {en.flatProfile.moveIn}
-                            </InputLabel>
+                            <InputLabel>{en.flatProfile.moveIn}</InputLabel>
                             <Text style={styles.text}>
                                 {userprofile.moveInDate}
                                 {userprofile.moveOutDate}
