@@ -3,7 +3,7 @@ const styles = StyleSheet.create({
     heading: {
         fontFamily: 'SourceSans3Bold',
         fontSize: 42,
-        lineHeight: 45,
+        lineHeight: 50,
         color: '#404040', //true gray,
     },
     title: {

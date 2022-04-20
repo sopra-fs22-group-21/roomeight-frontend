@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
-import { ProfilePicture } from '../../components/pictureRender';
+import { ProfilePicture } from '../../components/profilePicture';
 import {
     Container,
     Name,
