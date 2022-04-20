@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         padding: 0,
-        height: '100%'
+        height: '100%',
     },
 
     name: {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         fontSize: 26,
         lineHeight: 30,
         color: '#404040',
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
 });
 

@@ -75,8 +75,6 @@ export const Screen = (props) => {
 
 export const Name = (props) => (
     <Box>
-        <Text style={{ ...styles.name, ...props.style }}>
-            {props.children}
-        </Text>
+        <Text style={{ ...styles.name, ...props.style }}>{props.children}</Text>
     </Box>
 );

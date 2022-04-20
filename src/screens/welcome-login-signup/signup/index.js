@@ -10,7 +10,7 @@ import {
     Heading,
     TextBlock,
     Title,
-    Screen
+    Screen,
 } from '../../../components/theme';
 import Userprofile from '../../../models/Userprofile';
 import { postUserprofile } from '../../../redux/actions/postUserprofile';
