@@ -11,35 +11,38 @@ const NavBar = ({ navigation }) => {
     const route = useRoute().name;
     console.log(route);
 
-    const discoverIcon = <Icon
-        style={styles.icon}
-        name="search"
-        size={28}
-        color={'white'}
-    />
+    const discoverIcon = (
+        <Icon style={styles.icon} name="search" size={28} color={'white'} />
+    );
 
-    const matchesIcon = <Icon
-        style={styles.icon}
-        name="favorite-outline"
-        size={28}
-        color={'white'}
-    />
+    const matchesIcon = (
+        <Icon
+            style={styles.icon}
+            name="favorite-outline"
+            size={28}
+            color={'white'}
+        />
+    );
 
-    const chatIcon = <Icon 
-        style={styles.icon}
-        name="chat-outline" 
-        size={28}
-        type='material-community'
-        color={'white'}
-    />
+    const chatIcon = (
+        <Icon
+            style={styles.icon}
+            name="chat-outline"
+            size={28}
+            type="material-community"
+            color={'white'}
+        />
+    );
 
-    const profileIcon = <Icon
-        style={styles.icon}
-        name="person-outline"
-        size={28}
-        color={'white'}
-    />
-    const active = <View style={styles.active}/>
+    const profileIcon = (
+        <Icon
+            style={styles.icon}
+            name="person-outline"
+            size={28}
+            color={'white'}
+        />
+    );
+    const active = <View style={styles.active} />;
     return (
         <View style={styles.container}>
             <Pressable onPress={() => navigation.navigate('Discover')}>
@@ -58,8 +61,7 @@ const NavBar = ({ navigation }) => {
                 {profileIcon}
                 {route === 'Profile' ? active : null}
             </Pressable>
-        
         </View>
-       );
+    );
 };
 export default NavBar;

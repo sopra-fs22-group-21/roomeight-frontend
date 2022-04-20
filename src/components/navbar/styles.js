@@ -12,10 +12,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         height: 60,
         backgroundColor: colors.primary700,
-        opacity: 0.7
+        opacity: 0.7,
     },
-    icon: {
-    },
+    icon: {},
     active: {
         backgroundColor: 'white',
         borderRadius: 1000,

@@ -6,12 +6,18 @@ import { Container, Heading, Screen } from '../../components/theme';
 
 const Discover = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
-    console.log("Jordi: "+JSON.stringify(userprofile))
+    console.log('Jordi: ' + JSON.stringify(userprofile));
     return (
         <Screen navigation={navigation} showFooter>
             <Container>
                 <Heading>Discover</Heading>
-                <ProfilePicture image={(userprofile.pictureReference.length>0) ? userprofile.pictureReference[0] : null} />
+                <ProfilePicture
+                    image={
+                        userprofile.pictureReference.length > 0
+                            ? userprofile.pictureReference[0]
+                            : null
+                    }
+                />
             </Container>
         </Screen>
     );
