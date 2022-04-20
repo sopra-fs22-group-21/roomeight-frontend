@@ -4,13 +4,10 @@ import { useSelector } from 'react-redux';
 import { Container, Screen } from '../../components/theme';
 
 const Chat = ({ navigation }) => {
-
-    const chats = useSelector(state => state.chatState.chats);
+    const chats = useSelector((state) => state.chatState.chats);
 
     const renderItem = ({ item }) => {
-        return (
-            <ChatListItem chat={item}/>
-        );
+        return <ChatListItem chat={item} />;
     };
 
     return (
