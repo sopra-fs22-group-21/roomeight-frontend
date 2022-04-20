@@ -72,3 +72,11 @@ export const Screen = (props) => {
         </View>
     );
 };
+
+export const Name = (props) => (
+    <Box>
+        <Text style={{ ...styles.name, ...props.style }}>
+            {props.children}
+        </Text>
+    </Box>
+);

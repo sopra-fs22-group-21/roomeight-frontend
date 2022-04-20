@@ -43,6 +43,15 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         padding: 0,
+        height: '100%'
+    },
+
+    name: {
+        fontFamily: 'SourceSans3Bold',
+        fontSize: 26,
+        lineHeight: 30,
+        color: '#404040',
+        alignSelf: 'center'
     },
 });
 

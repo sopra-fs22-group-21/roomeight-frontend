@@ -21,11 +21,11 @@ const AddProfilePicture = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     let selectedTags = [];
 
-    function getInitials() {
+    /* function getInitials() {
         let firstLetter = userprofile.firstName.charAt(0);
         let lastLetter = userprofile.lastName.charAt(0);
         return firstLetter + lastLetter;
-    }
+    } */
 
     return (
         <Container showLogout>
@@ -39,7 +39,7 @@ const AddProfilePicture = ({ navigation }) => {
                             }}
                             variant="profile"
                             image={image}
-                            initials={getInitials()}
+                            //initials={getInitials()}
                             onPressSelect={async () => {
                                 const uri = await PickImage();
                                 setImage(uri);

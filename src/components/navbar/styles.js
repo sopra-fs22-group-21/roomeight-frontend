@@ -2,17 +2,16 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        position: 'absolute',
         padding: 0,
-        height: 40,
+        height: '100%',
         left: 0,
         right: 0,
-        height: 80,
+        bottom: 0,
     },
     box: {
         flex: 1,
         width: '100%',
-        maxWidth: '100%',
+        height: '100%',
         alignSelf: 'center',
         color: 'black',
     },
@@ -20,10 +19,9 @@ const styles = StyleSheet.create({
         color: '#404040',
         alignItems: 'center',
         padding: 30,
-        height: 90,
+        height: 2,
         left: 0,
         right: 0,
-        height: 80,
     },
 });
 

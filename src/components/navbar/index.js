@@ -10,24 +10,21 @@ import { React } from 'react';
 import { FontAwesome, Ionicons } from 'react-native-vector-icons';
 import { Box, Container } from '../theme';
 import styles from './styles';
+import { NavigationContainer } from '@react-navigation/native';
 
 const NavBar = ({ navigation }) => {
     const route = useRoute().name;
     console.log(route);
 
     return (
-        <NativeBaseProvider>
-            <Container style={styles.container} />
+        <NativeBaseProvider style={styles.container}>
             <Box
                 style={styles.box}
                 flex={1}
                 bg="white"
-                safeAreaTop
                 width="100%"
-                maxW="300px"
                 alignSelf="center"
             >
-                <Center flex={1}></Center>
                 <HStack
                     bg="#0E7490"
                     alignItems="center"
