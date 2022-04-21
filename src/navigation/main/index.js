@@ -2,9 +2,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import M8Loader from '../../../assets/logo/M8Loader';
 import { userAuthStateListener } from '../../redux/actions/authActions';
+import {
+    chatMemberShipListener,
+    chatInfoListener,
+} from '../../redux/actions/chatActions';
 import Chat from '../../screens/chat';
+import Chatroom from '../../screens/chatRoom';
 import AddPictures from '../../screens/create-profile/addPictures';
 import AddProfilePicture from '../../screens/create-profile/addProfilePicture';
 import ChooseStatus from '../../screens/create-profile/chooseStatus';
@@ -114,6 +118,11 @@ export default function Route() {
             <Stack.Screen
                 name="Chat"
                 component={Chat}
+                options={{ headerShown: false, animationEnabled: false }}
+            />
+            <Stack.Screen
+                name="ChatRoom"
+                component={Chatroom}
                 options={{ headerShown: false, animationEnabled: false }}
             />
         </>

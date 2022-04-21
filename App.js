@@ -1,4 +1,5 @@
 import { useFonts } from 'expo-font';
+import { NativeBaseProvider } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import Route from './src/navigation/main';
@@ -27,9 +28,11 @@ export default function App() {
     if (!loaded) return null;
 
     return (
-        <Provider store={reduxStore}>
-            <Route />
-        </Provider>
+        <NativeBaseProvider>
+            <Provider store={reduxStore}>
+                <Route />
+            </Provider>
+        </NativeBaseProvider>
     );
 }
 
