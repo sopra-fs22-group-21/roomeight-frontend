@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { View, Text, Pressable, TouchableOpacity } from 'react-native';
+import { View, Text, Pressable, TouchableOpacity, Image } from 'react-native';
 import { Box, NormalText, PinkBackground, TextBlock, Title } from '../theme';
 import { ProfilePicture } from '../profilePicture';
 import en from '../../resources/strings/en.json';
@@ -9,27 +9,25 @@ import Tags from '../tags';
 import tags from '../../resources/strings/tags';
 import tagIcons from '../../resources/icons/tagIcons';
 import { InputBox, InputLabel } from '../input';
-import Swiper from 'react-native-web-swiper';
 import { SharedElement } from 'react-navigation-shared-element';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { ImageGallery } from '../imageGallery';
+import Carousel from 'react-native-snap-carousel';
 
 export const ImageCard = (props) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     return (
-        <PinkBackground>
-            <Box />
-
-            <TouchableOpacity style={styles.name} onPress={props.onPress}>
+        <PinkBackground style={styles.pink}>
+            <TouchableWithoutFeedback
+                style={styles.name}
+                onPress={props.onPress}
+            >
                 <SharedElement id={'firstName'}>
                     <Title>{userprofile.firstName}</Title>
                 </SharedElement>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
             <View style={styles.swiper}>
-                <SharedElement id={'profilePicture'}>
-                    <ProfilePicture
-                        image={userprofile.pictureReference[0]}
-                        style={styles.image}
-                    />
-                </SharedElement>
+                <ImageGallery imageRefs={userprofile.pictureReference} />
             </View>
         </PinkBackground>
     );

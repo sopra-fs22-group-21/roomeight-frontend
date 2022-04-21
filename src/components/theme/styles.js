@@ -63,10 +63,9 @@ const styles = StyleSheet.create({
     },
     pink: {
         backgroundColor: colors.secondary100,
-        minHeight: 100,
+        justifyContent: 'flex-start',
         borderRadius: 20,
-        paddingLeft: 10,
-        paddingRight: 10,
+        padding: 20,
     },
 });
 

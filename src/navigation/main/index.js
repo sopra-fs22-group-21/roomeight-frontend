@@ -113,7 +113,7 @@ export default function Route() {
                 resize: 'clip',
             },
             {
-                id: `profilePicture`,
+                id: `profilePicture0`,
                 animation: 'fade',
             },
             {
@@ -130,15 +130,15 @@ export default function Route() {
     const completeComponents = (
         <>
             <Stack.Screen
-                name="Profile"
-                component={Profile}
-                options={mainOptions}
-            />
-            <Stack.Screen
                 name="DiscoverDetail"
                 component={DiscoverDetail}
                 options={mainOptions}
                 sharedElements={sharedDiscoverElements}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={mainOptions}
             />
             <Stack.Screen
                 name="DiscoverImage"

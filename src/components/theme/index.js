@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/actions/authActions';
 import { SecondaryButton } from '../button';
@@ -85,8 +86,21 @@ export const Name = (props) => (
     </Box>
 );
 
-export const PinkBackground = (props) => (
-    <Pressable {...props} style={styles.pink}>
-        {props.children}
-    </Pressable>
-);
+export const PinkBackground = (props) => {
+    if (props.onPress) {
+        return (
+            <Pressable
+                onPress={props.onPress}
+                style={{ ...styles.pink, ...props.style }}
+            >
+                {props.children}
+            </Pressable>
+        );
+    } else {
+        return (
+            <View style={{ ...styles.pink, ...props.style }}>
+                {props.children}
+            </View>
+        );
+    }
+};

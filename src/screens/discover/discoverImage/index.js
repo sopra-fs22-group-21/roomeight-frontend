@@ -14,6 +14,7 @@ import {
 import styles from './styles';
 import { ImageCard } from '../../../components/imageCard';
 import { SharedElement } from 'react-navigation-shared-element';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const DiscoverImage = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);

@@ -21,10 +21,9 @@ export const SingleDetailCard = (props) => {
     );
     return (
         <PinkBackground {...props}>
-            <Box />
             <View style={styles.row}>
                 <View style={styles.column}>
-                    <SharedElement id={'profilePicture'}>
+                    <SharedElement id={'profilePicture0'}>
                         <ProfilePicture
                             image={userprofile.pictureReference[0]}
                             style={styles.image}
