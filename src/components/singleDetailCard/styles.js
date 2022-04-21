@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../resources/colors';
 const styles = StyleSheet.create({
-    
     row: {
         flexDirection: 'row',
         maxHeight: 150,
@@ -19,12 +18,12 @@ const styles = StyleSheet.create({
         aspectRatio: null,
         minHeight: 100,
         maxHeight: '100%',
-        width:'100%',
+        width: '100%',
         borderColor: 'transparent',
     },
     tags: {
-        paddingLeft:0,
-    }
+        paddingLeft: 0,
+    },
 });
 
 export default styles;

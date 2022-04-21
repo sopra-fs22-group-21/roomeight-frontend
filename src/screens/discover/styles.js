@@ -7,6 +7,6 @@ const styles = StyleSheet.create({
     },
     heading: {
         fontSize: 12,
-    }
+    },
 });
 export default styles;

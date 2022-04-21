@@ -25,20 +25,18 @@ export const SmallHeading = (props) => (
 );
 
 export const Title = (props) => (
-    <Text style={{ ...styles.title, ...props.style }}>
-        {props.children}
-    </Text>
+    <Text style={{ ...styles.title, ...props.style }}>{props.children}</Text>
 );
 
 export const TextBlock = (props) => (
     <Box>
-        <NormalText style={{...props.style }}>{props.children}</NormalText>
+        <NormalText style={{ ...props.style }}>{props.children}</NormalText>
     </Box>
 );
 
 export const NormalText = (props) => (
     <Text style={{ ...styles.text, ...props.style }}>{props.children}</Text>
-)
+);
 
 export const Box = (props) => (
     <View style={{ ...styles.textBox, ...props.style }}>{props.children}</View>

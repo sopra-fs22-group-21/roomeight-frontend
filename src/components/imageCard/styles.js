@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     image: {
         borderRadius: 20,
         aspectRatio: 1,
-        width:'100%',
+        width: '100%',
         height: 'auto',
         marginBottom: 10,
         borderColor: 'transparent',
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 'auto',
         aspectRatio: 1,
-    }
+    },
 });
 
 export default styles;

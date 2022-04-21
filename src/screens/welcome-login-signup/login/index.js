@@ -8,7 +8,7 @@ import {
     Heading,
     TextBlock,
     Title,
-    Box
+    Box,
 } from '../../../components/theme';
 import { loginUser } from '../../../redux/actions/authActions';
 import en from '../../../resources/strings/en.json';
@@ -21,7 +21,9 @@ const Login = ({ navigation }) => {
     return (
         <Container>
             <Heading>{en.login.heading}</Heading>
-            <Box><Title>{en.login.title}</Title></Box>
+            <Box>
+                <Title>{en.login.title}</Title>
+            </Box>
             <KeyboardAwareScrollView
                 style={styles.inner}
                 showsVerticalScrollIndicator={false}

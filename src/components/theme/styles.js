@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 0,
         height: '100%',
-        minHeight: 100
+        minHeight: 100,
     },
 
     name: {

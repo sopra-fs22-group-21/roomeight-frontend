@@ -6,12 +6,15 @@ import { Box } from '../theme';
 import styles from './styles';
 
 export const DislikeButton = (props) => (
-    <Pressable style={(pressed) => [styles.dislikeButton, props.style]} {...props}>
+    <Pressable
+        style={(pressed) => [styles.dislikeButton, props.style]}
+        {...props}
+    >
         <Icon
             style={styles.icon}
             name="x"
             size={30}
-            color='black'
+            color="black"
             type="feather"
         />
     </Pressable>
@@ -23,7 +26,7 @@ export const LikeButton = (props) => (
             style={styles.icon}
             name="heart"
             size={25}
-            color='black'
+            color="black"
             type="font-awesome-5"
         />
     </Pressable>

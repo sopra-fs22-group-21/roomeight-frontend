@@ -12,7 +12,7 @@ const Tags = (props) => {
     const [tags, setTags] = useState({});
 
     const toggleSelect = (selected) => {
-        if(props.onChange){
+        if (props.onChange) {
             const t = { ...tags, ...selected };
             const tArray = Object.entries(t);
             props.onChange(
@@ -23,14 +23,18 @@ const Tags = (props) => {
     };
 
     return (
-        <View style={{...styles.box, ...props.style}}>
+        <View style={{ ...styles.box, ...props.style }}>
             <View style={styles.column}>
                 <View style={styles.tagContainer}>
                     {left.map((tag) => (
                         <TagElement
                             key={tag.name}
                             tag={tag}
-                            onChange={props.onChange ? (selected) => toggleSelect(selected) : null}
+                            onChange={
+                                props.onChange
+                                    ? (selected) => toggleSelect(selected)
+                                    : null
+                            }
                         />
                     ))}
                 </View>
@@ -41,7 +45,11 @@ const Tags = (props) => {
                         <TagElement
                             key={tag.name}
                             tag={tag}
-                            onChange={props.onChange ? (selected) => toggleSelect(selected) : null}
+                            onChange={
+                                props.onChange
+                                    ? (selected) => toggleSelect(selected)
+                                    : null
+                            }
                         />
                     ))}
                 </View>
