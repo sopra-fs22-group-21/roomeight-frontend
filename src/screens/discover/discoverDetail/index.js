@@ -15,7 +15,6 @@ import {
 import styles from './styles';
 import { ImageCard } from '../../../components/imageCard';
 
-
 const DiscoverDetail = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     return (
@@ -24,13 +23,13 @@ const DiscoverDetail = ({ navigation }) => {
                 <SmallHeading>Discover</SmallHeading>
                 <Box />
 
-                    <SingleDetailCard
-                        onPress={() => navigation.navigate('DiscoverImage')}
-                    />
+                <SingleDetailCard
+                    onPress={() => navigation.navigate('DiscoverImage')}
+                />
 
                 <Box />
                 <SharedElement id={'likeButtons'}>
-                <LikeButtons />
+                    <LikeButtons />
                 </SharedElement>
             </Container>
         </Screen>

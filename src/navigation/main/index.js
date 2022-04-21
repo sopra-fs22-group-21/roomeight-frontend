@@ -18,9 +18,7 @@ import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
-
 export default function Route() {
-
     const Stack = createSharedElementStackNavigator();
     /* const linking = {
         prefixes: ['https://www.roomeight.ch', 'https://roomeight.ch'],
@@ -95,17 +93,17 @@ export default function Route() {
             />
         </>
     );
-    const mainOptions = { 
-        headerShown: false, 
+    const mainOptions = {
+        headerShown: false,
         gestureEnabled: false,
-        cardStyleInterpolator: ({current: {progress}}) => {
+        cardStyleInterpolator: ({ current: { progress } }) => {
             return {
                 cardStyle: {
-                    opacity: progress
-                }
-            }
-        }
-    }
+                    opacity: progress,
+                },
+            };
+        },
+    };
     const sharedDiscoverElements = (route, otherRoute, showing) => {
         const { item } = route.params;
         return [
@@ -128,7 +126,7 @@ export default function Route() {
                 resize: 'clip',
             },
         ];
-    }
+    };
     const completeComponents = (
         <>
             <Stack.Screen
@@ -153,11 +151,7 @@ export default function Route() {
                 component={Matches}
                 options={mainOptions}
             />
-            <Stack.Screen
-                name="Chat"
-                component={Chat}
-                options={mainOptions}
-            />
+            <Stack.Screen name="Chat" component={Chat} options={mainOptions} />
         </>
     );
 

@@ -17,20 +17,19 @@ export const ImageCard = (props) => {
     return (
         <PinkBackground>
             <Box />
-            
-            <TouchableOpacity style={styles.name}onPress={props.onPress}>
-            <SharedElement id={'firstName'}>
-                <Title >{userprofile.firstName}</Title>
-            </SharedElement>
+
+            <TouchableOpacity style={styles.name} onPress={props.onPress}>
+                <SharedElement id={'firstName'}>
+                    <Title>{userprofile.firstName}</Title>
+                </SharedElement>
             </TouchableOpacity>
             <View style={styles.swiper}>
-
-            <SharedElement id={'profilePicture'}>
-                <ProfilePicture
+                <SharedElement id={'profilePicture'}>
+                    <ProfilePicture
                         image={userprofile.pictureReference[0]}
                         style={styles.image}
                     />
-                    </SharedElement>
+                </SharedElement>
             </View>
         </PinkBackground>
     );

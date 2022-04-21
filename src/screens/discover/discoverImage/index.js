@@ -15,7 +15,6 @@ import styles from './styles';
 import { ImageCard } from '../../../components/imageCard';
 import { SharedElement } from 'react-navigation-shared-element';
 
-
 const DiscoverImage = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     return (
@@ -23,14 +22,14 @@ const DiscoverImage = ({ navigation }) => {
             <Container style={styles.container}>
                 <SmallHeading>Discover</SmallHeading>
                 <Box />
-                    <ImageCard 
-                        onPress={() => navigation.navigate('DiscoverDetail')}
-                    />
+                <ImageCard
+                    onPress={() => navigation.navigate('DiscoverDetail')}
+                />
 
                 <Box />
-                
+
                 <SharedElement id={'likeButtons'}>
-                <LikeButtons />
+                    <LikeButtons />
                 </SharedElement>
             </Container>
         </Screen>

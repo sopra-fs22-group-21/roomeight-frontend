@@ -25,10 +25,10 @@ export const SingleDetailCard = (props) => {
             <View style={styles.row}>
                 <View style={styles.column}>
                     <SharedElement id={'profilePicture'}>
-                    <ProfilePicture
-                        image={userprofile.pictureReference[0]}
-                        style={styles.image}
-                    />
+                        <ProfilePicture
+                            image={userprofile.pictureReference[0]}
+                            style={styles.image}
+                        />
                     </SharedElement>
                 </View>
                 <View style={styles.column}>
