@@ -15,7 +15,10 @@ import {
 import { logoutUser } from '../../redux/actions/authActions';
 import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 import styles from './styles';
-import { chatMemberShipListener, chatInfoListener } from '../../redux/actions/chatActions';
+import {
+    chatMemberShipListener,
+    chatInfoListener,
+} from '../../redux/actions/chatActions';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
