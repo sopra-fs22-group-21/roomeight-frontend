@@ -1,5 +1,4 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import M8Loader from '../../../assets/logo/M8Loader';
@@ -10,16 +9,19 @@ import AddProfilePicture from '../../screens/create-profile/addProfilePicture';
 import ChooseStatus from '../../screens/create-profile/chooseStatus';
 import CompleteFlatProfile from '../../screens/create-profile/completeFlatProfile';
 import CompleteSingleProfile from '../../screens/create-profile/completeSingleProfile';
-import Discover from '../../screens/discover';
+import DiscoverDetail from '../../screens/discover/discoverDetail';
+import DiscoverImage from '../../screens/discover/discoverImage';
 import Matches from '../../screens/matches';
 import Profile from '../../screens/profile';
 import Login from '../../screens/welcome-login-signup/login';
 import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
-const Stack = createStackNavigator();
 
 export default function Route() {
+
+    const Stack = createSharedElementStackNavigator();
     /* const linking = {
         prefixes: ['https://www.roomeight.ch', 'https://roomeight.ch'],
         config: {
@@ -93,28 +95,68 @@ export default function Route() {
             />
         </>
     );
-
+    const mainOptions = { 
+        headerShown: false, 
+        gestureEnabled: false,
+        cardStyleInterpolator: ({current: {progress}}) => {
+            return {
+                cardStyle: {
+                    opacity: progress
+                }
+            }
+        }
+    }
+    const sharedDiscoverElements = (route, otherRoute, showing) => {
+        const { item } = route.params;
+        return [
+            {
+                id: `firstName`,
+                animation: 'fade',
+                resize: 'clip',
+            },
+            {
+                id: `profilePicture`,
+                animation: 'fade',
+            },
+            {
+                id: `likeButtons`,
+                animation: 'fade',
+            },
+            {
+                id: `description`,
+                animation: 'fade',
+                resize: 'clip',
+            },
+        ];
+    }
     const completeComponents = (
         <>
             <Stack.Screen
                 name="Profile"
                 component={Profile}
-                options={{ headerShown: false, animationEnabled: false }}
+                options={mainOptions}
             />
             <Stack.Screen
-                name="Discover"
-                component={Discover}
-                options={{ headerShown: false, animationEnabled: false }}
+                name="DiscoverDetail"
+                component={DiscoverDetail}
+                options={mainOptions}
+                sharedElements={sharedDiscoverElements}
+            />
+            <Stack.Screen
+                name="DiscoverImage"
+                component={DiscoverImage}
+                options={mainOptions}
+                sharedElements={sharedDiscoverElements}
             />
             <Stack.Screen
                 name="Matches"
                 component={Matches}
-                options={{ headerShown: false, animationEnabled: false }}
+                options={mainOptions}
             />
             <Stack.Screen
                 name="Chat"
                 component={Chat}
-                options={{ headerShown: false, animationEnabled: false }}
+                options={mainOptions}
             />
         </>
     );

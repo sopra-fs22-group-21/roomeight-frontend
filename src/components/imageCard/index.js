@@ -10,40 +10,27 @@ import tags from '../../resources/strings/tags';
 import tagIcons from '../../resources/icons/tagIcons';
 import { InputBox, InputLabel } from '../input';
 import Swiper from 'react-native-web-swiper';
+import { SharedElement } from 'react-navigation-shared-element';
 
 export const ImageCard = (props) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     return (
         <PinkBackground>
             <Box />
-            <TouchableOpacity onPress={props.onPress}>
-                <Title style={styles.name}>{userprofile.firstName}</Title>
+            
+            <TouchableOpacity style={styles.name}onPress={props.onPress}>
+            <SharedElement id={'firstName'}>
+                <Title >{userprofile.firstName}</Title>
+            </SharedElement>
             </TouchableOpacity>
             <View style={styles.swiper}>
-                <Swiper
-                    from={1}
-                    minDistanceForAction={0.1}
-                    controlsProps={{
-                        dotsTouchable: true,
-                        prevPos: 'left',
-                        nextPos: 'right',
-                        nextTitle: '',
-                        prevTitle: '',
-                    }}
-                >
-                    <ProfilePicture
+
+            <SharedElement id={'profilePicture'}>
+                <ProfilePicture
                         image={userprofile.pictureReference[0]}
                         style={styles.image}
                     />
-                    <ProfilePicture
-                        image={userprofile.pictureReference[1]}
-                        style={styles.image}
-                    />
-                    <ProfilePicture
-                        image={userprofile.pictureReference[0]}
-                        style={styles.image}
-                    />
-                </Swiper>
+                    </SharedElement>
             </View>
         </PinkBackground>
     );

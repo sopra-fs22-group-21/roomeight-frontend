@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         borderColor: 'transparent',
     },
     name: {
-        textAlign: 'center',
+        alignItems: 'center',
     },
     swiper: {
         width: '100%',

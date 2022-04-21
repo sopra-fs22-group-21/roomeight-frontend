@@ -9,6 +9,7 @@ import Tags from '../tags';
 import tags from '../../resources/strings/tags';
 import tagIcons from '../../resources/icons/tagIcons';
 import { InputBox, InputLabel } from '../input';
+import { SharedElement } from 'react-navigation-shared-element';
 
 export const SingleDetailCard = (props) => {
     const loading = useSelector((state) => state.loadingState);
@@ -23,13 +24,17 @@ export const SingleDetailCard = (props) => {
             <Box />
             <View style={styles.row}>
                 <View style={styles.column}>
+                    <SharedElement id={'profilePicture'}>
                     <ProfilePicture
                         image={userprofile.pictureReference[0]}
                         style={styles.image}
                     />
+                    </SharedElement>
                 </View>
                 <View style={styles.column}>
-                    <Title>{userprofile.firstName}</Title>
+                    <SharedElement id={'firstName'}>
+                        <Title>{userprofile.firstName}</Title>
+                    </SharedElement>
                     <NormalText style={styles.text}>{age} y/o</NormalText>
                     <NormalText style={styles.text}>
                         {userprofile.gender}

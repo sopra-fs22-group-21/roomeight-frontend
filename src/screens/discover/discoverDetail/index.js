@@ -1,39 +1,40 @@
 import { React, useState } from 'react';
 import { Pressable, Text } from 'react-native';
 import { useSelector } from 'react-redux';
-import { SingleDetailCard } from '../../components/singleDetailCard';
-import { LikeButton, LikeButtons } from '../../components/likeButtons';
-import { ProfilePicture } from '../../components/profilePicture';
+import { SingleDetailCard } from '../../../components/singleDetailCard';
+import { LikeButton, LikeButtons } from '../../../components/likeButtons';
+import { SharedElement } from 'react-navigation-shared-element';
+import { ProfilePicture } from '../../../components/profilePicture';
 import {
     Box,
     Container,
     Heading,
     Screen,
     SmallHeading,
-} from '../../components/theme';
+} from '../../../components/theme';
 import styles from './styles';
-import { ImageCard } from '../../components/imageCard';
+import { ImageCard } from '../../../components/imageCard';
 
-const Discover = ({ navigation }) => {
+
+const DiscoverDetail = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const [isShowingDetails, setIsShowingDetails] = useState(true);
     return (
         <Screen navigation={navigation} showFooter>
             <Container style={styles.container}>
                 <SmallHeading>Discover</SmallHeading>
                 <Box />
-                {isShowingDetails ? (
+
                     <SingleDetailCard
-                        onPress={() => setIsShowingDetails(false)}
+                        onPress={() => navigation.navigate('DiscoverImage')}
                     />
-                ) : (
-                    <ImageCard onPress={() => setIsShowingDetails(true)} />
-                )}
 
                 <Box />
+                <SharedElement id={'likeButtons'}>
                 <LikeButtons />
+                </SharedElement>
             </Container>
         </Screen>
     );
 };
-export default Discover;
+
+export default DiscoverDetail;
