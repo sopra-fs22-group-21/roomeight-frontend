@@ -15,30 +15,26 @@ import { ImageGallery } from '../imageGallery';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export const ImageCard = (props) => {
-    const { userprofile } = useSelector((state) => state.userprofileState);
-    userprofile.pictureReference = [
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHdvbWFuJTIwcHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80',
-        'https://vc-smash.ch/img/asset/YXNzZXRzL3RlYW1mb3Rvcy9ENC0yMDIxLTIyLmpwZWc=?fit=crop-51-34-1&w=1800&h=600&dpr=2&fm=webp&s=58a5b80a46d99ae2bc0cf8dba5ae34c4',
-    ];
+    const userprofile = props.userprofile;
     return (
         <PinkBackground style={styles.pink}>
             <TouchableWithoutFeedback
                 style={styles.name}
                 onPress={props.onPress}
             >
-                <SharedElement id={'firstName'}>
+                <SharedElement id={userprofile.email + 'firstName'}>
                     <Title>{userprofile.firstName}</Title>
                 </SharedElement>
             </TouchableWithoutFeedback>
             <View style={styles.swiper}>
                 <ImageGallery imageRefs={userprofile.pictureReference} />
                 <Pressable style={styles.description} onPress={props.onPress}>
-                    <SharedElement id="descriptionLabel">
+                    <SharedElement id={userprofile.email + 'descriptionLabel'}>
                         <InputLabel style={styles.text}>
                             {en.discover.description}
                         </InputLabel>
                     </SharedElement>
-                    <SharedElement id={'description'}>
+                    <SharedElement id={userprofile.email + 'description'}>
                         <NormalText
                             style={{ ...styles.text, ...styles.smaller }}
                         >

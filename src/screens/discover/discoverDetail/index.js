@@ -1,38 +1,17 @@
-import { React, useState } from 'react';
-import { Pressable, Text } from 'react-native';
+import { React } from 'react';
+import { SharedElement } from 'react-navigation-shared-element';
 import { useSelector } from 'react-redux';
 import { SingleDetailCard } from '../../../components/singleDetailCard';
-import { LikeButton, LikeButtons } from '../../../components/likeButtons';
-import { SharedElement } from 'react-navigation-shared-element';
-import { ProfilePicture } from '../../../components/profilePicture';
-import {
-    Box,
-    Container,
-    Heading,
-    Screen,
-    SmallHeading,
-} from '../../../components/theme';
-import styles from './styles';
-import { ImageCard } from '../../../components/imageCard';
+import DiscoverBase from '../discoverBase';
 
 const DiscoverDetail = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     return (
-        <Screen navigation={navigation} showFooter>
-            <Container style={styles.container}>
-                <SmallHeading>Discover</SmallHeading>
-                <Box />
-                <SharedElement id="card">
-                    <SingleDetailCard
-                        onPress={() => navigation.navigate('DiscoverImage')}
-                    />
-                </SharedElement>
-                <Box />
-                <SharedElement id={'likeButtons'}>
-                    <LikeButtons />
-                </SharedElement>
-            </Container>
-        </Screen>
+        <DiscoverBase
+            navigation={navigation}
+            userprofile={userprofile}
+            onPressDetail={() => navigation.navigate('DiscoverImage')}
+        />
     );
 };
 

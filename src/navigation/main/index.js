@@ -104,38 +104,6 @@ export default function Route() {
             };
         },
     };
-    const sharedDiscoverElements = (route, otherRoute, showing) => {
-        const { item } = route.params;
-        return [
-            {
-                id: `card`,
-                animation: 'fade-out',
-                resize: 'stretch',
-            },
-            {
-                id: `profilePicture0`,
-                animation: 'fade',
-            },
-            {
-                id: `gradient0`,
-                animation: 'fade',
-            },
-            {
-                id: `likeButtons`,
-                animation: 'fade',
-            },
-            {
-                id: `descriptionLabel`,
-                animation: 'fade',
-                resize: 'clip',
-            },
-            {
-                id: `description`,
-                animation: 'fade',
-                resize: 'clip',
-            },
-        ];
-    };
     const completeComponents = (
         <>
             <Stack.Screen
@@ -147,20 +115,22 @@ export default function Route() {
                         const { item } = route.params;
                         return [
                             {
-                                id: `card`,
+                                id: userprofile.email + 'card',
                                 animation: 'fade-out',
                                 resize: 'stretch',
                             },
                             {
-                                id: `firstName`,
+                                id: userprofile.email + `firstName`,
                                 animation: 'fade-in',
                             },
                             {
-                                id: `profilePicture0`,
+                                id: userprofile.pictureReference[0],
                                 animation: 'fade',
                             },
                             {
-                                id: `gradient0`,
+                                id:
+                                    userprofile.pictureReference[0] +
+                                    `gradient`,
                                 animation: 'fade',
                             },
                             {
@@ -168,12 +138,12 @@ export default function Route() {
                                 animation: 'fade',
                             },
                             {
-                                id: `descriptionLabel`,
+                                id: userprofile.email + `descriptionLabel`,
                                 animation: 'fade',
                                 resize: 'clip',
                             },
                             {
-                                id: `description`,
+                                id: userprofile.email + `description`,
                                 animation: 'fade',
                                 resize: 'clip',
                             },
@@ -195,20 +165,22 @@ export default function Route() {
                         const { item } = route.params;
                         return [
                             {
-                                id: `card`,
+                                id: userprofile.email + 'card',
                                 animation: 'fade-in',
                                 resize: 'stretch',
                             },
                             {
-                                id: `firstName`,
+                                id: userprofile.email + `firstName`,
                                 animation: 'fade-out',
                             },
                             {
-                                id: `profilePicture0`,
+                                id: userprofile.pictureReference[0],
                                 animation: 'fade',
                             },
                             {
-                                id: `gradient0`,
+                                id:
+                                    userprofile.pictureReference[0] +
+                                    `gradient`,
                                 animation: 'fade',
                             },
                             {
@@ -216,12 +188,12 @@ export default function Route() {
                                 animation: 'fade',
                             },
                             {
-                                id: `descriptionLabel`,
+                                id: userprofile.email + `descriptionLabel`,
                                 animation: 'fade',
                                 resize: 'clip',
                             },
                             {
-                                id: `description`,
+                                id: userprofile.email + `description`,
                                 animation: 'fade',
                                 resize: 'clip',
                             },

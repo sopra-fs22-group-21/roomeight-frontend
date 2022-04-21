@@ -17,7 +17,7 @@ export const ITEM_WIDTH = Dimensions.get('window').width - 80;
 const Img = ({ item, index }) => {
     return (
         <View style={styles.container} key={index}>
-            <SharedElement id={'profilePicture' + index}>
+            <SharedElement id={item}>
                 <Image source={{ uri: item }} style={styles.image} />
             </SharedElement>
             <SharedElement

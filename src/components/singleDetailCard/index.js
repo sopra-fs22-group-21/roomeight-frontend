@@ -12,17 +12,12 @@ import { InputBox, InputLabel } from '../input';
 import { SharedElement } from 'react-navigation-shared-element';
 
 export const SingleDetailCard = (props) => {
-    const loading = useSelector((state) => state.loadingState);
-    const { userprofile } = useSelector((state) => state.userprofileState);
+    const userprofile = props.userprofile;
     const ageInMilliseconds = new Date() - new Date(userprofile.birthday);
     const age = Math.floor(ageInMilliseconds / 1000 / 60 / 60 / 24 / 365); // convert to years
     const selectedTags = tagIcons.filter((tag) =>
         userprofile.tags.includes(tag.name)
     );
-    userprofile.pictureReference = [
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHdvbWFuJTIwcHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80',
-        'https://vc-smash.ch/img/asset/YXNzZXRzL3RlYW1mb3Rvcy9ENC0yMDIxLTIyLmpwZWc=?fit=crop-51-34-1&w=1800&h=600&dpr=2&fm=webp&s=58a5b80a46d99ae2bc0cf8dba5ae34c4',
-    ];
     return (
         <PinkBackground>
             <View style={styles.row}>

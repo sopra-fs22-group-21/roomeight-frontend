@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         borderRadius: 20,
         padding: 20,
+        height: '100%',
     },
 });
 
