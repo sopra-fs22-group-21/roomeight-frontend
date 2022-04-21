@@ -11,9 +11,22 @@ const styles = StyleSheet.create({
     },
     swiper: {
         flex: 1,
+        borderRadius: 20,
     },
     pink: {
         flex: 1,
+        // flex: 0.8,
+    },
+    text: {
+        color: 'white',
+    },
+    smaller: {
+        fontSize: 14,
+    },
+    description: {
+        position: 'absolute',
+        bottom: 0,
+        padding: 20,
     },
 });
 

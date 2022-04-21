@@ -10,26 +10,35 @@ import {
 import styles from './styles';
 import { SharedElement } from 'react-navigation-shared-element';
 import Carousel from 'react-native-snap-carousel';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const ITEM_WIDTH = Dimensions.get('window').width - 80;
 
 const Img = ({ item, index }) => {
     return (
-        <SharedElement id={'profilePicture' + index} key={item}>
-            <Image source={{ uri: item }} style={styles.image} />
-        </SharedElement>
+        <View style={styles.container} key={index}>
+            <SharedElement id={'profilePicture' + index}>
+                <Image source={{ uri: item }} style={styles.image} />
+            </SharedElement>
+            <SharedElement
+                id={'gradient' + index}
+                style={styles.gradientContainer}
+            >
+                <LinearGradient
+                    style={styles.overlay}
+                    colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}
+                />
+            </SharedElement>
+        </View>
     );
 };
 
 export const ImageGallery = ({ imageRefs }) => {
     const isCarousel = useRef(null);
-    const [index, setIndex] = useState(0);
 
     return (
         <View>
             <Carousel
-                layoutCardOffset={index}
-                onSnapToItem={(index) => setIndex(index)}
                 ref={isCarousel}
                 data={imageRefs}
                 renderItem={Img}

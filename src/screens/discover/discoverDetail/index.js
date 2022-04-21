@@ -22,11 +22,11 @@ const DiscoverDetail = ({ navigation }) => {
             <Container style={styles.container}>
                 <SmallHeading>Discover</SmallHeading>
                 <Box />
-
-                <SingleDetailCard
-                    onPress={() => navigation.navigate('DiscoverImage')}
-                />
-
+                <SharedElement id="card">
+                    <SingleDetailCard
+                        onPress={() => navigation.navigate('DiscoverImage')}
+                    />
+                </SharedElement>
                 <Box />
                 <SharedElement id={'likeButtons'}>
                     <LikeButtons />

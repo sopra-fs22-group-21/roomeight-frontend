@@ -3,11 +3,16 @@ import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
-        maxHeight: 150,
     },
     column: {
         width: '50%',
+    },
+    column1: {
         paddingRight: 10,
+    },
+    column2: {
+        paddingLeft: 10,
+        paddingTop: 10,
     },
     text: {
         fontSize: 14,
@@ -15,9 +20,7 @@ const styles = StyleSheet.create({
     },
     image: {
         borderRadius: 20,
-        aspectRatio: null,
-        minHeight: 100,
-        maxHeight: '100%',
+        aspectRatio: 1,
         width: '100%',
         borderColor: 'transparent',
     },

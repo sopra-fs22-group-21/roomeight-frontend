@@ -11,7 +11,7 @@ export const Input = (props) => (
 );
 
 export const InputLabel = (props) => (
-    <Text style={styles.label}>{props.children}</Text>
+    <Text style={{ ...styles.label, ...props.style }}>{props.children}</Text>
 );
 
 export const StyledTextInput = (props) => (

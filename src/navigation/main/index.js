@@ -108,17 +108,26 @@ export default function Route() {
         const { item } = route.params;
         return [
             {
-                id: `firstName`,
-                animation: 'fade',
-                resize: 'clip',
+                id: `card`,
+                animation: 'fade-out',
+                resize: 'stretch',
             },
             {
                 id: `profilePicture0`,
                 animation: 'fade',
             },
             {
+                id: `gradient0`,
+                animation: 'fade',
+            },
+            {
                 id: `likeButtons`,
                 animation: 'fade',
+            },
+            {
+                id: `descriptionLabel`,
+                animation: 'fade',
+                resize: 'clip',
             },
             {
                 id: `description`,
@@ -133,7 +142,44 @@ export default function Route() {
                 name="DiscoverDetail"
                 component={DiscoverDetail}
                 options={mainOptions}
-                sharedElements={sharedDiscoverElements}
+                sharedElements={(route, otherRoute, showing) => {
+                    if (otherRoute.name.includes('Discover')) {
+                        const { item } = route.params;
+                        return [
+                            {
+                                id: `card`,
+                                animation: 'fade-out',
+                                resize: 'stretch',
+                            },
+                            {
+                                id: `firstName`,
+                                animation: 'fade-in',
+                            },
+                            {
+                                id: `profilePicture0`,
+                                animation: 'fade',
+                            },
+                            {
+                                id: `gradient0`,
+                                animation: 'fade',
+                            },
+                            {
+                                id: `likeButtons`,
+                                animation: 'fade',
+                            },
+                            {
+                                id: `descriptionLabel`,
+                                animation: 'fade',
+                                resize: 'clip',
+                            },
+                            {
+                                id: `description`,
+                                animation: 'fade',
+                                resize: 'clip',
+                            },
+                        ];
+                    }
+                }}
             />
             <Stack.Screen
                 name="Profile"
@@ -144,7 +190,44 @@ export default function Route() {
                 name="DiscoverImage"
                 component={DiscoverImage}
                 options={mainOptions}
-                sharedElements={sharedDiscoverElements}
+                sharedElements={(route, otherRoute, showing) => {
+                    if (otherRoute.name.includes('Discover')) {
+                        const { item } = route.params;
+                        return [
+                            {
+                                id: `card`,
+                                animation: 'fade-in',
+                                resize: 'stretch',
+                            },
+                            {
+                                id: `firstName`,
+                                animation: 'fade-out',
+                            },
+                            {
+                                id: `profilePicture0`,
+                                animation: 'fade',
+                            },
+                            {
+                                id: `gradient0`,
+                                animation: 'fade',
+                            },
+                            {
+                                id: `likeButtons`,
+                                animation: 'fade',
+                            },
+                            {
+                                id: `descriptionLabel`,
+                                animation: 'fade',
+                                resize: 'clip',
+                            },
+                            {
+                                id: `description`,
+                                animation: 'fade',
+                                resize: 'clip',
+                            },
+                        ];
+                    }
+                }}
             />
             <Stack.Screen
                 name="Matches"

@@ -23,10 +23,11 @@ const DiscoverImage = ({ navigation }) => {
             <Container style={styles.container}>
                 <SmallHeading>Discover</SmallHeading>
                 <Box />
-                <ImageCard
-                    onPress={() => navigation.navigate('DiscoverDetail')}
-                />
-
+                <SharedElement id="card" style={{ flex: 0.9 }}>
+                    <ImageCard
+                        onPress={() => navigation.navigate('DiscoverDetail')}
+                    />
+                </SharedElement>
                 <Box />
 
                 <SharedElement id={'likeButtons'}>
