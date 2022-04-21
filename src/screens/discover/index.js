@@ -1,23 +1,29 @@
-import React from 'react';
-import { Text } from 'react-native';
+import { React, useState } from 'react';
+import { Pressable, Text } from 'react-native';
 import { useSelector } from 'react-redux';
+import { SingleDetailCard } from '../../components/singleDetailCard';
+import { LikeButton, LikeButtons } from '../../components/likeButtons';
 import { ProfilePicture } from '../../components/profilePicture';
-import { Container, Heading, Screen } from '../../components/theme';
+import { Box, Container, Heading, Screen, SmallHeading } from '../../components/theme';
+import styles from './styles';
+import { ImageCard } from '../../components/imageCard';
 
 const Discover = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
-    console.log('Jordi: ' + JSON.stringify(userprofile));
+    const [isShowingDetails, setIsShowingDetails] = useState(true)
     return (
         <Screen navigation={navigation} showFooter>
-            <Container>
-                <Heading>Discover</Heading>
-                <ProfilePicture
-                    image={
-                        userprofile.pictureReference.length > 0
-                            ? userprofile.pictureReference[0]
-                            : null
-                    }
-                />
+            <Container style={styles.container}>
+                <SmallHeading>Discover</SmallHeading>
+                <Box/>
+                {isShowingDetails ? 
+                    <SingleDetailCard onPress={() => setIsShowingDetails(false)}/>
+                    :
+                    <ImageCard onPress={() => setIsShowingDetails(true)}/>
+                }
+                    
+                <Box/>
+                <LikeButtons/>
             </Container>
         </Screen>
     );

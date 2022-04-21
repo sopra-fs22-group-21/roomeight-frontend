@@ -1,8 +1,15 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     heading: {
         fontFamily: 'SourceSans3Bold',
         fontSize: 42,
+        lineHeight: 50,
+        color: '#404040', //true gray,
+    },
+    smallHeading: {
+        fontFamily: 'SourceSans3Bold',
+        fontSize: 34,
         lineHeight: 50,
         color: '#404040', //true gray,
     },
@@ -44,6 +51,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 0,
         height: '100%',
+        minHeight: 100
     },
 
     name: {
@@ -52,6 +60,13 @@ const styles = StyleSheet.create({
         lineHeight: 30,
         color: '#404040',
         alignSelf: 'center',
+    },
+    pink: {
+        backgroundColor: colors.secondary100,
+        minHeight: 100,
+        borderRadius: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
     },
 });
 

@@ -47,7 +47,7 @@ const NavBar = ({ navigation }) => {
         <View style={styles.container}>
             <Pressable onPress={() => navigation.navigate('Discover')}>
                 {discoverIcon}
-                {route === 'Discover' ? active : null}
+                {route.includes('Discover') ? active : null}
             </Pressable>
             <Pressable onPress={() => navigation.navigate('Matches')}>
                 {matchesIcon}

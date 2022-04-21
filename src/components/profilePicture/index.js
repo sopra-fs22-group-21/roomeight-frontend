@@ -5,22 +5,18 @@ import styles from './styles';
 export const ProfilePicture = (props) => {
     if (props.image) {
         return (
-            <View>
                 <Image
-                    style={styles.imageProfile}
+                    style={[styles.imageProfile, props.style]}
                     source={{ uri: props.image }}
                 />
-            </View>
         );
     } else {
         return (
-            <View>
-                <View style={styles.backgroundProfile}>
+                <View style={[styles.backgroundProfile, props.style]}>
                     <Text style={styles.placeholderProfile}>
                         {props.initials}
                     </Text>
                 </View>
-            </View>
         );
     }
 };
