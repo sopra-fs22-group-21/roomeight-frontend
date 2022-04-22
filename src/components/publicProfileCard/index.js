@@ -15,17 +15,20 @@ export const PublicProfileCard = (props) => {
                 <ImageCard
                     profile={props.profile}
                     onPress={() => setIsShowingImage(false)}
+                    onDoubleTap={props.onDoubleTap}
                 />
             ) : props.isFlat ? (
                 <FlatDetailCard
                     flatprofile={props.profile}
                     onPress={() => setIsShowingImage(true)}
+                    onDoubleTap={props.onDoubleTap}
                 />
             ) : (
                 <SingleDetailCard
                     userprofile={props.profile}
                     onPress={() => setIsShowingImage(true)}
                     textIfNoData={props.textIfNoData}
+                    onDoubleTap={props.onDoubleTap}
                 />
             )}
         </>

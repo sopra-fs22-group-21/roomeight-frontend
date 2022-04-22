@@ -1,5 +1,5 @@
 import { React, useState, useRef } from 'react';
-import { Dimensions, Pressable, Text } from 'react-native';
+import { Dimensions, Pressable, Text, TouchableHighlight } from 'react-native';
 import { useSelector } from 'react-redux';
 import { SingleDetailCard } from '../../../components/singleDetailCard';
 import { LikeButton, LikeButtons } from '../../../components/likeButtons';
@@ -25,11 +25,16 @@ import { Icon } from 'react-native-elements';
 import { View } from 'react-native-animatable';
 import colors from '../../../resources/colors';
 import { DoubleTap } from '../../../components/doubleTap';
+import {
+    TapGestureHandler,
+    TouchableWithoutFeedback,
+} from 'react-native-gesture-handler';
 
 const ITEM_HEIGHT = Dimensions.get('window').height - 300;
 
 const Discover = ({ navigation }) => {
     const carousel = useRef(null);
+    const doubleTapRef = useRef(null);
     let initialProfiles = flatprofiles;
     const [like, setLike] = useState(false);
     const [state, setState] = useState({
@@ -75,6 +80,7 @@ const Discover = ({ navigation }) => {
                         isFlat={true}
                         profile={item}
                         key={item.id}
+                        onDoubleTap={handleLike}
                     />
                     <Box />
                     <LikeButtons
@@ -96,26 +102,18 @@ const Discover = ({ navigation }) => {
                 <SmallHeading>Discover</SmallHeading>
                 <Box />
                 <Inner>
-                    <DoubleTap
-                        doubleTap={() => {
-                            console.log('double tap');
-                            handleLike();
-                        }}
-                        delay={300}
-                    >
-                        <Carousel
-                            ref={carousel}
-                            data={state.profiles}
-                            renderItem={card}
-                            sliderHeight={ITEM_HEIGHT}
-                            itemHeight={ITEM_HEIGHT}
-                            inactiveSlideShift={0}
-                            useScrollView={true}
-                            vertical
-                            onSnapToItem={(index) => removeProfile(index - 1)}
-                        />
-                        <Box style={styles.bottom} />
-                    </DoubleTap>
+                    <Carousel
+                        ref={carousel}
+                        data={state.profiles}
+                        renderItem={card}
+                        sliderHeight={ITEM_HEIGHT}
+                        itemHeight={ITEM_HEIGHT}
+                        inactiveSlideShift={0}
+                        useScrollView={true}
+                        vertical
+                        onSnapToItem={(index) => removeProfile(index - 1)}
+                    />
+                    <Box style={styles.bottom} />
                 </Inner>
             </Container>
         </Screen>

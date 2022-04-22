@@ -27,7 +27,10 @@ export const ImageCard = (props) => {
                 </Title>
             </TouchableWithoutFeedback>
             <View style={styles.swiper}>
-                <ImageGallery imageRefs={props.profile.pictureReference} />
+                <ImageGallery
+                    imageRefs={props.profile.pictureReference}
+                    onDoubleTap={props.onDoubleTap}
+                />
                 <Pressable style={styles.description} onPress={props.onPress}>
                     <InputLabel style={styles.text}>
                         {en.discover.description}
