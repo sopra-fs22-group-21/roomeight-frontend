@@ -55,7 +55,7 @@ const CompleteFlatProfile = ({ navigation }) => {
                             setmoveInDateValid(valid);
                         }}
                     />
-                    <InputLabel children={en.completeFlatProfile.duration} />
+                    <InputLabel>{en.completeFlatProfile.duration}</InputLabel>
                     <Box style={styles.box}>
                         <CheckBox
                             containerStyle={styles.choice}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TextInput, View } from 'react-native';
-import { Box } from '../theme';
+import { Box, Strong } from '../theme';
 import styles from './styles';
 
 export const Input = (props) => (
@@ -8,10 +8,6 @@ export const Input = (props) => (
         <Text style={styles.label}>{props.label}</Text>
         <StyledTextInput {...props} />
     </Box>
-);
-
-export const InputLabel = (props) => (
-    <Text style={{ ...styles.label, ...props.style }}>{props.children}</Text>
 );
 
 export const StyledTextInput = (props) => (
@@ -25,6 +21,8 @@ export const StyledTextInput = (props) => (
         {...props}
     />
 );
+
+export const InputLabel = (props) => <Strong {...props} />;
 
 export const InputBox = (props) => (
     <Box style={props.style}>

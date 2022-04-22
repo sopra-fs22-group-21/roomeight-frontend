@@ -4,6 +4,9 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
     },
+    name: {
+        alignItems: 'center',
+    },
     column: {
         width: '50%',
     },
@@ -20,12 +23,34 @@ const styles = StyleSheet.create({
     },
     image: {
         borderRadius: 20,
-        aspectRatio: 1,
+        aspectRatio: null,
+        minHeight: 150,
         width: '100%',
         borderColor: 'transparent',
     },
     tags: {
         paddingLeft: 0,
+    },
+    avatar: {
+        width: 40,
+        marginRight: 15,
+    },
+    avatarText: {
+        fontSize: 15,
+    },
+    roomie: {
+        padding: 5,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        marginBottom: 5,
+        marginTop: 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    roomieName: {
+        fontSize: 20,
+        fontFamily: 'SourceSans3SemiBold',
+        lineHeight: 30,
     },
 });
 

@@ -8,7 +8,7 @@ const flatprofiles = [
         numberOfRoommates: 5,
         roomSize: 20.0,
         numberOfBaths: 2,
-        roommmates: [
+        roommates: [
             {
                 id: 5,
                 firstName: 'Samuel',
@@ -38,6 +38,8 @@ const flatprofiles = [
                 tags: ['SPORTS', 'WOKO'],
                 pictureReference: [
                     'https://pbs.twimg.com/profile_images/915010075734941696/Roxn5c0I_400x400.jpg',
+                    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHdvbWFuJTIwcHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80',
+                    'https://pbs.twimg.com/profile_images/915010075734941696/Roxn5c0I_400x400.jpg',
                 ],
                 creationDate: '2022-04-19',
                 onlineStatus: 'Offline',
@@ -56,7 +58,7 @@ const flatprofiles = [
                 biography: 'King Louis',
                 tags: ['CULTURE', 'WINE'],
                 pictureReference: [
-                    'https://pbs.twimg.com/profile_images/915010075734941696/Roxn5c0I_400x400.jpg',
+                    'https://pbs.twimg.com/profile_images/3383710369/ca4291b8d16067615b935454a476f543_400x400.jpeg',
                 ],
                 creationDate: '2022-04-19',
                 onlineStatus: 'Offline',
@@ -66,11 +68,12 @@ const flatprofiles = [
             },
             {
                 id: 8,
-                firstName: 'Lou-Noëlle',
+                firstName: 'Lou',
                 lastName: 'Michel',
                 isComplete: false,
                 description: 'Not often home, always travelling....',
                 biography: 'coming soon...',
+                pictureReference: [],
                 tags: ['COFFEE'],
                 creationDate: '2022-04-19',
                 onlineStatus: 'Offline',
@@ -101,7 +104,7 @@ const flatprofiles = [
         numberOfRoommates: 4,
         roomSize: 19.0,
         numberOfBaths: 1,
-        roommmates: [
+        roommates: [
             {
                 id: 10,
                 firstName: 'Cyril',

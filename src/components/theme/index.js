@@ -35,6 +35,10 @@ export const TextBlock = (props) => (
     </Box>
 );
 
+export const Strong = (props) => (
+    <Text style={{ ...styles.label, ...props.style }}>{props.children}</Text>
+);
+
 export const NormalText = (props) => (
     <Text style={{ ...styles.text, ...props.style }}>{props.children}</Text>
 );

@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     },
     image: {
         borderRadius: 20,
-        width: ITEM_WIDTH,
         height: '100%',
     },
     gradientContainer: {

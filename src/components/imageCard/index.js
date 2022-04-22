@@ -1,7 +1,21 @@
 import { React, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { View, Text, Pressable, TouchableOpacity, Image } from 'react-native';
-import { Box, NormalText, PinkBackground, TextBlock, Title } from '../theme';
+import {
+    View,
+    Text,
+    Pressable,
+    TouchableOpacity,
+    Image,
+    Dimensions,
+} from 'react-native';
+import {
+    Box,
+    NormalText,
+    PinkBackground,
+    Strong,
+    TextBlock,
+    Title,
+} from '../theme';
 import { ProfilePicture } from '../profilePicture';
 import en from '../../resources/strings/en.json';
 import styles from './styles';
@@ -12,6 +26,8 @@ import { InputBox, InputLabel } from '../input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { ImageGallery } from '../imageGallery';
 import { LinearGradient } from 'expo-linear-gradient';
+
+const ITEM_WIDTH = Dimensions.get('window').width - 80;
 
 export const ImageCard = (props) => {
     return (
@@ -30,14 +46,18 @@ export const ImageCard = (props) => {
                 <ImageGallery
                     imageRefs={props.profile.pictureReference}
                     onDoubleTap={props.onDoubleTap}
+                    height="100%"
+                    itemWidth={ITEM_WIDTH}
+                    sliderWidth={ITEM_WIDTH}
+                    overlay
                 />
                 <Pressable style={styles.description} onPress={props.onPress}>
                     <InputLabel style={styles.text}>
                         {en.discover.description}
                     </InputLabel>
-                    <NormalText style={{ ...styles.text, ...styles.smaller }}>
+                    <Strong style={{ ...styles.text, ...styles.smaller }}>
                         {props.profile.description}
-                    </NormalText>
+                    </Strong>
                 </Pressable>
             </View>
         </PinkBackground>

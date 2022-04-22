@@ -90,6 +90,7 @@
     "discover": {
         "heading": "Discover",
         "description": "Description",
-        "tags": "Tags"
+        "tags": "Tags",
+        "roommates": "Room8s"
     }
 }

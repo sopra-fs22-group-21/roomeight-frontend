@@ -6,14 +6,18 @@ export const ProfilePicture = (props) => {
     if (props.image) {
         return (
             <Image
-                style={[styles.imageProfile, props.style]}
+                style={{ ...styles.imageProfile, ...props.style }}
                 source={{ uri: props.image }}
             />
         );
     } else {
         return (
-            <View style={[styles.backgroundProfile, props.style]}>
-                <Text style={styles.placeholderProfile}>{props.initials}</Text>
+            <View style={{ ...styles.backgroundProfile, ...props.style }}>
+                <Text
+                    style={{ ...styles.placeholderProfile, ...props.textStyle }}
+                >
+                    {props.initials}
+                </Text>
             </View>
         );
     }

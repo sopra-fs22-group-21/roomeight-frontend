@@ -61,6 +61,11 @@ const styles = StyleSheet.create({
         color: '#404040',
         alignSelf: 'center',
     },
+    label: {
+        fontFamily: 'SourceSans3SemiBold',
+        fontSize: 18,
+        lineHeight: 24,
+    },
     pink: {
         backgroundColor: colors.secondary100,
         justifyContent: 'flex-start',
