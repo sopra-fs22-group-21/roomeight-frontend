@@ -91,6 +91,7 @@
         "heading": "Discover",
         "description": "Description",
         "tags": "Tags",
-        "roommates": "Room8s"
+        "roommates": "Room8s",
+        "location": "Location"
     }
 }

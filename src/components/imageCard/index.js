@@ -52,12 +52,12 @@ export const ImageCard = (props) => {
                     overlay={true}
                 />
                 <Pressable style={styles.description} onPress={props.onPress}>
-                    <InputLabel style={styles.text}>
+                    <Strong style={styles.text}>
                         {en.discover.description}
-                    </InputLabel>
-                    <Strong style={{ ...styles.text, ...styles.smaller }}>
-                        {props.profile.description}
                     </Strong>
+                    <NormalText style={{ ...styles.text, ...styles.smaller }}>
+                        {props.profile.description}
+                    </NormalText>
                 </Pressable>
             </View>
         </PinkBackground>

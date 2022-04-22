@@ -7,16 +7,18 @@ import { ImageGallery } from '../imageGallery';
 
 const SLIDER_WIDTH = Dimensions.get('window').width - 90;
 
-export const RoommateInfoBox = (props) => {
-    const [expanded, setExpanded] = useState(false);
+const RoommateInfoBox = (props) => {
     const initials =
         props.roomie.firstName.substring(0, 1) +
         props.roomie.lastName.substring(0, 1);
     return (
-        <Pressable style={styles.roomie} onPress={() => setExpanded(!expanded)}>
-            <View style={expanded ? styles.vertical : styles.horizontal}>
+        <Pressable
+            style={styles.roomie}
+            onPress={() => props.onPress(props.id)}
+        >
+            <View style={props.expanded ? styles.vertical : styles.horizontal}>
                 <View style={styles.horizontal}>
-                    {expanded ? (
+                    {props.expanded ? (
                         <View style={styles.gallery}>
                             <ImageGallery
                                 imageRefs={props.roomie.pictureReference}
@@ -36,7 +38,9 @@ export const RoommateInfoBox = (props) => {
                             }
                             initials={initials}
                             style={
-                                expanded ? styles.expandedAvatar : styles.avatar
+                                props.expanded
+                                    ? styles.expandedAvatar
+                                    : styles.avatar
                             }
                             textStyle={styles.avatarText}
                         />
@@ -46,7 +50,7 @@ export const RoommateInfoBox = (props) => {
                     <Strong style={styles.roomieName}>
                         {props.roomie.firstName} {props.roomie.lastName}
                     </Strong>
-                    {expanded ? (
+                    {props.expanded ? (
                         <>
                             <NormalText style={styles.smaller}>
                                 {props.roomie.biography}
@@ -59,5 +63,25 @@ export const RoommateInfoBox = (props) => {
                 </View>
             </View>
         </Pressable>
+    );
+};
+
+export const Roommates = (props) => {
+    const [expanded, setExpanded] = useState(null);
+    console.log(expanded);
+    return (
+        <>
+            {props.roomies.map((roomie) => (
+                <RoommateInfoBox
+                    roomie={roomie}
+                    id={roomie.id}
+                    key={roomie.id}
+                    onPress={(id) => {
+                        setExpanded(expanded != id ? id : null);
+                    }}
+                    expanded={expanded === roomie.id}
+                />
+            ))}
+        </>
     );
 };

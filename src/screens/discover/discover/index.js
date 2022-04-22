@@ -32,7 +32,7 @@ import {
 import { Button } from 'react-native-elements/dist/buttons/Button';
 import { SecondaryButton } from '../../../components/button';
 
-const ITEM_HEIGHT = Dimensions.get('window').height - 300;
+const ITEM_HEIGHT = Dimensions.get('window').height - 210;
 
 const Discover = ({ navigation }) => {
     const carousel = useRef(null);
@@ -114,7 +114,9 @@ const Discover = ({ navigation }) => {
                         vertical
                         onSnapToItem={(index) => removeProfile(index - 1)}
                     />
-                    <Box style={styles.bottom}>
+
+                    {/*
+                        <Box style={styles.bottom}>
                         <SecondaryButton
                             onPress={() =>
                                 setState({
@@ -129,8 +131,10 @@ const Discover = ({ navigation }) => {
                             }
                         >
                             Reset
-                        </SecondaryButton>
+                        </SecondaryButton> 
+                        
                     </Box>
+                        */}
                 </Inner>
             </Container>
         </Screen>
