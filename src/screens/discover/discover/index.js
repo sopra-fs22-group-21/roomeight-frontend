@@ -39,7 +39,10 @@ const Discover = ({ navigation }) => {
     const initialProfiles = flatprofiles;
     const [like, setLike] = useState(false);
     const [state, setState] = useState({
-        profiles: [...initialProfiles, { textIfNoData: 'Nothing to discover...' }]
+        profiles: [
+            ...initialProfiles,
+            { textIfNoData: 'Nothing to discover...' },
+        ],
     });
     //const { userprofile } = useSelector((state) => state.userprofileState);
 
@@ -111,11 +114,24 @@ const Discover = ({ navigation }) => {
                         vertical
                         onSnapToItem={(index) => removeProfile(index - 1)}
                     />
-                    <Box style={styles.bottom} >
-                    <SecondaryButton onPress={() => setState({profiles: [...initialProfiles, { textIfNoData: 'Nothing to discover...' }]})}>Reset</SecondaryButton>
+                    <Box style={styles.bottom}>
+                        <SecondaryButton
+                            onPress={() =>
+                                setState({
+                                    profiles: [
+                                        ...initialProfiles,
+                                        {
+                                            textIfNoData:
+                                                'Nothing to discover...',
+                                        },
+                                    ],
+                                })
+                            }
+                        >
+                            Reset
+                        </SecondaryButton>
                     </Box>
                 </Inner>
-                
             </Container>
         </Screen>
     );
