@@ -96,17 +96,18 @@ export const loadMessages = (chatId) => (dispatch) => {
         orderByChild('createdAt'),
         limitToLast(100)
     );
-    get(queryParams).then((snapshot) => {
-        if (snapshot.exists()) {
-            console.log(snapshot.val());
-            snapshot.forEach((message) => {
-                console.log(message.val());
-            });
-            const messages = snapshot.val();
-            dispatch(loadMessagesSuccess(chatId, messages));
-        }
-    })
-    .catch((error) => {
+    get(queryParams)
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val());
+                snapshot.forEach((message) => {
+                    console.log(message.val());
+                });
+                const messages = snapshot.val();
+                dispatch(loadMessagesSuccess(chatId, messages));
+            }
+        })
+        .catch((error) => {
             dispatch(loadMessagesFailure(error));
         });
 };
@@ -116,7 +117,7 @@ export const loadMessages = (chatId) => (dispatch) => {
  * @param {string} chatId the chatid to listen to
  * @dispatches {@link Constants.CHAT_INFO_LISTENER_STARTED } on request start
  * @dispatches {@link Constants.CHAT_INFO_CHANGE} on changes to the db
- * @returns unsubsribe object 
+ * @returns unsubsribe object
  */
 export const chatInfoListener = (chatid) => (dispatch) => {
     dispatch({

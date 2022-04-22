@@ -14,7 +14,8 @@ export const Chatroom = ({ route, navigartion }) => {
     const { auth } = useSelector((state) => state.authState);
     const dispatch = useDispatch();
     const previousMessages = useSelector(
-        (state) => state.chatState.messages[`${route.params.chatId}`]);
+        (state) => state.chatState.messages[`${route.params.chatId}`]
+    );
     const [messages, setMessages] = useState([]);
 
     //sets messages to previous messages if they exist
