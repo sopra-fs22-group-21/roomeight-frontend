@@ -30,8 +30,8 @@ const chatState = (state = initialState, action) => {
                 ...state,
                 messages: {
                     ...state.messages,
-                    [action.payload.chatid]: {
-                        ...state.messages[action.payload.chatid],
+                    [action.payload.chatId]: {
+                        ...state.messages[action.payload.chatId],
                         [action.payload.messages._id]: action.payload.messages,
                     },
                 },
@@ -41,7 +41,7 @@ const chatState = (state = initialState, action) => {
                 ...state,
                 messages: {
                     ...state.messages,
-                    [action.payload.chatid]: action.payload.messages,
+                    [action.payload.chatId]: action.payload.messages,
                 },
             };
 

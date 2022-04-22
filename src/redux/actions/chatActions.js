@@ -15,9 +15,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { database } from '../../../firebase/firebase-config';
 import * as Constants from '../constants';
 
-const chatMembershipChange = (chatid) => ({
+const chatMembershipChange = (chatId) => ({
     type: Constants.CHAT_MEMBERSHIP_CHANGE,
-    payload: chatid,
+    payload: chatId,
 });
 
 const chatInfoChange = (chatInfo) => ({
@@ -25,14 +25,14 @@ const chatInfoChange = (chatInfo) => ({
     payload: chatInfo,
 });
 
-const newChatMessage = (chatid, messages) => ({
+const newChatMessage = (chatId, messages) => ({
     type: Constants.NEW_CHAT_MESSAGE,
-    payload: { chatid, messages },
+    payload: { chatId, messages },
 });
 
-const loadMessagesSuccess = (chatid, messages) => ({
+const loadMessagesSuccess = (chatId, messages) => ({
     type: Constants.LOAD_MESSAGES_SUCCESS,
-    payload: { chatid, messages },
+    payload: { chatId, messages },
 });
 
 const loadMessagesFailure = (error) => ({
@@ -89,8 +89,7 @@ export const loadMessages = (chatId) => (dispatch) => {
         type: Constants.LOAD_MESSAGES_REQUEST,
         payload: chatId,
     });
-    const db = getDatabase();
-    const messageRef = ref(db, '/messages/' + chatId);
+    const messageRef = ref(database, '/messages/' + chatId);
     const queryParams = query(
         messageRef,
         orderByChild('createdAt'),
@@ -113,18 +112,18 @@ export const loadMessages = (chatId) => (dispatch) => {
 };
 
 /**
- * starts a listener to the chat information of the chatid provided
- * @param {string} chatId the chatid to listen to
+ * starts a listener to the chat information of the chatId provided
+ * @param {string} chatId the chatId to listen to
  * @dispatches {@link Constants.CHAT_INFO_LISTENER_STARTED } on request start
  * @dispatches {@link Constants.CHAT_INFO_CHANGE} on changes to the db
  * @returns unsubsribe object
  */
-export const chatInfoListener = (chatid) => (dispatch) => {
+export const chatInfoListener = (chatId) => (dispatch) => {
     dispatch({
         type: Constants.CHAT_INFO_LISTENER_STARTED,
-        payload: chatid,
+        payload: chatId,
     });
-    const chatReference = ref(database, `/chats/${chatid}`);
+    const chatReference = ref(database, `/chats/${chatId}`);
     let listener = onValue(chatReference, (snapshot) => {
         const chatInfo = snapshot.val();
         console.log(chatInfo);
@@ -132,24 +131,24 @@ export const chatInfoListener = (chatid) => (dispatch) => {
             dispatch(chatInfoChange(chatInfo));
         }
     });
-    dispatch(loadMessages(chatid));
-    dispatch(chatMessagesListener(chatid));
+    dispatch(loadMessages(chatId));
+    dispatch(chatMessagesListener(chatId));
     return listener;
 };
 
 /**
- * starts a listener to the newestMessage of the chatid provided
- * @param {string} chatId the chatid to listen to new messages
+ * starts a listener to the newestMessage of the chatId provided
+ * @param {string} chatId the chatId to listen to new messages
  * @dispatches {@link Constants.CHAT_MESSAGES_LISTENER_STARTED } on request start
  * @dispatches {@link newChatMessage } on changes to the messages
  * @returns unsubsribe object
  */
-export const chatMessagesListener = (chatid) => (dispatch) => {
+export const chatMessagesListener = (chatId) => (dispatch) => {
     dispatch({
         type: Constants.CHAT_MESSAGES_LISTENER_STARTED,
-        payload: chatid,
+        payload: chatId,
     });
-    const chatReference = ref(database, `/messages/${chatid}`);
+    const chatReference = ref(database, `/messages/${chatId}`);
     const queryParams = query(
         chatReference,
         orderByChild('createdAt'),
@@ -158,7 +157,7 @@ export const chatMessagesListener = (chatid) => (dispatch) => {
     let listener = onChildAdded(queryParams, (snapshot) => {
         const messages = snapshot.val();
         if (snapshot.exists()) {
-            dispatch(newChatMessage(chatid, messages));
+            dispatch(newChatMessage(chatId, messages));
         }
     });
     return listener;
@@ -194,7 +193,7 @@ export const sendMessage = (message, chatId) => async (dispatch, getState) => {
 };
 
 /**
- * writes a new chatid to the db and updates the chats state via the {@link chatMembershipChange}
+ * writes a new chatId to the db and updates the chats state via the {@link chatMembershipChange}
  * @param {chatInfoObject} chatInfo
  * @dispatches {@link Constants.CREATE_CHAT_REQUEST } on request start
  * @dispatches {@link Constants.CREATE_CHAT_SUCCESS } on success
