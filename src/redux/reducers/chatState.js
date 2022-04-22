@@ -1,8 +1,9 @@
 import * as Constants from '../constants';
 
 const initialState = {
-    chats: {},
+    chats: null,
     messages: {},
+    memberships: null,
 };
 
 const chatState = (state = initialState, action) => {
@@ -10,31 +11,38 @@ const chatState = (state = initialState, action) => {
         case Constants.CHAT_MEMBERSHIP_CHANGE:
             return {
                 ...state,
-                chats: action.payload,
+                memberships: {
+                    ...state.memberships,
+                    [action.payload]: true,
+                },
             };
 
         case Constants.CHAT_INFO_CHANGE:
-            state.chats[action.payload.chatid] = action.payload.chat;
             return {
                 ...state,
+                chats: {
+                    ...state.chats,
+                    [action.payload._id]: action.payload,
+                },
             };
-        case Constants.CHAT_MESSAGES_CHANGE:
-            //state.messages[action.payload.chatid] = action.payload.messages;
+        case Constants.NEW_CHAT_MESSAGE:
             return {
                 ...state,
                 messages: {
                     ...state.messages,
                     [action.payload.chatid]: {
                         ...state.messages[action.payload.chatid],
-                        ...action.payload.messages,
+                        [action.payload.messages._id]: action.payload.messages,
                     },
                 },
             };
-        case Constants.SEND_MESSAGE_SUCCESS:
-            state.messages[action.payload.chatid][action.payload.messageid] =
-                action.payload.message;
+        case Constants.LOAD_MESSAGES_SUCCESS:
             return {
                 ...state,
+                messages: {
+                    ...state.messages,
+                    [action.payload.chatid]: action.payload.messages,
+                },
             };
 
         default:

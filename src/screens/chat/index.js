@@ -1,9 +1,10 @@
-import { FlatList, Heading } from 'native-base';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { Button, FlatList, Heading } from 'native-base';
+import React from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ChatListItem from '../../components/ChatListItem';
 import CreateNewChat from '../../components/createNewChat';
 import { Container, Screen } from '../../components/theme';
+import { loadMessages } from '../../redux/actions/chatActions';
 
 const Chat = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -29,6 +30,15 @@ const Chat = ({ navigation }) => {
                     />
                 )}
                 {!chats && <Heading size="xl">No chats yet</Heading>}
+                <Button
+                    onPress={() => {
+                        dispatch(
+                            loadMessages(
+                                'CHAT-2fc014ea-0c76-468f-9451-1199e49d3207'
+                            )
+                        );
+                    }}
+                />
             </Container>
         </Screen>
     );

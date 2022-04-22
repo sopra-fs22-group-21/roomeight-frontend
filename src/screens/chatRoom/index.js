@@ -14,9 +14,7 @@ export const Chatroom = ({ route, navigartion }) => {
     const { auth } = useSelector((state) => state.authState);
     const dispatch = useDispatch();
     const previousMessages = useSelector(
-        (state) => state.chatState.messages[`${route.params.chatId}`],
-        shallowEqual
-    );
+        (state) => state.chatState.messages[`${route.params.chatId}`]);
     const [messages, setMessages] = useState([]);
 
     //sets messages to previous messages if they exist
@@ -27,7 +25,9 @@ export const Chatroom = ({ route, navigartion }) => {
     }, []);
     //updates the messages if the store changed
     useEffect(() => {
-        setMessages(Object.values(previousMessages));
+        if (previousMessages) {
+            setMessages(Object.values(previousMessages));
+        }
     }, [previousMessages]);
 
     //callback for sending message
@@ -36,7 +36,6 @@ export const Chatroom = ({ route, navigartion }) => {
         //modify attributess
         newMessage['pending'] = true;
         newMessage['createdAt'] = new Date().getTime();
-        newMessage['lastSender'] = userprofile.firstName;
         setMessages((previousMessages) =>
             GiftedChat.append(previousMessages, newMessage)
         );

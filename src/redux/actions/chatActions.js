@@ -1,22 +1,43 @@
-import { onValue, ref, remove, set, update, push } from 'firebase/database';
+import {
+    get,
+    getDatabase,
+    limitToLast,
+    onChildAdded,
+    onValue,
+    orderByChild,
+    query,
+    ref,
+    remove,
+    update,
+} from 'firebase/database';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import { database } from '../../../firebase/firebase-config';
 import * as Constants from '../constants';
 
-const chatMembershipChange = (chats) => ({
+const chatMembershipChange = (chatid) => ({
     type: Constants.CHAT_MEMBERSHIP_CHANGE,
-    payload: chats,
+    payload: chatid,
 });
 
-const chatInfoChange = (chatid, chat) => ({
+const chatInfoChange = (chatInfo) => ({
     type: Constants.CHAT_INFO_CHANGE,
-    payload: { chatid, chat },
+    payload: chatInfo,
 });
 
-const chatMessagesChange = (chatid, messages) => ({
-    type: Constants.CHAT_MESSAGES_CHANGE,
+const newChatMessage = (chatid, messages) => ({
+    type: Constants.NEW_CHAT_MESSAGE,
     payload: { chatid, messages },
+});
+
+const loadMessagesSuccess = (chatid, messages) => ({
+    type: Constants.LOAD_MESSAGES_SUCCESS,
+    payload: { chatid, messages },
+});
+
+const loadMessagesFailure = (error) => ({
+    type: Constants.LOAD_MESSAGES_FAILURE,
+    payload: error,
 });
 
 const sendMessageFailure = (error) => ({
@@ -46,91 +67,129 @@ export const chatMemberShipListener = () => (dispatch, getState) => {
     });
     const uid = getState().authState.auth.uid;
     console.log(uid);
-    const chatReference = ref(database, `/users/${uid}`);
-    return onValue(chatReference, (snapshot) => {
-        const chatIds = snapshot.val();
-        console.log(chatIds);
-        dispatch(chatMembershipChange(chatIds));
-        dispatch(chatInfoListener());
+    const chatReference = ref(database, `/memberships/${uid}`);
+    return onChildAdded(chatReference, (snapshot) => {
+        const chatId = snapshot.key;
+        console.log(chatId);
+        if (snapshot.exists()) {
+            dispatch(chatMembershipChange(chatId));
+            dispatch(chatInfoListener(chatId));
+        }
     });
 };
+
 /**
- * starts a listener to the chat information of each chat the user is a member of
+ * initialy loads the first 100 messages of all chats
+ * @dispatches {@link Constants.LOAD_MESSAGES_REQUEST} on request start
+ * @dispatches {@link loadMessagesSuccess} on success
+ * @dispatches {@link loadMessagesFailure} on failure
+ */
+export const loadMessages = (chatId) => (dispatch) => {
+    dispatch({
+        type: Constants.LOAD_MESSAGES_REQUEST,
+        payload: chatId,
+    });
+    const db = getDatabase();
+    const messageRef = ref(db, '/messages/' + chatId);
+    const queryParams = query(
+        messageRef,
+        orderByChild('createdAt'),
+        limitToLast(100)
+    );
+    get(queryParams).then((snapshot) => {
+        if (snapshot.exists()) {
+            console.log(snapshot.val());
+            snapshot.forEach((message) => {
+                console.log(message.val());
+            });
+            const messages = snapshot.val();
+            dispatch(loadMessagesSuccess(chatId, messages));
+        }
+    })
+    .catch((error) => {
+            dispatch(loadMessagesFailure(error));
+        });
+};
+
+/**
+ * starts a listener to the chat information of the chatid provided
+ * @param {string} chatId the chatid to listen to
  * @dispatches {@link Constants.CHAT_INFO_LISTENER_STARTED } on request start
  * @dispatches {@link Constants.CHAT_INFO_CHANGE} on changes to the db
- * @returns an array of unsubsribe objects for each chat
+ * @returns unsubsribe object 
  */
-export const chatInfoListener = () => (dispatch, getState) => {
+export const chatInfoListener = (chatid) => (dispatch) => {
     dispatch({
         type: Constants.CHAT_INFO_LISTENER_STARTED,
+        payload: chatid,
     });
-    const chats = getState().chatState.chats;
-    if (!chats) {
-        return;
-    }
-    const chatids = Object.keys(getState().chatState.chats);
-    let listeners = [];
-    chatids.forEach((chatid) => {
-        const chatReference = ref(database, `/chats/${chatid}`);
-        let listener = onValue(chatReference, (snapshot) => {
-            const chatInfo = snapshot.val();
-            dispatch(chatInfoChange(chatid, chatInfo));
-        });
-        listeners.push(listener);
+    const chatReference = ref(database, `/chats/${chatid}`);
+    let listener = onValue(chatReference, (snapshot) => {
+        const chatInfo = snapshot.val();
+        console.log(chatInfo);
+        if (snapshot.exists()) {
+            dispatch(chatInfoChange(chatInfo));
+        }
     });
-    dispatch(chatMessagesListener());
-    return listeners;
+    dispatch(loadMessages(chatid));
+    dispatch(chatMessagesListener(chatid));
+    return listener;
 };
 
 /**
- * starts a listener to the messages of all chats the user is a member of
+ * starts a listener to the newestMessage of the chatid provided
+ * @param {string} chatId the chatid to listen to new messages
  * @dispatches {@link Constants.CHAT_MESSAGES_LISTENER_STARTED } on request start
- * @dispatches {@link chatMessagesChange } on changes to the messages
- * @returns
+ * @dispatches {@link newChatMessage } on changes to the messages
+ * @returns unsubsribe object
  */
-export const chatMessagesListener = () => (dispatch, getState) => {
+export const chatMessagesListener = (chatid) => (dispatch) => {
     dispatch({
         type: Constants.CHAT_MESSAGES_LISTENER_STARTED,
+        payload: chatid,
     });
-    const chatids = Object.keys(getState().chatState.chats);
-    let listeners = [];
-    chatids.forEach((chatid) => {
-        const chatReference = ref(database, `/messages/${chatid}`);
-        let listener = onValue(chatReference, (snapshot) => {
-            const messages = snapshot.val();
-            dispatch(chatMessagesChange(chatid, messages));
-        });
-        listeners.push(listener);
+    const chatReference = ref(database, `/messages/${chatid}`);
+    const queryParams = query(
+        chatReference,
+        orderByChild('createdAt'),
+        limitToLast(1)
+    );
+    let listener = onChildAdded(queryParams, (snapshot) => {
+        const messages = snapshot.val();
+        if (snapshot.exists()) {
+            dispatch(newChatMessage(chatid, messages));
+        }
     });
-    return listeners;
+    return listener;
 };
 
 /**
- * saves the message to the db and updates the messages state via the {@link chatMessagesChange}
+ * saves the message to the db and updates the messages state via the {@link newChatMessage}
  * @param {messageObject} message
  * @param {uid of the chata} chatId
  * @dispatches {@link Constants.SEND_MESSAGE_REQUEST } on request start
  * @dispatches {@link sendMessageFailure} on failure
+ * @todo why is .catch executed without error???
  */
 export const sendMessage = (message, chatId) => async (dispatch, getState) => {
     dispatch({
         type: Constants.SEND_MESSAGE_REQUEST,
+        payload: message,
     });
-    const chatReference = ref(database, `/messages/${chatId}/${message._id}`);
     const updates = {};
     updates[`/messages/${chatId}/${message._id}`] = message;
     updates[`/chats/${chatId}/lastMessage`] = message.text;
     updates[`/chats/${chatId}/timeStamp`] = message.createdAt;
-    await update(ref(database), updates, function (error) {
-        console.log('completion');
-        if (!error) {
+    updates[`/chats/${chatId}/lastSender`] = message.user.name;
+    update(ref(database), updates)
+        .then(() => {
             dispatch({
                 type: Constants.SEND_MESSAGE_SUCCESS,
             });
-        } else {
+        })
+        .catch((error) => {
             dispatch(sendMessageFailure(error));
-        }
-    });
+        });
 };
 
 /**
@@ -155,12 +214,12 @@ export const createChat = (chatInfo) => (dispatch, getState) => {
             uid1: true,
             uid2: true,
         },
-        createdAt: Date.now().getTime(),
+        createdAt: new Date().getTime(),
     };
 
     const updates = {};
     updates[`/chats/${chatId}`] = chatInfo;
-    updates[`/users/${getState().authState.auth.uid}/${chatId}`] = true;
+    updates[`/memberships/${getState().authState.auth.uid}/${chatId}`] = true;
     update(ref(database), updates)
         .then(() => {
             dispatch({
@@ -187,7 +246,7 @@ export const deleteChat = (chatId) => (dispatch, getState) => {
     references.push(ref(database, `/chats/${chatId}`));
     references.push(ref(database, `/messages/${chatId}`));
     references.push(
-        ref(database, `/users/${getState().authState.auth.uid}/${chatId}`)
+        ref(database, `/memberships/${getState().authState.auth.uid}/${chatId}`)
     );
 
     references.forEach((ref) => {
