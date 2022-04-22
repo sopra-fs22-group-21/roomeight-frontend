@@ -9,6 +9,9 @@ const SLIDER_WIDTH = Dimensions.get('window').width - 90;
 
 export const RoommateInfoBox = (props) => {
     const [expanded, setExpanded] = useState(false);
+    const initials =
+        props.roomie.firstName.substring(0, 1) +
+        props.roomie.lastName.substring(0, 1);
     return (
         <Pressable style={styles.roomie} onPress={() => setExpanded(!expanded)}>
             <View style={expanded ? styles.vertical : styles.horizontal}>
@@ -21,6 +24,7 @@ export const RoommateInfoBox = (props) => {
                                 sliderWidth={SLIDER_WIDTH}
                                 height={100}
                                 activeSlideAlignment="start"
+                                initials={initials}
                             />
                         </View>
                     ) : (
@@ -30,10 +34,7 @@ export const RoommateInfoBox = (props) => {
                                     ? props.roomie.pictureReference[0]
                                     : null
                             }
-                            initials={
-                                props.roomie.firstName.substring(0, 1) +
-                                props.roomie.lastName.substring(0, 1)
-                            }
+                            initials={initials}
                             style={
                                 expanded ? styles.expandedAvatar : styles.avatar
                             }

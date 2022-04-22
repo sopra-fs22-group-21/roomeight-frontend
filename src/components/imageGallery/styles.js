@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
     image: {
         borderRadius: 20,
         height: '100%',
+        width: '100%',
+        aspectRatio: null,
     },
     gradientContainer: {
         position: 'absolute',

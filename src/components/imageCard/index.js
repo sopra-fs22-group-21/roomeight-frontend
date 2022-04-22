@@ -49,7 +49,7 @@ export const ImageCard = (props) => {
                     height="100%"
                     itemWidth={ITEM_WIDTH}
                     sliderWidth={ITEM_WIDTH}
-                    overlay
+                    overlay={true}
                 />
                 <Pressable style={styles.description} onPress={props.onPress}>
                     <InputLabel style={styles.text}>
