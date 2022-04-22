@@ -9,38 +9,32 @@ import Tags from '../tags';
 import tags from '../../resources/strings/tags';
 import tagIcons from '../../resources/icons/tagIcons';
 import { InputBox, InputLabel } from '../input';
-import { SharedElement } from 'react-navigation-shared-element';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { ImageGallery } from '../imageGallery';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export const ImageCard = (props) => {
-    const userprofile = props.userprofile;
     return (
         <PinkBackground style={styles.pink}>
             <TouchableWithoutFeedback
                 style={styles.name}
                 onPress={props.onPress}
             >
-                <SharedElement id={userprofile.email + 'firstName'}>
-                    <Title>{userprofile.firstName}</Title>
-                </SharedElement>
+                <Title>
+                    {props.profile.firstName
+                        ? props.profile.firstName
+                        : props.profile.name}
+                </Title>
             </TouchableWithoutFeedback>
             <View style={styles.swiper}>
-                <ImageGallery imageRefs={userprofile.pictureReference} />
+                <ImageGallery imageRefs={props.profile.pictureReference} />
                 <Pressable style={styles.description} onPress={props.onPress}>
-                    <SharedElement id={userprofile.email + 'descriptionLabel'}>
-                        <InputLabel style={styles.text}>
-                            {en.discover.description}
-                        </InputLabel>
-                    </SharedElement>
-                    <SharedElement id={userprofile.email + 'description'}>
-                        <NormalText
-                            style={{ ...styles.text, ...styles.smaller }}
-                        >
-                            {userprofile.description}
-                        </NormalText>
-                    </SharedElement>
+                    <InputLabel style={styles.text}>
+                        {en.discover.description}
+                    </InputLabel>
+                    <NormalText style={{ ...styles.text, ...styles.smaller }}>
+                        {props.profile.description}
+                    </NormalText>
                 </Pressable>
             </View>
         </PinkBackground>

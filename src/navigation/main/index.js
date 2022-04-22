@@ -1,4 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import M8Loader from '../../../assets/logo/M8Loader';
@@ -9,17 +10,15 @@ import AddProfilePicture from '../../screens/create-profile/addProfilePicture';
 import ChooseStatus from '../../screens/create-profile/chooseStatus';
 import CompleteFlatProfile from '../../screens/create-profile/completeFlatProfile';
 import CompleteSingleProfile from '../../screens/create-profile/completeSingleProfile';
-import DiscoverDetail from '../../screens/discover/discoverDetail';
-import DiscoverImage from '../../screens/discover/discoverImage';
+import Discover from '../../screens/discover/discover';
 import Matches from '../../screens/matches';
 import Profile from '../../screens/profile';
 import Login from '../../screens/welcome-login-signup/login';
 import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
-import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 export default function Route() {
-    const Stack = createSharedElementStackNavigator();
+    const Stack = createStackNavigator();
     /* const linking = {
         prefixes: ['https://www.roomeight.ch', 'https://roomeight.ch'],
         config: {
@@ -107,99 +106,14 @@ export default function Route() {
     const completeComponents = (
         <>
             <Stack.Screen
-                name="DiscoverDetail"
-                component={DiscoverDetail}
+                name="Discover"
+                component={Discover}
                 options={mainOptions}
-                sharedElements={(route, otherRoute, showing) => {
-                    if (otherRoute.name.includes('Discover')) {
-                        const { item } = route.params;
-                        return [
-                            {
-                                id: userprofile.email + 'card',
-                                animation: 'fade-out',
-                                resize: 'stretch',
-                            },
-                            {
-                                id: userprofile.email + `firstName`,
-                                animation: 'fade-in',
-                            },
-                            {
-                                id: userprofile.pictureReference[0],
-                                animation: 'fade',
-                            },
-                            {
-                                id:
-                                    userprofile.pictureReference[0] +
-                                    `gradient`,
-                                animation: 'fade',
-                            },
-                            {
-                                id: `likeButtons`,
-                                animation: 'fade',
-                            },
-                            {
-                                id: userprofile.email + `descriptionLabel`,
-                                animation: 'fade',
-                                resize: 'clip',
-                            },
-                            {
-                                id: userprofile.email + `description`,
-                                animation: 'fade',
-                                resize: 'clip',
-                            },
-                        ];
-                    }
-                }}
             />
             <Stack.Screen
                 name="Profile"
                 component={Profile}
                 options={mainOptions}
-            />
-            <Stack.Screen
-                name="DiscoverImage"
-                component={DiscoverImage}
-                options={mainOptions}
-                sharedElements={(route, otherRoute, showing) => {
-                    if (otherRoute.name.includes('Discover')) {
-                        const { item } = route.params;
-                        return [
-                            {
-                                id: userprofile.email + 'card',
-                                animation: 'fade-in',
-                                resize: 'stretch',
-                            },
-                            {
-                                id: userprofile.email + `firstName`,
-                                animation: 'fade-out',
-                            },
-                            {
-                                id: userprofile.pictureReference[0],
-                                animation: 'fade',
-                            },
-                            {
-                                id:
-                                    userprofile.pictureReference[0] +
-                                    `gradient`,
-                                animation: 'fade',
-                            },
-                            {
-                                id: `likeButtons`,
-                                animation: 'fade',
-                            },
-                            {
-                                id: userprofile.email + `descriptionLabel`,
-                                animation: 'fade',
-                                resize: 'clip',
-                            },
-                            {
-                                id: userprofile.email + `description`,
-                                animation: 'fade',
-                                resize: 'clip',
-                            },
-                        ];
-                    }
-                }}
             />
             <Stack.Screen
                 name="Matches"

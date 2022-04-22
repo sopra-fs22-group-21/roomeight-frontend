@@ -1,5 +1,6 @@
 const flatprofiles = [
     {
+        id: 4,
         name: 'Schönlein',
         address: 'Schönleinstrasse 14, 8032 Zürich',
         rent: 625,
@@ -9,6 +10,7 @@ const flatprofiles = [
         numberOfBaths: 2,
         roommmates: [
             {
+                id: 5,
                 firstName: 'Samuel',
                 lastName: 'Drack',
                 isComplete: true,
@@ -27,6 +29,7 @@ const flatprofiles = [
                 isAdvertisingRoom: true,
             },
             {
+                id: 6,
                 firstName: 'Emilie',
                 lastName: 'Späth',
                 isComplete: true,
@@ -45,6 +48,7 @@ const flatprofiles = [
                 isAdvertisingRoom: true,
             },
             {
+                id: 7,
                 firstName: 'Louis',
                 lastName: 'Jetzer',
                 isComplete: true,
@@ -61,6 +65,7 @@ const flatprofiles = [
                 isAdvertisingRoom: true,
             },
             {
+                id: 8,
                 firstName: 'Lou-Noëlle',
                 lastName: 'Michel',
                 isComplete: false,
@@ -88,6 +93,7 @@ const flatprofiles = [
         moveOutDate: '',
     },
     {
+        id: 9,
         name: 'Hutten-WG',
         address: 'Huttenstrasse 58, 8006 Zürich',
         rent: 700,
@@ -97,6 +103,7 @@ const flatprofiles = [
         numberOfBaths: 1,
         roommmates: [
             {
+                id: 10,
                 firstName: 'Cyril',
                 lastName: 'Ludwig',
                 isComplete: true,
@@ -115,6 +122,7 @@ const flatprofiles = [
                 isAdvertisingRoom: true,
             },
             {
+                id: 11,
                 firstName: 'Konstantin',
                 lastName: 'Tempel',
                 isComplete: true,
@@ -133,6 +141,7 @@ const flatprofiles = [
                 isAdvertisingRoom: true,
             },
             {
+                id: 12,
                 firstName: 'Luisa',
                 lastName: 'Stückelberger',
                 isComplete: true,
