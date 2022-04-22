@@ -29,19 +29,17 @@ import {
     TapGestureHandler,
     TouchableWithoutFeedback,
 } from 'react-native-gesture-handler';
+import { Button } from 'react-native-elements/dist/buttons/Button';
+import { SecondaryButton } from '../../../components/button';
 
 const ITEM_HEIGHT = Dimensions.get('window').height - 300;
 
 const Discover = ({ navigation }) => {
     const carousel = useRef(null);
-    const doubleTapRef = useRef(null);
-    let initialProfiles = flatprofiles;
+    const initialProfiles = flatprofiles;
     const [like, setLike] = useState(false);
     const [state, setState] = useState({
-        profiles: [
-            ...initialProfiles,
-            { textIfNoData: 'Nothing to discover...' },
-        ],
+        profiles: [...initialProfiles, { textIfNoData: 'Nothing to discover...' }]
     });
     //const { userprofile } = useSelector((state) => state.userprofileState);
 
@@ -77,7 +75,7 @@ const Discover = ({ navigation }) => {
             return (
                 <>
                     <PublicProfileCard
-                        isFlat={true}
+                        isFlat={initialProfiles == flatprofiles}
                         profile={item}
                         key={item.id}
                         onDoubleTap={handleLike}
@@ -113,8 +111,11 @@ const Discover = ({ navigation }) => {
                         vertical
                         onSnapToItem={(index) => removeProfile(index - 1)}
                     />
-                    <Box style={styles.bottom} />
+                    <Box style={styles.bottom} >
+                    <SecondaryButton onPress={() => setState({profiles: [...initialProfiles, { textIfNoData: 'Nothing to discover...' }]})}>Reset</SecondaryButton>
+                    </Box>
                 </Inner>
+                
             </Container>
         </Screen>
     );
