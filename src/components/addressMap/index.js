@@ -11,7 +11,6 @@ export const AddressMap = (props) => {
         let location = json.results[0].geometry.location;
         setCoordinates(location);
     }, []);
-    console.log(coordinates);
     return (
         <>
             <MapView
