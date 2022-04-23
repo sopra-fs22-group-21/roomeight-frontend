@@ -48,14 +48,10 @@ const Discover = ({ navigation }) => {
 
     const removeProfile = (index) => {
         if (index >= 0 && state.profiles.length > 1) {
-            console.log('removing: ' + index);
             state.profiles.splice(index, 1);
-            console.log(
-                state.profiles.map((p) => p.firstName + ' ' + p.textIfNoData)
-            );
             setState({ profiles: state.profiles });
             carousel.current.snapToItem(0, false);
-        } else console.log('Why you go back');
+        }
     };
 
     const handleLike = async () => {
