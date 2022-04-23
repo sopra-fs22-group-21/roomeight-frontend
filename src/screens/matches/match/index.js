@@ -7,8 +7,7 @@ import {
     Box,
     Container,
     Inner,
-    Screen,
-    SmallHeading,
+    HeadingWithBack,
 } from '../../../components/theme';
 import flatprofiles from '../../../resources/flatprofiles';
 import { PublicProfileCard } from '../../../components/publicProfileCard';
@@ -26,15 +25,9 @@ const Match = ({ route, navigation }) => {
             navigation={navigation}
         >
             <Inner>
-                <View style={styles.row}>
-                    <Icon
-                        name="arrow-back"
-                        size={30}
-                        style={styles.icon}
-                        onPress={() => navigation.goBack()}
-                    />
-                    <SmallHeading>Matches</SmallHeading>
-                </View>
+                <HeadingWithBack navigation={navigation}>
+                    Matches
+                </HeadingWithBack>
                 <Box />
                 <PublicProfileCard
                     profile={profile}

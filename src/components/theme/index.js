@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
@@ -83,6 +84,18 @@ export const Container = (props) => {
 export const Inner = (props) => (
     <View style={styles.inner} {...props}>
         {props.children}
+    </View>
+);
+
+export const HeadingWithBack = (props) => (
+    <View style={styles.row}>
+        <Icon
+            name="arrow-back"
+            size={30}
+            style={styles.icon}
+            onPress={() => props.navigation.goBack()}
+        />
+        <SmallHeading>{props.children}</SmallHeading>
     </View>
 );
 
