@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createChat } from '../../redux/actions/chatActions';
 import { CreateNewChatButton } from '../button';
 
-const NewChat = (props) => {
+const CreateNewChat = (props) => {
     const { isOpen, onOpen, onClose } = useDisclose();
     const { matches } = useSelector(
         (state) => state.userprofileState.userprofile
@@ -66,4 +66,4 @@ const NewChat = (props) => {
     );
 };
 
-export default NewChat;
+export default CreateNewChat;

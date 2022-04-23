@@ -1,9 +1,16 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     heading: {
         fontFamily: 'SourceSans3Bold',
         fontSize: 42,
-        lineHeight: 45,
+        lineHeight: 50,
+        color: '#404040', //true gray,
+    },
+    smallHeading: {
+        fontFamily: 'SourceSans3Bold',
+        fontSize: 34,
+        lineHeight: 50,
         color: '#404040', //true gray,
     },
     title: {
@@ -31,9 +38,16 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 40,
-        marginTop: 40,
+        padding: 20,
         height: '100%',
+        paddingBottom: 0,
+    },
+    icon: {
+        paddingRight: 10,
+    },
+    row: {
+        alignItems: 'center',
+        flexDirection: 'row',
     },
     inner: {
         flex: 1,
@@ -44,6 +58,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 0,
         height: '100%',
+        minHeight: 100,
     },
 
     name: {
@@ -52,6 +67,18 @@ const styles = StyleSheet.create({
         lineHeight: 30,
         color: '#404040',
         alignSelf: 'center',
+    },
+    label: {
+        fontFamily: 'SourceSans3SemiBold',
+        fontSize: 18,
+        lineHeight: 24,
+    },
+    pink: {
+        backgroundColor: colors.secondary100,
+        justifyContent: 'flex-start',
+        borderRadius: 20,
+        padding: 20,
+        flex: 1,
     },
 });
 

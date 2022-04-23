@@ -5,29 +5,36 @@ import TagElement from '../tagelement';
 import styles from './styles';
 
 const Tags = (props) => {
-    const half = Math.ceil(tagIcons.length / 2);
-    const left = tagIcons.slice(0, half);
-    const right = tagIcons.slice(half, tagIcons.length);
+    const tagsToShow = props.tags ? props.tags : tagIcons;
+    const half = Math.ceil(tagsToShow.length / 2);
+    const left = tagsToShow.slice(0, half);
+    const right = tagsToShow.slice(half, tagsToShow.length);
     const [tags, setTags] = useState({});
 
     const toggleSelect = (selected) => {
-        const t = { ...tags, ...selected };
-        const tArray = Object.entries(t);
-        props.onChange(
-            tArray.filter((tag) => tag[1] === true).map((tag) => tag[0])
-        );
-        setTags(t);
+        if (props.onChange) {
+            const t = { ...tags, ...selected };
+            const tArray = Object.entries(t);
+            props.onChange(
+                tArray.filter((tag) => tag[1] === true).map((tag) => tag[0])
+            );
+            setTags(t);
+        }
     };
 
     return (
-        <View style={styles.box}>
+        <View style={{ ...styles.box, ...props.style }}>
             <View style={styles.column}>
                 <View style={styles.tagContainer}>
                     {left.map((tag) => (
                         <TagElement
                             key={tag.name}
                             tag={tag}
-                            onChange={(selected) => toggleSelect(selected)}
+                            onChange={
+                                props.onChange
+                                    ? (selected) => toggleSelect(selected)
+                                    : null
+                            }
                         />
                     ))}
                 </View>
@@ -38,7 +45,11 @@ const Tags = (props) => {
                         <TagElement
                             key={tag.name}
                             tag={tag}
-                            onChange={(selected) => toggleSelect(selected)}
+                            onChange={
+                                props.onChange
+                                    ? (selected) => toggleSelect(selected)
+                                    : null
+                            }
                         />
                     ))}
                 </View>

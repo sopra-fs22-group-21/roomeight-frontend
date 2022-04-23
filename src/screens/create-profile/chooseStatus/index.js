@@ -19,7 +19,9 @@ const ChooseStatus = ({ navigation }) => {
     return (
         <Container showLogout>
             <Heading>{en.chooseStatus.heading}</Heading>
-            <Title>{en.chooseStatus.title}</Title>
+            <Box>
+                <Title>{en.chooseStatus.title}</Title>
+            </Box>
             <TextBlock>{en.chooseStatus.select}</TextBlock>
             <Inner>
                 <Box>

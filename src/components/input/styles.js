@@ -8,11 +8,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         borderRadius: 4,
     },
-    label: {
-        fontFamily: 'SourceSans3SemiBold',
-        fontSize: 18,
-        lineHeight: 24,
-    },
     error: {
         backgroundColor: '#fce6e6',
     },

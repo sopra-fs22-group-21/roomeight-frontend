@@ -2,10 +2,13 @@ import { useFonts } from 'expo-font';
 import { NativeBaseProvider } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
+import { firebaseConfig } from './firebase/firebase-config';
 import Route from './src/navigation/main';
 import reduxStore from './src/redux/reduxStore.js';
+import Geocoder from 'react-native-geocoding';
 
 export default function App() {
+    Geocoder.init(firebaseConfig.apiKey);
     const [loaded] = useFonts({
         SourceSans3Black: require('./assets/fonts/SourceSans3-Black.ttf'),
         SourceSans3BlackItalic: require('./assets/fonts/SourceSans3-BlackItalic.ttf'),
