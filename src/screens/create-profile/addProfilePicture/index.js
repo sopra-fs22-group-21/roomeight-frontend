@@ -14,7 +14,7 @@ import styles from './styles';
 
 const AddProfilePicture = ({ navigation }) => {
     const [gender, setGender] = useState(genders.notSet);
-    const [description, setDescription] = useState(null);
+    const [biography, setBiography] = useState(null);
     const [image, setImage] = useState('');
     const dispatch = useDispatch();
 
@@ -56,12 +56,12 @@ const AddProfilePicture = ({ navigation }) => {
                     </InputBox>
                     <Input
                         //style={(inputstyle.Input, styles.textInput)}
-                        label={en.addProfilePicture.whoIAm}
+                        label={en.addProfilePicture.biography}
                         multiline
                         onChangeText={(text) =>
-                            setDescription({
-                                ...description,
-                                description: text,
+                            setBiography({
+                                ...biography,
+                                biography: text,
                             })
                         }
                     />
@@ -72,12 +72,12 @@ const AddProfilePicture = ({ navigation }) => {
                                 const attributes = {
                                     localPictureReference: [image],
                                     gender: gender,
-                                    ...description,
+                                    ...biography,
                                 };
                             } else {
                                 const attributes = {
                                     gender: gender,
-                                    ...description,
+                                    ...biography,
                                 };
                                 dispatch(
                                     setTransitAttributes(

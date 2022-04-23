@@ -6,12 +6,10 @@ import { Box, Container, Screen, SmallHeading } from '../../components/theme';
 
 const Matches = ({ navigation }) => {
     return (
-        <Screen navigation={navigation} showFooter>
-            <Container>
-                <SmallHeading>Matches</SmallHeading>
-                <Box />
-            </Container>
-        </Screen>
+        <Container showFooter showLogout>
+            <SmallHeading>Matches</SmallHeading>
+            <Box />
+        </Container>
     );
 };
 export default Matches;

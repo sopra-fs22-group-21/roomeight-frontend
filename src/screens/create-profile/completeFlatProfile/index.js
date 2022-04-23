@@ -107,7 +107,9 @@ const CompleteFlatProfile = ({ navigation }) => {
                     />
                     <NavigationButtons
                         onPressBack={() => navigation.goBack()}
-                        onPressNext={() => navigation.navigate('AddPictures')}
+                        onPressNext={() =>
+                            navigation.navigate('AddDescription')
+                        }
                     />
                 </ScrollView>
             </KeyboardAvoidingView>

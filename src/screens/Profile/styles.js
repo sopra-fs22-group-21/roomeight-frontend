@@ -4,18 +4,16 @@ import Colors from '../../resources/colors';
 
 const styles = StyleSheet.create({
     overview: {
-        flex: 0.6,
-        backgroundColor: colors.secondary200,
-        padding: 6,
+        backgroundColor: colors.secondary100,
+        padding: 5,
         marginTop: 5,
         marginBottom: 10,
-        height: '40%',
-        display: 'flex',
         justifyContent: 'flex-start',
         alignContent: 'center',
         borderRadius: 5,
-        opacity: 0.5,
+        //opacity: 0.5,
         flexDirection: 'row',
+        height: 130,
     },
 
     bio: {
@@ -27,18 +25,16 @@ const styles = StyleSheet.create({
     biocontainer: {
         flex: 1,
         paddingTop: 40,
-        paddingBottom: 0,
+        paddingBottom: 10,
         marginTop: 40,
         marginBottom: 0,
         height: '100%',
     },
 
     text: {
-        fontFamily: 'SourceSans3Regular',
+        fontFamily: 'SourceSans3SemiBold',
         fontSize: 16,
-        alignContent: 'center',
-        color: 'black',
-        marginBottom: 20,
+        lineHeight: 24,
     },
     tab: {
         backgroundColor: 'transparent',
@@ -49,30 +45,35 @@ const styles = StyleSheet.create({
         marginBottom: 0,
     },
     indicator: {
-        backgroundColor: '#0E7490',
+        backgroundColor: colors.primary600,
         height: 2,
         width: '50%',
         marginBottom: 0,
     },
     container: {
         flex: 1,
-        padding: 30,
-        marginTop: 0,
+        padding: 0,
+        marginTop: 20,
         paddingTop: 0,
-        marginBottom: 0,
+        marginBottom: 60,
         height: '100%',
     },
-    scrolling: {
-        backgroundColor: '#e7e5e4',
-        padding: 10,
-        paddingBottom: 0,
-        marginTop: 0,
-        marginBottom: 0,
+    inner: {
+        flex: 1,
+    },
+    box: {
         display: 'flex',
-        justifyContent: 'flex-start',
-        alignContent: 'center',
-        borderRadius: 5,
-        opacity: 0.5,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        padding: 2,
+        height: '100%',
+    },
+    choice: {
+        backgroundColor: 'white',
+        borderColor: 'white',
+        height: '100%',
+        width: '50%',
     },
 });
 export default styles;
