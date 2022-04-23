@@ -1,3 +1,4 @@
+import colors from '../../resources/colors';
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     button: {
@@ -26,14 +27,14 @@ const styles = StyleSheet.create({
     secondary: {
         borderRadius: 4,
         borderWidth: 1,
-        borderColor: '#F9A8D4',
+        borderColor: colors.secondary300,
         backgroundColor: 'white',
     },
     secondaryPressed: {
         backgroundColor: '#FBCFE8',
     },
     secondaryLabel: {
-        color: '#EC4899',
+        color: colors.secondary500,
         fontFamily: 'SourceSans3SemiBold',
         fontSize: 16,
     },

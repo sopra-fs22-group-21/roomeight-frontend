@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
-import { ProfilePicture } from '../../components/pictureRender';
+import { ProfilePicture } from '../../components/profilePicture';
 import {
     Container,
     Name,
@@ -38,45 +38,45 @@ const Profile = ({ navigation }) => {
         console.log(userprofile);
     }
     return (
-        <Screen navigation={navigation}>
-            <Container style={styles.biocontainer}>
-                <Name>
-                    {userprofile.firstName + ' ' + userprofile.lastName}
-                </Name>
-                <Box style={styles.overview}>
-                    <ProfilePicture />
-                    <Container style={styles.bio}>
-                        <Text style={styles.text}>{userprofile.biography}</Text>
-                    </Container>
-                </Box>
-                <Tab
-                    value={index}
-                    onChange={(e) => {
-                        setIndex(e);
+        <Container
+            style={styles.biocontainer}
+            navigation={navigation}
+            showNavBar
+        >
+            <Name>{userprofile.firstName + ' ' + userprofile.lastName}</Name>
+            <Box style={styles.overview}>
+                <ProfilePicture />
+                <Container style={styles.bio}>
+                    <Text style={styles.text}>{userprofile.biography}</Text>
+                </Container>
+            </Box>
+            <Tab
+                value={index}
+                onChange={(e) => {
+                    setIndex(e);
+                }}
+                indicatorStyle={styles.indicator}
+                variant="primary"
+            >
+                <Tab.Item
+                    containerStyle={styles.tab}
+                    icon={{
+                        name: 'user-alt',
+                        type: 'font-awesome-5',
+                        color: 'black',
+                        size: 12,
                     }}
-                    indicatorStyle={styles.indicator}
-                    variant="primary"
-                >
-                    <Tab.Item
-                        containerStyle={styles.tab}
-                        icon={{
-                            name: 'user-alt',
-                            type: 'font-awesome-5',
-                            color: 'black',
-                            size: 12,
-                        }}
-                    />
-                    <Tab.Item
-                        containerStyle={styles.tab}
-                        icon={{
-                            name: 'groups',
-                            type: 'material-icons',
-                            color: 'black',
-                            size: 25,
-                        }}
-                    />
-                </Tab>
-            </Container>
+                />
+                <Tab.Item
+                    containerStyle={styles.tab}
+                    icon={{
+                        name: 'groups',
+                        type: 'material-icons',
+                        color: 'black',
+                        size: 25,
+                    }}
+                />
+            </Tab>
             {index === 0 ? (
                 <Container style={styles.container}>
                     <ScrollView>
@@ -129,7 +129,7 @@ const Profile = ({ navigation }) => {
                     </ScrollView>
                 </Container>
             )}
-        </Screen>
+        </Container>
     );
 };
 

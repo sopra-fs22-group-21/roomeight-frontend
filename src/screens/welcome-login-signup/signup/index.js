@@ -40,7 +40,9 @@ const Signup = ({ navigation }) => {
                 <KeyboardAvoidingView style={styles.inner} behavior="padding">
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <Heading>{en.signup.heading}</Heading>
-                        <Title>{en.signup.title}</Title>
+                        <Box>
+                            <Title>{en.signup.title}</Title>
+                        </Box>
                         <TextBlock>{en.signup.enterDetails}</TextBlock>
                         <Input
                             label={en.signup.email}

@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../resources/colors';
 import Colors from '../../resources/colors';
 
 const styles = StyleSheet.create({
     overview: {
-        backgroundColor: '#FBCFE8',
-        padding: 10,
-        paddingBottom: 0,
+        flex: 0.6,
+        backgroundColor: colors.secondary200,
+        padding: 6,
         marginTop: 5,
         marginBottom: 10,
         height: '40%',

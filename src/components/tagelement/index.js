@@ -6,10 +6,12 @@ import styles from './styles';
 const TagElement = (props) => {
     const [tag, setTag] = useState(props.tag);
     const handlePress = () => {
-        let selected = {};
-        selected[tag.name] = !tag.isSelected;
-        props.onChange(selected);
-        setTag({ ...tag, isSelected: !tag.isSelected });
+        if (props.onChange) {
+            let selected = {};
+            selected[tag.name] = !tag.isSelected;
+            props.onChange(selected);
+            setTag({ ...tag, isSelected: !tag.isSelected });
+        }
     };
 
     return (

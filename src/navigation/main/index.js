@@ -10,16 +10,15 @@ import AddProfilePicture from '../../screens/create-profile/addProfilePicture';
 import ChooseStatus from '../../screens/create-profile/chooseStatus';
 import CompleteFlatProfile from '../../screens/create-profile/completeFlatProfile';
 import CompleteSingleProfile from '../../screens/create-profile/completeSingleProfile';
-import Discover from '../../screens/discover';
+import Discover from '../../screens/discover/discover';
 import Matches from '../../screens/matches';
 import Profile from '../../screens/profile';
 import Login from '../../screens/welcome-login-signup/login';
 import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
 
-const Stack = createStackNavigator();
-
 export default function Route() {
+    const Stack = createStackNavigator();
     /* const linking = {
         prefixes: ['https://www.roomeight.ch', 'https://roomeight.ch'],
         config: {
@@ -93,29 +92,35 @@ export default function Route() {
             />
         </>
     );
-
+    const mainOptions = {
+        headerShown: false,
+        gestureEnabled: false,
+        cardStyleInterpolator: ({ current: { progress } }) => {
+            return {
+                cardStyle: {
+                    opacity: progress,
+                },
+            };
+        },
+    };
     const completeComponents = (
         <>
             <Stack.Screen
-                name="Profile"
-                component={Profile}
-                options={{ headerShown: false, animationEnabled: false }}
-            />
-            <Stack.Screen
                 name="Discover"
                 component={Discover}
-                options={{ headerShown: false, animationEnabled: false }}
+                options={mainOptions}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={mainOptions}
             />
             <Stack.Screen
                 name="Matches"
                 component={Matches}
-                options={{ headerShown: false, animationEnabled: false }}
+                options={mainOptions}
             />
-            <Stack.Screen
-                name="Chat"
-                component={Chat}
-                options={{ headerShown: false, animationEnabled: false }}
-            />
+            <Stack.Screen name="Chat" component={Chat} options={mainOptions} />
         </>
     );
 

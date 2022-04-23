@@ -65,7 +65,9 @@ const AddPictures = ({ navigation }) => {
 
     return (
         <Container>
-            <Title>{en.addPictures.heading}</Title>
+            <Box>
+                <Title>{en.addPictures.heading}</Title>
+            </Box>
 
             <FlatList
                 data={pictureSelectors}
