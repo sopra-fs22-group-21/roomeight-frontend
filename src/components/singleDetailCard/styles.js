@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingTop: 10,
     },
+    card: {
+        flex: 1,
+    },
     text: {
         fontSize: 14,
         paddingBottom: 4,
@@ -27,6 +30,13 @@ const styles = StyleSheet.create({
     tags: {
         paddingLeft: 0,
     },
+    /* messageButton: {
+        position: 'absolute',
+        bottom: 0,
+        width: '80%',
+        textAlign: 'center',
+        alignSelf: 'center',
+    }, */
 });
 
 export default styles;

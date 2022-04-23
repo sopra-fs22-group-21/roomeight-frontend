@@ -94,6 +94,7 @@ const flatprofiles = [
         onlineStatus: 'Offline',
         moveInDate: '2022-05-01',
         moveOutDate: '',
+        isFlat: true,
     },
     {
         id: 9,
@@ -174,6 +175,7 @@ const flatprofiles = [
         onlineStatus: 'Offline',
         moveInDate: '2022-04-01',
         moveOutDate: '',
+        isFlat: true,
     },
 ];
 

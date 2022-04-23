@@ -23,14 +23,15 @@ const userprofiles = [
         isAdvertisingRoom: false,
         moveInDate: '2022-04-21',
         moveOutDate: '',
+        isFlat: false,
     },
     {
         id: 2,
         firstName: 'John',
-        lastName: 'Stückelberger',
+        lastName: 'Müller',
         isComplete: true,
         description:
-            "Hi, I'm John, I'm super fun and cool. I am looking for a place to stay for the next 4 weeks since I am only in town for an internship. Love to meet new people and have some fun",
+            "Hi, I'm John, I'm super fun and cool. I am looking for a place to stay for the next 4 weeks since I am only in town for an internship. Love to meet new people and have some fun. Lorem ipsum asdf asdf asdf asdf asdf asdf asdf asdf asd fasdf asdf asdf asdf asdf asdf asdf asdf ",
         biography: '22 y/o student @UZH',
         tags: ['COOKING', 'SPORTS', 'INSTRUMENTS', 'JUWO'],
         pictureReference: [
@@ -48,11 +49,12 @@ const userprofiles = [
         isAdvertisingRoom: false,
         moveInDate: '2022-04-21',
         moveOutDate: '',
+        isFlat: false,
     },
     {
         id: 3,
         firstName: 'Marco',
-        lastName: 'Stückelberger',
+        lastName: 'Leder',
         isComplete: true,
         description:
             "Hi, I'm John, I'm super fun and cool. I am looking for a place to stay for the next 4 weeks since I am only in town for an internship. Love to meet new people and have some fun",
@@ -73,6 +75,7 @@ const userprofiles = [
         isAdvertisingRoom: false,
         moveInDate: '2022-04-21',
         moveOutDate: '',
+        isFlat: false,
     },
 ];
 export default userprofiles;

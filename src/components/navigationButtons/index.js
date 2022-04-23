@@ -34,7 +34,7 @@ export const NextButton = (props) => (
 );
 
 export const NavigationButtons = (props) => (
-    <Box style={styles.container}>
+    <View style={styles.container}>
         {props.onPressBack != null ? (
             <BackButton onPress={props.onPressBack} />
         ) : (
@@ -48,5 +48,5 @@ export const NavigationButtons = (props) => (
         ) : (
             <View />
         )}
-    </Box>
+    </View>
 );

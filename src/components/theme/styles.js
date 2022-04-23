@@ -38,8 +38,9 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 40,
-        marginTop: 40,
+        padding: 20,
+        paddingBottom: 60,
+        marginTop: 60,
         height: '100%',
     },
     inner: {

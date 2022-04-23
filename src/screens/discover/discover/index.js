@@ -74,7 +74,6 @@ const Discover = ({ navigation }) => {
             return (
                 <>
                     <PublicProfileCard
-                        isFlat={initialProfiles == flatprofiles}
                         profile={item}
                         key={item.id}
                         onDoubleTap={handleLike}
@@ -95,43 +94,20 @@ const Discover = ({ navigation }) => {
 
     return (
         <Screen navigation={navigation} showFooter>
-            <Container style={styles.container}>
+            <Container>
                 <SmallHeading>Discover</SmallHeading>
                 <Box />
-                <Inner>
-                    <Carousel
-                        ref={carousel}
-                        data={state.profiles}
-                        renderItem={card}
-                        sliderHeight={ITEM_HEIGHT}
-                        itemHeight={ITEM_HEIGHT}
-                        inactiveSlideShift={0}
-                        useScrollView={true}
-                        vertical
-                        onSnapToItem={(index) => removeProfile(index - 1)}
-                    />
-
-                    {/*
-                        <Box style={styles.bottom}>
-                        <SecondaryButton
-                            onPress={() =>
-                                setState({
-                                    profiles: [
-                                        ...initialProfiles,
-                                        {
-                                            textIfNoData:
-                                                'Nothing to discover...',
-                                        },
-                                    ],
-                                })
-                            }
-                        >
-                            Reset
-                        </SecondaryButton> 
-                        
-                    </Box>
-                        */}
-                </Inner>
+                <Carousel
+                    ref={carousel}
+                    data={state.profiles}
+                    renderItem={card}
+                    sliderHeight={ITEM_HEIGHT}
+                    itemHeight={ITEM_HEIGHT}
+                    inactiveSlideShift={0}
+                    useScrollView={true}
+                    vertical
+                    onSnapToItem={(index) => removeProfile(index - 1)}
+                />
             </Container>
         </Screen>
     );
