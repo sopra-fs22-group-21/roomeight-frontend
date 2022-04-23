@@ -14,5 +14,9 @@ export const DoubleTap = (props) => {
         setLast(new Date().getTime());
     };
 
-    return <Pressable onPress={handlePress}>{props.children}</Pressable>;
+    return (
+        <Pressable onPress={handlePress} {...props}>
+            {props.children}
+        </Pressable>
+    );
 };

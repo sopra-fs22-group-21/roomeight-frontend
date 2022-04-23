@@ -1,13 +1,6 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 0,
-        paddingTop: 20,
-        paddingLeft: 20,
-        paddingRight: 20,
-        marginTop: 40,
-    },
     heading: {
         fontSize: 12,
     },

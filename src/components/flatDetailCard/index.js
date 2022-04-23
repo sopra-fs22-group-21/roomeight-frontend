@@ -18,7 +18,6 @@ import tagIcons from '../../resources/icons/tagIcons';
 import { InputBox, InputLabel } from '../input';
 import { DoubleTap } from '../doubleTap';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Roommates } from '../roommates';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { SecondaryButton } from '../button';
 import { Icon } from 'react-native-elements';
@@ -26,6 +25,7 @@ import colors from '../../resources/colors';
 import Geocoder from 'react-native-geocoding';
 import { AddressMap } from '../addressMap';
 import { setCurrentScreen } from 'firebase/analytics';
+import { Profiles } from '../profiles';
 
 const ITEM_WIDTH = Dimensions.get('window').width - 80;
 
@@ -63,7 +63,7 @@ export const FlatDetailCard = (props) => {
         <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Strong>{en.discover.roommates}</Strong>
-                <Roommates roomies={flatprofile.roommates} />
+                <Profiles profiles={flatprofile.roommates} />
             </ScrollView>
         </DoubleTap>
     );
@@ -97,6 +97,18 @@ export const FlatDetailCard = (props) => {
                 useScrollView={true}
                 onSnapToItem={(index) => setCurrent(index)}
             />
+
+            {props.onClickMessage ? (
+                <View>
+                    <Box />
+                    <SecondaryButton
+                        style={styles.messageButton}
+                        onPress={props.onClickMessage}
+                    >
+                        message {flatprofile.name}
+                    </SecondaryButton>
+                </View>
+            ) : null}
             <Pagination
                 dotsLength={3}
                 activeDotIndex={current}

@@ -24,9 +24,18 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     description: {
+        flex: 1,
+    },
+    messageIcon: {
+        paddingLeft: 20,
+    },
+    row: {
         position: 'absolute',
         bottom: 0,
         padding: 20,
+        flexDirection: 'row',
+        flex: 1,
+        alignItems: 'flex-end',
     },
 });
 

@@ -11,7 +11,8 @@ import ChooseStatus from '../../screens/create-profile/chooseStatus';
 import CompleteFlatProfile from '../../screens/create-profile/completeFlatProfile';
 import CompleteSingleProfile from '../../screens/create-profile/completeSingleProfile';
 import Discover from '../../screens/discover/discover';
-import Matches from '../../screens/matches';
+import Matches from '../../screens/matches/matches';
+import Match from '../../screens/matches/match';
 import Profile from '../../screens/profile';
 import Login from '../../screens/welcome-login-signup/login';
 import Signup from '../../screens/welcome-login-signup/signup';
@@ -118,6 +119,11 @@ export default function Route() {
             <Stack.Screen
                 name="Matches"
                 component={Matches}
+                options={mainOptions}
+            />
+            <Stack.Screen
+                name="Match"
+                component={Match}
                 options={mainOptions}
             />
             <Stack.Screen name="Chat" component={Chat} options={mainOptions} />

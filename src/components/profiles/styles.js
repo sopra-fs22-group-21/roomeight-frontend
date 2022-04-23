@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     smaller: {
         fontSize: 14,
     },
-    roomie: {
+    profile: {
         padding: 5,
         backgroundColor: colors.secondary200,
         borderRadius: 10,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    roomieName: {
+    name: {
         fontSize: 20,
         fontFamily: 'SourceSans3SemiBold',
         lineHeight: 30,
