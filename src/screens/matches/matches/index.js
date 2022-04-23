@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text } from 'react-native';
 import { ImageCard } from '../../../components/imageCard';
 import { LikeButton } from '../../../components/likeButtons';
@@ -7,15 +7,19 @@ import { Box, Container, SmallHeading } from '../../../components/theme';
 import flatprofiles from '../../../resources/flatprofiles';
 import userprofiles from '../../../resources/userprofiles';
 import { PublicProfileCard } from '../../../components/publicProfileCard';
+import { useSelector } from 'react-redux';
 
 const Matches = ({ navigation }) => {
-    const initialProfiles = [...flatprofiles, ...userprofiles];
-    const [expanded, setExpanded] = useState(null);
+    const { userprofile } = useSelector((state) => state.userprofileState);
+    console.log(userprofile);
+
     return (
         <Container navigation={navigation} showNavBar>
             <SmallHeading>Matches</SmallHeading>
             <Box />
-            {initialProfiles.map((profile) => (
+
+            {/* userprofile.matches.map((profile) => (
+                !userprofile.firstName ? <Text>loading</Text> :
                 <ProfileInfoBox
                     profile={profile}
                     id={profile.id}
@@ -23,8 +27,8 @@ const Matches = ({ navigation }) => {
                     onPress={(id) => {
                         navigation.navigate('Match', { profile: profile });
                     }}
-                />
-            ))}
+                /> 
+                )) */}
         </Container>
     );
 };
