@@ -4,14 +4,7 @@ import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
 import { ProfilePicture } from '../../components/profilePicture';
-import {
-    Container,
-    Name,
-    Screen,
-    Heading,
-    Title,
-    Box,
-} from '../../components/theme';
+import { Container, Name, Box } from '../../components/theme';
 import { logoutUser } from '../../redux/actions/authActions';
 import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 import styles from './styles';

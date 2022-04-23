@@ -7,7 +7,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import colors from '../../resources/colors';
 import { Pressable, View } from 'react-native';
 import { Icon as Icon } from 'react-native-elements/dist/icons/Icon';
-const NavBar = ({ navigation }) => {
+import { SafeAreaView } from 'react-native-safe-area-context';
+const NavBar = ({ navigation }, props) => {
     const route = useRoute().name;
     console.log(route);
 
@@ -44,7 +45,7 @@ const NavBar = ({ navigation }) => {
     );
     const active = <View style={styles.active} />;
     return (
-        <View style={styles.container}>
+        <View style={{ ...styles.container, ...props.style }}>
             <Pressable onPress={() => navigation.navigate('Discover')}>
                 {discoverIcon}
                 {route.includes('Discover') ? active : null}
