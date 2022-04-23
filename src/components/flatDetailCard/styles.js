@@ -52,6 +52,16 @@ const styles = StyleSheet.create({
         fontFamily: 'SourceSans3SemiBold',
         lineHeight: 30,
     },
+    paginationContainer: {
+        paddingBottom: 0,
+        paddingTop: 20,
+    },
+    paginationDots: {
+        width: 7,
+        height: 7,
+        borderRadius: 10,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
 });
 
 export default styles;

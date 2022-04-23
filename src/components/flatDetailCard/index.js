@@ -19,18 +19,19 @@ import { InputBox, InputLabel } from '../input';
 import { DoubleTap } from '../doubleTap';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Roommates } from '../roommates';
-import Carousel from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { SecondaryButton } from '../button';
 import { Icon } from 'react-native-elements';
 import colors from '../../resources/colors';
 import Geocoder from 'react-native-geocoding';
 import { AddressMap } from '../addressMap';
+import { setCurrentScreen } from 'firebase/analytics';
 
 const ITEM_WIDTH = Dimensions.get('window').width - 80;
 
 export const FlatDetailCard = (props) => {
     const flatprofile = props.flatprofile;
-    const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
+    const [current, setCurrent] = useState(0);
 
     const selectedTags = tagIcons.filter((tag) =>
         flatprofile.tags.includes(tag.name)
@@ -94,6 +95,15 @@ export const FlatDetailCard = (props) => {
                 itemWidth={ITEM_WIDTH}
                 inactiveSlideShift={0}
                 useScrollView={true}
+                onSnapToItem={(index) => setCurrent(index)}
+            />
+            <Pagination
+                dotsLength={3}
+                activeDotIndex={current}
+                containerStyle={styles.paginationContainer}
+                dotStyle={styles.paginationDots}
+                inactiveDotOpacity={0.4}
+                inactiveDotScale={0.6}
             />
         </PinkBackground>
     );
