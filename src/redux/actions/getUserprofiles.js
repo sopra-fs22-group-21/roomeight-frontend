@@ -27,7 +27,7 @@ export const getCurrentUserprofile = (userId) => (dispatch) => {
     dispatch(getCurrentUserprofileRequest());
 
     apiClient()
-        .get(`/userprofiles/${userId}`)
+        .get(`/profiles/${userId}`)
         .then((response) => {
             dispatch(getMatches(response.data.matches));
             dispatch(getCurrentUserprofileSuccess(response.data));
