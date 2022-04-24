@@ -12,18 +12,7 @@ import apiClient from '../../../helper/apiClient';
 
 const Matches = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
-    userprofile.matches = flatprofiles;
-
-    const res = useSelector((state) => state.matchesState);
-    console.log(res);
-    useEffect(() => {
-        apiClient()
-            .get(`/flatprofiles/${userprofile.matches[0]}`)
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => console.warn(error));
-    }, []);
+    userprofile.matches = flatprofiles; //todo: if matches can get fetched, delete this line
 
     return (
         <Container navigation={navigation} showNavBar>
