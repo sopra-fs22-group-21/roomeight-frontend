@@ -8,17 +8,17 @@ class Userprofile {
         this.lastName = '';
         this.description = '';
         this.biography = '';
-        this.tags = '';
+        this.tags = [];
         this.pictureReference = '';
         // this.matches = '';
-        this.birthday = '';
+        this.birthday = new Date(NaN);
         this.email = '';
         this.phoneNumber = '';
         this.gender = '';
-        this.isSearchingRoom = '';
-        this.isAdvertisingRoom = '';
-        this.moveInDate = '';
-        this.moveOutDate = '';
+        this.isSearchingRoom = false;
+        this.isAdvertisingRoom = false;
+        this.moveInDate = new Date(NaN);
+        this.moveOutDate = new Date(NaN);
         this.password = '';
         Object.assign(this, data);
     }

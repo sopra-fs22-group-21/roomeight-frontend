@@ -7,13 +7,14 @@ import { ImageGallery } from '../imageGallery';
 
 const SLIDER_WIDTH = Dimensions.get('window').width - 90;
 
-const RoommateInfoBox = (props) => {
-    const initials =
-        props.roomie.firstName.substring(0, 1) +
-        props.roomie.lastName.substring(0, 1);
+export const ProfileInfoBox = (props) => {
+    const initials = props.profile.firstName
+        ? props.profile.firstName.substring(0, 1) +
+          props.profile.lastName.substring(0, 1)
+        : props.profile.name.substring(0, 1);
     return (
         <Pressable
-            style={styles.roomie}
+            style={styles.profile}
             onPress={() => props.onPress(props.id)}
         >
             <View style={props.expanded ? styles.vertical : styles.horizontal}>
@@ -21,7 +22,7 @@ const RoommateInfoBox = (props) => {
                     {props.expanded ? (
                         <View style={styles.gallery}>
                             <ImageGallery
-                                imageRefs={props.roomie.pictureReference}
+                                imageRefs={props.profile.pictureReference}
                                 itemWidth={150}
                                 sliderWidth={SLIDER_WIDTH}
                                 height={100}
@@ -32,8 +33,8 @@ const RoommateInfoBox = (props) => {
                     ) : (
                         <ProfilePicture
                             image={
-                                props.roomie.pictureReference.length > 0
-                                    ? props.roomie.pictureReference[0]
+                                props.profile.pictureReference.length > 0
+                                    ? props.profile.pictureReference[0]
                                     : null
                             }
                             initials={initials}
@@ -47,16 +48,20 @@ const RoommateInfoBox = (props) => {
                     )}
                 </View>
                 <View style={styles.rightSide}>
-                    <Strong style={styles.roomieName}>
-                        {props.roomie.firstName} {props.roomie.lastName}
+                    <Strong style={styles.name}>
+                        {props.profile.firstName
+                            ? props.profile.firstName +
+                              ' ' +
+                              props.profile.lastName
+                            : props.profile.name}
                     </Strong>
                     {props.expanded ? (
                         <>
                             <NormalText style={styles.smaller}>
-                                {props.roomie.biography}
+                                {props.profile.biography}
                             </NormalText>
                             <NormalText style={styles.smaller}>
-                                {props.roomie.description}
+                                {props.profile.description}
                             </NormalText>
                         </>
                     ) : null}
@@ -66,20 +71,20 @@ const RoommateInfoBox = (props) => {
     );
 };
 
-export const Roommates = (props) => {
+export const Profiles = (props) => {
     const [expanded, setExpanded] = useState(null);
     console.log(expanded);
     return (
         <>
-            {props.roomies.map((roomie) => (
-                <RoommateInfoBox
-                    roomie={roomie}
-                    id={roomie.id}
-                    key={roomie.id}
+            {props.profiles.map((profile) => (
+                <ProfileInfoBox
+                    profile={profile}
+                    id={profile.id}
+                    key={profile.id}
                     onPress={(id) => {
                         setExpanded(expanded != id ? id : null);
                     }}
-                    expanded={expanded === roomie.id}
+                    expanded={expanded === profile.id}
                 />
             ))}
         </>

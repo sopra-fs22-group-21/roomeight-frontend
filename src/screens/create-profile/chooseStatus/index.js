@@ -10,11 +10,13 @@ import {
     Title,
 } from '../../../components/theme';
 import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import en from '../../../resources/strings/en.json';
+import { updateUserprofile } from '../../../redux/actions/updateUserprofile';
 
 const ChooseStatus = ({ navigation }) => {
     const dispatch = useDispatch();
+    const { userprofile } = useSelector((state) => state.userprofileState);
 
     return (
         <Container showLogout>
@@ -55,7 +57,14 @@ const ChooseStatus = ({ navigation }) => {
                     </SecondaryButton>
                 </Box>
                 <Box>
-                    <SecondaryButton>{en.chooseStatus.flat}</SecondaryButton>
+                    <SecondaryButton
+                        onPress={() => {
+                            console.log('dispatching?');
+                            dispatch(updateUserprofile(userprofile));
+                        }}
+                    >
+                        {en.chooseStatus.flat}
+                    </SecondaryButton>
                 </Box>
             </Inner>
             <NavigationButtons onPressBack={() => navigation.goBack()} />

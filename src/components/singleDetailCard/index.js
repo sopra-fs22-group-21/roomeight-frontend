@@ -16,6 +16,8 @@ import Tags from '../tags';
 import tags from '../../resources/strings/tags';
 import tagIcons from '../../resources/icons/tagIcons';
 import { DoubleTap } from '../doubleTap';
+import { Icon } from 'react-native-elements';
+import { SecondaryButton } from '../button';
 
 export const SingleDetailCard = (props) => {
     const userprofile = props.userprofile;
@@ -26,7 +28,11 @@ export const SingleDetailCard = (props) => {
         : [];
     return (
         <PinkBackground>
-            <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
+            <DoubleTap
+                doubleTap={props.onDoubleTap}
+                delay={200}
+                style={styles.card}
+            >
                 <View style={styles.row}>
                     <View style={{ ...styles.column, ...styles.column1 }}>
                         <Pressable onPress={props.onPress} style={styles.image}>
@@ -48,6 +54,17 @@ export const SingleDetailCard = (props) => {
                     </View>
                 </View>
                 <Box />
+                {props.onClickMessage ? (
+                    <Box>
+                        <SecondaryButton
+                            style={styles.messageButton}
+                            onPress={props.onClickMessage}
+                        >
+                            message {userprofile.firstName}
+                        </SecondaryButton>
+                    </Box>
+                ) : null}
+
                 <Strong>{en.discover.description}</Strong>
                 <NormalText style={styles.text}>
                     {userprofile.description}
@@ -55,7 +72,6 @@ export const SingleDetailCard = (props) => {
                 <Box />
                 <Strong>{en.discover.tags}</Strong>
                 <Tags tags={selectedTags} style={styles.tags} />
-                {props.children}
                 <Box />
             </DoubleTap>
         </PinkBackground>

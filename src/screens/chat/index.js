@@ -1,14 +1,12 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { Container, Screen } from '../../components/theme';
+import { Container } from '../../components/theme';
 
 const Chat = ({ navigation }) => {
     return (
-        <Screen navigation={navigation} showFooter>
-            <Container>
-                <Text>Chat</Text>
-            </Container>
-        </Screen>
+        <Container navigation={navigation} showNavBar>
+            <Text>Chat</Text>
+        </Container>
     );
 };
 export default Chat;

@@ -38,9 +38,16 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 40,
-        marginTop: 40,
+        padding: 20,
         height: '100%',
+        paddingBottom: 0,
+    },
+    icon: {
+        paddingRight: 10,
+    },
+    row: {
+        alignItems: 'center',
+        flexDirection: 'row',
     },
     inner: {
         flex: 1,

@@ -14,6 +14,7 @@ import {
     Box,
 } from '../../components/theme';
 import PictureInput from '../../components/pictureInput';
+import { Container, Name, Box } from '../../components/theme';
 import { logoutUser } from '../../redux/actions/authActions';
 import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 import styles from './styles';

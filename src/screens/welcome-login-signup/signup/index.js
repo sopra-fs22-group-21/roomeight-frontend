@@ -10,7 +10,6 @@ import {
     Heading,
     TextBlock,
     Title,
-    Screen,
 } from '../../../components/theme';
 import Userprofile from '../../../models/Userprofile';
 import { postUserprofile } from '../../../redux/actions/postUserprofile';
@@ -18,7 +17,7 @@ import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
 const Signup = ({ navigation }) => {
-    const [user, setUser] = useState(new Userprofile());
+    const [user, setUser] = useState({});
     const [repeat, setRepeat] = useState('');
     const [emailValid, setEmailValid] = useState(null);
     const [passwordValid, setPasswordValid] = useState(null);
@@ -35,7 +34,10 @@ const Signup = ({ navigation }) => {
     const dispatch = useDispatch();
 
     return (
-        <Container onPressBack={() => navigation.goBack()}>
+        <Container
+            onPressBack={() => navigation.goBack()}
+            navigation={navigation}
+        >
             <KeyboardAvoidingView style={styles.inner} behavior="padding">
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <Heading>{en.signup.heading}</Heading>
@@ -142,7 +144,7 @@ const Signup = ({ navigation }) => {
                             if (valid)
                                 setUser({
                                     ...user,
-                                    birthday: '1999-06-22',
+                                    birthday: date,
                                 });
                             setbirthdayValid(valid && date <= new Date());
                         }}

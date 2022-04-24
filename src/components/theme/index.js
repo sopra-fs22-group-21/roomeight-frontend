@@ -1,6 +1,8 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/actions/authActions';
 import { SecondaryButton } from '../button';
@@ -58,15 +60,25 @@ export const Padding = (props) => (
 export const Container = (props) => {
     const dispatch = useDispatch();
     return (
-        <View {...props} style={{ ...styles.container, ...props.style }}>
-            {props.children}
-            {props.showLogout ? (
-                <SecondaryButton onPress={() => dispatch(logoutUser())}>
-                    Logout
-                </SecondaryButton>
-            ) : null}
-            {props.showNavBar ? <NavBar navigation={props.navigation} /> : null}
-        </View>
+        <SafeAreaProvider>
+            <SafeAreaView style={{ height: '100%' }}>
+                <View
+                    {...props}
+                    style={{ ...styles.container, ...props.style }}
+                >
+                    {props.children}
+                    {props.showLogout ? (
+                        <SecondaryButton onPress={() => dispatch(logoutUser())}>
+                            Logout
+                        </SecondaryButton>
+                    ) : null}
+                </View>
+
+                {props.showNavBar ? (
+                    <NavBar navigation={props.navigation} />
+                ) : null}
+            </SafeAreaView>
+        </SafeAreaProvider>
     );
 };
 export const Inner = (props) => (
@@ -75,14 +87,17 @@ export const Inner = (props) => (
     </View>
 );
 
-export const Screen = (props) => {
-    return (
-        <View style={{ ...styles.screen, ...props.style }} {...props}>
-            {props.children}
-            {props.showFooter ? <NavBar navigation={props.navigation} /> : null}
-        </View>
-    );
-};
+export const HeadingWithBack = (props) => (
+    <View style={styles.row}>
+        <Icon
+            name="arrow-back"
+            size={30}
+            style={styles.icon}
+            onPress={() => props.navigation.goBack()}
+        />
+        <SmallHeading>{props.children}</SmallHeading>
+    </View>
+);
 
 export const Name = (props) => (
     <Box>

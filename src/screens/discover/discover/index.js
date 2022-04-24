@@ -9,7 +9,6 @@ import {
     Container,
     Heading,
     Inner,
-    Screen,
     SmallHeading,
 } from '../../../components/theme';
 import styles from './styles';
@@ -32,7 +31,7 @@ import {
 import { Button } from 'react-native-elements/dist/buttons/Button';
 import { SecondaryButton } from '../../../components/button';
 
-const ITEM_HEIGHT = Dimensions.get('window').height - 210;
+const ITEM_HEIGHT = Dimensions.get('window').height - 230;
 
 const Discover = ({ navigation }) => {
     const carousel = useRef(null);
@@ -74,7 +73,6 @@ const Discover = ({ navigation }) => {
             return (
                 <>
                     <PublicProfileCard
-                        isFlat={initialProfiles == flatprofiles}
                         profile={item}
                         key={item.id}
                         onDoubleTap={handleLike}
@@ -94,46 +92,21 @@ const Discover = ({ navigation }) => {
     };
 
     return (
-        <Screen navigation={navigation} showFooter>
-            <Container style={styles.container}>
-                <SmallHeading>Discover</SmallHeading>
-                <Box />
-                <Inner>
-                    <Carousel
-                        ref={carousel}
-                        data={state.profiles}
-                        renderItem={card}
-                        sliderHeight={ITEM_HEIGHT}
-                        itemHeight={ITEM_HEIGHT}
-                        inactiveSlideShift={0}
-                        useScrollView={true}
-                        vertical
-                        onSnapToItem={(index) => removeProfile(index - 1)}
-                    />
-
-                    {/*
-                        <Box style={styles.bottom}>
-                        <SecondaryButton
-                            onPress={() =>
-                                setState({
-                                    profiles: [
-                                        ...initialProfiles,
-                                        {
-                                            textIfNoData:
-                                                'Nothing to discover...',
-                                        },
-                                    ],
-                                })
-                            }
-                        >
-                            Reset
-                        </SecondaryButton> 
-                        
-                    </Box>
-                        */}
-                </Inner>
-            </Container>
-        </Screen>
+        <Container navigation={navigation} showNavBar>
+            <SmallHeading>Discover</SmallHeading>
+            <Box />
+            <Carousel
+                ref={carousel}
+                data={state.profiles}
+                renderItem={card}
+                sliderHeight={ITEM_HEIGHT}
+                itemHeight={ITEM_HEIGHT}
+                inactiveSlideShift={0}
+                useScrollView={true}
+                vertical
+                onSnapToItem={(index) => removeProfile(index - 1)}
+            />
+        </Container>
     );
 };
 
