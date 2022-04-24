@@ -17,6 +17,7 @@ import Profile from '../../screens/profile';
 import Login from '../../screens/welcome-login-signup/login';
 import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
+import userprofiles from '../../resources/userprofiles';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -32,6 +33,7 @@ export default function Route() {
     const loading = useSelector((state) => state.loadingState);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const dispatch = useDispatch();
+    console.log(new Date(userprofiles[1].birthday));
 
     useEffect(() => {
         console.log('dispatch');
@@ -67,7 +69,7 @@ export default function Route() {
     const incompleteComponents = (
         <>
             <Stack.Screen
-                name="addProfilePicture"
+                name="AddProfilePicture"
                 component={AddProfilePicture}
                 options={{ headerShown: false }}
             />
@@ -134,8 +136,7 @@ export default function Route() {
         if (loggedIn) {
             if (userprofile.isComplete) {
                 return completeComponents;
-            }
-            return incompleteComponents;
+            } else return incompleteComponents;
         }
         return loggedOutComponents;
     }

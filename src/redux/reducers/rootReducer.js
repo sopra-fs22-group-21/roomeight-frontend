@@ -5,6 +5,7 @@ import flatprofileState from './flatprofileState';
 import errorState from './errorState';
 import transitState from './transitState';
 import loadingState from './loadingState';
+import matchesState from './matchesState';
 
 /**
  * comines reducers together to create a single reducer
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     errorState,
     transitState,
     loadingState,
+    matchesState,
 });
 
 export default rootReducer;

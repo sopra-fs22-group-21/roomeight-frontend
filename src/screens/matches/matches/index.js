@@ -8,10 +8,20 @@ import flatprofiles from '../../../resources/flatprofiles';
 import userprofiles from '../../../resources/userprofiles';
 import { PublicProfileCard } from '../../../components/publicProfileCard';
 import { useSelector } from 'react-redux';
+import apiClient from '../../../helper/apiClient';
 
 const Matches = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
-    console.log(userprofile);
+    const res = useSelector((state) => state.matchesState);
+    console.log(res);
+    useEffect(() => {
+        apiClient()
+            .get(`/flatprofiles/${userprofile.matches[0]}`)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => console.warn(error));
+    }, []);
 
     return (
         <Container navigation={navigation} showNavBar>

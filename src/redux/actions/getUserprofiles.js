@@ -1,5 +1,6 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
+import { getMatches } from './getMatches';
 
 const getCurrentUserprofileRequest = () => ({
     type: Constants.GET_CURRENT_USER_REQUEST,
@@ -28,6 +29,7 @@ export const getCurrentUserprofile = (userId) => (dispatch) => {
     apiClient()
         .get(`/userprofiles/${userId}`)
         .then((response) => {
+            dispatch(getMatches(response.data.matches));
             dispatch(getCurrentUserprofileSuccess(response.data));
         })
         .catch((error) => {
