@@ -23,6 +23,7 @@ import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
 import AddDescription from '../../screens/create-profile/addDescription';
 import userprofiles from '../../resources/userprofiles';
+import SignupDetails from '../../screens/welcome-login-signup/signupDetails';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -62,6 +63,11 @@ export default function Route() {
             <Stack.Screen
                 name="Signup"
                 component={Signup}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="SignupDetails"
+                component={SignupDetails}
                 options={{ headerShown: false }}
             />
             <Stack.Screen

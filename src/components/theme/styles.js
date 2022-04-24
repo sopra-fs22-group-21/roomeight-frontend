@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     inner: {
         flex: 1,
         justifyContent: 'center',
-        paddingBottom: 100,
+        padding: 20,
     },
     screen: {
         flex: 1,

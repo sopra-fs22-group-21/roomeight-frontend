@@ -87,7 +87,7 @@ export const Inner = (props) => (
     </View>
 );
 
-export const HeadingWithBack = (props) => (
+export const SmallHeadingWithBack = (props) => (
     <View style={styles.row}>
         <Icon
             name="arrow-back"

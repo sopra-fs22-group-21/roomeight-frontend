@@ -9,6 +9,7 @@
         "heading": "Welcome to roomeight",
         "title": "Sign Up",
         "enterDetails": "Please enter your details below",
+        "almostDone": "Almost done...",
         "email": "Email",
         "password": "Password",
         "repeatPassword": "Repeat Password",
