@@ -22,6 +22,17 @@ const Tags = (props) => {
         }
     };
 
+    const checkPreSelect = (preSelected) => {
+        for (let i = 0; i < tArray.length; i++) {
+            const t = { ...tags, ...preSelected };
+            const tArray = Object.entries(t);
+            props.preSelected(
+                tArray.filter((tag) => tag[1] === true).map((tag) => tag[0])
+            );
+            setTags = t;
+        }
+    };
+
     return (
         <View style={{ ...styles.box, ...props.style }}>
             <View style={styles.column}>
@@ -33,6 +44,12 @@ const Tags = (props) => {
                             onChange={
                                 props.onChange
                                     ? (selected) => toggleSelect(selected)
+                                    : null
+                            }
+                            preSelected={
+                                props.preSelected
+                                    ? (preSelected) =>
+                                          checkPreSelect(preSelected)
                                     : null
                             }
                         />

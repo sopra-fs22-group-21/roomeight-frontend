@@ -72,6 +72,16 @@ export const SingleDetailCard = (props) => {
                 <Box />
                 <Strong>{en.discover.tags}</Strong>
                 <Tags tags={selectedTags} style={styles.tags} />
+                {props.onClickEdit ? (
+                    <Box>
+                        <SecondaryButton
+                            style={styles.messageButton}
+                            onPress={props.onClickEdit}
+                        >
+                            Edit Profile
+                        </SecondaryButton>
+                    </Box>
+                ) : null}
                 <Box />
             </DoubleTap>
         </PinkBackground>

@@ -14,7 +14,6 @@ import {
     Box,
 } from '../../components/theme';
 import PictureInput from '../../components/pictureInput';
-import { Container, Name, Box } from '../../components/theme';
 import { logoutUser } from '../../redux/actions/authActions';
 import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 import styles from './styles';
@@ -28,6 +27,9 @@ import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 import { PickImage } from '../../helper/imageHandler';
 import { updateUserprofile } from '../../redux/actions/updateUserprofile';
 import flatprofiles from '../../resources/flatprofiles';
+import { PublicProfileCard } from '../../components/publicProfileCard';
+import { SingleDetailCard } from '../../components/singleDetailCard';
+import { FlatDetailCard } from '../../components/flatDetailCard';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
@@ -58,6 +60,8 @@ const Profile = ({ navigation }) => {
     const [nrBathrooms, setNrBathrooms] = useState(null);
     let selectedTagsFlat = [];
     const initialProfiles = flatprofiles;
+    const [editModeSingle, setEditmodeSingle] = useState(false);
+    const [editModeFlat, setEditmodeFlat] = useState(false);
 
     function changeToTemporary() {
         setTemporary(true);
@@ -133,6 +137,7 @@ const Profile = ({ navigation }) => {
             </Tab>
             {index === 0 ? (
                 <View style={styles.container}>
+                    {/* {editModeSingle ? ( */}
                     <KeyboardAwareScrollView
                         style={styles.inner}
                         behavior="padding"
@@ -159,7 +164,7 @@ const Profile = ({ navigation }) => {
 
                             <InputBox label={'Tags'}>
                                 <Tags
-                                    selected={selectedTags}
+                                    preSelected={userprofile.tags}
                                     onChange={(tags) => console.log(tags)}
                                 />
                             </InputBox>
@@ -185,27 +190,22 @@ const Profile = ({ navigation }) => {
                                     })
                                 }
                             />
-                            <PrimaryButton>Save</PrimaryButton>
                         </View>
-
-                        {/* <PrimaryButton
-                        onPress={() => {
-                            dispatch(logoutUser());
-                        }}
-                    >
-                        Logout
-                    </PrimaryButton>
-                    <PrimaryButton
-                        onPress={() => {
-                            dispatch(getCurrentUserprofile(auth.uid));
-                        }}
-                    >
-                        get
-                    </PrimaryButton> */}
+                        <PrimaryButton //onPress={setEditmodeSingle(false)}
+                        >
+                            Save
+                        </PrimaryButton>
                     </KeyboardAwareScrollView>
+                    {/* ) : (
+                        <SingleDetailCard
+                            userprofile={userprofile}
+                            onClickEdit={() => setEditmodeSingle(true)}
+                        />
+                    )} */}
                 </View>
             ) : (
                 <View style={styles.container}>
+                    {/* {editModeFlat ? ( */}
                     <KeyboardAwareScrollView
                         style={styles.inner}
                         behavior="padding"
@@ -268,7 +268,11 @@ const Profile = ({ navigation }) => {
                                 onChangeText={(text) => setRoomSize(text)}
                             />
                             <InputBox label={en.completeFlatProfile.tags}>
-                                <Tags onChange={(tags) => console.log(tags)} />
+                                <Tags
+                                    selected={selectedTags}
+                                    preSelected={userprofile.tags}
+                                    onChange={(tags) => console.log(tags)}
+                                />
                             </InputBox>
                             <Input
                                 label={en.completeFlatProfile.nrRoommates}
@@ -291,21 +295,50 @@ const Profile = ({ navigation }) => {
                                 }
                             />
                             <PrimaryButton
-                                onPress={() => {
+                                onPress={
+                                    () => {
+                                        //setEditmodeFlat(false);
+                                        console.log(editModeFlat);
+                                    } /* {
                                     dispatch(updateUserprofile(user));
                                     console.log('putting');
                                     console.log(error);
                                     console.log(userprofile);
-                                }}
+                                } */
+                                }
                             >
                                 Save
                             </PrimaryButton>
                         </View>
                     </KeyboardAwareScrollView>
+                    {/*  ) : (
+                        <SingleDetailCard
+                            userprofile={userprofile}
+                            onClickEdit={() => {
+                                setEditmodeFlat(true);
+                                console.log(editModeFlat);
+                            }}
+                        />
+                    )} */}
                 </View>
             )}
         </Container>
     );
 };
+
+/* <PrimaryButton
+                        onPress={() => {
+                            dispatch(logoutUser());
+                        }}
+                    >
+                        Logout
+                    </PrimaryButton>
+                    <PrimaryButton
+                        onPress={() => {
+                            dispatch(getCurrentUserprofile(auth.uid));
+                        }}
+                    >
+                        get
+                    </PrimaryButton> */
 
 export default Profile;

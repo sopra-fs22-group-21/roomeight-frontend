@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     },
     biocontainer: {
         flex: 1,
-        paddingTop: 20,
+        paddingTop: 0,
         paddingBottom: 10,
         marginTop: 40,
         marginBottom: 0,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary600,
         height: 2,
         width: '50%',
-        marginBottom: 0,
+        marginBottom: 5,
     },
     container: {
         flex: 1,
