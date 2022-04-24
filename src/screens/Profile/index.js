@@ -15,7 +15,12 @@ import {
 } from '../../components/theme';
 import PictureInput from '../../components/pictureInput';
 import styles from './styles';
-import { InputBox, InputLabel, Input } from '../../components/input';
+import { InputBox, Input } from '../../components/input';
+import {
+    chatMemberShipListener,
+    chatInfoListener,
+} from '../../redux/actions/chatActions';
+import { ScrollView } from 'react-native';
 import en from '../../resources/strings/en.json';
 import Tags from '../../components/tags';
 import DateInput from '../../components/dateInput';
@@ -28,6 +33,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 const Profile = ({ navigation }) => {
     useEffect(() => {
         console.log('render');
+        dispatch(chatMemberShipListener());
     }, []);
 
     const dispatch = useDispatch();
