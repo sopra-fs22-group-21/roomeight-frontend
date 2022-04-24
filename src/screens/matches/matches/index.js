@@ -12,6 +12,8 @@ import apiClient from '../../../helper/apiClient';
 
 const Matches = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
+    userprofile.matches = flatprofiles;
+
     const res = useSelector((state) => state.matchesState);
     console.log(res);
     useEffect(() => {
@@ -28,8 +30,7 @@ const Matches = ({ navigation }) => {
             <SmallHeading>Matches</SmallHeading>
             <Box />
 
-            {/* userprofile.matches.map((profile) => (
-                !userprofile.firstName ? <Text>loading</Text> :
+            {userprofile.matches.map((profile) => (
                 <ProfileInfoBox
                     profile={profile}
                     id={profile.id}
@@ -37,8 +38,8 @@ const Matches = ({ navigation }) => {
                     onPress={(id) => {
                         navigation.navigate('Match', { profile: profile });
                     }}
-                /> 
-                )) */}
+                />
+            ))}
         </Container>
     );
 };
