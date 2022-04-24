@@ -1,4 +1,5 @@
 import * as Constants from '../constants';
+import Userprofile from '../../models/Userprofile';
 
 const initialState = {
     userprofile: {},
@@ -16,19 +17,19 @@ const userprofileState = (state = initialState, action) => {
         case Constants.GET_CURRENT_USER_SUCCESS:
             return {
                 ...state,
-                userprofile: action.payload,
+                userprofile: new Userprofile(action.payload),
             };
 
         case Constants.POST_USERPROFILE_SUCCESS:
             return {
                 ...state,
-                userprofile: action.payload,
+                userprofile: new Userprofile(action.payload),
             };
 
         case Constants.UPDATE_USERPROFILE_SUCCESS:
             return {
                 ...state,
-                userprofile: action.payload,
+                userprofile: new Userprofile(action.payload),
             };
 
         default:

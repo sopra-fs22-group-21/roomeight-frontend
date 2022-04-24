@@ -1,4 +1,5 @@
 import * as Constants from '../constants';
+import Flatprofile from '../../models/Flatprofile';
 
 const initialState = {
     flatprofile: {},
@@ -9,12 +10,12 @@ const flatprofileState = (state = initialState, action) => {
         case Constants.GET_FLATPROFILE_SUCCESS:
             return {
                 ...state,
-                flatprofile: action.payload,
+                flatprofile: new Flatprofile(action.payload),
             };
         case Constants.POST_FLATPROFILE_SUCCESS:
             return {
                 ...state,
-                flatprofile: action.payload,
+                flatprofile: new Flatprofile(action.payload),
             };
 
         default:

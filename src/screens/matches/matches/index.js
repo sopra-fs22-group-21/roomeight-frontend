@@ -15,7 +15,7 @@ const Matches = ({ navigation }) => {
     userprofile.matches = flatprofiles; //todo: if matches can get fetched, delete this line
 
     return (
-        <Container navigation={navigation} showNavBar>
+        <Container navigation={navigation} showNavBar showLogout>
             <SmallHeading>Matches</SmallHeading>
             <Box />
 

@@ -24,14 +24,15 @@ const getCurrentUserprofileFailure = (error) => ({
  * @dispatches {@link getCurrentUserprofileFailure} on request failure with error payload
  */
 export const getCurrentUserprofile = (userId) => (dispatch) => {
+    console.log('userid: ' + userId);
     dispatch(getCurrentUserprofileRequest());
 
     apiClient()
         .get(`/profiles/${userId}`)
         .then((response) => {
+            dispatch(getCurrentUserprofileSuccess(response.data));
             if (response.data.flatId.length > 0)
                 dispatch(getFlatprofile(response.data.flatId));
-            dispatch(getCurrentUserprofileSuccess(response.data));
         })
         .catch((error) => {
             dispatch(getCurrentUserprofileFailure(error));

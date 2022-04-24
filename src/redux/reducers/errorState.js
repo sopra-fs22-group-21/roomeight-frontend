@@ -56,7 +56,7 @@ const errorState = (state = initialState, action) => {
                 ...state,
                 userprofileErrors: {
                     ...state.userprofileErrors,
-                    getCurrentUser: action.payload,
+                    getCurrentUser: action.error,
                 },
             };
 

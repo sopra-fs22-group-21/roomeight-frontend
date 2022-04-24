@@ -17,7 +17,7 @@ import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
 const Signup = ({ navigation }) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(new Userprofile());
     const [repeat, setRepeat] = useState('');
     const [emailValid, setEmailValid] = useState(null);
     const [passwordValid, setPasswordValid] = useState(null);
