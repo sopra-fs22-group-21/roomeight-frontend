@@ -5,7 +5,7 @@ import styles from './styles';
 
 export const Input = (props) => (
     <Box>
-        <InputLabel>{props.label}</InputLabel>
+        <InputLabel style={styles.label}>{props.label}</InputLabel>
         <StyledTextInput {...props} />
     </Box>
 );

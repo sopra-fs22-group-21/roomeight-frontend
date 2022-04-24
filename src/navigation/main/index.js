@@ -17,6 +17,7 @@ import Profile from '../../screens/profile';
 import Login from '../../screens/welcome-login-signup/login';
 import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
+import AddDescription from '../../screens/create-profile/addDescription';
 import userprofiles from '../../resources/userprofiles';
 
 export default function Route() {
@@ -81,6 +82,11 @@ export default function Route() {
             <Stack.Screen
                 name="AddPictures"
                 component={AddPictures}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="AddDescription"
+                component={AddDescription}
                 options={{ headerShown: false }}
             />
             <Stack.Screen

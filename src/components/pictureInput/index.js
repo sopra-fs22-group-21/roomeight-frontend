@@ -18,7 +18,7 @@ const pictureInput = (props) => {
                 return (
                     <Pressable onPress={props.onPressDelete}>
                         <Image
-                            style={styles.imageProfile}
+                            style={{ ...styles.imageProfile, ...props.style }}
                             source={{ uri: props.image }}
                         />
                         <EditBadge variant={props.variant} set={true} />
@@ -27,8 +27,18 @@ const pictureInput = (props) => {
             } else {
                 return (
                     <Pressable onPress={props.onPressSelect}>
-                        <View style={styles.backgroundProfile}>
-                            <Text style={styles.placeholderProfile}>
+                        <View
+                            style={{
+                                ...styles.backgroundProfile,
+                                ...props.style,
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    ...styles.placeholderProfile,
+                                    ...props.style,
+                                }}
+                            >
                                 {props.initials}
                             </Text>
                         </View>
