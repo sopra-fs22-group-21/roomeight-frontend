@@ -6,14 +6,14 @@ const styles = StyleSheet.create({
     overview: {
         backgroundColor: colors.secondary100,
         padding: 5,
-        marginTop: 5,
+        marginTop: 0,
         marginBottom: 10,
         justifyContent: 'flex-start',
         alignContent: 'center',
         borderRadius: 5,
         //opacity: 0.5,
         flexDirection: 'row',
-        height: 130,
+        height: 100,
     },
 
     bio: {
@@ -21,10 +21,12 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
         width: '100%',
+        display: 'flex',
+        justifyContent: 'space-evenly',
     },
     biocontainer: {
         flex: 1,
-        paddingTop: 40,
+        paddingTop: 20,
         paddingBottom: 10,
         marginTop: 40,
         marginBottom: 0,
@@ -74,6 +76,12 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         height: '100%',
         width: '50%',
+    },
+    image: {
+        borderRadius: 100,
+        height: 90,
+        width: 90,
+        borderColor: 'transparent',
     },
 });
 export default styles;

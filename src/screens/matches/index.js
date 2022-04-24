@@ -6,7 +6,7 @@ import { Box, Container, Screen, SmallHeading } from '../../components/theme';
 
 const Matches = ({ navigation }) => {
     return (
-        <Container showFooter showLogout>
+        <Container navigation={navigation} showLogout showNavBar>
             <SmallHeading>Matches</SmallHeading>
             <Box />
         </Container>

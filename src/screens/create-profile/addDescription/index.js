@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Gender from '../../../components/gender';
-import { Input, InputBox } from '../../../components/input';
+import { Input, InputBox, StyledTextInput } from '../../../components/input';
 import { NavigationButtons } from '../../../components/navigationButtons';
 import { Container, Heading } from '../../../components/theme';
 import { PickImage } from '../../../helper/imageHandler';
@@ -23,16 +23,20 @@ const AddDescription = ({ navigation }) => {
             <Heading>{en.addDescription.heading}</Heading>
             <KeyboardAvoidingView style={styles.inner} behavior="padding">
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <Input
+                    <InputBox
                         label={en.addDescription.description}
-                        multiline
-                        onChangeText={(text) =>
-                            setDescription({
-                                ...description,
-                                description: text,
-                            })
-                        }
-                    />
+                        style={styles.box}
+                    >
+                        <StyledTextInput
+                            multiline
+                            onChangeText={(text) =>
+                                setDescription({
+                                    ...description,
+                                    description: text,
+                                })
+                            }
+                        ></StyledTextInput>
+                    </InputBox>
                     <NavigationButtons
                         onPressNext={() => navigation.navigate('ChooseStatus')}
                     />

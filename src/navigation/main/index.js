@@ -131,13 +131,13 @@ export default function Route() {
     );
 
     function getUserStatus() {
-        /* if (loggedIn) {
+        if (loggedIn) {
             if (userprofile.isComplete) {
                 return completeComponents;
-            } */
-        return incompleteComponents;
-        /* }
-        return loggedOutComponents; */
+            }
+            return incompleteComponents;
+        }
+        return loggedOutComponents;
     }
 
     return (

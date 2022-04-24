@@ -4,6 +4,7 @@ import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
 import { ProfilePicture } from '../../components/profilePicture';
+import tagIcons from '../../resources/icons/tagIcons';
 import {
     Container,
     Name,
@@ -12,6 +13,7 @@ import {
     Title,
     Box,
 } from '../../components/theme';
+import PictureInput from '../../components/pictureInput';
 import { logoutUser } from '../../redux/actions/authActions';
 import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 import styles from './styles';
@@ -20,9 +22,11 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { InputBox, InputLabel, Input } from '../../components/input';
 import en from '../../resources/strings/en.json';
 import Tags from '../../components/tags';
-import modes from '../../resources/strings/modes';
 import DateInput from '../../components/dateInput';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
+import { PickImage } from '../../helper/imageHandler';
+import { updateUserprofile } from '../../redux/actions/updateUserprofile';
+import flatprofiles from '../../resources/flatprofiles';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
@@ -33,6 +37,7 @@ const Profile = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const loading = useSelector((state) => state.loadingState);
     const [index, setIndex] = useState(0);
+    const [image, setImage] = useState(userprofile.pictureReference[0]);
     const [moveInDateValidSingle, setmoveInDateValidSingle] = useState(
         userprofile.moveInDate
     );
@@ -51,6 +56,7 @@ const Profile = ({ navigation }) => {
     const [nrRoommates, setNrRoommates] = useState(null);
     const [nrBathrooms, setNrBathrooms] = useState(null);
     let selectedTagsFlat = [];
+    const initialProfiles = flatprofiles;
 
     function changeToTemporary() {
         setTemporary(true);
@@ -61,6 +67,10 @@ const Profile = ({ navigation }) => {
         setTemporary(false);
         setPermanent(true);
     }
+
+    const selectedTags = tagIcons.filter((tag) =>
+        userprofile.tags.includes(tag.name)
+    );
 
     if (!loading) {
         console.log('loading: ' + loading);
@@ -74,9 +84,23 @@ const Profile = ({ navigation }) => {
         >
             <Name>{userprofile.firstName + ' ' + userprofile.lastName}</Name>
             <Box style={styles.overview}>
-                <ProfilePicture />
+                <PictureInput
+                    style={styles.image}
+                    onPressDelete={() => {
+                        setImage('');
+                    }}
+                    variant="profile"
+                    image={image}
+                    //initials={getInitials()}
+                    onPressSelect={async () => {
+                        const uri = await PickImage();
+                        setImage(uri);
+                    }}
+                />
                 <Container style={styles.bio}>
-                    <Text style={styles.text}>{userprofile.biography}</Text>
+                    <Text style={styles.text} multiline>
+                        {userprofile.biography}
+                    </Text>
                 </Container>
             </Box>
             <Tab
@@ -116,6 +140,7 @@ const Profile = ({ navigation }) => {
                             <DateInput
                                 label={en.completeSingleProfile.moveInDate}
                                 valid={moveInDateValidSingle}
+                                //defaultValue={userprofile.moveInDate}
                                 onChange={(date, valid) => {
                                     if (valid)
                                         setUser({
@@ -132,11 +157,14 @@ const Profile = ({ navigation }) => {
                             />
 
                             <InputBox label={'Tags'}>
-                                <Tags onChange={(tags) => console.log(tags)} />
+                                <Tags
+                                    selected={selectedTags}
+                                    onChange={(tags) => console.log(tags)}
+                                />
                             </InputBox>
                             <Input
                                 label={en.addProfilePicture.biography}
-                                placeholder={userprofile.biography}
+                                defaultValue={userprofile.biography}
                                 multiline
                                 onChangeText={(text) =>
                                     setBiography({
@@ -147,7 +175,7 @@ const Profile = ({ navigation }) => {
                             />
                             <Input
                                 label={en.addProfilePicture.description}
-                                placeholder={userprofile.description}
+                                defaultValue={userprofile.description}
                                 multiline
                                 onChangeText={(text) =>
                                     setDescriptionSingle({
@@ -156,6 +184,7 @@ const Profile = ({ navigation }) => {
                                     })
                                 }
                             />
+                            <PrimaryButton>Save</PrimaryButton>
                         </View>
 
                         {/* <PrimaryButton
@@ -183,6 +212,7 @@ const Profile = ({ navigation }) => {
                         <View>
                             <Input
                                 label={en.completeFlatProfile.address}
+                                defaultValue={initialProfiles.address}
                                 onChangeText={(text) => setAddress(text)}
                             />
                             <DateInput
@@ -259,6 +289,16 @@ const Profile = ({ navigation }) => {
                                     })
                                 }
                             />
+                            <PrimaryButton
+                                onPress={() => {
+                                    dispatch(updateUserprofile(user));
+                                    console.log('putting');
+                                    console.log(error);
+                                    console.log(userprofile);
+                                }}
+                            >
+                                Save
+                            </PrimaryButton>
                         </View>
                     </KeyboardAwareScrollView>
                 </View>
