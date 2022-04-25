@@ -17,7 +17,7 @@ import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
 const Signup = ({ navigation }) => {
-    const [user, setUser] = useState(new Userprofile());
+    const [user, setUser] = useState({});
     const [repeat, setRepeat] = useState('');
     const [emailValid, setEmailValid] = useState(null);
     const [passwordValid, setPasswordValid] = useState(null);
@@ -36,7 +36,6 @@ const Signup = ({ navigation }) => {
     return (
         <Container
             onPressBack={() => navigation.goBack()}
-            showNavBar
             navigation={navigation}
         >
             <KeyboardAvoidingView style={styles.inner} behavior="padding">
@@ -145,7 +144,7 @@ const Signup = ({ navigation }) => {
                             if (valid)
                                 setUser({
                                     ...user,
-                                    birthday: '1999-06-22',
+                                    birthday: date,
                                 });
                             setbirthdayValid(valid && date <= new Date());
                         }}

@@ -13,7 +13,7 @@ const Chat = ({ navigation }) => {
     const chats = useSelector((state) => state.chatState.chats, shallowEqual);
 
     const renderItem = ({ item }) => {
-        return <ChatListItem chat={chats[item]} />;
+        return <ChatListItem chat={chats[item]} key={item} />;
     };
 
     return (

@@ -1,5 +1,6 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
+import { getFlatprofile, getMatches } from './getFlatprofile';
 
 const getCurrentUserprofileRequest = () => ({
     type: Constants.GET_CURRENT_USER_REQUEST,
@@ -26,8 +27,10 @@ export const getCurrentUserprofile = (userId) => (dispatch) => {
     dispatch(getCurrentUserprofileRequest());
 
     apiClient()
-        .get(`/userprofiles/${userId}`)
+        .get(`/profiles/${userId}`)
         .then((response) => {
+            if (response.data.flatId.length > 0)
+                dispatch(getFlatprofile(response.data.flatId));
             dispatch(getCurrentUserprofileSuccess(response.data));
         })
         .catch((error) => {

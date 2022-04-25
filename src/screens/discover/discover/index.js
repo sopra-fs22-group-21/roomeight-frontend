@@ -35,7 +35,7 @@ const ITEM_HEIGHT = Dimensions.get('window').height - 230;
 
 const Discover = ({ navigation }) => {
     const carousel = useRef(null);
-    const initialProfiles = flatprofiles;
+    const initialProfiles = userprofiles;
     const [like, setLike] = useState(false);
     const [state, setState] = useState({
         profiles: [

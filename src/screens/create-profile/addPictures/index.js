@@ -5,7 +5,7 @@ import { FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavigationButtons } from '../../../components/navigationButtons';
 import PictureInput from '../../../components/pictureInput';
-import { Container, Title } from '../../../components/theme';
+import { Box, Container, Title } from '../../../components/theme';
 import { PickImage } from '../../../helper/imageHandler';
 import { uploadImages } from '../../../redux/actions/uploadImage';
 import en from '../../../resources/strings/en.json';
@@ -47,19 +47,19 @@ const AddPictures = ({ navigation }) => {
     const pictureSelectors = [
         {
             index: 0,
-            image: images[0],
+            image: images ? images[0] : null,
         },
         {
             index: 1,
-            image: images[1],
+            image: images ? images[1] : null,
         },
         {
             index: 2,
-            image: images[2],
+            image: images ? images[2] : null,
         },
         {
             index: 3,
-            image: images[3],
+            image: images ? images[3] : null,
         },
     ];
 

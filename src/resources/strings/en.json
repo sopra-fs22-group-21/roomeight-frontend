@@ -50,7 +50,8 @@
         "take": "Take a picture",
         "next": "Next",
         "gender": "Gender",
-        "whoIAm": "This is who I am (optional)"
+        "biography": "This is who I am (optional)",
+        "description": "Description"
     },
     "completeSingleProfile": {
         "heading": "Tell us something about you",
@@ -86,6 +87,10 @@
         "tags": "We",
         "nrRoommates": "Number of roommates",
         "nrBathrooms": "Total Bathrooms"
+    },
+    "addDescription": {
+        "heading": "Tell us more details",
+        "description": "Description"
     },
     "singleProfile": {
         "description": "Description",
