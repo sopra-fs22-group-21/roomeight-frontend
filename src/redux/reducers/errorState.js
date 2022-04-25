@@ -1,4 +1,5 @@
 import * as Constants from '../constants';
+import en from '../../resources/strings/en.json';
 
 const initialState = {
     authErrors: {},
@@ -14,13 +15,18 @@ const initialState = {
  * @param {*} action
  */
 const errorState = (state = initialState, action) => {
+    let info = undefined;
     switch (action.type) {
         case Constants.LOGIN_USER_FAILURE:
+            if (action.payload.code.includes('user-not-found'))
+                info = en.errors.userWithEmailNotFound;
+            else info = en.errors.wrongPassword;
             return {
                 ...state,
                 authErrors: {
                     ...state.authErrors,
                     login: action.payload,
+                    infoForUser: info,
                 },
             };
 
@@ -30,6 +36,7 @@ const errorState = (state = initialState, action) => {
                 authErrors: {
                     ...state.authErrors,
                     login: undefined,
+                    infoForUser: undefined,
                 },
             };
 
@@ -48,6 +55,7 @@ const errorState = (state = initialState, action) => {
                 authErrors: {
                     ...state.authErrors,
                     logout: undefined,
+                    infoForUser: undefined,
                 },
             };
 
@@ -70,11 +78,18 @@ const errorState = (state = initialState, action) => {
             };
 
         case Constants.POST_USERPROFILE_FAILURE:
+            const pjson = JSON.stringify(action.payload);
+            const payload = JSON.parse(pjson);
+            console.log('status: ' + payload.status);
+            if (payload.status == 409) info = en.errors.userAlreadyExists;
+            else if (payload.status == 500) info = en.errors.serverError;
+            else info = en.errors.problemWithApplication;
             return {
                 ...state,
                 userprofileErrors: {
                     ...state.userprofileErrors,
                     postUserProfile: action.payload,
+                    infoForUser: info,
                 },
             };
 
@@ -84,6 +99,7 @@ const errorState = (state = initialState, action) => {
                 userprofileErrors: {
                     ...state.userprofileErrors,
                     postUserProfile: undefined,
+                    infoForUser: undefined,
                 },
             };
 

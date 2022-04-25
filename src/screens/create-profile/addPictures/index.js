@@ -2,16 +2,29 @@ import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+import { View } from 'react-native-animatable';
 import { useDispatch, useSelector } from 'react-redux';
+import { PrimaryButton } from '../../../components/button';
 import { NavigationButtons } from '../../../components/navigationButtons';
 import PictureInput from '../../../components/pictureInput';
-import { Box, Container, Title } from '../../../components/theme';
+import {
+    Box,
+    Container,
+    Heading,
+    NormalText,
+    ScreenPadding,
+    Title,
+} from '../../../components/theme';
 import { PickImage } from '../../../helper/imageHandler';
+import { postUserprofile } from '../../../redux/actions/postUserprofile';
+import { updateUserprofile } from '../../../redux/actions/updateUserprofile';
 import { uploadImages } from '../../../redux/actions/uploadImage';
 import en from '../../../resources/strings/en.json';
 
-const AddPictures = ({ navigation }) => {
+const AddPictures = ({ navigation, route }) => {
     const { transitUserprofile } = useSelector((state) => state.transitState);
+    const { userprofile } = useSelector((state) => state.userprofileState);
+
     console.log(transitUserprofile.localPictureReference);
     const [images, setImages] = useState(
         transitUserprofile.localPictureReference
@@ -64,35 +77,59 @@ const AddPictures = ({ navigation }) => {
     ];
 
     return (
-        <Container>
-            <Box>
-                <Title>{en.addPictures.heading}</Title>
-            </Box>
+        <Container onPressBack={() => navigation.goBack()}>
+            <ScreenPadding>
+                <Heading>{en.addPictures.heading}</Heading>
+                <NormalText>
+                    {route.params.includes('single')
+                        ? en.addPictures.infoSingle
+                        : en.addPictures.infoFlat}
+                </NormalText>
+                <Box />
 
-            <FlatList
-                data={pictureSelectors}
-                keyExtractor={(item) => item.index}
-                numColumns={2}
-                columnWrapperStyle={{
-                    justifyContent: 'space-evenly',
-                    paddingBottom: 30,
-                }}
-                renderItem={({ item }) => (
-                    <PictureInput
-                        variant="additional"
-                        onPressDelete={() => deletePicture(item.index)}
-                        onPressSelect={() => addPicture(item.index)}
-                        image={item.image}
+                <View>
+                    <FlatList
+                        data={pictureSelectors}
+                        keyExtractor={(item) => item.index}
+                        numColumns={2}
+                        columnWrapperStyle={{
+                            justifyContent: 'space-around',
+                            paddingBottom: 30,
+                        }}
+                        renderItem={({ item }) => (
+                            <PictureInput
+                                variant="additional"
+                                onPressDelete={() => deletePicture(item.index)}
+                                onPressSelect={() => addPicture(item.index)}
+                                image={item.image}
+                            />
+                        )}
                     />
-                )}
-            />
-
-            <NavigationButtons
-                onPressBack={() => navigation.goBack()}
-                onPressNext={() => {
-                    dispatch(uploadImages(images, 'userprofile'));
-                }}
-            />
+                </View>
+                <PrimaryButton
+                    onPress={() => {
+                        if (images) {
+                            dispatch(
+                                uploadImages(
+                                    images,
+                                    route.params.includes('single')
+                                        ? 'userprofile'
+                                        : 'flatprofile'
+                                )
+                            );
+                        }
+                        delete transitUserprofile.pictureReference;
+                        dispatch(
+                            updateUserprofile(
+                                userprofile.profileId,
+                                transitUserprofile
+                            )
+                        );
+                    }}
+                >
+                    Done
+                </PrimaryButton>
+            </ScreenPadding>
         </Container>
     );
 };

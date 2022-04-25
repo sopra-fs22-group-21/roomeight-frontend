@@ -18,11 +18,17 @@ import Userprofile from '../../../models/Userprofile';
 import { postUserprofile } from '../../../redux/actions/postUserprofile';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
+import Loader from 'react-native-modal-loader';
+import colors from '../../../resources/colors';
 
 const Signup = ({ route, navigation }) => {
     const [user, setUser] = useState(route.params);
     const [phoneValid, setPhoneValid] = useState(null);
     const [birthdayValid, setbirthdayValid] = useState(null);
+    const { userprofileErrors, authErrors } = useSelector(
+        (state) => state.errorState
+    );
+    const { loading } = useSelector((state) => state.loadingState);
 
     const phoneRegex =
         /(\b(0041|0)|\B\+41)(\s?\(0\))?(\s)?[1-9]{2}(\s)?[0-9]{3}(\s)?[0-9]{2}(\s)?[0-9]{2}\b/;
@@ -34,6 +40,7 @@ const Signup = ({ route, navigation }) => {
             onPressBack={() => navigation.goBack()}
             navigation={navigation}
         >
+            <Loader loading={loading} color={colors.secondary500} />
             <KeyboardAvoidingView style={styles.inner} behavior="padding">
                 <Inner>
                     <ScrollView showsVerticalScrollIndicator={false}>
@@ -89,6 +96,8 @@ const Signup = ({ route, navigation }) => {
                                 setbirthdayValid(valid && date <= new Date());
                             }}
                         />
+                        <Box />
+
                         <PrimaryButton
                             disabled={
                                 user.firstName == '' ||
@@ -106,9 +115,6 @@ const Signup = ({ route, navigation }) => {
                     </ScrollView>
                 </Inner>
             </KeyboardAvoidingView>
-            <View style={{ paddingLeft: 20, paddingRight: 20 }}>
-                <NavigationButtons onPressBack={() => navigation.goBack()} />
-            </View>
         </Container>
     );
 };

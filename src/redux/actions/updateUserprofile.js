@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 
@@ -22,11 +23,11 @@ const updateUserprofileFailure = (error) => ({
  * @dispatches {@link updateUserprofileSuccess} on update success with response payload
  * @dispatches {@link updateUserprofileFailure} on update failure with error payload
  */
-export const updateUserprofile = (requestBody) => (dispatch) => {
+export const updateUserprofile = (id, requestBody) => (dispatch) => {
     dispatch(updateUserprofileRequest());
-
+    console.log(requestBody);
     apiClient()
-        .patch('/userprofiles', requestBody)
+        .patch('/userprofiles/' + id, JSON.stringify(requestBody))
         .then((response) => {
             console.log(
                 'completeUserprofileSuccess: ' + JSON.stringify(response.data)

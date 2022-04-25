@@ -38,6 +38,9 @@ export default function Route() {
     const { auth, loggedIn } = useSelector((state) => state.authState);
     const loading = useSelector((state) => state.loadingState);
     const { userprofile } = useSelector((state) => state.userprofileState);
+    const { profileCompletionStatus } = useSelector(
+        (state) => state.transitState
+    );
     const dispatch = useDispatch();
     console.log(new Date(userprofiles[1].birthday));
 
@@ -80,13 +83,13 @@ export default function Route() {
     const incompleteComponents = (
         <>
             <Stack.Screen
-                name="AddProfilePicture"
-                component={AddProfilePicture}
+                name="ChooseStatus"
+                component={ChooseStatus}
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="ChooseStatus"
-                component={ChooseStatus}
+                name="AddProfilePicture"
+                component={AddProfilePicture}
                 options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -155,7 +158,12 @@ export default function Route() {
 
     function getUserStatus() {
         if (loggedIn) {
-            return completeComponents;
+            if (
+                userprofile.pictureReference ||
+                profileCompletionStatus.isComplete
+            ) {
+                return completeComponents;
+            } else return incompleteComponents;
         }
         return loggedOutComponents;
     }

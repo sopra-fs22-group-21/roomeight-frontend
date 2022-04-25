@@ -13,6 +13,13 @@ const styles = StyleSheet.create({
     textInput: {
         height: 40,
     },
+    box: {
+        display: 'flex',
+        flex: 1,
+        justifyContent: 'flex-start',
+        padding: 2,
+        height: 200,
+    },
 });
 
 export default styles;

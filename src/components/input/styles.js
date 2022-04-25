@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     input: {
         backgroundColor: '#e7e5e4',
@@ -9,10 +10,10 @@ const styles = StyleSheet.create({
         borderRadius: 4,
     },
     error: {
-        backgroundColor: '#fce6e6',
+        backgroundColor: '#f2e9ec',
     },
     valid: {
-        backgroundColor: '#e6f5ef',
+        backgroundColor: '#e9f2ef',
     },
 });
 

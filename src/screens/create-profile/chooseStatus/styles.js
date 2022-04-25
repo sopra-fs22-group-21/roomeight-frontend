@@ -1,13 +1,10 @@
 import { StyleSheet } from 'react-native';
-import colors from '../../../resources/colors';
 const styles = StyleSheet.create({
     inner: {
         flex: 1,
         paddingLeft: 20,
+        paddingTop: 20,
         paddingRight: 20,
-    },
-    error: {
-        color: colors.secondary600,
     },
 });
 
