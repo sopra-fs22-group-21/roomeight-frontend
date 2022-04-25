@@ -80,7 +80,22 @@ const AddPictures = ({ navigation, route }) => {
     ];
 
     return (
-        <Container onPressBack={() => navigation.goBack()}>
+        <Container
+            onPressBack={() => navigation.goBack()}
+            onPressNext={() => {
+                if (images) {
+                    dispatch(
+                        uploadImages(
+                            images,
+                            route.params.includes('single')
+                                ? 'userprofile'
+                                : 'flatprofile'
+                        )
+                    );
+                }
+                navigation.navigate('Done', route.params);
+            }}
+        >
             <Loader loading={loading} color={colors.secondary500} />
             <ScreenPadding>
                 <Heading>{en.addPictures.heading}</Heading>
@@ -110,29 +125,6 @@ const AddPictures = ({ navigation, route }) => {
                         )}
                     />
                 </View>
-                <PrimaryButton
-                    onPress={() => {
-                        if (images) {
-                            dispatch(
-                                uploadImages(
-                                    images,
-                                    route.params.includes('single')
-                                        ? 'userprofile'
-                                        : 'flatprofile'
-                                )
-                            );
-                        }
-                        delete transitUserprofile.localPictureReference;
-                        delete transitUserprofile.pictureReference;
-                        console.log(
-                            'Transituserprofile: ' +
-                                JSON.stringify(transitUserprofile)
-                        );
-                        dispatch(updateUserprofile(transitUserprofile));
-                    }}
-                >
-                    Done
-                </PrimaryButton>
             </ScreenPadding>
         </Container>
     );

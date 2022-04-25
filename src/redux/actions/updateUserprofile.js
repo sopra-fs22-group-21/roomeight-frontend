@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 import { auth } from '../../../firebase/firebase-config';
+import { getCurrentUserprofile } from './getUserprofiles';
 
 const updateUserprofileRequest = () => ({
     type: Constants.UPDATE_USERPROFILE_REQUEST,
@@ -26,16 +27,16 @@ const updateUserprofileFailure = (error) => ({
  */
 export const updateUserprofile = (requestBody) => (dispatch) => {
     dispatch(updateUserprofileRequest());
+    console.log('Requestbody: ');
+    console.log(requestBody);
     apiClient()
         .patch('/userprofiles/' + auth.currentUser.uid, requestBody)
         .then((response) => {
-            console.log(
-                'completeUserprofileSuccess: ' + JSON.stringify(response.data)
-            );
             dispatch(updateUserprofileSuccess(response.data));
+            dispatch(getCurrentUserprofile());
         })
         .catch((error) => {
-            console.log('error put userprofile');
+            console.log('error patch userprofile');
             dispatch(updateUserprofileFailure(error));
         });
 };

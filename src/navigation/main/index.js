@@ -10,9 +10,9 @@ import {
 import Chat from '../../screens/chat';
 import Chatroom from '../../screens/chatRoom';
 import AddPictures from '../../screens/create-profile/addPictures';
-import AddProfilePicture from '../../screens/create-profile/addProfilePicture';
+import CompletePersonalProfile from '../../screens/create-profile/completePersonalProfile';
 import ChooseStatus from '../../screens/create-profile/chooseStatus';
-import CompleteFlatProfile from '../../screens/create-profile/completeFlatProfile';
+import RoomInfo from '../../screens/create-profile/roomInfo';
 import CompleteSingleProfile from '../../screens/create-profile/completeSingleProfile';
 import Discover from '../../screens/discover/discover';
 import Matches from '../../screens/matches/matches';
@@ -25,6 +25,8 @@ import AddDescription from '../../screens/create-profile/addDescription';
 import userprofiles from '../../resources/userprofiles';
 import SignupDetails from '../../screens/welcome-login-signup/signupDetails';
 import genders from '../../resources/strings/genders';
+import FlatInfo from '../../screens/create-profile/flatInfo';
+import Done from '../../screens/create-profile/done';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -49,13 +51,6 @@ export default function Route() {
         console.log('dispatch');
         dispatch(userAuthStateListener());
     }, []);
-
-    /* if (loading) {
-        return <M8Loader height={200} width={200} />;
-    } */
-    console.log('logged in: ' + loggedIn);
-    console.log('user profile: ' + userprofile);
-    console.log('complete: ' + userprofile.isComplete);
 
     const loggedOutComponents = (
         <>
@@ -89,8 +84,8 @@ export default function Route() {
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="AddProfilePicture"
-                component={AddProfilePicture}
+                name="CompletePersonalProfile"
+                component={CompletePersonalProfile}
                 options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -109,8 +104,19 @@ export default function Route() {
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="CompleteFlatProfile"
-                component={CompleteFlatProfile}
+                name="RoomInfo"
+                component={RoomInfo}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="FlatInfo"
+                component={FlatInfo}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="Done"
+                component={Done}
                 options={{ headerShown: false }}
             />
         </>
@@ -158,12 +164,14 @@ export default function Route() {
     );
 
     function getUserStatus() {
-        if (loggedIn) {
-            if (userprofile.gender != genders.notSet) {
+        /*if (loggedIn) {
+            if (userprofile.pictureReference) {
                 return completeComponents;
             } else return incompleteComponents;
         }
         return loggedOutComponents;
+        */
+        return incompleteComponents;
     }
 
     return (

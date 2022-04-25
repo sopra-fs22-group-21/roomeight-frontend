@@ -41,7 +41,7 @@ const Signup = ({ route, navigation }) => {
             navigation={navigation}
         >
             <Loader loading={loading} color={colors.secondary500} />
-            <KeyboardAvoidingView style={styles.inner} behavior="padding">
+            <KeyboardAvoidingView style={styles.inner} behavior="position">
                 <Inner>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <Heading>{en.signup.title}</Heading>

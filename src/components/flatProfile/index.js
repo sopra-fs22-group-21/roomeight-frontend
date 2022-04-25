@@ -85,10 +85,7 @@ const FlatProfile = (props) => {
                                 if (valid)
                                     setUser({
                                         ...user,
-                                        moveInDate: dateFormat(
-                                            date,
-                                            'yyyy-mm-dd'
-                                        ),
+                                        moveInDate: date,
                                     });
                                 setmoveInDateValid(valid);
                             }}
@@ -147,7 +144,7 @@ const FlatProfile = (props) => {
                             onChangeText={(text) => setNrBathrooms(text)}
                         />
                         <Input
-                            label={en.addProfilePicture.description}
+                            label={en.completePersonalProfile.description}
                             multiline
                             onChangeText={(text) =>
                                 setDescription({

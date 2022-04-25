@@ -18,18 +18,19 @@ const userprofileState = (state = initialState, action) => {
             return {
                 ...state,
                 userprofile: new Userprofile(action.payload),
+                update: undefined,
             };
 
         case Constants.POST_USERPROFILE_SUCCESS:
             return {
                 ...state,
-                userprofile: new Userprofile(action.payload),
+                userprofile: action.payload,
             };
 
         case Constants.UPDATE_USERPROFILE_SUCCESS:
             return {
                 ...state,
-                userprofile: new Userprofile(action.payload),
+                update: action.payload,
             };
         case Constants.GET_CURRENT_USER_FAILURE:
             return {

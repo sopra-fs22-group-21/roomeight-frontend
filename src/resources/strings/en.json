@@ -32,7 +32,7 @@
         "title": "",
         "select": "Please select what applies to you",
         "room": "I'm looking for a room",
-        "roommate": "I'm looking for a new roommate",
+        "roommate": "My flat is looking for a new roommate",
         "flat": "I want to access an existing flat profile"
     },
     "addPictures": {
@@ -44,7 +44,7 @@
         "take": "Take a picture",
         "next": "Next"
     },
-    "addProfilePicture": {
+    "completePersonalProfile": {
         "heading": "Complete your personal profile",
         "title": "",
         "info": "Choose your profile picture and tell us something about yourself.",
@@ -84,19 +84,33 @@
     },
     "completeFlatProfile": {
         "heading": "Tell us something about your flat",
-        "title": "",
+        "tags": "We",
+        "nrRoommates": "Number of roommates"
+    },
+    "roomInfo": {
+        "heading": "Spit some facts about the free room!",
         "address": "Address",
         "moveInDate": "Move-In Date",
+        "moveOutDate": "Move-Out Date",
         "duration": "Duration",
         "rent": "Rent",
         "roomSize": "Room Size",
-        "tags": "We",
-        "nrRoommates": "Number of roommates",
         "nrBathrooms": "Total Bathrooms"
     },
-    "addDescription": {
-        "heading": "Tell us more details",
-        "description": "Description"
+    "flatInfo": {
+        "heading": "Who are you and your roomies?",
+        "info": "Tell your potential new roomeights something about your flat, so they can get an idea of what it's like to live with you!",
+        "tags": "Tags",
+        "nrRoommates": "Number of roommates",
+        "description": "Description",
+        "descriptionPlaceholder": "Add a longer description of your jobs, hobbies or roomeight expectations",
+        "biography": "Biography",
+        "biographyPlaceholder": "That's your flat in one sentence"
+    },
+    "done": {
+        "heading": "This is it!",
+        "title": "Are you ready to see some profiles?",
+        "start": "Start room8"
     },
     "singleProfile": {
         "description": "Description",

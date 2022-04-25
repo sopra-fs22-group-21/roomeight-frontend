@@ -57,15 +57,12 @@ const SingleProfile = (props) => {
                         <DateInput
                             label={en.completeSingleProfile.moveInDate}
                             valid={moveInDateValid}
-                            //defaultValue={userprofile.moveInDate}
+                            defaultValue={userprofile.moveInDate}
                             onChange={(date, valid) => {
                                 if (valid)
                                     setUser({
                                         ...user,
-                                        moveInDate: dateFormat(
-                                            date,
-                                            'yyyy-mm-dd'
-                                        ),
+                                        moveInDate: date,
                                     });
                                 setmoveInDateValid(valid && date > new Date());
                             }}
@@ -78,7 +75,7 @@ const SingleProfile = (props) => {
                             />
                         </InputBox>
                         <Input
-                            label={en.addProfilePicture.biography}
+                            label={en.completePersonalProfile.biography}
                             defaultValue={userprofile.biography}
                             multiline
                             onChangeText={(text) =>
@@ -89,7 +86,7 @@ const SingleProfile = (props) => {
                             }
                         />
                         <Input
-                            label={en.addProfilePicture.description}
+                            label={en.completePersonalProfile.description}
                             defaultValue={userprofile.description}
                             multiline
                             onChangeText={(text) =>

@@ -31,7 +31,7 @@ const CompleteSingleProfile = ({ navigation }) => {
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
                 dispatch(setTransitAttributes({ ...user }, 'userprofile'));
-                navigation.navigate('AddProfilePicture', 'single');
+                navigation.navigate('CompletePersonalProfile', 'single');
             }}
             nextDisabled={false}
         >
@@ -39,7 +39,7 @@ const CompleteSingleProfile = ({ navigation }) => {
                 <Heading>{en.completeSingleProfile.heading}</Heading>
                 <NormalText>{en.completeSingleProfile.info}</NormalText>
                 <Box />
-                <KeyboardAvoidingView style={styles.inner} behavior="padding">
+                <KeyboardAvoidingView style={styles.inner} behavior="position">
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <DateInput
                             label={en.completeSingleProfile.moveInDate}
@@ -48,7 +48,7 @@ const CompleteSingleProfile = ({ navigation }) => {
                                 if (valid)
                                     setUser({
                                         ...user,
-                                        moveInDate: date,
+                                        moveInDate: date.toJSON(),
                                     });
                                 setmoveInDateValid(valid && date > new Date());
                             }}

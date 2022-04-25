@@ -53,7 +53,7 @@ const ChooseStatus = ({ navigation }) => {
                                 { isFlat: true }
                             )
                         );
-                        navigation.navigate('CompleteFlatProfile');
+                        navigation.navigate('RoomInfo');
                     }}
                 >
                     {en.chooseStatus.roommate}

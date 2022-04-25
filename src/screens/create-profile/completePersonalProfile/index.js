@@ -18,7 +18,7 @@ import en from '../../../resources/strings/en.json';
 import genders from '../../../resources/strings/genders';
 import styles from './styles';
 
-const AddProfilePicture = ({ navigation, route }) => {
+const CompletePersonalProfile = ({ navigation, route }) => {
     const [gender, setGender] = useState(genders.notSet);
     const [biography, setBiography] = useState(null);
     const [description, setDescription] = useState(null);
@@ -57,20 +57,25 @@ const AddProfilePicture = ({ navigation, route }) => {
                 navigate();
             }}
             nextDisabled={
-                (!image &&
+                route.params.includes('single') &&
+                ((!image &&
                     !userprofile.pictureReference &&
                     !transitUserprofile.pictureReference) ||
-                (!biography &&
-                    !userprofile.biography &&
-                    !transitUserprofile.biography) ||
-                (!gender && !userprofile.gender && !transitUserprofile.gender)
+                    (!biography &&
+                        !userprofile.biography &&
+                        !transitUserprofile.biography) ||
+                    (!gender &&
+                        !userprofile.gender &&
+                        !transitUserprofile.gender))
             }
         >
             <ScreenPadding>
-                <KeyboardAvoidingView style={styles.inner} behavior="padding">
+                <KeyboardAvoidingView style={styles.inner} behavior="position">
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <Heading>{en.addProfilePicture.heading}</Heading>
-                        <NormalText>{en.addProfilePicture.info}</NormalText>
+                        <Heading>{en.completePersonalProfile.heading}</Heading>
+                        <NormalText>
+                            {en.completePersonalProfile.info}
+                        </NormalText>
                         <Box />
 
                         <Box style={{ alignItems: 'center' }}>
@@ -88,13 +93,13 @@ const AddProfilePicture = ({ navigation, route }) => {
                                 }}
                             />
                         </Box>
-                        <InputBox label={en.addProfilePicture.gender}>
+                        <InputBox label={en.completePersonalProfile.gender}>
                             <Gender
                                 onChange={(g) => {
                                     setGender(g);
                                     cache();
                                 }}
-                                value={
+                                defaultValue={
                                     userprofile.gender
                                         ? userprofile.gender
                                         : transitUserprofile.gender
@@ -103,10 +108,10 @@ const AddProfilePicture = ({ navigation, route }) => {
                         </InputBox>
                         <Input
                             //style={(inputstyle.Input, styles.textInput)}
-                            label={en.addProfilePicture.biography}
+                            label={en.completePersonalProfile.biography}
                             multiline
                             placeholder={
-                                en.addProfilePicture.biographyPlaceholder
+                                en.completePersonalProfile.biographyPlaceholder
                             }
                             onChangeText={(text) => {
                                 setBiography({
@@ -115,21 +120,24 @@ const AddProfilePicture = ({ navigation, route }) => {
                                 });
                                 cache();
                             }}
-                            value={
-                                userprofile.biography
+                            defaultValue={
+                                biography
+                                    ? biography
+                                    : userprofile.biography
                                     ? userprofile.biography
                                     : transitUserprofile.biography
                             }
                         />
 
                         <InputBox
-                            label={en.addProfilePicture.description}
+                            label={en.completePersonalProfile.description}
                             style={styles.box}
                         >
                             <StyledTextInput
                                 multiline
                                 placeholder={
-                                    en.addProfilePicture.descriptionPlaceholder
+                                    en.completePersonalProfile
+                                        .descriptionPlaceholder
                                 }
                                 onChangeText={(text) =>
                                     setDescription({
@@ -137,8 +145,10 @@ const AddProfilePicture = ({ navigation, route }) => {
                                         description: text,
                                     })
                                 }
-                                value={
-                                    userprofile.description
+                                defaultValue={
+                                    description
+                                        ? description
+                                        : userprofile.description
                                         ? userprofile.description
                                         : transitUserprofile.description
                                 }
@@ -150,4 +160,4 @@ const AddProfilePicture = ({ navigation, route }) => {
         </Container>
     );
 };
-export default AddProfilePicture;
+export default CompletePersonalProfile;

@@ -180,7 +180,7 @@ const Signup = ({ navigation }) => {
         <Container>
             <ScreenPadding>
                 <Loader loading={loading} color={colors.secondary500} />
-                <KeyboardAvoidingView behavior="padding">
+                <KeyboardAvoidingView behavior="position">
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <Heading>{heading}</Heading>
                         <Box>
