@@ -19,6 +19,7 @@ import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
 import AddDescription from '../../screens/create-profile/addDescription';
 import userprofiles from '../../resources/userprofiles';
+import Settings from '../../screens/profile/settings';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -122,6 +123,11 @@ export default function Route() {
             <Stack.Screen
                 name="Profile"
                 component={Profile}
+                options={mainOptions}
+            />
+            <Stack.Screen
+                name="Settings"
+                component={Settings}
                 options={mainOptions}
             />
             <Stack.Screen

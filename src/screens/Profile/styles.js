@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignContent: 'center',
         borderRadius: 5,
-        //opacity: 0.5,
         flexDirection: 'row',
         height: 100,
     },
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 0,
         paddingBottom: 10,
-        marginTop: 40,
+        marginTop: 10,
         marginBottom: 0,
         height: '100%',
     },
@@ -38,18 +37,19 @@ const styles = StyleSheet.create({
         lineHeight: 24,
     },
     tab: {
+        bottom: 1,
         backgroundColor: 'transparent',
         paddingBottom: 0,
         paddingTop: 0,
         margin: 0,
         marginTop: 0,
         marginBottom: 0,
+        borderBottomWidth: 1,
+        borderBottomColor: '#DADADA',
     },
     indicator: {
         backgroundColor: colors.primary600,
-        height: 2,
-        width: '50%',
-        marginBottom: 5,
+        height: 3,
     },
     container: {
         flex: 1,
@@ -81,6 +81,10 @@ const styles = StyleSheet.create({
         height: 90,
         width: 90,
         borderColor: 'transparent',
+    },
+    icon: {
+        alignSelf: 'flex-end',
+        paddingRight: 5,
     },
 });
 export default styles;

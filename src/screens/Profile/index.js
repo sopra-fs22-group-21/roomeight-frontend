@@ -3,7 +3,6 @@ import { Text, View } from 'react-native';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
-import tagIcons from '../../resources/icons/tagIcons';
 import {
     Container,
     Name,
@@ -16,21 +15,14 @@ import PictureInput from '../../components/pictureInput';
 import { logoutUser } from '../../redux/actions/authActions';
 import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 import styles from './styles';
-import { ScrollView } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { InputBox, InputLabel, Input } from '../../components/input';
 import en from '../../resources/strings/en.json';
-import Tags from '../../components/tags';
-import DateInput from '../../components/dateInput';
-import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 import { PickImage } from '../../helper/imageHandler';
 import { updateUserprofile } from '../../redux/actions/updateUserprofile';
 import flatprofiles from '../../resources/flatprofiles';
-import { PublicProfileCard } from '../../components/publicProfileCard';
-import { SingleDetailCard } from '../../components/singleDetailCard';
-import { FlatDetailCard } from '../../components/flatDetailCard';
 import SingleProfile from '../../components/singleProfile';
 import FlatProfile from '../../components/flatProfile';
+import { Icon } from 'react-native-elements';
+import { Pressable } from 'react-native';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
@@ -53,8 +45,17 @@ const Profile = ({ navigation }) => {
             navigation={navigation}
             showNavBar
         >
+            <Pressable onPress={() => navigation.navigate('Settings')}>
+                <Icon
+                    style={styles.icon}
+                    name="settings"
+                    type="feather"
+                    size={24}
+                    color={'black'}
+                />
+            </Pressable>
             <Name>{userprofile.firstName + ' ' + userprofile.lastName}</Name>
-            <Box style={styles.overview}>
+            {/* <Box style={styles.overview}>
                 <PictureInput
                     style={styles.image}
                     onPressDelete={() => {
@@ -73,14 +74,14 @@ const Profile = ({ navigation }) => {
                         {userprofile.biography}
                     </Text>
                 </Container>
-            </Box>
+            </Box> */}
             <Tab
                 value={index}
                 onChange={(e) => {
                     setIndex(e);
                 }}
                 indicatorStyle={styles.indicator}
-                variant="primary"
+                variant="default"
             >
                 <Tab.Item
                     containerStyle={styles.tab}
@@ -101,7 +102,9 @@ const Profile = ({ navigation }) => {
                     }}
                 />
             </Tab>
+            <Box />
             {index === 0 ? <SingleProfile /> : <FlatProfile />}
+            <Box />
         </Container>
     );
 };
