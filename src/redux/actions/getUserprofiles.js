@@ -1,6 +1,7 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 import { getFlatprofile, getMatches } from './getFlatprofile';
+import { auth } from '../../../firebase/firebase-config';
 
 const getCurrentUserprofileRequest = () => ({
     type: Constants.GET_CURRENT_USER_REQUEST,
@@ -23,16 +24,14 @@ const getCurrentUserprofileFailure = (error) => ({
  * @dispatches {@link getCurrentUserprofileSuccess} on request success with userprofile payload
  * @dispatches {@link getCurrentUserprofileFailure} on request failure with error payload
  */
-export const getCurrentUserprofile = (userId) => (dispatch) => {
-    console.log('userid: ' + userId);
+export const getCurrentUserprofile = () => (dispatch) => {
+    console.log('userid: ' + auth.currentUser.uid);
     dispatch(getCurrentUserprofileRequest());
 
     apiClient()
-        .get(`/profiles/${userId}`)
+        .get(`/userprofiles/${auth.currentUser.uid}`)
         .then((response) => {
             dispatch(getCurrentUserprofileSuccess(response.data));
-            if (response.data.flatId.length > 0)
-                dispatch(getFlatprofile(response.data.flatId));
         })
         .catch((error) => {
             dispatch(getCurrentUserprofileFailure(error));

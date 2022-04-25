@@ -30,6 +30,9 @@ const postUserprofileFailure = (error) => ({
  */
 export const postUserprofile = (requestBody) => (dispatch) => {
     dispatch(postUserprofileRequest());
+    dispatch({
+        type: Constants.LOADING_STATE,
+    });
 
     apiClient()
         .post('/userprofiles', requestBody)

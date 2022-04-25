@@ -13,10 +13,8 @@ const API_URL = (_env = Constants.manifest.releaseChannel) => {
 async function userToken() {
     const user = auth.currentUser;
     if (user) {
-        console.log('logged in');
         return user.getIdToken();
     } else {
-        console.log('no user');
         return null;
     }
 }

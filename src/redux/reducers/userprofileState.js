@@ -31,7 +31,11 @@ const userprofileState = (state = initialState, action) => {
                 ...state,
                 userprofile: new Userprofile(action.payload),
             };
-
+        case Constants.GET_CURRENT_USER_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+            };
         default:
             return state;
     }

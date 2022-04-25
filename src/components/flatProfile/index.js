@@ -12,23 +12,15 @@ import {
     Title,
     Box,
 } from '../../components/theme';
-import PictureInput from '../../components/pictureInput';
-import { logoutUser } from '../../redux/actions/authActions';
-import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 import styles from './styles';
-import { ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { InputBox, InputLabel, Input } from '../../components/input';
 import en from '../../resources/strings/en.json';
 import Tags from '../../components/tags';
 import DateInput from '../../components/dateInput';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
-import { PickImage } from '../../helper/imageHandler';
-import { updateUserprofile } from '../../redux/actions/updateUserprofile';
 import flatprofiles from '../../resources/flatprofiles';
-import { PublicProfileCard } from '../../components/publicProfileCard';
 import { SingleDetailCard } from '../../components/singleDetailCard';
-import { FlatDetailCard } from '../../components/flatDetailCard';
 import dateFormat from 'dateformat';
 
 const FlatProfile = (props) => {

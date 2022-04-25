@@ -21,7 +21,7 @@ import styles from './styles';
 const AddProfilePicture = ({ navigation, route }) => {
     const [gender, setGender] = useState(genders.notSet);
     const [biography, setBiography] = useState(null);
-    const [image, setImage] = useState('');
+    const [description, setDescription] = useState(null);
     const dispatch = useDispatch();
 
     const navigate = route.params.includes('single')
@@ -29,7 +29,10 @@ const AddProfilePicture = ({ navigation, route }) => {
         : () => navigation.navigate('AddPictures', 'flat');
 
     const { userprofile } = useSelector((state) => state.userprofileState);
-    let selectedTags = [];
+    const { transitUserprofile } = useSelector((state) => state.transitState);
+    const [image, setImage] = useState(
+        userprofile.image ? userprofile.image : transitUserprofile.image
+    );
 
     /* function getInitials() {
         let firstLetter = userprofile.firstName.charAt(0);
@@ -37,27 +40,31 @@ const AddProfilePicture = ({ navigation, route }) => {
         return firstLetter + lastLetter;
     } */
 
+    const cache = () => {
+        const attributes = {
+            localPictureReference: image ? [image] : undefined,
+            gender: gender,
+            ...biography,
+            ...description,
+        };
+        dispatch(setTransitAttributes(attributes, 'userprofile'));
+    };
     return (
         <Container
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
-                console.log(image);
-                if (image) {
-                    const attributes = {
-                        localPictureReference: [image],
-                        gender: gender,
-                        ...biography,
-                    };
-                } else {
-                    const attributes = {
-                        gender: gender,
-                        ...biography,
-                    };
-                    dispatch(setTransitAttributes(attributes, 'userprofile'));
-                }
+                cache();
                 navigate();
             }}
-            nextDisabled={!image || !biography}
+            nextDisabled={
+                (!image &&
+                    !userprofile.pictureReference &&
+                    !transitUserprofile.pictureReference) ||
+                (!biography &&
+                    !userprofile.biography &&
+                    !transitUserprofile.biography) ||
+                (!gender && !userprofile.gender && !transitUserprofile.gender)
+            }
         >
             <ScreenPadding>
                 <KeyboardAvoidingView style={styles.inner} behavior="padding">
@@ -77,6 +84,7 @@ const AddProfilePicture = ({ navigation, route }) => {
                                 onPressSelect={async () => {
                                     const uri = await PickImage();
                                     setImage(uri);
+                                    cache();
                                 }}
                             />
                         </Box>
@@ -84,7 +92,13 @@ const AddProfilePicture = ({ navigation, route }) => {
                             <Gender
                                 onChange={(g) => {
                                     setGender(g);
+                                    cache();
                                 }}
+                                value={
+                                    userprofile.gender
+                                        ? userprofile.gender
+                                        : transitUserprofile.gender
+                                }
                             />
                         </InputBox>
                         <Input
@@ -94,11 +108,17 @@ const AddProfilePicture = ({ navigation, route }) => {
                             placeholder={
                                 en.addProfilePicture.biographyPlaceholder
                             }
-                            onChangeText={(text) =>
+                            onChangeText={(text) => {
                                 setBiography({
                                     ...biography,
                                     biography: text,
-                                })
+                                });
+                                cache();
+                            }}
+                            value={
+                                userprofile.biography
+                                    ? userprofile.biography
+                                    : transitUserprofile.biography
                             }
                         />
 
@@ -116,6 +136,11 @@ const AddProfilePicture = ({ navigation, route }) => {
                                         ...description,
                                         description: text,
                                     })
+                                }
+                                value={
+                                    userprofile.description
+                                        ? userprofile.description
+                                        : transitUserprofile.description
                                 }
                             ></StyledTextInput>
                         </InputBox>

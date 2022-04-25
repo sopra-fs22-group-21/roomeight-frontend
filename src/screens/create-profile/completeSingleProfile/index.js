@@ -1,7 +1,7 @@
 import dateFormat from 'dateformat';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DateInput from '../../../components/dateInput';
 import { InputBox } from '../../../components/input';
 import { NavigationButtons } from '../../../components/navigationButtons';
@@ -22,6 +22,8 @@ const CompleteSingleProfile = ({ navigation }) => {
     const [moveInDateValid, setmoveInDateValid] = useState(null);
     const [gender, setGender] = useState(genders.notSet);
     const [user, setUser] = useState(null);
+    const { userprofile } = useSelector((state) => state.userprofileState);
+    const { transitUserprofile } = useSelector((state) => state.transitState);
     const dispatch = useDispatch();
     let selectedTags = [];
     return (
@@ -46,19 +48,26 @@ const CompleteSingleProfile = ({ navigation }) => {
                                 if (valid)
                                     setUser({
                                         ...user,
-                                        moveInDate: dateFormat(
-                                            date,
-                                            'yyyy-mm-dd'
-                                        ),
+                                        moveInDate: date,
                                     });
                                 setmoveInDateValid(valid && date > new Date());
                             }}
+                            value={
+                                userprofile.moveInDate
+                                    ? userprofile.moveInDate
+                                    : transitUserprofile.moveInDate
+                            }
                         />
 
                         <InputBox label={'Tags'}>
                             <Tags
                                 onChange={(tags) =>
                                     setUser({ ...user, tags: tags })
+                                }
+                                selected={
+                                    userprofile.tags
+                                        ? userprofile.tags
+                                        : transitUserprofile.tags
                                 }
                             />
                         </InputBox>

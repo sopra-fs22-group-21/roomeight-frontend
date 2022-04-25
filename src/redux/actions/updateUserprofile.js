@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
+import { auth } from '../../../firebase/firebase-config';
 
 const updateUserprofileRequest = () => ({
     type: Constants.UPDATE_USERPROFILE_REQUEST,
@@ -23,11 +24,10 @@ const updateUserprofileFailure = (error) => ({
  * @dispatches {@link updateUserprofileSuccess} on update success with response payload
  * @dispatches {@link updateUserprofileFailure} on update failure with error payload
  */
-export const updateUserprofile = (id, requestBody) => (dispatch) => {
+export const updateUserprofile = (requestBody) => (dispatch) => {
     dispatch(updateUserprofileRequest());
-    console.log(requestBody);
     apiClient()
-        .patch('/userprofiles/' + id, JSON.stringify(requestBody))
+        .patch('/userprofiles/' + auth.currentUser.uid, requestBody)
         .then((response) => {
             console.log(
                 'completeUserprofileSuccess: ' + JSON.stringify(response.data)

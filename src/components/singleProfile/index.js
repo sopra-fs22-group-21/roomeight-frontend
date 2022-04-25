@@ -14,9 +14,7 @@ import {
 } from '../../components/theme';
 import PictureInput from '../../components/pictureInput';
 import { logoutUser } from '../../redux/actions/authActions';
-import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 import styles from './styles';
-import { ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { InputBox, InputLabel, Input } from '../../components/input';
 import en from '../../resources/strings/en.json';

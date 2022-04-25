@@ -3,6 +3,8 @@ import * as ImagePicker from 'expo-image-picker';
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { View } from 'react-native-animatable';
+import { colors } from 'react-native-elements';
+import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
 import { NavigationButtons } from '../../../components/navigationButtons';
@@ -24,6 +26,7 @@ import en from '../../../resources/strings/en.json';
 const AddPictures = ({ navigation, route }) => {
     const { transitUserprofile } = useSelector((state) => state.transitState);
     const { userprofile } = useSelector((state) => state.userprofileState);
+    const { loading } = useSelector((state) => state.loadingState);
 
     console.log(transitUserprofile.localPictureReference);
     const [images, setImages] = useState(
@@ -78,6 +81,7 @@ const AddPictures = ({ navigation, route }) => {
 
     return (
         <Container onPressBack={() => navigation.goBack()}>
+            <Loader loading={loading} color={colors.secondary500} />
             <ScreenPadding>
                 <Heading>{en.addPictures.heading}</Heading>
                 <NormalText>
@@ -118,13 +122,13 @@ const AddPictures = ({ navigation, route }) => {
                                 )
                             );
                         }
+                        delete transitUserprofile.localPictureReference;
                         delete transitUserprofile.pictureReference;
-                        dispatch(
-                            updateUserprofile(
-                                userprofile.profileId,
-                                transitUserprofile
-                            )
+                        console.log(
+                            'Transituserprofile: ' +
+                                JSON.stringify(transitUserprofile)
                         );
+                        dispatch(updateUserprofile(transitUserprofile));
                     }}
                 >
                     Done

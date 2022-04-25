@@ -24,6 +24,7 @@ import Welcome from '../../screens/welcome-login-signup/welcome';
 import AddDescription from '../../screens/create-profile/addDescription';
 import userprofiles from '../../resources/userprofiles';
 import SignupDetails from '../../screens/welcome-login-signup/signupDetails';
+import genders from '../../resources/strings/genders';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -158,10 +159,7 @@ export default function Route() {
 
     function getUserStatus() {
         if (loggedIn) {
-            if (
-                userprofile.pictureReference ||
-                profileCompletionStatus.isComplete
-            ) {
+            if (userprofile.gender != genders.notSet) {
                 return completeComponents;
             } else return incompleteComponents;
         }
