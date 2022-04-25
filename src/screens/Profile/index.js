@@ -23,6 +23,7 @@ import SingleProfile from '../../components/singleProfile';
 import FlatProfile from '../../components/flatProfile';
 import { Icon } from 'react-native-elements';
 import { Pressable } from 'react-native';
+import AddFlatInProfile from '../../components/addFlatInProfile';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
@@ -33,7 +34,7 @@ const Profile = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const loading = useSelector((state) => state.loadingState);
     const [index, setIndex] = useState(0);
-    const [image, setImage] = useState(userprofile.pictureReference[0]);
+    //const [image, setImage] = useState(userprofile.pictureReference[0]);
 
     if (!loading) {
         console.log('loading: ' + loading);
@@ -103,7 +104,13 @@ const Profile = ({ navigation }) => {
                 />
             </Tab>
             <Box />
-            {index === 0 ? <SingleProfile /> : <FlatProfile />}
+            {index === 0 ? (
+                <SingleProfile />
+            ) : userprofile.isAdvertisingRoom ? (
+                <FlatProfile />
+            ) : (
+                <AddFlatInProfile />
+            )}
             <Box />
         </Container>
     );

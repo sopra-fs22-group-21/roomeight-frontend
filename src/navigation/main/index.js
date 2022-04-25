@@ -145,12 +145,12 @@ export default function Route() {
     );
 
     function getUserStatus() {
-        if (loggedIn) {
-            if (userprofile.isComplete) {
-                return completeComponents;
-            } else return incompleteComponents;
+        /*  if (loggedIn) {
+            if (userprofile.isComplete) { */
+        return completeComponents;
+        /* } else return incompleteComponents;
         }
-        return loggedOutComponents;
+        return loggedOutComponents; */
     }
 
     return (
