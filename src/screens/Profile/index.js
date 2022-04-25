@@ -2,16 +2,10 @@ import { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    Container,
-    Name,
-    Box,
-} from '../../components/theme';
+import { Container, Name, Box } from '../../components/theme';
 import PictureInput from '../../components/pictureInput';
 import styles from './styles';
-import {
-    chatMemberShipListener,
-} from '../../redux/actions/chatActions';
+import { chatMemberShipListener } from '../../redux/actions/chatActions';
 import { PickImage } from '../../helper/imageHandler';
 import SingleProfile from '../../components/singleProfile';
 import FlatProfile from '../../components/flatProfile';
