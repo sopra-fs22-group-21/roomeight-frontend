@@ -1,6 +1,5 @@
 import {
     get,
-    getDatabase,
     limitToLast,
     onChildAdded,
     onValue,
@@ -217,14 +216,30 @@ export const createChat = (chatInfo) => (dispatch, getState) => {
         createdAt: new Date().getTime(),
     };
 
-    const updates = {};
-    updates[`/chats/${chatId}`] = chatInfo;
-    updates[`/memberships/${getState().authState.auth.uid}/${chatId}`] = true;
-    update(ref(database), updates)
+    const membershipUpdate = {};
+    const chatUpdate = {};
+    const firstMessageId = 'MESSAGE-' + uuidv4();
+    membershipUpdate[
+        `/memberships/${getState().authState.auth.uid}/${chatId}`
+    ] = true;
+    chatUpdate[`/chats/${chatId}`] = chatInfo;
+    chatUpdate[`/messages/${chatId}/${firstMessageId}`] = {
+        _id: firstMessageId,
+        text: getState().userprofileState.firstName + ' has started the chat',
+        createdAt: new Date().getTime(),
+        user: {
+            name: getState().userprofileState.userprofile.firstName,
+            _id: getState().authState.auth.uid,
+        },
+        system: true,
+    };
+    update(ref(database), membershipUpdate)
         .then(() => {
-            dispatch({
-                type: Constants.CREATE_CHAT_SUCCESS,
-            });
+            update(ref(database), chatUpdate).then(
+                dispatch({
+                    type: Constants.CREATE_CHAT_SUCCESS,
+                })
+            );
         })
         .catch((error) => {
             dispatch(createChatFailure(error));
