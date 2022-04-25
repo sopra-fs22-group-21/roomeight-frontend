@@ -109,6 +109,16 @@ export const FlatDetailCard = (props) => {
                     </SecondaryButton>
                 </View>
             ) : null}
+            {props.onClickEdit ? (
+                <Box>
+                    <SecondaryButton
+                        style={styles.messageButton}
+                        onPress={props.onClickEdit}
+                    >
+                        Edit Profile
+                    </SecondaryButton>
+                </Box>
+            ) : null}
             <Pagination
                 dotsLength={3}
                 activeDotIndex={current}
