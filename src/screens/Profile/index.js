@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Text } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Name, Box } from '../../components/theme';
-import PictureInput from '../../components/pictureInput';
 import styles from './styles';
 import { chatMemberShipListener } from '../../redux/actions/chatActions';
-import { PickImage } from '../../helper/imageHandler';
 import SingleProfile from '../../components/singleProfile';
 import FlatProfile from '../../components/flatProfile';
+import { Icon } from 'react-native-elements/dist/icons/Icon';
+import AddFlatInProfile from '../../components/addFlatInProfile';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
@@ -32,8 +32,17 @@ const Profile = ({ navigation }) => {
             navigation={navigation}
             showNavBar
         >
+            <Pressable onPress={() => navigation.navigate('Settings')}>
+                <Icon
+                    style={styles.icon}
+                    name="settings"
+                    type="feather"
+                    size={24}
+                    color={'black'}
+                />
+            </Pressable>
             <Name>{userprofile.firstName + ' ' + userprofile.lastName}</Name>
-            <Box style={styles.overview}>
+            {/* <Box style={styles.overview}>
                 <PictureInput
                     style={styles.image}
                     onPressDelete={() => {
@@ -52,14 +61,14 @@ const Profile = ({ navigation }) => {
                         {userprofile.biography}
                     </Text>
                 </Container>
-            </Box>
+            </Box> */}
             <Tab
                 value={index}
                 onChange={(e) => {
                     setIndex(e);
                 }}
                 indicatorStyle={styles.indicator}
-                variant="primary"
+                variant="default"
             >
                 <Tab.Item
                     containerStyle={styles.tab}
@@ -80,7 +89,15 @@ const Profile = ({ navigation }) => {
                     }}
                 />
             </Tab>
-            {index === 0 ? <SingleProfile /> : <FlatProfile />}
+            <Box />
+            {index === 0 ? (
+                <SingleProfile />
+            ) : userprofile.isAdvertisingRoom ? (
+                <FlatProfile />
+            ) : (
+                <AddFlatInProfile />
+            )}
+            <Box />
         </Container>
     );
 };

@@ -21,7 +21,6 @@ const Matches = ({ navigation }) => {
         <Container navigation={navigation} showNavBar showLogout>
             <SmallHeading>Matches</SmallHeading>
             <Box />
-
             {userprofile.matches.map((profile) => {
                 console.log(profile);
                 if (profile.profileId)

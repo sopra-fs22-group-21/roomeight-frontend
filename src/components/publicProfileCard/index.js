@@ -7,9 +7,10 @@ import styles from './styles';
 import { Title } from '../theme';
 
 export const PublicProfileCard = (props) => {
-    console.log(props.isFlat);
-    const [isShowingImage, setIsShowingImage] = useState(!props.profile.email);
-    console.log(props.profile.isAdvertisingRoom);
+    const [isShowingImage, setIsShowingImage] = useState(
+        !props.profile.email && !props.showDetailsFirst
+    );
+
     return (
         <>
             {isShowingImage ? (
@@ -25,6 +26,7 @@ export const PublicProfileCard = (props) => {
                     onPress={() => setIsShowingImage(true)}
                     onClickMessage={props.onClickMessage}
                     onDoubleTap={props.onDoubleTap}
+                    onClickEdit={props.onClickEdit}
                 />
             ) : (
                 <SingleDetailCard
@@ -32,6 +34,7 @@ export const PublicProfileCard = (props) => {
                     onPress={() => setIsShowingImage(true)}
                     onDoubleTap={props.onDoubleTap}
                     onClickMessage={props.onClickMessage}
+                    onClickEdit={props.onClickEdit}
                 />
             )}
         </>

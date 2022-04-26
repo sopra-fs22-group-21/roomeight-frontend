@@ -22,9 +22,9 @@ import Login from '../../screens/welcome-login-signup/login';
 import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
 import SignupDetails from '../../screens/welcome-login-signup/signupDetails';
-import genders from '../../resources/strings/genders';
 import FlatInfo from '../../screens/create-profile/flatInfo';
 import Done from '../../screens/create-profile/done';
+import Settings from '../../screens/profile/settings';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -134,6 +134,11 @@ export default function Route() {
             <Stack.Screen
                 name="Profile"
                 component={Profile}
+                options={mainOptions}
+            />
+            <Stack.Screen
+                name="Settings"
+                component={Settings}
                 options={mainOptions}
             />
             <Stack.Screen

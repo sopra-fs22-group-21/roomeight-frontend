@@ -25,6 +25,7 @@ import { PickImage } from '../../helper/imageHandler';
 import { updateUserprofile } from '../../redux/actions/updateUserprofile';
 import { SingleDetailCard } from '../../components/singleDetailCard';
 import dateFormat from 'dateformat';
+import { PublicProfileCard } from '../publicProfileCard';
 
 const SingleProfile = (props) => {
     useEffect(() => {
@@ -70,8 +71,8 @@ const SingleProfile = (props) => {
 
                         <InputBox label={'Tags'}>
                             <Tags
-                                preSelected={userprofile.tags}
-                                onChange={(tags) => console.log(tags)}
+                                selected={userprofile.tags}
+                                onChange={(tags) => {}}
                             />
                         </InputBox>
                         <Input
@@ -112,9 +113,10 @@ const SingleProfile = (props) => {
         );
     } else {
         return (
-            <SingleDetailCard
-                userprofile={userprofile}
+            <PublicProfileCard
+                profile={userprofile}
                 onClickEdit={() => setEditMode(true)}
+                isFlat={false}
             />
         );
     }

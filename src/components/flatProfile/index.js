@@ -28,7 +28,7 @@ const FlatProfile = (props) => {
     }, []);
 
     const dispatch = useDispatch();
-    const { userprofile } = useSelector((state) => state.userprofileState);
+    //const { flatprofile } = useSelector((state) => state.flatprofileState);
     const loading = useSelector((state) => state.loadingState);
     const [image, setImage] = useState(userprofile.images[0]);
 
@@ -58,12 +58,12 @@ const FlatProfile = (props) => {
     }
 
     const selectedTags = tagIcons.filter((tag) =>
-        userprofile.tags.includes(tag.name)
+        flatprofile.tags.includes(tag.name)
     );
 
     if (!loading) {
         console.log('loading: ' + loading);
-        console.log(userprofile);
+        console.log(flatprofile);
     }
     if (editMode) {
         return (
@@ -129,7 +129,7 @@ const FlatProfile = (props) => {
                         <InputBox label={en.completeFlatProfile.tags}>
                             <Tags
                                 selected={selectedTags}
-                                preSelected={userprofile.tags}
+                                //preSelected={flatprofile.tags}
                                 onChange={(tags) => console.log(tags)}
                             />
                         </InputBox>
@@ -154,11 +154,14 @@ const FlatProfile = (props) => {
                             }
                         />
                         <PrimaryButton
-                            onPress={() => setEditMode(false)} /* {
+                            onPress={() => {
+                                setEditMode(false);
+                                console.log(flatprofile);
+                            }} /* {
                                     dispatch(updateUserprofile(user));
                                     console.log('putting');
                                     console.log(error);
-                                    console.log(userprofile);
+                                   
                                 } */
                         >
                             Save
@@ -169,12 +172,14 @@ const FlatProfile = (props) => {
         );
     } else {
         return (
-            <SingleDetailCard
-                userprofile={userprofile}
+            <PublicProfileCard
+                profile={flatprofile}
                 onClickEdit={() => {
                     setEditMode(true);
                     console.log(editMode);
                 }}
+                isFlat={true}
+                showDetailsFirst={true}
             />
         );
     }

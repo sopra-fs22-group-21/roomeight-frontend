@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button, FlatList, Heading } from 'native-base';
+import { Button, FlatList } from 'native-base';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ChatListItem from '../../components/ChatListItem';
 import CreateNewChat from '../../components/createNewChat';
-import { Container } from '../../components/theme';
+import { Container, Heading, SmallHeading } from '../../components/theme';
 import { loadMessages } from '../../redux/actions/chatActions';
 
 const Chat = ({ navigation }) => {
@@ -18,9 +18,10 @@ const Chat = ({ navigation }) => {
 
     return (
         <Container navigation={navigation} showNavBar>
-            <Heading size="xl">Chat</Heading>
+            <SmallHeading>Chat</SmallHeading>
+            {/*
             <CreateNewChat />
-            {chats && (
+            {chats && chats!=null(
                 <FlatList
                     data={Object.keys(chats)}
                     removeClippedSubviews
@@ -38,6 +39,7 @@ const Chat = ({ navigation }) => {
                     );
                 }}
             />
+            */}
         </Container>
     );
 };

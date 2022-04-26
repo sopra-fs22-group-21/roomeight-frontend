@@ -132,5 +132,8 @@
         "serverError": "There is a problem with the server. Please try again later.",
         "userWithEmailNotFound": "No user with this email can be found. Have you registered yet?",
         "wrongPassword": "Wrong password."
+    },
+    "settings": {
+        "heading": "Settings"
     }
 }
