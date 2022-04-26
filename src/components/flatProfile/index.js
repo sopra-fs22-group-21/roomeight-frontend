@@ -62,7 +62,6 @@ const FlatProfile = (props) => {
 
     if (!loading) {
         console.log('loading: ' + loading);
-        console.log(flatprofile);
     }
     if (editMode) {
         return (
@@ -157,7 +156,6 @@ const FlatProfile = (props) => {
                         <PrimaryButton
                             onPress={() => {
                                 setEditMode(false);
-                                console.log(flatprofile);
                             }} /* {
                                     dispatch(updateUserprofile(user));
                                     console.log('putting');

@@ -54,7 +54,6 @@ export const getCurrentUserprofile = () => (dispatch) => {
             userprofile = response.data;
             userprofile.images = [];
             dispatch(getCurrentUserprofileSuccess(response.data));
-            console.log('dispatching getDiscoverProfiles');
         })
         .catch((error) => {
             dispatch(getCurrentUserprofileFailure(error));

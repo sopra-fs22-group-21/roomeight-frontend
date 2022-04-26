@@ -7,8 +7,6 @@ const Gender = (props) => {
     const [gender, setGender] = useState(genders.notSet);
     const genderOptions = [genders.female, genders.male, genders.others];
     const i = genderOptions.indexOf(props.defaultValue);
-    console.log(genderOptions.indexOf(props.defaultValue));
-    console.log(props.defaultValue);
     const [index, setIndex] = useState(
         genderOptions.indexOf(props.defaultValue)
     );

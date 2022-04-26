@@ -25,7 +25,6 @@ const Tags = (props) => {
             props.onChange(
                 tArray.filter((tag) => tag[1] === true).map((tag) => tag[0])
             );
-            console.log(t);
             setTags(t);
         }
     };
