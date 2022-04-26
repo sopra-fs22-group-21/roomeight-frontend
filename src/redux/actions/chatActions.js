@@ -199,29 +199,59 @@ export const sendMessage = (message, chatId) => async (dispatch, getState) => {
  * @dispatches {@link createNewChatFailure} on failure
  * @todo where do i get the chatInfoObject from??
  */
-export const createChat = (chatInfo) => (dispatch, getState) => {
+export const createChat = (profileId) => (dispatch, getState) => {
     dispatch({
         type: Constants.CREATE_CHAT_REQUEST,
     });
+
     //create unique chat id
     const chatId = 'CHAT-' + uuidv4();
-
-    const chatInfo = {
-        _id: chatId,
-        title: 'New ChatUpdates',
-        members: {
-            uid1: true,
-            uid2: true,
-        },
-        createdAt: new Date().getTime(),
-    };
+    const firstMessageId = 'MESSAGE-' + uuidv4();
 
     const membershipUpdate = {};
     const chatUpdate = {};
-    const firstMessageId = 'MESSAGE-' + uuidv4();
-    membershipUpdate[
-        `/memberships/${getState().authState.auth.uid}/${chatId}`
-    ] = true;
+    let chatInfo;
+
+    if (profileId.charAt(2) === '$') {
+        //want to chat with flat
+        let matchprofile =
+            getState().userprofileState.userprofile.matches[profileId];
+        chatInfo = {
+            _id: chatId,
+            title: matchprofile.name,
+            members: {
+                ...matchprofile.roomMates,
+                [getState().authState.auth.uid]: true,
+            },
+            createdAt: new Date().getTime(),
+        };
+
+        membershipUpdate[
+            `/memberships/${getState().authState.auth.uid}/${chatId}`
+        ] = true;
+        matchprofile.roomMates.forEach((userId) => {
+            membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
+        });
+    } else {
+        //want to chat with user
+        let matchprofile =
+            getState().flatprofileState.flatprofile.matches[profileId];
+        let flatprofile = getState().flatprofileState.flatprofile;
+        chatInfo = {
+            _id: chatId,
+            title: matchprofile.firstName + ' ' + matchprofile.lastName,
+            members: {
+                ...flatprofile.roomMates,
+                [profileId]: true,
+            },
+            createdAt: new Date().getTime(),
+        };
+        membershipUpdate[`/memberships/${profileId}/${chatId}`] = true;
+        matchprofile.roomMates.forEach((userId) => {
+            membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
+        });
+    }
+
     chatUpdate[`/chats/${chatId}`] = chatInfo;
     chatUpdate[`/messages/${chatId}/${firstMessageId}`] = {
         _id: firstMessageId,
@@ -233,6 +263,7 @@ export const createChat = (chatInfo) => (dispatch, getState) => {
         },
         system: true,
     };
+
     update(ref(database), membershipUpdate)
         .then(() => {
             update(ref(database), chatUpdate).then(
