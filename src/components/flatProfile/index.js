@@ -21,6 +21,7 @@ import DateInput from '../../components/dateInput';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 import { SingleDetailCard } from '../../components/singleDetailCard';
 import dateFormat from 'dateformat';
+import { PublicProfileCard } from '../publicProfileCard';
 
 const FlatProfile = (props) => {
     useEffect(() => {
@@ -28,9 +29,8 @@ const FlatProfile = (props) => {
     }, []);
 
     const dispatch = useDispatch();
-    //const { flatprofile } = useSelector((state) => state.flatprofileState);
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const loading = useSelector((state) => state.loadingState);
-    const [image, setImage] = useState(userprofile.images[0]);
 
     const [moveInDateValid, setmoveInDateValid] = useState(null);
     const [description, setDescription] = useState(null);
@@ -43,7 +43,6 @@ const FlatProfile = (props) => {
     const [nrRoommates, setNrRoommates] = useState(null);
     const [nrBathrooms, setNrBathrooms] = useState(null);
     let selectedTagsFlat = [];
-    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const initialProfiles = flatprofile;
     const [editMode, setEditMode] = useState(false);
 
@@ -63,7 +62,6 @@ const FlatProfile = (props) => {
 
     if (!loading) {
         console.log('loading: ' + loading);
-        console.log(flatprofile);
     }
     if (editMode) {
         return (
@@ -74,12 +72,12 @@ const FlatProfile = (props) => {
                 >
                     <View>
                         <Input
-                            label={en.completeFlatProfile.address}
+                            label={en.roomInfo.address}
                             //defaultValue={initialProfiles.address}
                             onChangeText={(text) => setAddress(text)}
                         />
                         <DateInput
-                            label={en.completeFlatProfile.moveInDate}
+                            label={en.roomInfo.moveInDate}
                             valid={moveInDateValid}
                             onChange={(date, valid) => {
                                 if (valid)
@@ -115,18 +113,18 @@ const FlatProfile = (props) => {
                             ></CheckBox>
                         </Box>
                         <Input
-                            label={en.completeFlatProfile.rent}
+                            label={en.roomInfo.rent}
                             keyboardType="number-pad"
                             placeholder="CHF"
                             onChangeText={(text) => setRent(text)}
                         />
                         <Input
-                            label={en.completeFlatProfile.roomSize}
+                            label={en.roomInfo.roomSize}
                             keyboardType="number-pad"
                             placeholder="m2"
                             onChangeText={(text) => setRoomSize(text)}
                         />
-                        <InputBox label={en.completeFlatProfile.tags}>
+                        <InputBox label={en.flatInfo.tags}>
                             <Tags
                                 selected={selectedTags}
                                 //preSelected={flatprofile.tags}
@@ -134,17 +132,17 @@ const FlatProfile = (props) => {
                             />
                         </InputBox>
                         <Input
-                            label={en.completeFlatProfile.nrRoommates}
+                            label={en.flatInfo.nrRoommates}
                             keyboardType="number-pad"
                             onChangeText={(text) => setNrRoommates(text)}
                         />
                         <Input
-                            label={en.completeFlatProfile.nrBathrooms}
+                            label={en.roomInfo.nrBathrooms}
                             keyboardType="number-pad"
                             onChangeText={(text) => setNrBathrooms(text)}
                         />
                         <Input
-                            label={en.addProfilePicture.description}
+                            label={en.flatInfo.description}
                             multiline
                             onChangeText={(text) =>
                                 setDescription({
@@ -152,11 +150,12 @@ const FlatProfile = (props) => {
                                     description: text,
                                 })
                             }
+                            placeholder={en.flatInfo.descriptionPlaceholder}
+                            defaultValue={flatprofile.description}
                         />
                         <PrimaryButton
                             onPress={() => {
                                 setEditMode(false);
-                                console.log(flatprofile);
                             }} /* {
                                     dispatch(updateUserprofile(user));
                                     console.log('putting');

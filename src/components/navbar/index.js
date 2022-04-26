@@ -10,7 +10,6 @@ import { Icon as Icon } from 'react-native-elements/dist/icons/Icon';
 import { SafeAreaView } from 'react-native-safe-area-context';
 const NavBar = ({ navigation }, props) => {
     const route = useRoute().name;
-    console.log(route);
 
     const discoverIcon = (
         <Icon style={styles.icon} name="search" size={28} color={'white'} />

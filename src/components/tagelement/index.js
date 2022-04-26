@@ -21,7 +21,7 @@ const TagElement = (props) => {
                     style={styles.icon}
                     name={tag.icon}
                     type={tag.type}
-                    size={20}
+                    size={22}
                     color={tag.isSelected ? '#0E7490' : 'black'}
                 />
                 <Text

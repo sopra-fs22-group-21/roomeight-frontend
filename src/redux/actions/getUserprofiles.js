@@ -1,12 +1,7 @@
+import { auth } from '../../../firebase/firebase-config';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
-import {
-    getAllFlatProfiles,
-    getFlatprofile,
-    getMatches,
-} from './getFlatprofile';
-import { auth, storage } from '../../../firebase/firebase-config';
-import { getUrls, loadImagesToProfile } from '../../helper/imageHandler';
+import { getAllFlatProfiles, getFlatprofile } from './getFlatprofile';
 
 const getCurrentUserprofileRequest = (request) => ({
     type: Constants.GET_CURRENT_USER_REQUEST,
@@ -20,11 +15,6 @@ const getCurrentUserprofileSuccess = (response) => ({
 
 const getCurrentUserprofileFailure = (error) => ({
     type: Constants.GET_CURRENT_USER_FAILURE,
-    payload: error,
-});
-
-const getDownloadURLFailure = (error) => ({
-    type: Constants.GET_DOWNLOAD_URL_FAILURE,
     payload: error,
 });
 
@@ -64,40 +54,17 @@ export const getCurrentUserprofile = () => (dispatch) => {
             userprofile = response.data;
             userprofile.images = [];
             dispatch(getCurrentUserprofileSuccess(response.data));
-            console.log('dispatching getDiscoverProfiles');
-            if (userprofile.isSearchingRoom) dispatch(getAllFlatProfiles());
-            else dispatch(getAllUserprofiles());
-            if (userprofile.flatId && userprofile.flatId != '')
-                dispatch(getFlatprofile(userprofile.flatId));
         })
         .catch((error) => {
             dispatch(getCurrentUserprofileFailure(error));
         })
         .then(() => {
-            return loadImagesToProfile(userprofile);
-        })
-        .then((profile) => {
-            userprofile = profile;
-            if (profile.images.length > 0)
-                dispatch(getCurrentUserprofileSuccess(profile));
-        })
-        .catch((error) => {
-            dispatch(getDownloadURLFailure(error));
+            if (userprofile.isSearchingRoom) dispatch(getAllFlatProfiles());
+            else dispatch(getAllUserprofiles());
         })
         .then(() => {
-            return Promise.all(
-                userprofile.matches.map((profile) =>
-                    loadImagesToProfile(profile)
-                )
-            );
-        })
-        .then((profiles) => {
-            userprofile.matches = profiles;
-            dispatch(getCurrentUserprofileSuccess(userprofile));
-        })
-        .catch((error) => {
-            console.log(error);
-            dispatch(getDownloadURLFailure(error));
+            if (userprofile.flatId && userprofile.flatId != '')
+                dispatch(getFlatprofile(userprofile.flatId));
         });
 };
 
@@ -115,27 +82,15 @@ export const getAllUserprofiles = () => (dispatch) => {
             url: url,
         })
     );
-    let userprofiles = []
+    let userprofiles = [];
+
+    apiClient()
         .get(url)
-        .then(async (response) => {
+        .then((response) => {
             userprofiles = response.data;
             dispatch(getAllUserprofilesSuccess(response.data));
         })
         .catch((error) => {
             dispatch(getAllUserprofilesFailure(error));
-        })
-        .then(() => {
-            return Promise.all(
-                userprofiles.map((userprofile) =>
-                    loadImagesToProfile(userprofile)
-                )
-            );
-        })
-        .then((profiles) => {
-            dispatch(getAllUserprofilesSuccess(profiles));
-        })
-        .catch((error) => {
-            console.log(error);
-            dispatch(getDownloadURLFailure(error));
         });
 };

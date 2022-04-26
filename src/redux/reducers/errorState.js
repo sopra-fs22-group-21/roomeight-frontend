@@ -6,6 +6,7 @@ const initialState = {
     userprofileErrors: {},
     flatprofileErrors: {},
     transitErrors: {},
+    discoverErrors: {},
 };
 
 /**
@@ -153,6 +154,16 @@ const errorState = (state = initialState, action) => {
                 transitErrors: {
                     ...state.transitErrors,
                     uploadImage: undefined,
+                },
+            };
+
+        case Constants.POST_LIKE_FLAT_FAILURE:
+        case Constants.POST_LIKE_USER_FAILURE:
+            return {
+                ...state,
+                discoverErrors: {
+                    ...state.discoverErrors,
+                    like: action.payload,
                 },
             };
 

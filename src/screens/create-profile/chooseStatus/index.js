@@ -17,10 +17,6 @@ import styles from './styles';
 
 const ChooseStatus = ({ navigation }) => {
     const dispatch = useDispatch();
-    const { userprofile } = useSelector((state) => state.userprofileState);
-    const { transitUserprofile, profileCompletionStatus } = useSelector(
-        (state) => state.transitState
-    );
 
     return (
         <Container showLogout>

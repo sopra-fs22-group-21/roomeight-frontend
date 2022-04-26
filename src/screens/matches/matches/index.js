@@ -18,17 +18,17 @@ const Matches = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
 
     return (
-        <Container navigation={navigation} showNavBar showLogout>
+        <Container navigation={navigation} showNavBar>
             <SmallHeading>Matches</SmallHeading>
             <Box />
-            {userprofile.matches.map((profile) => {
+            {Object.values(userprofile.matches).map((profile) => {
                 console.log(profile);
                 if (profile.profileId)
                     return (
                         <ProfileInfoBox
                             profile={profile}
                             id={profile.profileId}
-                            key={profile.iprofileId}
+                            key={profile.profileId}
                             onPress={(id) => {
                                 navigation.navigate('Match', {
                                     profile: profile,

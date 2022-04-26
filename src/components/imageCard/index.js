@@ -33,6 +33,7 @@ const MAX_LENGTH = 160;
 
 export const ImageCard = (props) => {
     const croppedDescription =
+        props.profile.description &&
         props.profile.description.length > MAX_LENGTH
             ? props.profile.description.substring(0, MAX_LENGTH) + '...'
             : props.profile.description;

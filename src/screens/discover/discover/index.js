@@ -1,6 +1,6 @@
-import { React, useState, useRef } from 'react';
+import { React, useState, useRef, useEffect } from 'react';
 import { Dimensions, Pressable, Text, TouchableHighlight } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SingleDetailCard } from '../../../components/singleDetailCard';
 import { LikeButton, LikeButtons } from '../../../components/likeButtons';
 import { ProfilePicture } from '../../../components/profilePicture';
@@ -19,31 +19,42 @@ import {
 } from '../../../components/publicProfileCard';
 import { Icon } from 'react-native-elements';
 import { View } from 'react-native-animatable';
+import en from '../../../resources/strings/en.json';
+import {
+    postLikeFlat,
+    postLikeUser,
+} from '../../../redux/actions/discoverActions';
 
 const ITEM_HEIGHT = Dimensions.get('window').height - 230;
 
 const Discover = ({ navigation }) => {
+    const dispatch = useDispatch();
     const carousel = useRef(null);
-    const { discoverProfiles } = useSelector((state) => state.discoverState);
+    const { discoverProfiles, loading } = useSelector(
+        (state) => state.discoverState
+    );
+    const { userprofile } = useSelector((state) => state.userprofileState);
+    const [profiles, setProfiles] = useState([]);
     const [like, setLike] = useState(false);
-    const [state, setState] = useState({
-        profiles: [
-            ...discoverProfiles,
-            { textIfNoData: 'Nothing to discover...' },
-        ],
-    });
-    //const { userprofile } = useSelector((state) => state.userprofileState);
+
+    const getProfiles = () => {
+        if (profiles.length > 0) return profiles;
+        if (loading) return [{ textIfNoData: en.discover.loading }];
+        return discoverProfiles.concat([{ textIfNoData: en.discover.empty }]);
+    };
 
     const removeProfile = (index) => {
-        if (index >= 0 && state.profiles.length > 1) {
-            state.profiles.splice(index, 1);
-            setState({ profiles: state.profiles });
+        if (index >= 0 && profiles.length > 1) {
+            profiles.splice(index, 1);
+            setProfiles(profiles);
             carousel.current.snapToItem(0, false);
         }
     };
 
-    const handleLike = async () => {
+    const handleLike = async (profileId) => {
         setLike(true);
+        if (userprofile.isSearchingRoom) dispatch(postLikeFlat(profileId));
+        else dispatch(postLikeUser(profileId));
         setTimeout(() => {
             setLike(false);
             carousel.current.snapToNext();
@@ -63,13 +74,13 @@ const Discover = ({ navigation }) => {
                 <>
                     <PublicProfileCard
                         profile={item}
-                        key={item.id}
-                        onDoubleTap={handleLike}
+                        key={index}
+                        onDoubleTap={() => handleLike(item.profileId)}
                     />
                     <Box />
                     <LikeButtons
-                        onLike={handleLike}
-                        onDislike={handleDislike}
+                        onLike={() => handleLike(item.profileId)}
+                        onDislike={() => handleDislike}
                     />
                     {like ? (
                         <View style={styles.like}>
@@ -86,7 +97,7 @@ const Discover = ({ navigation }) => {
             <Box />
             <Carousel
                 ref={carousel}
-                data={state.profiles}
+                data={getProfiles()}
                 renderItem={card}
                 sliderHeight={ITEM_HEIGHT}
                 itemHeight={ITEM_HEIGHT}
