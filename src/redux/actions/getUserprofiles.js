@@ -1,12 +1,7 @@
+import { auth } from '../../../firebase/firebase-config';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
-import {
-    getAllFlatProfiles,
-    getFlatprofile,
-    getMatches,
-} from './getFlatprofile';
-import { auth, storage } from '../../../firebase/firebase-config';
-import { getUrls, loadImagesToProfile } from '../../helper/imageHandler';
+import { getAllFlatProfiles, getFlatprofile } from './getFlatprofile';
 
 const getCurrentUserprofileRequest = (request) => ({
     type: Constants.GET_CURRENT_USER_REQUEST,
@@ -20,11 +15,6 @@ const getCurrentUserprofileSuccess = (response) => ({
 
 const getCurrentUserprofileFailure = (error) => ({
     type: Constants.GET_CURRENT_USER_FAILURE,
-    payload: error,
-});
-
-const getDownloadURLFailure = (error) => ({
-    type: Constants.GET_DOWNLOAD_URL_FAILURE,
     payload: error,
 });
 

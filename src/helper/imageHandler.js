@@ -1,6 +1,6 @@
 import * as ImagePicker from 'expo-image-picker';
+import { getDownloadURL, ref } from 'firebase/storage';
 import { storage } from '../../firebase/firebase-config';
-import { ref, getDownloadURL } from 'firebase/storage';
 
 export const PickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -19,17 +19,9 @@ export const PickImage = async () => {
  * returns the current download link from firebase for the path provided
  * @param {String} pictureReference
  */
-export const getDownloadUrl = (pictureReference) => {
+export const getDownloadUrl = async (pictureReference) => {
     const ref = ref(storage, pictureReference);
-    return new Promise((resolve, reject) => {
-        getDownloadURL(pictureReference)
-            .then((url) => {
-                resolve(url);
-            })
-            .catch((error) => {
-                reject(error);
-            });
-    });
+    return getDownloadURL(ref);
 };
 
 export const loadImagesToProfile = (profile) => {
