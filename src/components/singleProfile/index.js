@@ -52,7 +52,7 @@ const SingleProfile = (props) => {
     const [editMode, setEditMode] = useState(false);
 
     const isCarousel = useRef(null);
-    const ITEM_WIDTH = Dimensions.get('window').width - 80;
+    const ITEM_WIDTH = 280 + 20; //item width is 280, padding 20
     const SLIDER_WIDTH = Dimensions.get('window').width - 25;
 
     const { transitUserprofile } = useSelector((state) => state.transitState);
@@ -95,12 +95,6 @@ const SingleProfile = (props) => {
                     onPressSelect={() => addPicture(item.index)}
                     image={item.image}
                 />
-                {props.overlay ? (
-                    <LinearGradient
-                        style={styles.overlay}
-                        colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}
-                    />
-                ) : null}
             </View>
         );
     };
@@ -144,7 +138,7 @@ const SingleProfile = (props) => {
                             sliderWidth={SLIDER_WIDTH}
                             itemWidth={ITEM_WIDTH}
                             inactiveSlideShift={0}
-                            activeSlideAlignment="center"
+                            activeSlideAlignment="start"
                             useScrollView={true}
                         />
                         {/* <FlatList

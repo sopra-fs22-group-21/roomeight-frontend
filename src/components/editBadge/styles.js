@@ -24,6 +24,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    backgroundEdit: {
+        position: 'absolute',
+        bottom: -7,
+        left: 260,
+        backgroundColor: Colors.secondary100,
+        display: 'flex',
+        borderRadius: 100,
+        width: 30,
+        aspectRatio: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
 
 export default styles;

@@ -3,7 +3,6 @@ import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Gender from '../../../components/gender';
 import { Input, InputBox, StyledTextInput } from '../../../components/input';
-import { NavigationButtons } from '../../../components/navigationButtons';
 import PictureInput from '../../../components/pictureInput';
 import {
     Box,
@@ -34,11 +33,15 @@ const CompletePersonalProfile = ({ navigation, route }) => {
         userprofile.image ? userprofile.image : transitUserprofile.image
     );
 
-    /* function getInitials() {
-        let firstLetter = userprofile.firstName.charAt(0);
-        let lastLetter = userprofile.lastName.charAt(0);
+    const getInitials = () => {
+        let firstLetter = userprofile.firstName
+            ? userprofile.firstName.charAt(0)
+            : '';
+        let lastLetter = userprofile.lastName
+            ? userprofile.lastName.charAt(0)
+            : '';
         return firstLetter + lastLetter;
-    } */
+    };
 
     const cache = () => {
         const attributes = {
@@ -51,7 +54,10 @@ const CompletePersonalProfile = ({ navigation, route }) => {
     };
     return (
         <Container
-            onPressBack={() => navigation.goBack()}
+            onPressBack={() => {
+                cache();
+                navigation.goBack();
+            }}
             onPressNext={() => {
                 cache();
                 navigate();
@@ -80,16 +86,15 @@ const CompletePersonalProfile = ({ navigation, route }) => {
 
                         <Box style={{ alignItems: 'center' }}>
                             <PictureInput
+                                variant={'profile'}
                                 onPressDelete={() => {
                                     setImage('');
                                 }}
-                                variant="profile"
                                 image={image}
-                                //initials={getInitials()}
+                                initials={getInitials()}
                                 onPressSelect={async () => {
                                     const uri = await PickImage();
                                     setImage(uri);
-                                    cache();
                                 }}
                             />
                         </Box>
@@ -97,7 +102,6 @@ const CompletePersonalProfile = ({ navigation, route }) => {
                             <Gender
                                 onChange={(g) => {
                                     setGender(g);
-                                    cache();
                                 }}
                                 defaultValue={
                                     userprofile.gender

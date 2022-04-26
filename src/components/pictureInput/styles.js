@@ -51,8 +51,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         height: 200,
         aspectRatio: 1.4,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     placeholderEdit: {
         letterSpacing: 5,

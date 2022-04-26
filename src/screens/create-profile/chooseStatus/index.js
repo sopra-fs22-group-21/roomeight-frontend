@@ -1,18 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SecondaryButton } from '../../../components/button';
-import { NavigationButtons } from '../../../components/navigationButtons';
 import {
     Box,
     Container,
     Heading,
     Inner,
     TextBlock,
-    Title,
 } from '../../../components/theme';
 import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import en from '../../../resources/strings/en.json';
-import { updateUserprofile } from '../../../redux/actions/updateUserprofile';
 import styles from './styles';
 
 const ChooseStatus = ({ navigation }) => {

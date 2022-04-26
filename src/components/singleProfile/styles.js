@@ -39,13 +39,7 @@ const styles = StyleSheet.create({
         borderColor: 'transparent',
     },
     imageSlider: {
-        flex: 1,
-        padding: 0,
-        marginTop: 0,
-        paddingTop: 0,
         marginBottom: 10,
-        height: '100%',
-        marginRight: 0,
     },
 });
 export default styles;
