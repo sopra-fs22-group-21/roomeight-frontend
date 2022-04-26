@@ -17,7 +17,7 @@ export const PickImage = async () => {
 };
 /**
  * returns the current download link from firebase for the path provided
- * @param {String} pictureReference 
+ * @param {String} pictureReference
  */
 export const getDownloadUrl = (pictureReference) => {
     const ref = ref(storage, pictureReference);
@@ -30,8 +30,7 @@ export const getDownloadUrl = (pictureReference) => {
                 reject(error);
             });
     });
-}
-
+};
 
 export const loadImagesToProfile = (profile) => {
     return Promise.all(
