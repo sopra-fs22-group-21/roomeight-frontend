@@ -3,7 +3,13 @@ import { Text } from 'react-native';
 import { ImageCard } from '../../../components/imageCard';
 import { LikeButton } from '../../../components/likeButtons';
 import { ProfileInfoBox } from '../../../components/profiles';
-import { Box, Container, SmallHeading } from '../../../components/theme';
+import {
+    Box,
+    Container,
+    Inner,
+    ScreenPadding,
+    SmallHeading,
+} from '../../../components/theme';
 import flatprofiles from '../../../resources/flatprofiles';
 import userprofiles from '../../../resources/userprofiles';
 import { PublicProfileCard } from '../../../components/publicProfileCard';

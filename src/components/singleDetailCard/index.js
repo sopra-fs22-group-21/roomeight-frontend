@@ -21,6 +21,7 @@ import { SecondaryButton } from '../button';
 
 export const SingleDetailCard = (props) => {
     const userprofile = props.userprofile;
+    console.log(userprofile.images);
     const ageInMilliseconds = new Date() - new Date(userprofile.birthday);
     const age = Math.floor(ageInMilliseconds / 1000 / 60 / 60 / 24 / 365); // convert to years
     const selectedTags = userprofile.tags
@@ -37,7 +38,7 @@ export const SingleDetailCard = (props) => {
                     <View style={{ ...styles.column, ...styles.column1 }}>
                         <Pressable onPress={props.onPress} style={styles.image}>
                             <ProfilePicture
-                                image={userprofile.pictureReference[0]}
+                                image={userprofile.images[0]}
                                 style={styles.image}
                             />
                         </Pressable>

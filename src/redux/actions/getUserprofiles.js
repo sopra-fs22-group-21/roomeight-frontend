@@ -1,7 +1,8 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 import { getFlatprofile, getMatches } from './getFlatprofile';
-import { auth } from '../../../firebase/firebase-config';
+import { auth, storage } from '../../../firebase/firebase-config';
+import { ref, getDownloadURL } from 'firebase/storage';
 
 const getCurrentUserprofileRequest = () => ({
     type: Constants.GET_CURRENT_USER_REQUEST,
@@ -30,8 +31,18 @@ export const getCurrentUserprofile = () => (dispatch) => {
 
     apiClient()
         .get(`/userprofiles/${auth.currentUser.uid}`)
-        .then((response) => {
-            dispatch(getCurrentUserprofileSuccess(response.data));
+        .then(async (response) => {
+            const userprofile = response.data;
+            Promise.all(
+                userprofile.pictureReference.map((reference) => {
+                    return getDownloadURL(ref(storage, reference));
+                })
+            ).then((urls) => {
+                userprofile.images = urls;
+                dispatch(getCurrentUserprofileSuccess(userprofile));
+            });
+            //dispatch(getDiscoverProfiles(userprofile.isSearchingRoom));
+            //if(userprofile.matches.length > 0) dispatch(getMatches(userprofile.matches));
         })
         .catch((error) => {
             dispatch(getCurrentUserprofileFailure(error));

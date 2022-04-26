@@ -21,7 +21,6 @@ import Profile from '../../screens/profile';
 import Login from '../../screens/welcome-login-signup/login';
 import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
-import AddDescription from '../../screens/create-profile/addDescription';
 import userprofiles from '../../resources/userprofiles';
 import SignupDetails from '../../screens/welcome-login-signup/signupDetails';
 import genders from '../../resources/strings/genders';
@@ -94,11 +93,6 @@ export default function Route() {
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="AddDescription"
-                component={AddDescription}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
                 name="CompleteSingleProfile"
                 component={CompleteSingleProfile}
                 options={{ headerShown: false }}
@@ -164,14 +158,12 @@ export default function Route() {
     );
 
     function getUserStatus() {
-        /*if (loggedIn) {
-            if (userprofile.pictureReference) {
+        if (loggedIn) {
+            if (userprofile.images && userprofile.images.length > 0) {
                 return completeComponents;
             } else return incompleteComponents;
         }
         return loggedOutComponents;
-        */
-        return incompleteComponents;
     }
 
     return (

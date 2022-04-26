@@ -59,7 +59,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
             nextDisabled={
                 route.params.includes('single') &&
                 ((!image &&
-                    !userprofile.pictureReference &&
+                    !userprofile.images &&
                     !transitUserprofile.pictureReference) ||
                     (!biography &&
                         !userprofile.biography &&
@@ -118,7 +118,6 @@ const CompletePersonalProfile = ({ navigation, route }) => {
                                     ...biography,
                                     biography: text,
                                 });
-                                cache();
                             }}
                             defaultValue={
                                 biography

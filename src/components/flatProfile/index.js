@@ -31,7 +31,7 @@ const FlatProfile = (props) => {
     const dispatch = useDispatch();
     const { userprofile } = useSelector((state) => state.userprofileState);
     const loading = useSelector((state) => state.loadingState);
-    const [image, setImage] = useState(userprofile.pictureReference[0]);
+    const [image, setImage] = useState(userprofile.images[0]);
 
     const [moveInDateValid, setmoveInDateValid] = useState(null);
     const [description, setDescription] = useState(null);
@@ -144,7 +144,7 @@ const FlatProfile = (props) => {
                             onChangeText={(text) => setNrBathrooms(text)}
                         />
                         <Input
-                            label={en.completePersonalProfile.description}
+                            label={en.addProfilePicture.description}
                             multiline
                             onChangeText={(text) =>
                                 setDescription({

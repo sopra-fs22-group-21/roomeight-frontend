@@ -11,7 +11,7 @@ const flatprofiles = [
         numberOfRoommates: 5,
         roomSize: 20.0,
         numberOfBaths: 2,
-        roommates: [
+        roomMates: [
             new Userprofile({
                 profileId: 5,
                 firstName: 'Samuel',
@@ -19,8 +19,9 @@ const flatprofiles = [
                 description: 'Med student in 4th year, like to cook',
                 biography: 'med student @UZH from AG',
                 tags: ['COOKING', 'STUDENT'],
-                pictureReference:
+                images: [
                     'https://dbe.unibas.ch/fileadmin/user_upload/dbe/Samuel_Drack_200x300.jpg?1629224422',
+                ],
                 creationDate: '2022-04-19',
                 onlineStatus: 'Offline',
                 birthday: '1997-01-07',
@@ -36,8 +37,9 @@ const flatprofiles = [
                 description: 'Med student in 3rd year',
                 biography: 'Rappi Swag',
                 tags: ['SPORTS', 'WOKO'],
-                pictureReference:
+                images: [
                     'https://pbs.twimg.com/profile_images/915010075734941696/Roxn5c0I_400x400.jpg',
+                ],
                 creationDate: '2022-04-19',
                 onlineStatus: 'Offline',
                 birthday: '1997-01-07',
@@ -53,8 +55,9 @@ const flatprofiles = [
                 description: 'Psychology student @UZH',
                 biography: 'King Louis',
                 tags: ['CULTURE', 'WINE'],
-                pictureReference:
+                images: [
                     'https://pbs.twimg.com/profile_images/3383710369/ca4291b8d16067615b935454a476f543_400x400.jpeg',
+                ],
                 creationDate: '2022-04-19',
                 onlineStatus: 'Offline',
                 gender: 'MALE',
@@ -67,7 +70,7 @@ const flatprofiles = [
                 lastName: 'Michel',
                 description: 'Not often home, always travelling....',
                 biography: 'coming soon...',
-                pictureReference: '',
+                images: [],
                 tags: ['COFFEE'],
                 creationDate: '2022-04-19',
                 onlineStatus: 'Offline',
@@ -80,8 +83,9 @@ const flatprofiles = [
             "We're a WOKO flat looking for a new rooomie, right next to the university",
         biography: 'Come live with us',
         tags: ['CLEANLINESS', 'COFFEE', 'WOKO', 'STUDENT'],
-        pictureReference:
+        images: [
             'https://www.wiwo.de/images/imago82055814h/22874812/4-format1001.jpg',
+        ],
         matches: [],
         creationDate: '2022-04-19',
         onlineStatus: 'Offline',
@@ -97,7 +101,7 @@ const flatprofiles = [
         numberOfRoommates: 4,
         roomSize: 19.0,
         numberOfBaths: 1,
-        roommates: [
+        roomMates: [
             new Userprofile({
                 profileId: 10,
                 firstName: 'Cyril',
@@ -105,8 +109,9 @@ const flatprofiles = [
                 description: 'Chemistry Engineer in my masters. Nerd Alert',
                 biography: 'I love memes',
                 tags: ['COOKING', 'STUDENT'],
-                pictureReference:
+                images: [
                     'https://media-exp1.licdn.com/dms/image/C4E22AQEKRlVgk-WCxQ/feedshare-shrink_800/0/1646674571492?e=2147483647&v=beta&t=2OGbVVc3wcs-lqmq5MEF3-iRJMivXjG9qLBLVg0gc5c',
+                ],
                 creationDate: '2022-04-19',
                 onlineStatus: 'Offline',
                 birthday: '1996-01-07',
@@ -122,8 +127,9 @@ const flatprofiles = [
                 description: 'Pilot to be, guitarist',
                 biography: 'Feeling alright',
                 tags: ['INSTRUMENTS'],
-                pictureReference:
+                images: [
                     'https://www.kameramann.de/app/uploads/2020/06/02_PIC-02-320x286.jpg',
+                ],
                 creationDate: '2022-04-19',
                 onlineStatus: 'Offline',
                 birthday: '1995-01-19',
@@ -140,8 +146,9 @@ const flatprofiles = [
                 description: 'computer science student',
                 biography: 'Häcker',
                 tags: ['COFFEE', 'INSTRUMENTS', 'PARTY'],
-                pictureReference:
+                images: [
                     'https://lh3.googleusercontent.com/kFvEhdvCCL09QnVXw3SyxruW8FVfTLhfQramcN9nNtu6x0FG7dlTKXeY1RmXls7gSRUMQTNXkK_OmDIcso8PKu_WhOORPpgL9uq88cn8wxo6glfO28VR4bltqmCWTL795jsOkRQ9uZVDCK_KlNqCKH2D_4gfZopMV88uJtaGS5yNt_vHxjgnLH2Iw5H59jPUvbaPAUMtGaMYq0Vh924DD57EoQWKcGC9IASRSKEAHzKh9PT3nge3QS7hU9ipMJxI5r0aR2-cAZcRTvN0oepWcR9Rt6zq_vztv1FQhAKYFUcon2-VO3kj7x0F6es1trNOr_mWMRPl05Y8m_pCM0UR5RzFjuL0VCGvVUvSLrV8Mfz5DxGFNXbWY1wE73UF2_piXfW10vr95XqbJquwBaM440HUi9e9S5aDwF_xzOTdHXIoGft2Qn582peIjHOGaPZlyM4AoAZ3ZH6_J5FoCxdOP160cqvtp5bri2o8sNF03eImRVsfoR8YCp_b-g8q9K6rhjPSFDomSdu0jxjtPITieITcAcMLy4nyZCXdIwarYreXDi0XSN_3WgCN1fcjj3g9qOolC5fSO1TsLc0EsustMYsALHS3EBeBQd0fCTcAqzqkxbzy1BCUOS9Aig_uI7p7UK3U2sFPjjx1tYyOniqNQE_QUcH_9gjclW2WEVR3zci6Oo2RqEpb7OrR9_JYUXSndhCfVSGkQzrwt8jizAgKOY5MhN_eoPeR73PRRgOw4TH9BO25_K2TYWFRW0gogw=w1278-h1696-no?authuser=0',
+                ],
                 creationDate: '2022-04-19',
                 onlineStatus: 'Offline',
                 gender: 'FEMALE',
@@ -153,8 +160,9 @@ const flatprofiles = [
             "We're a JUWO in the nicest location there is. Your room has a view over the whole city!",
         biography: 'Come live with us - Pleaase',
         tags: ['COFFEE', 'JUWO', 'INSTRUMENTS'],
-        pictureReference:
+        images: [
             'https://img.welt.de/img/regionales/hamburg/mobile102117523/4001354437-ci16x9-w1200/rb-WG-24-07-DW-Sonstiges-Hamburg-jpg.jpg',
+        ],
         matches: [],
         creationDate: '2022-04-19',
         onlineStatus: 'Offline',

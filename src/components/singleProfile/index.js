@@ -33,7 +33,7 @@ const SingleProfile = (props) => {
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.loadingState);
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const [image, setImage] = useState(userprofile.pictureReference[0]);
+    const [image, setImage] = useState(userprofile.images[0]);
     const [moveInDateValid, setmoveInDateValid] = useState(
         userprofile.moveInDate
     );

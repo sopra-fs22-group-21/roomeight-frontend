@@ -5,6 +5,8 @@ export const PickImage = async () => {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [4, 3],
+        maxWidth: 500,
+        maxHeight: 500,
         quality: 1,
     });
     if (!result.cancelled) {

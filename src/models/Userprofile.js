@@ -23,6 +23,7 @@ class Userprofile {
         this.moveInDate = null;
         this.moveOutDate = null;
         this.flatId = '';
+        this.images = [];
         Object.assign(this, data);
     }
 }

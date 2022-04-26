@@ -7,8 +7,9 @@ import styles from './styles';
 import { Title } from '../theme';
 
 export const PublicProfileCard = (props) => {
-    const [isShowingImage, setIsShowingImage] = useState(props.profile.isFlat);
-
+    console.log(props.isFlat);
+    const [isShowingImage, setIsShowingImage] = useState(!props.profile.email);
+    console.log(props.profile.isAdvertisingRoom);
     return (
         <>
             {isShowingImage ? (
@@ -18,7 +19,7 @@ export const PublicProfileCard = (props) => {
                     onDoubleTap={props.onDoubleTap}
                     onClickMessage={props.onClickMessage}
                 />
-            ) : props.profile.isFlat ? (
+            ) : !props.profile.email ? (
                 <FlatDetailCard
                     flatprofile={props.profile}
                     onPress={() => setIsShowingImage(true)}

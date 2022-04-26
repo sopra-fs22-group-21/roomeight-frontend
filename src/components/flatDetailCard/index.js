@@ -31,6 +31,7 @@ const ITEM_WIDTH = Dimensions.get('window').width - 80;
 
 export const FlatDetailCard = (props) => {
     const flatprofile = props.flatprofile;
+    console.log(flatprofile);
     const [current, setCurrent] = useState(0);
 
     const selectedTags = tagIcons.filter((tag) =>
@@ -42,7 +43,7 @@ export const FlatDetailCard = (props) => {
         <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
             <Pressable onPress={props.onPress} style={styles.image}>
                 <ProfilePicture
-                    image={flatprofile.pictureReference[0]}
+                    image={flatprofile.images[0]}
                     style={styles.image}
                 />
             </Pressable>
@@ -63,7 +64,7 @@ export const FlatDetailCard = (props) => {
         <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Strong>{en.discover.roommates}</Strong>
-                <Profiles profiles={flatprofile.roommates} />
+                <Profiles profiles={flatprofile.roomMates} />
             </ScrollView>
         </DoubleTap>
     );

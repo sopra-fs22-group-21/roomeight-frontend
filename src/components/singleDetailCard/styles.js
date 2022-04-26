@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         aspectRatio: 1,
         width: '100%',
         borderColor: 'transparent',
+        backgroundColor: 'rgba(0,0,0,0.05)',
     },
     tags: {
         paddingLeft: 0,
