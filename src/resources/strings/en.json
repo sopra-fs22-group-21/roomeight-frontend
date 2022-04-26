@@ -124,7 +124,9 @@
         "description": "Description",
         "tags": "Tags",
         "roommates": "Room8s",
-        "location": "Location"
+        "location": "Location",
+        "empty": "Nothing to discover...",
+        "loading": "Loading profiles you might like..."
     },
     "errors": {
         "userAlreadyExists": "A user with this email already exists. Try logging in or choosing a different email address.",

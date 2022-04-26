@@ -21,7 +21,6 @@ import { SecondaryButton } from '../button';
 
 export const SingleDetailCard = (props) => {
     const userprofile = props.userprofile;
-    console.log(userprofile.images);
     const ageInMilliseconds = new Date() - new Date(userprofile.birthday);
     const age = Math.floor(ageInMilliseconds / 1000 / 60 / 60 / 24 / 365); // convert to years
     const selectedTags = userprofile.tags

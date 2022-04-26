@@ -67,7 +67,7 @@ export const getAllFlatProfiles = () => (dispatch) => {
             dispatch(getAllFlatprofilesSuccess(response.data));
         })
         .catch((error) => {
-            console.log('\nflateprofile error');
+            console.log('\nflatprofile error');
             console.log(error);
             dispatch(getAllFlatprofilesFailure(error));
         });
