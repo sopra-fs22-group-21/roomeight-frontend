@@ -31,6 +31,11 @@ const styles = StyleSheet.create({
     tags: {
         paddingLeft: 0,
     },
+    editbutton: {
+        marginTop: 20,
+        marginBottom: 5,
+        alignContent: 'flex-end',
+    },
     /* messageButton: {
         position: 'absolute',
         bottom: 0,

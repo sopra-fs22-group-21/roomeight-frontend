@@ -62,6 +62,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
+    editbutton: {
+        marginTop: 20,
+        marginBottom: 5,
+        alignContent: 'flex-end',
+    },
 });
 
 export default styles;

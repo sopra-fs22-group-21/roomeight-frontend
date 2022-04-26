@@ -42,7 +42,51 @@ const Profile = ({ navigation }) => {
                 />
             </Pressable>
             <Name>{userprofile.firstName + ' ' + userprofile.lastName}</Name>
-            {/* <Box style={styles.overview}>
+            <Tab
+                value={index}
+                onChange={(e) => {
+                    setIndex(e);
+                }}
+                indicatorStyle={styles.indicator}
+                variant="default"
+            >
+                <Tab.Item
+                    containerStyle={styles.tab}
+                    icon={{
+                        name: 'user-alt',
+                        type: 'font-awesome-5',
+                        color: 'black',
+                        size: 18,
+                    }}
+                />
+                <Tab.Item
+                    containerStyle={styles.tab}
+                    icon={{
+                        name: 'house',
+                        type: 'material-icons',
+                        color: 'black',
+                        size: 24,
+                    }}
+                />
+            </Tab>
+            <Box />
+            {index === 0 ? (
+                <SingleProfile />
+            ) : userprofile.isAdvertisingRoom ? (
+                <FlatProfile />
+            ) : (
+                <AddFlatInProfile />
+            )}
+            <Box />
+        </Container>
+    );
+};
+
+export default Profile;
+
+//This was a overview of the profile, that we decided to delete
+{
+    /* <Box style={styles.overview}>
                 <PictureInput
                     style={styles.image}
                     onPressDelete={() => {
@@ -61,60 +105,5 @@ const Profile = ({ navigation }) => {
                         {userprofile.biography}
                     </Text>
                 </Container>
-            </Box> */}
-            <Tab
-                value={index}
-                onChange={(e) => {
-                    setIndex(e);
-                }}
-                indicatorStyle={styles.indicator}
-                variant="default"
-            >
-                <Tab.Item
-                    containerStyle={styles.tab}
-                    icon={{
-                        name: 'user-alt',
-                        type: 'font-awesome-5',
-                        color: 'black',
-                        size: 12,
-                    }}
-                />
-                <Tab.Item
-                    containerStyle={styles.tab}
-                    icon={{
-                        name: 'groups',
-                        type: 'material-icons',
-                        color: 'black',
-                        size: 25,
-                    }}
-                />
-            </Tab>
-            <Box />
-            {index === 0 ? (
-                <SingleProfile />
-            ) : userprofile.isAdvertisingRoom ? (
-                <FlatProfile />
-            ) : (
-                <AddFlatInProfile />
-            )}
-            <Box />
-        </Container>
-    );
-};
-
-/* <PrimaryButton
-                        onPress={() => {
-                            dispatch(logoutUser());
-                        }}
-                    >
-                        Logout
-                    </PrimaryButton>
-                    <PrimaryButton
-                        onPress={() => {
-                            dispatch(getCurrentUserprofile(auth.uid));
-                        }}
-                    >
-                        get
-                    </PrimaryButton> */
-
-export default Profile;
+            </Box> */
+}

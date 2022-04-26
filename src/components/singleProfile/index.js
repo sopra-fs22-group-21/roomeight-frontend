@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { Text, View, Dimensions } from 'react-native';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
@@ -26,6 +26,14 @@ import { updateUserprofile } from '../../redux/actions/updateUserprofile';
 import { SingleDetailCard } from '../../components/singleDetailCard';
 import dateFormat from 'dateformat';
 import { PublicProfileCard } from '../publicProfileCard';
+import Constants from 'expo-constants';
+import * as ImagePicker from 'expo-image-picker';
+import { FlatList } from 'react-native';
+import { colors } from 'react-native-elements';
+import Loader from 'react-native-modal-loader';
+import { uploadImages } from '../../redux/actions/uploadImage';
+import Carousel from 'react-native-snap-carousel/src/carousel/Carousel';
+import LinearGradient from 'react-native-linear-gradient';
 
 const SingleProfile = (props) => {
     useEffect(() => {
@@ -38,10 +46,83 @@ const SingleProfile = (props) => {
     const [moveInDateValid, setmoveInDateValid] = useState(
         userprofile.moveInDate
     );
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
     let selectedTagsSingle = [];
 
     const [editMode, setEditMode] = useState(false);
+
+    const isCarousel = useRef(null);
+    const ITEM_WIDTH = Dimensions.get('window').width - 80;
+    const SLIDER_WIDTH = Dimensions.get('window').width - 25;
+
+    const { transitUserprofile } = useSelector((state) => state.transitState);
+
+    console.log(transitUserprofile.localPictureReference);
+
+    const [images, setImages] = useState(userprofile.images);
+
+    function deletePicture(index) {
+        let updated = [...images];
+        updated[index] = '';
+        setImages(updated);
+    }
+
+    async function addPicture(index) {
+        const uri = await PickImage();
+        let updated = [...images];
+        updated[index] = uri;
+        setImages(updated);
+    }
+
+    useEffect(async () => {
+        if (Constants.platform.OS !== 'web') {
+            const { status } =
+                await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+                alert(
+                    'Sorry, we need camera roll permissions to make this work!'
+                );
+            }
+        }
+    }, []);
+
+    const Img = ({ item, index }) => {
+        return (
+            <View style={styles.imageSlider} key={index}>
+                <PictureInput
+                    variant="editprofile"
+                    onPressDelete={() => deletePicture(item.index)}
+                    onPressSelect={() => addPicture(item.index)}
+                    image={item.image}
+                />
+                {props.overlay ? (
+                    <LinearGradient
+                        style={styles.overlay}
+                        colors={['rgba(0,0,0,0)', 'rgba(0,0,0,1)']}
+                    />
+                ) : null}
+            </View>
+        );
+    };
+
+    const pictureSelectors = [
+        {
+            index: 0,
+            image: images ? images[0] : null,
+        },
+        {
+            index: 1,
+            image: images ? images[1] : null,
+        },
+        {
+            index: 2,
+            image: images ? images[2] : null,
+        },
+        {
+            index: 3,
+            image: images ? images[3] : null,
+        },
+    ];
 
     if (!loading) {
         console.log('loading: ' + loading);
@@ -54,6 +135,38 @@ const SingleProfile = (props) => {
                     style={styles.inner}
                     behavior="padding"
                 >
+                    <View>
+                        <Carousel
+                            {...props}
+                            ref={isCarousel}
+                            data={pictureSelectors}
+                            renderItem={Img}
+                            sliderWidth={SLIDER_WIDTH}
+                            itemWidth={ITEM_WIDTH}
+                            inactiveSlideShift={0}
+                            activeSlideAlignment="center"
+                            useScrollView={true}
+                        />
+                        {/* <FlatList
+                            data={pictureSelectors}
+                            keyExtractor={(item) => item.index}
+                            numColumns={4}
+                            columnWrapperStyle={{
+                                justifyContent: 'space-around',
+                                paddingBottom: 30,
+                            }}
+                            renderItem={({ item }) => (
+                                <PictureInput
+                                    variant="editprofile"
+                                    onPressDelete={() =>
+                                        deletePicture(item.index)
+                                    }
+                                    onPressSelect={() => addPicture(item.index)}
+                                    image={item.image}
+                                />
+                            )}
+                        /> */}
+                    </View>
                     <View>
                         <DateInput
                             label={en.completeSingleProfile.moveInDate}
@@ -72,7 +185,12 @@ const SingleProfile = (props) => {
                         <InputBox label={'Tags'}>
                             <Tags
                                 selected={userprofile.tags}
-                                onChange={(tags) => {}}
+                                onChange={(tags) =>
+                                    setUser({
+                                        ...user,
+                                        tags: tags,
+                                    })
+                                }
                             />
                         </InputBox>
                         <Input
@@ -102,8 +220,12 @@ const SingleProfile = (props) => {
                         onPress={() => {
                             setEditMode(false);
                             dispatch(updateUserprofile(user));
-                            console.log('putting');
-                            console.log(userprofile);
+                            if (images) {
+                                dispatch(uploadImages(images, 'single'));
+                            }
+                            /* console.log('putting');
+                            console.log(userprofile); */
+                            console.log(user);
                         }}
                     >
                         Save

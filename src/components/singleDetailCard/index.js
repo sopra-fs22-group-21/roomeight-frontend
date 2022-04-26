@@ -74,7 +74,7 @@ export const SingleDetailCard = (props) => {
                 <Strong>{en.discover.tags}</Strong>
                 <Tags tags={selectedTags} style={styles.tags} />
                 {props.onClickEdit ? (
-                    <Box>
+                    <Box style={styles.editbutton}>
                         <SecondaryButton
                             style={styles.messageButton}
                             onPress={props.onClickEdit}

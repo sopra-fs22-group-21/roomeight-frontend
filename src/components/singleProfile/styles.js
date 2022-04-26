@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 0,
-        marginTop: 20,
+        marginTop: 0,
         paddingTop: 0,
         marginBottom: 60,
         height: '100%',
@@ -37,6 +37,15 @@ const styles = StyleSheet.create({
         height: 90,
         width: 90,
         borderColor: 'transparent',
+    },
+    imageSlider: {
+        flex: 1,
+        padding: 0,
+        marginTop: 0,
+        paddingTop: 0,
+        marginBottom: 10,
+        height: '100%',
+        marginRight: 0,
     },
 });
 export default styles;

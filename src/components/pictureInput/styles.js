@@ -40,6 +40,25 @@ const styles = StyleSheet.create({
         aspectRatio: 0.7,
         borderRadius: 20,
     },
+    editprofile: {
+        height: 200,
+        aspectRatio: 1.4,
+        borderRadius: 20,
+    },
+    backgroundEditprofile: {
+        backgroundColor: Colors.secondary300,
+        display: 'flex',
+        borderRadius: 20,
+        height: 200,
+        aspectRatio: 1.4,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    placeholderEdit: {
+        letterSpacing: 5,
+        fontSize: 40,
+        fontFamily: 'SourceSans3Light',
+    },
 });
 
 export default styles;

@@ -6,7 +6,7 @@ import styles from './styles';
  * Component to select an image from the device's gallery and display it.
  * Logic must be handled with onPress function.
  *
- * @param {string} props.variant 'profile' | 'additional'
+ * @param {string} props.variant 'profile' | 'additional' | 'editprofile'
  * @param {string} props.onPress 'onPress function'
  * @param {string} props.image 'image uri'
  * @required variant!
@@ -62,6 +62,29 @@ const pictureInput = (props) => {
                     <Pressable onPress={props.onPressSelect}>
                         <View style={styles.backgroundAdditional}>
                             <Text style={styles.placeholderAdditional}>
+                                {props.initials}
+                            </Text>
+                        </View>
+                        <EditBadge variant={props.variant} set={false} />
+                    </Pressable>
+                );
+            }
+        case 'editprofile':
+            if (props.image) {
+                return (
+                    <Pressable onPress={props.onPressDelete}>
+                        <Image
+                            style={styles.editprofile}
+                            source={{ uri: props.image }}
+                        />
+                        <EditBadge variant={props.variant} set={true} />
+                    </Pressable>
+                );
+            } else {
+                return (
+                    <Pressable onPress={props.onPressSelect}>
+                        <View style={styles.backgroundEditprofile}>
+                            <Text style={styles.placeholderEdit}>
                                 {props.initials}
                             </Text>
                         </View>

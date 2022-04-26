@@ -111,7 +111,7 @@ export const FlatDetailCard = (props) => {
                 </View>
             ) : null}
             {props.onClickEdit ? (
-                <Box>
+                <Box style={styles.editbutton}>
                     <SecondaryButton
                         style={styles.messageButton}
                         onPress={props.onClickEdit}
