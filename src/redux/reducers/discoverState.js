@@ -1,8 +1,9 @@
 import * as Constants from '../constants';
 import Userprofile from '../../models/Userprofile';
+import Flatprofile from '../../models/Flatprofile';
 
 const initialState = {
-    userprofile: {},
+    discoverProfiles: [],
 };
 
 //TODO: error handling -> really set to null on every success?
@@ -14,31 +15,34 @@ const initialState = {
  */
 const userprofileState = (state = initialState, action) => {
     switch (action.type) {
-        case Constants.GET_CURRENT_USER_SUCCESS:
+        case Constants.GET_ALL_USERPROFILES_SUCCESS:
             return {
                 ...state,
-                userprofile: new Userprofile(action.payload),
-                update: undefined,
+                discoverProfiles: action.payload.map(
+                    (data) => new Userprofile(data)
+                ),
             };
 
-        case Constants.POST_USERPROFILE_SUCCESS:
+        case Constants.GET_ALL_USERPROFILES_FAILURE:
             return {
                 ...state,
-                userprofile: action.payload,
-            };
-
-        case Constants.UPDATE_USERPROFILE_SUCCESS:
-            return {
-                ...state,
-                update: action.payload,
-            };
-        case Constants.GET_CURRENT_USER_FAILURE:
-        case Constants.GET_DOWNLOAD_URL_FAILURE:
-            return {
-                ...state,
-                userprofile: state.userprofile,
                 error: action.payload,
             };
+
+        case Constants.GET_ALL_FLATPROFILES_SUCCESS:
+            return {
+                ...state,
+                discoverProfiles: action.payload.map(
+                    (data) => new Flatprofile(data)
+                ),
+            };
+
+        case Constants.GET_ALL_FLATPROFILES_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+            };
+
         default:
             return state;
     }

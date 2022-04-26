@@ -19,7 +19,6 @@ import en from '../../resources/strings/en.json';
 import Tags from '../../components/tags';
 import DateInput from '../../components/dateInput';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
-import flatprofiles from '../../resources/flatprofiles';
 import { SingleDetailCard } from '../../components/singleDetailCard';
 import dateFormat from 'dateformat';
 
@@ -44,7 +43,8 @@ const FlatProfile = (props) => {
     const [nrRoommates, setNrRoommates] = useState(null);
     const [nrBathrooms, setNrBathrooms] = useState(null);
     let selectedTagsFlat = [];
-    const initialProfiles = flatprofiles;
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
+    const initialProfiles = flatprofile;
     const [editMode, setEditMode] = useState(false);
 
     function changeToTemporary() {

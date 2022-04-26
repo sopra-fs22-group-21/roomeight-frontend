@@ -21,7 +21,6 @@ import Profile from '../../screens/profile';
 import Login from '../../screens/welcome-login-signup/login';
 import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
-import userprofiles from '../../resources/userprofiles';
 import SignupDetails from '../../screens/welcome-login-signup/signupDetails';
 import genders from '../../resources/strings/genders';
 import FlatInfo from '../../screens/create-profile/flatInfo';
@@ -44,7 +43,6 @@ export default function Route() {
         (state) => state.transitState
     );
     const dispatch = useDispatch();
-    console.log(new Date(userprofiles[1].birthday));
 
     useEffect(() => {
         console.log('dispatch');
