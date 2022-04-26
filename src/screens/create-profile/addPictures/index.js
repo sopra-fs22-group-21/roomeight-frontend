@@ -6,8 +6,6 @@ import { View } from 'react-native-animatable';
 import { colors } from 'react-native-elements';
 import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryButton } from '../../../components/button';
-import { NavigationButtons } from '../../../components/navigationButtons';
 import PictureInput from '../../../components/pictureInput';
 import {
     Box,
@@ -18,14 +16,11 @@ import {
     Title,
 } from '../../../components/theme';
 import { PickImage } from '../../../helper/imageHandler';
-import { postUserprofile } from '../../../redux/actions/postUserprofile';
-import { updateUserprofile } from '../../../redux/actions/updateUserprofile';
 import { uploadImages } from '../../../redux/actions/uploadImage';
 import en from '../../../resources/strings/en.json';
 
 const AddPictures = ({ navigation, route }) => {
     const { transitUserprofile } = useSelector((state) => state.transitState);
-    const { userprofile } = useSelector((state) => state.userprofileState);
     const { loading } = useSelector((state) => state.loadingState);
 
     console.log(transitUserprofile.localPictureReference);

@@ -9,7 +9,7 @@ export const PickImage = async () => {
         aspect: [4, 3],
         maxWidth: 500,
         maxHeight: 500,
-        quality: 1,
+        quality: 0.3,
     });
     if (!result.cancelled) {
         return result.uri;

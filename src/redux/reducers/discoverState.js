@@ -23,24 +23,12 @@ const userprofileState = (state = initialState, action) => {
                 ),
             };
 
-        case Constants.GET_ALL_USERPROFILES_FAILURE:
-            return {
-                ...state,
-                error: action.payload,
-            };
-
         case Constants.GET_ALL_FLATPROFILES_SUCCESS:
             return {
                 ...state,
                 discoverProfiles: action.payload.map(
                     (data) => new Flatprofile(data)
                 ),
-            };
-
-        case Constants.GET_ALL_FLATPROFILES_FAILURE:
-            return {
-                ...state,
-                error: action.payload,
             };
 
         default:

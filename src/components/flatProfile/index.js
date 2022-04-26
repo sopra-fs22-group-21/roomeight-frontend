@@ -28,9 +28,8 @@ const FlatProfile = (props) => {
     }, []);
 
     const dispatch = useDispatch();
-    //const { flatprofile } = useSelector((state) => state.flatprofileState);
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const loading = useSelector((state) => state.loadingState);
-    const [image, setImage] = useState(userprofile.images[0]);
 
     const [moveInDateValid, setmoveInDateValid] = useState(null);
     const [description, setDescription] = useState(null);
@@ -43,7 +42,6 @@ const FlatProfile = (props) => {
     const [nrRoommates, setNrRoommates] = useState(null);
     const [nrBathrooms, setNrBathrooms] = useState(null);
     let selectedTagsFlat = [];
-    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const initialProfiles = flatprofile;
     const [editMode, setEditMode] = useState(false);
 

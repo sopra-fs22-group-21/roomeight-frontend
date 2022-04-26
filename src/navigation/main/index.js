@@ -162,7 +162,10 @@ export default function Route() {
 
     function getUserStatus() {
         if (loggedIn) {
-            if (userprofile.images && userprofile.images.length > 0) {
+            if (
+                userprofile.pictureReference &&
+                userprofile.pictureReference.length > 0
+            ) {
                 return completeComponents;
             } else return incompleteComponents;
         }

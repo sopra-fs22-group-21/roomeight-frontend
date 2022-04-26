@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     },
     text: {
         fontFamily: 'SourceSans3Regular',
-        fontSize: 13,
-        lineHeight: 25,
+        fontSize: 15,
+        lineHeight: 30,
         paddingLeft: 5,
     },
     selected: {

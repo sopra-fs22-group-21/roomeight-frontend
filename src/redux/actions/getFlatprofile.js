@@ -47,31 +47,6 @@ export const getFlatprofile = (id) => (dispatch) => {
         })
         .catch((error) => {
             dispatch(getFlatprofileFailure(error));
-        })
-        .then(() => {
-            return loadImagesToProfile(flatprofile);
-        })
-        .then((profile) => {
-            if (profile.images.length > 0)
-                dispatch(getFlatprofileSuccess(profile));
-        })
-        .catch((error) => {
-            console.log(error);
-            dispatch(getDownloadURLFailure(error));
-        })
-        .then(() => {
-            return Promise.all(
-                flatprofile.roomMates.map((profile) =>
-                    loadImagesToProfile(profile)
-                )
-            );
-        })
-        .catch((error) => {
-            dispatch(getDownloadURLFailure(error));
-        })
-        .then((profiles) => {
-            flatprofile.roomMates = profiles;
-            dispatch(getAllFlatprofilesSuccess(flatprofile));
         });
 };
 
@@ -95,40 +70,5 @@ export const getAllFlatProfiles = () => (dispatch) => {
             console.log('\nflateprofile error');
             console.log(error);
             dispatch(getAllFlatprofilesFailure(error));
-        })
-        .then(() => {
-            return Promise.all(
-                flatprofiles.map((flatprofile) =>
-                    loadImagesToProfile(flatprofile)
-                )
-            );
-        })
-        .catch((error) => {
-            dispatch(getDownloadURLFailure(error));
-        })
-        .then((profiles) => {
-            flatprofiles = profiles;
-            dispatch(getAllFlatprofilesSuccess(profiles));
-        })
-        .then(() => {
-            return Promise.all(
-                flatprofiles.map((flatprofile) =>
-                    Promise.all(
-                        flatprofile.roomMates.map((roomie) =>
-                            loadImagesToProfile(roomie)
-                        )
-                    )
-                )
-            );
-        })
-        .catch((error) => {
-            dispatch(getDownloadURLFailure(error));
-        })
-        .then((roomies) => {
-            const updated = flatprofiles.map((profile, index) => {
-                profile.roomMates = roomies[index];
-                return profile;
-            });
-            dispatch(getAllFlatprofilesSuccess(updated));
         });
 };
