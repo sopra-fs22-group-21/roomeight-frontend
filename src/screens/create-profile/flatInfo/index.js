@@ -24,18 +24,9 @@ import styles from './styles';
 //TODO: backend, regex
 
 const FlatInfo = ({ navigation }) => {
-    const [moveInDateValid, setMoveInDateValid] = useState(null);
-    const [moveOutDateValid, setMoveOutDateValid] = useState(null);
     const [user, setUser] = useState(null);
-    const [address, setAddress] = useState(null);
-    const [rent, setRent] = useState(null);
-    const [roomSize, setRoomSize] = useState(null);
     const [temporary, setTemporary] = useState(false);
     const [permanent, setPermanent] = useState(false);
-    const [nrRoommates, setNrRoommates] = useState(null);
-    const [nrBathrooms, setNrBathrooms] = useState(null);
-    let selectedTags = [];
-
     function changeToTemporary() {
         setTemporary(true);
         setPermanent(false);

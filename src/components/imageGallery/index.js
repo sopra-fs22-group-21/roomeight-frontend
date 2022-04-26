@@ -8,7 +8,10 @@ import { ProfilePicture } from '../profilePicture';
 
 export const ImageGallery = (props) => {
     const isCarousel = useRef(null);
-    const images = props.imageRefs.length > 0 ? props.imageRefs : [null];
+    const images =
+        props.imageRefs && props.imageRefs.length > 0
+            ? props.imageRefs
+            : [null];
     const Img = ({ item, index }) => {
         return (
             <DoubleTap doubleTap={props.onDoubleTap} delay={200}>

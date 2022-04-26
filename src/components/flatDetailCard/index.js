@@ -43,7 +43,7 @@ export const FlatDetailCard = (props) => {
         <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
             <Pressable onPress={props.onPress} style={styles.image}>
                 <ProfilePicture
-                    image={flatprofile.images[0]}
+                    image={flatprofile.pictureReference[0]}
                     style={styles.image}
                 />
             </Pressable>

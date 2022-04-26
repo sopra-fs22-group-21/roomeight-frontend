@@ -22,7 +22,7 @@ export const ProfileInfoBox = (props) => {
                     {props.expanded ? (
                         <View style={styles.gallery}>
                             <ImageGallery
-                                imageRefs={props.profile.images}
+                                imageRefs={props.profile.pictureReference}
                                 itemWidth={150}
                                 sliderWidth={SLIDER_WIDTH}
                                 height={100}
@@ -33,8 +33,8 @@ export const ProfileInfoBox = (props) => {
                     ) : (
                         <ProfilePicture
                             image={
-                                props.profile.images.length > 0
-                                    ? props.profile.images[0]
+                                props.profile.pictureReference.length > 0
+                                    ? props.profile.pictureReference[0]
                                     : null
                             }
                             initials={initials}
