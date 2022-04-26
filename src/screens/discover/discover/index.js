@@ -44,7 +44,7 @@ const Discover = ({ navigation }) => {
     };
 
     const removeProfile = (index) => {
-        if (index >= 0 && profiles.length > 1) {
+        if (index >= 0 && profiles.length > 0) {
             const prof = [...profiles];
             prof.splice(index, 1);
             setProfiles(prof);
