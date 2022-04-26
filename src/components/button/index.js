@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, Text } from 'react-native';
 import styles from './styles';
+import { Icon } from 'react-native-elements';
 
 const BasicButton = (props) => (
     <Pressable
@@ -70,4 +71,10 @@ export const GenderButton = (props) => (
     >
         {props.children}
     </BasicButton>
+);
+
+export const CreateNewChatButton = (props) => (
+    <Pressable onPress={props.onPress}>
+        <Icon name="add-box" type="material" size={30} color="black" />
+    </Pressable>
 );

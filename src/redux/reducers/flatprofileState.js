@@ -6,6 +6,11 @@ const initialState = {
 
 const flatprofileState = (state = initialState, action) => {
     switch (action.type) {
+        case Constants.GET_FLATPROFILE_SUCCESS:
+            return {
+                ...state,
+                flatprofile: action.payload,
+            };
         case Constants.POST_FLATPROFILE_SUCCESS:
             return {
                 ...state,

@@ -12,22 +12,23 @@ import {
     Box,
 } from '../../components/theme';
 import PictureInput from '../../components/pictureInput';
-import { logoutUser } from '../../redux/actions/authActions';
-import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 import styles from './styles';
+import { InputBox, Input } from '../../components/input';
+import {
+    chatMemberShipListener,
+    chatInfoListener,
+} from '../../redux/actions/chatActions';
+import { ScrollView } from 'react-native';
 import en from '../../resources/strings/en.json';
 import { PickImage } from '../../helper/imageHandler';
 import { updateUserprofile } from '../../redux/actions/updateUserprofile';
 import flatprofiles from '../../resources/flatprofiles';
-import SingleProfile from '../../components/singleProfile';
-import FlatProfile from '../../components/flatProfile';
-import { Icon } from 'react-native-elements';
-import { Pressable } from 'react-native';
-import AddFlatInProfile from '../../components/addFlatInProfile';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
         console.log('render');
+        dispatch(chatMemberShipListener());
     }, []);
 
     const dispatch = useDispatch();
