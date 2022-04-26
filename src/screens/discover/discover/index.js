@@ -26,11 +26,9 @@ const Discover = ({ navigation }) => {
     const carousel = useRef(null);
     const { discoverProfiles } = useSelector((state) => state.discoverState);
     const [like, setLike] = useState(false);
+    const textIfNoData = 'Nothing to discover...';
     const [state, setState] = useState({
-        profiles: [
-            ...discoverProfiles,
-            { textIfNoData: 'Nothing to discover...' },
-        ],
+        profiles: discoverProfiles,
     });
     //const { userprofile } = useSelector((state) => state.userprofileState);
 
@@ -57,7 +55,7 @@ const Discover = ({ navigation }) => {
     const card = ({ item, index }) => {
         if (!item) return null;
         if (item && item.textIfNoData)
-            return <EmptyCard textIfNoData={item.textIfNoData} />;
+            return <EmptyCard textIfNoData={textIfNoData} />;
         else
             return (
                 <>
