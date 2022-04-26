@@ -8,7 +8,7 @@ export const BackButton = (props) => (
     <Pressable style={(pressed) => [styles.backButton, props.style]} {...props}>
         <Icon
             style={styles.icon}
-            name="arrow-back-ios"
+            name="arrow-back"
             size={20}
             color={props.disabled ? '#b0c8cf' : '#0E7490'}
         />
@@ -26,7 +26,7 @@ export const NextButton = (props) => (
     >
         <Icon
             style={styles.icon}
-            name="arrow-forward-ios"
+            name="arrow-forward"
             size={20}
             color={'white'}
         />

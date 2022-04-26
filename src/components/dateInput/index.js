@@ -7,13 +7,13 @@ import styles from './styles';
 
 const DateInput = (props) => {
     const [day, setDay] = useState(
-        props.value ? dateFormat(props.value, 'dd') : ''
+        props.defaultValue ? dateFormat(props.defaultValue, 'dd') : ''
     );
     const [month, setMonth] = useState(
-        props.value ? dateFormat(props.value, 'mm') : ''
+        props.defaultValue ? dateFormat(props.defaultValue, 'mm') : ''
     );
     const [year, setYear] = useState(
-        props.value ? dateFormat(props.value, 'yyyy') : ''
+        props.defaultValue ? dateFormat(props.defaultValue, 'yyyy') : ''
     );
     const isDay = (value) => {
         return !isNaN(value) && value.length <= 2 && Number(value) <= 31;

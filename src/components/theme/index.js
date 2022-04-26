@@ -5,8 +5,9 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../redux/actions/authActions';
-import { SecondaryButton } from '../button';
+import { PrimaryButton } from '../button';
 import NavBar from '../navbar';
+import { NavigationButtons } from '../navigationButtons';
 import styles from './styles';
 
 export const Heading = (props) => {
@@ -68,9 +69,19 @@ export const Container = (props) => {
                 >
                     {props.children}
                     {props.showLogout ? (
-                        <SecondaryButton onPress={() => dispatch(logoutUser())}>
+                        <PrimaryButton onPress={() => dispatch(logoutUser())}>
                             Logout
-                        </SecondaryButton>
+                        </PrimaryButton>
+                    ) : null}
+
+                    {props.onPressBack || props.onPressNext ? (
+                        <View style={styles.navigationButtons}>
+                            <NavigationButtons
+                                onPressBack={props.onPressBack}
+                                onPressNext={props.onPressNext}
+                                nextDisabled={props.nextDisabled}
+                            />
+                        </View>
                     ) : null}
                 </View>
 
@@ -87,7 +98,13 @@ export const Inner = (props) => (
     </View>
 );
 
-export const HeadingWithBack = (props) => (
+export const ScreenPadding = (props) => (
+    <View {...props} style={{ ...styles.screenPadding, ...props.style }}>
+        {props.children}
+    </View>
+);
+
+export const SmallHeadingWithBack = (props) => (
     <View style={styles.row}>
         <Icon
             name="arrow-back"

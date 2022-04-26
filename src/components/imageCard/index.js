@@ -50,7 +50,7 @@ export const ImageCard = (props) => {
             </TouchableWithoutFeedback>
             <View style={styles.swiper}>
                 <ImageGallery
-                    imageRefs={props.profile.pictureReference}
+                    imageRefs={props.profile.images}
                     onDoubleTap={props.onDoubleTap}
                     height="100%"
                     itemWidth={ITEM_WIDTH}

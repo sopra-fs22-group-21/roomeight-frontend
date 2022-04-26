@@ -5,6 +5,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         width: '100%',
+        position: 'absolute',
+        bottom: 20,
+        alignSelf: 'center',
     },
     backButton: {
         justifyContent: 'center',

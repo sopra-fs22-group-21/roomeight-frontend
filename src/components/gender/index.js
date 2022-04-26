@@ -4,9 +4,14 @@ import genders from '../../resources/strings/genders';
 import styles from './styles';
 
 const Gender = (props) => {
-    const [index, setIndex] = useState(0);
     const [gender, setGender] = useState(genders.notSet);
     const genderOptions = [genders.female, genders.male, genders.others];
+    const i = genderOptions.indexOf(props.defaultValue);
+    console.log(genderOptions.indexOf(props.defaultValue));
+    console.log(props.defaultValue);
+    const [index, setIndex] = useState(
+        genderOptions.indexOf(props.defaultValue)
+    );
     return (
         <Tab
             value={index}

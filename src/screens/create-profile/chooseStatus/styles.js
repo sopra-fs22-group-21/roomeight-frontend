@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
-    box: {
-        display: 'flex',
+    inner: {
         flex: 1,
-        justifyContent: 'flex-start',
-        padding: 2,
-        height: 200,
+        paddingLeft: 20,
+        paddingTop: 20,
+        paddingRight: 20,
     },
 });
 

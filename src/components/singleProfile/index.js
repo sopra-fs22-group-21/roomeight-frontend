@@ -14,9 +14,7 @@ import {
 } from '../../components/theme';
 import PictureInput from '../../components/pictureInput';
 import { logoutUser } from '../../redux/actions/authActions';
-import { getCurrentUserprofile } from '../../redux/actions/getUserprofiles';
 import styles from './styles';
-import { ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { InputBox, InputLabel, Input } from '../../components/input';
 import en from '../../resources/strings/en.json';
@@ -36,7 +34,7 @@ const SingleProfile = (props) => {
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.loadingState);
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const [image, setImage] = useState(userprofile.pictureReference[0]);
+    const [image, setImage] = useState(userprofile.images[0]);
     const [moveInDateValid, setmoveInDateValid] = useState(
         userprofile.moveInDate
     );
@@ -60,15 +58,12 @@ const SingleProfile = (props) => {
                         <DateInput
                             label={en.completeSingleProfile.moveInDate}
                             valid={moveInDateValid}
-                            value={userprofile.moveInDate}
+                            defaultValue={userprofile.moveInDate}
                             onChange={(date, valid) => {
                                 if (valid)
                                     setUser({
                                         ...user,
-                                        moveInDate: dateFormat(
-                                            date,
-                                            'yyyy-mm-dd'
-                                        ),
+                                        moveInDate: date,
                                     });
                                 setmoveInDateValid(valid && date > new Date());
                             }}
@@ -81,7 +76,7 @@ const SingleProfile = (props) => {
                             />
                         </InputBox>
                         <Input
-                            label={en.addProfilePicture.biography}
+                            label={en.completePersonalProfile.biography}
                             defaultValue={userprofile.biography}
                             multiline
                             onChangeText={(text) =>
@@ -92,7 +87,7 @@ const SingleProfile = (props) => {
                             }
                         />
                         <Input
-                            label={en.addProfilePicture.description}
+                            label={en.completePersonalProfile.description}
                             defaultValue={userprofile.description}
                             multiline
                             onChangeText={(text) =>

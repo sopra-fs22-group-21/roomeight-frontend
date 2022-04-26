@@ -13,33 +13,22 @@ import {
 } from '../../../components/theme';
 import styles from './styles';
 import Carousel from 'react-native-snap-carousel';
-import { ImageCard } from '../../../components/imageCard';
-import userprofiles from '../../../resources/userprofiles';
-import flatprofiles from '../../../resources/flatprofiles';
 import {
     EmptyCard,
     PublicProfileCard,
 } from '../../../components/publicProfileCard';
 import { Icon } from 'react-native-elements';
 import { View } from 'react-native-animatable';
-import colors from '../../../resources/colors';
-import { DoubleTap } from '../../../components/doubleTap';
-import {
-    TapGestureHandler,
-    TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
-import { Button } from 'react-native-elements/dist/buttons/Button';
-import { SecondaryButton } from '../../../components/button';
 
 const ITEM_HEIGHT = Dimensions.get('window').height - 230;
 
 const Discover = ({ navigation }) => {
     const carousel = useRef(null);
-    const initialProfiles = userprofiles;
+    const { discoverProfiles } = useSelector((state) => state.discoverState);
     const [like, setLike] = useState(false);
     const [state, setState] = useState({
         profiles: [
-            ...initialProfiles,
+            ...discoverProfiles,
             { textIfNoData: 'Nothing to discover...' },
         ],
     });

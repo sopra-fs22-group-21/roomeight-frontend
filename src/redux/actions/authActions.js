@@ -64,8 +64,9 @@ export const userAuthStateListener = () => (dispatch) => {
         if (user) {
             //user is logged in
             console.log('logged in');
-            dispatch(getCurrentUserprofile(user.uid));
+            console.log(user.uid);
             dispatch(loginUserSuccess(user));
+            dispatch(getCurrentUserprofile());
         } else {
             //no user logged in
             dispatch(logoutUserSuccess());

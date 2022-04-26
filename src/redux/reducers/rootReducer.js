@@ -6,11 +6,14 @@ import errorState from './errorState';
 import transitState from './transitState';
 import loadingState from './loadingState';
 import chatState from './chatState';
+import discoverState from './discoverState';
+import * as Constants from '../constants';
 /**
  * comines reducers together to create a single reducer
  * @see {@link combineReducers}
  */
-const rootReducer = combineReducers({
+
+const combinedReducer = combineReducers({
     userprofileState,
     flatprofileState,
     authState,
@@ -18,6 +21,14 @@ const rootReducer = combineReducers({
     transitState,
     loadingState,
     chatState,
+    discoverState,
 });
+
+const rootReducer = (state, action) => {
+    if (action.type == Constants.LOGOUT_USER_REQUEST) {
+        return combinedReducer(undefined, action);
+    }
+    return combinedReducer(state, action);
+};
 
 export default rootReducer;

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     row: {
         flex: 1,
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fce6e6',
     },
     valid: {
-        backgroundColor: '#e6f5ef',
+        backgroundColor: '#e9f2ef',
     },
 });
 

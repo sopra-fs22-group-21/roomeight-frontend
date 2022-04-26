@@ -19,6 +19,13 @@ const authState = (state = initialState, action) => {
                 loggedIn: true,
             };
 
+        case Constants.LOGIN_USER_FAILURE:
+            return {
+                ...state,
+                auth: action.payload,
+                loggedIn: false,
+            };
+
         case Constants.LOGOUT_USER_SUCCESS:
             return {
                 ...state,

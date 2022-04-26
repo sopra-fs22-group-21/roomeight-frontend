@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
         height: '100%',
         paddingBottom: 0,
     },
+    navigationButtons: {
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
     icon: {
         paddingRight: 10,
     },
@@ -52,13 +56,11 @@ const styles = StyleSheet.create({
     inner: {
         flex: 1,
         justifyContent: 'center',
-        paddingBottom: 100,
+        padding: 20,
     },
-    screen: {
+    screenPadding: {
+        padding: 20,
         flex: 1,
-        padding: 0,
-        height: '100%',
-        minHeight: 100,
     },
 
     name: {

@@ -1,29 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryButton } from '../../components/button';
-import {
-    Container,
-    Name,
-    Screen,
-    Heading,
-    Title,
-    Box,
-} from '../../components/theme';
-import PictureInput from '../../components/pictureInput';
+import { Container, Name, Box } from '../../components/theme';
 import styles from './styles';
-import { InputBox, Input } from '../../components/input';
-import {
-    chatMemberShipListener,
-    chatInfoListener,
-} from '../../redux/actions/chatActions';
-import { ScrollView } from 'react-native';
-import en from '../../resources/strings/en.json';
-import { PickImage } from '../../helper/imageHandler';
-import { updateUserprofile } from '../../redux/actions/updateUserprofile';
-import flatprofiles from '../../resources/flatprofiles';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { chatMemberShipListener } from '../../redux/actions/chatActions';
+import SingleProfile from '../../components/singleProfile';
+import FlatProfile from '../../components/flatProfile';
+import { Icon } from 'react-native-elements/dist/icons/Icon';
+import AddFlatInProfile from '../../components/addFlatInProfile';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
@@ -35,7 +20,7 @@ const Profile = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const loading = useSelector((state) => state.loadingState);
     const [index, setIndex] = useState(0);
-    //const [image, setImage] = useState(userprofile.pictureReference[0]);
+    const [image, setImage] = useState(userprofile.images[0]);
 
     if (!loading) {
         console.log('loading: ' + loading);

@@ -8,7 +8,8 @@
     "signup": {
         "heading": "Welcome to roomeight",
         "title": "Sign Up",
-        "enterDetails": "Please enter your details below",
+        "enterDetails": "Please enter your details below. The password must be at least 8 characters long.",
+        "almostDone": "Almost done...",
         "email": "Email",
         "password": "Password",
         "repeatPassword": "Repeat Password",
@@ -27,35 +28,40 @@
         "password": "Password"
     },
     "chooseStatus": {
-        "heading": "What's your plan?",
+        "heading": "What are you looking for?",
         "title": "",
         "select": "Please select what applies to you",
         "room": "I'm looking for a room",
-        "roommate": "I'm looking for a new roommate",
+        "roommate": "My flat is looking for a new roommate",
         "flat": "I want to access an existing flat profile"
     },
     "addPictures": {
-        "heading": "Add some Pictures of yourself",
-        "title": "",
+        "heading": "Add pictures",
+        "infoFlat": "To give a good impression of your flat, add pictures of the apartment, the free room and social events :)",
+        "infoSingle": "To give a good impression of yourself, add some more pictures that represent your personality :)",
         "select": "Please select a picture",
         "upload": "Upload a picture",
         "take": "Take a picture",
         "next": "Next"
     },
-    "addProfilePicture": {
-        "heading": "Complete your profile",
+    "completePersonalProfile": {
+        "heading": "Complete your personal profile",
         "title": "",
+        "info": "Choose your profile picture and tell us something about yourself.",
         "select": "Please select a picture",
         "upload": "Upload a picture",
         "take": "Take a picture",
         "next": "Next",
         "gender": "Gender",
-        "biography": "This is who I am (optional)",
-        "description": "Description"
+        "biography": "Biography",
+        "description": "Description",
+        "biographyPlaceholder": "That's you in one sentence",
+        "descriptionPlaceholder": "Add a longer description of your job, hobbies or roomeight expectations"
     },
     "completeSingleProfile": {
-        "heading": "Tell us something about you",
+        "heading": "Tell us something about yourself",
         "title": "",
+        "info": "Which tags describe you best? When will you be able to move in?",
         "moveInDate": "Move-In Date",
         "tags": "Tags"
     },
@@ -78,19 +84,33 @@
     },
     "completeFlatProfile": {
         "heading": "Tell us something about your flat",
-        "title": "",
+        "tags": "We",
+        "nrRoommates": "Number of roommates"
+    },
+    "roomInfo": {
+        "heading": "Spit some facts about the free room!",
         "address": "Address",
         "moveInDate": "Move-In Date",
+        "moveOutDate": "Move-Out Date",
         "duration": "Duration",
         "rent": "Rent",
         "roomSize": "Room Size",
-        "tags": "We",
-        "nrRoommates": "Number of roommates",
         "nrBathrooms": "Total Bathrooms"
     },
-    "addDescription": {
-        "heading": "Tell us more details",
-        "description": "Description"
+    "flatInfo": {
+        "heading": "Who are you and your roomies?",
+        "info": "Tell your potential new roomeights something about your flat, so they can get an idea of what it's like to live with you!",
+        "tags": "Tags",
+        "nrRoommates": "Number of roommates",
+        "description": "Description",
+        "descriptionPlaceholder": "Add a longer description of your jobs, hobbies or roomeight expectations",
+        "biography": "Biography",
+        "biographyPlaceholder": "That's your flat in one sentence"
+    },
+    "done": {
+        "heading": "This is it!",
+        "title": "Are you ready to see some profiles?",
+        "start": "Start room8"
     },
     "singleProfile": {
         "description": "Description",
@@ -105,6 +125,13 @@
         "tags": "Tags",
         "roommates": "Room8s",
         "location": "Location"
+    },
+    "errors": {
+        "userAlreadyExists": "A user with this email already exists. Try logging in or choosing a different email address.",
+        "problemWithApplication": "There is a problem with the application. Please try again later.",
+        "serverError": "There is a problem with the server. Please try again later.",
+        "userWithEmailNotFound": "No user with this email can be found. Have you registered yet?",
+        "wrongPassword": "Wrong password."
     },
     "settings": {
         "heading": "Settings"

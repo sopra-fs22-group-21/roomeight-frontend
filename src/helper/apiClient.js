@@ -3,20 +3,18 @@ import Constants from 'expo-constants';
 import { auth } from '../../firebase/firebase-config';
 
 const API_URL = (_env = Constants.manifest.releaseChannel) => {
-    //if (__DEV__) {
-    //    return 'https://343bc70e-4abf-4c78-abec-b25b6f4f34e9.mock.pstmn.io';
-    //} else {
-    return 'https://us-central1-roomeight-9cd94.cloudfunctions.net';
-    //}
+    if (__DEV__) {
+        return 'https://7be152d7-f460-4216-9386-295f88a99e3b.mock.pstmn.io';
+    } else {
+        return 'https://us-central1-roomeight-9cd94.cloudfunctions.net';
+    }
 };
 
 async function userToken() {
     const user = auth.currentUser;
     if (user) {
-        console.log('logged in');
         return user.getIdToken();
     } else {
-        console.log('no user');
         return null;
     }
 }
@@ -34,7 +32,6 @@ const apiClient = () => {
         }
         return req;
     });
-
     return axiosInstance;
 };
 

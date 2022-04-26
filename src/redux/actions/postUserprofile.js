@@ -1,3 +1,4 @@
+import React from 'react';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 import { loginUser } from './authActions';
@@ -29,6 +30,9 @@ const postUserprofileFailure = (error) => ({
  */
 export const postUserprofile = (requestBody) => (dispatch) => {
     dispatch(postUserprofileRequest());
+    dispatch({
+        type: Constants.LOADING_STATE,
+    });
 
     apiClient()
         .post('/userprofiles', requestBody)
@@ -44,7 +48,7 @@ export const postUserprofile = (requestBody) => (dispatch) => {
         })
         .catch((error) => {
             console.log('error posting userprofile');
-            console.log(error.message);
+            console.warn(error);
             console.log(requestBody);
             dispatch(postUserprofileFailure(error));
         });

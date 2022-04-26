@@ -9,13 +9,15 @@ import * as Constants from '../constants';
  * @param {'userprofile' | 'flatprofile'} profileType - 'userprofile' or 'flatprofile'
  * @dispatches {@link Constants.SET_TRANSIT_ATTRIBUTES_FLATPROFILE} | {@link Constants.SET_TRANSIT_ATTRIBUTES_USERPROFILE}
  */
-export const setTransitAttributes = (attributes, profileType) =>
-    profileType === 'userprofile'
+export const setTransitAttributes = (attributes, type, completionStatus) =>
+    type.includes('userprofile')
         ? {
               type: Constants.SET_TRANSIT_ATTRIBUTES_USERPROFILE,
               payload: attributes,
+              completionStatus: completionStatus,
           }
         : {
               type: Constants.SET_TRANSIT_ATTRIBUTES_FLATPROFILE,
               payload: attributes,
+              completionStatus: completionStatus,
           };
