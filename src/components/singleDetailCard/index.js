@@ -37,7 +37,7 @@ export const SingleDetailCard = (props) => {
                     <View style={{ ...styles.column, ...styles.column1 }}>
                         <Pressable onPress={props.onPress} style={styles.image}>
                             <ProfilePicture
-                                image={userprofile.images[0]}
+                                image={userprofile.pictureReference[0]}
                                 style={styles.image}
                             />
                         </Pressable>

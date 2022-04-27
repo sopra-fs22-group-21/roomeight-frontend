@@ -40,7 +40,7 @@ const Discover = ({ navigation }) => {
     const getProfiles = () => {
         if (profiles.length > 0) return profiles;
         if (loading) return [{ textIfNoData: en.discover.loading }];
-        return [{ textIfNoData: en.discover.empty }];
+        return discoverProfiles.concat([{ textIfNoData: en.discover.empty }]);
     };
 
     const removeProfile = (index) => {

@@ -20,20 +20,6 @@ export const PickImage = async () => {
  * @param {String} pictureReference
  */
 export const getDownloadUrl = async (pictureReference) => {
-    const ref = ref(storage, pictureReference);
-    return getDownloadURL(ref);
-};
-
-export const loadImagesToProfile = (profile) => {
-    return Promise.all(
-        [...Array(4)].map((x, i) => {
-            const reference = `${
-                profile.email ? 'userprofiles' : 'flatprofiles'
-            }/${profile.profileId}/profilePicture${i + 1}.jpg`;
-            return getDownloadURL(ref(storage, reference)).catch((error) => {});
-        })
-    ).then((urls) => {
-        profile.images = urls.filter((url) => url != null);
-        return profile;
-    });
+    const reference = ref(storage, pictureReference);
+    return getDownloadURL(reference);
 };

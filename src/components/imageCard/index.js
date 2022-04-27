@@ -1,31 +1,11 @@
-import { React, useState } from 'react';
-import { useSelector } from 'react-redux';
-import {
-    View,
-    Text,
-    Pressable,
-    TouchableOpacity,
-    Image,
-    Dimensions,
-} from 'react-native';
-import {
-    Box,
-    NormalText,
-    PinkBackground,
-    Strong,
-    TextBlock,
-    Title,
-} from '../theme';
+import { React } from 'react';
+import { View, Pressable, Dimensions } from 'react-native';
+import { Box, NormalText, PinkBackground, Strong, Title } from '../theme';
 import { ProfilePicture } from '../profilePicture';
 import en from '../../resources/strings/en.json';
 import styles from './styles';
-import Tags from '../tags';
-import tags from '../../resources/strings/tags';
-import tagIcons from '../../resources/icons/tagIcons';
-import { InputBox, InputLabel } from '../input';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { ImageGallery } from '../imageGallery';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Icon } from 'react-native-elements';
 
 const ITEM_WIDTH = Dimensions.get('window').width - 80;
@@ -51,7 +31,7 @@ export const ImageCard = (props) => {
             </TouchableWithoutFeedback>
             <View style={styles.swiper}>
                 <ImageGallery
-                    imageRefs={props.profile.images}
+                    imageRefs={props.profile.pictureReference}
                     onDoubleTap={props.onDoubleTap}
                     height="100%"
                     itemWidth={ITEM_WIDTH}

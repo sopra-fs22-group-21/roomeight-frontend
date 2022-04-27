@@ -52,7 +52,7 @@ export const getCurrentUserprofile = () => (dispatch) => {
         .get(url)
         .then(async (response) => {
             userprofile = response.data;
-            userprofile.images = [];
+            userprofile.pictureReference = [];
             dispatch(getCurrentUserprofileSuccess(response.data));
         })
         .catch((error) => {

@@ -22,19 +22,8 @@ import styles from './styles';
 
 const FlatInfo = ({ navigation }) => {
     const [user, setUser] = useState(null);
-    const [temporary, setTemporary] = useState(false);
-    const [permanent, setPermanent] = useState(false);
     const descInput = useRef(null);
     const bioInput = useRef(null);
-    function changeToTemporary() {
-        setTemporary(true);
-        setPermanent(false);
-    }
-
-    function changeToPermanent() {
-        setTemporary(false);
-        setPermanent(true);
-    }
 
     return (
         <Container

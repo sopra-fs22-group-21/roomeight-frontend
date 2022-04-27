@@ -23,7 +23,6 @@ const Done = ({ navigation, route }) => {
     const updateSingleprofile = () => {
         console.log(transitUserprofile);
         delete transitUserprofile.localPictureReference;
-        console.log(transitUserprofile);
         dispatch(updateUserprofile(transitUserprofile));
     };
 

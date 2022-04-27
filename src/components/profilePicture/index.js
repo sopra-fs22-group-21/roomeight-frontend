@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Text, View } from 'react-native';
+import { getDownloadUrl } from '../../helper/imageHandler';
 import styles from './styles';
 
 export const ProfilePicture = (props) => {
-    if (props.image) {
+    const [url, setUrl] = useState(null);
+    useEffect(() => {
+        if (props.image) {
+            getDownloadUrl(props.image)
+                .then((url) => setUrl(url))
+                .catch((error) => console.warn(error));
+        }
+    }, []);
+
+    if (url) {
         return (
             <Image
                 style={{ ...styles.imageProfile, ...props.style }}
-                source={{ uri: props.image }}
+                source={{ uri: url }}
             />
         );
     } else {

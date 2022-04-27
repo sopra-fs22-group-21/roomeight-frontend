@@ -30,6 +30,8 @@ const RoomInfo = ({ navigation }) => {
     }
 
     function changeToPermanent() {
+        delete user.moveOutDate;
+        setUser(user);
         setTemporary(false);
         setPermanent(true);
     }
@@ -38,6 +40,7 @@ const RoomInfo = ({ navigation }) => {
         <Container
             onPressBack={() => navigation.goBack()}
             onPressNext={() => navigation.navigate('FlatInfo')}
+            nextDisabled={moveIndate > moveOutDate}
         >
             <ScreenPadding style={styles.inner}>
                 <KeyboardAvoidingView behavior="padding">
@@ -83,8 +86,6 @@ const RoomInfo = ({ navigation }) => {
                                 checked={permanent}
                                 onPress={() => {
                                     changeToPermanent();
-                                    delete user.moveOutDate;
-                                    setUser(user);
                                 }}
                             ></CheckBox>
                         </Box>
@@ -92,8 +93,9 @@ const RoomInfo = ({ navigation }) => {
                             <DateInput
                                 label={en.roomInfo.moveOutDate}
                                 valid={moveOutDateValid}
+                                error={moveOutDate < moveInDate}
                                 onChange={(date, valid) => {
-                                    if (valid)
+                                    if (valid && moveOutDate > moveInDate)
                                         setUser({
                                             ...user,
                                             moveOutDate: date.toJSON(),

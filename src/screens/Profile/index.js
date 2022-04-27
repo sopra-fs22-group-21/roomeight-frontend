@@ -20,7 +20,7 @@ const Profile = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const loading = useSelector((state) => state.loadingState);
     const [index, setIndex] = useState(0);
-    const [image, setImage] = useState(userprofile.images[0]);
+    const [image, setImage] = useState(userprofile.pictureReference[0]);
 
     if (!loading) {
         console.log('loading: ' + loading);

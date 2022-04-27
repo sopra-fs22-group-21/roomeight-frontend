@@ -30,7 +30,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { transitUserprofile } = useSelector((state) => state.transitState);
     const [image, setImage] = useState(
-        userprofile.image ? userprofile.image : transitUserprofile.image
+        transitUserprofile.localPictureReference
     );
 
     const getInitials = () => {
@@ -65,7 +65,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
             nextDisabled={
                 route.params.includes('single') &&
                 ((!image &&
-                    !userprofile.images &&
+                    !userprofile.pictureReference &&
                     !transitUserprofile.pictureReference) ||
                     (!biography &&
                         !userprofile.biography &&
@@ -76,8 +76,11 @@ const CompletePersonalProfile = ({ navigation, route }) => {
             }
         >
             <ScreenPadding>
-                <KeyboardAvoidingView style={styles.inner} behavior="position">
-                    <ScrollView showsVerticalScrollIndicator={false}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <KeyboardAvoidingView
+                        style={styles.inner}
+                        behavior="padding"
+                    >
                         <Heading>{en.completePersonalProfile.heading}</Heading>
                         <NormalText>
                             {en.completePersonalProfile.info}
@@ -117,10 +120,10 @@ const CompletePersonalProfile = ({ navigation, route }) => {
                                 en.completePersonalProfile.biographyPlaceholder
                             }
                             onChangeText={(text) => {
-                                setBiography(text);
+                                setBiography({ ...biography, biography: text });
                             }}
                             defaultValue={
-                                biography
+                                biography && biography.biography
                                     ? biography
                                     : userprofile.biography
                                     ? userprofile.biography
@@ -138,18 +141,23 @@ const CompletePersonalProfile = ({ navigation, route }) => {
                                     en.completePersonalProfile
                                         .descriptionPlaceholder
                                 }
-                                onChangeText={(text) => setDescription(text)}
+                                onChangeText={(text) =>
+                                    setDescription({
+                                        ...description,
+                                        description: text,
+                                    })
+                                }
                                 defaultValue={
-                                    description
-                                        ? description
+                                    description && description.description
+                                        ? description.description
                                         : userprofile.description
                                         ? userprofile.description
                                         : transitUserprofile.description
                                 }
                             ></StyledTextInput>
                         </InputBox>
-                    </ScrollView>
-                </KeyboardAvoidingView>
+                    </KeyboardAvoidingView>
+                </ScrollView>
             </ScreenPadding>
         </Container>
     );

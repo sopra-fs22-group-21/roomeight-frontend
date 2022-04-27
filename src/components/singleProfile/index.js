@@ -1,39 +1,22 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Text, View, Dimensions } from 'react-native';
-import { Tab } from 'react-native-elements/dist/tab/Tab';
+import { View, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
-import tagIcons from '../../resources/icons/tagIcons';
-import {
-    Container,
-    Name,
-    Screen,
-    Heading,
-    Title,
-    Box,
-} from '../../components/theme';
+
 import PictureInput from '../../components/pictureInput';
-import { logoutUser } from '../../redux/actions/authActions';
 import styles from './styles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { InputBox, InputLabel, Input } from '../../components/input';
+import { InputBox, Input } from '../../components/input';
 import en from '../../resources/strings/en.json';
 import Tags from '../../components/tags';
 import DateInput from '../../components/dateInput';
-import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 import { PickImage } from '../../helper/imageHandler';
 import { updateUserprofile } from '../../redux/actions/updateUserprofile';
-import { SingleDetailCard } from '../../components/singleDetailCard';
-import dateFormat from 'dateformat';
 import { PublicProfileCard } from '../publicProfileCard';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
-import { FlatList } from 'react-native';
-import { colors } from 'react-native-elements';
-import Loader from 'react-native-modal-loader';
 import { uploadImages } from '../../redux/actions/uploadImage';
 import Carousel from 'react-native-snap-carousel/src/carousel/Carousel';
-import LinearGradient from 'react-native-linear-gradient';
 
 const SingleProfile = (props) => {
     useEffect(() => {
@@ -42,12 +25,10 @@ const SingleProfile = (props) => {
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.loadingState);
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const [image, setImage] = useState(userprofile.images[0]);
     const [moveInDateValid, setmoveInDateValid] = useState(
         userprofile.moveInDate
     );
     const [user, setUser] = useState({});
-    let selectedTagsSingle = [];
 
     const [editMode, setEditMode] = useState(false);
 
@@ -56,10 +37,11 @@ const SingleProfile = (props) => {
     const SLIDER_WIDTH = Dimensions.get('window').width - 25;
 
     const { transitUserprofile } = useSelector((state) => state.transitState);
-
-    console.log(transitUserprofile.localPictureReference);
-
-    const [images, setImages] = useState(userprofile.images);
+    const [images, setImages] = useState(
+        userprofile.pictureReference
+            ? userprofile.pictureReference
+            : transitUserprofile.localPictureReference
+    );
 
     function deletePicture(index) {
         let updated = [...images];

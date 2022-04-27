@@ -77,7 +77,7 @@ const AddPictures = ({ navigation, route }) => {
         <Container
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
-                if (images) {
+                if (images && images.some((image) => image)) {
                     dispatch(
                         uploadImages(
                             images,

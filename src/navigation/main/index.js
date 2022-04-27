@@ -25,6 +25,7 @@ import SignupDetails from '../../screens/welcome-login-signup/signupDetails';
 import FlatInfo from '../../screens/create-profile/flatInfo';
 import Done from '../../screens/create-profile/done';
 import Settings from '../../screens/profile/settings';
+import genders from '../../resources/strings/genders';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -162,10 +163,7 @@ export default function Route() {
 
     function getUserStatus() {
         if (loggedIn) {
-            if (
-                userprofile.pictureReference &&
-                userprofile.pictureReference.length > 0
-            ) {
+            if (userprofile.gender != genders.notSet) {
                 return completeComponents;
             } else return incompleteComponents;
         }
