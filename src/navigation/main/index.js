@@ -25,6 +25,7 @@ import SignupDetails from '../../screens/welcome-login-signup/signupDetails';
 import FlatInfo from '../../screens/create-profile/flatInfo';
 import Done from '../../screens/create-profile/done';
 import Settings from '../../screens/profile/settings';
+import AccessExistingFlatProfile from '../../screens/create-profile/accessExistingFlatProfile';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -103,6 +104,11 @@ export default function Route() {
             <Stack.Screen
                 name="FlatInfo"
                 component={FlatInfo}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="AccessExistingFlatProfile"
+                component={AccessExistingFlatProfile}
                 options={{ headerShown: false }}
             />
 

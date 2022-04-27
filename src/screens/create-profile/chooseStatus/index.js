@@ -62,6 +62,7 @@ const ChooseStatus = ({ navigation }) => {
                                 { joinsFlat: true }
                             )
                         );
+                        navigation.navigate('AccessExistingFlatProfile');
                     }}
                 >
                     {en.chooseStatus.flat}
