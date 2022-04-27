@@ -6,6 +6,7 @@ import errorState from './errorState';
 import transitState from './transitState';
 import loadingState from './loadingState';
 import chatState from './chatState';
+import imageState from './imageState';
 import discoverState from './discoverState';
 import * as Constants from '../constants';
 /**
@@ -22,6 +23,7 @@ const combinedReducer = combineReducers({
     loadingState,
     chatState,
     discoverState,
+    imageState,
 });
 
 const rootReducer = (state, action) => {

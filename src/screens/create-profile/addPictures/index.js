@@ -15,16 +15,16 @@ import {
     ScreenPadding,
 } from '../../../components/theme';
 import { PickImage } from '../../../helper/imageHandler';
-import { uploadImages } from '../../../redux/actions/uploadImage';
+import { uploadImages } from '../../../redux/actions/imageActions';
 import en from '../../../resources/strings/en.json';
 
 const AddPictures = ({ navigation, route }) => {
     const { transitUserprofile } = useSelector((state) => state.transitState);
     const { loading } = useSelector((state) => state.loadingState);
 
-    console.log(transitUserprofile.localPictureReference);
+    console.log(transitUserprofile.localpictureReferences);
     const [images, setImages] = useState(
-        transitUserprofile.localPictureReference
+        transitUserprofile.localpictureReferences
     );
 
     const dispatch = useDispatch();
@@ -77,7 +77,7 @@ const AddPictures = ({ navigation, route }) => {
         <Container
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
-                if (images && images.some((image) => image)) {
+                if (images) {
                     dispatch(
                         uploadImages(
                             images,

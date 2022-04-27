@@ -2,10 +2,10 @@ import * as Constants from '../constants';
 
 const initialState = {
     transitUserprofile: {
-        pictureReference: [],
+        pictureReferences: [],
     },
     transitFlatprofile: {
-        pictureReference: [],
+        pictureReferences: [],
     },
     profileCompletionStatus: {},
 };
@@ -54,9 +54,9 @@ const transitState = (state = initialState, action) => {
                 ...state,
                 transitUserprofile: {
                     ...state.transitUserprofile,
-                    localPictureReference: undefined,
-                    pictureReference: [
-                        ...state.transitUserprofile.pictureReference,
+                    localpictureReferences: undefined,
+                    pictureReferences: [
+                        ...state.transitUserprofile.pictureReferences,
                         action.payload,
                     ],
                 },
@@ -72,9 +72,9 @@ const transitState = (state = initialState, action) => {
                 ...state,
                 transitFlatprofile: {
                     ...state.transitFlatprofile,
-                    localPictureReference: undefined,
-                    pictureReference: [
-                        ...state.transitFlatprofile.pictureReference,
+                    localpictureReferences: undefined,
+                    pictureReferences: [
+                        ...state.transitFlatprofile.pictureReferences,
                         action.payload,
                     ],
                 },

@@ -1,7 +1,6 @@
 import { React } from 'react';
 import { View, Pressable, Dimensions } from 'react-native';
 import { Box, NormalText, PinkBackground, Strong, Title } from '../theme';
-import { ProfilePicture } from '../profilePicture';
 import en from '../../resources/strings/en.json';
 import styles from './styles';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
@@ -17,6 +16,10 @@ export const ImageCard = (props) => {
         props.profile.description.length > MAX_LENGTH
             ? props.profile.description.substring(0, MAX_LENGTH) + '...'
             : props.profile.description;
+
+    const initials = props.profile.firstName
+        ? props.profile.firstName.charAt(0) + props.profile.lastName.charAt(0)
+        : props.profile.name;
     return (
         <PinkBackground style={styles.pink}>
             <TouchableWithoutFeedback
@@ -31,12 +34,16 @@ export const ImageCard = (props) => {
             </TouchableWithoutFeedback>
             <View style={styles.swiper}>
                 <ImageGallery
-                    imageRefs={props.profile.pictureReference}
+                    imageRefs={props.profile.pictureReferences}
                     onDoubleTap={props.onDoubleTap}
+                    initials={initials}
                     height="100%"
                     itemWidth={ITEM_WIDTH}
                     sliderWidth={ITEM_WIDTH}
-                    overlay={true}
+                    overlay={
+                        props.profile.description &&
+                        props.profile.description.length > 0
+                    }
                 />
                 <View style={styles.row}>
                     <Pressable
@@ -44,7 +51,10 @@ export const ImageCard = (props) => {
                         onPress={props.onPress}
                     >
                         <Strong style={styles.text}>
-                            {en.discover.description}
+                            {props.profile.description &&
+                            props.profile.description.length > 0
+                                ? en.discover.description
+                                : 'View details'}
                         </Strong>
                         <NormalText
                             style={{ ...styles.text, ...styles.smaller }}

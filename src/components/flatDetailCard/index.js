@@ -31,7 +31,6 @@ const ITEM_WIDTH = Dimensions.get('window').width - 80;
 
 export const FlatDetailCard = (props) => {
     const flatprofile = props.flatprofile;
-    console.log(flatprofile);
     const [current, setCurrent] = useState(0);
 
     const selectedTags = tagIcons.filter((tag) =>
@@ -41,32 +40,62 @@ export const FlatDetailCard = (props) => {
 
     const firstPage = (
         <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
-            <Pressable onPress={props.onPress} style={styles.image}>
-                <ProfilePicture
-                    image={flatprofile.pictureReference[0]}
-                    style={styles.image}
-                />
-            </Pressable>
-            <Box />
-            <Strong>{en.discover.description}</Strong>
-            <NormalText style={styles.text}>
-                {flatprofile.description}
-            </NormalText>
-            <Box />
-            <Strong>{en.discover.tags}</Strong>
-            <Tags tags={selectedTags} style={styles.tags} />
-            <Box />
-            <Box />
-            <Box />
+            <View style={styles.imageContainer}>
+                <View style={{ flex: 2 }}>
+                    <Pressable onPress={props.onPress}>
+                        <ProfilePicture
+                            image={
+                                flatprofile.pictureReferences
+                                    ? flatprofile.pictureReferences[0]
+                                    : null
+                            }
+                            style={styles.image}
+                            initials={flatprofile.name}
+                        />
+                    </Pressable>
+                </View>
+                {flatprofile.description ? (
+                    <View style={{ flex: 1 }}>
+                        <Box />
+                        <Strong>{en.discover.description}</Strong>
+                        <NormalText style={styles.text}>
+                            {flatprofile.description}
+                        </NormalText>
+                    </View>
+                ) : null}
+
+                {flatprofile.biography ? (
+                    <View style={{ flex: 1 }}>
+                        <Box />
+                        <NormalText style={styles.text}>
+                            {flatprofile.biography}
+                        </NormalText>
+                    </View>
+                ) : null}
+                {flatprofile.tags.length > 0 ? (
+                    <View style={{ flex: 1 }}>
+                        <Box />
+                        <Strong>{en.discover.tags}</Strong>
+                        <Tags tags={selectedTags} style={styles.tags} />
+                    </View>
+                ) : null}
+            </View>
         </DoubleTap>
     );
     const secondPage = (
-        <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <Strong>{en.discover.roommates}</Strong>
-                <Profiles profiles={flatprofile.roomMates} />
-            </ScrollView>
-        </DoubleTap>
+        <>
+            <View style={{ flex: 1 }}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <Strong>{en.discover.roommates}</Strong>
+                    <Profiles profiles={flatprofile.roomMates} />
+                </ScrollView>
+            </View>
+            <DoubleTap
+                doubleTap={props.onDoubleTap}
+                delay={200}
+                style={{ flex: 1 }}
+            />
+        </>
     );
 
     const thirdPage = (

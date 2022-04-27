@@ -52,19 +52,18 @@ export const getCurrentUserprofile = () => (dispatch) => {
         .get(url)
         .then(async (response) => {
             userprofile = response.data;
-            userprofile.pictureReference = [];
             dispatch(getCurrentUserprofileSuccess(response.data));
         })
         .catch((error) => {
             dispatch(getCurrentUserprofileFailure(error));
         })
         .then(() => {
-            if (userprofile.isSearchingRoom) dispatch(getAllFlatProfiles());
-            else dispatch(getAllUserprofiles());
-        })
-        .then(() => {
             if (userprofile.flatId && userprofile.flatId != '')
                 dispatch(getFlatprofile(userprofile.flatId));
+        })
+        .then(() => {
+            if (userprofile.isSearchingRoom) dispatch(getAllFlatProfiles());
+            else dispatch(getAllUserprofiles());
         });
 };
 

@@ -19,14 +19,12 @@ const Tags = (props) => {
     const [tags, setTags] = useState({ ...values });
 
     const toggleSelect = (selected) => {
-        if (props.onChange) {
-            const t = { ...tags, ...selected };
-            const tArray = Object.entries(t);
-            props.onChange(
-                tArray.filter((tag) => tag[1] === true).map((tag) => tag[0])
-            );
-            setTags(t);
-        }
+        const t = { ...tags, ...selected };
+        const tArray = Object.entries(t);
+        props.onChange(
+            tArray.filter((tag) => tag[1] === true).map((tag) => tag[0])
+        );
+        setTags(t);
     };
 
     const getLeft = (list) => {
@@ -45,9 +43,13 @@ const Tags = (props) => {
                 <View style={styles.tagContainer}>
                     {getLeft(allTags).map((tag, i) => (
                         <TagElement
-                            key={i}
+                            key={tag.name}
                             tag={tag}
-                            onChange={(selected) => toggleSelect(selected)}
+                            onChange={
+                                props.onChange
+                                    ? (selected) => toggleSelect(selected)
+                                    : undefined
+                            }
                         />
                     ))}
                 </View>
@@ -56,9 +58,13 @@ const Tags = (props) => {
                 <View style={styles.tagContainer}>
                     {getRight(allTags).map((tag, i) => (
                         <TagElement
-                            key={i}
+                            key={tag.name}
                             tag={tag}
-                            onChange={(selected) => toggleSelect(selected)}
+                            onChange={
+                                props.onChange
+                                    ? (selected) => toggleSelect(selected)
+                                    : undefined
+                            }
                         />
                     ))}
                 </View>

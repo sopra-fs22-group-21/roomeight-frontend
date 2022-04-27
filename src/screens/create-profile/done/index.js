@@ -21,8 +21,7 @@ const Done = ({ navigation, route }) => {
     const { transitUserprofile } = useSelector((state) => state.transitState);
 
     const updateSingleprofile = () => {
-        console.log(transitUserprofile);
-        delete transitUserprofile.localPictureReference;
+        delete transitUserprofile.localpictureReferences;
         dispatch(updateUserprofile(transitUserprofile));
     };
 

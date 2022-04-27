@@ -10,18 +10,15 @@ import { InputBox, Input } from '../../components/input';
 import en from '../../resources/strings/en.json';
 import Tags from '../../components/tags';
 import DateInput from '../../components/dateInput';
-import { PickImage } from '../../helper/imageHandler';
+import { getDownloadUrl, PickImage } from '../../helper/imageHandler';
 import { updateUserprofile } from '../../redux/actions/updateUserprofile';
 import { PublicProfileCard } from '../publicProfileCard';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
-import { uploadImages } from '../../redux/actions/uploadImage';
+import { uploadImages } from '../../redux/actions/imageActions';
 import Carousel from 'react-native-snap-carousel/src/carousel/Carousel';
 
 const SingleProfile = (props) => {
-    useEffect(() => {
-        console.log('render');
-    }, []);
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.loadingState);
     const { userprofile } = useSelector((state) => state.userprofileState);
@@ -38,10 +35,12 @@ const SingleProfile = (props) => {
 
     const { transitUserprofile } = useSelector((state) => state.transitState);
     const [images, setImages] = useState(
-        userprofile.pictureReference
-            ? userprofile.pictureReference
-            : transitUserprofile.localPictureReference
+        userprofile.pictureReferences
+            ? userprofile.pictureReferences
+            : transitUserprofile.localpictureReferences
     );
+
+    useEffect(() => {}, []);
 
     function deletePicture(index) {
         let updated = [...images];
@@ -195,10 +194,11 @@ const SingleProfile = (props) => {
                     <PrimaryButton
                         onPress={() => {
                             setEditMode(false);
-                            dispatch(updateUserprofile(user));
                             if (images) {
-                                dispatch(uploadImages(images, 'single'));
+                                user.pictureReferences = images;
                             }
+                            dispatch(updateUserprofile(user));
+
                             /* console.log('putting');
                             console.log(userprofile); */
                             console.log(user);

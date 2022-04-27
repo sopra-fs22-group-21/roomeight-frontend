@@ -21,10 +21,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
         paddingBottom: 4,
     },
+    imageContainer: {
+        height: '100%',
+    },
     image: {
         borderRadius: 20,
         aspectRatio: null,
         minHeight: 150,
+        height: '100%',
         width: '100%',
         borderColor: 'transparent',
     },

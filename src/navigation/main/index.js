@@ -163,6 +163,7 @@ export default function Route() {
 
     function getUserStatus() {
         if (loggedIn) {
+            //return incompleteComponents;
             if (userprofile.gender != genders.notSet) {
                 return completeComponents;
             } else return incompleteComponents;

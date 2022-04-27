@@ -37,8 +37,18 @@ export const SingleDetailCard = (props) => {
                     <View style={{ ...styles.column, ...styles.column1 }}>
                         <Pressable onPress={props.onPress} style={styles.image}>
                             <ProfilePicture
-                                image={userprofile.pictureReference[0]}
+                                image={
+                                    userprofile.pictureReferences
+                                        ? userprofile.pictureReferences[0]
+                                        : null
+                                }
                                 style={styles.image}
+                                initials={
+                                    userprofile.firstName
+                                        ? userprofile.firstName.charAt(0) +
+                                          userprofile.lastName.charAt(0)
+                                        : ''
+                                }
                             />
                         </Pressable>
                     </View>
@@ -65,13 +75,19 @@ export const SingleDetailCard = (props) => {
                     </Box>
                 ) : null}
 
-                <Strong>{en.discover.description}</Strong>
+                {userprofile.description ? (
+                    <Strong>{en.discover.description}</Strong>
+                ) : null}
                 <NormalText style={styles.text}>
                     {userprofile.description}
                 </NormalText>
                 <Box />
-                <Strong>{en.discover.tags}</Strong>
-                <Tags tags={selectedTags} style={styles.tags} />
+                {userprofile.tags.length > 0 ? (
+                    <Strong>{en.discover.tags}</Strong>
+                ) : null}
+                {userprofile.tags.length > 0 ? (
+                    <Tags tags={selectedTags} style={styles.tags} />
+                ) : null}
                 {props.onClickEdit ? (
                     <Box style={styles.editbutton}>
                         <SecondaryButton

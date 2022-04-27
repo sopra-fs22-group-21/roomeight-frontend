@@ -17,9 +17,9 @@ export const PickImage = async () => {
 };
 /**
  * returns the current download link from firebase for the path provided
- * @param {String} pictureReference
+ * @param {String} pictureReferences
  */
-export const getDownloadUrl = async (pictureReference) => {
-    const reference = ref(storage, pictureReference);
+export const getDownloadUrl = async (pictureReferences) => {
+    const reference = ref(storage, pictureReferences);
     return getDownloadURL(reference);
 };

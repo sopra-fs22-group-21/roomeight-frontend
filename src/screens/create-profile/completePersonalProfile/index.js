@@ -30,7 +30,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { transitUserprofile } = useSelector((state) => state.transitState);
     const [image, setImage] = useState(
-        transitUserprofile.localPictureReference
+        transitUserprofile.localpictureReferences
     );
 
     const getInitials = () => {
@@ -45,7 +45,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
 
     const cache = () => {
         const attributes = {
-            localPictureReference: image ? [image] : undefined,
+            localpictureReferences: image ? [image] : undefined,
             gender: gender,
             ...biography,
             ...description,
@@ -65,8 +65,8 @@ const CompletePersonalProfile = ({ navigation, route }) => {
             nextDisabled={
                 route.params.includes('single') &&
                 ((!image &&
-                    !userprofile.pictureReference &&
-                    !transitUserprofile.pictureReference) ||
+                    !userprofile.pictureReferences &&
+                    !transitUserprofile.pictureReferences) ||
                     (!biography &&
                         !userprofile.biography &&
                         !transitUserprofile.biography) ||

@@ -8,7 +8,7 @@ import * as Constants from '../constants';
  * @param {'userprofile' | 'flatprofile'} profileType - either userprofile or flatprofile
  * @dispatches one of {@link Constants.UPLOAD_IMAGE_REQUEST_USERPROFILE} | {@link Constants.UPLOAD_IMAGE_REQUEST_FLATPROFILE}
  */
-const uploadImageRequest = (profileType) =>
+export const uploadImageRequest = (profileType) =>
     profileType === 'userprofile'
         ? {
               type: Constants.UPLOAD_IMAGE_REQUEST_USERPROFILE,
@@ -21,7 +21,7 @@ const uploadImageRequest = (profileType) =>
  * @param {'userprofile' | 'flatprofile'} profileType - either userprofile or flatprofile
  * @dispatches one of {@link Constants.UPLOAD_IMAGE_SUCCESS_USERPROFILE} | {@link Constants.UPLOAD_IMAGE_SUCCESS_FLATPROFILE}
  */
-const uploadImageSuccess = (url, profileType) =>
+export const uploadImageSuccess = (url, profileType) =>
     profileType === 'userprofile'
         ? {
               type: Constants.UPLOAD_IMAGE_SUCCESS_USERPROFILE,
@@ -35,7 +35,7 @@ const uploadImageSuccess = (url, profileType) =>
  * @param {'userprofile' | 'flatprofile'} profileType - either userprofile or flatprofile
  * @dispatches one of {@link Constants.UPLOAD_IMAGE_FAILURE_USERPROFILE} | {@link Constants.UPLOAD_IMAGE_FAILURE_FLATPROFILE}
  */
-const uploadImageFailure = (error, profileType) =>
+export const uploadImageFailure = (error, profileType) =>
     profileType === 'userprofile'
         ? {
               type: Constants.UPLOAD_IMAGE_FAILURE_USERPROFILE,
@@ -88,3 +88,14 @@ export const uploadImages =
             });
         });
     };
+
+export const setLocalPictureReferences = (references, profileType) =>
+    profileType === 'userprofile'
+        ? {
+              type: Constants.SET_LOCAL_PICTURE_REFERENCES_USER,
+              payload: references,
+          }
+        : {
+              type: Constants.SET_LOCAL_PICTURE_REFERENCES_FLAT,
+              payload: references,
+          };
