@@ -1,15 +1,12 @@
-import dateFormat from 'dateformat';
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, ScrollView } from 'react-native';
-import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
-import DateInput from '../../../components/dateInput';
+import { useRef } from 'react';
 import {
-    Input,
-    InputBox,
-    InputLabel,
-    StyledTextInput,
-} from '../../../components/input';
-import { NavigationButtons } from '../../../components/navigationButtons';
+    Keyboard,
+    KeyboardAvoidingView,
+    ScrollView,
+    TouchableWithoutFeedback,
+} from 'react-native';
+import { Input, InputBox, StyledTextInput } from '../../../components/input';
 import Tags from '../../../components/tags';
 import {
     Box,
@@ -27,6 +24,8 @@ const FlatInfo = ({ navigation }) => {
     const [user, setUser] = useState(null);
     const [temporary, setTemporary] = useState(false);
     const [permanent, setPermanent] = useState(false);
+    const descInput = useRef(null);
+    const bioInput = useRef(null);
     function changeToTemporary() {
         setTemporary(true);
         setPermanent(false);
@@ -40,16 +39,11 @@ const FlatInfo = ({ navigation }) => {
     return (
         <Container
             onPressBack={() => navigation.goBack()}
-            onPressNext={() =>
-                navigation.navigate('CompletePersonalProfile', 'flat')
-            }
+            onPressNext={() => navigation.navigate('AddPictures', 'flat')}
         >
             <ScreenPadding style={styles.inner}>
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                    style={{ flex: 1 }}
-                >
-                    <KeyboardAvoidingView behavior="position">
+                <KeyboardAvoidingView behavior="height">
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <Heading>{en.flatInfo.heading}</Heading>
                         <NormalText>{en.flatInfo.info}</NormalText>
                         <Box />
@@ -67,6 +61,7 @@ const FlatInfo = ({ navigation }) => {
                         <Input
                             label={en.flatInfo.biography}
                             multiline
+                            ref={bioInput}
                             placeholder={en.flatInfo.biographyPlaceholder}
                             onChangeText={(text) => {
                                 setUser({
@@ -78,13 +73,14 @@ const FlatInfo = ({ navigation }) => {
                         <InputBox
                             label={en.flatInfo.description}
                             style={styles.box}
+                            ref={descInput}
                         >
                             <Box>
                                 <StyledTextInput
                                     multiline
                                     onChangeText={(text) =>
-                                        setDescription({
-                                            ...description,
+                                        setUser({
+                                            ...user,
                                             description: text,
                                         })
                                     }
@@ -94,8 +90,8 @@ const FlatInfo = ({ navigation }) => {
                                 ></StyledTextInput>
                             </Box>
                         </InputBox>
-                    </KeyboardAvoidingView>
-                </ScrollView>
+                    </ScrollView>
+                </KeyboardAvoidingView>
             </ScreenPadding>
         </Container>
     );

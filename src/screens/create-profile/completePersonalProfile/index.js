@@ -24,8 +24,8 @@ const CompletePersonalProfile = ({ navigation, route }) => {
     const dispatch = useDispatch();
 
     const navigate = route.params.includes('single')
-        ? () => navigation.navigate('AddPictures', 'single')
-        : () => navigation.navigate('AddPictures', 'flat');
+        ? () => navigation.navigate('AddPictures', route.params)
+        : () => navigation.navigate('Done', route.params);
 
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { transitUserprofile } = useSelector((state) => state.transitState);
@@ -111,17 +111,13 @@ const CompletePersonalProfile = ({ navigation, route }) => {
                             />
                         </InputBox>
                         <Input
-                            //style={(inputstyle.Input, styles.textInput)}
                             label={en.completePersonalProfile.biography}
                             multiline
                             placeholder={
                                 en.completePersonalProfile.biographyPlaceholder
                             }
                             onChangeText={(text) => {
-                                setBiography({
-                                    ...biography,
-                                    biography: text,
-                                });
+                                setBiography(text);
                             }}
                             defaultValue={
                                 biography
@@ -142,12 +138,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
                                     en.completePersonalProfile
                                         .descriptionPlaceholder
                                 }
-                                onChangeText={(text) =>
-                                    setDescription({
-                                        ...description,
-                                        description: text,
-                                    })
-                                }
+                                onChangeText={(text) => setDescription(text)}
                                 defaultValue={
                                     description
                                         ? description

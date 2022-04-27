@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     },
     inner: {
         flex: 1,
+        paddingBottom: 50,
     },
     textInput: {
         height: 40,

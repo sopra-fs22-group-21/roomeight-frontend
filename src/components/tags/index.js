@@ -29,30 +29,40 @@ const Tags = (props) => {
         }
     };
 
+    const getLeft = (list) => {
+        const half = Math.ceil(list.length / 2);
+        return list.slice(0, half);
+    };
+
+    const getRight = (list) => {
+        const half = Math.ceil(list.length / 2);
+        return list.slice(half, list.length);
+    };
+
     return (
         <View style={{ ...styles.box, ...props.style }}>
-            <FlatList
-                data={allTags}
-                keyExtractor={(item) => item.name}
-                numColumns={2}
-                columnWrapperStyle={{
-                    justifyContent: 'flex-start',
-                    flex: 1,
-                    width: '100%',
-                }}
-                renderItem={({ item }) => (
-                    <View style={styles.columnItem}>
+            <View style={styles.column}>
+                <View style={styles.tagContainer}>
+                    {getLeft(allTags).map((tag, i) => (
                         <TagElement
-                            tag={item}
-                            onChange={
-                                props.onChange
-                                    ? (selected) => toggleSelect(selected)
-                                    : null
-                            }
+                            key={i}
+                            tag={tag}
+                            onChange={(selected) => toggleSelect(selected)}
                         />
-                    </View>
-                )}
-            />
+                    ))}
+                </View>
+            </View>
+            <View style={styles.column}>
+                <View style={styles.tagContainer}>
+                    {getRight(allTags).map((tag, i) => (
+                        <TagElement
+                            key={i}
+                            tag={tag}
+                            onChange={(selected) => toggleSelect(selected)}
+                        />
+                    ))}
+                </View>
+            </View>
         </View>
     );
 };

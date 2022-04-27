@@ -1,12 +1,19 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     box: {
-        paddingLeft: 10,
-        paddingRight: 10,
+        display: 'flex',
+        flexWrap: 'nowrap',
+        flexDirection: 'row',
     },
-    columnItem: {
-        width: '50%',
+    column: {
+        paddingRight: 10,
+        paddingLeft: 10,
+    },
+    tagContainer: {
+        display: 'flex',
+        flexDirection: 'column',
         alignItems: 'flex-start',
+        width: '100%',
     },
 });
 

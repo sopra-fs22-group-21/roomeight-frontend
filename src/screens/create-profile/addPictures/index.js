@@ -13,7 +13,6 @@ import {
     Heading,
     NormalText,
     ScreenPadding,
-    Title,
 } from '../../../components/theme';
 import { PickImage } from '../../../helper/imageHandler';
 import { uploadImages } from '../../../redux/actions/uploadImage';
@@ -88,7 +87,13 @@ const AddPictures = ({ navigation, route }) => {
                         )
                     );
                 }
-                navigation.navigate('Done', route.params);
+                if (route.params.includes('single'))
+                    navigation.navigate('Done', route.params);
+                else
+                    navigation.navigate(
+                        'CompletePersonalProfile',
+                        route.params
+                    );
             }}
         >
             <Loader loading={loading} color={colors.secondary500} />

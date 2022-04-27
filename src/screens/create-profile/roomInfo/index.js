@@ -1,11 +1,8 @@
-import dateFormat from 'dateformat';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 import DateInput from '../../../components/dateInput';
-import { Input, InputBox, InputLabel } from '../../../components/input';
-import { NavigationButtons } from '../../../components/navigationButtons';
-import Tags from '../../../components/tags';
+import { Input, InputLabel } from '../../../components/input';
 import {
     Box,
     Container,
@@ -14,8 +11,6 @@ import {
 } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
-
-//TODO: backend, regex
 
 const RoomInfo = ({ navigation }) => {
     const [moveInDateValid, setMoveInDateValid] = useState(null);
@@ -45,11 +40,8 @@ const RoomInfo = ({ navigation }) => {
             onPressNext={() => navigation.navigate('FlatInfo')}
         >
             <ScreenPadding style={styles.inner}>
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                    style={{ flex: 1 }}
-                >
-                    <KeyboardAvoidingView behavior="position">
+                <KeyboardAvoidingView behavior="padding">
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <Heading>{en.roomInfo.heading}</Heading>
                         <Input
                             label={en.roomInfo.address}
@@ -129,8 +121,8 @@ const RoomInfo = ({ navigation }) => {
                             keyboardType="number-pad"
                             onChangeText={(text) => setNrBathrooms(text)}
                         />
-                    </KeyboardAvoidingView>
-                </ScrollView>
+                    </ScrollView>
+                </KeyboardAvoidingView>
             </ScreenPadding>
         </Container>
     );

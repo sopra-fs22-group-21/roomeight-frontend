@@ -5,24 +5,25 @@ import styles from './styles';
 
 const editBadge = (props) => {
     if (!props.variant) return <Text>specify variant</Text>;
-    let backgroundStyle;
-    switch (props.variant) {
-        case 'profile':
-            backgroundStyle = styles.backgroundProfile;
-        case 'additional':
-            backgroundStyle = styles.backgroundAdditional;
-        case 'editprofile':
-        default:
-            backgroundStyle = styles.backgroundEdit;
-    }
+    const backgroundStyle = () => {
+        switch (props.variant) {
+            case 'profile':
+                return styles.backgroundProfile;
+            case 'additional':
+                return styles.backgroundAdditional;
+            case 'editprofile':
+            default:
+                return styles.backgroundEdit;
+        }
+    };
     return (
-        <View style={backgroundStyle}>
+        <View style={backgroundStyle()}>
             {props.set ? (
                 <Icon
                     style={styles.icon}
                     name={editIcons.delete.name}
                     type={editIcons.delete.type}
-                    size={20}
+                    size={props.variant == 'editprofile' ? 25 : 20}
                     color={'black'}
                 />
             ) : (
