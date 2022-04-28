@@ -44,10 +44,14 @@ export const Chatroom = ({ route, navigation }) => {
     }, []);
 
     let matchprofile;
-    if(userprofile.isSearching){
-        matchprofile = useSelector((state) => state.matchesState.matches[chatInfo.flatId]);
-    }else{
-        matchprofile = useSelector((state) => state.matchesState.matches[chatInfo.userId]);
+    if (userprofile.isSearching) {
+        matchprofile = useSelector(
+            (state) => state.matchesState.matches[chatInfo.flatId]
+        );
+    } else {
+        matchprofile = useSelector(
+            (state) => state.matchesState.matches[chatInfo.userId]
+        );
     }
     return (
         <Container>
@@ -59,7 +63,9 @@ export const Chatroom = ({ route, navigation }) => {
                 }}
                 navigation={navigation}
             >
-                {userprofile.isSearching ? chatInfo.title.forUser : chatInfo.title.forFlat}
+                {userprofile.isSearching
+                    ? chatInfo.title.forUser
+                    : chatInfo.title.forFlat}
             </SmallHeadingWithBack>
             <GiftedChat
                 messages={messages.sort((a, b) => b.createdAt - a.createdAt)}

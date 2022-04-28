@@ -9,7 +9,9 @@ import en from '../../resources/strings/en.json';
 const Chat = ({ navigation }) => {
     const dispatch = useDispatch();
     const { auth } = useSelector((state) => state.authState);
-    const {isSearching} = useSelector((state) => state.userprofileState.userprofile);
+    const { isSearching } = useSelector(
+        (state) => state.userprofileState.userprofile
+    );
     const chats = useSelector((state) => state.chatState.chats);
 
     const renderItem = ({ item }) => {

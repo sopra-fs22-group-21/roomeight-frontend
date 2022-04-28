@@ -14,20 +14,23 @@ import { CreateNewChatButton } from '../button';
 import { ProfileInfoBox } from '../profiles';
 
 function filterExisting(chats, matches) {
-    if(!matches){return []}
-    else if (!chats) {
+    if (!matches) {
+        return [];
+    } else if (!chats) {
         return Object.values(matches);
     } else {
         let existing = [];
         Object.values(chats).forEach((chat) => {
             existing = [...existing, ...Object.keys(chat.members)];
         });
-        console.log(existing)
+        console.log(existing);
         let filtered = Object.values(matches).filter((match) => {
-            console.log(match.profileId)
+            console.log(match.profileId);
             return !existing.includes(match.profileId);
         });
-        if(!filtered.length){return [""]}
+        if (!filtered.length) {
+            return [''];
+        }
         return filtered;
     }
 }
@@ -54,9 +57,11 @@ const CreateNewChat = (props) => {
     const renderItem = ({ item }) => {
         if (!item) {
             return (
-            <Center>
-                <Heading paddingTop={"50%"}>{en.matches.noNewMatches}</Heading>
-            </Center>
+                <Center>
+                    <Heading paddingTop={'50%'}>
+                        {en.matches.noNewMatches}
+                    </Heading>
+                </Center>
             );
         }
 
@@ -81,7 +86,7 @@ const CreateNewChat = (props) => {
                         <Heading>{en.matches.heading}</Heading>
                         <Center w="100%" h="100%">
                             {!matches && (
-                                <Heading marginTop={"100%"}>
+                                <Heading marginTop={'100%'}>
                                     {en.matches.noMatches}
                                 </Heading>
                             )}

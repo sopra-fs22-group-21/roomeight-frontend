@@ -18,7 +18,6 @@ const ChatListItem = ({ chat }) => {
         (state) => state.userprofileState.userprofile
     );
 
-
     return (
         <Pressable
             onPress={() => navigation.navigate('ChatRoom', { chatInfo: chat })}
@@ -52,14 +51,16 @@ const ChatListItem = ({ chat }) => {
                                 ? chat.title.forUser
                                 : chat.title.forFlat}
                         </Text>
-                        {chat.lastSender && <Text
-                            color="coolGray.600"
-                            _dark={{
-                                color: 'warmGray.200',
-                            }}
-                        >
-                            {chat.lastSender}
-                        </Text>}
+                        {chat.lastSender && (
+                            <Text
+                                color="coolGray.600"
+                                _dark={{
+                                    color: 'warmGray.200',
+                                }}
+                            >
+                                {chat.lastSender}
+                            </Text>
+                        )}
                         <Text
                             color="coolGray.600"
                             _dark={{

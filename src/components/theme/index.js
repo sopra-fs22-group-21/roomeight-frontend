@@ -105,14 +105,16 @@ export const ScreenPadding = (props) => (
 );
 
 export const SmallHeadingWithBack = (props) => (
-    <View style={styles.row} >
+    <View style={styles.row}>
         <Icon
             name="arrow-back"
             size={30}
             style={styles.icon}
             onPress={() => props.navigation.goBack()}
         />
-        <Pressable onPress={props.onPress}><SmallHeading>{props.children}</SmallHeading></Pressable>
+        <Pressable onPress={props.onPress}>
+            <SmallHeading>{props.children}</SmallHeading>
+        </Pressable>
     </View>
 );
 
