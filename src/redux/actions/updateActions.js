@@ -48,15 +48,21 @@ export const updateProfile =
         dispatch({
             type: Constants.LOADING_STATE,
         });
-
-        uploadImages(requestBody.pictureReferences).then((urls) => {
+        console.log(requestBody);
+        uploadImages(
+            requestBody.pictureReferences,
+            profileType,
+            profileId
+        ).then((urls) => {
+            console.log('urls:');
+            console.log(urls);
             if (urls) {
                 requestBody.pictureReferences = urls;
             }
             console.log('requestBody:');
             console.log(requestBody);
             apiClient()
-                .patch(`/${profileType}/${profileId}`, requestBody)
+                .patch(`/${profileType}s/${profileId}`, requestBody)
                 .then((response) => {
                     dispatch(updateProfileSuccess(response.data, profileType));
                     dispatch(

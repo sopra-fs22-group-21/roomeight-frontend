@@ -75,10 +75,12 @@ export const ProfileInfoBox = (props) => {
 };
 
 export const Profiles = (props) => {
+    const profiles =
+        props.profiles && props.profiles.length > 0 ? props.profiles : [];
     const [expanded, setExpanded] = useState(null);
     return (
         <>
-            {props.profiles.map((profile) => (
+            {profiles.map((profile) => (
                 <ProfileInfoBox
                     profile={profile}
                     id={profile.profileId}
