@@ -12,6 +12,7 @@ import {
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import { database } from '../../../firebase/firebase-config';
+import en from '../../resources/strings/en';
 import * as Constants from '../constants';
 
 const chatMembershipChange = (chatId) => ({
@@ -211,7 +212,7 @@ export const createChat = (profileId) => (dispatch, getState) => {
     const chatUpdate = {};
     let chatInfo;
 
-    if (profileId.charAt(2) === '$') {
+    if (profileId.startsWith('flt$')) {
         //want to chat with flat
         let matchprofile =
             getState().userprofileState.userprofile.matches[profileId];
@@ -219,7 +220,7 @@ export const createChat = (profileId) => (dispatch, getState) => {
             _id: chatId,
             title: matchprofile.name,
             members: {
-                ...matchprofile.roomMates,
+                ...Object.keys(matchprofile.roomMates),
                 [getState().authState.auth.uid]: true,
             },
             createdAt: new Date().getTime(),
@@ -228,7 +229,7 @@ export const createChat = (profileId) => (dispatch, getState) => {
         membershipUpdate[
             `/memberships/${getState().authState.auth.uid}/${chatId}`
         ] = true;
-        matchprofile.roomMates.forEach((userId) => {
+        Object.keys(matchprofile.roomMates).forEach((userId) => {
             membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
         });
     } else {
@@ -236,17 +237,21 @@ export const createChat = (profileId) => (dispatch, getState) => {
         let matchprofile =
             getState().flatprofileState.flatprofile.matches[profileId];
         let flatprofile = getState().flatprofileState.flatprofile;
+        let roomMates = flatprofile.roomMates;
+        roomMates.forEach((key) => {
+            roomMates[key] = true;
+        });
         chatInfo = {
             _id: chatId,
             title: matchprofile.firstName + ' ' + matchprofile.lastName,
             members: {
-                ...flatprofile.roomMates,
+                ...roomMates,
                 [profileId]: true,
             },
             createdAt: new Date().getTime(),
         };
         membershipUpdate[`/memberships/${profileId}/${chatId}`] = true;
-        matchprofile.roomMates.forEach((userId) => {
+        Object.keys(flatprofile.roomMates).forEach((userId) => {
             membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
         });
     }
@@ -254,7 +259,10 @@ export const createChat = (profileId) => (dispatch, getState) => {
     chatUpdate[`/chats/${chatId}`] = chatInfo;
     chatUpdate[`/messages/${chatId}/${firstMessageId}`] = {
         _id: firstMessageId,
-        text: getState().userprofileState.firstName + ' has started the chat',
+        text:
+            getState().userprofileState.userprofile.firstName +
+            ' ' +
+            en.chat.startedChat,
         createdAt: new Date().getTime(),
         user: {
             name: getState().userprofileState.userprofile.firstName,

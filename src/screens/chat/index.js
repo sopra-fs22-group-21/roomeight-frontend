@@ -5,6 +5,7 @@ import ChatListItem from '../../components/ChatListItem';
 import CreateNewChat from '../../components/createNewChat';
 import { Container, Heading, SmallHeading } from '../../components/theme';
 import { loadMessages } from '../../redux/actions/chatActions';
+import en from '../../resources/strings/en.json';
 
 const Chat = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -18,28 +19,17 @@ const Chat = ({ navigation }) => {
 
     return (
         <Container navigation={navigation} showNavBar>
-            <SmallHeading>Chat</SmallHeading>
+            <SmallHeading>{en.chat.heading}</SmallHeading>
             <CreateNewChat />
-            {chats &&
-                chats !=
-                    null(
-                        <FlatList
-                            data={Object.keys(chats)}
-                            removeClippedSubviews
-                            renderItem={renderItem}
-                            keyExtractor={(index) => index}
-                        />
-                    )}
-            {!chats && <Heading size="xl">No chats yet</Heading>}
-            <Button
-                onPress={() => {
-                    dispatch(
-                        loadMessages(
-                            'CHAT-2fc014ea-0c76-468f-9451-1199e49d3207'
-                        )
-                    );
-                }}
-            />
+            {chats && (
+                <FlatList
+                    data={Object.keys(chats)}
+                    removeClippedSubviews
+                    renderItem={renderItem}
+                    keyExtractor={(index) => index}
+                />
+            )}
+            {!chats && <Heading size="xl">{en.chat.noChats}</Heading>}
         </Container>
     );
 };
