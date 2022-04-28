@@ -19,7 +19,6 @@ const Chat = ({ navigation }) => {
     return (
         <Container navigation={navigation} showNavBar>
             <SmallHeading>Chat</SmallHeading>
-            {/*
             <CreateNewChat />
             {chats && chats!=null(
                 <FlatList
@@ -39,7 +38,6 @@ const Chat = ({ navigation }) => {
                     );
                 }}
             />
-            */}
         </Container>
     );
 };

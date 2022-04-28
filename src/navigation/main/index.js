@@ -17,7 +17,7 @@ import CompleteSingleProfile from '../../screens/create-profile/completeSinglePr
 import Discover from '../../screens/discover/discover';
 import Matches from '../../screens/matches/matches';
 import Match from '../../screens/matches/match';
-import Profile from '../../screens/profile';
+import Profile from '../../screens/profile/index.js';
 import Login from '../../screens/welcome-login-signup/login';
 import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
