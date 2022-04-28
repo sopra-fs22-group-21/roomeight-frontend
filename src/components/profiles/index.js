@@ -21,7 +21,7 @@ export const ProfileInfoBox = (props) => {
                 <View style={styles.horizontal}>
                     {props.expanded &&
                     props.profile.pictureReferences &&
-                    props.profile.pictureReferences[0].length > 1 ? (
+                    props.profile.pictureReferences[0] ? (
                         <View style={styles.gallery}>
                             <ImageGallery
                                 imageRefs={props.profile.pictureReferences}

@@ -20,6 +20,12 @@ const userprofileState = (state = initialState, action) => {
                 userprofile: action.payload,
                 update: undefined,
             };
+        case Constants.POST_LIKE_FLAT_SUCCESS:
+        case Constants.POST_LIKE_USER_SUCCESS:
+            return {
+                ...state,
+                userproifile: action.payload.updatedFlatProfile,
+            };
 
         case Constants.POST_USERPROFILE_SUCCESS:
             return {
