@@ -46,7 +46,7 @@ export const uploadImageFailure = (error, profileType) =>
 
 //this is not dispatching because it is needed afterwards for update in profiles
 //returns a simple promise
-export const uploadImages = async (pictureReferences) => {
+export const uploadImages = async (pictureReferences) => async (dispatch) => {
     if (pictureReferences && pictureReferences.length > 0) {
         dispatch(uploadImageRequest(profileType));
         return uploadAll(pictureReferences, profileType, profileId)

@@ -13,7 +13,8 @@ export const AddressMap = (props) => {
 
     useEffect(async () => {
         try {
-            let json = await Geocoder.from(props.address);
+            let json;
+            // json = await Geocoder.from(props.address);
             let location = json.results[0].geometry.location;
             setCoordinates(location);
             props.onSuccess(location);

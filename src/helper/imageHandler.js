@@ -9,7 +9,7 @@ export const pickImage = async () => {
         aspect: [4, 3],
         maxWidth: 500,
         maxHeight: 500,
-        quality: 0.3,
+        quality: 0.05,
     });
     if (!result.cancelled) {
         return result.uri;
@@ -24,23 +24,14 @@ export const getDownloadUrl = async (pictureReferences) => {
     return getDownloadURL(reference);
 };
 
-export const getAllDownloadUrsls = async (urls) => {
-    if (!urls) return Promise.resolve(null);
-    if (urls.length < 1) return Promise.resolve([]);
-    return Promise.all(
-        urls.map((uri) => {
-            if (!uri.includes('profiles')) return Promise.resolve(uri);
-            else return getDownloadUrl(uri);
-        })
-    );
-};
-
 export const uploadAll = async (uris, profileType, uid) => {
     console.log('uploading images');
-    return getAllDownloadUrsls(uris).then((urls) => {
-        return Promise.all(
-            urls.map(async (url, index) => {
-                const count = index + 1;
+    return Promise.all(
+        urls.map(async (url, index) => {
+            const count = index + 1;
+            if (url.startsWith('flat') || url.startsWith('user')) {
+                return Promise.resolve(url);
+            } else {
                 return fetch(url)
                     .then((response) => {
                         console.log('fetched');
@@ -69,7 +60,7 @@ export const uploadAll = async (uris, profileType, uid) => {
                         console.log(error);
                         return error;
                     });
-            })
-        );
-    });
+            }
+        })
+    );
 };

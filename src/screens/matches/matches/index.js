@@ -21,14 +21,14 @@ const Matches = ({ navigation }) => {
         <Container navigation={navigation} showNavBar>
             <SmallHeading>Matches</SmallHeading>
             <Box />
-            {Object.values(matches).map((profile) => {
+            {Object.values(matches).map((profile, index) => {
                 console.log('match: ' + profile.profileId);
                 if (profile.profileId)
                     return (
                         <ProfileInfoBox
                             profile={profile}
                             id={profile.profileId}
-                            key={profile.profileId}
+                            key={index}
                             onPress={(id) => {
                                 navigation.navigate('Match', {
                                     profile: profile,

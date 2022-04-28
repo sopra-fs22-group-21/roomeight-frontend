@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import Colors from '../../resources/colors';
+import colors from '../../resources/colors';
 
 const styles = StyleSheet.create({
     backgroundProfile: {
-        backgroundColor: '#FDA4AF',
+        backgroundColor: colors.secondary300,
         borderRadius: 120,
         width: 120,
         aspectRatio: 1,
