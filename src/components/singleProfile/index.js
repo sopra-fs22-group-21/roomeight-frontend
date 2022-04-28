@@ -101,7 +101,6 @@ const SingleProfile = (props) => {
     if (!loading) {
     }
     if (editMode) {
-        console.log(pictureSelectors);
         return (
             <View style={styles.container}>
                 <KeyboardAwareScrollView
@@ -183,7 +182,6 @@ const SingleProfile = (props) => {
                         if (images) {
                             user.pictureReferences = images;
                         }
-                        console.log(user);
                         dispatch(
                             updateProfile(
                                 user,

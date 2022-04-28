@@ -7,7 +7,7 @@ import styles from './styles';
 
 const DateInput = (props) => {
     const [day, setDay] = useState(
-        props.date ? dateFormat(props.defaultDate, 'dd') : ''
+        props.defaultDate ? dateFormat(props.defaultDate, 'dd') : ''
     );
     const [month, setMonth] = useState(
         props.defaultDate ? dateFormat(props.defaultDate, 'mm') : ''

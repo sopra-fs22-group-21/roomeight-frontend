@@ -46,19 +46,28 @@ export const uploadImageFailure = (error, profileType) =>
 
 //this is not dispatching because it is needed afterwards for update in profiles
 //returns a simple promise
-export const uploadImages = async (pictureReferences) => async (dispatch) => {
+export const uploadImages = async (
+    pictureReferences,
+    profileType,
+    profileId
+) => {
+    console.log('pictureReferences in uploadImages');
+    console.log(pictureReferences);
     if (pictureReferences && pictureReferences.length > 0) {
-        dispatch(uploadImageRequest(profileType));
+        console.log('uploading All');
+        //dispatch(uploadImageRequest(profileType));
         return uploadAll(pictureReferences, profileType, profileId)
             .then((urls) => {
-                dispatch(uploadImageSuccess(urls, profileType));
+                console.log('urls after Upload All:');
+                console.log(urls);
+                //dispatch(uploadImageSuccess(urls, profileType));
                 console.log(urls);
                 return urls;
             })
             .catch((error) => {
                 console.log('error uploading image');
                 console.log(error);
-                dispatch(uploadImageFailure(error, profileType));
+                //dispatch(uploadImageFailure(error, profileType));
                 return [];
             });
     } else {

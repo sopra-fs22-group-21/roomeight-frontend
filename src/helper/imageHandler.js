@@ -27,7 +27,7 @@ export const getDownloadUrl = async (pictureReferences) => {
 export const uploadAll = async (uris, profileType, uid) => {
     console.log('uploading images');
     return Promise.all(
-        urls.map(async (url, index) => {
+        uris.map(async (url, index) => {
             const count = index + 1;
             if (url.startsWith('flat') || url.startsWith('user')) {
                 return Promise.resolve(url);

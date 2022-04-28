@@ -16,22 +16,21 @@ import styles from './styles';
 
 const PictureInput = (props) => {
     const [image, setImage] = useState(null);
-    const getImage = () => {
-        if (!image && props.image && props.image.includes('profiles')) {
+    useEffect(() => {
+        if (props.image && props.image.includes('profiles')) {
             getDownloadUrl(props.image).then((url) => {
                 setImage(url);
             });
-        } else if (image && image != '') return image;
-        else return props.image;
-    };
+        } else setImage(props.image);
+    }, [props.image]);
     switch (props.variant) {
         case 'profile':
-            if (getImage()) {
+            if (image) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
                         <Image
                             style={{ ...styles.imageProfile, ...props.style }}
-                            source={{ uri: getImage() }}
+                            source={{ uri: image }}
                         />
                         <EditBadge variant={props.variant} set={true} />
                     </Pressable>
@@ -59,12 +58,12 @@ const PictureInput = (props) => {
                 );
             }
         case 'additional':
-            if (getImage()) {
+            if (image) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
                         <Image
                             style={styles.imageAdditional}
-                            source={{ uri: getImage() }}
+                            source={{ uri: image }}
                         />
                         <EditBadge variant={props.variant} set={true} />
                     </Pressable>
@@ -82,12 +81,12 @@ const PictureInput = (props) => {
                 );
             }
         case 'editprofile':
-            if (getImage()) {
+            if (image) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
                         <Image
                             style={styles.editprofile}
-                            source={{ uri: getImage() }}
+                            source={{ uri: image }}
                         />
                         <EditBadge variant={props.variant} set={true} />
                     </Pressable>
