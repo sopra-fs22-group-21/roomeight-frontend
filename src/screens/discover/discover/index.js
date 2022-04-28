@@ -34,19 +34,20 @@ const Discover = ({ navigation }) => {
         (state) => state.discoverState
     );
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const [profiles, setProfiles] = useState([]);
+    const [profiles, setProfiles] = useState(discoverProfiles);
     const [like, setLike] = useState(false);
 
     const getProfiles = () => {
         if (profiles.length > 0) return profiles;
         if (loading) return [{ textIfNoData: en.discover.loading }];
-        return discoverProfiles.concat([{ textIfNoData: en.discover.empty }]);
+        return [{ textIfNoData: en.discover.empty }];
     };
 
     const removeProfile = (index) => {
-        if (index >= 0 && profiles.length > 1) {
-            profiles.splice(index, 1);
-            setProfiles(profiles);
+        if (index >= 0 && profiles.length > 0) {
+            const prof = [...profiles];
+            prof.splice(index, 1);
+            setProfiles(prof);
             carousel.current.snapToItem(0, false);
         }
     };
@@ -80,7 +81,7 @@ const Discover = ({ navigation }) => {
                     <Box />
                     <LikeButtons
                         onLike={() => handleLike(item.profileId)}
-                        onDislike={() => handleDislike}
+                        onDislike={() => handleDislike()}
                     />
                     {like ? (
                         <View style={styles.like}>
