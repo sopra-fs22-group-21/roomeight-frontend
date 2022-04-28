@@ -24,9 +24,7 @@ import dateFormat from 'dateformat';
 import { PublicProfileCard } from '../publicProfileCard';
 
 const FlatProfile = (props) => {
-    useEffect(() => {
-        console.log('render');
-    }, []);
+    useEffect(() => {}, []);
 
     const dispatch = useDispatch();
     const { flatprofile } = useSelector((state) => state.flatprofileState);
@@ -156,12 +154,7 @@ const FlatProfile = (props) => {
                         <PrimaryButton
                             onPress={() => {
                                 setEditMode(false);
-                            }} /* {
-                                    dispatch(updateUserprofile(user));
-                                    console.log('putting');
-                                    console.log(error);
-                                   
-                                } */
+                            }}
                         >
                             Save
                         </PrimaryButton>
@@ -175,7 +168,6 @@ const FlatProfile = (props) => {
                 profile={flatprofile}
                 onClickEdit={() => {
                     setEditMode(true);
-                    console.log(editMode);
                 }}
                 isFlat={true}
                 showDetailsFirst={true}

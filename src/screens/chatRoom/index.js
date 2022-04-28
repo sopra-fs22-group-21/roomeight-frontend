@@ -9,7 +9,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { sendMessage } from '../../redux/actions/chatActions';
 import { useLinkBuilder } from '@react-navigation/native';
 
-export const Chatroom = ({ route, navigartion }) => {
+export const Chatroom = ({ route, navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { auth } = useSelector((state) => state.authState);
     const dispatch = useDispatch();

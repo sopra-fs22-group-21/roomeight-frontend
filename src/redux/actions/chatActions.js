@@ -1,6 +1,5 @@
 import {
     get,
-    getDatabase,
     limitToLast,
     onChildAdded,
     onValue,
@@ -13,6 +12,7 @@ import {
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import { database } from '../../../firebase/firebase-config';
+import en from '../../resources/strings/en';
 import * as Constants from '../constants';
 
 const chatMembershipChange = (chatId) => ({
@@ -66,7 +66,6 @@ export const chatMemberShipListener = () => (dispatch, getState) => {
         type: Constants.CHAT_MEMBERSHIP_LISTENER_STARTED,
     });
     const uid = getState().authState.auth.uid;
-    console.log(uid);
     const chatReference = ref(database, `/memberships/${uid}`);
     return onChildAdded(chatReference, (snapshot) => {
         const chatId = snapshot.key;
@@ -200,31 +199,85 @@ export const sendMessage = (message, chatId) => async (dispatch, getState) => {
  * @dispatches {@link createNewChatFailure} on failure
  * @todo where do i get the chatInfoObject from??
  */
-export const createChat = (chatInfo) => (dispatch, getState) => {
+export const createChat = (profileId) => (dispatch, getState) => {
     dispatch({
         type: Constants.CREATE_CHAT_REQUEST,
     });
+
     //create unique chat id
     const chatId = 'CHAT-' + uuidv4();
+    const firstMessageId = 'MESSAGE-' + uuidv4();
 
-    const chatInfo = {
-        _id: chatId,
-        title: 'New ChatUpdates',
-        members: {
-            uid1: true,
-            uid2: true,
-        },
+    const membershipUpdate = {};
+    const chatUpdate = {};
+    let chatInfo;
+
+    if (profileId.startsWith('flt$')) {
+        //want to chat with flat
+        let matchprofile =
+            getState().userprofileState.userprofile.matches[profileId];
+        chatInfo = {
+            _id: chatId,
+            title: matchprofile.name,
+            members: {
+                ...Object.keys(matchprofile.roomMates),
+                [getState().authState.auth.uid]: true,
+            },
+            createdAt: new Date().getTime(),
+        };
+
+        membershipUpdate[
+            `/memberships/${getState().authState.auth.uid}/${chatId}`
+        ] = true;
+        Object.keys(matchprofile.roomMates).forEach((userId) => {
+            membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
+        });
+    } else {
+        //want to chat with user
+        let matchprofile =
+            getState().flatprofileState.flatprofile.matches[profileId];
+        let flatprofile = getState().flatprofileState.flatprofile;
+        let roomMates = flatprofile.roomMates;
+        roomMates.forEach((key) => {
+            roomMates[key] = true;
+        });
+        chatInfo = {
+            _id: chatId,
+            title: matchprofile.firstName + ' ' + matchprofile.lastName,
+            members: {
+                ...roomMates,
+                [profileId]: true,
+            },
+            createdAt: new Date().getTime(),
+        };
+        membershipUpdate[`/memberships/${profileId}/${chatId}`] = true;
+        Object.keys(flatprofile.roomMates).forEach((userId) => {
+            membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
+        });
+    }
+
+    chatUpdate[`/chats/${chatId}`] = chatInfo;
+    chatUpdate[`/messages/${chatId}/${firstMessageId}`] = {
+        _id: firstMessageId,
+        text:
+            getState().userprofileState.userprofile.firstName +
+            ' ' +
+            en.chat.startedChat,
         createdAt: new Date().getTime(),
+        user: {
+            name: getState().userprofileState.userprofile.firstName,
+            _id: getState().authState.auth.uid,
+        },
+        system: true,
     };
 
-    const updates = {};
-    updates[`/chats/${chatId}`] = chatInfo;
-    updates[`/memberships/${getState().authState.auth.uid}/${chatId}`] = true;
-    update(ref(database), updates)
+    update(ref(database), membershipUpdate)
         .then(() => {
-            dispatch({
-                type: Constants.CREATE_CHAT_SUCCESS,
-            });
+            update(ref(database), chatUpdate).then(
+                dispatch({
+                    type: Constants.CREATE_CHAT_SUCCESS,
+                })
+            );
         })
         .catch((error) => {
             dispatch(createChatFailure(error));

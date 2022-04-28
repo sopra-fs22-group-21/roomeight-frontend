@@ -23,6 +23,7 @@ import en from '../../../resources/strings/en.json';
 import {
     postLikeFlat,
     postLikeUser,
+    updateDiscoverProfiles,
 } from '../../../redux/actions/discoverActions';
 
 const ITEM_HEIGHT = Dimensions.get('window').height - 230;
@@ -37,18 +38,20 @@ const Discover = ({ navigation }) => {
     const [profiles, setProfiles] = useState(discoverProfiles);
     const [like, setLike] = useState(false);
 
-    const getProfiles = () => {
-        if (profiles.length > 0) return profiles;
-        if (loading) return [{ textIfNoData: en.discover.loading }];
-        return [{ textIfNoData: en.discover.empty }];
-    };
+    useEffect(() => {
+        if (loading) setProfiles([{ textIfNoData: en.discover.loading }]);
+        else
+            setProfiles(
+                discoverProfiles.concat([{ textIfNoData: en.discover.empty }])
+            );
+        carousel.current.snapToItem(0, false);
+    }, [discoverProfiles]);
 
     const removeProfile = (index) => {
         if (index >= 0 && profiles.length > 0) {
-            const prof = [...profiles];
+            const prof = [...discoverProfiles];
             prof.splice(index, 1);
-            setProfiles(prof);
-            carousel.current.snapToItem(0, false);
+            dispatch(updateDiscoverProfiles(prof));
         }
     };
 
@@ -98,7 +101,7 @@ const Discover = ({ navigation }) => {
             <Box />
             <Carousel
                 ref={carousel}
-                data={getProfiles()}
+                data={profiles}
                 renderItem={card}
                 sliderHeight={ITEM_HEIGHT}
                 itemHeight={ITEM_HEIGHT}

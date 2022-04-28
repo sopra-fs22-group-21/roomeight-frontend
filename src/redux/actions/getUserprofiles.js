@@ -1,7 +1,7 @@
 import { auth } from '../../../firebase/firebase-config';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
-import { getAllFlatProfiles, getFlatprofile } from './getFlatprofile';
+import { getAllFlatProfiles, getFlatprofile } from './flatprofileActions';
 
 const getCurrentUserprofileRequest = (request) => ({
     type: Constants.GET_CURRENT_USER_REQUEST,
@@ -52,19 +52,18 @@ export const getCurrentUserprofile = () => (dispatch) => {
         .get(url)
         .then(async (response) => {
             userprofile = response.data;
-            userprofile.images = [];
             dispatch(getCurrentUserprofileSuccess(response.data));
         })
         .catch((error) => {
             dispatch(getCurrentUserprofileFailure(error));
         })
         .then(() => {
-            if (userprofile.isSearchingRoom) dispatch(getAllFlatProfiles());
-            else dispatch(getAllUserprofiles());
-        })
-        .then(() => {
             if (userprofile.flatId && userprofile.flatId != '')
                 dispatch(getFlatprofile(userprofile.flatId));
+        })
+        .then(() => {
+            if (userprofile.isSearchingRoom) dispatch(getAllFlatProfiles());
+            else dispatch(getAllUserprofiles());
         });
 };
 

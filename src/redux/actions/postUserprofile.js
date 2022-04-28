@@ -49,6 +49,7 @@ export const postUserprofile = (requestBody) => (dispatch) => {
         .catch((error) => {
             console.log('error posting userprofile');
             console.warn(error);
+            console.log('request body:');
             console.log(requestBody);
             dispatch(postUserprofileFailure(error));
         });

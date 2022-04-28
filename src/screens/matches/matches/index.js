@@ -15,20 +15,20 @@ import { useSelector } from 'react-redux';
 import apiClient from '../../../helper/apiClient';
 
 const Matches = ({ navigation }) => {
-    const { userprofile } = useSelector((state) => state.userprofileState);
+    const { matches } = useSelector((state) => state.matchesState);
 
     return (
         <Container navigation={navigation} showNavBar>
             <SmallHeading>Matches</SmallHeading>
             <Box />
-            {Object.values(userprofile.matches).map((profile) => {
-                console.log(profile);
+            {Object.values(matches).map((profile, index) => {
+                console.log('match: ' + profile.profileId);
                 if (profile.profileId)
                     return (
                         <ProfileInfoBox
                             profile={profile}
                             id={profile.profileId}
-                            key={profile.profileId}
+                            key={index}
                             onPress={(id) => {
                                 navigation.navigate('Match', {
                                     profile: profile,

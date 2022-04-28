@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
+import { getDownloadUrl } from '../../helper/imageHandler';
 import EditBadge from '../editBadge';
 import styles from './styles';
 
@@ -11,15 +13,24 @@ import styles from './styles';
  * @param {string} props.image 'image uri'
  * @required variant!
  */
-const pictureInput = (props) => {
+
+const PictureInput = (props) => {
+    const [image, setImage] = useState(null);
+    useEffect(() => {
+        if (props.image && props.image.includes('profiles')) {
+            getDownloadUrl(props.image).then((url) => {
+                setImage(url);
+            });
+        } else setImage(props.image);
+    }, [props.image]);
     switch (props.variant) {
         case 'profile':
-            if (props.image) {
+            if (image) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
                         <Image
                             style={{ ...styles.imageProfile, ...props.style }}
-                            source={{ uri: props.image }}
+                            source={{ uri: image }}
                         />
                         <EditBadge variant={props.variant} set={true} />
                     </Pressable>
@@ -47,12 +58,12 @@ const pictureInput = (props) => {
                 );
             }
         case 'additional':
-            if (props.image) {
+            if (image) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
                         <Image
                             style={styles.imageAdditional}
-                            source={{ uri: props.image }}
+                            source={{ uri: image }}
                         />
                         <EditBadge variant={props.variant} set={true} />
                     </Pressable>
@@ -70,12 +81,12 @@ const pictureInput = (props) => {
                 );
             }
         case 'editprofile':
-            if (props.image) {
+            if (image) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
                         <Image
                             style={styles.editprofile}
-                            source={{ uri: props.image }}
+                            source={{ uri: image }}
                         />
                         <EditBadge variant={props.variant} set={true} />
                     </Pressable>
@@ -97,4 +108,4 @@ const pictureInput = (props) => {
     }
 };
 
-export default pictureInput;
+export default PictureInput;

@@ -1,53 +1,32 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Text, View, Dimensions } from 'react-native';
-import { Tab } from 'react-native-elements/dist/tab/Tab';
+import { View, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryButton } from '../../components/button';
-import tagIcons from '../../resources/icons/tagIcons';
-import {
-    Container,
-    Name,
-    Screen,
-    Heading,
-    Title,
-    Box,
-} from '../../components/theme';
+import { PrimaryButton, SecondaryButton } from '../../components/button';
+
 import PictureInput from '../../components/pictureInput';
-import { logoutUser } from '../../redux/actions/authActions';
 import styles from './styles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { InputBox, InputLabel, Input } from '../../components/input';
+import { InputBox, Input } from '../../components/input';
 import en from '../../resources/strings/en.json';
 import Tags from '../../components/tags';
 import DateInput from '../../components/dateInput';
-import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
-import { PickImage } from '../../helper/imageHandler';
-import { updateUserprofile } from '../../redux/actions/updateUserprofile';
-import { SingleDetailCard } from '../../components/singleDetailCard';
-import dateFormat from 'dateformat';
+import { pickImage } from '../../helper/imageHandler';
+import { updateProfile } from '../../redux/actions/updateActions';
 import { PublicProfileCard } from '../publicProfileCard';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
-import { FlatList } from 'react-native';
-import { colors } from 'react-native-elements';
-import Loader from 'react-native-modal-loader';
-import { uploadImages } from '../../redux/actions/uploadImage';
 import Carousel from 'react-native-snap-carousel/src/carousel/Carousel';
-import LinearGradient from 'react-native-linear-gradient';
+import { Box } from '../theme';
 
 const SingleProfile = (props) => {
-    useEffect(() => {
-        console.log('render');
-    }, []);
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.loadingState);
+    const [pictureSelectors, setPictureSelectors] = useState([]);
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const [image, setImage] = useState(userprofile.images[0]);
     const [moveInDateValid, setmoveInDateValid] = useState(
         userprofile.moveInDate
     );
     const [user, setUser] = useState({});
-    let selectedTagsSingle = [];
 
     const [editMode, setEditMode] = useState(false);
 
@@ -56,19 +35,18 @@ const SingleProfile = (props) => {
     const SLIDER_WIDTH = Dimensions.get('window').width - 25;
 
     const { transitUserprofile } = useSelector((state) => state.transitState);
-
-    console.log(transitUserprofile.localPictureReference);
-
-    const [images, setImages] = useState(userprofile.images);
+    const [images, setImages] = useState(
+        userprofile.pictureReferences ? userprofile.pictureReferences : null
+    );
 
     function deletePicture(index) {
         let updated = [...images];
-        updated[index] = '';
+        updated[index] = undefined;
         setImages(updated);
     }
 
     async function addPicture(index) {
-        const uri = await PickImage();
+        const uri = await pickImage();
         let updated = [...images];
         updated[index] = uri;
         setImages(updated);
@@ -86,6 +64,27 @@ const SingleProfile = (props) => {
         }
     }, []);
 
+    useEffect(() => {
+        setPictureSelectors([
+            {
+                index: 0,
+                image: images ? images[0] : null,
+            },
+            {
+                index: 1,
+                image: images ? images[1] : null,
+            },
+            {
+                index: 2,
+                image: images ? images[2] : null,
+            },
+            {
+                index: 3,
+                image: images ? images[3] : null,
+            },
+        ]);
+    }, [images]);
+
     const Img = ({ item, index }) => {
         return (
             <View style={styles.imageSlider} key={index}>
@@ -99,33 +98,13 @@ const SingleProfile = (props) => {
         );
     };
 
-    const pictureSelectors = [
-        {
-            index: 0,
-            image: images ? images[0] : null,
-        },
-        {
-            index: 1,
-            image: images ? images[1] : null,
-        },
-        {
-            index: 2,
-            image: images ? images[2] : null,
-        },
-        {
-            index: 3,
-            image: images ? images[3] : null,
-        },
-    ];
-
     if (!loading) {
-        console.log('loading: ' + loading);
-        console.log(userprofile);
     }
     if (editMode) {
         return (
             <View style={styles.container}>
                 <KeyboardAwareScrollView
+                    showsVerticalScrollIndicator={false}
                     style={styles.inner}
                     behavior="padding"
                 >
@@ -141,31 +120,16 @@ const SingleProfile = (props) => {
                             activeSlideAlignment="start"
                             useScrollView={true}
                         />
-                        {/* <FlatList
-                            data={pictureSelectors}
-                            keyExtractor={(item) => item.index}
-                            numColumns={4}
-                            columnWrapperStyle={{
-                                justifyContent: 'space-around',
-                                paddingBottom: 30,
-                            }}
-                            renderItem={({ item }) => (
-                                <PictureInput
-                                    variant="editprofile"
-                                    onPressDelete={() =>
-                                        deletePicture(item.index)
-                                    }
-                                    onPressSelect={() => addPicture(item.index)}
-                                    image={item.image}
-                                />
-                            )}
-                        /> */}
                     </View>
                     <View>
                         <DateInput
                             label={en.completeSingleProfile.moveInDate}
                             valid={moveInDateValid}
-                            defaultValue={userprofile.moveInDate}
+                            defaultDate={
+                                userprofile.moveInDate
+                                    ? new Date(userprofile.moveInDate)
+                                    : null
+                            }
                             onChange={(date, valid) => {
                                 if (valid)
                                     setUser({
@@ -210,21 +174,25 @@ const SingleProfile = (props) => {
                             }
                         />
                     </View>
-                    <PrimaryButton
-                        onPress={() => {
-                            setEditMode(false);
-                            dispatch(updateUserprofile(user));
-                            if (images) {
-                                dispatch(uploadImages(images, 'single'));
-                            }
-                            /* console.log('putting');
-                            console.log(userprofile); */
-                            console.log(user);
-                        }}
-                    >
-                        Save
-                    </PrimaryButton>
                 </KeyboardAwareScrollView>
+                <Box />
+                <SecondaryButton
+                    onPress={() => {
+                        setEditMode(false);
+                        if (images) {
+                            user.pictureReferences = images;
+                        }
+                        dispatch(
+                            updateProfile(
+                                user,
+                                'userprofile',
+                                userprofile.profileId
+                            )
+                        );
+                    }}
+                >
+                    Save
+                </SecondaryButton>
             </View>
         );
     } else {

@@ -10,7 +10,7 @@ class Userprofile {
         this.description = '';
         this.biography = '';
         this.tags = [];
-        this.pictureReference = '';
+        this.pictureReferences = [];
         this.matches = [];
         this.creationDate = null;
         this.onlineStatus = '';

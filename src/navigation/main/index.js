@@ -17,7 +17,7 @@ import CompleteSingleProfile from '../../screens/create-profile/completeSinglePr
 import Discover from '../../screens/discover/discover';
 import Matches from '../../screens/matches/matches';
 import Match from '../../screens/matches/match';
-import Profile from '../../screens/profile';
+import Profile from '../../screens/profile/index.js';
 import Login from '../../screens/welcome-login-signup/login';
 import Signup from '../../screens/welcome-login-signup/signup';
 import Welcome from '../../screens/welcome-login-signup/welcome';
@@ -26,6 +26,8 @@ import FlatInfo from '../../screens/create-profile/flatInfo';
 import Done from '../../screens/create-profile/done';
 import Settings from '../../screens/profile/settings';
 import AccessExistingFlatProfile from '../../screens/create-profile/accessExistingFlatProfile';
+import genders from '../../resources/strings/genders';
+import CreateFlat from '../../screens/create-profile/createFlat';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -94,6 +96,11 @@ export default function Route() {
             <Stack.Screen
                 name="CompleteSingleProfile"
                 component={CompleteSingleProfile}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="CreateFlat"
+                component={CreateFlat}
                 options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -168,9 +175,10 @@ export default function Route() {
 
     function getUserStatus() {
         if (loggedIn) {
+            //return incompleteComponents;
             if (
-                userprofile.pictureReference &&
-                userprofile.pictureReference.length > 0
+                userprofile.gender != genders.notSet ||
+                userprofile.flatId != ''
             ) {
                 return completeComponents;
             } else return incompleteComponents;

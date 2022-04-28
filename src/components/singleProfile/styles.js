@@ -9,10 +9,6 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 0,
-        marginTop: 0,
-        paddingTop: 0,
-        marginBottom: 60,
         height: '100%',
     },
     inner: {

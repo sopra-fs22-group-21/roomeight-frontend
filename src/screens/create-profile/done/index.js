@@ -1,9 +1,8 @@
-import { updateUserprofile } from '../../../redux/actions/updateUserprofile';
+import { updateProfile } from '../../../redux/actions/updateActions';
 import React, { useState } from 'react';
 import { colors } from 'react-native-elements';
 import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
-import { storage } from '../../../../firebase/firebase-config';
 import { PrimaryButton } from '../../../components/button';
 import {
     Box,
@@ -14,26 +13,26 @@ import {
     Title,
 } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
-import styles from './styles';
+import { postFlatprofile } from '../../../redux/actions/flatprofileActions';
 
 const Done = ({ navigation, route }) => {
-    const [description, setDescription] = useState(null);
     const dispatch = useDispatch();
+    const { userprofile } = useSelector((state) => state.userprofileState);
 
     const { loading } = useSelector((state) => state.loadingState);
     const { transitUserprofile, transitFlatprofile } = useSelector(
         (state) => state.transitState
     );
-    const { userprofile } = useSelector((state) => state.userprofileState);
 
     const updateSingleprofile = () => {
-        console.log(transitUserprofile);
-        delete transitUserprofile.localPictureReference;
-        console.log(transitUserprofile);
-        dispatch(updateUserprofile(transitUserprofile));
+        dispatch(
+            updateProfile(
+                transitUserprofile,
+                'userprofile',
+                userprofile.profileId
+            )
+        );
     };
-
-    const updateFlatprofile = () => {};
 
     const joinFlat = () => {};
 
@@ -52,7 +51,10 @@ const Done = ({ navigation, route }) => {
                             if (route.params.includes('single'))
                                 updateSingleprofile();
                             else if (route.params.includes('join')) joinFlat();
-                            else updateFlatprofile();
+                            else {
+                                updateSingleprofile();
+                                dispatch(postFlatprofile(transitFlatprofile));
+                            }
                         }}
                     >
                         {en.done.start}

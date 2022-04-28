@@ -5,12 +5,27 @@ import { Box, NormalText, Strong } from '../theme';
 import Geocoder from 'react-native-geocoding';
 
 export const AddressMap = (props) => {
-    const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
+    const [coordinates, setCoordinates] = useState({
+        lat: 47.3769,
+        lng: 8.5417,
+    });
+    const [found, setFound] = useState(true);
+
     useEffect(async () => {
-        let json = await Geocoder.from(props.address);
-        let location = json.results[0].geometry.location;
-        setCoordinates(location);
-    }, []);
+        try {
+            let json;
+            // json = await Geocoder.from(props.address);
+            let location = json.results[0].geometry.location;
+            setCoordinates(location);
+            props.onSuccess(location);
+            setFound(true);
+        } catch (error) {
+            console.warn(error);
+            props.onError(error);
+            setFound(false);
+        }
+    }, [props.address]);
+
     return (
         <>
             <MapView
@@ -22,13 +37,15 @@ export const AddressMap = (props) => {
                     longitudeDelta: 0.03,
                 }}
             >
-                <Marker
-                    key={0}
-                    coordinate={{
-                        latitude: coordinates.lat,
-                        longitude: coordinates.lng,
-                    }}
-                />
+                {found ? (
+                    <Marker
+                        key={0}
+                        coordinate={{
+                            latitude: coordinates.lat,
+                            longitude: coordinates.lng,
+                        }}
+                    />
+                ) : null}
             </MapView>
         </>
     );

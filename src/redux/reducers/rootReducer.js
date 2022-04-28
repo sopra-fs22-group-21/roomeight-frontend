@@ -5,6 +5,7 @@ import flatprofileState from './flatprofileState';
 import errorState from './errorState';
 import transitState from './transitState';
 import loadingState from './loadingState';
+import matchesState from './matchesState';
 import chatState from './chatState';
 import discoverState from './discoverState';
 import * as Constants from '../constants';
@@ -22,6 +23,7 @@ const combinedReducer = combineReducers({
     loadingState,
     chatState,
     discoverState,
+    matchesState,
 });
 
 const rootReducer = (state, action) => {

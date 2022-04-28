@@ -9,7 +9,7 @@ class Flatprofile {
         this.description = '';
         this.biography = '';
         this.tags = [];
-        this.pictureReference = '';
+        this.pictureReferences = [];
         this.creationDate = null;
         this.onlineStatus = '';
         this.moveInDate = null;

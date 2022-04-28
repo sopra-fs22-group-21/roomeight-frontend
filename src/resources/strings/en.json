@@ -89,6 +89,7 @@
     },
     "roomInfo": {
         "heading": "Spit some facts about the free room!",
+        "info": "You need to specify the address, other fields are optional. But the more you tell your future roomie, the better :)",
         "address": "Address",
         "moveInDate": "Move-In Date",
         "moveOutDate": "Move-Out Date",
@@ -112,6 +113,11 @@
         "failure": "Please contact the roomie who has set up the flat profile to add you with your email.",
         "success": "You have been successfully added to your flat. Please continue and complete your personal profile."
     },
+    "createFlat": {
+        "heading": "Give your flat a name!",
+        "info": "What do you guys call yourselves? Maybe the name of your street? Also, add a profile picture for the flat so that people get a good impression :)",
+        "name": "Name"
+    },
     "done": {
         "heading": "This is it!",
         "title": "Are you ready to see some profiles?",
@@ -132,6 +138,16 @@
         "location": "Location",
         "empty": "Nothing to discover...",
         "loading": "Loading profiles you might like..."
+    },
+    "matches": {
+        "heading": "Matches",
+        "noNewMatches": "sorry:(\nno new matches...",
+        "noMatches": "sorry :(\nno matches yet..."
+    },
+    "chat": {
+        "heading": "Chat",
+        "noChats": "You haven't started\nany chats yet...",
+        "startedChat": "started a chat with you"
     },
     "errors": {
         "userAlreadyExists": "A user with this email already exists. Try logging in or choosing a different email address.",

@@ -40,7 +40,7 @@ export const postLikeFlat = (otherProfileId) => (dispatch) => {
     dispatch(postLikeFlatRequest());
 
     apiClient()
-        .post('/flatprofiles/likeFlat/' + otherProfileId)
+        .post('/userprofiles/likeFlat/' + otherProfileId)
         .then((response) => {
             dispatch(postLikeFlatSuccess(response.data));
         })
@@ -69,4 +69,11 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
             console.warn('error liking user');
             dispatch(postLikeUserFailure(error));
         });
+};
+
+export const updateDiscoverProfiles = (discoverProfiles) => (dispatch) => {
+    dispatch({
+        type: Constants.UPDATE_DISCOVER_PROFILES,
+        payload: discoverProfiles,
+    });
 };

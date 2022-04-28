@@ -19,10 +19,12 @@ export const ProfileInfoBox = (props) => {
         >
             <View style={props.expanded ? styles.vertical : styles.horizontal}>
                 <View style={styles.horizontal}>
-                    {props.expanded ? (
+                    {props.expanded &&
+                    props.profile.pictureReferences &&
+                    props.profile.pictureReferences[0] ? (
                         <View style={styles.gallery}>
                             <ImageGallery
-                                imageRefs={props.profile.pictureReference}
+                                imageRefs={props.profile.pictureReferences}
                                 itemWidth={150}
                                 sliderWidth={SLIDER_WIDTH}
                                 height={100}
@@ -33,8 +35,9 @@ export const ProfileInfoBox = (props) => {
                     ) : (
                         <ProfilePicture
                             image={
-                                props.profile.pictureReference.length > 0
-                                    ? props.profile.pictureReference[0]
+                                props.profile.pictureReferences &&
+                                props.profile.pictureReferences.length > 0
+                                    ? props.profile.pictureReferences[0]
                                     : null
                             }
                             initials={initials}
@@ -72,19 +75,20 @@ export const ProfileInfoBox = (props) => {
 };
 
 export const Profiles = (props) => {
+    const profiles =
+        props.profiles && props.profiles.length > 0 ? props.profiles : [];
     const [expanded, setExpanded] = useState(null);
-    console.log(expanded);
     return (
         <>
-            {props.profiles.map((profile) => (
+            {profiles.map((profile) => (
                 <ProfileInfoBox
                     profile={profile}
-                    id={profile.id}
-                    key={profile.id}
+                    id={profile.profileId}
+                    key={profile.profileId}
                     onPress={(id) => {
                         setExpanded(expanded != id ? id : null);
                     }}
-                    expanded={expanded === profile.id}
+                    expanded={expanded === profile.profileId}
                 />
             ))}
         </>

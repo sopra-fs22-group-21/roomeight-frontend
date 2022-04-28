@@ -1,10 +1,8 @@
-import dateFormat from 'dateformat';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import DateInput from '../../../components/dateInput';
 import { InputBox } from '../../../components/input';
-import { NavigationButtons } from '../../../components/navigationButtons';
 import Tags from '../../../components/tags';
 import {
     Box,
@@ -15,17 +13,14 @@ import {
 } from '../../../components/theme';
 import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import en from '../../../resources/strings/en.json';
-import genders from '../../../resources/strings/genders';
 import styles from './styles';
 
 const CompleteSingleProfile = ({ navigation }) => {
     const [moveInDateValid, setmoveInDateValid] = useState(null);
-    const [gender, setGender] = useState(genders.notSet);
-    const [user, setUser] = useState(null);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { transitUserprofile } = useSelector((state) => state.transitState);
+    const [user, setUser] = useState(transitUserprofile);
     const dispatch = useDispatch();
-    let selectedTags = [];
     return (
         <Container
             onPressBack={() => navigation.goBack()}
@@ -36,11 +31,11 @@ const CompleteSingleProfile = ({ navigation }) => {
             nextDisabled={false}
         >
             <ScreenPadding>
-                <Heading>{en.completeSingleProfile.heading}</Heading>
-                <NormalText>{en.completeSingleProfile.info}</NormalText>
-                <Box />
                 <KeyboardAvoidingView style={styles.inner} behavior="position">
                     <ScrollView showsVerticalScrollIndicator={false}>
+                        <Heading>{en.completeSingleProfile.heading}</Heading>
+                        <NormalText>{en.completeSingleProfile.info}</NormalText>
+                        <Box />
                         <DateInput
                             label={en.completeSingleProfile.moveInDate}
                             valid={moveInDateValid}
@@ -52,10 +47,12 @@ const CompleteSingleProfile = ({ navigation }) => {
                                     });
                                 setmoveInDateValid(valid && date > new Date());
                             }}
-                            value={
+                            defaultDate={
                                 userprofile.moveInDate
-                                    ? userprofile.moveInDate
+                                    ? new Date(userprofile.moveInDate)
                                     : transitUserprofile.moveInDate
+                                    ? new Date(transitUserprofile.moveInDate)
+                                    : null
                             }
                         />
 
@@ -65,7 +62,8 @@ const CompleteSingleProfile = ({ navigation }) => {
                                     setUser({ ...user, tags: tags })
                                 }
                                 selected={
-                                    userprofile.tags
+                                    userprofile.tags &&
+                                    userprofile.tags.length > 0
                                         ? userprofile.tags
                                         : transitUserprofile.tags
                                 }

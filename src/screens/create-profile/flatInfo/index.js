@@ -1,15 +1,7 @@
-import dateFormat from 'dateformat';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
-import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
-import DateInput from '../../../components/dateInput';
-import {
-    Input,
-    InputBox,
-    InputLabel,
-    StyledTextInput,
-} from '../../../components/input';
-import { NavigationButtons } from '../../../components/navigationButtons';
+import { useDispatch, useSelector } from 'react-redux';
+import { Input, InputBox, StyledTextInput } from '../../../components/input';
 import Tags from '../../../components/tags';
 import {
     Box,
@@ -18,46 +10,37 @@ import {
     NormalText,
     ScreenPadding,
 } from '../../../components/theme';
+import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
-//TODO: backend, regex
-
 const FlatInfo = ({ navigation }) => {
-    const [user, setUser] = useState(null);
-    const [temporary, setTemporary] = useState(false);
-    const [permanent, setPermanent] = useState(false);
-    function changeToTemporary() {
-        setTemporary(true);
-        setPermanent(false);
-    }
-
-    function changeToPermanent() {
-        setTemporary(false);
-        setPermanent(true);
-    }
+    const { transitFlatprofile } = useSelector((state) => state.transitState);
+    const [flat, setFlat] = useState(transitFlatprofile);
+    const dispatch = useDispatch();
 
     return (
         <Container
+            navigation={navigation}
             onPressBack={() => navigation.goBack()}
-            onPressNext={() =>
-                navigation.navigate('CompletePersonalProfile', 'flat')
-            }
+            onPressNext={() => {
+                dispatch(setTransitAttributes(flat, 'flatprofile'));
+                navigation.navigate('AddPictures', 'flat');
+            }}
+            nextDisabled={!flat.biography}
         >
             <ScreenPadding style={styles.inner}>
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                    style={{ flex: 1 }}
-                >
-                    <KeyboardAvoidingView behavior="position">
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <KeyboardAvoidingView behavior="padding">
                         <Heading>{en.flatInfo.heading}</Heading>
                         <NormalText>{en.flatInfo.info}</NormalText>
                         <Box />
                         <InputBox label={en.flatInfo.tags}>
                             <Tags
+                                selected={flat.tags}
                                 onChange={(tags) =>
-                                    setUser({
-                                        ...user,
+                                    setFlat({
+                                        ...flat,
                                         tags: tags,
                                     })
                                 }
@@ -67,10 +50,11 @@ const FlatInfo = ({ navigation }) => {
                         <Input
                             label={en.flatInfo.biography}
                             multiline
+                            defaultValue={flat.biography}
                             placeholder={en.flatInfo.biographyPlaceholder}
                             onChangeText={(text) => {
-                                setUser({
-                                    ...user,
+                                setFlat({
+                                    ...flat,
                                     biography: text,
                                 });
                             }}
@@ -82,9 +66,10 @@ const FlatInfo = ({ navigation }) => {
                             <Box>
                                 <StyledTextInput
                                     multiline
+                                    defaultValue={flat.description}
                                     onChangeText={(text) =>
-                                        setDescription({
-                                            ...description,
+                                        setFlat({
+                                            ...flat,
                                             description: text,
                                         })
                                     }
