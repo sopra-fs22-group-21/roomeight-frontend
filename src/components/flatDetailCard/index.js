@@ -21,8 +21,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { SecondaryButton } from '../button';
 import { Icon } from 'react-native-elements';
-import colors from '../../resources/colors';
-import Geocoder from 'react-native-geocoding';
 import { AddressMap } from '../addressMap';
 import { setCurrentScreen } from 'firebase/analytics';
 import { Profiles } from '../profiles';

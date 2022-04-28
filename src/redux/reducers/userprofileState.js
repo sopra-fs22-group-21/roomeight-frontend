@@ -15,7 +15,6 @@ const initialState = {
 const userprofileState = (state = initialState, action) => {
     switch (action.type) {
         case Constants.GET_CURRENT_USER_SUCCESS:
-            console.log(action.payload);
             return {
                 ...state,
                 userprofile: action.payload,

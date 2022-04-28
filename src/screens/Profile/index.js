@@ -12,7 +12,6 @@ import AddFlatInProfile from '../../components/addFlatInProfile';
 
 const Profile = ({ navigation }) => {
     useEffect(() => {
-        console.log('render');
         dispatch(chatMemberShipListener());
     }, []);
 
@@ -96,7 +95,7 @@ export default Profile;
                     image={image}
                     //initials={getInitials()}
                     onPressSelect={async () => {
-                        const uri = await PickImage();
+                        const uri = await pickImage();
                         setImage(uri);
                     }}
                 />

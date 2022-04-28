@@ -17,9 +17,9 @@ import styles from './styles';
 
 const CompleteSingleProfile = ({ navigation }) => {
     const [moveInDateValid, setmoveInDateValid] = useState(null);
-    const [user, setUser] = useState(null);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { transitUserprofile } = useSelector((state) => state.transitState);
+    const [user, setUser] = useState(transitUserprofile);
     const dispatch = useDispatch();
     return (
         <Container
@@ -47,10 +47,12 @@ const CompleteSingleProfile = ({ navigation }) => {
                                     });
                                 setmoveInDateValid(valid && date > new Date());
                             }}
-                            value={
+                            defaultDate={
                                 userprofile.moveInDate
-                                    ? userprofile.moveInDate
+                                    ? new Date(userprofile.moveInDate)
                                     : transitUserprofile.moveInDate
+                                    ? new Date(transitUserprofile.moveInDate)
+                                    : null
                             }
                         />
 
@@ -60,7 +62,8 @@ const CompleteSingleProfile = ({ navigation }) => {
                                     setUser({ ...user, tags: tags })
                                 }
                                 selected={
-                                    userprofile.tags
+                                    userprofile.tags &&
+                                    userprofile.tags.length > 0
                                         ? userprofile.tags
                                         : transitUserprofile.tags
                                 }

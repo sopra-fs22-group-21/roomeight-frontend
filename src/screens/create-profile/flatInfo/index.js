@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
-import { useRef } from 'react';
-import {
-    Keyboard,
-    KeyboardAvoidingView,
-    ScrollView,
-    TouchableWithoutFeedback,
-} from 'react-native';
+import { KeyboardAvoidingView, ScrollView } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, InputBox, StyledTextInput } from '../../../components/input';
 import Tags from '../../../components/tags';
 import {
@@ -15,32 +10,37 @@ import {
     NormalText,
     ScreenPadding,
 } from '../../../components/theme';
+import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
-//TODO: backend, regex
-
 const FlatInfo = ({ navigation }) => {
-    const [user, setUser] = useState(null);
-    const descInput = useRef(null);
-    const bioInput = useRef(null);
+    const { transitFlatprofile } = useSelector((state) => state.transitState);
+    const [flat, setFlat] = useState(transitFlatprofile);
+    const dispatch = useDispatch();
 
     return (
         <Container
+            navigation={navigation}
             onPressBack={() => navigation.goBack()}
-            onPressNext={() => navigation.navigate('AddPictures', 'flat')}
+            onPressNext={() => {
+                dispatch(setTransitAttributes(flat, 'flatprofile'));
+                navigation.navigate('AddPictures', 'flat');
+            }}
+            nextDisabled={!flat.biography}
         >
             <ScreenPadding style={styles.inner}>
-                <KeyboardAvoidingView behavior="height">
-                    <ScrollView showsVerticalScrollIndicator={false}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <KeyboardAvoidingView behavior="padding">
                         <Heading>{en.flatInfo.heading}</Heading>
                         <NormalText>{en.flatInfo.info}</NormalText>
                         <Box />
                         <InputBox label={en.flatInfo.tags}>
                             <Tags
+                                selected={flat.tags}
                                 onChange={(tags) =>
-                                    setUser({
-                                        ...user,
+                                    setFlat({
+                                        ...flat,
                                         tags: tags,
                                     })
                                 }
@@ -50,11 +50,11 @@ const FlatInfo = ({ navigation }) => {
                         <Input
                             label={en.flatInfo.biography}
                             multiline
-                            ref={bioInput}
+                            defaultValue={flat.biography}
                             placeholder={en.flatInfo.biographyPlaceholder}
                             onChangeText={(text) => {
-                                setUser({
-                                    ...user,
+                                setFlat({
+                                    ...flat,
                                     biography: text,
                                 });
                             }}
@@ -62,14 +62,14 @@ const FlatInfo = ({ navigation }) => {
                         <InputBox
                             label={en.flatInfo.description}
                             style={styles.box}
-                            ref={descInput}
                         >
                             <Box>
                                 <StyledTextInput
                                     multiline
+                                    defaultValue={flat.description}
                                     onChangeText={(text) =>
-                                        setUser({
-                                            ...user,
+                                        setFlat({
+                                            ...flat,
                                             description: text,
                                         })
                                     }
@@ -79,8 +79,8 @@ const FlatInfo = ({ navigation }) => {
                                 ></StyledTextInput>
                             </Box>
                         </InputBox>
-                    </ScrollView>
-                </KeyboardAvoidingView>
+                    </KeyboardAvoidingView>
+                </ScrollView>
             </ScreenPadding>
         </Container>
     );

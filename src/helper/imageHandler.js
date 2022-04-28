@@ -1,8 +1,8 @@
 import * as ImagePicker from 'expo-image-picker';
-import { getDownloadURL, ref } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../../firebase/firebase-config';
 
-export const PickImage = async () => {
+export const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
@@ -22,4 +22,54 @@ export const PickImage = async () => {
 export const getDownloadUrl = async (pictureReferences) => {
     const reference = ref(storage, pictureReferences);
     return getDownloadURL(reference);
+};
+
+export const getAllDownloadUrsls = async (urls) => {
+    if (!urls) return Promise.resolve(null);
+    if (urls.length < 1) return Promise.resolve([]);
+    return Promise.all(
+        urls.map((uri) => {
+            if (!uri.includes('profiles')) return Promise.resolve(uri);
+            else return getDownloadUrl(uri);
+        })
+    );
+};
+
+export const uploadAll = async (uris, profileType, uid) => {
+    console.log('uploading images');
+    return getAllDownloadUrsls(uris).then((urls) => {
+        return Promise.all(
+            urls.map(async (url, index) => {
+                const count = index + 1;
+                return fetch(url)
+                    .then((response) => {
+                        console.log('fetched');
+                        return response.blob();
+                    })
+                    .then((blob) => {
+                        console.log('got blob');
+                        const refPath = `${profileType}s/${uid}/profilePicture${count}.jpg`;
+                        const storageRef = ref(storage, refPath);
+                        const metadata = {
+                            contentType: 'image/jpeg',
+                            customMetadata: {
+                                profileType: profileType,
+                                uploadedBy: uid,
+                                uploadedAt: Date.now().toLocaleString(),
+                            },
+                        };
+                        return uploadBytes(storageRef, blob, metadata);
+                    })
+                    .then((result) => {
+                        console.log('got result');
+                        return result.metadata.fullPath;
+                    })
+                    .catch((error) => {
+                        console.log('could not get result');
+                        console.log(error);
+                        return error;
+                    });
+            })
+        );
+    });
 };

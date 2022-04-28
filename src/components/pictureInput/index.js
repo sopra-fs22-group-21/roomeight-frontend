@@ -14,7 +14,7 @@ import styles from './styles';
  * @required variant!
  */
 
-const pictureInput = (props) => {
+const PictureInput = (props) => {
     const [image, setImage] = useState(null);
     const getImage = () => {
         if (!image && props.image && props.image.includes('profiles')) {
@@ -24,7 +24,6 @@ const pictureInput = (props) => {
         } else if (image && image != '') return image;
         else return props.image;
     };
-    console.log(getImage());
     switch (props.variant) {
         case 'profile':
             if (getImage()) {
@@ -110,4 +109,4 @@ const pictureInput = (props) => {
     }
 };
 
-export default pictureInput;
+export default PictureInput;

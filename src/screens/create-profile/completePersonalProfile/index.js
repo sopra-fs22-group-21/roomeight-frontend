@@ -11,27 +11,36 @@ import {
     NormalText,
     ScreenPadding,
 } from '../../../components/theme';
-import { PickImage } from '../../../helper/imageHandler';
+import { pickImage } from '../../../helper/imageHandler';
 import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import en from '../../../resources/strings/en.json';
 import genders from '../../../resources/strings/genders';
 import styles from './styles';
 
 const CompletePersonalProfile = ({ navigation, route }) => {
-    const [gender, setGender] = useState(genders.notSet);
     const [biography, setBiography] = useState(null);
     const [description, setDescription] = useState(null);
     const dispatch = useDispatch();
 
-    const navigate = route.params.includes('single')
-        ? () => navigation.navigate('AddPictures', route.params)
-        : () => navigation.navigate('Done', route.params);
-
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { transitUserprofile } = useSelector((state) => state.transitState);
-    const [image, setImage] = useState(
-        transitUserprofile.localpictureReferences
+    const [gender, setGender] = useState(
+        userprofile.gender != genders.notSet
+            ? userprofile.gender
+            : transitUserprofile.gender
+            ? transitUserprofile.gender
+            : genders.notSet
     );
+    const [image, setImage] = useState(
+        transitUserprofile.pictureReferences &&
+            transitUserprofile.pictureReferences.length > 0
+            ? transitUserprofile.pictureReferences[0]
+            : null
+    );
+
+    const navigate = route.params.includes('single')
+        ? () => navigation.navigate('AddPictures', 'single')
+        : () => navigation.navigate('Done', route.params);
 
     const getInitials = () => {
         let firstLetter = userprofile.firstName
@@ -45,7 +54,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
 
     const cache = () => {
         const attributes = {
-            localpictureReferences: image ? [image] : undefined,
+            pictureReferences: image ? [image] : [],
             gender: gender,
             ...biography,
             ...description,
@@ -65,22 +74,19 @@ const CompletePersonalProfile = ({ navigation, route }) => {
             nextDisabled={
                 route.params.includes('single') &&
                 ((!image &&
-                    !userprofile.pictureReferences &&
+                    userprofile.pictureReferences.length < 1 &&
                     !transitUserprofile.pictureReferences) ||
                     (!biography &&
                         !userprofile.biography &&
                         !transitUserprofile.biography) ||
-                    (!gender &&
-                        !userprofile.gender &&
-                        !transitUserprofile.gender))
+                    (gender == genders.notSet &&
+                        userprofile.gender == genders.notSet &&
+                        transitUserprofile.gender == genders.notSet))
             }
         >
-            <ScreenPadding>
+            <ScreenPadding style={styles.inner}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <KeyboardAvoidingView
-                        style={styles.inner}
-                        behavior="padding"
-                    >
+                    <KeyboardAvoidingView behavior="padding">
                         <Heading>{en.completePersonalProfile.heading}</Heading>
                         <NormalText>
                             {en.completePersonalProfile.info}
@@ -96,7 +102,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
                                 image={image}
                                 initials={getInitials()}
                                 onPressSelect={async () => {
-                                    const uri = await PickImage();
+                                    const uri = await pickImage();
                                     setImage(uri);
                                 }}
                             />
@@ -106,11 +112,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
                                 onChange={(g) => {
                                     setGender(g);
                                 }}
-                                defaultValue={
-                                    userprofile.gender
-                                        ? userprofile.gender
-                                        : transitUserprofile.gender
-                                }
+                                defaultValue={gender}
                             />
                         </InputBox>
                         <Input

@@ -76,7 +76,6 @@ export const ProfileInfoBox = (props) => {
 
 export const Profiles = (props) => {
     const [expanded, setExpanded] = useState(null);
-    console.log(expanded);
     return (
         <>
             {props.profiles.map((profile) => (

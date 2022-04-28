@@ -66,7 +66,6 @@ export const chatMemberShipListener = () => (dispatch, getState) => {
         type: Constants.CHAT_MEMBERSHIP_LISTENER_STARTED,
     });
     const uid = getState().authState.auth.uid;
-    console.log(uid);
     const chatReference = ref(database, `/memberships/${uid}`);
     return onChildAdded(chatReference, (snapshot) => {
         const chatId = snapshot.key;

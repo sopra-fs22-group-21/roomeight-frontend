@@ -1,4 +1,4 @@
-import { updateUserprofile } from '../../../redux/actions/updateUserprofile';
+import { updateProfile } from '../../../redux/actions/updateActions';
 import React, { useState } from 'react';
 import { colors } from 'react-native-elements';
 import Loader from 'react-native-modal-loader';
@@ -13,19 +13,26 @@ import {
     Title,
 } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
+import { postFlatprofile } from '../../../redux/actions/flatprofileActions';
 
 const Done = ({ navigation, route }) => {
     const dispatch = useDispatch();
+    const { userprofile } = useSelector((state) => state.userprofileState);
 
     const { loading } = useSelector((state) => state.loadingState);
-    const { transitUserprofile } = useSelector((state) => state.transitState);
+    const { transitUserprofile, transitFlatprofile } = useSelector(
+        (state) => state.transitState
+    );
 
     const updateSingleprofile = () => {
-        delete transitUserprofile.localpictureReferences;
-        dispatch(updateUserprofile(transitUserprofile));
+        dispatch(
+            updateProfile(
+                transitUserprofile,
+                'userprofile',
+                userprofile.profileId
+            )
+        );
     };
-
-    const updateFlatprofile = () => {};
 
     const joinFlat = () => {};
 
@@ -44,7 +51,10 @@ const Done = ({ navigation, route }) => {
                             if (route.params.includes('single'))
                                 updateSingleprofile();
                             else if (route.params.includes('join')) joinFlat();
-                            else updateFlatprofile();
+                            else {
+                                updateSingleprofile();
+                                dispatch(postFlatprofile(transitFlatprofile));
+                            }
                         }}
                     >
                         {en.done.start}

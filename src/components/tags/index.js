@@ -43,7 +43,7 @@ const Tags = (props) => {
                 <View style={styles.tagContainer}>
                     {getLeft(allTags).map((tag, i) => (
                         <TagElement
-                            key={tag.name}
+                            key={tag.name + i}
                             tag={tag}
                             onChange={
                                 props.onChange
@@ -58,7 +58,7 @@ const Tags = (props) => {
                 <View style={styles.tagContainer}>
                     {getRight(allTags).map((tag, i) => (
                         <TagElement
-                            key={tag.name}
+                            key={tag.name + i}
                             tag={tag}
                             onChange={
                                 props.onChange

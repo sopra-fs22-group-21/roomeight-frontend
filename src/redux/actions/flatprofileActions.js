@@ -1,6 +1,19 @@
 import apiClient from '../../helper/apiClient';
-import { loadImagesToProfile } from '../../helper/imageHandler';
 import * as Constants from '../constants';
+
+const postFlatprofileRequest = () => ({
+    type: Constants.POST_FLATPROFILE_REQUEST,
+});
+
+const postFlatprofileSuccess = (response) => ({
+    type: Constants.POST_FLATPROFILE_SUCCESS,
+    payload: response,
+});
+
+const postFlatprofileFailure = (error) => ({
+    type: Constants.POST_FLATPROFILE_FAILURE,
+    payload: error,
+});
 
 const getFlatprofileRequest = () => ({
     type: Constants.GET_FLATPROFILE_REQUEST,
@@ -71,4 +84,39 @@ export const getAllFlatProfiles = () => (dispatch) => {
             console.log(error);
             dispatch(getAllFlatprofilesFailure(error));
         });
+};
+
+/**
+ * sends a postRequest to backend api to create a Flat belonging to the user that makes the request
+ * @param {object} requestBody - the body of the postRequest
+ * @dispatches {@link postFlatprofileRequest} on post request start
+ * @dispatches {@link postFlatprofileSuccess} on post success with response payload
+ * @dispatches {@link postFlatprofileFailure} on post failure with error payload
+ */
+export const postFlatprofile = (requestBody) => (dispatch) => {
+    dispatch(postFlatprofileRequest());
+
+    dispatch({
+        type: Constants.LOADING_STATE,
+    });
+
+    uploadImages(requestBody.pictureReferences).then((urls) => {
+        if (urls) {
+            requestBody.pictureReferences = urls;
+        }
+        console.log('requestBody:');
+        console.log(requestBody);
+        apiClient()
+            .post('/flatprofiles', requestBody)
+            .then((response) => {
+                console.log(
+                    'postFlatprofileSuccess: ' + JSON.stringify(response.data)
+                );
+                dispatch(postFlatprofileSuccess(response.data));
+            })
+            .catch((error) => {
+                console.log('error post flatprofile');
+                dispatch(postFlatprofileFailure(error));
+            });
+    });
 };

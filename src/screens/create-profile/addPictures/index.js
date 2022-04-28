@@ -14,17 +14,25 @@ import {
     NormalText,
     ScreenPadding,
 } from '../../../components/theme';
-import { PickImage } from '../../../helper/imageHandler';
+import { pickImage } from '../../../helper/imageHandler';
 import { uploadImages } from '../../../redux/actions/imageActions';
+import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import en from '../../../resources/strings/en.json';
 
 const AddPictures = ({ navigation, route }) => {
-    const { transitUserprofile } = useSelector((state) => state.transitState);
+    const isFlat = route.params.includes('flat');
+    const profileType = isFlat ? 'flatprofile' : 'userprofile';
+    const { transitUserprofile, transitFlatprofile } = useSelector(
+        (state) => state.transitState
+    );
     const { loading } = useSelector((state) => state.loadingState);
 
-    console.log(transitUserprofile.localpictureReferences);
     const [images, setImages] = useState(
-        transitUserprofile.localpictureReferences
+        isFlat
+            ? transitFlatprofile.pictureReferences
+                ? transitFlatprofile.pictureReferences
+                : []
+            : transitUserprofile.pictureReferences
     );
 
     const dispatch = useDispatch();
@@ -36,10 +44,18 @@ const AddPictures = ({ navigation, route }) => {
     }
 
     async function addPicture(index) {
-        const uri = await PickImage();
+        const uri = await pickImage();
         let updated = [...images];
         updated[index] = uri;
         setImages(updated);
+        dispatch(
+            setTransitAttributes(
+                {
+                    pictureReferences: updated,
+                },
+                profileType
+            )
+        );
     }
 
     useEffect(async () => {
@@ -77,32 +93,21 @@ const AddPictures = ({ navigation, route }) => {
         <Container
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
-                if (images) {
-                    dispatch(
-                        uploadImages(
-                            images,
-                            route.params.includes('single')
-                                ? 'userprofile'
-                                : 'flatprofile'
-                        )
-                    );
-                }
-                if (route.params.includes('single'))
-                    navigation.navigate('Done', route.params);
-                else
+                if (isFlat)
                     navigation.navigate(
                         'CompletePersonalProfile',
                         route.params
                     );
+                else navigation.navigate('Done', 'single');
             }}
         >
             <Loader loading={loading} color={colors.secondary500} />
             <ScreenPadding>
                 <Heading>{en.addPictures.heading}</Heading>
                 <NormalText>
-                    {route.params.includes('single')
-                        ? en.addPictures.infoSingle
-                        : en.addPictures.infoFlat}
+                    {isFlat
+                        ? en.addPictures.infoFlat
+                        : en.addPictures.infoSingle}
                 </NormalText>
                 <Box />
 

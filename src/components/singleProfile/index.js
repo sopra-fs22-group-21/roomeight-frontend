@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { View, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryButton } from '../../components/button';
+import { PrimaryButton, SecondaryButton } from '../../components/button';
 
 import PictureInput from '../../components/pictureInput';
 import styles from './styles';
@@ -10,13 +10,13 @@ import { InputBox, Input } from '../../components/input';
 import en from '../../resources/strings/en.json';
 import Tags from '../../components/tags';
 import DateInput from '../../components/dateInput';
-import { getDownloadUrl, PickImage } from '../../helper/imageHandler';
-import { updateUserprofile } from '../../redux/actions/updateUserprofile';
+import { pickImage } from '../../helper/imageHandler';
+import { updateProfile } from '../../redux/actions/updateActions';
 import { PublicProfileCard } from '../publicProfileCard';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
-import { uploadImages } from '../../redux/actions/imageActions';
 import Carousel from 'react-native-snap-carousel/src/carousel/Carousel';
+import { Box } from '../theme';
 
 const SingleProfile = (props) => {
     const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const SingleProfile = (props) => {
     const [images, setImages] = useState(
         userprofile.pictureReferences
             ? userprofile.pictureReferences
-            : transitUserprofile.localpictureReferences
+            : transitUserprofile.pictureReferences
     );
 
     useEffect(() => {}, []);
@@ -49,7 +49,7 @@ const SingleProfile = (props) => {
     }
 
     async function addPicture(index) {
-        const uri = await PickImage();
+        const uri = await pickImage();
         let updated = [...images];
         updated[index] = uri;
         setImages(updated);
@@ -100,13 +100,12 @@ const SingleProfile = (props) => {
     ];
 
     if (!loading) {
-        console.log('loading: ' + loading);
-        console.log(userprofile);
     }
     if (editMode) {
         return (
             <View style={styles.container}>
                 <KeyboardAwareScrollView
+                    showsVerticalScrollIndicator={false}
                     style={styles.inner}
                     behavior="padding"
                 >
@@ -122,31 +121,12 @@ const SingleProfile = (props) => {
                             activeSlideAlignment="start"
                             useScrollView={true}
                         />
-                        {/* <FlatList
-                            data={pictureSelectors}
-                            keyExtractor={(item) => item.index}
-                            numColumns={4}
-                            columnWrapperStyle={{
-                                justifyContent: 'space-around',
-                                paddingBottom: 30,
-                            }}
-                            renderItem={({ item }) => (
-                                <PictureInput
-                                    variant="editprofile"
-                                    onPressDelete={() =>
-                                        deletePicture(item.index)
-                                    }
-                                    onPressSelect={() => addPicture(item.index)}
-                                    image={item.image}
-                                />
-                            )}
-                        /> */}
                     </View>
                     <View>
                         <DateInput
                             label={en.completeSingleProfile.moveInDate}
                             valid={moveInDateValid}
-                            defaultValue={userprofile.moveInDate}
+                            defaultDate={new Date(userprofile.moveInDate)}
                             onChange={(date, valid) => {
                                 if (valid)
                                     setUser({
@@ -191,22 +171,25 @@ const SingleProfile = (props) => {
                             }
                         />
                     </View>
-                    <PrimaryButton
-                        onPress={() => {
-                            setEditMode(false);
-                            if (images) {
-                                user.pictureReferences = images;
-                            }
-                            dispatch(updateUserprofile(user));
-
-                            /* console.log('putting');
-                            console.log(userprofile); */
-                            console.log(user);
-                        }}
-                    >
-                        Save
-                    </PrimaryButton>
                 </KeyboardAwareScrollView>
+                <Box />
+                <SecondaryButton
+                    onPress={() => {
+                        setEditMode(false);
+                        if (images) {
+                            user.pictureReferences = images;
+                        }
+                        dispatch(
+                            updateProfile(
+                                user,
+                                'userprofile',
+                                userprofile.profileId
+                            )
+                        );
+                    }}
+                >
+                    Save
+                </SecondaryButton>
             </View>
         );
     } else {

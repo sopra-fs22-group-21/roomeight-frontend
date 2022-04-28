@@ -26,6 +26,7 @@ import FlatInfo from '../../screens/create-profile/flatInfo';
 import Done from '../../screens/create-profile/done';
 import Settings from '../../screens/profile/settings';
 import genders from '../../resources/strings/genders';
+import CreateFlat from '../../screens/create-profile/createFlat';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -97,6 +98,11 @@ export default function Route() {
                 options={{ headerShown: false }}
             />
             <Stack.Screen
+                name="CreateFlat"
+                component={CreateFlat}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
                 name="RoomInfo"
                 component={RoomInfo}
                 options={{ headerShown: false }}
@@ -164,7 +170,10 @@ export default function Route() {
     function getUserStatus() {
         if (loggedIn) {
             //return incompleteComponents;
-            if (userprofile.gender != genders.notSet) {
+            if (
+                userprofile.gender != genders.notSet ||
+                userprofile.flatId != ''
+            ) {
                 return completeComponents;
             } else return incompleteComponents;
         }

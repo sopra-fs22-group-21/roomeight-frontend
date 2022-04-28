@@ -22,7 +22,7 @@ const Matches = ({ navigation }) => {
             <SmallHeading>Matches</SmallHeading>
             <Box />
             {Object.values(userprofile.matches).map((profile) => {
-                console.log(profile);
+                console.log('match: ' + profile.profileId);
                 if (profile.profileId)
                     return (
                         <ProfileInfoBox

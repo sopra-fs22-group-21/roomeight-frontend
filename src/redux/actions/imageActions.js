@@ -1,5 +1,6 @@
 import { ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase-config';
+import { uploadAll } from '../../helper/imageHandler';
 import * as Constants from '../constants';
 
 /**
@@ -42,60 +43,25 @@ export const uploadImageFailure = (error, profileType) =>
               payload: error,
           }
         : { type: Constants.UPLOAD_IMAGE_FAILURE_FLATPROFILE, payload: error };
-/**
- * Uploads an image to firebase and writes the download url to the redux store.
- *
- * @param {array} uriList the list of uri's of the images to upload
- * @param {string} profileType either "userprofile" or "flatprofile"
- * @todo what happens if downloadurl fails? picture should get deleted?
- * @todo better to store downloadurl or refrpath?
- */
-export const uploadImages =
-    (uriList, profileType) => async (dispatch, getState) => {
+
+//this is not dispatching because it is needed afterwards for update in profiles
+//returns a simple promise
+export const uploadImages = async (pictureReferences) => {
+    if (pictureReferences && pictureReferences.length > 0) {
         dispatch(uploadImageRequest(profileType));
-        let filteredList = uriList.filter((uri) => uri !== '');
-        let count = 0;
-        console.log(filteredList, count);
-        filteredList.forEach(async (uri) => {
-            count++;
-            const uid = getState().authState.auth.uid;
-            const refPath = `${profileType}s/${uid}/profilePicture${count}.jpg`;
-            const storageRef = ref(storage, refPath);
-
-            const response = await fetch(uri);
-            const blob = await response.blob();
-
-            const metadata = {
-                contentType: 'image/jpeg',
-                customMetadata: {
-                    profileType: profileType,
-                    uploadedBy: uid,
-                    uploadedAt: Date.now().toLocaleString(),
-                },
-            };
-
-            const uploadTask = uploadBytesResumable(storageRef, blob, metadata);
-
-            uploadTask.on('state_changed', {
-                complete: () => {
-                    console.log('upload complete!');
-                    dispatch(uploadImageSuccess(refPath, profileType));
-                },
-                error: (error) => {
-                    console.log(error);
-                    dispatch(uploadImageFailure(error, profileType));
-                },
+        return uploadAll(pictureReferences, profileType, profileId)
+            .then((urls) => {
+                dispatch(uploadImageSuccess(urls, profileType));
+                console.log(urls);
+                return urls;
+            })
+            .catch((error) => {
+                console.log('error uploading image');
+                console.log(error);
+                dispatch(uploadImageFailure(error, profileType));
+                return [];
             });
-        });
-    };
-
-export const setLocalPictureReferences = (references, profileType) =>
-    profileType === 'userprofile'
-        ? {
-              type: Constants.SET_LOCAL_PICTURE_REFERENCES_USER,
-              payload: references,
-          }
-        : {
-              type: Constants.SET_LOCAL_PICTURE_REFERENCES_FLAT,
-              payload: references,
-          };
+    } else {
+        return Promise.resolve(null);
+    }
+};
