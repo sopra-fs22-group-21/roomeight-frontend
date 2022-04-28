@@ -4,7 +4,7 @@ import Flatprofile from '../../models/Flatprofile';
 
 const initialState = {
     discoverProfiles: [],
-    loading: false,
+    loading: true,
 };
 
 //TODO: error handling -> really set to null on every success?
@@ -52,6 +52,12 @@ const userprofileState = (state = initialState, action) => {
                 ...state,
                 error: action.payload,
                 loading: false,
+            };
+
+        case Constants.UPDATE_DISCOVER_PROFILES:
+            return {
+                ...state,
+                discoverProfiles: action.payload,
             };
 
         default:

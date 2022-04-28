@@ -70,3 +70,10 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
             dispatch(postLikeUserFailure(error));
         });
 };
+
+export const updateDiscoverProfiles = (discoverProfiles) => (dispatch) => {
+    dispatch({
+        type: Constants.UPDATE_DISCOVER_PROFILES,
+        payload: discoverProfiles,
+    });
+};
