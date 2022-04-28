@@ -13,8 +13,6 @@ import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
 const ChooseStatus = ({ navigation }) => {
-    const dispatch = useDispatch();
-
     return (
         <Container showLogout>
             <Inner style={styles.inner}>
@@ -24,13 +22,6 @@ const ChooseStatus = ({ navigation }) => {
                 <Box />
                 <SecondaryButton
                     onPress={() => {
-                        dispatch(
-                            setTransitAttributes(
-                                { isSearchingRoom: true },
-                                'userprofile',
-                                { isSingleRoomie: true }
-                            )
-                        );
                         navigation.navigate('CompleteSingleProfile');
                     }}
                 >
@@ -39,13 +30,6 @@ const ChooseStatus = ({ navigation }) => {
                 <Box />
                 <SecondaryButton
                     onPress={() => {
-                        dispatch(
-                            setTransitAttributes(
-                                { isAdvertisingRoom: true },
-                                'userprofile',
-                                { isFlat: true }
-                            )
-                        );
                         navigation.navigate('CreateFlat');
                     }}
                 >
@@ -53,17 +37,7 @@ const ChooseStatus = ({ navigation }) => {
                 </SecondaryButton>
                 <Box />
 
-                <SecondaryButton
-                    onPress={() => {
-                        dispatch(
-                            setTransitAttributes(
-                                { isAdvertisingRoom: true },
-                                'userprofile',
-                                { joinsFlat: true }
-                            )
-                        );
-                    }}
-                >
+                <SecondaryButton onPress={() => {}}>
                     {en.chooseStatus.flat}
                 </SecondaryButton>
                 <Box />

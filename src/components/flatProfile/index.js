@@ -55,7 +55,7 @@ const FlatProfile = (props) => {
     }
 
     const selectedTags = tagIcons.filter((tag) =>
-        flatprofile.tags.includes(tag.name)
+        flatprofile.tags ? flatprofile.tags.includes(tag.name) : false
     );
 
     if (!loading) {

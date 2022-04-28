@@ -11,14 +11,15 @@ import { Icon } from 'react-native-elements/dist/icons/Icon';
 import AddFlatInProfile from '../../components/addFlatInProfile';
 
 const Profile = ({ navigation }) => {
+    const dispatch = useDispatch();
+    const { userprofile } = useSelector((state) => state.userprofileState);
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
+    const loading = useSelector((state) => state.loadingState);
+    const [index, setIndex] = useState(0);
+
     useEffect(() => {
         dispatch(chatMemberShipListener());
     }, []);
-
-    const dispatch = useDispatch();
-    const { userprofile } = useSelector((state) => state.userprofileState);
-    const loading = useSelector((state) => state.loadingState);
-    const [index, setIndex] = useState(0);
 
     if (!loading) {
         console.log('loading: ' + loading);
@@ -70,7 +71,7 @@ const Profile = ({ navigation }) => {
             <Box />
             {index === 0 ? (
                 <SingleProfile />
-            ) : userprofile.isAdvertisingRoom ? (
+            ) : flatprofile.profileId ? (
                 <FlatProfile />
             ) : (
                 <AddFlatInProfile />

@@ -14,6 +14,7 @@ import {
 } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
 import { postFlatprofile } from '../../../redux/actions/flatprofileActions';
+import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 
 const Done = ({ navigation, route }) => {
     const dispatch = useDispatch();

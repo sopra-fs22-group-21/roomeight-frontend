@@ -1,3 +1,4 @@
+import { updateProfile } from './updateActions';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 
@@ -99,24 +100,25 @@ export const postFlatprofile = (requestBody) => (dispatch) => {
     dispatch({
         type: Constants.LOADING_STATE,
     });
+    let references = requestBody.pictureReferences;
+    delete requestBody.pictureReferences;
 
-    uploadImages(requestBody.pictureReferences).then((urls) => {
-        if (urls) {
-            requestBody.pictureReferences = urls;
-        }
-        console.log('requestBody:');
-        console.log(requestBody);
-        apiClient()
-            .post('/flatprofiles', requestBody)
-            .then((response) => {
-                console.log(
-                    'postFlatprofileSuccess: ' + JSON.stringify(response.data)
-                );
-                dispatch(postFlatprofileSuccess(response.data));
-            })
-            .catch((error) => {
-                console.log('error post flatprofile');
-                dispatch(postFlatprofileFailure(error));
-            });
-    });
+    console.log('requestBody:');
+    console.log(requestBody);
+    apiClient()
+        .post('/flatprofiles', requestBody)
+        .then((response) => {
+            console.log(
+                'postFlatprofileSuccess: ' + JSON.stringify(response.data)
+            );
+            dispatch(postFlatprofileSuccess(response.data));
+            let update = { pictureReferences: references };
+            dispatch(
+                updateProfile(update, 'flatprofile', response.data.profileId)
+            );
+        })
+        .catch((error) => {
+            console.log('error post flatprofile');
+            dispatch(postFlatprofileFailure(error));
+        });
 };

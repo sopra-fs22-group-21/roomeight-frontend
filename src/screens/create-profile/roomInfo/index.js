@@ -59,7 +59,7 @@ const RoomInfo = ({ navigation }) => {
                 rentValid === false ||
                 roomSizeValid === false ||
                 nrBathroomsValid === false ||
-                (!flat.permanent && !flat.moveOutDate)
+                (flat.permanent === false && !flat.moveOutDate)
             }
         >
             <ScreenPadding style={styles.inner}>
@@ -72,14 +72,14 @@ const RoomInfo = ({ navigation }) => {
                             label={en.roomInfo.address}
                             error={addressValid === false}
                             defaultValue={flat.address}
-                            onChangeText={(text) =>
+                            onChangeText={(text) => {
                                 setFlat({
                                     ...flat,
                                     address: text,
-                                })
-                            }
+                                });
+                            }}
                         />
-                        {flat.address && flat.address != '' ? (
+                        {/*flat.address && flat.address != '' ? (
                             <>
                                 <View style={styles.map}>
                                     <AddressMap
@@ -90,7 +90,7 @@ const RoomInfo = ({ navigation }) => {
                                 </View>
                                 <Box />
                             </>
-                        ) : null}
+                        ) : null*/}
 
                         <DateInput
                             label={en.roomInfo.moveInDate}

@@ -171,7 +171,9 @@ export default function Route() {
         if (loggedIn) {
             //return incompleteComponents;
             if (
-                userprofile.gender != genders.notSet ||
+                (userprofile.gender != genders.notSet &&
+                    userprofile.isSearchingRoom &&
+                    !userprofile.isAdvertisingRoom) ||
                 userprofile.flatId != ''
             ) {
                 return completeComponents;
