@@ -32,7 +32,7 @@ export const FlatDetailCard = (props) => {
     const [current, setCurrent] = useState(0);
 
     const selectedTags = tagIcons.filter((tag) =>
-        flatprofile.tags.includes(tag.name)
+        flatprofile.tags ? flatprofile.tags.includes(tag.name) : false
     );
     const carousel = useRef(null);
 

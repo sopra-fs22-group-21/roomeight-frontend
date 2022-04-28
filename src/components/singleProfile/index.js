@@ -21,6 +21,7 @@ import { Box } from '../theme';
 const SingleProfile = (props) => {
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.loadingState);
+    const [pictureSelectors, setPictureSelectors] = useState([]);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const [moveInDateValid, setmoveInDateValid] = useState(
         userprofile.moveInDate
@@ -35,16 +36,12 @@ const SingleProfile = (props) => {
 
     const { transitUserprofile } = useSelector((state) => state.transitState);
     const [images, setImages] = useState(
-        userprofile.pictureReferences
-            ? userprofile.pictureReferences
-            : transitUserprofile.pictureReferences
+        userprofile.pictureReferences ? userprofile.pictureReferences : null
     );
-
-    useEffect(() => {}, []);
 
     function deletePicture(index) {
         let updated = [...images];
-        updated[index] = '';
+        updated[index] = undefined;
         setImages(updated);
     }
 
@@ -67,6 +64,27 @@ const SingleProfile = (props) => {
         }
     }, []);
 
+    useEffect(() => {
+        setPictureSelectors([
+            {
+                index: 0,
+                image: images ? images[0] : null,
+            },
+            {
+                index: 1,
+                image: images ? images[1] : null,
+            },
+            {
+                index: 2,
+                image: images ? images[2] : null,
+            },
+            {
+                index: 3,
+                image: images ? images[3] : null,
+            },
+        ]);
+    }, [images]);
+
     const Img = ({ item, index }) => {
         return (
             <View style={styles.imageSlider} key={index}>
@@ -80,28 +98,10 @@ const SingleProfile = (props) => {
         );
     };
 
-    const pictureSelectors = [
-        {
-            index: 0,
-            image: images ? images[0] : null,
-        },
-        {
-            index: 1,
-            image: images ? images[1] : null,
-        },
-        {
-            index: 2,
-            image: images ? images[2] : null,
-        },
-        {
-            index: 3,
-            image: images ? images[3] : null,
-        },
-    ];
-
     if (!loading) {
     }
     if (editMode) {
+        console.log(pictureSelectors);
         return (
             <View style={styles.container}>
                 <KeyboardAwareScrollView
@@ -126,7 +126,11 @@ const SingleProfile = (props) => {
                         <DateInput
                             label={en.completeSingleProfile.moveInDate}
                             valid={moveInDateValid}
-                            defaultDate={new Date(userprofile.moveInDate)}
+                            defaultDate={
+                                userprofile.moveInDate
+                                    ? new Date(userprofile.moveInDate)
+                                    : null
+                            }
                             onChange={(date, valid) => {
                                 if (valid)
                                     setUser({
@@ -179,6 +183,7 @@ const SingleProfile = (props) => {
                         if (images) {
                             user.pictureReferences = images;
                         }
+                        console.log(user);
                         dispatch(
                             updateProfile(
                                 user,
