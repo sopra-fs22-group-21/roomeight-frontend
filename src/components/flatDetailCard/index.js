@@ -31,9 +31,10 @@ export const FlatDetailCard = (props) => {
     const flatprofile = props.flatprofile;
     const [current, setCurrent] = useState(0);
 
-    const selectedTags = tagIcons.filter((tag) =>
-        flatprofile.tags ? flatprofile.tags.includes(tag.name) : false
-    );
+    const selectedTags = flatprofile.tags
+        ? tagIcons.filter((tag) => flatprofile.tags.includes(tag.name))
+        : [];
+
     const carousel = useRef(null);
 
     const firstPage = (
@@ -70,13 +71,13 @@ export const FlatDetailCard = (props) => {
                         </NormalText>
                     </View>
                 ) : null}
-                {flatprofile.tags.length > 0 ? (
-                    <View style={{ flex: 1 }}>
-                        <Box />
-                        <Strong>{en.discover.tags}</Strong>
-                        <Tags tags={selectedTags} style={styles.tags} />
-                    </View>
-                ) : null}
+                {/*  {flatprofile.tags.length > 0 ? ( */}
+                <View style={{ flex: 1 }}>
+                    <Box />
+                    <Strong>{en.discover.tags}</Strong>
+                    <Tags tags={selectedTags} style={styles.tags} />
+                </View>
+                {/* ) : null} */}
             </View>
         </DoubleTap>
     );
