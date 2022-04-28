@@ -19,16 +19,17 @@ const Chat = ({ navigation }) => {
     return (
         <Container navigation={navigation} showNavBar>
             <SmallHeading>Chat</SmallHeading>
-            {/*
             <CreateNewChat />
-            {chats && chats!=null(
-                <FlatList
-                    data={Object.keys(chats)}
-                    removeClippedSubviews
-                    renderItem={renderItem}
-                    keyExtractor={(index) => index}
-                />
-            )}
+            {chats &&
+                chats !=
+                    null(
+                        <FlatList
+                            data={Object.keys(chats)}
+                            removeClippedSubviews
+                            renderItem={renderItem}
+                            keyExtractor={(index) => index}
+                        />
+                    )}
             {!chats && <Heading size="xl">No chats yet</Heading>}
             <Button
                 onPress={() => {
@@ -39,7 +40,6 @@ const Chat = ({ navigation }) => {
                     );
                 }}
             />
-            */}
         </Container>
     );
 };
