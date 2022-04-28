@@ -4,24 +4,32 @@ import {
     Center,
     FlatList,
     Heading,
-    useDisclose,
     Text,
+    useDisclose,
 } from 'native-base';
 import { useDispatch, useSelector } from 'react-redux';
 import { createChat } from '../../redux/actions/chatActions';
+import en from '../../resources/strings/en.json';
 import { CreateNewChatButton } from '../button';
 import { ProfileInfoBox } from '../profiles';
-import en from '../../resources/strings/en.json';
 
 function filterExisting(chats, matches) {
-    let existing = [];
-    Object.values(chats).forEach((chat) => {
-        existing = [...existing, ...Object.keys(chat.members)];
-    });
-    let filtered = Object.values(matches).filter((match) => {
-        return !existing.includes(match.profileId);
-    });
-    return filtered;
+    if(!matches){return []}
+    else if (!chats) {
+        return Object.values(matches);
+    } else {
+        let existing = [];
+        Object.values(chats).forEach((chat) => {
+            existing = [...existing, ...Object.keys(chat.members)];
+        });
+        console.log(existing)
+        let filtered = Object.values(matches).filter((match) => {
+            console.log(match.profileId)
+            return !existing.includes(match.profileId);
+        });
+        if(!filtered.length){return [""]}
+        return filtered;
+    }
 }
 
 const CreateNewChat = (props) => {
@@ -45,7 +53,11 @@ const CreateNewChat = (props) => {
 
     const renderItem = ({ item }) => {
         if (!item) {
-            return <Text>{en.matches.noNewMatches}</Text>;
+            return (
+            <Center>
+                <Heading paddingTop={"50%"}>{en.matches.noNewMatches}</Heading>
+            </Center>
+            );
         }
 
         return (
@@ -54,6 +66,7 @@ const CreateNewChat = (props) => {
                 id={item.profileId}
                 onPress={(id) => {
                     dispatch(createChat(id));
+                    onClose();
                 }}
             />
         );
@@ -68,17 +81,13 @@ const CreateNewChat = (props) => {
                         <Heading>{en.matches.heading}</Heading>
                         <Center w="100%" h="100%">
                             {!matches && (
-                                <Heading marginTop={500}>
+                                <Heading marginTop={"100%"}>
                                     {en.matches.noMatches}
                                 </Heading>
                             )}
                             <Box w="100%" h="100%">
                                 <FlatList
-                                    data={
-                                        matches
-                                            ? filterExisting(chats, matches)
-                                            : []
-                                    }
+                                    data={filterExisting(chats, matches)}
                                     renderItem={renderItem}
                                     keyExtractor={(index) => index}
                                 />

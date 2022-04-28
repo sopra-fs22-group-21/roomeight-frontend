@@ -142,7 +142,7 @@
     "chat": {
         "heading": "Chat",
         "noChats": "You haven't started\nany chats yet...",
-        "startedChat": "started a chat with you"
+        "startedChat": "started a chat with all of you"
     },
     "errors": {
         "userAlreadyExists": "A user with this email already exists. Try logging in or choosing a different email address.",

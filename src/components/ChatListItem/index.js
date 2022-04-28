@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { getDownloadURL } from 'firebase/storage';
 import {
     Avatar,
     Box,
@@ -8,16 +9,19 @@ import {
     Text,
     VStack,
 } from 'native-base';
-import { View } from 'react-native';
+import { useSelector } from 'react-redux';
+import { getDownloadUrl } from '../../helper/imageHandler';
 
 const ChatListItem = ({ chat }) => {
     const navigation = useNavigation();
+    const { isSearching } = useSelector(
+        (state) => state.userprofileState.userprofile
+    );
+
 
     return (
         <Pressable
-            onPress={() =>
-                navigation.navigate('ChatRoom', { chatId: chat._id })
-            }
+            onPress={() => navigation.navigate('ChatRoom', { chatInfo: chat })}
         >
             <Box
                 borderBottomWidth="1"
@@ -44,16 +48,18 @@ const ChatListItem = ({ chat }) => {
                             color="coolGray.800"
                             bold
                         >
-                            {chat.title}
+                            {isSearching
+                                ? chat.title.forUser
+                                : chat.title.forFlat}
                         </Text>
-                        <Text
+                        {chat.lastSender && <Text
                             color="coolGray.600"
                             _dark={{
                                 color: 'warmGray.200',
                             }}
                         >
                             {chat.lastSender}
-                        </Text>
+                        </Text>}
                         <Text
                             color="coolGray.600"
                             _dark={{
@@ -76,17 +82,6 @@ const ChatListItem = ({ chat }) => {
                     </Text>
                 </HStack>
             </Box>
-        </Pressable>
-    );
-
-    return (
-        <Pressable onPress={() => navigation.navigate('chatSingle')}>
-            <Avatar source={{ uri: 'https://picsum.photos/200/300' }} />
-
-            <View>
-                <Text>{chat.title}</Text>
-                <Text>{chat.lastMessage}</Text>
-            </View>
         </Pressable>
     );
 };
