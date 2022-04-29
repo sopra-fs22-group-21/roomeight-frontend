@@ -10,7 +10,12 @@ import { View } from 'react-native';
 const AddFlatInProfile = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <PrimaryButton /* onPress={() => navigation.navigate('RoomInfo')} */
+            <PrimaryButton
+            /* onPress={() =>
+                    navigation.navigate('incompleteComponents', {
+                        screen: 'RoomInfo',
+                    })
+                } */
             >
                 Create a flat
             </PrimaryButton>

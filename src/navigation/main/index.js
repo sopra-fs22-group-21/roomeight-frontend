@@ -28,6 +28,7 @@ import Settings from '../../screens/profile/settings';
 import AccessExistingFlatProfile from '../../screens/create-profile/accessExistingFlatProfile';
 import genders from '../../resources/strings/genders';
 import CreateFlat from '../../screens/create-profile/createFlat';
+import AddFlatInProfile from '../../components/addFlatInProfile';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -170,6 +171,11 @@ export default function Route() {
                 options={{ headerShown: false, animationEnabled: false }}
             />
             <Stack.Screen name="Chat" component={Chat} options={mainOptions} />
+            <Stack.Screen
+                name="AddFlatInProfile"
+                component={AddFlatInProfile}
+                options={mainOptions}
+            />
         </>
     );
 

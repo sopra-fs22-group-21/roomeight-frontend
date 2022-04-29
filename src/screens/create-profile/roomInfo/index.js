@@ -26,6 +26,7 @@ const RoomInfo = ({ navigation }) => {
     const [flat, setFlat] = useState(transitFlatprofile);
     const [roomSizeValid, setRoomSizeValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
+    const [nrRoommatesValid, setNrRoommatessValid] = useState(null);
     const dispatch = useDispatch();
 
     function changeToTemporary() {
@@ -182,6 +183,17 @@ const RoomInfo = ({ navigation }) => {
                                 setFlat({
                                     ...flat,
                                     roomSize: Number(text),
+                                });
+                            }}
+                        />
+                        <Input
+                            label={en.flatInfo.nrRoommates}
+                            keyboardType="number-pad"
+                            onChangeText={(text) => {
+                                setNrRoommatessValid(!isNaN(Number(text)));
+                                setFlat({
+                                    ...flat,
+                                    nrRoommates: Number(text),
                                 });
                             }}
                         />

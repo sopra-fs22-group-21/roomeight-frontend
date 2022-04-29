@@ -12,6 +12,7 @@ import en from '../../resources/strings/en.json';
 import Tags from '../../components/tags';
 import DateInput from '../../components/dateInput';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
+import { updateProfile } from '../../redux/actions/updateActions';
 import dateFormat from 'dateformat';
 import { PublicProfileCard } from '../publicProfileCard';
 import Constants from 'expo-constants';
@@ -33,7 +34,7 @@ const FlatProfile = (props) => {
     const [addressValid, setAddressValid] = useState(true);
     const [rentValid, setRentValid] = useState(null);
     const [roomSizeValid, setRoomSizeValid] = useState(null);
-    const [nrRoommates, setNrRoommates] = useState(null);
+    const [nrRoommatesValid, setNrRoommatesValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
     let selectedTagsFlat = [];
     const [editMode, setEditMode] = useState(false);
@@ -159,8 +160,9 @@ const FlatProfile = (props) => {
                         />
                         <DateInput
                             label={en.roomInfo.moveInDate}
+                            valid={moveInDateValid}
                             defaultDate={
-                                flat.moveInDate
+                                flatprofile.moveInDate
                                     ? new Date(flatprofile.moveInDate)
                                     : null
                             }
@@ -168,7 +170,7 @@ const FlatProfile = (props) => {
                                 if (valid)
                                     setFlat({
                                         ...flat,
-                                        moveInDate: date.toJSON(),
+                                        moveInDate: date,
                                     });
                                 setmoveInDateValid(valid && date > new Date());
                             }}
@@ -183,7 +185,7 @@ const FlatProfile = (props) => {
                                 checkedIcon="dot-circle-o"
                                 uncheckedIcon="circle-o"
                                 color="#0E7490"
-                                checked={!flatprofile.permanent}
+                                checked={!flat.permanent}
                                 onPress={() => changeToTemporary()}
                             ></CheckBox>
                             <CheckBox
@@ -194,11 +196,11 @@ const FlatProfile = (props) => {
                                 checkedIcon="dot-circle-o"
                                 uncheckedIcon="circle-o"
                                 color="#0E7490"
-                                checked={flatprofile.permanent}
+                                checked={flat.permanent}
                                 onPress={() => changeToPermanent()}
                             ></CheckBox>
                         </Box>
-                        {!flatprofile.permanent ? (
+                        {!flat.permanent ? (
                             <DateInput
                                 label={en.roomInfo.moveOutDate}
                                 error={moveOutDateValid === false}
@@ -262,19 +264,26 @@ const FlatProfile = (props) => {
                         <Input
                             label={en.flatInfo.nrRoommates}
                             keyboardType="number-pad"
-                            onChangeText={(text) => setNrRoommates(text)}
+                            error={nrRoommatesValid === false}
+                            defaultValue={flatprofile.numberOfRoommates}
+                            onChangeText={(text) => {
+                                setNrRoommatesValid(!isNaN(Number(text)));
+                                setFlat({
+                                    ...flat,
+                                    numberOfRoommates: Number(text),
+                                });
+                            }}
                         />
                         <Input
                             label={en.roomInfo.nrBathrooms}
                             keyboardType="number-pad"
-                            placeholder="1"
                             error={nrBathroomsValid === false}
-                            defaultValue={flatprofile.nrBathrooms}
+                            defaultValue={flatprofile.numberOfBaths}
                             onChangeText={(text) => {
                                 setNrBathroomsValid(!isNaN(Number(text)));
                                 setFlat({
                                     ...flat,
-                                    nrBathrooms: Number(text),
+                                    numberOfBaths: Number(text),
                                 });
                             }}
                         />
@@ -294,8 +303,10 @@ const FlatProfile = (props) => {
                             onPress={() => {
                                 setEditMode(false);
                                 if (images) {
-                                    flat.pictureReferences = images;
+                                    flatprofile.pictureReferences = images;
                                 }
+                                console.log(flatprofile);
+                                console.log(flat);
                                 dispatch(
                                     updateProfile(
                                         flat,
