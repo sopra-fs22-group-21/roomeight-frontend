@@ -6,7 +6,7 @@ export const DoubleTap = (props) => {
 
     const handlePress = () => {
         const delta = new Date().getTime() - last;
-        if (delta < props.delay) {
+        if (delta < props.delay && props.doubleTap) {
             props.doubleTap();
         }
         setLast(new Date().getTime());

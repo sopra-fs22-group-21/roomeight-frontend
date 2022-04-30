@@ -2,11 +2,12 @@ import { StyleSheet } from 'react-native';
 import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     row: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        paddingBottom: 20,
     },
     name: {
         alignSelf: 'center',
+        position: 'absolute',
+        paddingBottom: 20,
     },
     column: {
         width: '50%',
@@ -20,14 +21,14 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 14,
-        marginBottom: 0,
+        marginBottom: 4,
     },
     title: {
         paddingBottom: 4,
         marginTop: 0,
     },
     imageContainer: {
-        height: '100%',
+        flex: 1,
     },
     image: {
         borderRadius: 20,
@@ -81,8 +82,8 @@ const styles = StyleSheet.create({
     icon: {
         right: 0,
         top: 0,
-        width: '100%',
-        alignContent: 'flex-end',
+        position: 'absolute',
+        color: colors.secondary400,
     },
 });
 
