@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'space-evenly',
     },
-    biocontainer: {
+    profileContainer: {
         flex: 1,
         paddingTop: 0,
         paddingBottom: 10,
@@ -85,6 +85,13 @@ const styles = StyleSheet.create({
     icon: {
         alignSelf: 'flex-end',
         paddingRight: 5,
+    },
+    name: {
+        fontFamily: 'SourceSans3Bold',
+        fontSize: 18,
+        lineHeight: 20,
+        color: '#404040',
+        alignSelf: 'center',
     },
 });
 export default styles;

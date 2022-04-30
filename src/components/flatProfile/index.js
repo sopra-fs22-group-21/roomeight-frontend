@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
 import { View, Dimensions } from 'react-native';
-import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
 import tagIcons from '../../resources/icons/tagIcons';
@@ -302,27 +301,28 @@ const FlatProfile = (props) => {
                                 })
                             }
                         />
-                        <PrimaryButton
-                            onPress={() => {
-                                setEditMode(false);
-                                if (images) {
-                                    flatprofile.pictureReferences = images;
-                                }
-                                console.log(flatprofile);
-                                console.log(flat);
-                                dispatch(
-                                    updateProfile(
-                                        flat,
-                                        'flatprofile',
-                                        flatprofile.profileId
-                                    )
-                                );
-                            }}
-                        >
-                            Save
-                        </PrimaryButton>
                     </View>
                 </KeyboardAwareScrollView>
+                <Box style={styles.space}></Box>
+                <PrimaryButton
+                    onPress={() => {
+                        setEditMode(false);
+                        if (images) {
+                            flatprofile.pictureReferences = images;
+                        }
+                        console.log(flatprofile);
+                        console.log(flat);
+                        dispatch(
+                            updateProfile(
+                                flat,
+                                'flatprofile',
+                                flatprofile.profileId
+                            )
+                        );
+                    }}
+                >
+                    Save
+                </PrimaryButton>
             </View>
         );
     } else {

@@ -176,7 +176,7 @@ const SingleProfile = (props) => {
                     </View>
                 </KeyboardAwareScrollView>
                 <Box />
-                <SecondaryButton
+                <PrimaryButton
                     onPress={() => {
                         setEditMode(false);
                         if (images) {
@@ -192,7 +192,7 @@ const SingleProfile = (props) => {
                     }}
                 >
                     Save
-                </SecondaryButton>
+                </PrimaryButton>
             </View>
         );
     } else {

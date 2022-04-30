@@ -3,9 +3,10 @@ import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     name: {
-        alignItems: 'center',
+        alignSelf: 'center',
     },
     column: {
         width: '50%',
@@ -71,10 +72,17 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     editbutton: {
-        marginTop: 20,
+        position: 'absolute',
+        width: '90%',
         bottom: 0,
+        textAlign: 'center',
+        alignSelf: 'center',
+    },
+    icon: {
+        right: 0,
+        top: 0,
+        width: '100%',
         alignContent: 'flex-end',
-        padding: 0,
     },
 });
 

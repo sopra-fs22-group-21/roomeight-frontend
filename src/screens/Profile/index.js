@@ -17,17 +17,13 @@ const Profile = ({ navigation }) => {
     const loading = useSelector((state) => state.loadingState);
     const [index, setIndex] = useState(0);
 
-    useEffect(() => {
-        dispatch(chatMemberShipListener());
-    }, []);
-
     if (!loading) {
         console.log('loading: ' + loading);
         console.log(userprofile);
     }
     return (
         <Container
-            style={styles.biocontainer}
+            style={styles.profileContainer}
             navigation={navigation}
             showNavBar
         >
@@ -40,7 +36,9 @@ const Profile = ({ navigation }) => {
                     color={'black'}
                 />
             </Pressable>
-            <Name>{userprofile.firstName + ' ' + userprofile.lastName}</Name>
+            <Text style={styles.name}>
+                {userprofile.firstName + ' ' + userprofile.lastName}
+            </Text>
             <Tab
                 value={index}
                 onChange={(e) => {
@@ -82,27 +80,3 @@ const Profile = ({ navigation }) => {
 };
 
 export default Profile;
-
-//This was a overview of the profile, that we decided to delete
-{
-    /* <Box style={styles.overview}>
-                <PictureInput
-                    style={styles.image}
-                    onPressDelete={() => {
-                        setImage('');
-                    }}
-                    variant="profile"
-                    image={image}
-                    //initials={getInitials()}
-                    onPressSelect={async () => {
-                        const uri = await pickImage();
-                        setImage(uri);
-                    }}
-                />
-                <Container style={styles.bio}>
-                    <Text style={styles.text} multiline>
-                        {userprofile.biography}
-                    </Text>
-                </Container>
-            </Box> */
-}

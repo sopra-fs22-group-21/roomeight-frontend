@@ -4,15 +4,17 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
     },
-    column: {
-        width: '50%',
-    },
     column1: {
         paddingRight: 10,
+        width: '45%',
     },
     column2: {
         paddingLeft: 10,
         paddingTop: 10,
+        width: '45%',
+    },
+    column3: {
+        width: '10%',
     },
     card: {
         flex: 1,
@@ -32,10 +34,15 @@ const styles = StyleSheet.create({
         marginTop: 0,
     },
     editbutton: {
-        marginTop: 20,
+        position: 'absolute',
+        width: '90%',
         bottom: 0,
-        alignContent: 'flex-end',
-        padding: 0,
+        textAlign: 'center',
+        alignSelf: 'center',
+    },
+    icon: {
+        right: 0,
+        width: '100%',
     },
     /* messageButton: {
         position: 'absolute',

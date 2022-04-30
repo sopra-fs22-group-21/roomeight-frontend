@@ -113,9 +113,27 @@ export const FlatDetailCard = (props) => {
     return (
         <PinkBackground>
             <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
-                <View style={styles.name}>
-                    <Title>{flatprofile.name}</Title>
-                </View>
+                {props.onClickEdit ? (
+                    <View style={styles.row}>
+                        <Box />
+                        <View style={styles.name}>
+                            <Title>{flatprofile.name}</Title>
+                        </View>
+                        <Pressable onPress={props.onClickEdit}>
+                            <Icon
+                                style={styles.icon}
+                                name="edit"
+                                type="feather"
+                                size={20}
+                                color={'black'}
+                            />
+                        </Pressable>
+                    </View>
+                ) : (
+                    <View style={styles.name}>
+                        <Title>{flatprofile.name}</Title>
+                    </View>
+                )}
             </DoubleTap>
             <Carousel
                 ref={carousel}
@@ -139,14 +157,7 @@ export const FlatDetailCard = (props) => {
                     </SecondaryButton>
                 </View>
             ) : null}
-            {props.onClickEdit ? (
-                <SecondaryButton
-                    style={styles.editbutton}
-                    onPress={props.onClickEdit}
-                >
-                    Edit Profile
-                </SecondaryButton>
-            ) : null}
+
             <Pagination
                 dotsLength={3}
                 activeDotIndex={current}
