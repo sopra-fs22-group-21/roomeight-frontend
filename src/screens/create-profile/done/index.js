@@ -26,6 +26,7 @@ const Done = ({ navigation, route }) => {
     );
 
     const updateSingleprofile = () => {
+        dispatch(setTransitAttributes({ isComplete: true }, 'userprofile'));
         dispatch(
             updateProfile(
                 transitUserprofile,

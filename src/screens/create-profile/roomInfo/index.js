@@ -80,7 +80,7 @@ const RoomInfo = ({ navigation }) => {
                                 });
                             }}
                         />
-                        {/*flat.address && flat.address != '' ? (
+                        {flat.address && flat.address != '' ? (
                             <>
                                 <View style={styles.map}>
                                     <AddressMap
@@ -91,7 +91,7 @@ const RoomInfo = ({ navigation }) => {
                                 </View>
                                 <Box />
                             </>
-                        ) : null*/}
+                        ) : null}
 
                         <DateInput
                             label={en.roomInfo.moveInDate}

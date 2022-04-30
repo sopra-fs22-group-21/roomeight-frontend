@@ -20,7 +20,7 @@ const ChatListItem = ({ chat }) => {
 
     return (
         <Pressable
-            onPress={() => navigation.navigate('ChatRoom', { chatInfo: chat })}
+            onPress={() => navigation.navigate('Chatroom', { chatInfo: chat })}
         >
             <Box
                 borderBottomWidth="1"

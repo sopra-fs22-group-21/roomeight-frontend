@@ -26,7 +26,7 @@ export const AddressMap = (props) => {
         }
     }, [props.address]);
 
-    return null; /*
+    return (
         <>
             <MapView
                 style={{ width: '100%', height: '100%' }}
@@ -48,5 +48,5 @@ export const AddressMap = (props) => {
                 ) : null}
             </MapView>
         </>
-    ); */
+    );
 };
