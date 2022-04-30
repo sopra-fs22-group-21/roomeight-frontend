@@ -33,7 +33,7 @@ export const pickImage = async () => {
  * @returns 
  */
 export async function getImageSource(pictureReference) {
-    if(!pictureReference) return null;
+    if (!pictureReference) return null;
     if (!pictureReference.includes('pic-')) {
         return { uri: pictureReference };
     } else {
