@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Gender from '../../../components/gender';
 import { Input, InputBox, StyledTextInput } from '../../../components/input';
 import PictureInput from '../../../components/pictureInput';
+import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
     Container,
@@ -32,8 +33,11 @@ const CompletePersonalProfile = ({ navigation, route }) => {
             : genders.notSet
     );
     const [image, setImage] = useState(
-        transitUserprofile.pictureReferences &&
-            transitUserprofile.pictureReferences.length > 0
+        userprofile.pictureReferences &&
+            userprofile.pictureReferences.length > 0
+            ? userprofile.pictureReferences[0]
+            : transitUserprofile.pictureReferences &&
+              transitUserprofile.pictureReferences.length > 0
             ? transitUserprofile.pictureReferences[0]
             : null
     );
@@ -62,7 +66,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
         dispatch(setTransitAttributes(attributes, 'userprofile'));
     };
     return (
-        <Container
+        <ScreenContainer
             onPressBack={() => {
                 cache();
                 navigation.goBack();
@@ -74,7 +78,8 @@ const CompletePersonalProfile = ({ navigation, route }) => {
             nextDisabled={
                 route.params.includes('single') &&
                 ((!image &&
-                    userprofile.pictureReferences.length < 1 &&
+                    (!userprofile.pictureReferences ||
+                        userprofile.pictureReferences.length < 1) &&
                     !transitUserprofile.pictureReferences) ||
                     (!biography &&
                         !userprofile.biography &&
@@ -161,7 +166,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
                     </KeyboardAvoidingView>
                 </ScrollView>
             </ScreenPadding>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default CompletePersonalProfile;

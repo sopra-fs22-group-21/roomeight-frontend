@@ -95,7 +95,7 @@ const tagIcons = [
         isSelected: false,
     },
     {
-        name: 'peaceful',
+        name: 'PEACEFUL',
         label: 'peaceful',
         icon: 'self-improvement',
         type: 'material',

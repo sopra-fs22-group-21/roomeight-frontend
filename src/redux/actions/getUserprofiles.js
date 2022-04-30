@@ -1,7 +1,7 @@
 import { auth } from '../../../firebase/firebase-config';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
-import { getAllFlatProfiles, getFlatprofile } from './flatprofileActions';
+import { getAllFlatProfiles, getFlatprofile } from './getFlatprofiles';
 
 const getCurrentUserprofileRequest = (request) => ({
     type: Constants.GET_CURRENT_USER_REQUEST,

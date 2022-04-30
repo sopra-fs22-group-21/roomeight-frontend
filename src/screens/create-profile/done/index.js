@@ -6,15 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
 import {
     Box,
-    Container,
     Heading,
     Inner,
     ScreenPadding,
     Title,
 } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
-import { postFlatprofile } from '../../../redux/actions/flatprofileActions';
+import { postFlatprofile } from '../../../redux/actions/postFlatprofile';
 import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const Done = ({ navigation, route }) => {
     const dispatch = useDispatch();
@@ -26,7 +26,6 @@ const Done = ({ navigation, route }) => {
     );
 
     const updateSingleprofile = () => {
-        dispatch(setTransitAttributes({ isComplete: true }, 'userprofile'));
         dispatch(
             updateProfile(
                 transitUserprofile,
@@ -39,7 +38,7 @@ const Done = ({ navigation, route }) => {
     const joinFlat = () => {};
 
     return (
-        <Container onPressBack={() => navigation.goBack()}>
+        <ScreenContainer onPressBack={() => navigation.goBack()}>
             <Loader loading={loading} color={colors.secondary500} />
             <ScreenPadding>
                 <Inner>
@@ -57,13 +56,14 @@ const Done = ({ navigation, route }) => {
                                 updateSingleprofile();
                                 dispatch(postFlatprofile(transitFlatprofile));
                             }
+                            navigation.navigate('Discover');
                         }}
                     >
                         {en.done.start}
                     </PrimaryButton>
                 </Inner>
             </ScreenPadding>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default Done;

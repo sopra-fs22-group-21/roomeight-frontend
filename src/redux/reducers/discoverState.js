@@ -4,7 +4,7 @@ import Flatprofile from '../../models/Flatprofile';
 
 const initialState = {
     discoverProfiles: [],
-    loading: true,
+    loading: false,
 };
 
 //TODO: error handling -> really set to null on every success?

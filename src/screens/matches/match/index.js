@@ -9,11 +9,12 @@ import {
 import { PublicProfileCard } from '../../../components/publicProfileCard';
 import { View } from 'react-native-animatable';
 import en from '../../../resources/strings/en.json';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const Match = ({ route, navigation }) => {
     const { profile } = route.params;
     return (
-        <Container showNavBar navigation={navigation}>
+        <ScreenContainer showNavBar navigation={navigation}>
             <SmallHeadingWithBack navigation={navigation}>
                 {en.matches.heading}
             </SmallHeadingWithBack>
@@ -27,7 +28,7 @@ const Match = ({ route, navigation }) => {
                     }
                 />
             </View>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default Match;

@@ -44,7 +44,8 @@ export default function Route() {
         if (!userprofile) return createScreens(loadingScreens);
         if (!userprofile.isComplete) return createScreens(incompleteScreens);
         if (userprofile.flatId != '') return createScreens(homeScreens);
-        else return createScreens(homeScreens.concat(createFlatScreens));
+        if (userprofile)
+            return createScreens(homeScreens.concat(createFlatScreens));
     };
 
     return (

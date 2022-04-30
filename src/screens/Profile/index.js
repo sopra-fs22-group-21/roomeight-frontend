@@ -9,6 +9,8 @@ import SingleProfile from '../../components/singleProfile';
 import FlatProfile from '../../components/flatProfile';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import AddFlatInProfile from '../../components/addFlatInProfile';
+import { ScreenContainer } from '../../components/screenContainer';
+import { View } from 'react-native-animatable';
 
 const Profile = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -22,23 +24,24 @@ const Profile = ({ navigation }) => {
         console.log(userprofile);
     }
     return (
-        <Container
-            style={styles.profileContainer}
-            navigation={navigation}
-            showNavBar
-        >
-            <Pressable onPress={() => navigation.navigate('Settings')}>
-                <Icon
+        <ScreenContainer navigation={navigation} showNavBar>
+            <View>
+                <Text style={styles.name}>
+                    {userprofile.firstName + ' ' + userprofile.lastName}
+                </Text>
+
+                <Pressable
+                    onPress={() => navigation.navigate('Settings')}
                     style={styles.icon}
-                    name="settings"
-                    type="feather"
-                    size={24}
-                    color={'black'}
-                />
-            </Pressable>
-            <Text style={styles.name}>
-                {userprofile.firstName + ' ' + userprofile.lastName}
-            </Text>
+                >
+                    <Icon
+                        name="settings"
+                        type="feather"
+                        size={24}
+                        color={'black'}
+                    />
+                </Pressable>
+            </View>
             <Tab
                 value={index}
                 onChange={(e) => {
@@ -75,7 +78,7 @@ const Profile = ({ navigation }) => {
                 <AddFlatInProfile navigation={navigation} />
             )}
             <Box />
-        </Container>
+        </ScreenContainer>
     );
 };
 

@@ -1,13 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../redux/actions/authActions';
-import { PrimaryButton } from '../button';
-import NavBar from '../navbar';
-import { NavigationButtons } from '../navigationButtons';
 import styles from './styles';
 
 export const Heading = (props) => {
@@ -58,40 +51,6 @@ export const Padding = (props) => (
     <View style={{ ...styles.padding, ...props.style }}>{props.children}</View>
 );
 
-export const Container = (props) => {
-    const dispatch = useDispatch();
-    return (
-        <SafeAreaProvider>
-            <SafeAreaView style={{ height: '100%' }}>
-                <View
-                    {...props}
-                    style={{ ...styles.container, ...props.style }}
-                >
-                    {props.children}
-                    {props.showLogout ? (
-                        <PrimaryButton onPress={() => dispatch(logoutUser())}>
-                            Logout
-                        </PrimaryButton>
-                    ) : null}
-
-                    {props.onPressBack || props.onPressNext ? (
-                        <View style={styles.navigationButtons}>
-                            <NavigationButtons
-                                onPressBack={props.onPressBack}
-                                onPressNext={props.onPressNext}
-                                nextDisabled={props.nextDisabled}
-                            />
-                        </View>
-                    ) : null}
-                </View>
-
-                {props.showNavBar ? (
-                    <NavBar navigation={props.navigation} />
-                ) : null}
-            </SafeAreaView>
-        </SafeAreaProvider>
-    );
-};
 export const Inner = (props) => (
     <View style={styles.inner} {...props}>
         {props.children}

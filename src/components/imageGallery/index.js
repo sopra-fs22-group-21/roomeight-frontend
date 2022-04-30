@@ -1,4 +1,4 @@
-import { React, useRef, useState } from 'react';
+import { React, useRef } from 'react';
 import { View, Image } from 'react-native';
 import styles from './styles';
 import Carousel from 'react-native-snap-carousel';

@@ -1,6 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { ITEM_WIDTH, SLIDER_WIDTH } from '.';
-import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     container: {
         borderRadius: 20,

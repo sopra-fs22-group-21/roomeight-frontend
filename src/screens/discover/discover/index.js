@@ -25,6 +25,7 @@ import {
     postLikeUser,
     updateDiscoverProfiles,
 } from '../../../redux/actions/discoverActions';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const ITEM_HEIGHT = Dimensions.get('window').height - 230;
 
@@ -96,7 +97,7 @@ const Discover = ({ navigation }) => {
     };
 
     return (
-        <Container navigation={navigation} showNavBar>
+        <ScreenContainer navigation={navigation} showNavBar>
             <SmallHeading>Discover</SmallHeading>
             <Box />
             <Carousel
@@ -110,7 +111,7 @@ const Discover = ({ navigation }) => {
                 vertical
                 onSnapToItem={(index) => removeProfile(index - 1)}
             />
-        </Container>
+        </ScreenContainer>
     );
 };
 

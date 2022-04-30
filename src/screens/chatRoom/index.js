@@ -54,7 +54,7 @@ export const Chatroom = ({ route, navigation }) => {
         );
     }
     return (
-        <Container>
+        <ScreenContainer>
             <SmallHeadingWithBack
                 onPress={() => {
                     navigation.navigate('Match', {
@@ -79,7 +79,7 @@ export const Chatroom = ({ route, navigation }) => {
                 alwaysShowSend
                 showUserAvatar
             />
-        </Container>
+        </ScreenContainer>
     );
 };
 

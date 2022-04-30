@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    Container,
-    Heading,
-    TextBlock,
-    Title,
-    Box,
-    SemiBold,
-} from '../../../components/theme';
+import { Title, Box, SemiBold } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
 import { NavigationButtons } from '../../../components/navigationButtons';
-import { PrimaryButton, SecondaryButton } from '../../../components/button';
-import getCurrentUserprofile from '../../../redux/actions/getUserprofiles';
+import { SecondaryButton } from '../../../components/button';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const AccessExistingFlatProfile = ({ navigation, route }) => {
     const dispatch = useDispatch();
@@ -28,7 +21,7 @@ const AccessExistingFlatProfile = ({ navigation, route }) => {
     };
 
     return (
-        <Container>
+        <ScreenContainer>
             <Box style={styles.box}>
                 <Title style={styles.text}>{en.accessExisting.heading}</Title>
                 {partOfFlat ? (
@@ -61,7 +54,7 @@ const AccessExistingFlatProfile = ({ navigation, route }) => {
                 }}
                 /* nextDisabled={partOfFlat() != true} */
             />
-        </Container>
+        </ScreenContainer>
     );
 };
 export default AccessExistingFlatProfile;

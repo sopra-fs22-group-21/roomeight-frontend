@@ -6,6 +6,8 @@ import { firebaseConfig } from './firebase/firebase-config';
 import Route from './src/navigation/main';
 import reduxStore from './src/redux/reduxStore.js';
 import Geocoder from 'react-native-geocoding';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import colors from './src/resources/colors';
 
 export default function App() {
     Geocoder.init(firebaseConfig.apiKey);
@@ -32,9 +34,10 @@ export default function App() {
 
     return (
         <NativeBaseProvider>
-            <Provider store={reduxStore}>
-                <Route />
-            </Provider>
+
+                    <Provider store={reduxStore}>
+                        <Route />
+                    </Provider>
         </NativeBaseProvider>
     );
 }

@@ -1,7 +1,7 @@
 import { useRoute } from '@react-navigation/native';
 import { React } from 'react';
 import { FontAwesome, Ionicons } from 'react-native-vector-icons';
-import { Box, Container } from '../theme';
+import { Box } from '../theme';
 import styles from './styles';
 import { NavigationContainer } from '@react-navigation/native';
 import colors from '../../resources/colors';
@@ -51,15 +51,15 @@ const NavBar = ({ navigation }, props) => {
             </Pressable>
             <Pressable onPress={() => navigation.navigate('Matches')}>
                 {matchesIcon}
-                {route === 'Matches' ? active : null}
+                {route.includes('Match') ? active : null}
             </Pressable>
             <Pressable onPress={() => navigation.navigate('Chat')}>
                 {chatIcon}
-                {route === 'Chat' ? active : null}
+                {route.includes('Chat') ? active : null}
             </Pressable>
             <Pressable onPress={() => navigation.navigate('Profile')}>
                 {profileIcon}
-                {route === 'Profile' ? active : null}
+                {route.includes('Profile') ? active : null}
             </Pressable>
         </View>
     );

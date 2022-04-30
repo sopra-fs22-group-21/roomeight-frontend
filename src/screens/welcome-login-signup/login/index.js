@@ -16,6 +16,7 @@ import en from '../../../resources/strings/en.json';
 import Loader from 'react-native-modal-loader';
 import styles from './styles';
 import colors from '../../../resources/colors';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Login = ({ navigation }) => {
     const { loading } = useSelector((state) => state.loadingState);
 
     return (
-        <Container onPressBack={() => navigation.goBack()}>
+        <ScreenContainer onPressBack={() => navigation.goBack()}>
             <Loader loading={loading} color={colors.secondary500} />
             <ScreenPadding>
                 <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
@@ -72,7 +73,7 @@ const Login = ({ navigation }) => {
                     </PrimaryButton>
                 </KeyboardAwareScrollView>
             </ScreenPadding>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default Login;

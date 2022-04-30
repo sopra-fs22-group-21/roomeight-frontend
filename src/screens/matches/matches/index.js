@@ -3,22 +3,17 @@ import { Text } from 'react-native';
 import { ImageCard } from '../../../components/imageCard';
 import { LikeButton } from '../../../components/likeButtons';
 import { ProfileInfoBox } from '../../../components/profiles';
-import {
-    Box,
-    Container,
-    Inner,
-    ScreenPadding,
-    SmallHeading,
-} from '../../../components/theme';
+import { Box, SmallHeading } from '../../../components/theme';
 import { PublicProfileCard } from '../../../components/publicProfileCard';
 import { useSelector } from 'react-redux';
 import apiClient from '../../../helper/apiClient';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const Matches = ({ navigation }) => {
     const { matches } = useSelector((state) => state.matchesState);
 
     return (
-        <Container navigation={navigation} showNavBar>
+        <ScreenContainer navigation={navigation} showNavBar>
             <SmallHeading>Matches</SmallHeading>
             <Box />
             {Object.values(matches).map((profile, index) => {
@@ -37,7 +32,7 @@ const Matches = ({ navigation }) => {
                         />
                     );
             })}
-        </Container>
+        </ScreenContainer>
     );
 };
 export default Matches;
