@@ -88,17 +88,15 @@ export const SingleDetailCard = (props) => {
                 {userprofile.tags.length > 0 ? (
                     <Tags tags={selectedTags} style={styles.tags} />
                 ) : null}
-                {props.onClickEdit ? (
-                    <Box style={styles.editbutton}>
-                        <SecondaryButton
-                            style={styles.messageButton}
-                            onPress={props.onClickEdit}
-                        >
-                            Edit Profile
-                        </SecondaryButton>
-                    </Box>
-                ) : null}
                 <Box />
+                {props.onClickEdit ? (
+                    <SecondaryButton
+                        style={styles.editbutton}
+                        onPress={props.onClickEdit}
+                    >
+                        Edit Profile
+                    </SecondaryButton>
+                ) : null}
             </DoubleTap>
         </PinkBackground>
     );

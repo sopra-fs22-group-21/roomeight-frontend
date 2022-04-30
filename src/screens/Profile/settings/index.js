@@ -16,7 +16,6 @@ import styles from './styles';
 import { NavigationButtons } from '../../../components/navigationButtons';
 
 const Settings = ({ navigation }) => {
-    const dispatch = useDispatch();
     return (
         <Container showLogout>
             <Heading>{en.settings.heading}</Heading>
