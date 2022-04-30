@@ -108,6 +108,11 @@
         "biography": "Biography",
         "biographyPlaceholder": "That's your flat in one sentence"
     },
+    "addRoomie": {
+        "heading": "Add a room8 to your flat",
+        "info": "Type in the email of your room8 to allow him access to the app.",
+        "email": "Email"
+    },
     "accessExisting": {
         "heading": "Would you like to join a flat that already exists?",
         "failure": "Please contact the roomie who has set up the flat profile to add you with your email.",

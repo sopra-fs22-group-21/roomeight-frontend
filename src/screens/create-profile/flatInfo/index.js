@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { SecondaryButton } from '../../../components/button';
 import { Input, InputBox, StyledTextInput } from '../../../components/input';
 import Tags from '../../../components/tags';
 import {
@@ -24,8 +25,9 @@ const FlatInfo = ({ navigation }) => {
             navigation={navigation}
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
+                //hier post?
                 dispatch(setTransitAttributes(flat, 'flatprofile'));
-                navigation.navigate('AddPictures', 'flat');
+                navigation.navigate('AddRoomie');
             }}
             nextDisabled={!flat.biography}
         >
