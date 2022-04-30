@@ -7,7 +7,6 @@ import { Input } from '../../../components/input';
 import { NavigationButtons } from '../../../components/navigationButtons';
 import {
     Box,
-    Container,
     Heading,
     ScreenPadding,
     TextBlock,
@@ -18,6 +17,7 @@ import en from '../../../resources/strings/en.json';
 import Loader from 'react-native-modal-loader';
 import styles from './styles';
 import colors from '../../../resources/colors';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const Signup = ({ navigation }) => {
     const [user, setUser] = useState({});
@@ -177,7 +177,7 @@ const Signup = ({ navigation }) => {
     );
 
     return (
-        <Container>
+        <ScreenContainer>
             <ScreenPadding>
                 <Loader loading={loading} color={colors.secondary500} />
                 <KeyboardAvoidingView behavior="position">
@@ -217,7 +217,7 @@ const Signup = ({ navigation }) => {
                     />
                 )}
             </ScreenPadding>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default Signup;

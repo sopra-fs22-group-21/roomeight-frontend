@@ -3,7 +3,7 @@ import { View, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
 import tagIcons from '../../resources/icons/tagIcons';
-import { Container, Name, Screen, Heading, Title, Box } from '../theme';
+import { Name, Screen, Heading, Title, Box } from '../theme';
 import styles from './styles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { InputBox, InputLabel, Input } from '../../components/input';

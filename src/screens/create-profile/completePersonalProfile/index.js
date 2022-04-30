@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Gender from '../../../components/gender';
 import { Input, InputBox, StyledTextInput } from '../../../components/input';
 import PictureInput from '../../../components/pictureInput';
+import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
     Container,
@@ -65,7 +66,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
         dispatch(setTransitAttributes(attributes, 'userprofile'));
     };
     return (
-        <Container
+        <ScreenContainer
             onPressBack={() => {
                 cache();
                 navigation.goBack();
@@ -165,7 +166,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
                     </KeyboardAvoidingView>
                 </ScrollView>
             </ScreenPadding>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default CompletePersonalProfile;

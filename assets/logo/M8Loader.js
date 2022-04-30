@@ -1,9 +1,9 @@
 import { Image } from 'react-native';
-import { Container } from '../../src/components/theme';
+import { ScreenContainer } from '../../src/components/screenContainer';
 
 const M8Loader = (props) => {
     return (
-        <Container>
+        <ScreenContainer>
             <Image
                 source={require('./m8Loader30.gif')}
                 style={{
@@ -13,7 +13,7 @@ const M8Loader = (props) => {
                     alignItems: 'center',
                 }}
             />
-        </Container>
+       </ScreenContainer>
     );
 };
 

@@ -14,6 +14,7 @@ import { pickImage } from '../../../helper/imageHandler';
 import PictureInput from '../../../components/pictureInput';
 import { ScrollView } from 'react-native-gesture-handler';
 import { KeyboardAvoidingView } from 'react-native';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const CreateFlat = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const CreateFlat = ({ navigation }) => {
     const [flat, setFlat] = useState(transitFlatprofile);
 
     return (
-        <Container
+        <ScreenContainer
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
                 dispatch(setTransitAttributes(flat, 'flatprofiles'));
@@ -78,7 +79,7 @@ const CreateFlat = ({ navigation }) => {
                     </KeyboardAvoidingView>
                 </ScrollView>
             </ScreenPadding>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default CreateFlat;

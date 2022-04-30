@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, InputBox, StyledTextInput } from '../../../components/input';
+import { ScreenContainer } from '../../../components/screenContainer';
 import Tags from '../../../components/tags';
 import {
     Box,
@@ -20,7 +21,7 @@ const FlatInfo = ({ navigation }) => {
     const dispatch = useDispatch();
 
     return (
-        <Container
+        <ScreenContainer
             navigation={navigation}
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
@@ -82,7 +83,7 @@ const FlatInfo = ({ navigation }) => {
                     </KeyboardAvoidingView>
                 </ScrollView>
             </ScreenPadding>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default FlatInfo;

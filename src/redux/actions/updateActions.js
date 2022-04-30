@@ -1,15 +1,7 @@
-import { useSelector } from 'react-redux';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
-import { auth } from '../../../firebase/firebase-config';
 import { getCurrentUserprofile } from './getUserprofiles';
-import {
-    uploadImageFailure,
-    uploadImageRequest,
-    uploadImageSuccess,
-} from './imageActions';
-import { uploadAll } from '../../helper/imageHandler';
-import { getFlatprofile } from './flatprofileActions';
+import { getFlatprofile } from './getFlatprofiles';
 import { uploadImages } from './imageActions';
 
 const updateProfileRequest = (profileType) => ({

@@ -7,6 +7,7 @@ import { colors } from 'react-native-elements';
 import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
 import PictureInput from '../../../components/pictureInput';
+import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
     Container,
@@ -90,7 +91,7 @@ const AddPictures = ({ navigation, route }) => {
     ];
 
     return (
-        <Container
+        <ScreenContainer
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
                 if (isFlat)
@@ -131,7 +132,7 @@ const AddPictures = ({ navigation, route }) => {
                     />
                 </View>
             </ScreenPadding>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default AddPictures;

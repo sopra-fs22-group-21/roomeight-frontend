@@ -1,20 +1,15 @@
 import React from 'react';
 import { SecondaryButton } from '../../../components/button';
-import {
-    Box,
-    Container,
-    Heading,
-    Inner,
-    TextBlock,
-} from '../../../components/theme';
+import { Box, Heading, Inner, TextBlock } from '../../../components/theme';
 import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import { useDispatch } from 'react-redux';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const ChooseStatus = ({ navigation }) => {
     return (
-        <Container showLogout>
+        <ScreenContainer showLogout>
             <Inner style={styles.inner}>
                 <Heading>{en.chooseStatus.heading}</Heading>
                 <Box />
@@ -46,7 +41,7 @@ const ChooseStatus = ({ navigation }) => {
                 </SecondaryButton>
                 <Box />
             </Inner>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default ChooseStatus;

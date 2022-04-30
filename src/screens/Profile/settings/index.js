@@ -4,23 +4,24 @@ import { useDispatch } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
 import { Input } from '../../../components/input';
 import {
-    Container,
     Heading,
-    TextBlock,
-    Title,
-    Box,
+    Inner,
+    SmallHeadingWithBack,
 } from '../../../components/theme';
 import { loginUser } from '../../../redux/actions/authActions';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
 import { NavigationButtons } from '../../../components/navigationButtons';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const Settings = ({ navigation }) => {
     return (
-        <Container showLogout>
-            <Heading>{en.settings.heading}</Heading>
-            <NavigationButtons onPressBack={() => navigation.goBack()} />
-        </Container>
+        <ScreenContainer showLogout>
+            <SmallHeadingWithBack navigation={navigation}>
+                {en.settings.heading}
+            </SmallHeadingWithBack>
+            <Inner />
+        </ScreenContainer>
     );
 };
 export default Settings;

@@ -5,30 +5,12 @@ const styles = StyleSheet.create({
     overview: {
         backgroundColor: colors.secondary100,
         padding: 5,
-        marginTop: 0,
         marginBottom: 10,
         justifyContent: 'flex-start',
         alignContent: 'center',
         borderRadius: 5,
         flexDirection: 'row',
         height: 100,
-    },
-
-    bio: {
-        padding: 10,
-        marginTop: 5,
-        marginBottom: 5,
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-evenly',
-    },
-    profileContainer: {
-        flex: 1,
-        paddingTop: 0,
-        paddingBottom: 10,
-        marginTop: 10,
-        marginBottom: 0,
-        height: '100%',
     },
 
     text: {
@@ -83,14 +65,15 @@ const styles = StyleSheet.create({
         borderColor: 'transparent',
     },
     icon: {
-        alignSelf: 'flex-end',
+        position: 'absolute',
+        right: 0,
+        top: 0,
         paddingRight: 5,
     },
     name: {
         fontFamily: 'SourceSans3Bold',
-        fontSize: 18,
-        lineHeight: 20,
-        color: '#404040',
+        fontSize: 20,
+        lineHeight: 28,
         alignSelf: 'center',
     },
 });

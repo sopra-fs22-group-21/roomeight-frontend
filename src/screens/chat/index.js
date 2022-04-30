@@ -3,7 +3,8 @@ import React from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ChatListItem from '../../components/ChatListItem';
 import CreateNewChat from '../../components/createNewChat';
-import { Container, SmallHeading } from '../../components/theme';
+import { ScreenContainer } from '../../components/screenContainer';
+import { SmallHeading } from '../../components/theme';
 import en from '../../resources/strings/en.json';
 
 const Chat = ({ navigation }) => {
@@ -19,7 +20,7 @@ const Chat = ({ navigation }) => {
     };
 
     return (
-        <Container navigation={navigation} showNavBar>
+        <ScreenContainer navigation={navigation} showNavBar>
             <HStack>
                 <SmallHeading>{en.chat.heading}</SmallHeading>
                 <Spacer />
@@ -40,7 +41,7 @@ const Chat = ({ navigation }) => {
                     </SmallHeading>
                 </Center>
             )}
-        </Container>
+        </ScreenContainer>
     );
 };
 export default Chat;

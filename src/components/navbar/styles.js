@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         height: 60,
         backgroundColor: colors.primary700,
-        opacity: 0.7,
+        overflow: 'hidden',
+        //transform: [{translateY: 10}]
     },
     view: {
         padding: 0,

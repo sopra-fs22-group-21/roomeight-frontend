@@ -45,7 +45,7 @@ const RoomInfo = ({ navigation }) => {
     }
 
     return (
-        <Container
+        <ScreenContainer
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
                 dispatch(setTransitAttributes(flat, 'flatprofile'));
@@ -214,7 +214,7 @@ const RoomInfo = ({ navigation }) => {
                     </ScrollView>
                 </KeyboardAvoidingView>
             </ScreenPadding>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default RoomInfo;
