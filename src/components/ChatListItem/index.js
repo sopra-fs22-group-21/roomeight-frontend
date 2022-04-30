@@ -30,7 +30,7 @@ const ChatListItem = ({ chat }) => {
                 pr="5"
                 py="2"
             >
-                <HStack space={3} justifyContent="space-between">
+                <HStack space={1} justifyContent="space-between">
                     <Avatar
                         size="48px"
                         source={{
@@ -69,7 +69,7 @@ const ChatListItem = ({ chat }) => {
                         </Text>
                     </VStack>
                     <Text
-                        marginLeft={'-10%'}
+                        marginLeft={"25%"}
                         fontSize="xs"
                         _dark={{
                             color: 'warmGray.50',

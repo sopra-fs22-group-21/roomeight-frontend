@@ -69,7 +69,7 @@ export const chatMemberShipListener = () => (dispatch, getState) => {
     const chatReference = ref(database, `/memberships/${uid}`);
     return onChildAdded(chatReference, (snapshot) => {
         const chatId = snapshot.key;
-        console.log(chatId);
+        console.log('chatid:', chatId);
         if (snapshot.exists()) {
             dispatch(chatMembershipChange(chatId));
             dispatch(chatInfoListener(chatId));
