@@ -19,7 +19,11 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 14,
+        marginBottom: 0,
+    },
+    title: {
         paddingBottom: 4,
+        marginTop: 0,
     },
     imageContainer: {
         height: '100%',
@@ -68,8 +72,9 @@ const styles = StyleSheet.create({
     },
     editbutton: {
         marginTop: 20,
-        marginBottom: 5,
+        bottom: 0,
         alignContent: 'flex-end',
+        padding: 0,
     },
 });
 

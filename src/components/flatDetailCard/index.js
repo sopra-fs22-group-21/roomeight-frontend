@@ -31,9 +31,10 @@ export const FlatDetailCard = (props) => {
     const flatprofile = props.flatprofile;
     const [current, setCurrent] = useState(0);
 
-    const selectedTags = tagIcons.filter((tag) =>
-        flatprofile.tags ? flatprofile.tags.includes(tag.name) : false
-    );
+    const selectedTags = flatprofile.tags
+        ? tagIcons.filter((tag) => flatprofile.tags.includes(tag.name))
+        : [];
+
     const carousel = useRef(null);
 
     const firstPage = (
@@ -52,16 +53,6 @@ export const FlatDetailCard = (props) => {
                         />
                     </Pressable>
                 </View>
-                {flatprofile.description ? (
-                    <View style={{ flex: 1 }}>
-                        <Box />
-                        <Strong>{en.discover.description}</Strong>
-                        <NormalText style={styles.text}>
-                            {flatprofile.description}
-                        </NormalText>
-                    </View>
-                ) : null}
-
                 {flatprofile.biography ? (
                     <View style={{ flex: 1 }}>
                         <Box />
@@ -70,9 +61,20 @@ export const FlatDetailCard = (props) => {
                         </NormalText>
                     </View>
                 ) : null}
+
+                {flatprofile.description ? (
+                    <View style={{ flex: 1 }}>
+                        <Strong style={styles.title}>
+                            {en.discover.description}
+                        </Strong>
+                        <NormalText style={styles.text}>
+                            {flatprofile.description}
+                        </NormalText>
+                    </View>
+                ) : null}
+
                 {flatprofile.tags.length > 0 ? (
                     <View style={{ flex: 1 }}>
-                        <Box />
                         <Strong>{en.discover.tags}</Strong>
                         <Tags tags={selectedTags} style={styles.tags} />
                     </View>
@@ -138,14 +140,12 @@ export const FlatDetailCard = (props) => {
                 </View>
             ) : null}
             {props.onClickEdit ? (
-                <Box style={styles.editbutton}>
-                    <SecondaryButton
-                        style={styles.messageButton}
-                        onPress={props.onClickEdit}
-                    >
-                        Edit Profile
-                    </SecondaryButton>
-                </Box>
+                <SecondaryButton
+                    style={styles.editbutton}
+                    onPress={props.onClickEdit}
+                >
+                    Edit Profile
+                </SecondaryButton>
             ) : null}
             <Pagination
                 dotsLength={3}

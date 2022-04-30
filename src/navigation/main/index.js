@@ -25,8 +25,10 @@ import SignupDetails from '../../screens/welcome-login-signup/signupDetails';
 import FlatInfo from '../../screens/create-profile/flatInfo';
 import Done from '../../screens/create-profile/done';
 import Settings from '../../screens/profile/settings';
+import AccessExistingFlatProfile from '../../screens/create-profile/accessExistingFlatProfile';
 import genders from '../../resources/strings/genders';
 import CreateFlat from '../../screens/create-profile/createFlat';
+import AddFlatInProfile from '../../components/addFlatInProfile';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -112,6 +114,11 @@ export default function Route() {
                 component={FlatInfo}
                 options={{ headerShown: false }}
             />
+            <Stack.Screen
+                name="AccessExistingFlatProfile"
+                component={AccessExistingFlatProfile}
+                options={{ headerShown: false }}
+            />
 
             <Stack.Screen
                 name="Done"
@@ -164,6 +171,11 @@ export default function Route() {
                 options={{ headerShown: false, animationEnabled: false }}
             />
             <Stack.Screen name="Chat" component={Chat} options={mainOptions} />
+            <Stack.Screen
+                name="AddFlatInProfile"
+                component={AddFlatInProfile}
+                options={mainOptions}
+            />
         </>
     );
 

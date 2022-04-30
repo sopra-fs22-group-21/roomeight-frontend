@@ -108,6 +108,11 @@
         "biography": "Biography",
         "biographyPlaceholder": "That's your flat in one sentence"
     },
+    "accessExisting": {
+        "heading": "Would you like to join a flat that already exists?",
+        "failure": "Please contact the roomie who has set up the flat profile to add you with your email.",
+        "success": "You have been successfully added to your flat. Please continue and complete your personal profile."
+    },
     "createFlat": {
         "heading": "Give your flat a name!",
         "info": "What do you guys call yourselves? Maybe the name of your street? Also, add a profile picture for the flat so that people get a good impression :)",

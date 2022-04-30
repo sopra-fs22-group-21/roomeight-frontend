@@ -37,7 +37,11 @@ const ChooseStatus = ({ navigation }) => {
                 </SecondaryButton>
                 <Box />
 
-                <SecondaryButton onPress={() => {}}>
+                <SecondaryButton
+                    onPress={() => {
+                        navigation.navigate('AccessExistingFlatProfile');
+                    }}
+                >
                     {en.chooseStatus.flat}
                 </SecondaryButton>
                 <Box />
