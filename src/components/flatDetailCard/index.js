@@ -95,16 +95,15 @@ export const FlatDetailCard = (props) => {
                         />
                     </Pressable>
                 </View>
+                <Box/>
                 <View>
                     {flatprofile.biography ? (
-                        <Box>
                             <View>
                                 <Box />
                                 <NormalText style={styles.text}>
                                     {flatprofile.biography}
                                 </NormalText>
                             </View>
-                        </Box>
                     ) : null}
 
                     <FlatList

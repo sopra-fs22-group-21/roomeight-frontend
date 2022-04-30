@@ -56,7 +56,7 @@ const Done = ({ navigation, route }) => {
                                 updateSingleprofile();
                                 dispatch(postFlatprofile(transitFlatprofile));
                             }
-                            navigation.navigate('Discover');
+                            //navigation.navigate('Discover');
                         }}
                     >
                         {en.done.start}

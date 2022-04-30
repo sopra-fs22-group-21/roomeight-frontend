@@ -7,6 +7,7 @@ import loggedOutScreens from '../loggedOutScreens';
 import loadingScreens from '../loadingScreens';
 import incompleteScreens, { createFlatScreens } from '../incompleteScreens';
 import homeScreens from '../homeScreens';
+import { chatMemberShipListener } from '../../redux/actions/chatActions';
 
 export default function Route() {
     const Stack = createStackNavigator();

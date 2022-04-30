@@ -1,7 +1,6 @@
-import CachedImage from 'expo-cached-image';
 import { useEffect, useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
-import { getImageSource } from '../../helper/apiClient';
+import { Pressable, Text, View, Image } from 'react-native';
+import { getImageSource } from '../../helper/imageHandler';
 import EditBadge from '../editBadge';
 import styles from './styles';
 
@@ -16,11 +15,13 @@ import styles from './styles';
  */
 const PictureInput = (props) => {
     const [imageSource, setImageSource] = useState(null);
+
+    async function loadSource() {
+        const source = await getImageSource(props.image);
+        setImageSource(source);
+    }
+
     useEffect(() => {
-        async function loadSource() {
-            const source = await getImageSource(props.image);
-            setImageSource(source);
-        }
         loadSource();
     }, [props.image]);
 
@@ -29,9 +30,8 @@ const PictureInput = (props) => {
             if (imageSource) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
-                        <CachedImage
+                        <Image
                             style={{ ...styles.imageProfile, ...props.style }}
-                            cacheKey={imageSource.pictureId}
                             source={{ uri: imageSource.uri }}
                         />
                         <EditBadge variant={props.variant} set={true} />
@@ -63,9 +63,8 @@ const PictureInput = (props) => {
             if (imageSource) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
-                        <CachedImage
+                        <Image
                             style={styles.imageAdditional}
-                            cacheKey={imageSource.pictureId}
                             source={{ uri: imageSource.uri }}
                         />
                         <EditBadge variant={props.variant} set={true} />
@@ -87,9 +86,8 @@ const PictureInput = (props) => {
             if (imageSource) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
-                        <CachedImage
+                        <Image
                             style={styles.editprofile}
-                            cacheKey={imageSource.pictureId}
                             source={{ uri: imageSource.uri }}
                         />
                         <EditBadge variant={props.variant} set={true} />
