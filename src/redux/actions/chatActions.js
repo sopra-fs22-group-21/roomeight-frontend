@@ -12,6 +12,7 @@ import {
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import { database } from '../../../firebase/firebase-config';
+import en from '../../resources/strings/en';
 import * as Constants from '../constants';
 
 const chatMembershipChange = (chatId) => ({
@@ -204,31 +205,41 @@ export const createChat = (profileId) => (dispatch, getState) => {
     });
 
     //create unique chat id
-    const chatId = 'CHAT-' + uuidv4();
-    const firstMessageId = 'MESSAGE-' + uuidv4();
+    const chatId = 'chat-' + uuidv4();
+    const firstMessageId = 'msg-' + uuidv4();
 
     const membershipUpdate = {};
     const chatUpdate = {};
-    let chatInfo;
+    const userprofile = getState().userprofileState.userprofile;
+    let chatInfo = {
+        members: {},
+    };
+    chatInfo['_id'] = chatId;
+    chatInfo['createdAt'] = new Date().getTime();
 
-    if (profileId.charAt(2) === '$') {
+    if (profileId.startsWith('flt$')) {
         //want to chat with flat
-        let matchprofile =
-            getState().userprofileState.userprofile.matches[profileId];
+        let matchprofile = userprofile.matches[profileId];
+        let roomMates = Object.keys(matchprofile.roomMates);
+        roomMates.forEach((mateId) => (chatInfo['members'][mateId] = true));
         chatInfo = {
-            _id: chatId,
-            title: matchprofile.name,
-            members: {
-                ...matchprofile.roomMates,
-                [getState().authState.auth.uid]: true,
+            ...chatInfo,
+            title: {
+                forFlat: userprofile.firstName + ' ' + userprofile.lastName,
+                forUser: matchprofile.name,
             },
-            createdAt: new Date().getTime(),
+            members: {
+                ...chatInfo.members,
+                [userprofile.profileId]: true,
+            },
+            flatId: profileId,
+            userId: userprofile.profileId,
         };
 
         membershipUpdate[
-            `/memberships/${getState().authState.auth.uid}/${chatId}`
+            `/memberships/${userprofile.profileId}/${chatId}`
         ] = true;
-        matchprofile.roomMates.forEach((userId) => {
+        Object.keys(matchprofile.roomMates).forEach((userId) => {
             membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
         });
     } else {
@@ -236,17 +247,25 @@ export const createChat = (profileId) => (dispatch, getState) => {
         let matchprofile =
             getState().flatprofileState.flatprofile.matches[profileId];
         let flatprofile = getState().flatprofileState.flatprofile;
+        let roomMates = Object.keys(flatprofile.roomMates);
+        roomMates.forEach((mateId) => (chatInfo['members'][mateId] = true));
         chatInfo = {
-            _id: chatId,
-            title: matchprofile.firstName + ' ' + matchprofile.lastName,
+            ...chatInfo,
+            title: {
+                forFlat: matchprofile.firstName + ' ' + matchprofile.lastName,
+                forUser: flatprofile.name,
+            },
             members: {
-                ...flatprofile.roomMates,
+                ...chatInfo.members,
                 [profileId]: true,
             },
-            createdAt: new Date().getTime(),
+            flatId: flatprofile.profileId,
+            userId: profileId,
         };
+
         membershipUpdate[`/memberships/${profileId}/${chatId}`] = true;
-        matchprofile.roomMates.forEach((userId) => {
+
+        Object.keys(flatprofile.roomMates).forEach((userId) => {
             membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
         });
     }
@@ -254,15 +273,15 @@ export const createChat = (profileId) => (dispatch, getState) => {
     chatUpdate[`/chats/${chatId}`] = chatInfo;
     chatUpdate[`/messages/${chatId}/${firstMessageId}`] = {
         _id: firstMessageId,
-        text: getState().userprofileState.firstName + ' has started the chat',
+        text: userprofile.firstName + ' ' + en.chat.startedChat,
         createdAt: new Date().getTime(),
         user: {
-            name: getState().userprofileState.userprofile.firstName,
-            _id: getState().authState.auth.uid,
+            _id: userprofile.profileId,
+            name: userprofile.firstName + ' ' + userprofile.lastName,
         },
         system: true,
     };
-
+    chatInfo['lastMessage'] = userprofile.firstName + ' ' + en.chat.startedChat;
     update(ref(database), membershipUpdate)
         .then(() => {
             update(ref(database), chatUpdate).then(

@@ -134,6 +134,16 @@
         "empty": "Nothing to discover...",
         "loading": "Loading profiles you might like..."
     },
+    "matches": {
+        "heading": "Matches",
+        "noNewMatches": "sorry:(\nno new matches...",
+        "noMatches": "sorry :(\nno matches yet..."
+    },
+    "chat": {
+        "heading": "Chat",
+        "noChats": "You haven't started\nany chats yet...",
+        "startedChat": "started a chat with all of you"
+    },
     "errors": {
         "userAlreadyExists": "A user with this email already exists. Try logging in or choosing a different email address.",
         "problemWithApplication": "There is a problem with the application. Please try again later.",

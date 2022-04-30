@@ -112,7 +112,9 @@ export const SmallHeadingWithBack = (props) => (
             style={styles.icon}
             onPress={() => props.navigation.goBack()}
         />
-        <SmallHeading>{props.children}</SmallHeading>
+        <Pressable onPress={props.onPress}>
+            <SmallHeading>{props.children}</SmallHeading>
+        </Pressable>
     </View>
 );
 

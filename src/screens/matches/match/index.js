@@ -8,13 +8,14 @@ import {
 } from '../../../components/theme';
 import { PublicProfileCard } from '../../../components/publicProfileCard';
 import { View } from 'react-native-animatable';
+import en from '../../../resources/strings/en.json';
 
 const Match = ({ route, navigation }) => {
     const { profile } = route.params;
     return (
         <Container showNavBar navigation={navigation}>
             <SmallHeadingWithBack navigation={navigation}>
-                Matches
+                {en.matches.heading}
             </SmallHeadingWithBack>
             <Box />
             <View style={{ flex: 0.8 }}>

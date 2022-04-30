@@ -1,45 +1,79 @@
 import {
     Actionsheet,
     Box,
-    Button,
     Center,
     FlatList,
     Heading,
-    Pressable,
-    Spacer,
     Text,
     useDisclose,
 } from 'native-base';
 import { useDispatch, useSelector } from 'react-redux';
 import { createChat } from '../../redux/actions/chatActions';
+import en from '../../resources/strings/en.json';
 import { CreateNewChatButton } from '../button';
+import { ProfileInfoBox } from '../profiles';
+
+function filterExisting(chats, matches) {
+    if (!matches) {
+        return [];
+    } else if (!chats) {
+        return Object.values(matches);
+    } else {
+        let existing = [];
+        Object.values(chats).forEach((chat) => {
+            existing = [...existing, ...Object.keys(chat.members)];
+        });
+        console.log(existing);
+        let filtered = Object.values(matches).filter((match) => {
+            console.log(match.profileId);
+            return !existing.includes(match.profileId);
+        });
+        if (!filtered.length) {
+            return [''];
+        }
+        return filtered;
+    }
+}
 
 const CreateNewChat = (props) => {
     const { isOpen, onOpen, onClose } = useDisclose();
-    const { matches } = useSelector(
+    const { isSearching } = useSelector(
         (state) => state.userprofileState.userprofile
     );
+    const { chats } = useSelector((state) => state.chatState);
     const dispatch = useDispatch();
 
+    let matches;
+    if (isSearching) {
+        matches = useSelector(
+            (state) => state.userprofileState.userprofile.matches
+        );
+    } else {
+        matches = useSelector(
+            (state) => state.flatprofileState.flatprofile.matches
+        );
+    }
+
     const renderItem = ({ item }) => {
+        if (!item) {
+            return (
+                <Center>
+                    <Heading paddingTop={'50%'}>
+                        {en.matches.noNewMatches}
+                    </Heading>
+                </Center>
+            );
+        }
+
         return (
-            <Center>
-                <Pressable
-                    onPress={() => {
-                        dispatch(createChat(item));
-                    }}
-                    borderRadius="md"
-                    height={50}
-                    width={300}
-                    my={1}
-                    backgroundColor="red.100"
-                    alignItems="center"
-                >
-                    <Center height={50} width={300}>
-                        <Text>{item}</Text>
-                    </Center>
-                </Pressable>
-            </Center>
+            <ProfileInfoBox
+                profile={item}
+                id={item.profileId}
+                onPress={(id) => {
+                    dispatch(createChat(id));
+                    onClose();
+                }}
+            />
         );
     };
 
@@ -49,11 +83,16 @@ const CreateNewChat = (props) => {
             <Center>
                 <Actionsheet isOpen={isOpen} onClose={onClose}>
                     <Actionsheet.Content>
-                        <Heading>Matches</Heading>
+                        <Heading>{en.matches.heading}</Heading>
                         <Center w="100%" h="100%">
+                            {!matches && (
+                                <Heading marginTop={'100%'}>
+                                    {en.matches.noMatches}
+                                </Heading>
+                            )}
                             <Box w="100%" h="100%">
                                 <FlatList
-                                    data={matches}
+                                    data={filterExisting(chats, matches)}
                                     renderItem={renderItem}
                                     keyExtractor={(index) => index}
                                 />
