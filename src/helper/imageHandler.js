@@ -1,5 +1,6 @@
 import * as ImagePicker from 'expo-image-picker';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
 import { storage } from '../../firebase/firebase-config';
 
 export const pickImage = async () => {
@@ -15,6 +16,34 @@ export const pickImage = async () => {
         return result.uri;
     }
 };
+
+/**
+ * gets the download url of an image link is temporarily available for everyone (even unauthenticated)
+ * to use direct authentication something like this is required
+ * return source = {
+            method:'GET',
+            uri: `https://firebasestorage.googleapis.com/v0/b/roomeight-9cd94.appspot.com/o/${type}%2F${id}%2F${picture}?alt=media`,
+            headers: {
+                Authorization: `Bearer ${await userToken()}`,
+            },
+        };
+ * but i have currently not found a way to use cache and this option
+ *       
+ * @param {string} pictureReference logical reference to the file in the storage bucket 
+ * @returns 
+ */
+export async function getImageSource(pictureReference) {
+    if (!pictureReference.includes('pic-')) {
+        return { uri: pictureReference };
+    } else {
+        const picId = pictureReference.split('/')[2];
+        return {
+            uri: await getDownloadURL(ref(storage, pictureReference)),
+            pictureId: picId,
+        };
+    }
+}
+
 /**
  * returns the current download link from firebase for the path provided
  * @param {String} pictureReferences
@@ -39,10 +68,12 @@ export const uploadAll = async (uris, profileType, uid) => {
                     })
                     .then((blob) => {
                         console.log('got blob');
-                        const refPath = `${profileType}s/${uid}/profilePicture${count}.jpg`;
+                        const picId = 'pic-' + uuidv4();
+                        const refPath = `${profileType}s/${uid}/${picId}.jpg`;
                         const storageRef = ref(storage, refPath);
                         const metadata = {
                             contentType: 'image/jpeg',
+                            cacheControl: 'public, max-age=259200',
                             customMetadata: {
                                 profileType: profileType,
                                 uploadedBy: uid,

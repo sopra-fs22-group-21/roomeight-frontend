@@ -11,10 +11,10 @@ const API_URL = (_env = Constants.manifest.releaseChannel) => {
     }
 };
 
-async function userToken() {
+export async function userToken() {
     const user = auth.currentUser;
     if (user) {
-        return user.getIdToken();
+        return user.getIdToken(true);
     } else {
         return null;
     }
