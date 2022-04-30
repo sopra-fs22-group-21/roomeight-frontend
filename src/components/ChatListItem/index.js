@@ -69,7 +69,7 @@ const ChatListItem = ({ chat }) => {
                         </Text>
                     </VStack>
                     <Text
-                        marginLeft={"25%"}
+                        marginLeft={'25%'}
                         fontSize="xs"
                         _dark={{
                             color: 'warmGray.50',

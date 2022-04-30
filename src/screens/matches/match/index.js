@@ -25,9 +25,9 @@ const Match = ({ route, navigation }) => {
                 <PublicProfileCard
                     profile={profile}
                     isFlat={profile.isAdvertisingRoom}
-                    onClickMessage={() =>{
-                        dispatch(createChat(profile.profileId))
-                        navigation.navigate('Chat', { id: profile.id })
+                    onClickMessage={() => {
+                        dispatch(createChat(profile.profileId));
+                        navigation.navigate('Chat', { id: profile.id });
                     }}
                 />
             </View>
