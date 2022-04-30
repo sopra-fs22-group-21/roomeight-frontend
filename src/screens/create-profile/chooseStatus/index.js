@@ -24,13 +24,6 @@ const ChooseStatus = ({ navigation }) => {
                 <Box />
                 <SecondaryButton
                     onPress={() => {
-                        dispatch(
-                            setTransitAttributes(
-                                { isSearchingRoom: true },
-                                'userprofile',
-                                { isSingleRoomie: true }
-                            )
-                        );
                         navigation.navigate('CompleteSingleProfile');
                     }}
                 >
