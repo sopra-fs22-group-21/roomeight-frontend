@@ -1,5 +1,4 @@
 import { useNavigation } from '@react-navigation/native';
-import { getDownloadURL } from 'firebase/storage';
 import {
     Avatar,
     Box,
@@ -10,14 +9,13 @@ import {
     VStack,
 } from 'native-base';
 import { useSelector } from 'react-redux';
-import { getDownloadUrl } from '../../helper/imageHandler';
+import dateFormat from 'dateformat';
 
 const ChatListItem = ({ chat }) => {
     const navigation = useNavigation();
-    const { isSearching } = useSelector(
+    const { isSearchingRoom } = useSelector(
         (state) => state.userprofileState.userprofile
     );
-
     return (
         <Pressable
             onPress={() => navigation.navigate('Chatroom', { chatInfo: chat })}
@@ -47,7 +45,7 @@ const ChatListItem = ({ chat }) => {
                             color="coolGray.800"
                             bold
                         >
-                            {isSearching
+                            {isSearchingRoom
                                 ? chat.title.forUser
                                 : chat.title.forFlat}
                         </Text>
@@ -70,8 +68,8 @@ const ChatListItem = ({ chat }) => {
                             {chat.lastMessage}
                         </Text>
                     </VStack>
-                    <Spacer />
                     <Text
+                        marginLeft={'-10%'}
                         fontSize="xs"
                         _dark={{
                             color: 'warmGray.50',
@@ -79,7 +77,7 @@ const ChatListItem = ({ chat }) => {
                         color="coolGray.800"
                         alignSelf="flex-start"
                     >
-                        {chat.timeStamp}
+                        {dateFormat(chat.timestamp, 'dd.mm, hh:MM')}
                     </Text>
                 </HStack>
             </Box>

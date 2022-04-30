@@ -178,7 +178,7 @@ export const sendMessage = (message, chatId) => async (dispatch, getState) => {
     const updates = {};
     updates[`/messages/${chatId}/${message._id}`] = message;
     updates[`/chats/${chatId}/lastMessage`] = message.text;
-    updates[`/chats/${chatId}/timeStamp`] = message.createdAt;
+    updates[`/chats/${chatId}/timestamp`] = message.createdAt;
     updates[`/chats/${chatId}/lastSender`] = message.user.name;
     update(ref(database), updates)
         .then(() => {
@@ -282,6 +282,8 @@ export const createChat = (profileId) => (dispatch, getState) => {
         system: true,
     };
     chatInfo['lastMessage'] = userprofile.firstName + ' ' + en.chat.startedChat;
+    chatInfo['timestamp'] =
+        chatUpdate[`/messages/${chatId}/${firstMessageId}`].createdAt;
     update(ref(database), membershipUpdate)
         .then(() => {
             update(ref(database), chatUpdate).then(

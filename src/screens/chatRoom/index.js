@@ -45,7 +45,7 @@ export const Chatroom = ({ route, navigation }) => {
     }, []);
 
     let matchprofile;
-    if (userprofile.isSearching) {
+    if (userprofile.isSearchingRoom) {
         matchprofile = useSelector(
             (state) => state.matchesState.matches[chatInfo.flatId]
         );
@@ -64,7 +64,7 @@ export const Chatroom = ({ route, navigation }) => {
                 }}
                 navigation={navigation}
             >
-                {userprofile.isSearching
+                {userprofile.isSearchingRoom
                     ? chatInfo.title.forUser
                     : chatInfo.title.forFlat}
             </SmallHeadingWithBack>

@@ -45,6 +45,7 @@
     "axios": "^0.26.1",
     "constants": "^0.0.2",
     "expo": "~44.0.0",
+    "expo-cached-image": "^44.1.7",
     "expo-constants": "~13.0.1",
     "expo-font": "~10.0.4",
     "expo-image-picker": "~12.0.1",

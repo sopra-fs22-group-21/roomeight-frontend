@@ -20,8 +20,9 @@ export default function Route() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log('dispatch');
+        console.log('navigation dispatch');
         dispatch(userAuthStateListener());
+        dispatch(chatMemberShipListener());
     }, []);
 
     const createScreens = (screens) => {

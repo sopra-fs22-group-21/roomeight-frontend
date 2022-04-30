@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { Image, Text, View } from 'react-native';
-import { getDownloadUrl } from '../../helper/imageHandler';
+import { getImageSource } from '../../helper/imageHandler';
 import styles from './styles';
+import CachedImage from 'expo-cached-image';
+import { v4 as uuidv4 } from 'uuid';
 
 export const ProfilePicture = (props) => {
-    const [url, setUrl] = useState(null);
+    const [imageSource, setImageSource] = useState(null);
+
     useEffect(() => {
         if (props.image) {
-            getDownloadUrl(props.image)
-                .then((url) => setUrl(url))
-                .catch((error) => console.warn(error));
+            async function loadSource() {
+                const source = await getImageSource(props.image);
+                setImageSource(source);
+            }
+            loadSource();
+            console.log(imageSource);
         }
-    }, []);
+    }, [props.image]);
 
-    if (url) {
+    if (imageSource) {
         return (
-            <Image
+            <CachedImage
                 style={{ ...styles.imageProfile, ...props.style }}
-                source={{ uri: url }}
+                cacheKey={imageSource.pictureId}
+                source={{ uri: imageSource.uri }}
             />
         );
     } else {

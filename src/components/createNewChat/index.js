@@ -4,7 +4,6 @@ import {
     Center,
     FlatList,
     Heading,
-    Text,
     useDisclose,
 } from 'native-base';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,11 +20,11 @@ function filterExisting(chats, matches) {
     } else {
         let existing = [];
         Object.values(chats).forEach((chat) => {
-            existing = [...existing, ...Object.keys(chat.members)];
+            existing.push(chat.userId);
+            existing.push(chat.flatId);
         });
         console.log(existing);
         let filtered = Object.values(matches).filter((match) => {
-            console.log(match.profileId);
             return !existing.includes(match.profileId);
         });
         if (!filtered.length) {
@@ -37,14 +36,14 @@ function filterExisting(chats, matches) {
 
 const CreateNewChat = (props) => {
     const { isOpen, onOpen, onClose } = useDisclose();
-    const { isSearching } = useSelector(
+    const { isSearchingRoom } = useSelector(
         (state) => state.userprofileState.userprofile
     );
     const { chats } = useSelector((state) => state.chatState);
     const dispatch = useDispatch();
 
     let matches;
-    if (isSearching) {
+    if (isSearchingRoom) {
         matches = useSelector(
             (state) => state.userprofileState.userprofile.matches
         );

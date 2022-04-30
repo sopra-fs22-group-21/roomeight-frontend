@@ -1,6 +1,7 @@
+import CachedImage from 'expo-cached-image';
 import { useEffect, useState } from 'react';
-import { Image, Pressable, Text, View } from 'react-native';
-import { getDownloadUrl } from '../../helper/imageHandler';
+import { Pressable, Text, View } from 'react-native';
+import { getImageSource } from '../../helper/apiClient';
 import EditBadge from '../editBadge';
 import styles from './styles';
 
@@ -13,24 +14,25 @@ import styles from './styles';
  * @param {string} props.image 'image uri'
  * @required variant!
  */
-
 const PictureInput = (props) => {
-    const [image, setImage] = useState(null);
+    const [imageSource, setImageSource] = useState(null);
     useEffect(() => {
-        if (props.image && props.image.includes('profiles')) {
-            getDownloadUrl(props.image).then((url) => {
-                setImage(url);
-            });
-        } else setImage(props.image);
+        async function loadSource() {
+            const source = await getImageSource(props.image);
+            setImageSource(source);
+        }
+        loadSource();
     }, [props.image]);
+
     switch (props.variant) {
         case 'profile':
-            if (image) {
+            if (imageSource) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
-                        <Image
+                        <CachedImage
                             style={{ ...styles.imageProfile, ...props.style }}
-                            source={{ uri: image }}
+                            cacheKey={imageSource.pictureId}
+                            source={{ uri: imageSource.uri }}
                         />
                         <EditBadge variant={props.variant} set={true} />
                     </Pressable>
@@ -58,12 +60,13 @@ const PictureInput = (props) => {
                 );
             }
         case 'additional':
-            if (image) {
+            if (imageSource) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
-                        <Image
+                        <CachedImage
                             style={styles.imageAdditional}
-                            source={{ uri: image }}
+                            cacheKey={imageSource.pictureId}
+                            source={{ uri: imageSource.uri }}
                         />
                         <EditBadge variant={props.variant} set={true} />
                     </Pressable>
@@ -81,12 +84,13 @@ const PictureInput = (props) => {
                 );
             }
         case 'editprofile':
-            if (image) {
+            if (imageSource) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
-                        <Image
+                        <CachedImage
                             style={styles.editprofile}
-                            source={{ uri: image }}
+                            cacheKey={imageSource.pictureId}
+                            source={{ uri: imageSource.uri }}
                         />
                         <EditBadge variant={props.variant} set={true} />
                     </Pressable>
