@@ -4,24 +4,13 @@ import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 0,
-        marginTop: 20,
-        paddingTop: 0,
-        marginBottom: 60,
         height: '100%',
+        paddingBottom: 0,
     },
     text: {
         fontFamily: 'SourceSans3SemiBold',
         fontSize: 16,
         lineHeight: 24,
-    },
-    tab: {
-        backgroundColor: 'transparent',
-        paddingBottom: 0,
-        paddingTop: 0,
-        margin: 0,
-        marginTop: 0,
-        marginBottom: 0,
     },
     inner: {
         flex: 1,
@@ -45,6 +34,9 @@ const styles = StyleSheet.create({
         height: 90,
         width: 90,
         borderColor: 'transparent',
+    },
+    space: {
+        height: 5,
     },
 });
 export default styles;

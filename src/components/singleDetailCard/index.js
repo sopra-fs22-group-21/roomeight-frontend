@@ -34,7 +34,7 @@ export const SingleDetailCard = (props) => {
                 style={styles.card}
             >
                 <View style={styles.row}>
-                    <View style={{ ...styles.column, ...styles.column1 }}>
+                    <View style={styles.column1}>
                         <Pressable onPress={props.onPress} style={styles.image}>
                             <ProfilePicture
                                 image={
@@ -52,7 +52,7 @@ export const SingleDetailCard = (props) => {
                             />
                         </Pressable>
                     </View>
-                    <View style={{ ...styles.column, ...styles.column2 }}>
+                    <View style={styles.column2}>
                         <Title>{userprofile.firstName}</Title>
                         <NormalText style={styles.text}>{age} y/o</NormalText>
                         <NormalText style={styles.text}>
@@ -62,6 +62,19 @@ export const SingleDetailCard = (props) => {
                             {userprofile.biography}
                         </NormalText>
                     </View>
+                    {props.onClickEdit ? (
+                        <View style={styles.column3}>
+                            <Pressable onPress={props.onClickEdit}>
+                                <Icon
+                                    style={styles.icon}
+                                    name="edit"
+                                    type="feather"
+                                    size={20}
+                                    color={'black'}
+                                />
+                            </Pressable>
+                        </View>
+                    ) : null}
                 </View>
                 <Box />
                 {props.onClickMessage ? (
@@ -89,14 +102,6 @@ export const SingleDetailCard = (props) => {
                     <Tags tags={selectedTags} style={styles.tags} />
                 ) : null}
                 <Box />
-                {props.onClickEdit ? (
-                    <SecondaryButton
-                        style={styles.editbutton}
-                        onPress={props.onClickEdit}
-                    >
-                        Edit Profile
-                    </SecondaryButton>
-                ) : null}
             </DoubleTap>
         </PinkBackground>
     );

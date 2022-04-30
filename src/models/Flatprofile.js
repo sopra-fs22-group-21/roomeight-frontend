@@ -15,11 +15,11 @@ class Flatprofile {
         this.moveInDate = null;
         this.moveOutDate = null;
         this.address = '';
-        this.rent = NaN;
+        this.rent = 500;
         this.permanent = null;
-        this.numberOfRoommates = NaN;
-        this.roomSize = NaN;
-        this.numberOfBaths = NaN;
+        this.numberOfRoommates = null;
+        this.roomSize = null;
+        this.numberOfBaths = null;
         this.roomMates = [];
         this.matches = [];
         Object.assign(this, data);
