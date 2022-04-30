@@ -49,7 +49,9 @@ export const updateProfile =
             type: Constants.LOADING_STATE,
         });
         console.log(requestBody);
+        if (profileType == 'userprofile') requestBody.isComplete = true;
         uploadImages(
+            //only uploads if picturereferencesis set and not empty
             requestBody.pictureReferences,
             profileType,
             profileId

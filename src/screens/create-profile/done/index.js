@@ -26,7 +26,6 @@ const Done = ({ navigation, route }) => {
     );
 
     const updateSingleprofile = () => {
-        dispatch(setTransitAttributes({ isComplete: true }, 'userprofile'));
         dispatch(
             updateProfile(
                 transitUserprofile,
@@ -57,6 +56,7 @@ const Done = ({ navigation, route }) => {
                                 updateSingleprofile();
                                 dispatch(postFlatprofile(transitFlatprofile));
                             }
+                            navigation.navigate('Discover');
                         }}
                     >
                         {en.done.start}

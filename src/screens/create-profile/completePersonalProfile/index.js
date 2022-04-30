@@ -32,8 +32,11 @@ const CompletePersonalProfile = ({ navigation, route }) => {
             : genders.notSet
     );
     const [image, setImage] = useState(
-        transitUserprofile.pictureReferences &&
-            transitUserprofile.pictureReferences.length > 0
+        userprofile.pictureReferences &&
+            userprofile.pictureReferences.length > 0
+            ? userprofile.pictureReferences[0]
+            : transitUserprofile.pictureReferences &&
+              transitUserprofile.pictureReferences.length > 0
             ? transitUserprofile.pictureReferences[0]
             : null
     );
@@ -74,7 +77,8 @@ const CompletePersonalProfile = ({ navigation, route }) => {
             nextDisabled={
                 route.params.includes('single') &&
                 ((!image &&
-                    userprofile.pictureReferences.length < 1 &&
+                    (!userprofile.pictureReferences ||
+                        userprofile.pictureReferences.length < 1) &&
                     !transitUserprofile.pictureReferences) ||
                     (!biography &&
                         !userprofile.biography &&
