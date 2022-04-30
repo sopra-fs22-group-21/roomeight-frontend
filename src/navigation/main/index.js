@@ -42,7 +42,7 @@ export default function Route() {
     const getUserStatus = () => {
         if (!loggedIn) return createScreens(loggedOutScreens);
         if (!userprofile) return createScreens(loadingScreens);
-        //if (!userprofile.isComplete) return createScreens(incompleteScreens)
+        if (!userprofile.isComplete) return createScreens(incompleteScreens)
         if (userprofile.flatId != '') return createScreens(homeScreens);
         else return createScreens(homeScreens.concat(createFlatScreens));
     };

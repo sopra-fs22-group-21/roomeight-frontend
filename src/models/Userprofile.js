@@ -24,6 +24,7 @@ class Userprofile {
         this.moveOutDate = null;
         this.flatId = '';
         this.images = [];
+        this.isComplete = false;
         Object.assign(this, data);
     }
 }

@@ -74,7 +74,7 @@ const Profile = ({ navigation }) => {
             ) : flatprofile.profileId ? (
                 <FlatProfile />
             ) : (
-                <AddFlatInProfile />
+                <AddFlatInProfile navigation={navigation}/>
             )}
             <Box />
         </Container>
