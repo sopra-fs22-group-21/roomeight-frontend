@@ -16,6 +16,7 @@ import {
 import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const RoomInfo = ({ navigation }) => {
     const { transitFlatprofile } = useSelector((state) => state.transitState);

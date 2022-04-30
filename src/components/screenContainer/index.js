@@ -1,6 +1,7 @@
 import { View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../redux/actions/authActions';
 import colors from '../../resources/colors';
 import { PrimaryButton } from '../button';
 import NavBar from '../navbar';

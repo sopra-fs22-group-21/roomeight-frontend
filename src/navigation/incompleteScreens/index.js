@@ -7,6 +7,7 @@ import RoomInfo from '../../screens/create-profile/roomInfo';
 import FlatInfo from '../../screens/create-profile/flatInfo';
 import Done from '../../screens/create-profile/done';
 import AddRoomie from '../../screens/create-profile/addRoomie';
+import AccessExistingFlatProfile from '../../screens/create-profile/accessExistingFlatProfile';
 
 const options = { headerShown: false };
 
@@ -42,6 +43,11 @@ export const createFlatScreens = [
     {
         name: 'Done',
         component: Done,
+        options: options,
+    },
+    {
+        name: 'AccessExistingFlatProfile',
+        component: AccessExistingFlatProfile,
         options: options,
     },
 ];

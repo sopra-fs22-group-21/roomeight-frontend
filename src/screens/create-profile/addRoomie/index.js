@@ -16,6 +16,7 @@ import { setTransitAttributes } from '../../../redux/actions/setTransitAttribute
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
 import { Actionsheet, Center, useDisclose } from 'native-base';
+import { ScreenContainer } from '../../../components/screenContainer';
 
 const AddRoomie = ({ navigation }) => {
     const { transitFlatprofile } = useSelector((state) => state.transitState);
@@ -51,10 +52,6 @@ const AddRoomie = ({ navigation }) => {
                 error={
                     emailValid === false || userprofileErrors.postUserprofile
                 }
-                onEndEditing={() => {
-                    if (user.email != '')
-                        setEmailValid(emailRegex.test(user.email));
-                }}
                 valid={emailValid}
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -62,15 +59,19 @@ const AddRoomie = ({ navigation }) => {
                     const copy = [...roomMates];
                     copy[item.id].email = text;
                     setRoommates(copy);
-                    if (emailRegex.test(text)) setEmailValid(true);
-                    else setEmailValid(null);
+                    if (emailRegex.test(text)) {
+                        setEmailValid(true);
+                        console.log(emailValid);
+                    } else {
+                        setEmailValid(null);
+                    }
                 }}
             />
         );
     };
 
     return (
-        <Container
+        <ScreenContainer
             navigation={navigation}
             //TODO: edit
             onPressBack={() => navigation.goBack()}
@@ -112,7 +113,7 @@ const AddRoomie = ({ navigation }) => {
                     </KeyboardAvoidingView>
                 </ScrollView>
             </ScreenPadding>
-        </Container>
+        </ScreenContainer>
     );
 };
 export default AddRoomie;

@@ -6,6 +6,7 @@ import styles from './styles';
 import { NavigationButtons } from '../../../components/navigationButtons';
 import { SecondaryButton } from '../../../components/button';
 import { ScreenContainer } from '../../../components/screenContainer';
+import { getCurrentUserprofile } from '../../../redux/actions/getUserprofiles';
 
 const AccessExistingFlatProfile = ({ navigation, route }) => {
     const dispatch = useDispatch();
@@ -31,7 +32,9 @@ const AccessExistingFlatProfile = ({ navigation, route }) => {
                         </SemiBold>
                         <Box />
                         <SecondaryButton
-                        /* onPress={() => dispatch(getCurrentUserprofile())} */
+                            onPress={() => {
+                                dispatch(getCurrentUserprofile());
+                            }}
                         >
                             Reload
                         </SecondaryButton>
@@ -52,7 +55,7 @@ const AccessExistingFlatProfile = ({ navigation, route }) => {
                         'accessFlat'
                     );
                 }}
-                /* nextDisabled={partOfFlat() != true} */
+                nextDisabled={partOfFlat() != true}
             />
         </ScreenContainer>
     );
