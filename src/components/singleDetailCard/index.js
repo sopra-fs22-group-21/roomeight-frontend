@@ -18,6 +18,8 @@ import tagIcons from '../../resources/icons/tagIcons';
 import { DoubleTap } from '../doubleTap';
 import { Icon } from 'react-native-elements';
 import { SecondaryButton } from '../button';
+import { Gender } from '../gender';
+import dateFormat from 'dateformat';
 
 export const SingleDetailCard = (props) => {
     const userprofile = props.userprofile;
@@ -54,9 +56,13 @@ export const SingleDetailCard = (props) => {
                     </View>
                     <View style={styles.column2}>
                         <Title>{userprofile.firstName}</Title>
-                        <NormalText style={styles.text}>{age} y/o</NormalText>
                         <NormalText style={styles.text}>
-                            {userprofile.gender}
+                            <Gender
+                                gender={userprofile.gender}
+                                size={styles.genderIcon.fontSize}
+                                style={styles.genderIcon}
+                            />
+                            {age} y/o{' '}
                         </NormalText>
                         <NormalText style={styles.text}>
                             {userprofile.biography}
@@ -89,19 +95,34 @@ export const SingleDetailCard = (props) => {
                 ) : null}
 
                 {userprofile.description ? (
-                    <Strong>{en.discover.description}</Strong>
+                    <>
+                        <Strong>{en.discover.description}</Strong>
+                        <NormalText style={styles.text}>
+                            {userprofile.description}
+                        </NormalText>
+                        <Box />
+                    </>
                 ) : null}
-                <NormalText style={styles.text}>
-                    {userprofile.description}
-                </NormalText>
-                <Box />
                 {userprofile.tags.length > 0 ? (
-                    <Strong>{en.discover.tags}</Strong>
+                    <>
+                        <Strong>{en.discover.tags}</Strong>
+                        <Tags tags={selectedTags} style={styles.tags} />
+                        <Box />
+                    </>
                 ) : null}
-                {userprofile.tags.length > 0 ? (
-                    <Tags tags={selectedTags} style={styles.tags} />
+
+                {userprofile.moveInDate ? (
+                    <>
+                        <Strong>{en.discover.moveInDate}</Strong>
+                        <NormalText style={styles.text}>
+                            {dateFormat(
+                                new Date(userprofile.moveInDate),
+                                'dd. mm. yyyy'
+                            )}
+                        </NormalText>
+                        <Box />
+                    </>
                 ) : null}
-                <Box />
             </DoubleTap>
         </PinkBackground>
     );

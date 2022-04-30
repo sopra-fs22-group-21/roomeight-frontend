@@ -113,7 +113,7 @@ const CompletePersonalProfile = ({ navigation, route }) => {
                             />
                         </Box>
                         <InputBox label={en.completePersonalProfile.gender}>
-                            <Gender
+                            <GenderInput
                                 onChange={(g) => {
                                     setGender(g);
                                 }}

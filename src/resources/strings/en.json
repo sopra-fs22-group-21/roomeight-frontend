@@ -139,10 +139,13 @@
         "heading": "Discover",
         "description": "Description",
         "tags": "Tags",
+        "temporary": "Temporary until",
         "roommates": "Room8s",
         "location": "Location",
         "empty": "Nothing to discover...",
-        "loading": "Loading profiles you might like..."
+        "loading": "Loading profiles you might like...",
+        "moveInDate": "Move-In Date",
+        "nrRoommates": "Room8s in total"
     },
     "matches": {
         "heading": "Matches",

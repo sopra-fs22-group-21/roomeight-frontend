@@ -79,7 +79,7 @@ const Discover = ({ navigation }) => {
                 <>
                     <PublicProfileCard
                         profile={item}
-                        key={index}
+                        key={item.profileId}
                         onDoubleTap={() => handleLike(item.profileId)}
                     />
                     <Box />

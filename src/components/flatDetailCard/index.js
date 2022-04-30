@@ -1,6 +1,6 @@
 import { React, useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { View, Text, Pressable, Dimensions } from 'react-native';
+import { View, Text, Pressable, Dimensions, FlatList } from 'react-native';
 import {
     Box,
     NormalText,
@@ -24,6 +24,7 @@ import { Icon } from 'react-native-elements';
 import { AddressMap } from '../addressMap';
 import { setCurrentScreen } from 'firebase/analytics';
 import { Profiles } from '../profiles';
+import dateFormat from 'dateformat';
 
 const ITEM_WIDTH = Dimensions.get('window').width - 80;
 
@@ -37,10 +38,51 @@ export const FlatDetailCard = (props) => {
 
     const carousel = useRef(null);
 
+    const flatInfos = () => {
+        let flatInfos = [];
+        if (flatprofile.moveInDate) {
+            flatInfos.push({
+                label: en.roomInfo.moveInDate,
+                value: dateFormat(
+                    new Date(flatprofile.moveInDate),
+                    'dd. mm. yyyy'
+                ),
+            });
+        }
+        if (!flatprofile.permanent && flatprofile.moveOutDate) {
+            flatInfos.push({
+                label: en.discover.temporary,
+                value: dateFormat(
+                    new Date(flatprofile.moveOutDate),
+                    'dd. mm. yyyy'
+                ),
+            });
+        }
+        if (flatprofile.rent) {
+            flatInfos.push({
+                label: en.roomInfo.rent,
+                value: flatprofile.rent,
+            });
+        }
+        if (flatprofile.roomSize) {
+            flatInfos.push({
+                label: en.roomInfo.roomSize,
+                value: flatprofile.roomSize + ' m\u00b2',
+            });
+        }
+        if (flatprofile.numberOfBaths) {
+            flatInfos.push({
+                label: en.roomInfo.nrBathrooms,
+                value: flatprofile.numberOfBaths,
+            });
+        }
+        return flatInfos;
+    };
+
     const firstPage = (
         <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
-            <View style={styles.imageContainer}>
-                <View style={{ flex: 2 }}>
+            <View style={{ height: '100%' }}>
+                <View style={{ flexShrink: 1 }}>
                     <Pressable onPress={props.onPress}>
                         <ProfilePicture
                             image={
@@ -53,48 +95,84 @@ export const FlatDetailCard = (props) => {
                         />
                     </Pressable>
                 </View>
-                {flatprofile.biography ? (
-                    <View style={{ flex: 1 }}>
-                        <Box />
-                        <NormalText style={styles.text}>
-                            {flatprofile.biography}
-                        </NormalText>
-                    </View>
-                ) : null}
+                <View>
+                    {flatprofile.biography ? (
+                        <Box>
+                            <View>
+                                <Box />
+                                <NormalText style={styles.text}>
+                                    {flatprofile.biography}
+                                </NormalText>
+                            </View>
+                        </Box>
+                    ) : null}
 
-                {flatprofile.description ? (
-                    <View style={{ flex: 1 }}>
-                        <Strong style={styles.title}>
-                            {en.discover.description}
-                        </Strong>
-                        <NormalText style={styles.text}>
-                            {flatprofile.description}
-                        </NormalText>
-                    </View>
-                ) : null}
-
-                {flatprofile.tags.length > 0 ? (
-                    <View style={{ flex: 1 }}>
-                        <Strong>{en.discover.tags}</Strong>
-                        <Tags tags={selectedTags} style={styles.tags} />
-                    </View>
-                ) : null}
+                    <FlatList
+                        data={flatInfos()}
+                        numColumns={2}
+                        columnWrapperStyle={{
+                            paddingBottom: 30,
+                        }}
+                        renderItem={({ item }) =>
+                            item ? (
+                                <View style={{ width: '50%' }}>
+                                    <Strong style={styles.title}>
+                                        {item.label}
+                                    </Strong>
+                                    <NormalText style={styles.text}>
+                                        {item.value}
+                                    </NormalText>
+                                </View>
+                            ) : null
+                        }
+                        keyExtractor={({ index }) => index}
+                    />
+                </View>
             </View>
         </DoubleTap>
     );
     const secondPage = (
         <>
             <View style={{ flex: 1 }}>
-                <ScrollView showsVerticalScrollIndicator={false}>
+                <Box style={{ flexShrink: 1 }}>
                     <Strong>{en.discover.roommates}</Strong>
                     <Profiles profiles={flatprofile.roomMates} />
-                </ScrollView>
+                </Box>
+                <DoubleTap
+                    doubleTap={props.onDoubleTap}
+                    delay={200}
+                    style={{ flex: 1 }}
+                >
+                    {flatprofile.description ? (
+                        <Box>
+                            <Strong style={styles.title}>
+                                {en.discover.description}
+                            </Strong>
+                            <NormalText style={styles.text}>
+                                {flatprofile.description}
+                            </NormalText>
+                        </Box>
+                    ) : null}
+
+                    {flatprofile.tags.length > 0 ? (
+                        <Box>
+                            <Strong>{en.discover.tags}</Strong>
+                            <Tags tags={selectedTags} style={styles.tags} />
+                        </Box>
+                    ) : null}
+
+                    {flatprofile.numberOfRoommates ? (
+                        <Box>
+                            <Strong style={styles.title}>
+                                {en.discover.nrRoommates}
+                            </Strong>
+                            <NormalText style={styles.text}>
+                                {flatprofile.numberOfRoommates}
+                            </NormalText>
+                        </Box>
+                    ) : null}
+                </DoubleTap>
             </View>
-            <DoubleTap
-                doubleTap={props.onDoubleTap}
-                delay={200}
-                style={{ flex: 1 }}
-            />
         </>
     );
 
@@ -119,13 +197,15 @@ export const FlatDetailCard = (props) => {
                         <View style={styles.name}>
                             <Title>{flatprofile.name}</Title>
                         </View>
-                        <Pressable onPress={props.onClickEdit}>
+                        <Pressable
+                            onPress={props.onClickEdit}
+                            style={styles.icon}
+                        >
                             <Icon
-                                style={styles.icon}
                                 name="edit"
                                 type="feather"
                                 size={20}
-                                color={'black'}
+                                color={styles.icon.color}
                             />
                         </Pressable>
                     </View>

@@ -20,8 +20,14 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     text: {
-        fontSize: 14,
+        fontSize: 15,
         paddingBottom: 4,
+    },
+    genderIcon: {
+        fontSize: 15,
+        paddingTop: 10,
+        paddingRight: 5,
+        paddingLeft: 2,
     },
     image: {
         borderRadius: 20,

@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import { Dimensions, Pressable, View } from 'react-native';
+import { Dimensions, FlatList, Pressable, View } from 'react-native';
 import { NormalText, Strong } from '../theme';
 import { ProfilePicture } from '../profilePicture';
 import styles from './styles';
@@ -75,22 +75,25 @@ export const ProfileInfoBox = (props) => {
 };
 
 export const Profiles = (props) => {
-    const profiles =
-        props.profiles && props.profiles.length > 0 ? props.profiles : [];
+    if (!props.profiles) return null;
+
     const [expanded, setExpanded] = useState(null);
     return (
-        <>
-            {profiles.map((profile) => (
+        <FlatList
+            data={Object.values(props.profiles)}
+            renderItem={({ item }) => (
                 <ProfileInfoBox
-                    profile={profile}
-                    id={profile.profileId}
-                    key={profile.profileId}
+                    profile={item}
+                    id={item.profileId}
+                    key={item.profileId}
                     onPress={(id) => {
                         setExpanded(expanded != id ? id : null);
                     }}
-                    expanded={expanded === profile.profileId}
+                    expanded={expanded === item.profileId}
                 />
-            ))}
-        </>
+            )}
+            keyExtractor={(item) => item.profileId}
+            style={props.style}
+        />
     );
 };
