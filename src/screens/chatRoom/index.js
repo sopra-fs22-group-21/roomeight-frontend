@@ -78,7 +78,8 @@ export const Chatroom = ({ route, navigation }) => {
                 }}
                 messageIdGenerator={() => 'msg-' + uuidv4()}
                 alwaysShowSend
-                showUserAvatar
+                renderUsernameOnMessage
+                renderAvatar={null}
             />
         </ScreenContainer>
     );

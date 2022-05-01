@@ -58,7 +58,7 @@ const deleteChatFailure = (error) => ({
 /**
  * Attatches a listener to the db where all active chats are stored!
  * @dispatches {@link Constants.CHAT_MEMBERSHIP_LISTENER_STARTED } on request start
- * @dispatches {@link Constant.CHAT_MEMBERSHIP_CHANGE} on changes to the db
+ * @dispatches {@link chatMembershipChange} on changes to the db
  * @returns the unsbscribe object of the ChatIds listener
  */
 export const chatMemberShipListener = () => (dispatch, getState) => {

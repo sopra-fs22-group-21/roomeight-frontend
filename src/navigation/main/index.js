@@ -43,7 +43,6 @@ export default function Route() {
     useEffect(() => {
         console.log('navigation dispatch');
         dispatch(userAuthStateListener());
-        dispatch(chatMemberShipListener());
     }, []);
 
     useEffect(() => {
