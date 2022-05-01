@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     overlay: {
         position: 'absolute',
         bottom: 0,
-        height: '30%',
+        height: '50%',
         width: '100%',
         borderRadius: 20,
     },

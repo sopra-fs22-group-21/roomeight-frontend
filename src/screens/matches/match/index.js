@@ -22,7 +22,7 @@ const Match = ({ route, navigation }) => {
                 {en.matches.heading}
             </SmallHeadingWithBack>
             <Box />
-            <View style={{ flex: 0.8 }}>
+            <Box style={{ flex: 1 }}>
                 <PublicProfileCard
                     profile={profile}
                     isFlat={profile.isAdvertisingRoom}
@@ -50,7 +50,7 @@ const Match = ({ route, navigation }) => {
                         }
                     }}
                 />
-            </View>
+            </Box>
         </ScreenContainer>
     );
 };

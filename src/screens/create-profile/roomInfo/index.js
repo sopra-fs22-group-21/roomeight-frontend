@@ -164,7 +164,7 @@ const RoomInfo = ({ navigation }) => {
                             keyboardType="number-pad"
                             error={rentValid === false}
                             placeholder="CHF"
-                            defaultValue={flat.rent}
+                            defaultValue={flat.rent ? flat.rent + '' : null}
                             onChangeText={(text) => {
                                 setRentValid(!isNaN(Number(text)));
                                 setFlat({
@@ -178,7 +178,9 @@ const RoomInfo = ({ navigation }) => {
                             keyboardType="number-pad"
                             placeholder="m2"
                             error={roomSizeValid === false}
-                            defaultValue={flat.roomSize}
+                            defaultValue={
+                                flat.roomSize ? flat.roomSize + '' : null
+                            }
                             onChangeText={(text) => {
                                 setRoomSizeValid(!isNaN(Number(text)));
                                 setFlat({
@@ -187,28 +189,35 @@ const RoomInfo = ({ navigation }) => {
                                 });
                             }}
                         />
+                        {/*
                         <Input
                             label={en.flatInfo.nrRoommates}
                             keyboardType="number-pad"
+                            defaultValue={flat.numberOfRoommates ? flat.numberOfRoommates+"" : null}
                             onChangeText={(text) => {
                                 setNrRoommatessValid(!isNaN(Number(text)));
                                 setFlat({
                                     ...flat,
-                                    nrRoommates: Number(text),
+                                    numberOfRoommates: Number(text),
                                 });
                             }}
                         />
+                        */}
                         <Input
                             label={en.roomInfo.nrBathrooms}
                             keyboardType="number-pad"
                             placeholder="1"
                             error={nrBathroomsValid === false}
-                            defaultValue={flat.nrBathrooms}
+                            defaultValue={
+                                flat.numberOfBaths
+                                    ? flat.numberOfBaths + ''
+                                    : null
+                            }
                             onChangeText={(text) => {
                                 setNrBathroomsValid(!isNaN(Number(text)));
                                 setFlat({
                                     ...flat,
-                                    nrBathrooms: Number(text),
+                                    numberOfBaths: Number(text),
                                 });
                             }}
                         />

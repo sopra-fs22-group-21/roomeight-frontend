@@ -26,6 +26,7 @@ const AddPictures = ({ navigation, route }) => {
     const { transitUserprofile, transitFlatprofile } = useSelector(
         (state) => state.transitState
     );
+    const { userprofile } = useSelector((state) => state.userprofileState);
     const { loading } = useSelector((state) => state.loadingState);
 
     const [images, setImages] = useState(
@@ -94,7 +95,9 @@ const AddPictures = ({ navigation, route }) => {
         <ScreenContainer
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
-                if (isFlat)
+                if (userprofile.isComplete && isFlat)
+                    navigation.navigate('Done', route.params);
+                else if (isFlat)
                     navigation.navigate(
                         'CompletePersonalProfile',
                         route.params

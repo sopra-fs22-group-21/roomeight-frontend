@@ -5,16 +5,24 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     column1: {
-        paddingRight: 10,
-        width: '45%',
+        paddingRight: 0,
+        flex: 1,
+        //flexShrink: 1,
     },
     column2: {
-        paddingLeft: 10,
-        paddingTop: 10,
-        width: '45%',
+        paddingLeft: -20,
+        paddingTop: 5,
+        flex: 1,
+        transform: [
+            {
+                translateX: 20,
+            },
+        ],
     },
-    column3: {
-        width: '10%',
+    icon: {
+        //position: 'absolute',
+        flex: 0,
+        color: colors.secondary400,
     },
     card: {
         flex: 1,
@@ -31,9 +39,11 @@ const styles = StyleSheet.create({
     },
     image: {
         borderRadius: 20,
-        aspectRatio: 1,
+        aspectRatio: null,
+        flex: 1,
         width: '100%',
         borderColor: 'transparent',
+        //flexShrink: 1,
     },
     tags: {
         paddingLeft: 0,
@@ -46,9 +56,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignSelf: 'center',
     },
-    icon: {
-        right: 0,
-        width: '100%',
+    paginationContainer: {
+        paddingTop: 20,
+        transform: [
+            {
+                translateY: -5,
+            },
+        ],
+    },
+    paginationDots: {
+        width: 7,
+        height: 7,
+        borderRadius: 10,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     /* messageButton: {
         position: 'absolute',

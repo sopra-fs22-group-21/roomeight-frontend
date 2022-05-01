@@ -15,7 +15,6 @@ export const ProfilePicture = (props) => {
                 setImageSource(source);
             }
             loadSource();
-            console.log(imageSource);
         }
     }, [props.image]);
 

@@ -41,8 +41,8 @@ export const ImageCard = (props) => {
                     itemWidth={ITEM_WIDTH}
                     sliderWidth={ITEM_WIDTH}
                     overlay={
-                        props.profile.description &&
-                        props.profile.description.length > 0
+                        props.profile.pictureReferences &&
+                        props.profile.pictureReferences.length > 0
                     }
                 />
                 <View style={styles.row}>

@@ -13,6 +13,11 @@ const options = { headerShown: false };
 
 export const createFlatScreens = [
     {
+        name: 'AccessExistingFlatProfile',
+        component: AccessExistingFlatProfile,
+        options: options,
+    },
+    {
         name: 'AddPictures',
         component: AddPictures,
         options: options,
@@ -45,17 +50,20 @@ export const createFlatScreens = [
         component: Done,
         options: options,
     },
+];
+
+export const chooseStatus = [
     {
-        name: 'AccessExistingFlatProfile',
-        component: AccessExistingFlatProfile,
+        name: 'ChooseStatus',
+        component: ChooseStatus,
         options: options,
     },
 ];
 
-const incompleteScreens = [
+const incompleteScreens = createFlatScreens.concat([
     {
-        name: 'ChooseStatus',
-        component: ChooseStatus,
+        name: 'CompleteSingleProfile',
+        component: CompleteSingleProfile,
         options: options,
     },
     {
@@ -63,11 +71,6 @@ const incompleteScreens = [
         component: CompletePersonalProfile,
         options: options,
     },
-    {
-        name: 'CompleteSingleProfile',
-        component: CompleteSingleProfile,
-        options: options,
-    },
-].concat(createFlatScreens);
+]);
 
 export default incompleteScreens;

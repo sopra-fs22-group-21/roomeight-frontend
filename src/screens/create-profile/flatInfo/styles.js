@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     },
     inner: {
         flex: 1,
-        paddingBottom: 70,
+        // paddingBottom: 70,
     },
 });
 

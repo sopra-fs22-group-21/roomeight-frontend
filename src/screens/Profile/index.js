@@ -17,7 +17,7 @@ const Profile = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
     const loading = useSelector((state) => state.loadingState);
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(userprofile.isAdvertisingRoom ? 1 : 0);
 
     if (!loading) {
         console.log('loading: ' + loading);

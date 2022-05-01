@@ -1,4 +1,4 @@
-import { React, useState, useRef, useEffect } from 'react';
+import { React, useState, useRef, useEffect, useCallback } from 'react';
 import { Dimensions, Pressable, Text, TouchableHighlight } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SingleDetailCard } from '../../../components/singleDetailCard';
@@ -26,10 +26,12 @@ import {
     updateDiscoverProfiles,
 } from '../../../redux/actions/discoverActions';
 import { ScreenContainer } from '../../../components/screenContainer';
+import { useComponentSize } from '../../../hooks/layout';
 
-const ITEM_HEIGHT = Dimensions.get('window').height - 230;
+const ITEM_HEIGHT = Dimensions.get('screen').height - 170;
 
 const Discover = ({ navigation }) => {
+    const [cardSize, getCardSize] = useComponentSize();
     const dispatch = useDispatch();
     const carousel = useRef(null);
     const { discoverProfiles, loading } = useSelector(
@@ -46,7 +48,7 @@ const Discover = ({ navigation }) => {
                 discoverProfiles.concat([{ textIfNoData: en.discover.empty }])
             );
         carousel.current.snapToItem(0, false);
-    }, [discoverProfiles]);
+    }, [loading]);
 
     const removeProfile = (index) => {
         if (index >= 0 && profiles.length > 0) {
@@ -76,13 +78,14 @@ const Discover = ({ navigation }) => {
             return <EmptyCard textIfNoData={item.textIfNoData} />;
         else
             return (
-                <>
-                    <PublicProfileCard
-                        profile={item}
-                        key={item.profileId}
-                        onDoubleTap={() => handleLike(item.profileId)}
-                    />
-                    <Box />
+                <View style={{ height: '100%' }}>
+                    <Box style={{ flex: 1, flexGrow: 1 }}>
+                        <PublicProfileCard
+                            profile={item}
+                            key={item.profileId}
+                            onDoubleTap={() => handleLike(item.profileId)}
+                        />
+                    </Box>
                     <LikeButtons
                         onLike={() => handleLike(item.profileId)}
                         onDislike={() => handleDislike()}
@@ -92,25 +95,32 @@ const Discover = ({ navigation }) => {
                             <Icon name="favorite" size={200} color={'white'} />
                         </View>
                     ) : null}
-                </>
+                </View>
             );
     };
 
     return (
         <ScreenContainer navigation={navigation} showNavBar>
-            <SmallHeading>Discover</SmallHeading>
-            <Box />
-            <Carousel
-                ref={carousel}
-                data={profiles}
-                renderItem={card}
-                sliderHeight={ITEM_HEIGHT}
-                itemHeight={ITEM_HEIGHT}
-                inactiveSlideShift={0}
-                useScrollView={true}
-                vertical
-                onSnapToItem={(index) => removeProfile(index - 1)}
-            />
+            <View style={{ height: '100%', flex: 1 }} onLayout={getCardSize}>
+                <SmallHeading>Discover</SmallHeading>
+                <Box />
+                <Carousel
+                    ref={carousel}
+                    data={profiles}
+                    renderItem={card}
+                    sliderHeight={
+                        cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
+                    }
+                    itemHeight={
+                        cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
+                    }
+                    activeSlideAlignment="start"
+                    inactiveSlideShift={0}
+                    useScrollView
+                    vertical
+                    onSnapToItem={(index) => removeProfile(index - 1)}
+                />
+            </View>
         </ScreenContainer>
     );
 };
