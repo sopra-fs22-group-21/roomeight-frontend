@@ -58,9 +58,9 @@ const Signup = ({ navigation }) => {
                 valid={emailValid}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                onChangeText={(text) => {
-                    setUser({ ...user, email: text });
-                    if (emailRegex.test(text)) setEmailValid(true);
+                onChangeText={(newText) => {
+                    setUser({ ...user, email: newText });
+                    if (emailRegex.test(newText)) setEmailValid(true);
                     else setEmailValid(null);
                 }}
             />
@@ -73,9 +73,9 @@ const Signup = ({ navigation }) => {
                 onEndEditing={() => {
                     if (password != '') setPasswordValid(password.length >= 8);
                 }}
-                onChangeText={(text) => {
-                    setPassword(text);
-                    if (text.length >= 8) setPasswordValid(true);
+                onChangeText={(newText) => {
+                    setPassword(newText);
+                    if (newText.length >= 8) setPasswordValid(true);
                     else setPasswordValid(null);
                 }}
                 secureTextEntry={true}
@@ -93,11 +93,14 @@ const Signup = ({ navigation }) => {
                         );
                 }}
                 secureTextEntry={true}
-                onChangeText={(text) => {
-                    setUser({ ...user, password: text });
-                    if (text.length >= password.length && password != text)
+                onChangeText={(newText) => {
+                    setUser({ ...user, password: newText });
+                    if (
+                        newText.length >= password.length &&
+                        password != newText
+                    )
                         setRepeatValid(false);
-                    else if (text == password) setRepeatValid(true);
+                    else if (newText == password) setRepeatValid(true);
                     else setRepeatValid(null);
                 }}
             />
@@ -113,7 +116,9 @@ const Signup = ({ navigation }) => {
                 valid={user.firstName && user.firstName != ''}
                 autoComplet="name-given"
                 autoCapitalize="words"
-                onChangeText={(text) => setUser({ ...user, firstName: text })}
+                onChangeText={(newText) =>
+                    setUser({ ...user, firstName: newText })
+                }
             />
             <Input
                 key="lastName"
@@ -122,7 +127,9 @@ const Signup = ({ navigation }) => {
                 valid={user.lastName && user.lastName != ''}
                 autoComplet="name-family"
                 autoCapitalize="words"
-                onChangeText={(text) => setUser({ ...user, lastName: text })}
+                onChangeText={(newText) =>
+                    setUser({ ...user, lastName: newText })
+                }
             />
             <Input
                 key="phone"
@@ -136,9 +143,9 @@ const Signup = ({ navigation }) => {
                     if (user.phoneNumber != '')
                         setPhoneValid(phoneRegex.test(user.phoneNumber));
                 }}
-                onChangeText={(text) => {
-                    setUser({ ...user, phoneNumber: text });
-                    if (phoneRegex.test(text)) setPhoneValid(true);
+                onChangeText={(newText) => {
+                    setUser({ ...user, phoneNumber: newText });
+                    if (phoneRegex.test(newText)) setPhoneValid(true);
                     else setPhoneValid(null);
                 }}
             />

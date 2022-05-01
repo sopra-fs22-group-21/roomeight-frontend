@@ -41,7 +41,6 @@ export const getFlatprofile = (id) => (dispatch) => {
     apiClient()
         .get(`/flatprofiles/${id}`)
         .then((response) => {
-            flatprofile = response.data;
             dispatch(getFlatprofileSuccess(response.data));
         })
         .catch((error) => {
@@ -58,11 +57,9 @@ export const getFlatprofile = (id) => (dispatch) => {
 export const getAllFlatProfiles = () => (dispatch) => {
     const url = '/flatprofiles/';
     dispatch(getAllFlatprofilesRequest());
-    let flatprofiles = [];
     apiClient()
         .get(url)
         .then((response) => {
-            flatprofiles = response.data;
             dispatch(getAllFlatprofilesSuccess(response.data));
         })
         .catch((error) => {

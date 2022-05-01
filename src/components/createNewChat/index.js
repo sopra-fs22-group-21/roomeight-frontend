@@ -33,7 +33,7 @@ function filterExisting(chats, matches) {
     }
 }
 
-const CreateNewChat = (props) => {
+const CreateNewChat = (_props) => {
     const { isOpen, onOpen, onClose } = useDisclose();
     const { isSearchingRoom } = useSelector(
         (state) => state.userprofileState.userprofile

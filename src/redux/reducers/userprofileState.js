@@ -1,5 +1,4 @@
 import * as Constants from '../constants';
-import Userprofile from '../../models/Userprofile';
 
 const initialState = {
     userprofile: {},

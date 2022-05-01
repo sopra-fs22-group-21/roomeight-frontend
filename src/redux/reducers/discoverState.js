@@ -32,6 +32,7 @@ const userprofileState = (state = initialState, action) => {
             };
 
         case Constants.GET_ALL_USERPROFILES_FAILURE:
+        case Constants.GET_ALL_FLATPROFILES_FAILURE:
             return {
                 ...state,
                 error: action.payload,
@@ -44,13 +45,6 @@ const userprofileState = (state = initialState, action) => {
                 discoverProfiles: action.payload.map(
                     (data) => new Flatprofile(data)
                 ),
-                loading: false,
-            };
-
-        case Constants.GET_ALL_FLATPROFILES_FAILURE:
-            return {
-                ...state,
-                error: action.payload,
                 loading: false,
             };
 

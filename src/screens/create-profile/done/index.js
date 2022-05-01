@@ -34,8 +34,6 @@ const Done = ({ navigation, route }) => {
         );
     };
 
-    const joinFlat = () => {};
-
     return (
         <ScreenContainer onPressBack={() => navigation.goBack()}>
             <Loader loading={loading} color={colors.secondary500} />
