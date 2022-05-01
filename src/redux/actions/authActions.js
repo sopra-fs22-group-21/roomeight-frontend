@@ -6,6 +6,7 @@ import {
 import { auth } from '../../../firebase/firebase-config';
 import * as Constants from '../constants';
 import { getCurrentUserprofile } from './getUserprofiles';
+import { chatMemberShipListener } from './chatActions';
 
 // intermediary actions for redux
 
@@ -66,6 +67,7 @@ export const userAuthStateListener = () => (dispatch) => {
             console.log('logged in');
             dispatch(loginUserSuccess(user));
             dispatch(getCurrentUserprofile());
+            dispatch(chatMemberShipListener());
         } else {
             //no user logged in
             dispatch(logoutUserSuccess());
