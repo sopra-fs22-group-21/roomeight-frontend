@@ -11,6 +11,14 @@ import AccessExistingFlatProfile from '../../screens/create-profile/accessExisti
 
 const options = { headerShown: false };
 
+export const addRoomieScreens = [
+    {
+        name: 'AddRoomie',
+        component: AddRoomie,
+        options: options,
+    },
+];
+
 export const createFlatScreens = [
     {
         name: 'AccessExistingFlatProfile',
@@ -41,16 +49,11 @@ export const createFlatScreens = [
         options: options,
     },
     {
-        name: 'AddRoomie',
-        component: AddRoomie,
-        options: options,
-    },
-    {
         name: 'Done',
         component: Done,
         options: options,
     },
-];
+].concat(addRoomieScreens);
 
 export const chooseStatus = [
     {

@@ -73,7 +73,7 @@ const Profile = ({ navigation }) => {
             {index === 0 ? (
                 <SingleProfile />
             ) : flatprofile.profileId ? (
-                <FlatProfile />
+                <FlatProfile navigation={navigation} />
             ) : (
                 <AddFlatInProfile navigation={navigation} />
             )}

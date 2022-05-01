@@ -17,7 +17,6 @@ import tags from '../../resources/strings/tags';
 import tagIcons from '../../resources/icons/tagIcons';
 import { InputBox, InputLabel } from '../input';
 import { DoubleTap } from '../doubleTap';
-import { ScrollView } from 'react-native-gesture-handler';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { SecondaryButton } from '../button';
 import { Icon } from 'react-native-elements';
@@ -137,6 +136,16 @@ export const FlatDetailCard = (props) => {
                 <Box style={{ flexShrink: 1 }}>
                     <Strong>{en.discover.roommates}</Strong>
                     <Profiles profiles={flatprofile.roomMates} />
+                    {props.onClickAddRoomie ? (
+                        <Pressable onPress={props.onClickAddRoomie}>
+                            <Icon
+                                name="plus-circle"
+                                type="feather"
+                                size={25}
+                                color={styles.icon.color}
+                            />
+                        </Pressable>
+                    ) : null}
                 </Box>
                 <DoubleTap
                     doubleTap={props.onDoubleTap}

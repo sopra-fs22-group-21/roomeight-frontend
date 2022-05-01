@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from 'react';
 import { View, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
-import tagIcons from '../../resources/icons/tagIcons';
 import { Name, Screen, Heading, Title, Box } from '../theme';
 import styles from './styles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -12,17 +11,12 @@ import Tags from '../../components/tags';
 import DateInput from '../../components/dateInput';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 import { updateProfile } from '../../redux/actions/updateActions';
-import dateFormat from 'dateformat';
 import { PublicProfileCard } from '../publicProfileCard';
-import Constants from 'expo-constants';
-import * as ImagePicker from 'expo-image-picker';
-import Carousel from 'react-native-snap-carousel/src/carousel/Carousel';
-import PictureInput from '../../components/pictureInput';
 import { PictureInputGallery } from '../pictureInputGallery';
 import { AddRoomieInput } from '../addRoomieInput';
 import { postRoommateToFlat } from '../../redux/actions/postFlatprofile';
 
-const FlatProfile = (props) => {
+const FlatProfile = ({ navigation }, props) => {
     useEffect(() => {}, []);
 
     const dispatch = useDispatch();
@@ -30,16 +24,13 @@ const FlatProfile = (props) => {
 
     const [moveInDateValid, setmoveInDateValid] = useState(null);
     const [moveOutDateValid, setMoveOutDateValid] = useState(null);
-    const [description, setDescription] = useState(null);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
     const { transitFlatprofile } = useSelector((state) => state.transitState);
     const [flat, setFlat] = useState({});
     const [addressValid, setAddressValid] = useState(true);
     const [rentValid, setRentValid] = useState(null);
     const [roomSizeValid, setRoomSizeValid] = useState(null);
-    const [nrRoommatesValid, setNrRoommatesValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
-    let selectedTagsFlat = [];
     const [editMode, setEditMode] = useState(false);
 
     function changeToTemporary() {
@@ -255,12 +246,15 @@ const FlatProfile = (props) => {
     } else {
         return (
             <PublicProfileCard
-                profile={flatprofile} //true????
+                profile={flatprofile}
                 onClickEdit={() => {
                     setEditMode(true);
                 }}
                 isFlat={true}
                 showDetailsFirst={true}
+                onClickAddRoomie={() => {
+                    navigation.navigate('AddRoomie', 'profile');
+                }}
             />
         );
     }

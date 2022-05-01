@@ -8,6 +8,7 @@ import loadingScreens from '../loadingScreens';
 import incompleteScreens, {
     createFlatScreens,
     chooseStatus,
+    addRoomieScreens,
 } from '../incompleteScreens';
 import homeScreens from '../homeScreens';
 import { chatMemberShipListener } from '../../redux/actions/chatActions';
@@ -69,7 +70,9 @@ export default function Route() {
             userprofile.flatId &&
             userprofile.flatId != ''
         )
-            setCurrentComponents(createScreens(homeScreens));
+            setCurrentComponents(
+                createScreens(homeScreens.concat(addRoomieScreens))
+            );
         else if (Object.keys(userprofile).length > 0)
             setCurrentComponents(
                 createScreens(homeScreens.concat(createFlatScreens))
