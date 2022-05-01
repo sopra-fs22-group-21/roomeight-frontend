@@ -20,7 +20,6 @@ const CreateFlat = ({ navigation }) => {
     const dispatch = useDispatch();
     const { transitFlatprofile } = useSelector((state) => state.transitState);
     const [flat, setFlat] = useState(transitFlatprofile);
-    console.log(flat);
 
     return (
         <ScreenContainer

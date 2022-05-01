@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userAuthStateListener } from '../../redux/actions/authActions';
 import loggedOutScreens from '../loggedOutScreens';
 import loadingScreens from '../loadingScreens';
-import incompleteScreens, { createFlatScreens } from '../incompleteScreens';
+import incompleteScreens, {
+    createFlatScreens,
+    chooseStatus,
+} from '../incompleteScreens';
 import homeScreens from '../homeScreens';
 import { chatMemberShipListener } from '../../redux/actions/chatActions';
 
@@ -49,9 +52,23 @@ export default function Route() {
             setCurrentComponents(createScreens(loggedOutScreens));
         else if (Object.keys(userprofile).length === 0)
             setCurrentComponents(createScreens(loadingScreens));
-        else if (userprofile.isComplete === false)
+        else if (
+            userprofile.isComplete === false &&
+            userprofile.flatId.length < 1
+        )
+            setCurrentComponents(
+                createScreens(chooseStatus.concat(incompleteScreens))
+            );
+        else if (
+            userprofile.isComplete === false &&
+            userprofile.flatId.length > 0
+        )
             setCurrentComponents(createScreens(incompleteScreens));
-        else if (userprofile.flatId && userprofile.flatId != '')
+        else if (
+            userprofile.isComplete &&
+            userprofile.flatId &&
+            userprofile.flatId != ''
+        )
             setCurrentComponents(createScreens(homeScreens));
         else if (Object.keys(userprofile).length > 0)
             setCurrentComponents(

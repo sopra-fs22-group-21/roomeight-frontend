@@ -112,7 +112,6 @@ export const FlatDetailCard = (props) => {
                             paddingBottom: 30,
                         }}
                         renderItem={({ item }) => {
-                            console.log(item);
                             return item ? (
                                 <View style={{ width: '50%' }}>
                                     <Strong style={styles.title}>

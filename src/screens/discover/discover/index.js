@@ -28,6 +28,8 @@ import {
 import { ScreenContainer } from '../../../components/screenContainer';
 import { useComponentSize } from '../../../hooks/layout';
 
+const ITEM_HEIGHT = Dimensions.get('screen').height - 170;
+
 const Discover = ({ navigation }) => {
     const [cardSize, getCardSize] = useComponentSize();
     const dispatch = useDispatch();
@@ -46,7 +48,7 @@ const Discover = ({ navigation }) => {
                 discoverProfiles.concat([{ textIfNoData: en.discover.empty }])
             );
         carousel.current.snapToItem(0, false);
-    }, [discoverProfiles]);
+    }, [loading]);
 
     const removeProfile = (index) => {
         if (index >= 0 && profiles.length > 0) {
@@ -106,11 +108,15 @@ const Discover = ({ navigation }) => {
                     ref={carousel}
                     data={profiles}
                     renderItem={card}
-                    sliderHeight={cardSize.height ? cardSize.height - 70 : 0}
-                    itemHeight={cardSize.height ? cardSize.height - 70 : 0}
+                    sliderHeight={
+                        cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
+                    }
+                    itemHeight={
+                        cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
+                    }
                     activeSlideAlignment="start"
                     inactiveSlideShift={0}
-                    useScrollView={true}
+                    useScrollView
                     vertical
                     onSnapToItem={(index) => removeProfile(index - 1)}
                 />

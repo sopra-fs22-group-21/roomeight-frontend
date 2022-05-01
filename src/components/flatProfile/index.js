@@ -19,6 +19,8 @@ import * as ImagePicker from 'expo-image-picker';
 import Carousel from 'react-native-snap-carousel/src/carousel/Carousel';
 import PictureInput from '../../components/pictureInput';
 import { PictureInputGallery } from '../pictureInputGallery';
+import { AddRoomieInput } from '../addRoomieInput';
+import { postRoommateToFlat } from '../../redux/actions/postFlatprofile';
 
 const FlatProfile = (props) => {
     useEffect(() => {}, []);
@@ -30,6 +32,7 @@ const FlatProfile = (props) => {
     const [moveOutDateValid, setMoveOutDateValid] = useState(null);
     const [description, setDescription] = useState(null);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
+    const { transitFlatprofile } = useSelector((state) => state.transitState);
     const [flat, setFlat] = useState({});
     const [addressValid, setAddressValid] = useState(true);
     const [rentValid, setRentValid] = useState(null);
@@ -152,7 +155,7 @@ const FlatProfile = (props) => {
                             keyboardType="number-pad"
                             error={rentValid === false}
                             placeholder="CHF"
-                            defaultValue={flatprofile.rent}
+                            defaultValue={flatprofile.rent + ''}
                             onChangeText={(text) => {
                                 setRentValid(!isNaN(Number(text)));
                                 setFlat({
@@ -166,7 +169,7 @@ const FlatProfile = (props) => {
                             keyboardType="number-pad"
                             placeholder="m2"
                             error={roomSizeValid === false}
-                            defaultValue={flatprofile.roomSize}
+                            defaultValue={flatprofile.roomSize + ''}
                             onChangeText={(text) => {
                                 setRoomSizeValid(!isNaN(Number(text)));
                                 setFlat({
@@ -186,6 +189,9 @@ const FlatProfile = (props) => {
                                 }
                             />
                         </InputBox>
+                        <AddRoomieInput />
+                        <Box />
+                        {/*
                         <Input
                             label={en.flatInfo.nrRoommates}
                             keyboardType="number-pad"
@@ -198,12 +204,12 @@ const FlatProfile = (props) => {
                                     numberOfRoommates: Number(text),
                                 });
                             }}
-                        />
+                        /> */}
                         <Input
                             label={en.roomInfo.nrBathrooms}
                             keyboardType="number-pad"
                             error={nrBathroomsValid === false}
-                            defaultValue={flatprofile.numberOfBaths}
+                            defaultValue={flatprofile.numberOfBaths + ''}
                             onChangeText={(text) => {
                                 setNrBathroomsValid(!isNaN(Number(text)));
                                 setFlat({
@@ -229,7 +235,6 @@ const FlatProfile = (props) => {
                 <Box style={styles.space}></Box>
                 <PrimaryButton
                     onPress={() => {
-                        console.log(flat);
                         setEditMode(false);
                         dispatch(
                             updateProfile(
@@ -237,6 +242,9 @@ const FlatProfile = (props) => {
                                 'flatprofile',
                                 flatprofile.profileId
                             )
+                        );
+                        transitFlatprofile.roommateEmails.forEach((email) =>
+                            dispatch(postRoommateToFlat(email))
                         );
                     }}
                 >

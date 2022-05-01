@@ -51,7 +51,7 @@ export const SingleDetailCard = (props) => {
     }, [contentSize, cardSize]);
 
     useEffect(() => {
-        setSecondPageNeeded(false);
+        if (props.onClickEdit) setSecondPageNeeded(false);
     }, [userprofile]);
 
     const profilePictureAndBio = (
