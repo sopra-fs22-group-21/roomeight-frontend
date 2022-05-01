@@ -11,20 +11,19 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         //transform: [{translateY: 10}]
     },
-    view: {
-        padding: 0,
-        backgroundColor: colors.primary700,
-        opacity: 0.7,
-    },
     active: {
         backgroundColor: 'white',
         borderRadius: 1000,
-        width: '160%',
+        width: '50%',
         height: 50,
         position: 'absolute',
-        bottom: -40,
-        left: '-30%',
+        bottom: -41,
+        //left: '10%',
         transform: [{ scaleY: 0.3 }],
+    },
+    pressable: {
+        flex: 1,
+        alignItems: 'center',
     },
 });
 

@@ -40,7 +40,7 @@ const Discover = ({ navigation }) => {
                 discoverProfiles.concat([{ textIfNoData: en.discover.empty }])
             );
         carousel.current.snapToItem(0, false);
-    }, [loading]);
+    }, [loading, discoverProfiles]);
 
     const removeProfile = (index) => {
         if (index >= 0 && profiles.length > 0) {

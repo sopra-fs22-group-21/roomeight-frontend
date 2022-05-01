@@ -40,19 +40,31 @@ const NavBar = ({ navigation }, props) => {
     const active = <View style={styles.active} />;
     return (
         <View style={{ ...styles.container, ...props.style }}>
-            <Pressable onPress={() => navigation.navigate('Discover')}>
+            <Pressable
+                onPress={() => navigation.navigate('Discover')}
+                style={styles.pressable}
+            >
                 {discoverIcon}
                 {route.includes('Discover') ? active : null}
             </Pressable>
-            <Pressable onPress={() => navigation.navigate('Matches')}>
+            <Pressable
+                onPress={() => navigation.navigate('Matches')}
+                style={styles.pressable}
+            >
                 {matchesIcon}
                 {route.includes('Match') ? active : null}
             </Pressable>
-            <Pressable onPress={() => navigation.navigate('Chat')}>
+            <Pressable
+                onPress={() => navigation.navigate('Chat')}
+                style={styles.pressable}
+            >
                 {chatIcon}
                 {route.includes('Chat') ? active : null}
             </Pressable>
-            <Pressable onPress={() => navigation.navigate('Profile')}>
+            <Pressable
+                onPress={() => navigation.navigate('Profile')}
+                style={styles.pressable}
+            >
                 {profileIcon}
                 {route.includes('Profile') ? active : null}
             </Pressable>

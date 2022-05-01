@@ -52,11 +52,15 @@ const Done = ({ navigation, route }) => {
                             else if (
                                 route.params.includes('single') ||
                                 !userprofile.isComplete
-                            )
+                            ) {
                                 updateSingleprofile();
-                            if (route.params.includes('flat'))
-                                dispatch(postFlatprofile(transitFlatprofile));
-                            navigation.navigate('Discover');
+                                navigation.navigate('Discover');
+                            }
+                            if (route.params.includes('flat')) {
+                                dispatch(
+                                    postFlatprofile(transitFlatprofile)
+                                ).then(() => navigation.navigate('Discover'));
+                            }
                         }}
                     >
                         {en.done.start}
