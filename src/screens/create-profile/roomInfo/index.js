@@ -55,7 +55,7 @@ const RoomInfo = ({ navigation }) => {
             nextDisabled={
                 !flat.address ||
                 flat.address.length < 1 ||
-                //addressValid === false ||
+                addressValid === false ||
                 moveInDateValid === false ||
                 moveOutDateValid === false ||
                 rentValid === false ||
@@ -74,7 +74,7 @@ const RoomInfo = ({ navigation }) => {
                             label={en.roomInfo.address}
                             error={addressValid === false}
                             defaultValue={flat.address}
-                            onChangeText={(text) => {
+                            onEndEditing={(text) => {
                                 setFlat({
                                     ...flat,
                                     address: text,

@@ -69,7 +69,7 @@ export const chatMemberShipListener = () => (dispatch, getState) => {
     const chatReference = ref(database, `/memberships/${uid}`);
     return onChildAdded(chatReference, (snapshot) => {
         const chatId = snapshot.key;
-        console.log('chatid:', chatId);
+        console.log('chatid', chatId);
         if (snapshot.exists()) {
             dispatch(chatMembershipChange(chatId));
             dispatch(chatInfoListener(chatId));
@@ -220,7 +220,7 @@ export const createChat = (profileId) => (dispatch, getState) => {
     if (profileId.startsWith('flt$')) {
         //want to chat with flat
         let matchprofile = userprofile.matches[profileId];
-        let roomMates = Object.keys(matchprofile.roomMates);
+        let roomMates = matchprofile.roomMates; //todo: object.keys
         roomMates.forEach((mateId) => (chatInfo['members'][mateId] = true));
         chatInfo = {
             ...chatInfo,
@@ -239,7 +239,8 @@ export const createChat = (profileId) => (dispatch, getState) => {
         membershipUpdate[
             `/memberships/${userprofile.profileId}/${chatId}`
         ] = true;
-        Object.keys(matchprofile.roomMates).forEach((userId) => {
+        matchprofile.roomMates.forEach((userId) => {
+            //todo: object.keys
             membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
         });
     } else {

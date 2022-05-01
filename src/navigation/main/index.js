@@ -48,8 +48,7 @@ export default function Route() {
 
     useEffect(() => {
         console.log(loading);
-        if (!loggedIn && !loading)
-            setCurrentComponents(createScreens(loggedOutScreens));
+        if (!loggedIn) setCurrentComponents(createScreens(loggedOutScreens));
         else if (Object.keys(userprofile).length === 0)
             setCurrentComponents(createScreens(loadingScreens));
         else if (

@@ -14,14 +14,15 @@ export const AddressMap = (props) => {
     useEffect(async () => {
         try {
             let json;
-            // json = await Geocoder.from(props.address);
+            json = await Geocoder.from(props.address);
             let location = json.results[0].geometry.location;
             setCoordinates(location);
-            props.onSuccess(location);
+            if (props.onSuccess) props.onSuccess(location);
+            console.log(location);
             setFound(true);
         } catch (error) {
             console.warn(error);
-            props.onError(error);
+            if (props.onError) props.onError(error);
             setFound(false);
         }
     }, [props.address]);
