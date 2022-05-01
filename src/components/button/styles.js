@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
     primary: {
         borderRadius: 20,
-        backgroundColor: '#0E7490',
+        backgroundColor: colors.primary700,
     },
     primaryPressed: {
         backgroundColor: '#0c6076',

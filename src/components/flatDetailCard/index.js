@@ -42,6 +42,7 @@ export const FlatDetailCard = (props) => {
         let flatInfos = [];
         if (flatprofile.moveInDate) {
             flatInfos.push({
+                key: 0,
                 label: en.roomInfo.moveInDate,
                 value: dateFormat(
                     new Date(flatprofile.moveInDate),
@@ -51,6 +52,7 @@ export const FlatDetailCard = (props) => {
         }
         if (!flatprofile.permanent && flatprofile.moveOutDate) {
             flatInfos.push({
+                key: 1,
                 label: en.discover.temporary,
                 value: dateFormat(
                     new Date(flatprofile.moveOutDate),
@@ -60,18 +62,21 @@ export const FlatDetailCard = (props) => {
         }
         if (flatprofile.rent) {
             flatInfos.push({
+                key: 2,
                 label: en.roomInfo.rent,
                 value: flatprofile.rent + ' CHF',
             });
         }
         if (flatprofile.roomSize) {
             flatInfos.push({
+                key: 3,
                 label: en.roomInfo.roomSize,
                 value: flatprofile.roomSize + ' m\u00b2',
             });
         }
         if (flatprofile.numberOfBaths) {
             flatInfos.push({
+                key: 4,
                 label: en.roomInfo.nrBathrooms,
                 value: flatprofile.numberOfBaths,
             });
@@ -113,7 +118,7 @@ export const FlatDetailCard = (props) => {
                         }}
                         renderItem={({ item }) => {
                             return item ? (
-                                <View style={{ width: '50%' }}>
+                                <View style={{ width: '50%' }} key={item.key}>
                                     <Strong style={styles.title}>
                                         {item.label}
                                     </Strong>
@@ -123,7 +128,6 @@ export const FlatDetailCard = (props) => {
                                 </View>
                             ) : null;
                         }}
-                        keyExtractor={({ index }) => index}
                         useScrollView
                         scrollEnabled
                     />

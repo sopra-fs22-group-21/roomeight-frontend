@@ -216,7 +216,7 @@ export const createChat = (profileId) => (dispatch, getState) => {
     if (profileId.startsWith('flt$')) {
         //want to chat with flat
         let matchprofile = userprofile.matches[profileId];
-        let roomMates = matchprofile.roomMates;
+        let roomMates = matchprofile.roomMates; //todo: object.keys
         roomMates.forEach((mateId) => (chatInfo['members'][mateId] = true));
         chatInfo = {
             ...chatInfo,
@@ -236,6 +236,7 @@ export const createChat = (profileId) => (dispatch, getState) => {
             `/memberships/${userprofile.profileId}/${chatId}`
         ] = true;
         matchprofile.roomMates.forEach((userId) => {
+            //todo: object.keys
             membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
         });
     } else {
