@@ -75,7 +75,7 @@ export const ProfileInfoBox = (props) => {
 };
 
 export const Profiles = (props) => {
-    if (!props.profiles || props.profiles[0] != '') return null;
+    if (!props.profiles || Array.isArray(props.profiles)) return null;
 
     const [expanded, setExpanded] = useState(null);
     return (
