@@ -1,6 +1,7 @@
 import { auth } from '../../../firebase/firebase-config';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
+import { updateDiscoverProfiles } from './discoverActions';
 import { getAllFlatProfiles, getFlatprofile } from './getFlatprofiles';
 
 const getCurrentUserprofileRequest = (request) => ({
@@ -91,7 +92,7 @@ export const reloadCurrentUserprofile = () => (dispatch) => {
  * @dispatches {@link getAllUserprofilesSuccess} on request success with userprofile payload
  * @dispatches {@link getAllUserprofilesFailure} on request failure with error payload
  */
-export const getAllUserprofiles = () => (dispatch) => {
+export const getAllUserprofiles = () => (dispatch, getState) => {
     const url = '/userprofiles/';
     dispatch(
         getAllUserprofilesRequest({
@@ -104,6 +105,16 @@ export const getAllUserprofiles = () => (dispatch) => {
         .get(url)
         .then((response) => {
             dispatch(getAllUserprofilesSuccess(response.data));
+            dispatch(
+                updateDiscoverProfiles(
+                    response.data.filter(
+                        (profile) =>
+                            !Object.keys(
+                                getState().matchesState.matches
+                            ).includes(profile.profileId)
+                    )
+                )
+            );
         })
         .catch((error) => {
             dispatch(getAllUserprofilesFailure(error));

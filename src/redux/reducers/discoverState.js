@@ -22,15 +22,6 @@ const userprofileState = (state = initialState, action) => {
                 ...state,
                 loading: true,
             };
-        case Constants.GET_ALL_USERPROFILES_SUCCESS:
-            return {
-                ...state,
-                discoverProfiles: action.payload.map(
-                    (data) => new Userprofile(data)
-                ),
-                loading: false,
-            };
-
         case Constants.GET_ALL_USERPROFILES_FAILURE:
         case Constants.GET_ALL_FLATPROFILES_FAILURE:
             return {
@@ -38,20 +29,21 @@ const userprofileState = (state = initialState, action) => {
                 error: action.payload,
                 loading: false,
             };
-
+        case Constants.GET_ALL_USERPROFILES_SUCCESS:
         case Constants.GET_ALL_FLATPROFILES_SUCCESS:
             return {
                 ...state,
-                discoverProfiles: action.payload.map(
-                    (data) => new Flatprofile(data)
-                ),
+                error: undefined,
                 loading: false,
             };
 
         case Constants.UPDATE_DISCOVER_PROFILES:
             return {
                 ...state,
-                discoverProfiles: action.payload,
+                discoverProfiles: action.payload.map(
+                    (data) => new Userprofile(data)
+                ),
+                loading: false,
             };
 
         default:
