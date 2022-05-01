@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userAuthStateListener } from '../../redux/actions/authActions';
 import loggedOutScreens from '../loggedOutScreens';
@@ -13,19 +13,12 @@ export default function Route() {
     const Stack = createStackNavigator();
 
     const { auth, loggedIn } = useSelector((state) => state.authState);
-    const loading = useSelector((state) => state.loadingState);
+    const { loading } = useSelector((state) => state.loadingState);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { profileCompletionStatus } = useSelector(
         (state) => state.transitState
     );
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        console.log('navigation dispatch');
-        dispatch(userAuthStateListener());
-        dispatch(chatMemberShipListener());
-    }, []);
-
     const createScreens = (screens) => {
         return (
             <>
@@ -41,21 +34,37 @@ export default function Route() {
         );
     };
 
-    const getUserStatus = () => {
-        if (!loggedIn) return createScreens(loggedOutScreens);
-        if (!userprofile) return createScreens(loadingScreens);
-        if (!userprofile.isComplete) return createScreens(incompleteScreens);
-        if (userprofile.flatId != '') return createScreens(homeScreens);
-        if (userprofile)
-            return createScreens(homeScreens.concat(createFlatScreens));
-    };
+    const [currentComponents, setCurrentComponents] = useState(
+        createScreens(loadingScreens)
+    );
+    useEffect(() => {
+        console.log('navigation dispatch');
+        dispatch(userAuthStateListener());
+        dispatch(chatMemberShipListener());
+    }, []);
+
+    useEffect(() => {
+        console.log(loading);
+        if (!loggedIn && !loading)
+            setCurrentComponents(createScreens(loggedOutScreens));
+        else if (Object.keys(userprofile).length === 0)
+            setCurrentComponents(createScreens(loadingScreens));
+        else if (userprofile.isComplete === false)
+            setCurrentComponents(createScreens(incompleteScreens));
+        else if (userprofile.flatId && userprofile.flatId != '')
+            setCurrentComponents(createScreens(homeScreens));
+        else if (Object.keys(userprofile).length > 0)
+            setCurrentComponents(
+                createScreens(homeScreens.concat(createFlatScreens))
+            );
+    }, [userprofile, loggedIn, loading]);
 
     return (
         <NavigationContainer>
             <Stack.Navigator
                 screenOptions={{ cardStyle: { backgroundColor: 'white' } }}
             >
-                {getUserStatus()}
+                {currentComponents}
             </Stack.Navigator>
         </NavigationContainer>
     );

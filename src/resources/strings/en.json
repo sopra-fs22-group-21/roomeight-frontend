@@ -70,8 +70,8 @@
         "pets": "bringing pets",
         "party": "party person",
         "smoker": "smoker",
-        "woko": "WOKO ready",
-        "juwo": "JUWO ready",
+        "woko": "WOKO",
+        "juwo": "JUWO",
         "student": "mainly student",
         "plants": "bringing plants",
         "art": "bringing art",
@@ -80,7 +80,8 @@
         "instruments": "instruments",
         "cleanliness": "cleanliness",
         "coffee": "coffee",
-        "wine": "wine"
+        "wine": "wine",
+        "peaceful": "peaceful"
     },
     "completeFlatProfile": {
         "heading": "Tell us something about your flat",

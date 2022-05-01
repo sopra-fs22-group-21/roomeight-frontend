@@ -61,7 +61,7 @@ export const FlatDetailCard = (props) => {
         if (flatprofile.rent) {
             flatInfos.push({
                 label: en.roomInfo.rent,
-                value: flatprofile.rent,
+                value: flatprofile.rent + ' CHF',
             });
         }
         if (flatprofile.roomSize) {
@@ -98,12 +98,11 @@ export const FlatDetailCard = (props) => {
                 <Box />
                 <View>
                     {flatprofile.biography ? (
-                        <View>
-                            <Box />
+                        <Box>
                             <NormalText style={styles.text}>
                                 {flatprofile.biography}
                             </NormalText>
-                        </View>
+                        </Box>
                     ) : null}
 
                     <FlatList
@@ -112,8 +111,9 @@ export const FlatDetailCard = (props) => {
                         columnWrapperStyle={{
                             paddingBottom: 30,
                         }}
-                        renderItem={({ item }) =>
-                            item ? (
+                        renderItem={({ item }) => {
+                            console.log(item);
+                            return item ? (
                                 <View style={{ width: '50%' }}>
                                     <Strong style={styles.title}>
                                         {item.label}
@@ -122,9 +122,11 @@ export const FlatDetailCard = (props) => {
                                         {item.value}
                                     </NormalText>
                                 </View>
-                            ) : null
-                        }
+                            ) : null;
+                        }}
                         keyExtractor={({ index }) => index}
+                        useScrollView
+                        scrollEnabled
                     />
                 </View>
             </View>
@@ -153,14 +155,16 @@ export const FlatDetailCard = (props) => {
                         </Box>
                     ) : null}
 
-                    {flatprofile.tags.length > 0 ? (
+                    {flatprofile.tags && flatprofile.tags.length > 0 ? (
                         <Box>
                             <Strong>{en.discover.tags}</Strong>
                             <Tags tags={selectedTags} style={styles.tags} />
                         </Box>
                     ) : null}
 
-                    {flatprofile.numberOfRoommates ? (
+                    {flatprofile.roomMates &&
+                    flatprofile.numberOfRoommates ==
+                        flatprofile.roomMates.length ? (
                         <Box>
                             <Strong style={styles.title}>
                                 {en.discover.nrRoommates}
@@ -209,7 +213,7 @@ export const FlatDetailCard = (props) => {
                         </Pressable>
                     </View>
                 ) : (
-                    <View style={styles.name}>
+                    <View style={{ alignSelf: 'center' }}>
                         <Title>{flatprofile.name}</Title>
                     </View>
                 )}

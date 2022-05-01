@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
     image: {
         borderRadius: 20,
         aspectRatio: null,
-        minHeight: 150,
         height: '100%',
         width: '100%',
         borderColor: 'transparent',

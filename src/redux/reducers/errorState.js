@@ -122,6 +122,24 @@ const errorState = (state = initialState, action) => {
                 },
             };
 
+        case Constants.UPDATE_FLATPROFILE_FAILURE:
+            return {
+                ...state,
+                flatprofileErrors: {
+                    ...state.flatprofileErrors,
+                    updateFlatprofile: action.payload,
+                },
+            };
+
+        case Constants.UPDATE_FLATPROFILE_SUCCESS:
+            return {
+                ...state,
+                flatprofileErrors: {
+                    ...state.flatprofileErrors,
+                    updateFlatprofile: undefined,
+                },
+            };
+
         case Constants.POST_FLATPROFILE_FAILURE:
             return {
                 ...state,

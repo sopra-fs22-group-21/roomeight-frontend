@@ -49,14 +49,15 @@ const Done = ({ navigation, route }) => {
                     <Box />
                     <PrimaryButton
                         onPress={() => {
-                            if (route.params.includes('single'))
+                            if (route.params.includes('join')) joinFlat();
+                            else if (
+                                route.params.includes('single') ||
+                                !userprofile.isComplete
+                            )
                                 updateSingleprofile();
-                            else if (route.params.includes('join')) joinFlat();
-                            else {
-                                updateSingleprofile();
+                            if (route.params.includes('flat'))
                                 dispatch(postFlatprofile(transitFlatprofile));
-                            }
-                            //navigation.navigate('Discover');
+                            navigation.navigate('Discover');
                         }}
                     >
                         {en.done.start}
