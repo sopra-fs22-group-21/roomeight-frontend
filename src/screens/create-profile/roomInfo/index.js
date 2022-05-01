@@ -3,12 +3,12 @@ import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { View } from 'react-native-animatable';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 import { useDispatch, useSelector } from 'react-redux';
-import DateInput from '../../../components/dateInput';
 import { AddressMap } from '../../../components/addressMap';
+import DateInput from '../../../components/dateInput';
 import { Input, InputLabel } from '../../../components/input';
+import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
-    Container,
     Heading,
     NormalText,
     ScreenPadding,
@@ -16,7 +16,6 @@ import {
 import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
-import { ScreenContainer } from '../../../components/screenContainer';
 
 const RoomInfo = ({ navigation }) => {
     const { transitFlatprofile } = useSelector((state) => state.transitState);

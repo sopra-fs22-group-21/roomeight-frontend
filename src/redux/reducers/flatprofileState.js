@@ -1,5 +1,5 @@
-import * as Constants from '../constants';
 import Flatprofile from '../../models/Flatprofile';
+import * as Constants from '../constants';
 
 const initialState = {
     flatprofile: {},

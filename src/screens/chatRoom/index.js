@@ -3,9 +3,9 @@ import 'react-native-get-random-values';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { Container, SmallHeadingWithBack } from '../../components/theme';
-import { sendMessage } from '../../redux/actions/chatActions';
 import { ScreenContainer } from '../../components/screenContainer';
+import { SmallHeadingWithBack } from '../../components/theme';
+import { sendMessage } from '../../redux/actions/chatActions';
 
 export const Chatroom = ({ route, navigation }) => {
     const chatInfo = route.params.chatInfo;
@@ -19,7 +19,6 @@ export const Chatroom = ({ route, navigation }) => {
     //sets messages to previous messages if they exist
     useEffect(() => {
         if (previousMessages) {
-            console.log(previousMessages);
             setMessages(Object.values(previousMessages));
         }
     }, []);
@@ -31,7 +30,6 @@ export const Chatroom = ({ route, navigation }) => {
     }, [previousMessages]);
     //callback for sending message
     const onSend = useCallback((newMessage = []) => {
-        console.log(newMessage);
         //modify attributess
         newMessage['pending'] = true;
         newMessage['createdAt'] = new Date().getTime();
@@ -40,7 +38,6 @@ export const Chatroom = ({ route, navigation }) => {
         );
         newMessage['pending'] = false;
         newMessage['sent'] = true;
-        console.log(newMessage);
         dispatch(sendMessage(newMessage, chatInfo._id));
     }, []);
 

@@ -1,30 +1,18 @@
-import { React, useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { View, Text, Pressable, Dimensions, FlatList } from 'react-native';
-import {
-    Box,
-    NormalText,
-    PinkBackground,
-    Strong,
-    TextBlock,
-    Title,
-} from '../theme';
-import { ProfilePicture } from '../profilePicture';
-import en from '../../resources/strings/en.json';
-import styles from './styles';
-import Tags from '../tags';
-import tags from '../../resources/strings/tags';
-import tagIcons from '../../resources/icons/tagIcons';
-import { InputBox, InputLabel } from '../input';
-import { DoubleTap } from '../doubleTap';
-import { ScrollView } from 'react-native-gesture-handler';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { SecondaryButton } from '../button';
-import { Icon } from 'react-native-elements';
-import { AddressMap } from '../addressMap';
-import { setCurrentScreen } from 'firebase/analytics';
-import { Profiles } from '../profiles';
 import dateFormat from 'dateformat';
+import { React, useRef, useState } from 'react';
+import { Dimensions, FlatList, Pressable, View } from 'react-native';
+import { Icon } from 'react-native-elements';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+import tagIcons from '../../resources/icons/tagIcons';
+import en from '../../resources/strings/en.json';
+import { AddressMap } from '../addressMap';
+import { SecondaryButton } from '../button';
+import { DoubleTap } from '../doubleTap';
+import { ProfilePicture } from '../profilePicture';
+import { Profiles } from '../profiles';
+import Tags from '../tags';
+import { Box, NormalText, PinkBackground, Strong, Title } from '../theme';
+import styles from './styles';
 
 const ITEM_WIDTH = Dimensions.get('window').width - 80;
 

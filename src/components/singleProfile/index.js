@@ -1,23 +1,17 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { View, Dimensions } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryButton, SecondaryButton } from '../../components/button';
-
-import PictureInput from '../../components/pictureInput';
-import styles from './styles';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { InputBox, Input } from '../../components/input';
-import en from '../../resources/strings/en.json';
-import Tags from '../../components/tags';
+import { useDispatch, useSelector } from 'react-redux';
+import { PrimaryButton } from '../../components/button';
 import DateInput from '../../components/dateInput';
-import { pickImage } from '../../helper/imageHandler';
+import { Input, InputBox } from '../../components/input';
+import Tags from '../../components/tags';
 import { updateProfile } from '../../redux/actions/updateActions';
-import { PublicProfileCard } from '../publicProfileCard';
-import Constants from 'expo-constants';
-import * as ImagePicker from 'expo-image-picker';
-import Carousel from 'react-native-snap-carousel/src/carousel/Carousel';
-import { Box } from '../theme';
+import en from '../../resources/strings/en.json';
 import { PictureInputGallery } from '../pictureInputGallery';
+import { PublicProfileCard } from '../publicProfileCard';
+import { Box } from '../theme';
+import styles from './styles';
 
 const SingleProfile = (props) => {
     const dispatch = useDispatch();

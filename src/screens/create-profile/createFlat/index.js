@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
+import { KeyboardAvoidingView } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input } from '../../../components/input';
+import PictureInput from '../../../components/pictureInput';
+import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
-    Container,
     Heading,
     NormalText,
     ScreenPadding,
 } from '../../../components/theme';
+import { pickImage } from '../../../helper/imageHandler';
 import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import en from '../../../resources/strings/en.json';
-import { pickImage } from '../../../helper/imageHandler';
-import PictureInput from '../../../components/pictureInput';
-import { ScrollView } from 'react-native-gesture-handler';
-import { KeyboardAvoidingView } from 'react-native';
-import { ScreenContainer } from '../../../components/screenContainer';
 
 const CreateFlat = ({ navigation }) => {
     const dispatch = useDispatch();

@@ -1,5 +1,5 @@
-import * as Constants from '../constants';
 import en from '../../resources/strings/en.json';
+import * as Constants from '../constants';
 
 const initialState = {
     authErrors: {},

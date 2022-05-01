@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import Gender, { GenderInput } from '../../../components/gender';
+import { GenderInput } from '../../../components/gender';
 import { Input, InputBox, StyledTextInput } from '../../../components/input';
 import PictureInput from '../../../components/pictureInput';
 import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
-    Container,
     Heading,
     NormalText,
     ScreenPadding,

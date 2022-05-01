@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Pressable, Text, View, Image } from 'react-native';
+import { Image, Pressable, Text, View } from 'react-native';
 import { getImageSource } from '../../helper/imageHandler';
 import EditBadge from '../editBadge';
 import styles from './styles';

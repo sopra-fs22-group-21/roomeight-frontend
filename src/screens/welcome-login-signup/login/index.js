@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
 import { Input } from '../../../components/input';
+import { ScreenContainer } from '../../../components/screenContainer';
 import {
-    Container,
+    Box,
     Heading,
+    ScreenPadding,
     TextBlock,
     Title,
-    Box,
-    ScreenPadding,
 } from '../../../components/theme';
 import { loginUser } from '../../../redux/actions/authActions';
-import en from '../../../resources/strings/en.json';
-import Loader from 'react-native-modal-loader';
-import styles from './styles';
 import colors from '../../../resources/colors';
-import { ScreenContainer } from '../../../components/screenContainer';
+import en from '../../../resources/strings/en.json';
+import styles from './styles';
 
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();

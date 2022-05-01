@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Title, Box, SemiBold, NormalText } from '../../../components/theme';
+import { SecondaryButton } from '../../../components/button';
+import { NavigationButtons } from '../../../components/navigationButtons';
+import { Profiles } from '../../../components/profiles';
+import { ScreenContainer } from '../../../components/screenContainer';
+import { Box, SemiBold, Title } from '../../../components/theme';
+import { getCurrentUserprofile } from '../../../redux/actions/getUserprofiles';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
-import { NavigationButtons } from '../../../components/navigationButtons';
-import { SecondaryButton } from '../../../components/button';
-import { ScreenContainer } from '../../../components/screenContainer';
-import { getCurrentUserprofile } from '../../../redux/actions/getUserprofiles';
-import { PublicProfileCard } from '../../../components/publicProfileCard';
-import { ProfileInfoBox, Profiles } from '../../../components/profiles';
 
 const AccessExistingFlatProfile = ({ navigation, route }) => {
     const dispatch = useDispatch();

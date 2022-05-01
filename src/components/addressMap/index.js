@@ -1,8 +1,6 @@
 import { React, useEffect, useState } from 'react';
-import MapView from 'react-native-maps';
-import { Marker } from 'react-native-maps';
-import { Box, NormalText, Strong } from '../theme';
 import Geocoder from 'react-native-geocoding';
+import MapView, { Marker } from 'react-native-maps';
 
 export const AddressMap = (props) => {
     const [coordinates, setCoordinates] = useState({

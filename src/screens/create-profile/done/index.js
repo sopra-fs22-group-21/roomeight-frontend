@@ -1,9 +1,9 @@
-import { updateProfile } from '../../../redux/actions/updateActions';
-import React, { useState } from 'react';
+import React from 'react';
 import { colors } from 'react-native-elements';
 import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
+import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
     Heading,
@@ -11,10 +11,9 @@ import {
     ScreenPadding,
     Title,
 } from '../../../components/theme';
-import en from '../../../resources/strings/en.json';
 import { postFlatprofile } from '../../../redux/actions/postFlatprofile';
-import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
-import { ScreenContainer } from '../../../components/screenContainer';
+import { updateProfile } from '../../../redux/actions/updateActions';
+import en from '../../../resources/strings/en.json';
 
 const Done = ({ navigation, route }) => {
     const dispatch = useDispatch();

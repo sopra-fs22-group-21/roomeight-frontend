@@ -1,9 +1,8 @@
+import CachedImage from 'expo-cached-image';
 import React, { useEffect, useState } from 'react';
-import { Image, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { getImageSource } from '../../helper/imageHandler';
 import styles from './styles';
-import CachedImage from 'expo-cached-image';
-import { v4 as uuidv4 } from 'uuid';
 
 export const ProfilePicture = (props) => {
     const [imageSource, setImageSource] = useState(null);

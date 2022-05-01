@@ -14,10 +14,8 @@ const ChatListItem = ({ chat }) => {
     let pic;
     const [imageSource, setImageSource] = useState({ uri: '' });
     useEffect(() => {
-        console.log(isSearchingRoom);
         if (isSearchingRoom) {
             pic = matches[chat.flatId].pictureReferences[0];
-            console.log('pic', pic);
         } else {
             pic = matches[chat.userId].pictureReferences[0];
         }
@@ -41,14 +39,14 @@ const ChatListItem = ({ chat }) => {
                 pr="5"
                 py="2"
             >
-                <HStack space={1} justifyContent="space-between">
+                <HStack space={3} justifyContent="flex-start">
                     <Avatar
                         size="48px"
                         source={{
                             uri: imageSource.uri,
                         }}
                     />
-                    <VStack>
+                    <VStack justifyContent="flex-start">
                         <Text
                             _dark={{
                                 color: 'warmGray.50',
@@ -62,7 +60,6 @@ const ChatListItem = ({ chat }) => {
                         </Text>
                         {chat.lastSender ? (
                             <Text
-                                marginRight={-50}
                                 color="coolGray.600"
                                 _dark={{
                                     color: 'warmGray.200',
@@ -73,13 +70,13 @@ const ChatListItem = ({ chat }) => {
                                     chat.lastMessage.substring(0, 20)}
                             </Text>
                         ) : (
-                            <Text color="coolGray.600" marginRight={-50}>
-                                {chat.lastMessage.substring(0, 25)}
+                            <Text color="coolGray.600">
+                                {chat.lastMessage.substring(0, 20)}
                             </Text>
                         )}
                     </VStack>
                     <Text
-                        marginLeft={10}
+                        marginLeft="auto"
                         fontSize="xs"
                         _dark={{
                             color: 'warmGray.50',

@@ -1,11 +1,9 @@
 import React from 'react';
 import { SecondaryButton } from '../../../components/button';
+import { ScreenContainer } from '../../../components/screenContainer';
 import { Box, Heading, Inner, TextBlock } from '../../../components/theme';
-import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
-import { useDispatch } from 'react-redux';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
-import { ScreenContainer } from '../../../components/screenContainer';
 
 const ChooseStatus = ({ navigation }) => {
     return (

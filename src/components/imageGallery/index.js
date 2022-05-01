@@ -1,10 +1,10 @@
-import { React, useRef } from 'react';
-import { View, Image } from 'react-native';
-import styles from './styles';
-import Carousel from 'react-native-snap-carousel';
 import { LinearGradient } from 'expo-linear-gradient';
+import { React, useRef } from 'react';
+import { View } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 import { DoubleTap } from '../doubleTap';
 import { ProfilePicture } from '../profilePicture';
+import styles from './styles';
 
 export const ImageGallery = (props) => {
     const isCarousel = useRef(null);

@@ -23,7 +23,6 @@ function filterExisting(chats, matches) {
             existing.push(chat.userId);
             existing.push(chat.flatId);
         });
-        console.log(existing);
         let filtered = Object.values(matches).filter((match) => {
             return !existing.includes(match.profileId);
         });

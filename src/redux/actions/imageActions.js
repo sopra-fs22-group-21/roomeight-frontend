@@ -1,5 +1,3 @@
-import { ref, uploadBytesResumable } from 'firebase/storage';
-import { storage } from '../../../firebase/firebase-config';
 import { uploadAll } from '../../helper/imageHandler';
 import * as Constants from '../constants';
 
@@ -51,15 +49,12 @@ export const uploadImages = async (
     profileType,
     profileId
 ) => {
-    console.log('pictureReferences in uploadImages');
-    console.log(pictureReferences);
     if (pictureReferences && pictureReferences.length > 0) {
         console.log('uploading All');
         //dispatch(uploadImageRequest(profileType));
         return uploadAll(pictureReferences, profileType, profileId)
             .then((urls) => {
                 console.log('urls after Upload All:');
-                console.log(urls);
                 //dispatch(uploadImageSuccess(urls, profileType));
                 console.log(urls);
                 return urls;

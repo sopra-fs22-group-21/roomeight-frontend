@@ -1,7 +1,7 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
-import { getCurrentUserprofile } from './getUserprofiles';
 import { getFlatprofile } from './getFlatprofiles';
+import { getCurrentUserprofile } from './getUserprofiles';
 import { uploadImages } from './imageActions';
 
 const updateProfileRequest = (profileType) => ({

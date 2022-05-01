@@ -1,7 +1,6 @@
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { Box } from '../theme';
 import styles from './styles';
 
 export const BackButton = (props) => (

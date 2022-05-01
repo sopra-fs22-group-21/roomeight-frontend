@@ -1,10 +1,10 @@
 import { React, useState } from 'react';
-import { ImageCard } from '../imageCard';
-import { FlatDetailCard } from '../flatDetailCard';
-import { SingleDetailCard } from '../singleDetailCard';
 import { View } from 'react-native-animatable';
-import styles from './styles';
+import { FlatDetailCard } from '../flatDetailCard';
+import { ImageCard } from '../imageCard';
+import { SingleDetailCard } from '../singleDetailCard';
 import { Title } from '../theme';
+import styles from './styles';
 
 export const PublicProfileCard = (props) => {
     const [isShowingImage, setIsShowingImage] = useState(

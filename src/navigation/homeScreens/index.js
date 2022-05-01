@@ -1,10 +1,10 @@
+import Chat from '../../screens/chat';
+import Chatroom from '../../screens/chatRoom';
 import Discover from '../../screens/discover/discover';
+import Match from '../../screens/matches/match';
+import Matches from '../../screens/matches/matches';
 import Profile from '../../screens/profile';
 import Settings from '../../screens/profile/settings';
-import Matches from '../../screens/matches/matches';
-import Match from '../../screens/matches/match';
-import Chatroom from '../../screens/chatRoom';
-import Chat from '../../screens/chat';
 
 const options = {
     headerShown: false,

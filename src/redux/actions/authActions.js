@@ -5,8 +5,8 @@ import {
 } from 'firebase/auth';
 import { auth } from '../../../firebase/firebase-config';
 import * as Constants from '../constants';
-import { getCurrentUserprofile } from './getUserprofiles';
 import { chatMemberShipListener } from './chatActions';
+import { getCurrentUserprofile } from './getUserprofiles';
 
 // intermediary actions for redux
 

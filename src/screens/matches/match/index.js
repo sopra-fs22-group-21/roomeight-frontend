@@ -1,17 +1,10 @@
-import React, { useState } from 'react';
-import {
-    Box,
-    Container,
-    Inner,
-    SmallHeadingWithBack,
-    ScreenPadding,
-} from '../../../components/theme';
-import { PublicProfileCard } from '../../../components/publicProfileCard';
-import { View } from 'react-native-animatable';
-import en from '../../../resources/strings/en.json';
-import { ScreenContainer } from '../../../components/screenContainer';
-import { createChat } from '../../../redux/actions/chatActions';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { PublicProfileCard } from '../../../components/publicProfileCard';
+import { ScreenContainer } from '../../../components/screenContainer';
+import { Box, SmallHeadingWithBack } from '../../../components/theme';
+import { createChat } from '../../../redux/actions/chatActions';
+import en from '../../../resources/strings/en.json';
 const Match = ({ route, navigation }) => {
     const { profile } = route.params;
     const { chats } = useSelector((state) => state.chatState);

@@ -1,11 +1,11 @@
 import { React } from 'react';
-import { View, Pressable, Dimensions } from 'react-native';
-import { Box, NormalText, PinkBackground, Strong, Title } from '../theme';
-import en from '../../resources/strings/en.json';
-import styles from './styles';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { ImageGallery } from '../imageGallery';
+import { Dimensions, Pressable, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import en from '../../resources/strings/en.json';
+import { ImageGallery } from '../imageGallery';
+import { NormalText, PinkBackground, Strong, Title } from '../theme';
+import styles from './styles';
 
 const ITEM_WIDTH = Dimensions.get('window').width - 80;
 const MAX_LENGTH = 160;

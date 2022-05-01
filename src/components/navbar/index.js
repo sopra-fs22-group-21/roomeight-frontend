@@ -1,13 +1,8 @@
 import { useRoute } from '@react-navigation/native';
 import { React } from 'react';
-import { FontAwesome, Ionicons } from 'react-native-vector-icons';
-import { Box } from '../theme';
-import styles from './styles';
-import { NavigationContainer } from '@react-navigation/native';
-import colors from '../../resources/colors';
 import { Pressable, View } from 'react-native';
-import { Icon as Icon } from 'react-native-elements/dist/icons/Icon';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Icon } from 'react-native-elements/dist/icons/Icon';
+import styles from './styles';
 const NavBar = ({ navigation }, props) => {
     const route = useRoute().name;
 
