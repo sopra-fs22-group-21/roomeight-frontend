@@ -1,32 +1,24 @@
-import { React, useState, useRef, useEffect, useCallback } from 'react';
-import { Dimensions, Pressable, Text, TouchableHighlight } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { SingleDetailCard } from '../../../components/singleDetailCard';
-import { LikeButton, LikeButtons } from '../../../components/likeButtons';
-import { ProfilePicture } from '../../../components/profilePicture';
-import {
-    Box,
-    Container,
-    Heading,
-    Inner,
-    SmallHeading,
-} from '../../../components/theme';
-import styles from './styles';
+import { React, useEffect, useRef, useState } from 'react';
+import { Dimensions } from 'react-native';
+import { View } from 'react-native-animatable';
+import { Icon } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
+import { useDispatch, useSelector } from 'react-redux';
+import { LikeButtons } from '../../../components/likeButtons';
 import {
     EmptyCard,
     PublicProfileCard,
 } from '../../../components/publicProfileCard';
-import { Icon } from 'react-native-elements';
-import { View } from 'react-native-animatable';
-import en from '../../../resources/strings/en.json';
+import { ScreenContainer } from '../../../components/screenContainer';
+import { Box, SmallHeading } from '../../../components/theme';
+import { useComponentSize } from '../../../hooks/layout';
 import {
     postLikeFlat,
     postLikeUser,
     updateDiscoverProfiles,
 } from '../../../redux/actions/discoverActions';
-import { ScreenContainer } from '../../../components/screenContainer';
-import { useComponentSize } from '../../../hooks/layout';
+import en from '../../../resources/strings/en.json';
+import styles from './styles';
 
 const ITEM_HEIGHT = Dimensions.get('screen').height - 170;
 

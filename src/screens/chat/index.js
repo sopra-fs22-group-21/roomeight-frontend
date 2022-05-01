@@ -1,6 +1,6 @@
 import { Center, FlatList, HStack, Spacer } from 'native-base';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ChatListItem from '../../components/ChatListItem';
 import CreateNewChat from '../../components/createNewChat';
 import { ScreenContainer } from '../../components/screenContainer';
@@ -8,11 +8,6 @@ import { SmallHeading } from '../../components/theme';
 import en from '../../resources/strings/en.json';
 
 const Chat = ({ navigation }) => {
-    const dispatch = useDispatch();
-    const { auth } = useSelector((state) => state.authState);
-    const { isSearchingRoom } = useSelector(
-        (state) => state.userprofileState.userprofile
-    );
     const chats = useSelector((state) => state.chatState.chats);
 
     const renderItem = ({ item }) => {

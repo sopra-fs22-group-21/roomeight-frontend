@@ -1,6 +1,6 @@
-import * as Constants from '../constants';
-import Userprofile from '../../models/Userprofile';
 import Flatprofile from '../../models/Flatprofile';
+import Userprofile from '../../models/Userprofile';
+import * as Constants from '../constants';
 
 const initialState = {
     discoverProfiles: [],

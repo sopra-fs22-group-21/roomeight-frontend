@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import tagIcons from '../../resources/icons/tagIcons';
 import TagElement from '../tagelement';
 import styles from './styles';

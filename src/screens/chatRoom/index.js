@@ -3,9 +3,9 @@ import 'react-native-get-random-values';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { Container, SmallHeadingWithBack } from '../../components/theme';
-import { sendMessage } from '../../redux/actions/chatActions';
 import { ScreenContainer } from '../../components/screenContainer';
+import { SmallHeadingWithBack } from '../../components/theme';
+import { sendMessage } from '../../redux/actions/chatActions';
 
 export const Chatroom = ({ route, navigation }) => {
     const chatInfo = route.params.chatInfo;

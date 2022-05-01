@@ -1,6 +1,6 @@
-import Welcome from '../../screens/welcome-login-signup/welcome';
-import Signup from '../../screens/welcome-login-signup/signup';
 import Login from '../../screens/welcome-login-signup/login';
+import Signup from '../../screens/welcome-login-signup/signup';
+import Welcome from '../../screens/welcome-login-signup/welcome';
 
 const options = { headerShown: false };
 

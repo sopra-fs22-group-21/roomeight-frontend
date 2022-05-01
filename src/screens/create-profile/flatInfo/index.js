@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { SecondaryButton } from '../../../components/button';
 import { Input, InputBox, StyledTextInput } from '../../../components/input';
 import { ScreenContainer } from '../../../components/screenContainer';
 import Tags from '../../../components/tags';
 import {
     Box,
-    Container,
     Heading,
     NormalText,
     ScreenPadding,

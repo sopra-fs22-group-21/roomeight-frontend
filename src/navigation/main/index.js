@@ -3,24 +3,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userAuthStateListener } from '../../redux/actions/authActions';
-import loggedOutScreens from '../loggedOutScreens';
-import loadingScreens from '../loadingScreens';
-import incompleteScreens, {
-    createFlatScreens,
-    chooseStatus,
-} from '../incompleteScreens';
 import homeScreens from '../homeScreens';
-import { chatMemberShipListener } from '../../redux/actions/chatActions';
+import incompleteScreens, {
+    chooseStatus,
+    createFlatScreens,
+} from '../incompleteScreens';
+import loadingScreens from '../loadingScreens';
+import loggedOutScreens from '../loggedOutScreens';
 
 export default function Route() {
     const Stack = createStackNavigator();
 
-    const { auth, loggedIn } = useSelector((state) => state.authState);
+    const { loggedIn } = useSelector((state) => state.authState);
     const { loading } = useSelector((state) => state.loadingState);
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const { profileCompletionStatus } = useSelector(
-        (state) => state.transitState
-    );
     const dispatch = useDispatch();
     const createScreens = (screens) => {
         return (

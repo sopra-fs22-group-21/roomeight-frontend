@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, Text } from 'react-native';
-import styles from './styles';
 import { Icon } from 'react-native-elements';
+import styles from './styles';
 
 const BasicButton = (props) => (
     <Pressable

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
-import { Input } from '../input';
 import { setTransitAttributes } from '../../redux/actions/setTransitAttributes';
 import { SecondaryButton } from '../button';
+import { Input } from '../input';
 
 //always writes emails into transitstate
 export const AddRoomieInput = (props) => {

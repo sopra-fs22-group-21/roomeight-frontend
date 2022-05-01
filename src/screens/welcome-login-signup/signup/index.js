@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
+import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
 import DateInput from '../../../components/dateInput';
 import { Input } from '../../../components/input';
 import { NavigationButtons } from '../../../components/navigationButtons';
+import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
     Heading,
@@ -13,11 +15,9 @@ import {
     Title,
 } from '../../../components/theme';
 import { postUserprofile } from '../../../redux/actions/postUserprofile';
-import en from '../../../resources/strings/en.json';
-import Loader from 'react-native-modal-loader';
-import styles from './styles';
 import colors from '../../../resources/colors';
-import { ScreenContainer } from '../../../components/screenContainer';
+import en from '../../../resources/strings/en.json';
+import styles from './styles';
 
 const Signup = ({ navigation }) => {
     const [user, setUser] = useState({});

@@ -1,28 +1,18 @@
-import { React, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { View, Text, Pressable, Share, Dimensions } from 'react-native';
-import {
-    Box,
-    NormalText,
-    PinkBackground,
-    Strong,
-    TextBlock,
-    Title,
-} from '../theme';
-import { ProfilePicture } from '../profilePicture';
-import en from '../../resources/strings/en.json';
-import styles from './styles';
-import Tags from '../tags';
-import tags from '../../resources/strings/tags';
-import tagIcons from '../../resources/icons/tagIcons';
-import { DoubleTap } from '../doubleTap';
-import { Icon } from 'react-native-elements';
-import { SecondaryButton } from '../button';
-import { Gender } from '../gender';
 import dateFormat from 'dateformat';
-import { useComponentSize } from '../../hooks/layout';
-import consts from 'expo-cached-image/lib/consts';
+import { React, useEffect, useRef, useState } from 'react';
+import { Dimensions, Pressable, View } from 'react-native';
+import { Icon } from 'react-native-elements';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import { useComponentSize } from '../../hooks/layout';
+import tagIcons from '../../resources/icons/tagIcons';
+import en from '../../resources/strings/en.json';
+import { SecondaryButton } from '../button';
+import { DoubleTap } from '../doubleTap';
+import { Gender } from '../gender';
+import { ProfilePicture } from '../profilePicture';
+import Tags from '../tags';
+import { Box, NormalText, PinkBackground, Strong, Title } from '../theme';
+import styles from './styles';
 
 const ITEM_WIDTH = Dimensions.get('window').width - 80;
 

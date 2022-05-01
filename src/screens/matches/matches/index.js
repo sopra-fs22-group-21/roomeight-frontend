@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Text } from 'react-native';
-import { ImageCard } from '../../../components/imageCard';
-import { LikeButton } from '../../../components/likeButtons';
-import { ProfileInfoBox } from '../../../components/profiles';
-import { Box, SmallHeading } from '../../../components/theme';
-import { PublicProfileCard } from '../../../components/publicProfileCard';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import apiClient from '../../../helper/apiClient';
+import { ProfileInfoBox } from '../../../components/profiles';
 import { ScreenContainer } from '../../../components/screenContainer';
+import { Box, SmallHeading } from '../../../components/theme';
 
 const Matches = ({ navigation }) => {
     const { matches } = useSelector((state) => state.matchesState);

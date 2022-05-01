@@ -1,7 +1,7 @@
 import React from 'react';
-import { Inner } from '../../components/theme';
 import M8Loader from '../../../assets/logo/M8Loader';
 import { ScreenContainer } from '../../components/screenContainer';
+import { Inner } from '../../components/theme';
 
 const Loading = ({ navigation }) => {
     return (

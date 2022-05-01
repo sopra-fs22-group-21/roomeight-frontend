@@ -1,5 +1,3 @@
-import { ref, uploadBytesResumable } from 'firebase/storage';
-import { storage } from '../../../firebase/firebase-config';
 import { uploadAll } from '../../helper/imageHandler';
 import * as Constants from '../constants';
 

@@ -1,7 +1,7 @@
-import { updateProfile } from './updateActions';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 import { getFlatprofile } from './getFlatprofiles';
+import { updateProfile } from './updateActions';
 
 const postFlatprofileRequest = () => ({
     type: Constants.POST_FLATPROFILE_REQUEST,

@@ -1,4 +1,3 @@
-import React from 'react';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 import { loginUser } from './authActions';

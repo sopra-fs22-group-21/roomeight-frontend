@@ -1,19 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Pressable, Text } from 'react-native';
-import { Tab } from 'react-native-elements/dist/tab/Tab';
-import { useDispatch, useSelector } from 'react-redux';
-import { Container, Name, Box } from '../../components/theme';
-import styles from './styles';
-import { chatMemberShipListener } from '../../redux/actions/chatActions';
-import SingleProfile from '../../components/singleProfile';
-import FlatProfile from '../../components/flatProfile';
-import { Icon } from 'react-native-elements/dist/icons/Icon';
-import AddFlatInProfile from '../../components/addFlatInProfile';
-import { ScreenContainer } from '../../components/screenContainer';
 import { View } from 'react-native-animatable';
+import { Icon } from 'react-native-elements/dist/icons/Icon';
+import { Tab } from 'react-native-elements/dist/tab/Tab';
+import { useSelector } from 'react-redux';
+import AddFlatInProfile from '../../components/addFlatInProfile';
+import FlatProfile from '../../components/flatProfile';
+import { ScreenContainer } from '../../components/screenContainer';
+import SingleProfile from '../../components/singleProfile';
+import { Box } from '../../components/theme';
+import styles from './styles';
 
 const Profile = ({ navigation }) => {
-    const dispatch = useDispatch();
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
     const loading = useSelector((state) => state.loadingState);

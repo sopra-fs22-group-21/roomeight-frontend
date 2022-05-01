@@ -10,13 +10,11 @@ import PictureInput from '../../../components/pictureInput';
 import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
-    Container,
     Heading,
     NormalText,
     ScreenPadding,
 } from '../../../components/theme';
 import { pickImage } from '../../../helper/imageHandler';
-import { uploadImages } from '../../../redux/actions/imageActions';
 import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import en from '../../../resources/strings/en.json';
 

@@ -1,13 +1,13 @@
+import AccessExistingFlatProfile from '../../screens/create-profile/accessExistingFlatProfile';
+import AddPictures from '../../screens/create-profile/addPictures';
+import AddRoomie from '../../screens/create-profile/addRoomie';
 import ChooseStatus from '../../screens/create-profile/chooseStatus';
 import CompletePersonalProfile from '../../screens/create-profile/completePersonalProfile';
-import AddPictures from '../../screens/create-profile/addPictures';
 import CompleteSingleProfile from '../../screens/create-profile/completeSingleProfile';
 import CreateFlat from '../../screens/create-profile/createFlat';
-import RoomInfo from '../../screens/create-profile/roomInfo';
-import FlatInfo from '../../screens/create-profile/flatInfo';
 import Done from '../../screens/create-profile/done';
-import AddRoomie from '../../screens/create-profile/addRoomie';
-import AccessExistingFlatProfile from '../../screens/create-profile/accessExistingFlatProfile';
+import FlatInfo from '../../screens/create-profile/flatInfo';
+import RoomInfo from '../../screens/create-profile/roomInfo';
 
 const options = { headerShown: false };
 
