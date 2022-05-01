@@ -27,6 +27,7 @@ export const PublicProfileCard = (props) => {
                     onClickMessage={props.onClickMessage}
                     onDoubleTap={props.onDoubleTap}
                     onClickEdit={props.onClickEdit}
+                    onClickAddRoomie={props.onClickAddRoomie}
                 />
             ) : (
                 <SingleDetailCard

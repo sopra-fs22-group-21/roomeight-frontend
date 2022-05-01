@@ -16,7 +16,7 @@ import { PublicProfileCard } from '../publicProfileCard';
 import { Box } from '../theme';
 import styles from './styles';
 
-const FlatProfile = (props) => {
+const FlatProfile = ({ navigation }, props) => {
     useEffect(() => {}, []);
 
     const dispatch = useDispatch();
@@ -24,16 +24,13 @@ const FlatProfile = (props) => {
 
     const [moveInDateValid, setmoveInDateValid] = useState(null);
     const [moveOutDateValid, setMoveOutDateValid] = useState(null);
-    const [description, setDescription] = useState(null);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
     const { transitFlatprofile } = useSelector((state) => state.transitState);
     const [flat, setFlat] = useState({});
     const [addressValid, setAddressValid] = useState(true);
     const [rentValid, setRentValid] = useState(null);
     const [roomSizeValid, setRoomSizeValid] = useState(null);
-    const [nrRoommatesValid, setNrRoommatesValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
-    let selectedTagsFlat = [];
     const [editMode, setEditMode] = useState(false);
 
     function changeToTemporary() {
@@ -249,12 +246,15 @@ const FlatProfile = (props) => {
     } else {
         return (
             <PublicProfileCard
-                profile={flatprofile} //true????
+                profile={flatprofile}
                 onClickEdit={() => {
                     setEditMode(true);
                 }}
                 isFlat={true}
                 showDetailsFirst={true}
+                onClickAddRoomie={() => {
+                    navigation.navigate('AddRoomie', 'profile');
+                }}
             />
         );
     }

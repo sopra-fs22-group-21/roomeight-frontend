@@ -129,6 +129,16 @@ export const FlatDetailCard = (props) => {
                 <Box style={{ flexShrink: 1 }}>
                     <Strong>{en.discover.roommates}</Strong>
                     <Profiles profiles={flatprofile.roomMates} />
+                    {props.onClickAddRoomie ? (
+                        <Pressable onPress={props.onClickAddRoomie}>
+                            <Icon
+                                name="plus-circle"
+                                type="feather"
+                                size={25}
+                                color={styles.icon.color}
+                            />
+                        </Pressable>
+                    ) : null}
                 </Box>
                 <DoubleTap
                     doubleTap={props.onDoubleTap}

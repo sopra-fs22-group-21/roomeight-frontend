@@ -7,6 +7,7 @@ import homeScreens from '../homeScreens';
 import incompleteScreens, {
     chooseStatus,
     createFlatScreens,
+    addRoomieScreens,
 } from '../incompleteScreens';
 import loadingScreens from '../loadingScreens';
 import loggedOutScreens from '../loggedOutScreens';
@@ -64,7 +65,9 @@ export default function Route() {
             userprofile.flatId &&
             userprofile.flatId != ''
         )
-            setCurrentComponents(createScreens(homeScreens));
+            setCurrentComponents(
+                createScreens(homeScreens.concat(addRoomieScreens))
+            );
         else if (Object.keys(userprofile).length > 0)
             setCurrentComponents(
                 createScreens(homeScreens.concat(createFlatScreens))
