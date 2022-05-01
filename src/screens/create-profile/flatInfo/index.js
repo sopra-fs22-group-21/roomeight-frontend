@@ -26,7 +26,7 @@ const FlatInfo = ({ navigation }) => {
             onPressNext={() => {
                 //hier post?
                 dispatch(setTransitAttributes(flat, 'flatprofile'));
-                navigation.navigate('AddRoomie');
+                navigation.navigate('AddRoomie', 'complete');
             }}
             nextDisabled={!flat.biography}
         >

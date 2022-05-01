@@ -12,9 +12,6 @@ const initialState = {
 const loadingState = (state = initialState, action) => {
     switch (action.type) {
         //All request start types that set loading to true
-        case Constants.LOGIN_USER_REQUEST:
-        case Constants.LOGOUT_USER_REQUEST:
-
         case Constants.GET_CURRENT_USER_REQUEST:
         case Constants.UPDATE_USERPROFILE_REQUEST:
         case Constants.POST_USERPROFILE_REQUEST:

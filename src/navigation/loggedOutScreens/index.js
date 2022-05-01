@@ -8,7 +8,17 @@ const loggedOutScreens = [
     {
         name: 'Welcome',
         component: Welcome,
-        options: options,
+        options: {
+            headerShown: false,
+            gestureEnabled: false,
+            cardStyleInterpolator: ({ current: { progress } }) => {
+                return {
+                    cardStyle: {
+                        opacity: progress,
+                    },
+                };
+            },
+        },
     },
     {
         name: 'Signup',

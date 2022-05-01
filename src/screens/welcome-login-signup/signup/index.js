@@ -30,7 +30,7 @@ const Signup = ({ navigation }) => {
     const { userprofileErrors, authErrors } = useSelector(
         (state) => state.errorState
     );
-    const { loading } = useSelector((state) => state.loadingState);
+    const { loading } = useSelector((state) => state.authState);
     const [heading, setHeading] = useState(en.signup.heading);
     const [title, setTitle] = useState(en.signup.title);
     const [text, setText] = useState(en.signup.enterDetails);

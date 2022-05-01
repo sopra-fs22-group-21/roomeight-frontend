@@ -20,10 +20,9 @@ const userprofileState = (state = initialState, action) => {
                 update: undefined,
             };
         case Constants.POST_LIKE_FLAT_SUCCESS:
-        case Constants.POST_LIKE_USER_SUCCESS:
             return {
                 ...state,
-                userproifile: action.payload.updatedFlatProfile,
+                //todo: userprofile: action.payload.updatedUserProfile,
             };
 
         case Constants.POST_USERPROFILE_SUCCESS:

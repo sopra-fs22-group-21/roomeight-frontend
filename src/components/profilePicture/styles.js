@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
         borderRadius: 120,
         width: 120,
         aspectRatio: 1,
+        padding: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
