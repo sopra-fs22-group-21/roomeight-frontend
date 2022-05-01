@@ -28,9 +28,9 @@ const Chat = ({ navigation }) => {
             </HStack>
             {chats && (
                 <FlatList
-                    data={Object.keys(chats).sort(
-                        (a, b) => b.timestamp - a.timestamp
-                    )}
+                    data={Object.values(chats)
+                        .sort((a, b) => b.timestamp - a.timestamp)
+                        .map((chat) => chat._id)}
                     removeClippedSubviews
                     renderItem={renderItem}
                     keyExtractor={(index) => index}
