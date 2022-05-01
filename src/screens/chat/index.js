@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import ChatListItem from '../../components/ChatListItem';
 import CreateNewChat from '../../components/createNewChat';
 import { ScreenContainer } from '../../components/screenContainer';
-import { SmallHeading } from '../../components/theme';
+import { Box, SmallHeading } from '../../components/theme';
 import en from '../../resources/strings/en.json';
 
 const Chat = ({ navigation }) => {
@@ -16,11 +16,13 @@ const Chat = ({ navigation }) => {
 
     return (
         <ScreenContainer navigation={navigation} showNavBar>
-            <HStack>
-                <SmallHeading>{en.chat.heading}</SmallHeading>
-                <Spacer />
-                <CreateNewChat />
-            </HStack>
+            <Box>
+                <HStack alignItems="center">
+                    <SmallHeading>{en.chat.heading}</SmallHeading>
+                    <Spacer />
+                    <CreateNewChat />
+                </HStack>
+            </Box>
             {chats && (
                 <FlatList
                     data={Object.values(chats)

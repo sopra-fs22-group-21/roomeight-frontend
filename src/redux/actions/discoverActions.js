@@ -1,7 +1,7 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 import { getFlatprofile } from './getFlatprofiles';
-import { getCurrentUserprofile } from './getUserprofiles';
+import { reloadCurrentUserprofile } from './getUserprofiles';
 
 const postLikeFlatRequest = () => ({
     type: Constants.POST_LIKE_FLAT_REQUEST,
@@ -45,13 +45,9 @@ export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
         .post('/userprofiles/likeFlat/' + otherProfileId)
         .then((response) => {
             dispatch(postLikeFlatSuccess(response.data));
-            if (
-                response.data.matches.length >
-                Object.keys(getState().userprofileState.userprofile.matches)
-                    .length
-            ) {
+            if (response.data.isMatch) {
                 //todo: response.data.isMatch
-                dispatch(getCurrentUserprofile());
+                dispatch(reloadCurrentUserprofile());
             }
         })
         .catch((error) => {
@@ -75,7 +71,9 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
         .then((response) => {
             dispatch(postLikeUserSuccess(response.data));
             if (response.data.isMatch) {
-                dispatch(getFlatprofile());
+                dispatch(
+                    getFlatprofile(response.data.updatedFlatProfile.profileId)
+                );
             }
         })
         .catch((error) => {

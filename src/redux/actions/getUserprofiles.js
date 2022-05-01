@@ -67,6 +67,24 @@ export const getCurrentUserprofile = () => (dispatch) => {
         });
 };
 
+export const reloadCurrentUserprofile = () => (dispatch) => {
+    const url = `/userprofiles/${auth.currentUser.uid}`;
+    dispatch(
+        getCurrentUserprofileRequest({
+            id: auth.currentUser.uid,
+            url: url,
+        })
+    );
+    apiClient()
+        .get(url)
+        .then((response) => {
+            userprofile = response.data;
+            dispatch(getCurrentUserprofileSuccess(response.data));
+        })
+        .catch((error) => {
+            dispatch(getCurrentUserprofileFailure(error));
+        });
+};
 /**
  * makes a request to the backend api to get all userprofiles
  * @dispatches {@link getAllUserprofilesRequest} on request start
