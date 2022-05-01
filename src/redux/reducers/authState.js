@@ -3,6 +3,7 @@ import * as Constants from '../constants';
 const initialState = {
     auth: {},
     loggedIn: false,
+    loading: true,
 };
 
 /**
@@ -12,11 +13,19 @@ const initialState = {
  */
 const authState = (state = initialState, action) => {
     switch (action.type) {
+        case Constants.LOGIN_USER_REQUEST:
+        case Constants.LOGOUT_USER_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+
         case Constants.LOGIN_USER_SUCCESS:
             return {
                 ...state,
                 auth: action.payload,
                 loggedIn: true,
+                loading: false,
             };
 
         case Constants.LOGIN_USER_FAILURE:
@@ -24,6 +33,7 @@ const authState = (state = initialState, action) => {
                 ...state,
                 auth: action.payload,
                 loggedIn: false,
+                loading: false,
             };
 
         case Constants.LOGOUT_USER_SUCCESS:
@@ -31,6 +41,7 @@ const authState = (state = initialState, action) => {
                 ...state,
                 auth: {},
                 loggedIn: false,
+                loading: false,
             };
 
         default:

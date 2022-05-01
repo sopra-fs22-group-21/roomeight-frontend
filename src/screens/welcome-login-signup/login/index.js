@@ -24,7 +24,7 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const { authErrors } = useSelector((state) => state.errorState);
     const [dispatched, setDispatched] = useState(false);
-    const { loading } = useSelector((state) => state.loadingState);
+    const { loading } = useSelector((state) => state.authState);
 
     return (
         <ScreenContainer onPressBack={() => navigation.goBack()}>

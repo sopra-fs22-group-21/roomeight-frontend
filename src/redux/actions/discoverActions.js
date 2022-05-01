@@ -1,5 +1,7 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
+import { getFlatprofile } from './getFlatprofiles';
+import { getCurrentUserprofile } from './getUserprofiles';
 
 const postLikeFlatRequest = () => ({
     type: Constants.POST_LIKE_FLAT_REQUEST,
@@ -36,13 +38,21 @@ const postLikeUserFailure = (error) => ({
  * @dispatches {@link postLikeFlatSuccess} on post success with response payload
  * @dispatches {@link postLikeFlatFailure} on post failure with error payload
  */
-export const postLikeFlat = (otherProfileId) => (dispatch) => {
+export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
     dispatch(postLikeFlatRequest());
 
     apiClient()
         .post('/userprofiles/likeFlat/' + otherProfileId)
         .then((response) => {
             dispatch(postLikeFlatSuccess(response.data));
+            if (
+                response.data.matches.length >
+                Object.keys(getState().userprofileState.userprofile.matches)
+                    .length
+            ) {
+                //todo: response.data.isMatch
+                dispatch(getCurrentUserprofile());
+            }
         })
         .catch((error) => {
             console.warn('error liking flat');
@@ -64,6 +74,9 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
         .post('/userprofiles/likeUser/' + otherProfileId)
         .then((response) => {
             dispatch(postLikeUserSuccess(response.data));
+            if (response.data.isMatch) {
+                dispatch(getFlatprofile());
+            }
         })
         .catch((error) => {
             console.warn('error liking user');
