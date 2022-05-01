@@ -24,6 +24,7 @@ const RoomInfo = ({ navigation }) => {
     const [addressValid, setAddressValid] = useState(true);
     const [rentValid, setRentValid] = useState(null);
     const [flat, setFlat] = useState(transitFlatprofile);
+    const [address, setAddress] = useState(transitFlatprofile.address);
     const [roomSizeValid, setRoomSizeValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
     const [nrRoommatesValid, setNrRoommatessValid] = useState(null);
@@ -73,11 +74,12 @@ const RoomInfo = ({ navigation }) => {
                         <Input
                             label={en.roomInfo.address}
                             error={addressValid === false}
-                            defaultValue={flat.address}
-                            onEndEditing={(text) => {
+                            defaultValue={flat.address ? flat.address : ''}
+                            onChangeText={(text) => setAddress(text)}
+                            onEndEditing={() => {
                                 setFlat({
                                     ...flat,
-                                    address: text,
+                                    address: address,
                                 });
                             }}
                         />
@@ -96,10 +98,9 @@ const RoomInfo = ({ navigation }) => {
 
                         <DateInput
                             label={en.roomInfo.moveInDate}
+                            error={moveInDateValid === false}
                             defaultDate={
-                                flat.moveInDate
-                                    ? new Date(flat.moveInDate)
-                                    : null
+                                flat.moveInDate ? new Date(flat.moveInDate) : ''
                             }
                             onChange={(date, valid) => {
                                 if (valid)
@@ -164,7 +165,7 @@ const RoomInfo = ({ navigation }) => {
                             keyboardType="number-pad"
                             error={rentValid === false}
                             placeholder="CHF"
-                            defaultValue={flat.rent ? flat.rent + '' : null}
+                            defaultValue={flat.rent ? flat.rent + '' : ''}
                             onChangeText={(text) => {
                                 setRentValid(!isNaN(Number(text)));
                                 setFlat({
@@ -179,7 +180,7 @@ const RoomInfo = ({ navigation }) => {
                             placeholder="m2"
                             error={roomSizeValid === false}
                             defaultValue={
-                                flat.roomSize ? flat.roomSize + '' : null
+                                flat.roomSize ? flat.roomSize + '' : ''
                             }
                             onChangeText={(text) => {
                                 setRoomSizeValid(!isNaN(Number(text)));

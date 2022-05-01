@@ -14,6 +14,7 @@ import {
 import { postFlatprofile } from '../../../redux/actions/postFlatprofile';
 import { updateProfile } from '../../../redux/actions/updateActions';
 import en from '../../../resources/strings/en.json';
+import { StackActions } from '@react-navigation/native';
 
 const Done = ({ navigation, route }) => {
     const dispatch = useDispatch();
@@ -55,9 +56,8 @@ const Done = ({ navigation, route }) => {
                                 navigation.navigate('Discover');
                             }
                             if (route.params.includes('flat')) {
-                                dispatch(
-                                    postFlatprofile(transitFlatprofile)
-                                ).then(() => navigation.navigate('Discover'));
+                                dispatch(postFlatprofile(transitFlatprofile));
+                                navigation.dispatch(StackActions.popToTop());
                             }
                         }}
                     >

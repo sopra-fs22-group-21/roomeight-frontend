@@ -52,24 +52,30 @@ export const postFlatprofile = (requestBody) => (dispatch) => {
 
     console.log('requestBody:');
     console.log(requestBody);
-    apiClient()
+    return apiClient()
         .post('/flatprofiles', requestBody)
         .then((response) => {
             console.log(
                 'postFlatprofileSuccess: ' + JSON.stringify(response.data)
             );
-            dispatch(postFlatprofileSuccess(response.data));
-            let update = { pictureReferences: references };
-            dispatch(
-                updateProfile(update, 'flatprofile', response.data.profileId)
-            );
-            emails.forEach((email) => {
-                dispatch(postRoommateToFlat(email));
-            });
+            return dispatch(postFlatprofileSuccess(response.data));
         })
         .catch((error) => {
             console.log('error post flatprofile');
             dispatch(postFlatprofileFailure(error));
+        })
+        .then((response) => {
+            let update = { pictureReferences: references };
+            return dispatch(
+                updateProfile(update, 'flatprofile', response.data.profileId)
+            ).catch((error) => console.log('error uploading'));
+        })
+        .then((response) => {
+            return Promise.all(
+                emails.map((email) => {
+                    return dispatch(postRoommateToFlat(email));
+                })
+            ).catch((error) => console.log('error posting roommates ' + error));
         });
 };
 
