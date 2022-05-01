@@ -1,20 +1,22 @@
 import React from 'react';
 import { Pressable, Text } from 'react-native';
-import styles from './style';
+import { Icon } from 'react-native-elements';
+import styles from './styles';
 
 const BasicButton = (props) => (
     <Pressable
         {...props}
-        style={({ pressed }) => [
-            styles.button,
-            props.style,
-            styles,
-            props.disabled
-                ? props.disabledStyle
-                : pressed
-                ? props.pressedStyle
-                : '',
-        ]}
+        style={({ pressed }) => {
+            const basicStyles = {
+                ...styles.button,
+                ...props.style,
+                ...styles,
+            };
+            if (props.disabled)
+                return { ...basicStyles, ...props.disabledStyle };
+            if (pressed) return { ...basicStyles, ...props.pressedStyle };
+            return basicStyles;
+        }}
     >
         {({ pressed }) => (
             <Text
@@ -37,7 +39,7 @@ const BasicButton = (props) => (
 export const PrimaryButton = (props) => (
     <BasicButton
         {...props}
-        style={styles.primary}
+        style={{ ...styles.primary, ...props.style }}
         disabledStyle={styles.primaryDisabled}
         pressedStyle={styles.primaryPressed}
         textStyle={styles.primaryLabel}
@@ -49,7 +51,7 @@ export const PrimaryButton = (props) => (
 export const SecondaryButton = (props) => (
     <BasicButton
         {...props}
-        style={styles.secondary}
+        style={{ ...styles.secondary, ...props.style }}
         disabledStyle={styles.secondaryDisabled}
         pressedStyle={styles.secondaryPressed}
         textStyle={styles.secondaryLabel}
@@ -63,10 +65,16 @@ export const SecondaryButton = (props) => (
 export const GenderButton = (props) => (
     <BasicButton
         {...props}
-        style={styles.gender}
+        style={{ ...styles.gender, ...props.style }}
         disabledStyle={styles.genderDisables}
         pressedStyle={styles.genderPressed}
     >
         {props.children}
     </BasicButton>
+);
+
+export const CreateNewChatButton = (props) => (
+    <Pressable onPress={props.onPress}>
+        <Icon name="add-box" type="material" size={30} color="black" />
+    </Pressable>
 );

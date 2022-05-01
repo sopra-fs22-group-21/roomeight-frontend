@@ -11,5 +11,7 @@ const tags = {
     wine: 'WINE',
     woko: 'WOKO',
     juwo: 'JUWO',
+    peaceful: 'PEACEFUL',
+    smoker: 'SMOKER',
 };
 export default tags;

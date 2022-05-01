@@ -3,17 +3,17 @@ import React, { useRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
 import { InputLabel } from '../input';
 import { Box } from '../theme';
-import styles from './style';
+import styles from './styles';
 
 const DateInput = (props) => {
     const [day, setDay] = useState(
-        props.date ? dateFormat(props.date, 'dd') : ''
+        props.defaultDate ? dateFormat(props.defaultDate, 'dd') : ''
     );
     const [month, setMonth] = useState(
-        props.date ? dateFormat(props.date, 'mm') : ''
+        props.defaultDate ? dateFormat(props.defaultDate, 'mm') : ''
     );
     const [year, setYear] = useState(
-        props.date ? dateFormat(props.date, 'yyyy') : ''
+        props.defaultDate ? dateFormat(props.defaultDate, 'yyyy') : ''
     );
     const isDay = (value) => {
         return !isNaN(value) && value.length <= 2 && Number(value) <= 31;

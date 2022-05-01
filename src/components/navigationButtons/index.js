@@ -1,14 +1,13 @@
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { Box } from '../theme';
-import styles from './style';
+import styles from './styles';
 
 export const BackButton = (props) => (
     <Pressable style={(pressed) => [styles.backButton, props.style]} {...props}>
         <Icon
             style={styles.icon}
-            name="arrow-back-ios"
+            name="arrow-back"
             size={20}
             color={props.disabled ? '#b0c8cf' : '#0E7490'}
         />
@@ -26,7 +25,7 @@ export const NextButton = (props) => (
     >
         <Icon
             style={styles.icon}
-            name="arrow-forward-ios"
+            name="arrow-forward"
             size={20}
             color={'white'}
         />
@@ -34,7 +33,7 @@ export const NextButton = (props) => (
 );
 
 export const NavigationButtons = (props) => (
-    <Box style={styles.container}>
+    <View style={styles.container}>
         {props.onPressBack != null ? (
             <BackButton onPress={props.onPressBack} />
         ) : (
@@ -48,5 +47,5 @@ export const NavigationButtons = (props) => (
         ) : (
             <View />
         )}
-    </Box>
+    </View>
 );

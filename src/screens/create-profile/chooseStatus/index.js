@@ -1,51 +1,45 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { SecondaryButton } from '../../../components/button';
-import { NavigationButtons } from '../../../components/navigationButtons';
-import {
-    Box,
-    Container,
-    Heading,
-    Inner,
-    TextBlock,
-    Title,
-} from '../../../components/theme';
+import { ScreenContainer } from '../../../components/screenContainer';
+import { Box, Heading, Inner, TextBlock } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
+import styles from './styles';
 
 const ChooseStatus = ({ navigation }) => {
-    const dispatch = useDispatch();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     return (
-        <Container showLogout>
-            <Heading>{en.chooseStatus.heading}</Heading>
-            <Title>{en.chooseStatus.title}</Title>
-            <TextBlock>{en.chooseStatus.select}</TextBlock>
-            <Inner>
-                <Box>
-                    <SecondaryButton
-                        onPress={() =>
-                            navigation.navigate('CompleteSingleProfile')
-                        }
-                    >
-                        {en.chooseStatus.room}
-                    </SecondaryButton>
-                </Box>
-                <Box>
-                    <SecondaryButton
-                        onPress={() =>
-                            navigation.navigate('CompleteFlatProfile')
-                        }
-                    >
-                        {en.chooseStatus.roommate}
-                    </SecondaryButton>
-                </Box>
-                <Box>
-                    <SecondaryButton>{en.chooseStatus.flat}</SecondaryButton>
-                </Box>
+        <ScreenContainer showLogout>
+            <Inner style={styles.inner}>
+                <Heading>{en.chooseStatus.heading}</Heading>
+                <Box />
+                <TextBlock>{en.chooseStatus.select}</TextBlock>
+                <Box />
+                <SecondaryButton
+                    onPress={() => {
+                        navigation.navigate('CompleteSingleProfile');
+                    }}
+                >
+                    {en.chooseStatus.room}
+                </SecondaryButton>
+                <Box />
+                <SecondaryButton
+                    onPress={() => {
+                        navigation.navigate('CreateFlat');
+                    }}
+                >
+                    {en.chooseStatus.roommate}
+                </SecondaryButton>
+                <Box />
+
+                <SecondaryButton
+                    onPress={() => {
+                        navigation.navigate('AccessExistingFlatProfile');
+                    }}
+                >
+                    {en.chooseStatus.flat}
+                </SecondaryButton>
+                <Box />
             </Inner>
-            <NavigationButtons onPressBack={() => navigation.goBack()} />
-        </Container>
+        </ScreenContainer>
     );
 };
 export default ChooseStatus;

@@ -1,0 +1,39 @@
+name: Deploy Project to Heroku
+
+on:
+    push:
+        branches:
+            - dev
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # auto-generated
+            HEROKU_KEY: ${{ secrets.HEROKU_API_KEY }}
+            HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+            HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+
+        steps:
+            # checkout repository code
+            - uses: actions/checkout@v1
+
+            # create .netrc file for heroku authentication
+            # https://devcenter.heroku.com/articles/authentication
+            - run: |+
+                  cat >~/.netrc <<EOF
+                  machine api.heroku.com
+                      login $HEROKU_EMAIL
+                      password $HEROKU_KEY
+                  machine git.heroku.com
+                      login $HEROKU_EMAIL
+                      password $HEROKU_KEY
+                  EOF
+
+            # login with .netrc file
+            - run: heroku config:set USE_NPM_INSTALL=true -a $HEROKU_APP_NAME 
+            - run: heroku login
+
+            # deploy code
+            - run: heroku git:remote -a $HEROKU_APP_NAME
+            - run: git push heroku HEAD:refs/heads/master

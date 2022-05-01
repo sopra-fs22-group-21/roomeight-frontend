@@ -2,6 +2,7 @@
     "expo": {
         "name": "roomeight",
         "slug": "roomeight",
+        "owner": "sopragroup21",
         "version": "1.0.0",
         "orientation": "portrait",
         "icon": "./assets/icon.png",

@@ -4,22 +4,27 @@
  */
 class Userprofile {
     constructor(data = {}) {
+        this.profileId = '';
         this.firstName = '';
         this.lastName = '';
         this.description = '';
         this.biography = '';
-        this.tags = '';
-        this.pictureReference = '';
-        // this.matches = '';
-        this.birthday = '';
+        this.tags = [];
+        this.pictureReferences = [];
+        this.matches = [];
+        this.creationDate = null;
+        this.onlineStatus = '';
+        this.birthday = null;
         this.email = '';
         this.phoneNumber = '';
         this.gender = '';
-        this.isSearchingRoom = '';
-        this.isAdvertisingRoom = '';
-        this.moveInDate = '';
-        this.moveOutDate = '';
-        this.password = '';
+        this.isSearchingRoom = false;
+        this.isAdvertisingRoom = false;
+        this.moveInDate = null;
+        this.moveOutDate = null;
+        this.flatId = '';
+        this.images = [];
+        this.isComplete = false;
         Object.assign(this, data);
     }
 }

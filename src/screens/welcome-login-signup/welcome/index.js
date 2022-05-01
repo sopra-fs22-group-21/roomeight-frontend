@@ -3,7 +3,7 @@ import { TouchableOpacity, View } from 'react-native';
 import Room8Logo from '../../../../assets/logo/Room8Logo.js';
 import { Box, SemiBold, TextBlock } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
-import styles from './style';
+import styles from './styles';
 
 function Welcome({ navigation }) {
     return (

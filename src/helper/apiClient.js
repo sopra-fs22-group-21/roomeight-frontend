@@ -2,22 +2,20 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 import { auth } from '../../firebase/firebase-config';
 
-const API_URL = (env = Constants.manifest.releaseChannel) => {
-    //if (__DEV__) {
-    //   return 'https://b8585bf5-1579-433d-aec8-d6ad6bdfb349.mock.pstmn.io';
-    //} else {
-    return 'https://us-central1-roomeight-9cd94.cloudfunctions.net';
-    //}
+const API_URL = (_env = Constants.manifest.releaseChannel) => {
+    if (__DEV__) {
+        return 'https://europe-west1-roomeight-9cd94.cloudfunctions.net';
+        //return 'https://7be152d7-f460-4216-9386-295f88a99e3b.mock.pstmn.io';
+    } else {
+        return 'https://europe-west1-roomeight-9cd94.cloudfunctions.net';
+    }
 };
 
-async function userToken() {
+export async function userToken() {
     const user = auth.currentUser;
     if (user) {
-        console.log('logged in');
-        const token = await user.getIdToken();
-        return token;
+        return user.getIdToken(true);
     } else {
-        console.log('no user');
         return null;
     }
 }
@@ -35,7 +33,6 @@ const apiClient = () => {
         }
         return req;
     });
-
     return axiosInstance;
 };
 

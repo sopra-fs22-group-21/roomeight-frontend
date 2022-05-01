@@ -1,10 +1,7 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../redux/actions/authActions';
-import { SecondaryButton } from '../button';
-import NavBar from '../navbar';
-import styles from './style';
+import { Pressable, Text, View } from 'react-native';
+import { Icon } from 'react-native-elements';
+import styles from './styles';
 
 export const Heading = (props) => {
     return props.hidden ? (
@@ -18,18 +15,28 @@ export const Heading = (props) => {
     );
 };
 
+export const SmallHeading = (props) => (
+    <Text style={{ ...styles.smallHeading, ...props.style }}>
+        {props.children}
+    </Text>
+);
+
 export const Title = (props) => (
-    <Box>
-        <Text style={{ ...styles.title, ...props.style }}>
-            {props.children}
-        </Text>
-    </Box>
+    <Text style={{ ...styles.title, ...props.style }}>{props.children}</Text>
 );
 
 export const TextBlock = (props) => (
     <Box>
-        <Text style={{ ...styles.text, ...props.style }}>{props.children}</Text>
+        <NormalText style={{ ...props.style }}>{props.children}</NormalText>
     </Box>
+);
+
+export const Strong = (props) => (
+    <Text style={{ ...styles.label, ...props.style }}>{props.children}</Text>
+);
+
+export const NormalText = (props) => (
+    <Text style={{ ...styles.text, ...props.style }}>{props.children}</Text>
 );
 
 export const Box = (props) => (
@@ -44,31 +51,53 @@ export const Padding = (props) => (
     <View style={{ ...styles.padding, ...props.style }}>{props.children}</View>
 );
 
-export const Container = (props) => {
-    const dispatch = useDispatch();
-    return (
-        <View style={{ ...styles.container, ...props.style }} {...props}>
-            {props.children}
-            {props.showLogout ? (
-                <SecondaryButton onPress={() => dispatch(logoutUser())}>
-                    Logout
-                </SecondaryButton>
-            ) : null}
-            {props.showNavBar ? <NavBar navigation={props.navigation} /> : null}
-        </View>
-    );
-};
 export const Inner = (props) => (
     <View style={styles.inner} {...props}>
         {props.children}
     </View>
 );
 
-export const Screen = (props) => {
-    return (
-        <View style={{ ...styles.screen, ...props.style }} {...props}>
-            {props.children}
-            {props.showFooter ? <NavBar navigation={props.navigation} /> : null}
-        </View>
-    );
+export const ScreenPadding = (props) => (
+    <View {...props} style={{ ...styles.screenPadding, ...props.style }}>
+        {props.children}
+    </View>
+);
+
+export const SmallHeadingWithBack = (props) => (
+    <View style={styles.row}>
+        <Icon
+            name="arrow-back"
+            size={30}
+            style={styles.icon}
+            onPress={() => props.navigation.goBack()}
+        />
+        <Pressable onPress={props.onPress}>
+            <SmallHeading>{props.children}</SmallHeading>
+        </Pressable>
+    </View>
+);
+
+export const Name = (props) => (
+    <Box>
+        <Text style={{ ...styles.name, ...props.style }}>{props.children}</Text>
+    </Box>
+);
+
+export const PinkBackground = (props) => {
+    if (props.onPress) {
+        return (
+            <Pressable
+                onPress={props.onPress}
+                style={{ ...styles.pink, ...props.style }}
+            >
+                {props.children}
+            </Pressable>
+        );
+    } else {
+        return (
+            <View style={{ ...styles.pink, ...props.style }}>
+                {props.children}
+            </View>
+        );
+    }
 };

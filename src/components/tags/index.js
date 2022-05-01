@@ -2,13 +2,21 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import tagIcons from '../../resources/icons/tagIcons';
 import TagElement from '../tagelement';
-import styles from './style';
+import styles from './styles';
 
 const Tags = (props) => {
-    const half = Math.ceil(tagIcons.length / 2);
-    const left = tagIcons.slice(0, half);
-    const right = tagIcons.slice(half, tagIcons.length);
-    const [tags, setTags] = useState({});
+    const tagsToShow = props.tags ? props.tags : tagIcons;
+    const allTags = tagsToShow.map((tag) => ({
+        ...tag,
+        isSelected: props.selected ? props.selected.includes(tag.name) : false,
+    }));
+    let values = {};
+    allTags
+        .filter((tag) => tag.isSelected)
+        .map((tag) => {
+            values[tag.name] = true;
+        });
+    const [tags, setTags] = useState({ ...values });
 
     const toggleSelect = (selected) => {
         const t = { ...tags, ...selected };
@@ -19,26 +27,44 @@ const Tags = (props) => {
         setTags(t);
     };
 
+    const getLeft = (list) => {
+        const half = Math.ceil(list.length / 2);
+        return list.slice(0, half);
+    };
+
+    const getRight = (list) => {
+        const half = Math.ceil(list.length / 2);
+        return list.slice(half, list.length);
+    };
+
     return (
-        <View style={styles.box}>
+        <View style={{ ...styles.box, ...props.style }}>
             <View style={styles.column}>
                 <View style={styles.tagContainer}>
-                    {left.map((tag) => (
+                    {getLeft(allTags).map((tag, i) => (
                         <TagElement
-                            key={tag.name}
+                            key={tag.name + i}
                             tag={tag}
-                            onChange={(selected) => toggleSelect(selected)}
+                            onChange={
+                                props.onChange
+                                    ? (selected) => toggleSelect(selected)
+                                    : undefined
+                            }
                         />
                     ))}
                 </View>
             </View>
             <View style={styles.column}>
                 <View style={styles.tagContainer}>
-                    {right.map((tag) => (
+                    {getRight(allTags).map((tag, i) => (
                         <TagElement
-                            key={tag.name}
+                            key={tag.name + i}
                             tag={tag}
-                            onChange={(selected) => toggleSelect(selected)}
+                            onChange={
+                                props.onChange
+                                    ? (selected) => toggleSelect(selected)
+                                    : undefined
+                            }
                         />
                     ))}
                 </View>

@@ -1,31 +1,24 @@
-import {
-    COMPLETE_FLATPROFILE_FAILURE,
-    COMPLETE_FLATPROFILE_REQUEST,
-    COMPLETE_FLATPROFILE_SUCCESS,
-} from '../constants/index';
+import Flatprofile from '../../models/Flatprofile';
+import * as Constants from '../constants';
+
+const initialState = {
+    flatprofile: {},
+};
 
 const flatprofileState = (state = initialState, action) => {
     switch (action.type) {
-        case COMPLETE_FLATPROFILE_REQUEST:
+        case Constants.GET_FLATPROFILE_SUCCESS:
+        case Constants.POST_FLATPROFILE_SUCCESS:
             return {
                 ...state,
-                loading: true,
-            };
-        case COMPLETE_FLATPROFILE_SUCCESS:
-            return {
-                ...state,
-                error: null,
-                userProfile: {},
-                isComplete: true,
-                loading: false,
-            };
-        case COMPLETE_FLATPROFILE_FAILURE:
-            return {
-                ...state,
-                error: action.payload,
-                loading: false,
+                flatprofile: new Flatprofile(action.payload),
             };
 
+        case Constants.POST_LIKE_USER_SUCCESS:
+            return {
+                ...state,
+                //todo: flatprofile: action.payload.updatedFlatProfile,
+            };
         default:
             return state;
     }

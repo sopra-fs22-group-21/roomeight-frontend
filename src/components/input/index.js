@@ -1,17 +1,13 @@
 import React from 'react';
-import { Text, TextInput, View } from 'react-native';
-import { Box } from '../theme';
-import styles from './style';
+import { TextInput, View } from 'react-native';
+import { Box, Strong } from '../theme';
+import styles from './styles';
 
 export const Input = (props) => (
     <Box>
-        <Text style={styles.label}>{props.label}</Text>
+        <InputLabel style={styles.label}>{props.label}</InputLabel>
         <StyledTextInput {...props} />
     </Box>
-);
-
-export const InputLabel = (props) => (
-    <Text style={styles.label}>{props.children}</Text>
 );
 
 export const StyledTextInput = (props) => (
@@ -25,6 +21,8 @@ export const StyledTextInput = (props) => (
         {...props}
     />
 );
+
+export const InputLabel = (props) => <Strong {...props} />;
 
 export const InputBox = (props) => (
     <Box style={props.style}>

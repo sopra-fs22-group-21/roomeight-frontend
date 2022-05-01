@@ -1,41 +1,40 @@
 import apiClient from '../../helper/apiClient';
-import {
-    POST_USERPROFILE_FAILURE,
-    POST_USERPROFILE_REQUEST,
-    POST_USERPROFILE_SUCCESS,
-} from '../constants';
+import * as Constants from '../constants';
 import { loginUser } from './authActions';
 
 const postUserprofileRequest = () => ({
-    type: POST_USERPROFILE_REQUEST,
+    type: Constants.POST_USERPROFILE_REQUEST,
 });
 
-const postUserprofileSuccess = (userprofile) => ({
-    type: POST_USERPROFILE_SUCCESS,
-    payload: userprofile,
+const postUserprofileSuccess = (response) => ({
+    type: Constants.POST_USERPROFILE_SUCCESS,
+    payload: response,
 });
 
 const postUserprofileFailure = (error) => ({
-    type: POST_USERPROFILE_FAILURE,
+    type: Constants.POST_USERPROFILE_FAILURE,
     payload: error,
 });
 
 /**
  * Sends a post request to the backend to create a new userprofile
- * @param {object} userprofile - JSON object with the request body
+ * @param {object} requestBody - JSON object with the request body
  *
  * @dispatches {@link postUserprofileRequest} on post request start
  * @dispatches {@link postUserprofileSuccess} on post success
  * @dispatches {@link postUserprofileFailure} on post failure with error payload
  * @dispatches {@link loginUser} on post success to login the user after registration
  *
- * @see {@link apiClient} for more information on the post request
+ * @see {@link apiClient} for more information
  */
-export const postUserprofile = (userprofile) => (dispatch) => {
+export const postUserprofile = (requestBody) => (dispatch) => {
     dispatch(postUserprofileRequest());
+    dispatch({
+        type: Constants.LOADING_STATE,
+    });
 
     apiClient()
-        .post('/userprofiles', userprofile)
+        .post('/userprofiles', requestBody)
         .then((response) => {
             console.log(
                 'postUserprofileSuccess: ' + JSON.stringify(response.data)
@@ -44,12 +43,13 @@ export const postUserprofile = (userprofile) => (dispatch) => {
         })
         .then(() => {
             console.log('then logging in...');
-            dispatch(loginUser(userprofile.email, userprofile.password));
+            dispatch(loginUser(requestBody.email, requestBody.password));
         })
         .catch((error) => {
             console.log('error posting userprofile');
-            console.log(error.message);
-            console.log(userprofile);
+            console.warn(error);
+            console.log('request body:');
+            console.log(requestBody);
             dispatch(postUserprofileFailure(error));
         });
 };

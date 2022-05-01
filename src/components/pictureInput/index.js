@@ -1,25 +1,38 @@
+import { useEffect, useState } from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
+import { getImageSource } from '../../helper/imageHandler';
 import EditBadge from '../editBadge';
-import styles from './style';
+import styles from './styles';
 
 /**
  * Component to select an image from the device's gallery and display it.
  * Logic must be handled with onPress function.
  *
- * @param {string} props.variant 'profile' | 'additional'
+ * @param {string} props.variant 'profile' | 'additional' | 'editprofile'
  * @param {string} props.onPress 'onPress function'
  * @param {string} props.image 'image uri'
  * @required variant!
  */
-const pictureInput = (props) => {
+const PictureInput = (props) => {
+    const [imageSource, setImageSource] = useState(null);
+
+    async function loadSource() {
+        const source = await getImageSource(props.image);
+        setImageSource(source);
+    }
+
+    useEffect(() => {
+        loadSource();
+    }, [props.image]);
+
     switch (props.variant) {
         case 'profile':
-            if (props.image) {
+            if (imageSource) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
                         <Image
-                            style={styles.imageProfile}
-                            source={{ uri: props.image }}
+                            style={{ ...styles.imageProfile, ...props.style }}
+                            source={{ uri: imageSource.uri }}
                         />
                         <EditBadge variant={props.variant} set={true} />
                     </Pressable>
@@ -27,8 +40,18 @@ const pictureInput = (props) => {
             } else {
                 return (
                     <Pressable onPress={props.onPressSelect}>
-                        <View style={styles.backgroundProfile}>
-                            <Text style={styles.placeholderProfile}>
+                        <View
+                            style={{
+                                ...styles.backgroundProfile,
+                                ...props.style,
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    ...styles.placeholderProfile,
+                                    ...props.style,
+                                }}
+                            >
                                 {props.initials}
                             </Text>
                         </View>
@@ -37,12 +60,12 @@ const pictureInput = (props) => {
                 );
             }
         case 'additional':
-            if (props.image) {
+            if (imageSource) {
                 return (
                     <Pressable onPress={props.onPressDelete}>
                         <Image
                             style={styles.imageAdditional}
-                            source={{ uri: props.image }}
+                            source={{ uri: imageSource.uri }}
                         />
                         <EditBadge variant={props.variant} set={true} />
                     </Pressable>
@@ -59,9 +82,32 @@ const pictureInput = (props) => {
                     </Pressable>
                 );
             }
+        case 'editprofile':
+            if (imageSource) {
+                return (
+                    <Pressable onPress={props.onPressDelete}>
+                        <Image
+                            style={styles.editprofile}
+                            source={{ uri: imageSource.uri }}
+                        />
+                        <EditBadge variant={props.variant} set={true} />
+                    </Pressable>
+                );
+            } else {
+                return (
+                    <Pressable onPress={props.onPressSelect}>
+                        <View style={styles.backgroundEditprofile}>
+                            <Text style={styles.placeholderEdit}>
+                                {props.initials}
+                            </Text>
+                        </View>
+                        <EditBadge variant={props.variant} set={false} />
+                    </Pressable>
+                );
+            }
         default:
             return <Text> specify variant! </Text>;
     }
 };
 
-export default pictureInput;
+export default PictureInput;

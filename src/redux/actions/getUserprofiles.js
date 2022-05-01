@@ -1,37 +1,93 @@
+import { auth } from '../../../firebase/firebase-config';
 import apiClient from '../../helper/apiClient';
-import {
-    GET_USERS_FAILURE,
-    GET_USERS_REQUEST,
-    GET_USERS_SUCCESS,
-} from '../constants';
+import * as Constants from '../constants';
+import { getAllFlatProfiles, getFlatprofile } from './getFlatprofiles';
 
-const getUserProfilesRequest = () => ({
-    type: GET_USERS_REQUEST,
+const getCurrentUserprofileRequest = (request) => ({
+    type: Constants.GET_CURRENT_USER_REQUEST,
+    payload: request,
 });
 
-const getUserProfilesSuccess = (userProfiles) => ({
-    type: GET_USERS_SUCCESS,
-    payload: userProfiles,
+const getCurrentUserprofileSuccess = (response) => ({
+    type: Constants.GET_CURRENT_USER_SUCCESS,
+    payload: response,
 });
 
-const getUserProfilesFailure = (error) => ({
-    type: GET_USERS_FAILURE,
+const getCurrentUserprofileFailure = (error) => ({
+    type: Constants.GET_CURRENT_USER_FAILURE,
+    payload: error,
+});
+
+const getAllUserprofilesRequest = (request) => ({
+    type: Constants.GET_ALL_USERPROFILES_REQUEST,
+    payload: request,
+});
+const getAllUserprofilesSuccess = (response) => ({
+    type: Constants.GET_ALL_USERPROFILES_SUCCESS,
+    payload: response,
+});
+const getAllUserprofilesFailure = (error) => ({
+    type: Constants.GET_ALL_USERPROFILES_FAILURE,
     payload: error,
 });
 
 /**
- * to be done!
- * @returns
+ * makes a request to the backend api to get the current userprofile
+ * @params {string} userId the uid of a user to set as pathvariable
+ * @dispatches {@link getCurrentUserprofileRequest} on request start
+ * @dispatches {@link getCurrentUserprofileSuccess} on request success with userprofile payload
+ * @dispatches {@link getCurrentUserprofileFailure} on request failure with error payload
  */
-export const getUserProfiles = () => (dispatch) => {
-    dispatch(getUserProfilesRequest());
+export const getCurrentUserprofile = () => (dispatch) => {
+    const url = `/userprofiles/${auth.currentUser.uid}`;
+    dispatch(
+        getCurrentUserprofileRequest({
+            id: auth.currentUser.uid,
+            url: url,
+        })
+    );
+    let userprofile = {};
 
     apiClient()
-        .get('/userprofiles')
+        .get(url)
         .then((response) => {
-            dispatch(getUserProfilesSuccess(response.data));
+            userprofile = response.data;
+            dispatch(getCurrentUserprofileSuccess(response.data));
         })
         .catch((error) => {
-            dispatch(getUserProfilesFailure(error));
+            dispatch(getCurrentUserprofileFailure(error));
+        })
+        .then(() => {
+            if (userprofile.flatId && userprofile.flatId != '')
+                dispatch(getFlatprofile(userprofile.flatId));
+        })
+        .then(() => {
+            if (userprofile.isSearchingRoom) dispatch(getAllFlatProfiles());
+            else dispatch(getAllUserprofiles());
+        });
+};
+
+/**
+ * makes a request to the backend api to get all userprofiles
+ * @dispatches {@link getAllUserprofilesRequest} on request start
+ * @dispatches {@link getAllUserprofilesSuccess} on request success with userprofile payload
+ * @dispatches {@link getAllUserprofilesFailure} on request failure with error payload
+ */
+export const getAllUserprofiles = () => (dispatch) => {
+    const url = '/userprofiles/';
+    dispatch(
+        getAllUserprofilesRequest({
+            id: auth.currentUser.uid,
+            url: url,
+        })
+    );
+
+    apiClient()
+        .get(url)
+        .then((response) => {
+            dispatch(getAllUserprofilesSuccess(response.data));
+        })
+        .catch((error) => {
+            dispatch(getAllUserprofilesFailure(error));
         });
 };
