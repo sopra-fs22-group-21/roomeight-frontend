@@ -47,7 +47,6 @@ const Discover = ({ navigation }) => {
             const prof = [...discoverProfiles];
             prof.splice(index, 1);
             dispatch(updateDiscoverProfiles(prof));
-            carousel.current.snapToItem(0);
         }
     };
 
