@@ -96,7 +96,6 @@ export const loadMessages = (chatId) => (dispatch) => {
     get(queryParams)
         .then((snapshot) => {
             if (snapshot.exists()) {
-                snapshot.forEach((message) => {});
                 const messages = snapshot.val();
                 dispatch(loadMessagesSuccess(chatId, messages));
             }
@@ -149,13 +148,12 @@ export const chatMessagesListener = (chatId) => (dispatch) => {
         orderByChild('createdAt'),
         limitToLast(1)
     );
-    let listener = onChildAdded(queryParams, (snapshot) => {
+    return onChildAdded(queryParams, (snapshot) => {
         const messages = snapshot.val();
         if (snapshot.exists()) {
             dispatch(newChatMessage(chatId, messages));
         }
     });
-    return listener;
 };
 
 /**
@@ -164,9 +162,8 @@ export const chatMessagesListener = (chatId) => (dispatch) => {
  * @param {uid of the chata} chatId
  * @dispatches {@link Constants.SEND_MESSAGE_REQUEST } on request start
  * @dispatches {@link sendMessageFailure} on failure
- * @todo why is .catch executed without error???
  */
-export const sendMessage = (message, chatId) => async (dispatch, getState) => {
+export const sendMessage = (message, chatId) => async (dispatch) => {
     dispatch({
         type: Constants.SEND_MESSAGE_REQUEST,
         payload: message,
@@ -193,7 +190,6 @@ export const sendMessage = (message, chatId) => async (dispatch, getState) => {
  * @dispatches {@link Constants.CREATE_CHAT_REQUEST } on request start
  * @dispatches {@link Constants.CREATE_CHAT_SUCCESS } on success
  * @dispatches {@link createNewChatFailure} on failure
- * @todo where do i get the chatInfoObject from??
  */
 export const createChat = (profileId) => (dispatch, getState) => {
     dispatch({
@@ -304,7 +300,7 @@ export const deleteChat = (chatId) => (dispatch, getState) => {
     dispatch({
         type: Constants.DELETE_CHAT_REQUEST,
     });
-    let error = false;
+    let errorOccured = false;
     const references = [];
     references.push(ref(database, `/chats/${chatId}`));
     references.push(ref(database, `/messages/${chatId}`));
@@ -312,13 +308,13 @@ export const deleteChat = (chatId) => (dispatch, getState) => {
         ref(database, `/memberships/${getState().authState.auth.uid}/${chatId}`)
     );
 
-    references.forEach((ref) => {
-        remove(ref).catch((error) => {
-            error = true;
+    references.forEach((refrence) => {
+        remove(refrence).catch((error) => {
+            errorOccured = true;
             dispatch(deleteChatFailure(error));
         });
     });
-    if (!error) {
+    if (!errorOccured) {
         dispatch({
             type: Constants.DELETE_CHAT_SUCCESS,
         });

@@ -59,6 +59,7 @@ const RoomInfo = ({ navigation }) => {
                 moveOutDateValid === false ||
                 rentValid === false ||
                 roomSizeValid === false ||
+                nrRoommatesValid === false ||
                 nrBathroomsValid === false ||
                 (flat.permanent === false && !flat.moveOutDate)
             }
@@ -188,11 +189,14 @@ const RoomInfo = ({ navigation }) => {
                                 });
                             }}
                         />
-                        {/*
                         <Input
                             label={en.flatInfo.nrRoommates}
                             keyboardType="number-pad"
-                            defaultValue={flat.numberOfRoommates ? flat.numberOfRoommates+"" : null}
+                            defaultValue={
+                                flat.numberOfRoommates
+                                    ? flat.numberOfRoommates + ''
+                                    : null
+                            }
                             onChangeText={(text) => {
                                 setNrRoommatessValid(!isNaN(Number(text)));
                                 setFlat({
@@ -201,7 +205,6 @@ const RoomInfo = ({ navigation }) => {
                                 });
                             }}
                         />
-                        */}
                         <Input
                             label={en.roomInfo.nrBathrooms}
                             keyboardType="number-pad"

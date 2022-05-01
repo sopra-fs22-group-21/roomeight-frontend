@@ -9,18 +9,14 @@ import { getCurrentUserprofile } from '../../../redux/actions/getUserprofiles';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
-const AccessExistingFlatProfile = ({ navigation, route }) => {
+const AccessExistingFlatProfile = ({ navigation }) => {
     const dispatch = useDispatch();
 
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
 
     const partOfFlat = () => {
-        if (userprofile.flatId) {
-            return true;
-        } else {
-            return false;
-        }
+        return Boolean(userprofile.flatId);
     };
 
     return (
@@ -61,7 +57,7 @@ const AccessExistingFlatProfile = ({ navigation, route }) => {
                         'accessFlat'
                     );
                 }}
-                nextDisabled={partOfFlat() != true}
+                nextDisabled={!partOfFlat()}
             />
         </ScreenContainer>
     );

@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     input: {
         backgroundColor: '#e7e5e4',

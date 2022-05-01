@@ -50,7 +50,7 @@ export const getCurrentUserprofile = () => (dispatch) => {
 
     apiClient()
         .get(url)
-        .then(async (response) => {
+        .then((response) => {
             userprofile = response.data;
             dispatch(getCurrentUserprofileSuccess(response.data));
         })
@@ -81,12 +81,10 @@ export const getAllUserprofiles = () => (dispatch) => {
             url: url,
         })
     );
-    let userprofiles = [];
 
     apiClient()
         .get(url)
         .then((response) => {
-            userprofiles = response.data;
             dispatch(getAllUserprofilesSuccess(response.data));
         })
         .catch((error) => {

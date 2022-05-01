@@ -16,12 +16,7 @@ export const Chatroom = ({ route, navigation }) => {
         (state) => state.chatState.messages[chatInfo._id]
     );
     const [messages, setMessages] = useState([]);
-    //sets messages to previous messages if they exist
-    useEffect(() => {
-        if (previousMessages) {
-            setMessages(Object.values(previousMessages));
-        }
-    }, []);
+
     //updates the messages if the store changed
     useEffect(() => {
         if (previousMessages) {
@@ -29,7 +24,7 @@ export const Chatroom = ({ route, navigation }) => {
         }
     }, [previousMessages]);
     //callback for sending message
-    const onSend = useCallback((newMessage = []) => {
+    const onSend = useCallback((newMessage = {}) => {
         //modify attributess
         newMessage['pending'] = true;
         newMessage['createdAt'] = new Date().getTime();

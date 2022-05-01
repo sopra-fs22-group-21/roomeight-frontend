@@ -13,9 +13,8 @@ import { PublicProfileCard } from '../publicProfileCard';
 import { Box } from '../theme';
 import styles from './styles';
 
-const SingleProfile = (props) => {
+const SingleProfile = (_props) => {
     const dispatch = useDispatch();
-    const loading = useSelector((state) => state.loadingState);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const [moveInDateValid, setmoveInDateValid] = useState(
         userprofile.moveInDate
