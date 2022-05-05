@@ -50,40 +50,52 @@ export const postFlatprofile = (requestBody) => (dispatch) => {
     let emails = requestBody.roommateEmails;
     delete requestBody.roommateEmails;
 
-    console.log('requestBody:');
+    console.log('post flat requestBody:');
     console.log(requestBody);
+    let flatprofile = {};
     return apiClient()
         .post('/flatprofiles', requestBody)
         .then((response) => {
+            flatprofile = response.data;
             console.log(
                 'postFlatprofileSuccess: ' + JSON.stringify(response.data)
             );
-            return dispatch(postFlatprofileSuccess(response.data));
+            return Promise.resolve(dispatch(postFlatprofileSuccess(response.data)));
         })
         .catch((error) => {
             console.log('error post flatprofile');
-            dispatch(postFlatprofileFailure(error));
+            return Promise.resolve(dispatch(postFlatprofileFailure(error)));
         })
-        .then((response) => {
+        .then(() => {
             let update = { pictureReferences: references };
+            console.log("dispatching updateProfile")
+            console.log(update)
             return dispatch(
-                updateProfile(update, 'flatprofile', response.data.profileId)
-            ).catch((error) => console.log('error uploading'));
+                updateProfile(update, 'flatprofile', flatprofile.profileId)
+            ).catch((error) => {
+                console.log('error uploading')
+                console.log(error)
+            });
         })
-        .then((response) => {
-            return Promise.all(
-                emails.map((email) => {
-                    return dispatch(postRoommateToFlat(email));
-                })
-            ).catch((error) => console.log('error posting roommates ' + error));
+        .then(() => {
+            if(emails){
+                console.log("adding users to flat")
+                console.log(emails)
+                return Promise.all(
+                    emails.map((email) => {
+                        return dispatch(postRoommateToFlat(email));
+                    })
+                ).catch((error) => console.log('error posting roommates ' + error));
+            }
         });
 };
 
 export const postRoommateToFlat = (email) => (dispatch) => {
     dispatch(postRoommateToFlatRequest());
-    apiClient()
+    return apiClient()
         .post(`/flatprofiles/roommate/${email}`, {})
         .then((response) => {
+            
             console.log('could add roommate with email ' + email);
             console.log(JSON.stringify(response.data));
 
