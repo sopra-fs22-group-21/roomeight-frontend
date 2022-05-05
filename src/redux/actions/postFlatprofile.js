@@ -60,7 +60,9 @@ export const postFlatprofile = (requestBody) => (dispatch) => {
             console.log(
                 'postFlatprofileSuccess: ' + JSON.stringify(response.data)
             );
-            return Promise.resolve(dispatch(postFlatprofileSuccess(response.data)));
+            return Promise.resolve(
+                dispatch(postFlatprofileSuccess(response.data))
+            );
         })
         .catch((error) => {
             console.log('error post flatprofile');
@@ -68,24 +70,26 @@ export const postFlatprofile = (requestBody) => (dispatch) => {
         })
         .then(() => {
             let update = { pictureReferences: references };
-            console.log("dispatching updateProfile")
-            console.log(update)
+            console.log('dispatching updateProfile');
+            console.log(update);
             return dispatch(
                 updateProfile(update, 'flatprofile', flatprofile.profileId)
             ).catch((error) => {
-                console.log('error uploading')
-                console.log(error)
+                console.log('error uploading');
+                console.log(error);
             });
         })
         .then(() => {
-            if(emails){
-                console.log("adding users to flat")
-                console.log(emails)
+            if (emails) {
+                console.log('adding users to flat');
+                console.log(emails);
                 return Promise.all(
                     emails.map((email) => {
                         return dispatch(postRoommateToFlat(email));
                     })
-                ).catch((error) => console.log('error posting roommates ' + error));
+                ).catch((error) =>
+                    console.log('error posting roommates ' + error)
+                );
             }
         });
 };
@@ -95,7 +99,6 @@ export const postRoommateToFlat = (email) => (dispatch) => {
     return apiClient()
         .post(`/flatprofiles/roommate/${email}`, {})
         .then((response) => {
-            
             console.log('could add roommate with email ' + email);
             console.log(JSON.stringify(response.data));
 
