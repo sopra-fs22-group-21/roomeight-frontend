@@ -1,5 +1,13 @@
 import { React, useState } from 'react';
-import { Dimensions, FlatList, Pressable, View } from 'react-native';
+import {
+    Dimensions,
+    FlatList,
+    Pressable,
+    View,
+    Text,
+    Modal,
+} from 'react-native';
+import { SecondaryButton } from '../button';
 import { ImageGallery } from '../imageGallery';
 import { ProfilePicture } from '../profilePicture';
 import { NormalText, Strong } from '../theme';
@@ -12,6 +20,7 @@ export const ProfileInfoBox = (props) => {
         ? props.profile.firstName.substring(0, 1) +
           props.profile.lastName.substring(0, 1)
         : props.profile.name.substring(0, 1);
+
     return (
         <Pressable
             style={styles.profile}
@@ -69,6 +78,11 @@ export const ProfileInfoBox = (props) => {
                         </>
                     ) : null}
                 </View>
+                {props.onClickShowLikes ? (
+                    <SecondaryButton onPress={props.onClickShowLikes}>
+                        [3/7]
+                    </SecondaryButton>
+                ) : null}
             </View>
         </Pressable>
     );
