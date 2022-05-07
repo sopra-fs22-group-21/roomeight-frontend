@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import ChatListItem from '../../components/ChatListItem';
 import CreateNewChat from '../../components/createNewChat';
+import { EmptyCard } from '../../components/publicProfileCard';
 import { ScreenContainer } from '../../components/screenContainer';
 import { Box, SmallHeading } from '../../components/theme';
 import en from '../../resources/strings/en.json';
@@ -33,13 +34,7 @@ const Chat = ({ navigation }) => {
                     keyExtractor={(index) => index}
                 />
             )}
-            {!chats && (
-                <Center>
-                    <SmallHeading style={{ paddingTop: '50%' }}>
-                        {en.chat.noChats}
-                    </SmallHeading>
-                </Center>
-            )}
+            {!chats && <EmptyCard textIfNoData={en.chat.noChats} />}
         </ScreenContainer>
     );
 };

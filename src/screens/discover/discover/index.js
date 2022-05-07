@@ -4,6 +4,7 @@ import { View } from 'react-native-animatable';
 import { Icon } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 import { useDispatch, useSelector } from 'react-redux';
+import { ItsAMatch } from '../../../components/itsAMatch';
 import { LikeButtons } from '../../../components/likeButtons';
 import {
     EmptyCard,
@@ -19,6 +20,8 @@ import {
 } from '../../../redux/actions/discoverActions';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
+import * as Constants from '../../../redux/constants';
+import { goToChat } from '../../../redux/actions/chatActions';
 
 const ITEM_HEIGHT = Dimensions.get('screen').height - 170;
 
@@ -26,15 +29,26 @@ const Discover = ({ navigation }) => {
     const [cardSize, getCardSize] = useComponentSize();
     const dispatch = useDispatch();
     const carousel = useRef(null);
-    const { discoverProfiles, loading } = useSelector(
+    const { discoverProfiles, loading, newMatch } = useSelector(
         (state) => state.discoverState
     );
     const { userprofile } = useSelector((state) => state.userprofileState);
+    const { matches } = useSelector((state) => state.matchesState);
     const [profiles, setProfiles] = useState(discoverProfiles);
     const [like, setLike] = useState(false);
+    const [match, setMatch] = useState(undefined);
 
     useEffect(() => {
-        if (loading) setProfiles([{ textIfNoData: en.discover.loading }]);
+        if (newMatch) setMatch(matches[newMatch]);
+        console.log('newmatch: ');
+        console.log(newMatch);
+        console.log('userprofile: ');
+        console.log(userprofile);
+    }, [matches]);
+
+    useEffect(() => {
+        if (loading || !discoverProfiles)
+            setProfiles([{ textIfNoData: en.discover.loading }]);
         else
             setProfiles(
                 discoverProfiles.concat([{ textIfNoData: en.discover.empty }])
@@ -92,28 +106,48 @@ const Discover = ({ navigation }) => {
     };
 
     return (
-        <ScreenContainer navigation={navigation} showNavBar>
-            <View style={{ height: '100%', flex: 1 }} onLayout={getCardSize}>
-                <SmallHeading>Discover</SmallHeading>
-                <Box />
-                <Carousel
-                    ref={carousel}
-                    data={profiles}
-                    renderItem={card}
-                    sliderHeight={
-                        cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
+        <>
+            <ScreenContainer navigation={navigation} showNavBar>
+                <View
+                    style={{ height: '100%', flex: 1 }}
+                    onLayout={getCardSize}
+                >
+                    <SmallHeading>Discover</SmallHeading>
+                    <Box />
+                    <Carousel
+                        ref={carousel}
+                        data={profiles}
+                        renderItem={card}
+                        sliderHeight={
+                            cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
+                        }
+                        itemHeight={
+                            cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
+                        }
+                        activeSlideAlignment="start"
+                        inactiveSlideShift={0}
+                        useScrollView
+                        vertical
+                        onSnapToItem={(index) => removeProfile(index - 1)}
+                    />
+                </View>
+            </ScreenContainer>
+            {match ? (
+                <ItsAMatch
+                    profile={match}
+                    navigation={navigation}
+                    onPressMessage={() =>
+                        dispatch(goToChat(match.profileId, navigation))
                     }
-                    itemHeight={
-                        cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
-                    }
-                    activeSlideAlignment="start"
-                    inactiveSlideShift={0}
-                    useScrollView
-                    vertical
-                    onSnapToItem={(index) => removeProfile(index - 1)}
+                    onDiscard={() => {
+                        setMatch(null);
+                        dispatch({
+                            type: Constants.MATCH_IS_VIEWED,
+                        });
+                    }}
                 />
-            </View>
-        </ScreenContainer>
+            ) : null}
+        </>
     );
 };
 

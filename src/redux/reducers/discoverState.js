@@ -5,6 +5,7 @@ import * as Constants from '../constants';
 const initialState = {
     discoverProfiles: [],
     loading: false,
+    newMatch: null,
 };
 
 //TODO: error handling -> really set to null on every success?
@@ -44,6 +45,21 @@ const userprofileState = (state = initialState, action) => {
                     (data) => new Userprofile(data)
                 ),
                 loading: false,
+            };
+
+        case Constants.POST_LIKE_FLAT_SUCCESS:
+        case Constants.POST_LIKE_USER_SUCCESS:
+            if (action.payload.isMatch) {
+                return {
+                    ...state,
+                    newMatch: action.payload.profileId,
+                };
+            } else return state;
+
+        case Constants.MATCH_IS_VIEWED:
+            return {
+                ...state,
+                newMatch: null,
             };
 
         default:

@@ -44,7 +44,12 @@ export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
     apiClient()
         .post('/userprofiles/likeFlat/' + otherProfileId)
         .then((response) => {
-            dispatch(postLikeFlatSuccess(response.data));
+            dispatch(
+                postLikeFlatSuccess({
+                    ...response.data,
+                    profileId: otherProfileId,
+                })
+            );
             if (response.data.isMatch) {
                 //todo: response.data.isMatch
                 dispatch(reloadCurrentUserprofile());
@@ -69,7 +74,12 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
     apiClient()
         .post('/userprofiles/likeUser/' + otherProfileId)
         .then((response) => {
-            dispatch(postLikeUserSuccess(response.data));
+            dispatch(
+                postLikeUserSuccess({
+                    ...response.data,
+                    profileId: otherProfileId,
+                })
+            );
             if (response.data.isMatch) {
                 dispatch(
                     getFlatprofile(response.data.updatedFlatProfile.profileId)

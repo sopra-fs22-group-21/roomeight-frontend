@@ -184,6 +184,25 @@ export const sendMessage = (message, chatId) => async (dispatch) => {
         });
 };
 
+export const goToChat = (profileId, navigation) => (dispatch, getState) => {
+    const chats = getState().chatState.chats;
+    let exists = false;
+    if (chats) {
+        Object.values(chats).forEach((chat) => {
+            if (chat.userId === profileId || chat.flatId === profileId) {
+                exists = true;
+                navigation.navigate('Chatroom', {
+                    chatInfo: chat,
+                });
+                return;
+            }
+        });
+    }
+    dispatch(createChat(profileId)).then((chat) => {
+        navigation.navigate('Chatroom', { chatInfo: chat });
+    });
+};
+
 /**
  * writes a new chatId to the db and updates the chats state via the {@link chatMembershipChange}
  * @param {chatInfoObject} chatInfo
@@ -277,13 +296,14 @@ export const createChat = (profileId) => (dispatch, getState) => {
     chatInfo['lastMessage'] = userprofile.firstName + ' ' + en.chat.startedChat;
     chatInfo['timestamp'] =
         chatUpdate[`/messages/${chatId}/${firstMessageId}`].createdAt;
-    update(ref(database), membershipUpdate)
+    return update(ref(database), membershipUpdate)
         .then(() => {
-            update(ref(database), chatUpdate).then(
+            return update(ref(database), chatUpdate).then(() => {
                 dispatch({
                     type: Constants.CREATE_CHAT_SUCCESS,
-                })
-            );
+                });
+                return chatInfo;
+            });
         })
         .catch((error) => {
             dispatch(createChatFailure(error));
