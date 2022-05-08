@@ -12,11 +12,13 @@ const initialState = {
  * @param {reduxAction} action action that got dispatched
  */
 const userprofileState = (state = initialState, action) => {
+    const profile = { ...action.payload };
     switch (action.type) {
         case Constants.GET_CURRENT_USER_SUCCESS:
+            delete profile.matches;
             return {
                 ...state,
-                userprofile: action.payload,
+                userprofile: profile,
                 update: undefined,
             };
         case Constants.POST_LIKE_FLAT_SUCCESS:
@@ -26,21 +28,22 @@ const userprofileState = (state = initialState, action) => {
             };
 
         case Constants.POST_USERPROFILE_SUCCESS:
+            delete profile.matches;
             return {
                 ...state,
-                userprofile: action.payload,
+                userprofile: profile,
             };
 
         case Constants.UPDATE_USERPROFILE_SUCCESS:
+            delete profile.matches;
             return {
                 ...state,
-                update: action.payload,
+                update: profile,
             };
         case Constants.GET_CURRENT_USER_FAILURE:
         case Constants.GET_DOWNLOAD_URL_FAILURE:
             return {
                 ...state,
-                userprofile: state.userprofile,
                 error: action.payload,
             };
         default:

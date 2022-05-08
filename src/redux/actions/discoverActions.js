@@ -51,7 +51,6 @@ export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
                 })
             );
             if (response.data.isMatch) {
-                //todo: response.data.isMatch
                 dispatch(reloadCurrentUserprofile());
             }
         })
