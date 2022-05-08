@@ -5,6 +5,8 @@ import Match from '../../screens/matches/match';
 import Matches from '../../screens/matches/matches';
 import Profile from '../../screens/profile';
 import Settings from '../../screens/profile/settings';
+import LikesFlat from '../../screens/matches/matches/likesFlat';
+import MatchesFlat from '../../screens/matches/matches/matchesFlat';
 
 const options = {
     headerShown: false,
@@ -47,7 +49,16 @@ const homeScreens = [
         component: Match,
         options: options,
     },
-
+    {
+        name: 'MatchesFlat',
+        component: MatchesFlat,
+        options: options,
+    },
+    {
+        name: 'LikesFlat',
+        component: LikesFlat,
+        options: options,
+    },
     {
         name: 'Chatroom',
         component: Chatroom,
