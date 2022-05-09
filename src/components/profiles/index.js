@@ -80,7 +80,7 @@ export const ProfileInfoBox = (props) => {
                 </View>
                 {props.onClickShowLikes ? (
                     <SecondaryButton onPress={props.onClickShowLikes}>
-                        [3/7]
+                        (3/7)
                     </SecondaryButton>
                 ) : null}
             </View>

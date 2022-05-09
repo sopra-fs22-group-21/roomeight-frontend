@@ -9,9 +9,10 @@ import { SecondaryButton } from '../../../../components/button';
 import styles from './styles';
 import LikesList from '../../../../components/likesList';
 
-const LikesFlat = ({ navigation }) => {
+const LikesFlat = ({ navigation }, props) => {
     const { matches } = useSelector((state) => state.matchesState);
-    const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false, null);
+    const flatprofile = props.flatprofile;
 
     return (
         <View>
@@ -31,7 +32,7 @@ const LikesFlat = ({ navigation }) => {
                                 });
                             }}
                             onClickShowLikes={() => {
-                                setModalVisible(true);
+                                setModalVisible(true, id);
                             }}
                         />
                     );
@@ -50,7 +51,9 @@ const LikesFlat = ({ navigation }) => {
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
                             <Title>Likes Overview</Title>
-                            <LikesList />
+                            <Box />
+                            <LikesList flatprofile={props.profiles} />
+                            <Box />
                             <SecondaryButton
                                 onPress={() => setModalVisible(!modalVisible)}
                             >
