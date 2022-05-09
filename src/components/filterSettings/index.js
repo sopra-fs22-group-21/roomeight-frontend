@@ -376,7 +376,7 @@ const FilterSettings = (props) => {
             <View style={styles.inner}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <Box />
-                    {!isSearchingRoom ? searchingFilters : advertisingFilters}
+                    {isSearchingRoom ? searchingFilters : advertisingFilters}
                     <Box />
                 </ScrollView>
                 <Box />
