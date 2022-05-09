@@ -53,7 +53,7 @@ const Matches = ({ navigation }) => {
                 {index === 0 ? (
                     <MatchesFlat navigation={navigation} />
                 ) : (
-                    <LikesFlat navigation={navigation} />
+                    <LikesFlat navigation={navigation} profile={userprofile} />
                 )}
             </ScreenContainer>
         );
