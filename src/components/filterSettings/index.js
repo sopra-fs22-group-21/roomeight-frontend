@@ -185,6 +185,7 @@ const FilterSettings = (props) => {
                         ? newFilters.rent.max
                         : null
                 }
+                step={10}
                 minRange={100}
                 onRangeChange={(range) => setRent(range)}
                 onValueChange={(low, high) => {

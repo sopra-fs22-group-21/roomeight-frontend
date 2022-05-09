@@ -55,7 +55,7 @@ export const NumberRange = (props) => {
                         max={props.max}
                         low={low}
                         high={high}
-                        step={1}
+                        step={props.step ? props.step : 1}
                         minRange={props.minRange}
                         renderThumb={renderThumb}
                         renderRail={renderRail}
