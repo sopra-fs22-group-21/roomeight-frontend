@@ -10,14 +10,14 @@ import styles from './styles';
 import LikesList from '../../../../components/likesList';
 
 const LikesFlat = ({ navigation }, props) => {
-    const { matches } = useSelector((state) => state.matchesState);
-    const [modalVisible, setModalVisible] = useState(false, null);
+    const { likes, loading } = useSelector((state) => state.likesState);
+    const [modalVisible, setModalVisible] = useState(false);
     const flatprofile = props.flatprofile;
-
+    if (loading) return <Text>loading</Text>;
     return (
         <View>
             <Box />
-            {Object.values(matches).map((profile, index) => {
+            {Object.values(likes).map((profile, index) => {
                 console.log('like: ' + profile.profileId);
                 if (profile.profileId)
                     return (
@@ -32,7 +32,7 @@ const LikesFlat = ({ navigation }, props) => {
                                 });
                             }}
                             onClickShowLikes={() => {
-                                setModalVisible(true, id);
+                                setModalVisible(true);
                             }}
                         />
                     );

@@ -31,6 +31,11 @@ const styles = StyleSheet.create({
         fontSize: 15,
         paddingBottom: 4,
     },
+    liked: {
+        fontFamily: 'SourceSans3SemiBold',
+        fontSize: 15,
+        paddingLeft: 3,
+    },
     genderIcon: {
         fontSize: 15,
         paddingTop: 10,

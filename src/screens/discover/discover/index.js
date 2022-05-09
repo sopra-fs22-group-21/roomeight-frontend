@@ -30,8 +30,10 @@ const Discover = ({ navigation }) => {
         (state) => state.discoverState
     );
     const { userprofile } = useSelector((state) => state.userprofileState);
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const [profiles, setProfiles] = useState(discoverProfiles);
     const [like, setLike] = useState(false);
+    const [showLikes, setShowLike] = useState(false);
 
     useEffect(() => {
         if (loading) setProfiles([{ textIfNoData: en.discover.loading }]);
@@ -76,6 +78,12 @@ const Discover = ({ navigation }) => {
                             profile={item}
                             key={item.profileId}
                             onDoubleTap={() => handleLike(item.profileId)}
+                            onClickShowLikes={() => {
+                                setShowLike(true);
+                                console.log(flatprofile.likes);
+                            }}
+                            nrLiked={flatprofile.likes.length}
+                            nrRoommates={flatprofile.numberOfRoommates}
                         />
                     </Box>
                     <LikeButtons
