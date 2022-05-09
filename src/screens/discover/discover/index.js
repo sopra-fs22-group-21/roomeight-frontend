@@ -142,6 +142,7 @@ const Discover = ({ navigation }) => {
                     setFilters(fil);
                     //setFilterTags(fTags);
                     setIsShowingSettings(false);
+                    console.log(fil);
                 }}
                 filters={filters}
             />

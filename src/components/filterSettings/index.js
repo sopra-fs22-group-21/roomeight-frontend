@@ -72,14 +72,13 @@ const FilterSettings = (props) => {
     };
 
     useEffect(() => {
-        const el = { ...filteredElements };
-        let duration;
+        let duration = '';
         if (newFilters.moveInDate)
-            duration =
+            duration +=
                 'from ' +
                 dateFormat(new Date(newFilters.moveInDate), 'dd.mm.yyyy');
         if (newFilters.moveOutDate)
-            duration =
+            duration +=
                 ' until ' +
                 dateFormat(new Date(newFilters.moveOutDate), 'dd.mm.yyyy');
         let selectedFilters = { ...filteredElements };
