@@ -24,6 +24,7 @@ import * as Constants from '../../../redux/constants';
 import { goToChat } from '../../../redux/actions/chatActions';
 import FilterSettings from '../../../components/filterSettings';
 import colors from '../../../resources/colors';
+import { updateProfile } from '../../../redux/actions/updateActions';
 
 const ITEM_HEIGHT = Dimensions.get('screen').height - 170;
 
@@ -141,6 +142,14 @@ const Discover = ({ navigation }) => {
                 onSave={(fil, fTags) => {
                     setFilters(fil);
                     //setFilterTags(fTags);
+
+                    dispatch(
+                        updateProfile(
+                            { filters: { ...fil } },
+                            'userprofile',
+                            userprofile.profileId
+                        )
+                    );
                     setIsShowingSettings(false);
                     console.log(fil);
                 }}
