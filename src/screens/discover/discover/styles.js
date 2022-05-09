@@ -4,6 +4,11 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 12,
     },
+    headingRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
     bottom: {
         height: 50,
     },

@@ -182,20 +182,21 @@ const FlatProfile = ({ navigation }, props) => {
                         </InputBox>
                         <AddRoomieInput />
                         <Box />
-                        {/*
-                        <Input
-                            label={en.flatInfo.nrRoommates}
-                            keyboardType="number-pad"
-                            error={nrRoommatesValid === false}
-                            defaultValue={flatprofile.numberOfRoommates}
-                            onChangeText={(text) => {
-                                setNrRoommatesValid(!isNaN(Number(text)));
-                                setFlat({
-                                    ...flat,
-                                    numberOfRoommates: Number(text),
-                                });
-                            }}
-                        /> */}
+                        {
+                            <Input
+                                label={en.flatInfo.nrRoommates}
+                                keyboardType="number-pad"
+                                error={nrRoommatesValid === false}
+                                defaultValue={flatprofile.numberOfRoommates}
+                                onChangeText={(text) => {
+                                    setNrRoommatesValid(!isNaN(Number(text)));
+                                    setFlat({
+                                        ...flat,
+                                        numberOfRoommates: Number(text),
+                                    });
+                                }}
+                            />
+                        }
                         <Input
                             label={en.roomInfo.nrBathrooms}
                             keyboardType="number-pad"
