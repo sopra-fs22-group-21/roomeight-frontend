@@ -1,5 +1,6 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
+import { updateDiscoverProfiles } from './discoverActions';
 
 const getFlatprofileRequest = () => ({
     type: Constants.GET_FLATPROFILE_REQUEST,
@@ -54,13 +55,23 @@ export const getFlatprofile = (id) => (dispatch) => {
  * @dispatches {@link getAllFlatprofilesSuccess} on request success with userprofile payload
  * @dispatches {@link getAllFlatprofilesFailure} on request failure with error payload
  */
-export const getAllFlatProfiles = () => (dispatch) => {
+export const getAllFlatProfiles = () => (dispatch, getState) => {
     const url = '/flatprofiles/';
     dispatch(getAllFlatprofilesRequest());
     apiClient()
         .get(url)
         .then((response) => {
             dispatch(getAllFlatprofilesSuccess(response.data));
+            dispatch(
+                updateDiscoverProfiles(
+                    response.data.filter(
+                        (profile) =>
+                            !Object.keys(
+                                getState().matchesState.matches
+                            ).includes(profile.profileId)
+                    )
+                )
+            );
         })
         .catch((error) => {
             console.log('\nflatprofile error');

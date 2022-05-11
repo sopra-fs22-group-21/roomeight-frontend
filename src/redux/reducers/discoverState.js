@@ -5,6 +5,7 @@ import * as Constants from '../constants';
 const initialState = {
     discoverProfiles: [],
     loading: false,
+    newMatch: null,
 };
 
 //TODO: error handling -> really set to null on every success?
@@ -22,7 +23,22 @@ const userprofileState = (state = initialState, action) => {
                 ...state,
                 loading: true,
             };
+        case Constants.GET_ALL_USERPROFILES_FAILURE:
+        case Constants.GET_ALL_FLATPROFILES_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+                loading: false,
+            };
         case Constants.GET_ALL_USERPROFILES_SUCCESS:
+        case Constants.GET_ALL_FLATPROFILES_SUCCESS:
+            return {
+                ...state,
+                error: undefined,
+                loading: false,
+            };
+
+        case Constants.UPDATE_DISCOVER_PROFILES:
             return {
                 ...state,
                 discoverProfiles: action.payload.map(
@@ -31,27 +47,19 @@ const userprofileState = (state = initialState, action) => {
                 loading: false,
             };
 
-        case Constants.GET_ALL_USERPROFILES_FAILURE:
-        case Constants.GET_ALL_FLATPROFILES_FAILURE:
-            return {
-                ...state,
-                error: action.payload,
-                loading: false,
-            };
+        case Constants.POST_LIKE_FLAT_SUCCESS:
+        case Constants.POST_LIKE_USER_SUCCESS:
+            if (action.payload.isMatch) {
+                return {
+                    ...state,
+                    newMatch: action.payload.profileId,
+                };
+            } else return state;
 
-        case Constants.GET_ALL_FLATPROFILES_SUCCESS:
+        case Constants.MATCH_IS_VIEWED:
             return {
                 ...state,
-                discoverProfiles: action.payload.map(
-                    (data) => new Flatprofile(data)
-                ),
-                loading: false,
-            };
-
-        case Constants.UPDATE_DISCOVER_PROFILES:
-            return {
-                ...state,
-                discoverProfiles: action.payload,
+                newMatch: null,
             };
 
         default:

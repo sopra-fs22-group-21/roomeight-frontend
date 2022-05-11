@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ProfileInfoBox } from '../../../components/profiles';
+import { EmptyCard } from '../../../components/publicProfileCard';
 import { ScreenContainer } from '../../../components/screenContainer';
 import { Box, SmallHeading } from '../../../components/theme';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
@@ -8,12 +9,31 @@ import styles from './styles';
 import { Text } from 'react-native';
 import MatchesFlat from './matchesFlat';
 import LikesFlat from './likesFlat';
+import en from '../../../resources/strings/en.json';
 
 const Matches = ({ navigation }) => {
     const { matches } = useSelector((state) => state.matchesState);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const [isFlat] = useState(userprofile.isAdvertisingRoom ? true : false);
     const [index, setIndex] = useState(0);
+
+    const matchesList = Object.values(matches).map((profile, index) => {
+        if (profile.profileId)
+            return (
+                <ProfileInfoBox
+                    profile={profile}
+                    id={profile.profileId}
+                    key={index}
+                    onPress={(id) => {
+                        navigation.navigate('Match', {
+                            profile: profile,
+                        });
+                    }}
+                />
+            );
+    });
+
+    const noMatches = <EmptyCard textIfNoData={en.matches.noMatches} />;
 
     if (isFlat) {
         return (
@@ -60,24 +80,9 @@ const Matches = ({ navigation }) => {
     } else {
         return (
             <ScreenContainer navigation={navigation} showNavBar>
-                <SmallHeading>Matches</SmallHeading>
+                <SmallHeading>{en.matches.heading}</SmallHeading>
                 <Box />
-                {Object.values(matches).map((profile, index) => {
-                    console.log('match: ' + profile.profileId);
-                    if (profile.profileId)
-                        return (
-                            <ProfileInfoBox
-                                profile={profile}
-                                id={profile.profileId}
-                                key={index}
-                                onPress={(id) => {
-                                    navigation.navigate('Match', {
-                                        profile: profile,
-                                    });
-                                }}
-                            />
-                        );
-                })}
+                {matchesList.length > 0 ? matchesList : noMatches}
             </ScreenContainer>
         );
     }

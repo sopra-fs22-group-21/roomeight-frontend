@@ -42,7 +42,7 @@ export const updateProfile =
         });
         console.log(requestBody);
         if (profileType == 'userprofile') requestBody.isComplete = true;
-        uploadImages(
+        return uploadImages(
             //only uploads if picturereferencesis set and not empty
             requestBody.pictureReferences,
             profileType,
@@ -55,7 +55,7 @@ export const updateProfile =
             }
             console.log('requestBody:');
             console.log(requestBody);
-            apiClient()
+            return apiClient()
                 .patch(`/${profileType}s/${profileId}`, requestBody)
                 .then((response) => {
                     dispatch(updateProfileSuccess(response.data, profileType));

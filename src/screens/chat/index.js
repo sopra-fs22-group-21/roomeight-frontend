@@ -3,8 +3,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import ChatListItem from '../../components/ChatListItem';
 import CreateNewChat from '../../components/createNewChat';
+import { EmptyCard } from '../../components/publicProfileCard';
 import { ScreenContainer } from '../../components/screenContainer';
-import { SmallHeading } from '../../components/theme';
+import { Box, SmallHeading } from '../../components/theme';
 import en from '../../resources/strings/en.json';
 
 const Chat = ({ navigation }) => {
@@ -16,11 +17,13 @@ const Chat = ({ navigation }) => {
 
     return (
         <ScreenContainer navigation={navigation} showNavBar>
-            <HStack>
-                <SmallHeading>{en.chat.heading}</SmallHeading>
-                <Spacer />
-                <CreateNewChat />
-            </HStack>
+            <Box>
+                <HStack alignItems="center">
+                    <SmallHeading>{en.chat.heading}</SmallHeading>
+                    <Spacer />
+                    <CreateNewChat />
+                </HStack>
+            </Box>
             {chats && (
                 <FlatList
                     data={Object.values(chats)
@@ -31,13 +34,7 @@ const Chat = ({ navigation }) => {
                     keyExtractor={(index) => index}
                 />
             )}
-            {!chats && (
-                <Center>
-                    <SmallHeading style={{ paddingTop: '50%' }}>
-                        {en.chat.noChats}
-                    </SmallHeading>
-                </Center>
-            )}
+            {!chats && <EmptyCard textIfNoData={en.chat.noChats} />}
         </ScreenContainer>
     );
 };

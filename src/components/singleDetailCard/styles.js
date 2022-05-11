@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     column2: {
         paddingLeft: -20,
         paddingTop: 5,
+        paddingRight: 10,
         flex: 1,
         transform: [
             {

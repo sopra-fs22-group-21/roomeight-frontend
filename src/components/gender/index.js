@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import genders from '../../resources/strings/genders';
@@ -28,9 +28,11 @@ const otherIcon = {
 export const GenderInput = (props) => {
     const [gender, setGender] = useState(genders.notSet);
     const genderOptions = [genders.female, genders.male, genders.others];
-    const [index, setIndex] = useState(
-        genderOptions.indexOf(props.defaultValue)
-    );
+    const [index, setIndex] = useState(-1);
+    useEffect(() => {
+        setIndex(genderOptions.indexOf(props.defaultValue));
+    }, [props.defaultValue]);
+
     return (
         <Tab
             value={index}

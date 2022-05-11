@@ -1,6 +1,7 @@
 import { auth } from '../../../firebase/firebase-config';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
+import { updateDiscoverProfiles } from './discoverActions';
 import { getAllFlatProfiles, getFlatprofile } from './getFlatprofiles';
 
 const getCurrentUserprofileRequest = (request) => ({
@@ -67,13 +68,31 @@ export const getCurrentUserprofile = () => (dispatch) => {
         });
 };
 
+export const reloadCurrentUserprofile = () => (dispatch) => {
+    const url = `/userprofiles/${auth.currentUser.uid}`;
+    dispatch(
+        getCurrentUserprofileRequest({
+            id: auth.currentUser.uid,
+            url: url,
+        })
+    );
+    apiClient()
+        .get(url)
+        .then((response) => {
+            userprofile = response.data;
+            dispatch(getCurrentUserprofileSuccess(response.data));
+        })
+        .catch((error) => {
+            dispatch(getCurrentUserprofileFailure(error));
+        });
+};
 /**
  * makes a request to the backend api to get all userprofiles
  * @dispatches {@link getAllUserprofilesRequest} on request start
  * @dispatches {@link getAllUserprofilesSuccess} on request success with userprofile payload
  * @dispatches {@link getAllUserprofilesFailure} on request failure with error payload
  */
-export const getAllUserprofiles = () => (dispatch) => {
+export const getAllUserprofiles = () => (dispatch, getState) => {
     const url = '/userprofiles/';
     dispatch(
         getAllUserprofilesRequest({
@@ -86,6 +105,16 @@ export const getAllUserprofiles = () => (dispatch) => {
         .get(url)
         .then((response) => {
             dispatch(getAllUserprofilesSuccess(response.data));
+            dispatch(
+                updateDiscoverProfiles(
+                    response.data.filter(
+                        (profile) =>
+                            !Object.keys(
+                                getState().matchesState.matches
+                            ).includes(profile.profileId)
+                    )
+                )
+            );
         })
         .catch((error) => {
             dispatch(getAllUserprofilesFailure(error));
