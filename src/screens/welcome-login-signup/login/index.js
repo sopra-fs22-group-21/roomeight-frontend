@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
 import { Input } from '../../../components/input';
@@ -13,7 +12,6 @@ import {
     Title,
 } from '../../../components/theme';
 import { loginUser } from '../../../redux/actions/authActions';
-import colors from '../../../resources/colors';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
@@ -27,7 +25,6 @@ const Login = ({ navigation }) => {
 
     return (
         <ScreenContainer onPressBack={() => navigation.goBack()}>
-            <Loader loading={loading} color={colors.secondary500} />
             <ScreenPadding>
                 <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                     <Heading>{en.login.heading}</Heading>
@@ -76,3 +73,4 @@ const Login = ({ navigation }) => {
     );
 };
 export default Login;
+//<Loader loading={loading} color={colors.secondary500} />

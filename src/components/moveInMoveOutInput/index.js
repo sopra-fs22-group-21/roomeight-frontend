@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import en from '../../resources/strings/en.json';
 import { KeyboardAvoidingView } from 'native-base';
 import { Box } from '../theme';
-import { InputLabel } from '../input';
+import { InputLabel, OptionBoxes } from '../input';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 
 //moveInDate, moveOutDate, permanent, onSetMoveInDate, onSetMoveOutDate
@@ -49,45 +49,16 @@ export const MoveInMoveOutInput = (props) => {
                 }}
             />
             <InputLabel>{en.roomInfo.duration}</InputLabel>
-            <Box style={styles.box}>
-                <CheckBox
-                    containerStyle={styles.choice}
-                    wrapperStyle={styles.wrapper}
-                    textStyle={styles.text}
-                    title="Permanent"
-                    checkedIcon="dot-circle-o"
-                    uncheckedIcon="circle-o"
-                    color="#0E7490"
-                    checked={permanent === true}
-                    onPress={() => {
-                        let isPermanent;
-                        if (permanent !== true || !props.allowPermanentNull)
-                            isPermanent = true;
-                        else isPermanent = null;
-                        props.onSetMoveOutDate(null);
-                        props.onSetPermanent(isPermanent);
-                        setPermanent(isPermanent);
-                    }}
-                />
-                <CheckBox
-                    containerStyle={styles.choice}
-                    wrapperStyle={styles.wrapper}
-                    textStyle={styles.text}
-                    title={'Temporary'}
-                    checkedIcon="dot-circle-o"
-                    uncheckedIcon="circle-o"
-                    color="#0E7490"
-                    checked={permanent === false}
-                    onPress={() => {
-                        let isPermanent;
-                        if (permanent !== false || !props.allowPermanentNull)
-                            isPermanent = false;
-                        else isPermanent = null;
-                        setPermanent(isPermanent);
-                        props.onSetPermanent(isPermanent);
-                    }}
-                />
-            </Box>
+            <OptionBoxes
+                option1="Permanent"
+                option2="Temporary"
+                nullable
+                onChange={(permanent, temporary) => {
+                    if (permanent) setPermanent(true);
+                    else if (!temporary) setPermanent(null);
+                    else setPermanent(false);
+                }}
+            />
             {permanent === false ? (
                 <DateInput
                     label={

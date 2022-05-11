@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
         padding: 20,
         paddingTop: 0,
     },
+    smalltext: {
+        fontSize: 13,
+    },
     filter: {
         backgroundColor: colors.primary100, //'#e7e5e4',
         borderRadius: 20,

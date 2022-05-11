@@ -148,6 +148,10 @@
         "moveInDate": "Move-In Date",
         "nrRoommates": "Room8s in total"
     },
+    "filter": {
+        "matchingTimeRangeExplanation": "If you activate the clever time range search, you will only be shown profiles that might be relevant according to your move-in and move-out date.",
+        "matchingTimeRange": "Clever time range"
+    },
     "matches": {
         "heading": "Matches",
         "noNewMatches": "sorry:(\nno new matches...",

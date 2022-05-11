@@ -31,6 +31,7 @@ const FlatProfile = ({ navigation }, props) => {
     const [rentValid, setRentValid] = useState(null);
     const [roomSizeValid, setRoomSizeValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
+    const [nrRoommatesValid, setNrRoommatesValid] = useState(null);
     const [editMode, setEditMode] = useState(false);
 
     function changeToTemporary() {
@@ -235,9 +236,10 @@ const FlatProfile = ({ navigation }, props) => {
                                 flatprofile.profileId
                             )
                         );
-                        transitFlatprofile.roommateEmails.forEach((email) =>
-                            dispatch(postRoommateToFlat(email))
-                        );
+                        if (transitFlatprofile.roommateEmails)
+                            transitFlatprofile.roommateEmails.forEach((email) =>
+                                dispatch(postRoommateToFlat(email))
+                            );
                     }}
                 >
                     Save

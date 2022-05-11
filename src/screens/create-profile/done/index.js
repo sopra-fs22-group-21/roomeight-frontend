@@ -1,6 +1,5 @@
 import React from 'react';
 import { colors } from 'react-native-elements';
-import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
 import { ScreenContainer } from '../../../components/screenContainer';
@@ -26,7 +25,7 @@ const Done = ({ navigation, route }) => {
     );
 
     const updateSingleprofile = () => {
-        dispatch(
+        return dispatch(
             updateProfile(
                 transitUserprofile,
                 'userprofile',
@@ -37,7 +36,6 @@ const Done = ({ navigation, route }) => {
 
     return (
         <ScreenContainer onPressBack={() => navigation.goBack()}>
-            <Loader loading={loading} color={colors.secondary500} />
             <ScreenPadding>
                 <Inner>
                     <Heading>{en.done.heading}</Heading>
@@ -52,8 +50,9 @@ const Done = ({ navigation, route }) => {
                                 route.params.includes('single') ||
                                 !userprofile.isComplete
                             ) {
-                                updateSingleprofile();
-                                navigation.navigate('Discover');
+                                updateSingleprofile().then(() => {
+                                    navigation.navigate('Discover');
+                                });
                             }
                             if (route.params.includes('flat')) {
                                 dispatch(postFlatprofile(transitFlatprofile));

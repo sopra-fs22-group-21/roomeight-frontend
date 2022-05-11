@@ -101,8 +101,12 @@ export const FlatDetailCard = (props) => {
                     <FlatList
                         data={flatInfos()}
                         numColumns={2}
-                        columnWrapperStyle={{
-                            paddingBottom: 30,
+                        columnWrapperStyle={{}}
+                        contentContainerStyle={{
+                            alignItems: 'stretch',
+                            justifyContent: 'space-between',
+                            maxHeight: '100%',
+                            flexGrow: 1,
                         }}
                         renderItem={({ item }) => {
                             return item ? (
@@ -163,9 +167,7 @@ export const FlatDetailCard = (props) => {
                         </Box>
                     ) : null}
 
-                    {flatprofile.roomMates &&
-                    flatprofile.numberOfRoommates ==
-                        flatprofile.roomMates.length ? (
+                    {flatprofile.numberOfRoommates ? (
                         <Box>
                             <Strong style={styles.title}>
                                 {en.discover.nrRoommates}

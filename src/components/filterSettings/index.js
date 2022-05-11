@@ -1,19 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { PrimaryButton } from '../button';
 import styles from './styles';
-import DateInput from '../dateInput';
 import { useSelector } from 'react-redux';
 import en from '../../resources/strings/en.json';
 import { KeyboardAvoidingView } from 'native-base';
 import { Box, NormalText } from '../theme';
-import { MoveInMoveOutInput } from '../moveInMoveOutInput';
-import RangeSlider from 'rn-range-slider';
-import { InputBox, InputLabel } from '../input';
-import { AgeRange, NumberRange } from '../numberRange';
+import { CheckBox, InputBox, OptionBoxes } from '../input';
+import { NumberRange } from '../numberRange';
 import Tags from '../tags';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Gender, GenderInput } from '../gender';
+import { GenderInput } from '../gender';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import dateFormat from 'dateformat';
 import colors from '../../resources/colors';
@@ -46,12 +43,6 @@ const FilterSettings = (props) => {
     const [rent, setRent] = useState(null);
     const [nrRoommates, setNrRoommates] = useState(null);
     const [nrBathrooms, setNrBathrooms] = useState(null);
-    const moveInLabel = isSearchingRoom
-        ? 'Your latest possible move-in Date'
-        : 'The latest possible move-in date';
-    const moveOutLabel = isSearchingRoom
-        ? 'Your earliest possible move-out Date'
-        : 'The earliest possible move-out date';
 
     const deleteFilter = (name, objectOnRemove) => {
         let filters = { ...newFilters };
@@ -64,42 +55,40 @@ const FilterSettings = (props) => {
         setNewFilters(filters);
     };
 
-    const setFilter = (el, name, label, objectOnRemove) => {
-        el[name] = {
+    const setFilter = (selectedFilters, name, label, objectOnRemove) => {
+        selectedFilters[name] = {
             name: label,
             objectOnRemove: objectOnRemove,
         };
     };
 
     useEffect(() => {
-        let duration = '';
-        if (newFilters.moveInDate)
-            duration +=
-                'from ' +
-                dateFormat(new Date(newFilters.moveInDate), 'dd.mm.yyyy');
-        if (newFilters.moveOutDate)
-            duration +=
-                ' until ' +
-                dateFormat(new Date(newFilters.moveOutDate), 'dd.mm.yyyy');
-        let selectedFilters = { ...filteredElements };
-        if (duration)
-            setFilter(selectedFilters, 'duration', duration, {
-                moveInDate: undefined,
-                moveOutDate: undefined,
-            });
-        else delete selectedFilters.duration;
+        let selectedFilters = {};
         if (newFilters.gender)
             setFilter(selectedFilters, 'gender', newFilters.gender);
         else delete selectedFilters.gender;
+
+        if (newFilters.matchingTimeRange)
+            setFilter(
+                selectedFilters,
+                'matchingTimeRange',
+                'Clever time range'
+            );
+        else delete selectedFilters.matchingTimeRange;
+
         if (age) setFilter(selectedFilters, 'age', age + ' y/o');
         else delete selectedFilters.age;
+
         if (roomSize) setFilter(selectedFilters, 'roomSize', roomSize + 'm²');
         else delete selectedFilters.roomSize;
+
         if (rent) setFilter(selectedFilters, 'rent', rent + ' CHF');
         else delete selectedFilters.rent;
+
         if (nrRoommates)
             setFilter(selectedFilters, 'nrRoommates', nrRoommates + ' room8s');
         else delete selectedFilters.nrRoommates;
+
         if (nrBathrooms)
             setFilter(
                 selectedFilters,
@@ -107,6 +96,7 @@ const FilterSettings = (props) => {
                 nrBathrooms + ' bathrooms'
             );
         else delete selectedFilters.nrBathrooms;
+
         if (newFilters.permanent != null && newFilters.permanent != undefined)
             setFilter(
                 selectedFilters,
@@ -117,37 +107,74 @@ const FilterSettings = (props) => {
         setFilteredElements(selectedFilters);
     }, [newFilters, age, roomSize, rent, nrRoommates, nrBathrooms]);
 
-    const dates = (
-        <MoveInMoveOutInput
-            moveInLabel={moveInLabel}
-            moveOutLabel={moveOutLabel}
-            moveInDate={newFilters ? newFilters.moveInDate : null}
-            moveOutDate={newFilters ? newFilters.moveOutDate : null}
-            permanent={newFilters.permanent}
-            onSetPermanent={(permanent) =>
-                setNewFilters({
-                    ...newFilters,
-                    permanent: permanent,
-                })
-            }
-            allowPermanentNull
-            onSetMoveInDate={(date) => {
-                if (date) {
+    const duration = (
+        <>
+            <Box>
+                <CheckBox
+                    label={en.filter.matchingTimeRange}
+                    checked={newFilters.matchingTimeRange}
+                    onPress={() =>
+                        setNewFilters({
+                            ...newFilters,
+                            matchingTimeRange: !newFilters.matchingTimeRange,
+                        })
+                    }
+                />
+                <NormalText style={styles.smalltext}>
+                    {en.filter.matchingTimeRangeExplanation}
+                </NormalText>
+            </Box>
+
+            <OptionBoxes
+                option1="Permanent"
+                option2="Temporary"
+                option1Checked={newFilters.permanent === true}
+                option2Checked={newFilters.permanent === false}
+                nullable
+                onChange={(permanent, temporary) => {
+                    let perm = null;
+                    if (permanent) perm = true;
+                    else if (temporary) perm = false;
                     setNewFilters({
                         ...newFilters,
-                        moveInDate: date.toJSON(),
+                        permanent: perm,
                     });
-                }
-            }}
-            onSetMoveOutDate={(date) => {
-                if (date) {
+                }}
+            />
+            {/*
+            Removed this filter because it would have been too complex / not necessary to account for all edge cases
+            <MoveInMoveOutInput
+                moveInLabel={moveInLabel}
+                moveOutLabel={moveOutLabel}
+                moveInDate={newFilters ? newFilters.moveInDate : null}
+                moveOutDate={newFilters ? newFilters.moveOutDate : null}
+                permanent={newFilters.permanent}
+                onSetPermanent={(permanent) =>
                     setNewFilters({
                         ...newFilters,
-                        moveOutDate: date.toJSON(),
-                    });
+                        permanent: permanent,
+                    })
                 }
-            }}
-        />
+                allowPermanentNull
+                onSetMoveInDate={(date) => {
+                    if (date) {
+                        setNewFilters({
+                            ...newFilters,
+                            moveInDate: date.toJSON(),
+                        });
+                    }
+                }}
+                onSetMoveOutDate={(date) => {
+                    if (date) {
+                        setNewFilters({
+                            ...newFilters,
+                            moveOutDate: date.toJSON(),
+                        });
+                    }
+                }}
+            />
+            */}
+        </>
     );
 
     const tags = (
@@ -168,7 +195,7 @@ const FilterSettings = (props) => {
 
     const searchingFilters = (
         <>
-            {dates}
+            {duration}
             {tags}
             <NumberRange
                 label="Rent"
@@ -279,7 +306,7 @@ const FilterSettings = (props) => {
 
     const advertisingFilters = (
         <>
-            {dates}
+            {duration}
 
             <NumberRange
                 label={'Age'}

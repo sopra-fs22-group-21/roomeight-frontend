@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
-import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
 import DateInput from '../../../components/dateInput';
@@ -186,7 +185,6 @@ const Signup = ({ navigation }) => {
     return (
         <ScreenContainer>
             <ScreenPadding>
-                <Loader loading={loading} color={colors.secondary500} />
                 <KeyboardAvoidingView behavior="position">
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <Heading>{heading}</Heading>

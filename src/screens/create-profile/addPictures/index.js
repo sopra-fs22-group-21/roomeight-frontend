@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { View } from 'react-native-animatable';
 import { colors } from 'react-native-elements';
-import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
 import PictureInput from '../../../components/pictureInput';
 import { ScreenContainer } from '../../../components/screenContainer';
@@ -103,7 +102,6 @@ const AddPictures = ({ navigation, route }) => {
                 else navigation.navigate('Done', 'single');
             }}
         >
-            <Loader loading={loading} color={colors.secondary500} />
             <ScreenPadding>
                 <Heading>{en.addPictures.heading}</Heading>
                 <NormalText>

@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     },
     card: {
         flex: 1,
+        overflow: 'scroll',
     },
     text: {
         fontSize: 15,
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
         aspectRatio: null,
         flex: 1,
         width: '100%',
+        padding: 0,
         borderColor: 'transparent',
         //flexShrink: 1,
     },
@@ -59,11 +61,9 @@ const styles = StyleSheet.create({
     },
     paginationContainer: {
         paddingTop: 20,
-        transform: [
-            {
-                translateY: -5,
-            },
-        ],
+        position: 'absolute',
+        alignSelf: 'center',
+        bottom: 0,
     },
     paginationDots: {
         width: 7,
