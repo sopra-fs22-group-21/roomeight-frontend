@@ -80,9 +80,9 @@ const Discover = ({ navigation }) => {
                             onDoubleTap={() => handleLike(item.profileId)}
                             onClickShowLikes={() => {
                                 setShowLike(true);
-                                console.log(flatprofile.likes);
+                                console.log(flatprofile);
                             }}
-                            nrLiked={flatprofile.likes.length}
+                            nrLiked={5 /* flatprofile.likes[2].likes.length */}
                             nrRoommates={flatprofile.numberOfRoommates}
                         />
                     </Box>
