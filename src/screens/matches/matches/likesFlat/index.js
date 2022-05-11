@@ -12,31 +12,59 @@ import LikesList from '../../../../components/likesList';
 const LikesFlat = ({ navigation }, props) => {
     const { likes, loading } = useSelector((state) => state.likesState);
     const [modalVisible, setModalVisible] = useState(false);
-    const flatprofile = props.flatprofile;
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
     if (loading) return <Text>loading</Text>;
+    else {
+        console.log('\n\n\n\nlikes:');
+        console.log(likes);
+    }
     return (
         <View>
             <Box />
-            {Object.values(likes).map((profile, index) => {
-                console.log('like: ' + profile.profileId);
-                if (profile.profileId)
-                    return (
-                        <ProfileInfoBox
-                            navigation={navigation}
-                            profile={profile}
-                            id={profile.profileId}
-                            key={index}
-                            onPress={(id) => {
-                                navigation.navigate('Match', {
-                                    profile: profile,
-                                });
-                            }}
-                            onClickShowLikes={() => {
-                                setModalVisible(true);
-                            }}
-                        />
-                    );
-            })}
+            {likes
+                .map((like) => like.likedUser)
+                .map((like) => Object.values(like)[0])
+                .map((profile, index) => {
+                    console.log('like: ');
+                    console.log(profile);
+                    if (profile.profileId)
+                        return (
+                            <ProfileInfoBox
+                                navigation={navigation}
+                                profile={profile}
+                                id={profile.profileId}
+                                key={index}
+                                onPress={(id) => {
+                                    navigation.navigate('Match', {
+                                        profile: profile,
+                                    });
+                                }}
+                                onClickShowLikes={() => {
+                                    setModalVisible(true);
+                                }}
+                                nrLiked={
+                                    flatprofile.likes
+                                        ? flatprofile.likes.filter((like) => {
+                                              console.log(
+                                                  Object.keys(like.likedUser)[0]
+                                              );
+                                              return (
+                                                  Object.keys(
+                                                      like.likedUser
+                                                  )[0] === profile.profileId
+                                              );
+                                          })[0].likes.length
+                                        : null
+                                }
+                                nrRoommates={
+                                    flatprofile.roomMates
+                                        ? Object.keys(flatprofile.roomMates)
+                                              .length
+                                        : null
+                                }
+                            />
+                        );
+                })}
 
             <View style={styles.centeredView}>
                 <Modal
@@ -52,7 +80,7 @@ const LikesFlat = ({ navigation }, props) => {
                         <View style={styles.modalView}>
                             <Title>Likes Overview</Title>
                             <Box />
-                            <LikesList flatprofile={props.profiles} />
+                            <LikesList flatprofile={flatprofile} />
                             <Box />
                             <SecondaryButton
                                 onPress={() => setModalVisible(!modalVisible)}

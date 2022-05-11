@@ -90,6 +90,10 @@ const Discover = ({ navigation }) => {
         carousel.current.snapToNext();
     };
 
+    function countRoommates(profileId) {
+        let counter = 0;
+    }
+
     const card = ({ item }) => {
         if (!item) return null;
         if (item && item.textIfNoData)
@@ -106,8 +110,24 @@ const Discover = ({ navigation }) => {
                                 setShowLike(true);
                                 console.log(flatprofile);
                             }}
-                            nrLiked={5 /* flatprofile.likes[2].likes.length */}
-                            nrRoommates={flatprofile.numberOfRoommates}
+                            nrLiked={
+                                flatprofile.likes
+                                    ? flatprofile.likes.filter((like) => {
+                                          console.log(
+                                              Object.keys(like.likedUser)[0]
+                                          );
+                                          return (
+                                              Object.keys(like.likedUser)[0] ===
+                                              item.profileId
+                                          );
+                                      })[0].likes.length
+                                    : null
+                            }
+                            nrRoommates={
+                                flatprofile.roomMates
+                                    ? Object.keys(flatprofile.roomMates).length
+                                    : null
+                            }
                         />
                     </Box>
                     <LikeButtons

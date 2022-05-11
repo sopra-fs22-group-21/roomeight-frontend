@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
         ],
     },
     icon: {
-        //position: 'absolute',
         flex: 0,
         color: colors.secondary400,
     },

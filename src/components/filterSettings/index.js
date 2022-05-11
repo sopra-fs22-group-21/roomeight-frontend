@@ -8,7 +8,6 @@ import en from '../../resources/strings/en.json';
 import { KeyboardAvoidingView } from 'native-base';
 import { Box, NormalText } from '../theme';
 import { MoveInMoveOutInput } from '../moveInMoveOutInput';
-import RangeSlider from 'rn-range-slider';
 import { InputBox, InputLabel } from '../input';
 import { AgeRange, NumberRange } from '../numberRange';
 import Tags from '../tags';
