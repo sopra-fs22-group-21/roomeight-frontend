@@ -13,11 +13,27 @@ const LikesFlat = ({ navigation }, props) => {
     const { likes, loading } = useSelector((state) => state.likesState);
     const [modalVisible, setModalVisible] = useState(false);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
+    const [likesOfProfile, setLikesOfProfile] = useState(null);
     if (loading) return <Text>loading</Text>;
     else {
         console.log('\n\n\n\nlikes:');
         console.log(likes);
     }
+    function countLikes(profileId) {
+        if (flatprofile.likes) {
+            const filtered = flatprofile.likes.filter((like) => {
+                return Object.keys(like.likedUser)[0] === profileId;
+            });
+            if (filtered.length !== 0) {
+                return filtered[0].likes.length;
+            } else {
+                return 0;
+            }
+        } else {
+            return null;
+        }
+    }
+
     return (
         <View>
             <Box />
@@ -41,21 +57,9 @@ const LikesFlat = ({ navigation }, props) => {
                                 }}
                                 onClickShowLikes={() => {
                                     setModalVisible(true);
+                                    setLikesOfProfile(profile);
                                 }}
-                                nrLiked={
-                                    flatprofile.likes
-                                        ? flatprofile.likes.filter((like) => {
-                                              console.log(
-                                                  Object.keys(like.likedUser)[0]
-                                              );
-                                              return (
-                                                  Object.keys(
-                                                      like.likedUser
-                                                  )[0] === profile.profileId
-                                              );
-                                          })[0].likes.length
-                                        : null
-                                }
+                                nrLiked={countLikes(profile.profileId)}
                                 nrRoommates={
                                     flatprofile.roomMates
                                         ? Object.keys(flatprofile.roomMates)
@@ -80,7 +84,10 @@ const LikesFlat = ({ navigation }, props) => {
                         <View style={styles.modalView}>
                             <Title>Likes Overview</Title>
                             <Box />
-                            <LikesList flatprofile={flatprofile} />
+                            <LikesList
+                                flatprofile={flatprofile}
+                                userprofile={likesOfProfile}
+                            />
                             <Box />
                             <SecondaryButton
                                 onPress={() => setModalVisible(!modalVisible)}

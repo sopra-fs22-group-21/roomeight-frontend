@@ -8,26 +8,45 @@ import { Box } from '../theme';
 
 const LikesList = (props) => {
     const flatprofile = props.flatprofile;
-    console.log(flatprofile);
+    const userprofile = props.userprofile;
+    console.log('FLAAAAAAAAAAAAAAAAAAAATPROFILE');
+
+    const roomiesLiked = Object.values(
+        flatprofile.likes.filter(
+            (like) => Object.keys(like.likedUser)[0] === userprofile.profileId
+        )[0].likes
+    );
+
+    console.log('Roomies Liked:', roomiesLiked);
+
+    const roomie = Object.values(flatprofile.roomMates).filter(
+        (roomie) => roomie.profileId === roomiesLiked[0]
+    );
+    /* console.log('user:');
+    console.log(userprofile); */
     return (
         <View>
             <View style={styles.horizontal}>
-                <Icon name="like" type="foundation" size={24} color={'black'} />
+                <Icon
+                    style={styles.icon}
+                    name="like"
+                    type="foundation"
+                    size={24}
+                    color={'black'}
+                />
                 <FlatList
                     numColumns={5}
-                    data={Object.values(flatprofile.likes)}
+                    data={roomie}
+                    keyExtractor={(item) => {
+                        item;
+                        console.log('\nITEM:');
+                        console.log(item);
+                    }}
                     renderItem={({ item }) => {
                         return item ? (
                             <ProfilePicture
-                                profile={item}
-                                id={item.profileId}
-                                key={item.profileId}
                                 style={styles.profilePicture}
-                                /* initials={item.initials}
-                                image={
-                                    item.pictureReferences
-                                        ? item.pictureReferences[0]
-                                        : 0 }*/
+                                image={item.pictureReferences[0]}
                             ></ProfilePicture>
                         ) : null;
                     }}
@@ -37,6 +56,7 @@ const LikesList = (props) => {
             <View>
                 <Pressable style={styles.horizontal}>
                     <Icon
+                        style={styles.icon}
                         name="dislike"
                         type="foundation"
                         size={24}

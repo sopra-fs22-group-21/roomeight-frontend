@@ -86,13 +86,24 @@ const Discover = ({ navigation }) => {
         }, 500);
     };
 
+    function countLikes(profileId) {
+        if (flatprofile.likes) {
+            const filtered = flatprofile.likes.filter((like) => {
+                return Object.keys(like.likedUser)[0] === profileId;
+            });
+            if (filtered.length !== 0) {
+                return filtered[0].likes.length;
+            } else {
+                return 0;
+            }
+        } else {
+            return null;
+        }
+    }
+
     const handleDislike = () => {
         carousel.current.snapToNext();
     };
-
-    function countRoommates(profileId) {
-        let counter = 0;
-    }
 
     const card = ({ item }) => {
         if (!item) return null;
@@ -108,21 +119,8 @@ const Discover = ({ navigation }) => {
                             onDoubleTap={() => handleLike(item.profileId)}
                             onClickShowLikes={() => {
                                 setShowLike(true);
-                                console.log(flatprofile);
                             }}
-                            nrLiked={
-                                flatprofile.likes
-                                    ? flatprofile.likes.filter((like) => {
-                                          console.log(
-                                              Object.keys(like.likedUser)[0]
-                                          );
-                                          return (
-                                              Object.keys(like.likedUser)[0] ===
-                                              item.profileId
-                                          );
-                                      })[0].likes.length
-                                    : null
-                            }
+                            nrLiked={countLikes(item.profileId)}
                             nrRoommates={
                                 flatprofile.roomMates
                                     ? Object.keys(flatprofile.roomMates).length
