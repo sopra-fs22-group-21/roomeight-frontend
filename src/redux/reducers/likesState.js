@@ -12,6 +12,9 @@ const initialState = {
  * @param {object} initialState
  * @param {reduxAction} action action that got dispatched
  */
+
+//TODO: only write in likes state if user has also liked flat back
+
 const likesState = (state = initialState, action) => {
     switch (action.type) {
         case Constants.GET_FLATPROFILE_SUCCESS:

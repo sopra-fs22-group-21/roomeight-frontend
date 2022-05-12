@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ProfileInfoBox } from '../../../../components/profiles';
-import { ScreenContainer } from '../../../../components/screenContainer';
 import { Box, Title } from '../../../../components/theme';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { Text, View, Modal, Pressable } from 'react-native';

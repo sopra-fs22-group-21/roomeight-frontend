@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, Pressable, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import { Profiles } from '../profiles';
@@ -11,17 +11,58 @@ const LikesList = (props) => {
     const userprofile = props.userprofile;
     console.log('FLAAAAAAAAAAAAAAAAAAAATPROFILE');
 
-    const roomiesLiked = Object.values(
+    const roomiesLikedList = Object.values(
         flatprofile.likes.filter(
             (like) => Object.keys(like.likedUser)[0] === userprofile.profileId
         )[0].likes
     );
 
-    console.log('Roomies Liked:', roomiesLiked);
+    console.log('Roomies Liked:', roomiesLikedList);
 
-    const roomie = Object.values(flatprofile.roomMates).filter(
-        (roomie) => roomie.profileId === roomiesLiked[0]
+    /*  const roomiesLikedObj = Object.values(flatprofile.roomMates).map(
+        (roomie) => roomie.profileId === roomiesLikedList[0]
+    ); */
+
+    /*  Object.values(flatprofile.roomMates).filter(
+        (roomie) => roomie.profileId === roomiesLikedList[0]
     );
+ */
+
+    function getRoomiesLiked() {
+        const roomiesLikedObj = [];
+        for (let i = 0; i < Object.keys(flatprofile.roomMates).length; i++) {
+            if (
+                roomiesLikedList.includes(
+                    Object.values(flatprofile.roomMates)[i].profileId
+                )
+            ) {
+                roomiesLikedObj.push(Object.values(flatprofile.roomMates)[i]);
+                console.log('RoomiesOBJECT:', roomiesLikedObj);
+            }
+        }
+        console.log('RoomiesObj:', roomiesLikedObj);
+        return roomiesLikedObj;
+    }
+
+    function getRoomiesDisliked() {
+        const roomiesDislikedObj = [];
+        for (let i = 0; i < Object.keys(flatprofile.roomMates).length; i++) {
+            if (
+                !roomiesLikedList.includes(
+                    Object.values(flatprofile.roomMates)[i].profileId
+                )
+            ) {
+                roomiesDislikedObj.push(
+                    Object.values(flatprofile.roomMates)[i]
+                );
+            }
+        }
+        console.log('RoomiesDislikeObj:', roomiesDislikedObj);
+        return roomiesDislikedObj;
+    }
+
+    console.log('Roomies:', roomiesLikedList);
+
     /* console.log('user:');
     console.log(userprofile); */
     return (
@@ -36,7 +77,7 @@ const LikesList = (props) => {
                 />
                 <FlatList
                     numColumns={5}
-                    data={roomie}
+                    data={getRoomiesLiked()}
                     keyExtractor={(item) => {
                         item;
                         console.log('\nITEM:');
@@ -62,10 +103,23 @@ const LikesList = (props) => {
                         size={24}
                         color={'black'}
                     />
-                    <ProfilePicture
-                        style={styles.profilePicture}
-                        initials={props.initials}
-                    ></ProfilePicture>
+                    <FlatList
+                        numColumns={5}
+                        data={getRoomiesDisliked()}
+                        keyExtractor={(item) => {
+                            item;
+                            console.log('\nITEM:');
+                            console.log(item);
+                        }}
+                        renderItem={({ item }) => {
+                            return item ? (
+                                <ProfilePicture
+                                    style={styles.profilePicture}
+                                    image={item.pictureReferences[0]}
+                                ></ProfilePicture>
+                            ) : null;
+                        }}
+                    />
                 </Pressable>
             </View>
         </View>

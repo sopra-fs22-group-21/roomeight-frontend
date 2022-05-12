@@ -30,6 +30,7 @@ const FlatProfile = ({ navigation }, props) => {
     const [addressValid, setAddressValid] = useState(true);
     const [rentValid, setRentValid] = useState(null);
     const [roomSizeValid, setRoomSizeValid] = useState(null);
+    const [nrRoommatesValid, setNrRoommatesValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
     const [editMode, setEditMode] = useState(false);
 
