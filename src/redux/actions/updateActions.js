@@ -74,3 +74,44 @@ export const updateProfile =
                 });
         });
     };
+
+/**
+ * Post request to register the device for push notifications
+ * @param {String} token
+ * @dispatches {@link updateProfileSuccess} on update success with response payload
+ * @dispatches {@link updateProfileFailure} on update failure with error payload
+ */
+export const postPushToken =
+    (token, profileId) => async (dispatch, getState) => {
+        try {
+            const res = await apiClient().post(
+                `/userprofile/${profileId}/devices`,
+                {
+                    expoPushToken: token,
+                }
+            );
+            dispatch(updateProfileSuccess(res, 'userprofile'));
+        } catch (error) {
+            dispatch(updateProfileError(error));
+        }
+    };
+/**
+ * Delete request to unregister the device from push notifications
+ * @param {*} token
+ * @dispatches {@link updateProfileSuccess} on update success with response payload
+ * @dispatches {@link updateProfileFailure} on update failure with error payload
+ */
+export const deletePushToken =
+    (token, profileId) => async (dispatch, getState) => {
+        try {
+            const res = await apiClient().delete(
+                `/userprofile/${profileId}/devices`,
+                {
+                    expoPushToken: token,
+                }
+            );
+            return dispatch(updateProfileSuccess(res, 'userprofile'));
+        } catch (error) {
+            return dispatch(updateProfileFailure(error));
+        }
+    };

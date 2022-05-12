@@ -13,15 +13,15 @@ import {
 import { ScreenContainer } from '../../../components/screenContainer';
 import { Box, SmallHeading } from '../../../components/theme';
 import { useComponentSize } from '../../../hooks/layout';
+import { goToChat } from '../../../redux/actions/chatActions';
 import {
     postLikeFlat,
     postLikeUser,
     updateDiscoverProfiles,
 } from '../../../redux/actions/discoverActions';
+import * as Constants from '../../../redux/constants';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
-import * as Constants from '../../../redux/constants';
-import { goToChat } from '../../../redux/actions/chatActions';
 
 const ITEM_HEIGHT = Dimensions.get('screen').height - 170;
 
@@ -42,8 +42,6 @@ const Discover = ({ navigation }) => {
         if (newMatch) setMatch(matches[newMatch]);
         console.log('newmatch: ');
         console.log(newMatch);
-        console.log('userprofile: ');
-        console.log(userprofile);
     }, [matches]);
 
     useEffect(() => {

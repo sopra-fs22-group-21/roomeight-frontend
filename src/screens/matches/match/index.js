@@ -7,7 +7,6 @@ import { goToChat } from '../../../redux/actions/chatActions';
 import en from '../../../resources/strings/en.json';
 const Match = ({ route, navigation }) => {
     const { profile } = route.params;
-    const { chats } = useSelector((state) => state.chatState);
     const dispatch = useDispatch();
     return (
         <ScreenContainer showNavBar navigation={navigation}>

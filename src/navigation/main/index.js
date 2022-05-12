@@ -1,86 +1,86 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import * as Notifications from 'expo-notifications';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userAuthStateListener } from '../../redux/actions/authActions';
 import homeScreens from '../homeScreens';
 import incompleteScreens, {
+    addRoomieScreens,
     chooseStatus,
     createFlatScreens,
-    addRoomieScreens,
 } from '../incompleteScreens';
 import loadingScreens from '../loadingScreens';
 import loggedOutScreens from '../loggedOutScreens';
 
 export default function Route() {
     const Stack = createStackNavigator();
-
+    const CurrentComponents = createStackNavigator();
     const { loggedIn } = useSelector((state) => state.authState);
     const { loading } = useSelector((state) => state.loadingState);
-    const { userprofile } = useSelector((state) => state.userprofileState);
-    const dispatch = useDispatch();
-    const createScreens = (screens) => {
-        return (
-            <>
-                {screens.map((screen, index) => (
-                    <Stack.Screen
-                        key={index}
-                        name={screen.name}
-                        component={screen.component}
-                        options={screen.options}
-                    />
-                ))}
-            </>
-        );
-    };
-
-    const [currentComponents, setCurrentComponents] = useState(
-        createScreens(loadingScreens)
+    const { flatId, isComplete } = useSelector(
+        (state) => state.userprofileState?.userprofile
     );
+    const dispatch = useDispatch();
+    const navigation = useNavigation();
+    const lastNotificationResponse =
+        Notifications.useLastNotificationResponse();
+    const [currentComponents, setCurrentComponents] = useState(loadingScreens);
+
     useEffect(() => {
         console.log('navigation dispatch');
         dispatch(userAuthStateListener());
     }, []);
 
     useEffect(() => {
+        navigation.navigate('CurrentComponents', { screen: 'Matches' });
+    }, [lastNotificationResponse]);
+
+    function CurrentComponentsBuilder() {
+        return createScreens(currentComponents);
+    }
+
+    const createScreens = (screens) => {
+        return (
+            <CurrentComponents.Navigator
+                screenOptions={{
+                    cardStyle: { backgroundColor: 'white' },
+                    headerShown: false,
+                }}
+            >
+                {screens.map((screen, index) => (
+                    <CurrentComponents.Screen
+                        key={index}
+                        name={screen.name}
+                        component={screen.component}
+                        options={screen.options}
+                    />
+                ))}
+            </CurrentComponents.Navigator>
+        );
+    };
+
+    useEffect(() => {
         console.log('loading:', loading);
-        if (!loggedIn && !loading)
-            setCurrentComponents(createScreens(loggedOutScreens));
-        else if (Object.keys(userprofile).length === 0)
-            setCurrentComponents(createScreens(loadingScreens));
-        else if (
-            userprofile.isComplete === false &&
-            userprofile.flatId.length < 1
-        )
-            setCurrentComponents(
-                createScreens(chooseStatus.concat(incompleteScreens))
-            );
-        else if (
-            userprofile.isComplete === false &&
-            userprofile.flatId.length > 0
-        )
-            setCurrentComponents(createScreens(incompleteScreens));
-        else if (
-            userprofile.isComplete &&
-            userprofile.flatId &&
-            userprofile.flatId != ''
-        )
-            setCurrentComponents(
-                createScreens(homeScreens.concat(addRoomieScreens))
-            );
-        else if (Object.keys(userprofile).length > 0)
-            setCurrentComponents(
-                createScreens(homeScreens.concat(createFlatScreens))
-            );
-    }, [userprofile, loggedIn, loading]);
+        console.log('loggedIn:', loggedIn);
+        if (!loggedIn && !loading) setCurrentComponents(loggedOutScreens);
+        else if (isComplete === false && flatId.length < 1)
+            setCurrentComponents(chooseStatus.concat(incompleteScreens));
+        else if (isComplete === false && flatId.length > 0)
+            setCurrentComponents(incompleteScreens);
+        else if (isComplete && flatId && flatId != '')
+            setCurrentComponents(homeScreens.concat(addRoomieScreens));
+        else {
+            setCurrentComponents(homeScreens.concat(createFlatScreens));
+        }
+    }, [isComplete, flatId, loggedIn, loading]);
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator
-                screenOptions={{ cardStyle: { backgroundColor: 'white' } }}
-            >
-                {currentComponents}
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen
+                name="CurrentComponents"
+                component={CurrentComponentsBuilder}
+            />
+        </Stack.Navigator>
     );
 }

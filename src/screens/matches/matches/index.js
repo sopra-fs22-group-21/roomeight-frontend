@@ -62,7 +62,6 @@ const Matches = ({ navigation }) => {
                 <SmallHeading>Matches</SmallHeading>
                 <Box />
                 {Object.values(matches).map((profile, index) => {
-                    console.log('match: ' + profile.profileId);
                     if (profile.profileId)
                         return (
                             <ProfileInfoBox

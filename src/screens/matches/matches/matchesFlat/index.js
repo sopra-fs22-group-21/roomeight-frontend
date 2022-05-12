@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { ProfileInfoBox } from '../../../../components/profiles';
-import { ScreenContainer } from '../../../../components/screenContainer';
-import { Box, SmallHeading } from '../../../../components/theme';
-import { Tab } from 'react-native-elements/dist/tab/Tab';
-import { Text, View } from 'react-native';
+import { Box } from '../../../../components/theme';
 
 const MatchesFlat = ({ navigation }) => {
     const { matches } = useSelector((state) => state.matchesState);
@@ -12,7 +10,6 @@ const MatchesFlat = ({ navigation }) => {
         <View>
             <Box />
             {Object.values(matches).map((profile, index) => {
-                console.log('match: ' + profile.profileId);
                 if (profile.profileId)
                     return (
                         <ProfileInfoBox

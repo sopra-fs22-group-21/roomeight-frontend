@@ -186,20 +186,26 @@ export const sendMessage = (message, chatId) => async (dispatch) => {
 export const goToChat = (profileId, navigation) => (dispatch, getState) => {
     const chats = getState().chatState.chats;
     let exists = false;
+    let previousChat;
     if (chats) {
-        Object.values(chats).forEach((chat) => {
+        Object.values(chats).every((chat) => {
             if (chat.userId === profileId || chat.flatId === profileId) {
+                console.log('true');
                 exists = true;
-                navigation.navigate('Chatroom', {
-                    chatInfo: chat,
-                });
-                return;
+                previousChat = chat;
+                return false;
+            } else {
+                return true;
             }
         });
     }
-    dispatch(createChat(profileId)).then((chat) => {
-        navigation.navigate('Chatroom', { chatInfo: chat });
-    });
+    if (!exists) {
+        dispatch(createChat(profileId)).then((chat) => {
+            navigation.navigate('Chatroom', { chatInfo: chat });
+        });
+    } else {
+        navigation.navigate('Chatroom', { chatInfo: previousChat });
+    }
 };
 
 /**
@@ -221,6 +227,8 @@ export const createChat = (profileId) => (dispatch, getState) => {
     const membershipUpdate = {};
     const chatUpdate = {};
     const userprofile = getState().userprofileState.userprofile;
+    const matchprofile = getState().matchesState.matches[profileId];
+
     let chatInfo = {
         members: {},
     };
@@ -229,8 +237,8 @@ export const createChat = (profileId) => (dispatch, getState) => {
 
     if (profileId.startsWith('flt$')) {
         //want to chat with flat
-        let matchprofile = userprofile.matches[profileId];
-        let roomMates = matchprofile.roomMates; //todo: object.keys
+        //let matchprofile = userprofile.matches[profileId];
+        let roomMates = matchprofile.roomMates;
         roomMates.forEach((mateId) => (chatInfo['members'][mateId] = true));
         chatInfo = {
             ...chatInfo,
@@ -255,8 +263,8 @@ export const createChat = (profileId) => (dispatch, getState) => {
         });
     } else {
         //want to chat with user
-        let matchprofile =
-            getState().flatprofileState.flatprofile.matches[profileId];
+        /* let matchprofile =
+            getState().flatprofileState.flatprofile.matches[profileId]; */
         let flatprofile = getState().flatprofileState.flatprofile;
         let roomMates = Object.keys(flatprofile.roomMates);
         roomMates.forEach((mateId) => (chatInfo['members'][mateId] = true));
