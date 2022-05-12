@@ -59,11 +59,6 @@ export const updateProfile =
                 .patch(`/${profileType}s/${profileId}`, requestBody)
                 .then((response) => {
                     dispatch(updateProfileSuccess(response.data, profileType));
-                    dispatch(
-                        profileType == 'userprofile'
-                            ? getCurrentUserprofile()
-                            : getFlatprofile(profileId)
-                    );
                 })
                 .catch((error) => {
                     dispatch(updateProfileFailure(error, profileType));

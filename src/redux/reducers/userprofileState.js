@@ -15,6 +15,7 @@ const userprofileState = (state = initialState, action) => {
     const profile = { ...action.payload };
     switch (action.type) {
         case Constants.GET_CURRENT_USER_SUCCESS:
+        case Constants.UPDATE_USERPROFILE_SUCCESS:
             delete profile.matches;
             return {
                 ...state,

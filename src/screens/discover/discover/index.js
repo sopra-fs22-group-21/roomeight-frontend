@@ -41,7 +41,6 @@ const Discover = ({ navigation }) => {
     const [like, setLike] = useState(false);
     const [match, setMatch] = useState(undefined);
     const [isShowingSettings, setIsShowingSettings] = useState(false);
-    const [filters, setFilters] = useState(null);
     //const [filterTags, setFilterTags] = useState(null);
 
     useEffect(() => {
@@ -140,7 +139,6 @@ const Discover = ({ navigation }) => {
         <>
             <FilterSettings
                 onSave={(fil, fTags) => {
-                    setFilters(fil);
                     //setFilterTags(fTags);
 
                     dispatch(
@@ -153,7 +151,7 @@ const Discover = ({ navigation }) => {
                     setIsShowingSettings(false);
                     console.log(fil);
                 }}
-                filters={filters}
+                filters={userprofile.filters}
             />
         </>
     );
@@ -161,8 +159,8 @@ const Discover = ({ navigation }) => {
     const filtersAreActive = () => {
         let active =
             !isShowingSettings &&
-            filters &&
-            Object.values(filters).some(
+            userprofile.filters &&
+            Object.values(userprofile.filters).some(
                 (f) =>
                     f != undefined &&
                     f != null &&
