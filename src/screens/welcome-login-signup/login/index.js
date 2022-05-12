@@ -14,6 +14,7 @@ import {
 import { loginUser } from '../../../redux/actions/authActions';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
+import Loading from '../../loading';
 
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -24,52 +25,60 @@ const Login = ({ navigation }) => {
     const { loading } = useSelector((state) => state.authState);
 
     return (
-        <ScreenContainer onPressBack={() => navigation.goBack()}>
-            <ScreenPadding>
-                <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-                    <Heading>{en.login.heading}</Heading>
-                    <Box>
-                        <Title>{en.login.title}</Title>
-                    </Box>
-                    <TextBlock>{en.login.enterDetails}</TextBlock>
-                    <Input
-                        label={en.login.email}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        onChangeText={(text) => {
-                            setEmail(text);
-                            setDispatched(false);
-                        }}
-                    />
-                    <Input
-                        label={en.login.password}
-                        secureTextEntry={true}
-                        onChangeText={(text) => {
-                            setPassword(text);
-                            setDispatched(false);
-                        }}
-                    />
-                    {authErrors.infoForUser && dispatched ? (
-                        <>
-                            <Box />
-                            <TextBlock style={styles.error}>
-                                {authErrors.infoForUser}
-                            </TextBlock>
-                        </>
-                    ) : null}
+        <>
+            {loading ? (
+                <Loading />
+            ) : (
+                <ScreenContainer onPressBack={() => navigation.goBack()}>
+                    <ScreenPadding>
+                        <KeyboardAwareScrollView
+                            showsVerticalScrollIndicator={false}
+                        >
+                            <Heading>{en.login.heading}</Heading>
+                            <Box>
+                                <Title>{en.login.title}</Title>
+                            </Box>
+                            <TextBlock>{en.login.enterDetails}</TextBlock>
+                            <Input
+                                label={en.login.email}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                onChangeText={(text) => {
+                                    setEmail(text);
+                                    setDispatched(false);
+                                }}
+                            />
+                            <Input
+                                label={en.login.password}
+                                secureTextEntry={true}
+                                onChangeText={(text) => {
+                                    setPassword(text);
+                                    setDispatched(false);
+                                }}
+                            />
+                            {authErrors.infoForUser && dispatched ? (
+                                <>
+                                    <Box />
+                                    <TextBlock style={styles.error}>
+                                        {authErrors.infoForUser}
+                                    </TextBlock>
+                                </>
+                            ) : null}
 
-                    <Box />
-                    <PrimaryButton
-                        onPress={() => {
-                            setDispatched(true);
-                            dispatch(loginUser(email, password));
-                        }}
-                    >
-                        Login
-                    </PrimaryButton>
-                </KeyboardAwareScrollView>
-            </ScreenPadding>
-        </ScreenContainer>
+                            <Box />
+                            <PrimaryButton
+                                onPress={() => {
+                                    setDispatched(true);
+                                    dispatch(loginUser(email, password));
+                                }}
+                            >
+                                Login
+                            </PrimaryButton>
+                        </KeyboardAwareScrollView>
+                    </ScreenPadding>
+                </ScreenContainer>
+            )}
+        </>
     );
 };
 export default Login;

@@ -17,6 +17,7 @@ import { postUserprofile } from '../../../redux/actions/postUserprofile';
 import colors from '../../../resources/colors';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
+import Loading from '../../loading';
 
 const Signup = ({ navigation }) => {
     const [user, setUser] = useState({});
@@ -182,6 +183,7 @@ const Signup = ({ navigation }) => {
         </>
     );
 
+    if (loading) return <Loading />;
     return (
         <ScreenContainer>
             <ScreenPadding>

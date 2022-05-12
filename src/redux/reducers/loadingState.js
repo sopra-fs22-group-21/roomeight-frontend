@@ -1,7 +1,7 @@
 import * as Constants from '../constants';
 
 const initialState = {
-    loading: false,
+    loading: true,
 };
 
 /**
@@ -16,10 +16,10 @@ const loadingState = (state = initialState, action) => {
         case Constants.GET_FLATPROFILE_REQUEST:
         case Constants.UPDATE_USERPROFILE_REQUEST:
         case Constants.UPDATE_FLATPROFILE_REQUEST:
-        case Constants.POST_USERPROFILE_REQUEST:
-        case Constants.POST_FLATPROFILE_REQUEST:
-        case Constants.LOGOUT_USER_REQUEST:
-        case Constants.LOGIN_USER_REQUEST:
+        //case Constants.POST_USERPROFILE_REQUEST:
+        //case Constants.POST_FLATPROFILE_REQUEST:
+        //case Constants.LOGOUT_USER_REQUEST:
+        //case Constants.LOGIN_USER_REQUEST:
 
         case Constants.UPLOAD_IMAGE_REQUEST_USERPROFILE:
         case Constants.UPLOAD_IMAGE_REQUEST_FLATPROFILE:
@@ -30,15 +30,15 @@ const loadingState = (state = initialState, action) => {
             };
 
         //All request end types that set loading to false
-        case Constants.LOGIN_USER_SUCCESS:
-        case Constants.LOGIN_USER_FAILURE:
+        //case Constants.LOGIN_USER_SUCCESS:
+        //case Constants.LOGIN_USER_FAILURE:
         case Constants.LOGOUT_USER_SUCCESS:
         case Constants.LOGOUT_USER_FAILURE:
 
         case Constants.GET_CURRENT_USER_SUCCESS:
         case Constants.GET_CURRENT_USER_FAILURE:
-        case Constants.POST_USERPROFILE_SUCCESS:
-        case Constants.POST_USERPROFILE_FAILURE:
+        //case Constants.POST_USERPROFILE_SUCCESS:
+        //case Constants.POST_USERPROFILE_FAILURE:
         case Constants.UPDATE_USERPROFILE_SUCCESS:
         case Constants.UPDATE_USERPROFILE_FAILURE:
 

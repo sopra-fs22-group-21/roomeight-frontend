@@ -255,20 +255,22 @@ const FilterSettings = (props) => {
                 min={2}
                 max={10}
                 low={
-                    newFilters.nrRoommates && newFilters.nrRoommates.min
-                        ? newFilters.nrRoommates.min
+                    newFilters.numberOfRoommates &&
+                    newFilters.numberOfRoommates.min
+                        ? newFilters.numberOfRoommates.min
                         : null
                 }
                 high={
-                    newFilters.nrRoommates && newFilters.nrRoommates.max
-                        ? newFilters.nrRoommates.max
+                    newFilters.numberOfRoommates &&
+                    newFilters.numberOfRoommates.max
+                        ? newFilters.numberOfRoommates.max
                         : null
                 }
                 onRangeChange={(range) => setNrRoommates(range)}
                 onValueChange={(low, high) => {
                     setNewFilters({
                         ...newFilters,
-                        nrRoommates: {
+                        numberOfRoommates: {
                             min: low,
                             max: high,
                         },
@@ -281,20 +283,20 @@ const FilterSettings = (props) => {
                 min={1}
                 max={4}
                 low={
-                    newFilters.nrBathrooms && newFilters.nrBathrooms.min
-                        ? newFilters.nrBathrooms.min
+                    newFilters.numberOfBaths && newFilters.numberOfBaths.min
+                        ? newFilters.numberOfBaths.min
                         : null
                 }
                 high={
-                    newFilters.nrBathrooms && newFilters.nrBathrooms.max
-                        ? newFilters.nrBathrooms.max
+                    newFilters.numberOfBaths && newFilters.numberOfBaths.max
+                        ? newFilters.numberOfBaths.max
                         : null
                 }
                 onRangeChange={(range) => setNrBathrooms(range)}
                 onValueChange={(low, high) => {
                     setNewFilters({
                         ...newFilters,
-                        nrBathrooms: {
+                        numberOfBaths: {
                             min: low,
                             max: high,
                         },
