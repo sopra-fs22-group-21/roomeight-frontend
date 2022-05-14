@@ -169,9 +169,6 @@ export const sendMessage = (message, chatId) => async (dispatch) => {
     });
     const updates = {};
     updates[`/messages/${chatId}/${message._id}`] = message;
-    updates[`/chats/${chatId}/lastMessage`] = message.text;
-    updates[`/chats/${chatId}/timestamp`] = message.createdAt;
-    updates[`/chats/${chatId}/lastSender`] = message.user.name;
     update(ref(database), updates)
         .then(() => {
             dispatch({
@@ -253,18 +250,8 @@ export const createChat = (profileId) => (dispatch, getState) => {
             flatId: profileId,
             userId: userprofile.profileId,
         };
-
-        membershipUpdate[
-            `/memberships/${userprofile.profileId}/${chatId}`
-        ] = true;
-        matchprofile.roomMates.forEach((userId) => {
-            //todo: object.keys
-            membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
-        });
     } else {
         //want to chat with user
-        /* let matchprofile =
-            getState().flatprofileState.flatprofile.matches[profileId]; */
         let flatprofile = getState().flatprofileState.flatprofile;
         let roomMates = Object.keys(flatprofile.roomMates);
         roomMates.forEach((mateId) => (chatInfo['members'][mateId] = true));
@@ -281,16 +268,10 @@ export const createChat = (profileId) => (dispatch, getState) => {
             flatId: flatprofile.profileId,
             userId: profileId,
         };
-
-        membershipUpdate[`/memberships/${profileId}/${chatId}`] = true;
-
-        Object.keys(flatprofile.roomMates).forEach((userId) => {
-            membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
-        });
     }
 
     chatUpdate[`/chats/${chatId}`] = chatInfo;
-    chatUpdate[`/messages/${chatId}/${firstMessageId}`] = {
+    const firstMessage = {
         _id: firstMessageId,
         text: userprofile.firstName + ' ' + en.chat.startedChat,
         createdAt: new Date().getTime(),
@@ -300,17 +281,14 @@ export const createChat = (profileId) => (dispatch, getState) => {
         },
         system: true,
     };
-    chatInfo['lastMessage'] = userprofile.firstName + ' ' + en.chat.startedChat;
-    chatInfo['timestamp'] =
-        chatUpdate[`/messages/${chatId}/${firstMessageId}`].createdAt;
-    return update(ref(database), membershipUpdate)
+
+    return update(ref(database), chatUpdate)
         .then(() => {
-            return update(ref(database), chatUpdate).then(() => {
-                dispatch({
-                    type: Constants.CREATE_CHAT_SUCCESS,
-                });
-                return chatInfo;
+            dispatch({
+                type: Constants.CREATE_CHAT_SUCCESS,
             });
+            dispatch(sendMessage(firstMessage, chatId));
+            return chatInfo;
         })
         .catch((error) => {
             dispatch(createChatFailure(error));
