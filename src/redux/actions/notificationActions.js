@@ -98,7 +98,7 @@ export const notificationsListener = () => (dispatch, getState) => {
                         type: Constants.NEW_MATCH,
                     });
                 }
-                dispatch(getCurrentUserprofile())
+                dispatch(getCurrentUserprofile());
             }
         }
     );
