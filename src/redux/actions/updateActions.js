@@ -27,6 +27,16 @@ const updateProfileFailure = (error, profileType) => ({
     payload: error,
 });
 
+const postPushTokenFailure = (error) => ({
+    type: Constants.POST_PUSH_TOKEN_FAILURE,
+    payload: error,
+});
+
+const deletePushTokenFailure = (error) => ({
+    type: Constants.DELETE_PUSH_TOKEN_FAILURE,
+    payload: error,
+});
+
 /**
  * sends update request to backend api to update the userprofile in the DB
  * @param {object} requestBody - the body of the update request
@@ -81,37 +91,34 @@ export const updateProfile =
  * @dispatches {@link updateProfileSuccess} on update success with response payload
  * @dispatches {@link updateProfileFailure} on update failure with error payload
  */
-export const postPushToken =
-    (token, profileId) => async (dispatch, getState) => {
-        try {
-            const res = await apiClient().post(
-                `/userprofile/${profileId}/devices`,
-                {
-                    expoPushToken: token,
-                }
-            );
-            dispatch(updateProfileSuccess(res, 'userprofile'));
-        } catch (error) {
-            dispatch(updateProfileError(error));
-        }
-    };
+export const postPushToken = (token) => async (dispatch) => {
+    dispatch({
+        type: Constants.POST_PUSH_TOKEN_REQUEST,
+    });
+    try {
+        await apiClient().post(`userprofiles/devices${token}`);
+        dispatch({
+            type: Constants.POST_PUSH_TOKEN_SUCCESS,
+            payload: token,
+        });
+    } catch (error) {
+        dispatch(postPushTokenFailure(error));
+    }
+};
 /**
  * Delete request to unregister the device from push notifications
  * @param {*} token
  * @dispatches {@link updateProfileSuccess} on update success with response payload
  * @dispatches {@link updateProfileFailure} on update failure with error payload
  */
-export const deletePushToken =
-    (token, profileId) => async (dispatch, getState) => {
-        try {
-            const res = await apiClient().delete(
-                `/userprofile/${profileId}/devices`,
-                {
-                    expoPushToken: token,
-                }
-            );
-            return dispatch(updateProfileSuccess(res, 'userprofile'));
-        } catch (error) {
-            return dispatch(updateProfileFailure(error));
-        }
-    };
+export const deletePushToken = (token) => async (dispatch) => {
+    try {
+        await apiClient().delete(`userprofiles/devices/${token}`);
+        dispatch({
+            type: Constants.DELETE_PUSH_TOKEN_SUCCESS,
+            payload: token,
+        });
+    } catch (error) {
+        dispatch(deletePushTokenFailure(error));
+    }
+};

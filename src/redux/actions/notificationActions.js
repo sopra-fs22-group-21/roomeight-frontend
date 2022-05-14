@@ -75,7 +75,7 @@ export const notificationsListener = () => (dispatch, getState) => {
             if (data.type === 'NEW_LIKE') {
                 dispatch({
                     type: Constants.NEW_LIKE,
-                    payload: data.profile,
+                    payload: data,
                 });
             } else if (data.type === 'NEW_MATCH') {
                 dispatch({
@@ -94,7 +94,7 @@ export const notificationsListener = () => (dispatch, getState) => {
                 if (data.type === 'NEW_LIKE') {
                     dispatch({
                         type: Constants.NEW_LIKE,
-                        payload: data.profile,
+                        payload: data,
                     });
                 } else if (data.type === 'NEW_MATCH') {
                     dispatch({

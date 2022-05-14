@@ -52,9 +52,9 @@ const logoutUserFailure = (error) => ({
 export const loginUser = (email, password) => async (dispatch) => {
     dispatch(loginUserRequest());
     try {
-        const user = await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, email, password);
         const expoPushToken = await registerForPushNotificationsAsync();
-        dispatch(postPushToken(expoPushToken, user.uid));
+        dispatch(postPushToken(expoPushToken));
     } catch (error) {
         dispatch(loginUserFailure(error));
     }
@@ -92,11 +92,10 @@ export const userAuthStateListener = () => (dispatch) => {
  */
 export const logoutUser = () => async (dispatch, getState) => {
     dispatch(logoutUserRequest());
-    const profileId = getState().authState.auth.uid;
     signOut(auth).catch((error) => {
         dispatch(logoutUserFailure(error));
     });
     const expoPushToken = await Notifications.getExpoPushTokenAsync();
-    dispatch(deletePushToken(expoPushToken, profileId));
+    dispatch(deletePushToken(expoPushToken));
     dispatch(logoutUserSuccess());
 };
