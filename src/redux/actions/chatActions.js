@@ -221,7 +221,6 @@ export const createChat = (profileId) => (dispatch, getState) => {
     const chatId = 'chat-' + uuidv4();
     const firstMessageId = 'msg-' + uuidv4();
 
-    const membershipUpdate = {};
     const chatUpdate = {};
     const userprofile = getState().userprofileState.userprofile;
     const matchprofile = getState().matchesState.matches[profileId];
