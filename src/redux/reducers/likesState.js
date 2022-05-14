@@ -46,7 +46,7 @@ const likesState = (state = initialState, action) => {
                     },
                 ],
             };
-            default:
+        default:
             return state;
     }
 };
