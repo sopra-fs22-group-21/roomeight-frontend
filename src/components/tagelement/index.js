@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import styles from './styles';
@@ -13,6 +13,9 @@ const TagElement = (props) => {
             setTag({ ...tag, isSelected: !tag.isSelected });
         }
     };
+    useEffect(() => {
+        setTag(props.tag);
+    }, [props.tag]);
 
     return (
         <View>

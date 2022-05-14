@@ -22,6 +22,11 @@ import {
 import * as Constants from '../../../redux/constants';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
+import * as Constants from '../../../redux/constants';
+import { goToChat } from '../../../redux/actions/chatActions';
+import FilterSettings from '../../../components/filterSettings';
+import colors from '../../../resources/colors';
+import { updateProfile } from '../../../redux/actions/updateActions';
 
 const ITEM_HEIGHT = Dimensions.get('screen').height - 170;
 
@@ -33,10 +38,15 @@ const Discover = ({ navigation }) => {
         (state) => state.discoverState
     );
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const { matches } = useSelector((state) => state.matchesState);
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const [profiles, setProfiles] = useState(discoverProfiles);
     const [like, setLike] = useState(false);
+    const [showLikes, setShowLike] = useState(false);
+    const { matches } = useSelector((state) => state.matchesState);
     const [match, setMatch] = useState(undefined);
+    const [isShowingSettings, setIsShowingSettings] = useState(false);
+    const [filters, setFilters] = useState(null);
+    //const [filterTags, setFilterTags] = useState(null);
 
     useEffect(() => {
         if (newMatch) setMatch(matches[newMatch]);
@@ -45,14 +55,18 @@ const Discover = ({ navigation }) => {
     }, [matches]);
 
     useEffect(() => {
-        if (loading || !discoverProfiles)
-            setProfiles([{ textIfNoData: en.discover.loading }]);
-        else
-            setProfiles(
-                discoverProfiles.concat([{ textIfNoData: en.discover.empty }])
-            );
-        carousel.current.snapToItem(0, false);
-    }, [loading, discoverProfiles]);
+        if (!isShowingSettings) {
+            if (loading || !discoverProfiles)
+                setProfiles([{ textIfNoData: en.discover.loading }]);
+            else
+                setProfiles(
+                    discoverProfiles.concat([
+                        { textIfNoData: en.discover.empty },
+                    ])
+                );
+            carousel.current.snapToItem(0, false);
+        }
+    }, [loading, discoverProfiles, isShowingSettings]);
 
     const removeProfile = (index) => {
         if (index >= 0 && profiles.length > 0) {
@@ -72,11 +86,26 @@ const Discover = ({ navigation }) => {
         }, 500);
     };
 
+    function countLikes(profileId) {
+        if (flatprofile.likes) {
+            const filtered = flatprofile.likes.filter((like) => {
+                return Object.keys(like.likedUser)[0] === profileId;
+            });
+            if (filtered.length !== 0) {
+                return filtered[0].likes.length;
+            } else {
+                return 0;
+            }
+        } else {
+            return null;
+        }
+    }
+
     const handleDislike = () => {
         carousel.current.snapToNext();
     };
 
-    const card = ({ item, index }) => {
+    const card = ({ item }) => {
         if (!item) return null;
         if (item && item.textIfNoData)
             return <EmptyCard textIfNoData={item.textIfNoData} />;
@@ -88,6 +117,15 @@ const Discover = ({ navigation }) => {
                             profile={item}
                             key={item.profileId}
                             onDoubleTap={() => handleLike(item.profileId)}
+                            onClickShowLikes={() => {
+                                setShowLike(true);
+                            }}
+                            nrLiked={countLikes(item.profileId)}
+                            nrRoommates={
+                                flatprofile.roomMates
+                                    ? Object.keys(flatprofile.roomMates).length
+                                    : null
+                            }
                         />
                     </Box>
                     <LikeButtons
@@ -103,6 +141,64 @@ const Discover = ({ navigation }) => {
             );
     };
 
+    const profileCarousel = (
+        <>
+            <Carousel
+                ref={carousel}
+                data={profiles}
+                renderItem={card}
+                sliderHeight={
+                    cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
+                }
+                itemHeight={
+                    cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
+                }
+                activeSlideAlignment="start"
+                inactiveSlideShift={0}
+                useScrollView
+                vertical
+                onSnapToItem={(index) => removeProfile(index - 1)}
+            />
+        </>
+    );
+
+    const settings = (
+        <>
+            <FilterSettings
+                onSave={(fil, fTags) => {
+                    setFilters(fil);
+                    //setFilterTags(fTags);
+
+                    dispatch(
+                        updateProfile(
+                            { filters: { ...fil } },
+                            'userprofile',
+                            userprofile.profileId
+                        )
+                    );
+                    setIsShowingSettings(false);
+                    console.log(fil);
+                }}
+                filters={filters}
+            />
+        </>
+    );
+
+    const filtersAreActive = () => {
+        let active =
+            !isShowingSettings &&
+            filters &&
+            Object.values(filters).some(
+                (f) =>
+                    f != undefined &&
+                    f != null &&
+                    Object.values(f).some(
+                        (child) => child != undefined && child != null
+                    )
+            );
+        return active;
+    };
+
     return (
         <>
             <ScreenContainer navigation={navigation} showNavBar>
@@ -110,24 +206,30 @@ const Discover = ({ navigation }) => {
                     style={{ height: '100%', flex: 1 }}
                     onLayout={getCardSize}
                 >
-                    <SmallHeading>Discover</SmallHeading>
+                    <View style={styles.headingRow}>
+                        <SmallHeading>
+                            {isShowingSettings ? 'Set Filters' : 'Discover'}
+                        </SmallHeading>
+                        <Icon
+                            name={isShowingSettings ? 'close' : 'tune'}
+                            size={30}
+                            color={
+                                filtersAreActive() ? colors.primary400 : 'black'
+                            }
+                            onPress={() =>
+                                setIsShowingSettings(!isShowingSettings)
+                            }
+                        />
+                    </View>
                     <Box />
-                    <Carousel
-                        ref={carousel}
-                        data={profiles}
-                        renderItem={card}
-                        sliderHeight={
-                            cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
-                        }
-                        itemHeight={
-                            cardSize.height ? cardSize.height - 70 : ITEM_HEIGHT
-                        }
-                        activeSlideAlignment="start"
-                        inactiveSlideShift={0}
-                        useScrollView
-                        vertical
-                        onSnapToItem={(index) => removeProfile(index - 1)}
-                    />
+                    {isShowingSettings ? (
+                        settings
+                    ) : (
+                        <>
+                            {/*filterTags*/}
+                            {profileCarousel}
+                        </>
+                    )}
                 </View>
             </ScreenContainer>
             {match ? (

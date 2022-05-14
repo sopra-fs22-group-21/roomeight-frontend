@@ -22,6 +22,7 @@ class Flatprofile {
         this.numberOfBaths = null;
         this.roomMates = [];
         this.matches = [];
+        this.likes = [];
         Object.assign(this, data);
     }
 }

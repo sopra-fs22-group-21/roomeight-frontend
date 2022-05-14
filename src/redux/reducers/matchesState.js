@@ -33,6 +33,23 @@ const matchesState = (state = initialState, action) => {
                 ...state,
                 matches: action.payload.matches,
             };
+
+        case Constants.POST_LIKE_FLAT_SUCCESS:
+            if (action.payload.isMatch) {
+                return {
+                    ...state,
+                    matches: action.payload.updatedUserProfile.matches,
+                };
+            } else return state;
+
+        case Constants.POST_LIKE_USER_SUCCESS:
+            if (action.payload.isMatch) {
+                return {
+                    ...state,
+                    matches: action.payload.updatedFlatProfile.matches,
+                };
+            } else return state;
+
         default:
             return state;
     }

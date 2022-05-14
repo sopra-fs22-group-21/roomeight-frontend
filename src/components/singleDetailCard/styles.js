@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
         ],
     },
     icon: {
-        //position: 'absolute',
         flex: 0,
         color: colors.secondary400,
     },
@@ -31,6 +30,11 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 15,
         paddingBottom: 4,
+    },
+    liked: {
+        fontFamily: 'SourceSans3SemiBold',
+        fontSize: 15,
+        paddingLeft: 3,
     },
     genderIcon: {
         fontSize: 15,

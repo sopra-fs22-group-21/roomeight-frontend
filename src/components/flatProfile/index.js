@@ -30,6 +30,7 @@ const FlatProfile = ({ navigation }, props) => {
     const [addressValid, setAddressValid] = useState(true);
     const [rentValid, setRentValid] = useState(null);
     const [roomSizeValid, setRoomSizeValid] = useState(null);
+    const [nrRoommatesValid, setNrRoommatesValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
     const [editMode, setEditMode] = useState(false);
 
@@ -182,20 +183,21 @@ const FlatProfile = ({ navigation }, props) => {
                         </InputBox>
                         <AddRoomieInput />
                         <Box />
-                        {/*
-                        <Input
-                            label={en.flatInfo.nrRoommates}
-                            keyboardType="number-pad"
-                            error={nrRoommatesValid === false}
-                            defaultValue={flatprofile.numberOfRoommates}
-                            onChangeText={(text) => {
-                                setNrRoommatesValid(!isNaN(Number(text)));
-                                setFlat({
-                                    ...flat,
-                                    numberOfRoommates: Number(text),
-                                });
-                            }}
-                        /> */}
+                        {
+                            <Input
+                                label={en.flatInfo.nrRoommates}
+                                keyboardType="number-pad"
+                                error={nrRoommatesValid === false}
+                                defaultValue={flatprofile.numberOfRoommates}
+                                onChangeText={(text) => {
+                                    setNrRoommatesValid(!isNaN(Number(text)));
+                                    setFlat({
+                                        ...flat,
+                                        numberOfRoommates: Number(text),
+                                    });
+                                }}
+                            />
+                        }
                         <Input
                             label={en.roomInfo.nrBathrooms}
                             keyboardType="number-pad"

@@ -1,6 +1,6 @@
 import dateFormat from 'dateformat';
 import { React, useEffect, useRef, useState } from 'react';
-import { Dimensions, Pressable, View } from 'react-native';
+import { Dimensions, Pressable, View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { useComponentSize } from '../../hooks/layout';
@@ -87,6 +87,21 @@ export const SingleDetailCard = (props) => {
                     color={styles.icon.color}
                     onPress={props.onClickEdit}
                 />
+            ) : null}
+            {props.onClickShowLikes ? (
+                <View style={styles.row}>
+                    <Icon
+                        style={styles.icon}
+                        name="like"
+                        type="foundation"
+                        size={20}
+                        color={styles.icon.color}
+                        onPress={props.onClickShowLikes}
+                    />
+                    <Text style={styles.liked}>
+                        {props.nrLiked}/{props.nrRoommates}
+                    </Text>
+                </View>
             ) : null}
         </View>
     );
