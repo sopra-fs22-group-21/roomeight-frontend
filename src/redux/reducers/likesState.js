@@ -21,10 +21,13 @@ const likesState = (state = initialState, action) => {
             return {
                 ...state,
                 likes: action.payload.likes.filter((like) => {
-                    console.log(Object.keys(action.payload.matches));
-                    console.log(Object.keys(like.likedUser)[0]);
-                    return !Object.keys(action.payload.matches).includes(
-                        Object.keys(like.likedUser)[0]
+                    return (
+                        !Object.keys(action.payload.matches).includes(
+                            Object.keys(like.likedUser)[0]
+                        ) &&
+                        Object.values(like.likedUser)[0].likes.includes(
+                            action.payload.profileId
+                        )
                     );
                 }),
                 loading: false,

@@ -40,8 +40,6 @@ const LikesFlat = ({ navigation }, props) => {
                 .map((like) => like.likedUser)
                 .map((like) => Object.values(like)[0])
                 .map((profile, index) => {
-                    console.log('like: ');
-                    console.log(profile);
                     if (profile.profileId)
                         return (
                             <ProfileInfoBox

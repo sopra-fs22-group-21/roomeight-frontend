@@ -11,9 +11,9 @@ const Match = ({ route, navigation }) => {
     const dispatch = useDispatch();
     return (
         <ScreenContainer showNavBar navigation={navigation}>
-            <SmallHeadingWithBack navigation={navigation}>
-                {en.matches.heading}
-            </SmallHeadingWithBack>
+            <SmallHeadingWithBack
+                navigation={navigation}
+            ></SmallHeadingWithBack>
             <Box />
             <Box style={{ flex: 1 }}>
                 <PublicProfileCard
