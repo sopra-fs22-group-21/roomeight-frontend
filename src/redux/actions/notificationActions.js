@@ -71,18 +71,16 @@ export const notificationsListener = () => (dispatch, getState) => {
     const unsubF = Notifications.addNotificationReceivedListener(
         (notification) => {
             const { data } = notification.request.content;
-            console.log(data);
             if (data.type === 'NEW_LIKE') {
                 dispatch({
                     type: Constants.NEW_LIKE,
-                    payload: data,
                 });
             } else if (data.type === 'NEW_MATCH') {
                 dispatch({
                     type: Constants.NEW_MATCH,
-                    payload: data.profile,
                 });
             }
+            dispatch(getCurrentUserprofile());
         }
     );
 
@@ -94,14 +92,13 @@ export const notificationsListener = () => (dispatch, getState) => {
                 if (data.type === 'NEW_LIKE') {
                     dispatch({
                         type: Constants.NEW_LIKE,
-                        payload: data,
                     });
                 } else if (data.type === 'NEW_MATCH') {
                     dispatch({
                         type: Constants.NEW_MATCH,
-                        payload: data.profile,
                     });
                 }
+                dispatch(getCurrentUserprofile())
             }
         }
     );

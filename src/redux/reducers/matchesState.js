@@ -20,14 +20,6 @@ const matchesState = (state = initialState, action) => {
                     matches: action.payload.matches,
                 };
             } else return state;
-        case Constants.NEW_MATCH:
-            return {
-                ...state,
-                matches: {
-                    ...state.matches,
-                    [action.payload.profileId]: action.payload,
-                },
-            };
         case Constants.GET_FLATPROFILE_SUCCESS:
             return {
                 ...state,

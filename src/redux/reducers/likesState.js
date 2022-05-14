@@ -32,20 +32,6 @@ const likesState = (state = initialState, action) => {
                 }),
                 loading: false,
             };
-        case Constants.NEW_LIKE:
-            return {
-                ...state,
-                likes: [
-                    ...state.likes,
-                    {
-                        likedUser: action.payload.profile,
-                        likes: [
-                            ...state.likes.likes,
-                            action.payload.liking_user_id,
-                        ],
-                    },
-                ],
-            };
         default:
             return state;
     }
