@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
-import { View } from 'react-native-animatable';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddressMap } from '../../../components/addressMap';
 import DateInput from '../../../components/dateInput';
 import { Input, InputLabel } from '../../../components/input';
 import { ScreenContainer } from '../../../components/screenContainer';
@@ -18,13 +16,14 @@ import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
 const RoomInfo = ({ navigation }) => {
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const { transitFlatprofile } = useSelector((state) => state.transitState);
     const [moveInDateValid, setMoveInDateValid] = useState(null);
     const [moveOutDateValid, setMoveOutDateValid] = useState(null);
-    const [addressValid, setAddressValid] = useState(true);
     const [rentValid, setRentValid] = useState(null);
-    const [flat, setFlat] = useState(transitFlatprofile);
-    const [address, setAddress] = useState(transitFlatprofile.address);
+    const [flat, setFlat] = useState(
+        flatprofile ? flatprofile : transitFlatprofile
+    );
     const [roomSizeValid, setRoomSizeValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
     const [nrRoommatesValid, setNrRoommatessValid] = useState(null);
@@ -53,9 +52,6 @@ const RoomInfo = ({ navigation }) => {
                 navigation.navigate('FlatInfo');
             }}
             nextDisabled={
-                !flat.address ||
-                flat.address.length < 1 ||
-                addressValid === false ||
                 moveInDateValid === false ||
                 moveOutDateValid === false ||
                 rentValid === false ||
@@ -71,30 +67,6 @@ const RoomInfo = ({ navigation }) => {
                         <Heading>{en.roomInfo.heading}</Heading>
                         <NormalText>{en.roomInfo.info}</NormalText>
                         <Box />
-                        <Input
-                            label={en.roomInfo.address}
-                            error={addressValid === false}
-                            defaultValue={flat.address ? flat.address : ''}
-                            onChangeText={(text) => setAddress(text)}
-                            onEndEditing={() => {
-                                setFlat({
-                                    ...flat,
-                                    address: address,
-                                });
-                            }}
-                        />
-                        {flat.address && flat.address != '' ? (
-                            <>
-                                <View style={styles.map}>
-                                    <AddressMap
-                                        address={flat.address}
-                                        onError={() => setAddressValid(false)}
-                                        onSuccess={() => setAddressValid(true)}
-                                    />
-                                </View>
-                                <Box />
-                            </>
-                        ) : null}
 
                         <DateInput
                             label={en.roomInfo.moveInDate}

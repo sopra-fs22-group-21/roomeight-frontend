@@ -7,9 +7,6 @@ const styles = StyleSheet.create({
         marginTop: 40,
         height: '100%',
     },
-    map: {
-        height: 200,
-    },
     inner: {
         flex: 1,
         //paddingBottom: 70,

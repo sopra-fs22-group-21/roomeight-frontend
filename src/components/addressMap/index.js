@@ -4,24 +4,27 @@ import MapView, { Marker } from 'react-native-maps';
 
 export const AddressMap = (props) => {
     const [coordinates, setCoordinates] = useState({
-        lat: 47.3769,
-        lng: 8.5417,
+        lat: props.latitude ? props.latitude : 47.3769,
+        lng: props.longitude ? props.longitude : 8.5417,
     });
     const [found, setFound] = useState(true);
 
     useEffect(async () => {
-        try {
-            let json;
-            json = await Geocoder.from(props.address);
-            let location = json.results[0].geometry.location;
-            setCoordinates(location);
-            if (props.onSuccess) props.onSuccess(location);
-            console.log(location);
-            setFound(true);
-        } catch (error) {
-            console.warn(error);
-            if (props.onError) props.onError(error);
-            setFound(false);
+        if (props.address && props.resolveAddress) {
+            try {
+                let json;
+                json = await Geocoder.from(props.address);
+                let location = json.results[0].geometry.location;
+                setCoordinates(location);
+                if (props.onSuccess)
+                    props.onSuccess(location.lat, location.lng);
+                console.log(location);
+                setFound(true);
+            } catch (error) {
+                console.warn(error);
+                if (props.onError) props.onError(error);
+                setFound(false);
+            }
         }
     }, [props.address]);
 

@@ -1,4 +1,5 @@
 import AccessExistingFlatProfile from '../../screens/create-profile/accessExistingFlatProfile';
+import AddAddress from '../../screens/create-profile/addAddress';
 import AddPictures from '../../screens/create-profile/addPictures';
 import AddRoomie from '../../screens/create-profile/addRoomie';
 import ChooseStatus from '../../screens/create-profile/chooseStatus';
@@ -21,8 +22,8 @@ export const addRoomieScreens = [
 
 export const createFlatScreens = [
     {
-        name: 'AccessExistingFlatProfile',
-        component: AccessExistingFlatProfile,
+        name: 'RoomInfo',
+        component: RoomInfo,
         options: options,
     },
     {
@@ -38,8 +39,8 @@ export const createFlatScreens = [
     },
 
     {
-        name: 'RoomInfo',
-        component: RoomInfo,
+        name: 'AddAddress',
+        component: AddAddress,
         options: options,
     },
 
@@ -54,6 +55,14 @@ export const createFlatScreens = [
         options: options,
     },
 ].concat(addRoomieScreens);
+
+export const addedScreens = [
+    {
+        name: 'AccessExistingFlatProfile',
+        component: AccessExistingFlatProfile,
+        options: options,
+    },
+].concat(createFlatScreens);
 
 export const chooseStatus = [
     {

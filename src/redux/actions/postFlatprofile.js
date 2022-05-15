@@ -40,23 +40,16 @@ const postRoommateToFlatFailure = (error) => ({
  */
 export const postFlatprofile = (requestBody) => (dispatch) => {
     dispatch(postFlatprofileRequest());
+    const flat = { ...requestBody };
 
-    dispatch({
-        type: Constants.LOADING_STATE,
-    });
-    let references = requestBody.pictureReferences;
-    delete requestBody.pictureReferences;
-
-    let emails = requestBody.roommateEmails;
-    delete requestBody.roommateEmails;
+    delete flat.pictureReferences;
+    delete flat.roommateEmails;
 
     console.log('post flat requestBody:');
-    console.log(requestBody);
-    let flatprofile = {};
+    console.log(flat);
     return apiClient()
-        .post('/flatprofiles', requestBody)
+        .post('/flatprofiles', flat)
         .then((response) => {
-            flatprofile = response.data;
             console.log(
                 'postFlatprofileSuccess: ' + JSON.stringify(response.data)
             );
@@ -67,30 +60,6 @@ export const postFlatprofile = (requestBody) => (dispatch) => {
         .catch((error) => {
             console.log('error post flatprofile');
             return Promise.resolve(dispatch(postFlatprofileFailure(error)));
-        })
-        .then(() => {
-            let update = { pictureReferences: references };
-            console.log('dispatching updateProfile');
-            console.log(update);
-            return dispatch(
-                updateProfile(update, 'flatprofile', flatprofile.profileId)
-            ).catch((error) => {
-                console.log('error uploading');
-                console.log(error);
-            });
-        })
-        .then(() => {
-            if (emails) {
-                console.log('adding users to flat');
-                console.log(emails);
-                return Promise.all(
-                    emails.map((email) => {
-                        return dispatch(postRoommateToFlat(email));
-                    })
-                ).catch((error) =>
-                    console.log('error posting roommates ' + error)
-                );
-            }
         });
 };
 

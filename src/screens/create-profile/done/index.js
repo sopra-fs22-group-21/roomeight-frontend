@@ -55,8 +55,13 @@ const Done = ({ navigation, route }) => {
                                 });
                             }
                             if (route.params.includes('flat')) {
-                                dispatch(postFlatprofile(transitFlatprofile));
-                                navigation.dispatch(StackActions.popToTop());
+                                dispatch(
+                                    postFlatprofile(transitFlatprofile)
+                                ).then(() => {
+                                    navigation.dispatch(
+                                        StackActions.popToTop()
+                                    );
+                                });
                             }
                         }}
                     >

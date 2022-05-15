@@ -37,35 +37,52 @@ const updateProfileFailure = (error, profileType) => ({
 export const updateProfile =
     (requestBody, profileType, profileId) => async (dispatch) => {
         dispatch(updateProfileRequest(profileType));
-        dispatch({
-            type: Constants.LOADING_STATE,
-        });
         console.log(requestBody);
+
+        let emails = requestBody.roommateEmails;
+        delete requestBody.roommateEmails;
+
         if (profileType == 'userprofile') requestBody.isComplete = true;
         return uploadImages(
             //only uploads if picturereferencesis set and not empty
             requestBody.pictureReferences,
             profileType,
             profileId
-        ).then((urls) => {
-            console.log('urls:');
-            console.log(urls);
-            if (urls) {
-                requestBody.pictureReferences = urls;
-            }
-            console.log('requestBody:');
-            console.log(requestBody);
-            return apiClient()
-                .patch(`/${profileType}s/${profileId}`, requestBody)
-                .then((response) => {
-                    dispatch(updateProfileSuccess(response.data, profileType));
-                })
-                .catch((error) => {
-                    dispatch(updateProfileFailure(error, profileType));
-                    console.log('error patch profile');
-                    console.log(error);
-                    console.log('request body:');
-                    console.log(requestBody);
-                });
-        });
+        )
+            .then((urls) => {
+                console.log('urls:');
+                console.log(urls);
+                if (urls) {
+                    requestBody.pictureReferences = urls;
+                }
+                console.log('requestBody:');
+                console.log(requestBody);
+                return apiClient()
+                    .patch(`/${profileType}s/${profileId}`, requestBody)
+                    .then((response) => {
+                        dispatch(
+                            updateProfileSuccess(response.data, profileType)
+                        );
+                    })
+                    .catch((error) => {
+                        dispatch(updateProfileFailure(error, profileType));
+                        console.log('error patch profile');
+                        console.log(error);
+                        console.log('request body:');
+                        console.log(requestBody);
+                    });
+            })
+            .then(() => {
+                if (emails) {
+                    console.log('adding users to flat');
+                    console.log(emails);
+                    return Promise.all(
+                        emails.map((email) => {
+                            return dispatch(postRoommateToFlat(email));
+                        })
+                    ).catch((error) =>
+                        console.log('error posting roommates ' + error)
+                    );
+                }
+            });
     };

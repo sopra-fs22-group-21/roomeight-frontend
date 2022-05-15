@@ -17,15 +17,18 @@ import en from '../../../resources/strings/en.json';
 
 const CreateFlat = ({ navigation }) => {
     const dispatch = useDispatch();
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const { transitFlatprofile } = useSelector((state) => state.transitState);
-    const [flat, setFlat] = useState(transitFlatprofile);
+    const [flat, setFlat] = useState(
+        flatprofile ? flatprofile : transitFlatprofile
+    );
 
     return (
         <ScreenContainer
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
                 dispatch(setTransitAttributes(flat, 'flatprofiles'));
-                navigation.navigate('RoomInfo');
+                navigation.navigate('AddAddress');
             }}
             nextDisabled={
                 !flat.name ||

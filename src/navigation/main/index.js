@@ -8,6 +8,7 @@ import incompleteScreens, {
     chooseStatus,
     createFlatScreens,
     addRoomieScreens,
+    addedScreens,
 } from '../incompleteScreens';
 import loadingScreens from '../loadingScreens';
 import loggedOutScreens from '../loggedOutScreens';
@@ -18,6 +19,7 @@ export default function Route() {
     const { loggedIn } = useSelector((state) => state.authState);
     const { loading } = useSelector((state) => state.loadingState);
     const { userprofile } = useSelector((state) => state.userprofileState);
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const dispatch = useDispatch();
     const createScreens = (screens) => {
         return (
@@ -57,9 +59,18 @@ export default function Route() {
             );
         else if (
             userprofile.isComplete === false &&
-            userprofile.flatId.length > 0
+            userprofile.flatId.length > 0 &&
+            flatprofile.pictureReferences &&
+            flatprofile.pictureReferences.length <= 0
         )
             setCurrentComponents(createScreens(incompleteScreens));
+        else if (
+            userprofile.isComplete === false &&
+            userprofile.flatId.length > 0 &&
+            flatprofile.pictureReferences &&
+            flatprofile.pictureReferences.length > 0
+        )
+            setCurrentComponents(createScreens(addedScreens));
         else if (
             userprofile.isComplete &&
             userprofile.flatId &&
