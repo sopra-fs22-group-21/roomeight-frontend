@@ -140,6 +140,7 @@ const errorState = (state = initialState, action) => {
                 },
             };
 
+        case Constants.POST_ROOMMATE_TO_FLAT_FAILURE:
         case Constants.POST_FLATPROFILE_FAILURE:
             return {
                 ...state,

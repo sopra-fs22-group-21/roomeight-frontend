@@ -187,11 +187,13 @@ export const FlatDetailCard = (props) => {
             <Strong>{en.discover.location}</Strong>
             <NormalText>{flatprofile.address}</NormalText>
             <Box />
-            <AddressMap
-                resolveAddress={false}
-                latitude={flatprofile.addressCoordinates.latitude}
-                longitude={flatprofile.addressCoordinates.longitude}
-            />
+            {flatprofile.addressCoordinates ? (
+                <AddressMap
+                    resolveAddress={false}
+                    latitude={flatprofile.addressCoordinates.latitude}
+                    longitude={flatprofile.addressCoordinates.longitude}
+                />
+            ) : null}
         </DoubleTap>
     );
 

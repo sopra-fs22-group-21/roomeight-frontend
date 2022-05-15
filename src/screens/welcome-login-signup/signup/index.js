@@ -59,7 +59,7 @@ const Signup = ({ navigation }) => {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 onChangeText={(newText) => {
-                    setUser({ ...user, email: newText });
+                    setUser({ ...user, email: newText.toLowerCase() });
                     if (emailRegex.test(newText)) setEmailValid(true);
                     else setEmailValid(null);
                 }}

@@ -72,7 +72,7 @@ export const chooseStatus = [
     },
 ];
 
-const incompleteScreens = createFlatScreens.concat([
+const incompleteScreens = addedScreens.concat([
     {
         name: 'CompleteSingleProfile',
         component: CompleteSingleProfile,

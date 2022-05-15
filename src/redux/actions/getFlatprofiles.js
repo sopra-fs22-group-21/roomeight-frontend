@@ -6,7 +6,7 @@ const getFlatprofileRequest = () => ({
     type: Constants.GET_FLATPROFILE_REQUEST,
 });
 
-const getFlatprofileSuccess = (response) => ({
+export const getFlatprofileSuccess = (response) => ({
     type: Constants.GET_FLATPROFILE_SUCCESS,
     payload: response,
 });

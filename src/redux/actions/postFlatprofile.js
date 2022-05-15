@@ -76,6 +76,7 @@ export const postRoommateToFlat = (email) => (dispatch) => {
         })
         .catch((error) => {
             console.log('error post flatprofile');
+            console.warn(error);
             dispatch(postRoommateToFlatFailure(error));
         });
 };
