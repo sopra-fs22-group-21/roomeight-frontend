@@ -12,7 +12,6 @@ import Tags from '../tags';
 import { ScrollView } from 'react-native-gesture-handler';
 import { GenderInput } from '../gender';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
-import dateFormat from 'dateformat';
 import colors from '../../resources/colors';
 
 export const Filter = (props) => (

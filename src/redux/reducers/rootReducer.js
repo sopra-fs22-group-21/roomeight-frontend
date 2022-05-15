@@ -9,6 +9,7 @@ import loadingState from './loadingState';
 import matchesState from './matchesState';
 import transitState from './transitState';
 import userprofileState from './userprofileState';
+import likesState from './likesState';
 /**
  * comines reducers together to create a single reducer
  * @see {@link combineReducers}
@@ -24,6 +25,7 @@ const combinedReducer = combineReducers({
     chatState,
     discoverState,
     matchesState,
+    likesState,
 });
 
 const rootReducer = (state, action) => {

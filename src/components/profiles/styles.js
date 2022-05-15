@@ -43,6 +43,19 @@ const styles = StyleSheet.create({
         fontFamily: 'SourceSans3SemiBold',
         lineHeight: 30,
     },
+    icon: {
+        flex: 0,
+        color: colors.secondary400,
+    },
+    row: {
+        flexDirection: 'row',
+    },
+    liked: {
+        fontFamily: 'SourceSans3SemiBold',
+        fontSize: 15,
+        paddingLeft: 3,
+        paddingRight: 5,
+    },
 });
 
 export default styles;

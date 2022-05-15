@@ -36,6 +36,9 @@ export const PublicProfileCard = (props) => {
                     onDoubleTap={props.onDoubleTap}
                     onClickMessage={props.onClickMessage}
                     onClickEdit={props.onClickEdit}
+                    onClickShowLikes={props.onClickShowLikes}
+                    nrLiked={props.nrLiked}
+                    nrRoommates={props.nrRoommates}
                 />
             )}
         </>

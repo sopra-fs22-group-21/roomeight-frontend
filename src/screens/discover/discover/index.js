@@ -36,9 +36,11 @@ const Discover = ({ navigation }) => {
         (state) => state.discoverState
     );
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const { matches } = useSelector((state) => state.matchesState);
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const [profiles, setProfiles] = useState(discoverProfiles);
     const [like, setLike] = useState(false);
+    const [showLikes, setShowLike] = useState(false);
+    const { matches } = useSelector((state) => state.matchesState);
     const [match, setMatch] = useState(undefined);
     const [isShowingSettings, setIsShowingSettings] = useState(false);
     //const [filterTags, setFilterTags] = useState(null);
@@ -83,6 +85,21 @@ const Discover = ({ navigation }) => {
         }, 500);
     };
 
+    function countLikes(profileId) {
+        if (flatprofile.likes) {
+            const filtered = flatprofile.likes.filter((like) => {
+                return Object.keys(like.likedUser)[0] === profileId;
+            });
+            if (filtered.length !== 0) {
+                return filtered[0].likes.length;
+            } else {
+                return 0;
+            }
+        } else {
+            return null;
+        }
+    }
+
     const handleDislike = () => {
         carousel.current.snapToNext();
     };
@@ -99,6 +116,15 @@ const Discover = ({ navigation }) => {
                             profile={item}
                             key={item.profileId}
                             onDoubleTap={() => handleLike(item.profileId)}
+                            onClickShowLikes={() => {
+                                setShowLike(true);
+                            }}
+                            nrLiked={countLikes(item.profileId)}
+                            nrRoommates={
+                                flatprofile.roomMates
+                                    ? Object.keys(flatprofile.roomMates).length
+                                    : null
+                            }
                         />
                     </Box>
                     <LikeButtons

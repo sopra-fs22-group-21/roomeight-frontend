@@ -120,7 +120,6 @@ export const chatInfoListener = (chatId) => (dispatch) => {
     const chatReference = ref(database, `/chats/${chatId}`);
     let listener = onValue(chatReference, (snapshot) => {
         const chatInfo = snapshot.val();
-        console.log(chatInfo);
         if (snapshot.exists()) {
             dispatch(chatInfoChange(chatInfo));
         }
