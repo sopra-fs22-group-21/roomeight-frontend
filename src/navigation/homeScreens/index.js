@@ -3,8 +3,8 @@ import Chatroom from '../../screens/chatRoom';
 import Discover from '../../screens/discover/discover';
 import Match from '../../screens/matches/match';
 import Matches from '../../screens/matches/matches';
-import Profile from '../../screens/Profile';
-import Settings from '../../screens/Profile/settings';
+import Profile from '../../screens/profile';
+import Settings from '../../screens/profile/settings';
 import LikesFlat from '../../screens/matches/matches/likesFlat';
 import MatchesFlat from '../../screens/matches/matches/matchesFlat';
 

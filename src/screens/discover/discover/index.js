@@ -19,11 +19,9 @@ import {
     postLikeUser,
     updateDiscoverProfiles,
 } from '../../../redux/actions/discoverActions';
-import * as Constants from '../../../redux/constants';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
 import * as Constants from '../../../redux/constants';
-import { goToChat } from '../../../redux/actions/chatActions';
 import FilterSettings from '../../../components/filterSettings';
 import colors from '../../../resources/colors';
 import { updateProfile } from '../../../redux/actions/updateActions';
