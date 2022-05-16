@@ -53,8 +53,7 @@ export const loginUser = (email, password) => async (dispatch) => {
     dispatch(loginUserRequest());
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        const expoPushToken = await registerForPushNotificationsAsync();
-        expoPushToken && dispatch(postPushToken(expoPushToken));
+        await dispatch(postPushToken());
     } catch (error) {
         dispatch(loginUserFailure(error));
     }
@@ -90,12 +89,11 @@ export const userAuthStateListener = () => (dispatch) => {
  * @dispatches {@link deletePushToken} to deregister the device for notifications in the backend
  * @see {@link userAuthStateListener} reacts if logout is successful
  */
-export const logoutUser = () => async (dispatch, getState) => {
+export const logoutUser = () => async (dispatch) => {
     dispatch(logoutUserRequest());
+    await dispatch(deletePushToken());
+
     signOut(auth).catch((error) => {
         dispatch(logoutUserFailure(error));
     });
-    const expoPushToken = await Notifications.getExpoPushTokenAsync();
-    expoPushToken && dispatch(deletePushToken(expoPushToken));
-    dispatch(logoutUserSuccess());
 };
