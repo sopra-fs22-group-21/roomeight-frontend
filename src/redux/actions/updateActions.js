@@ -1,7 +1,7 @@
+import * as Notifications from 'expo-notifications';
 import apiClient from '../../helper/apiClient';
+import { registerForPushNotificationsAsync } from '../../helper/notificationsHelper';
 import * as Constants from '../constants';
-import { getFlatprofile } from './getFlatprofiles';
-import { getCurrentUserprofile } from './getUserprofiles';
 import { uploadImages } from './imageActions';
 
 const updateProfileRequest = (profileType) => ({
@@ -103,12 +103,15 @@ export const updateProfile =
  * @dispatches {@link updateProfileSuccess} on update success with response payload
  * @dispatches {@link updateProfileFailure} on update failure with error payload
  */
-export const postPushToken = (token) => async (dispatch) => {
+export const postPushToken = () => async (dispatch) => {
+    const token = await registerForPushNotificationsAsync();
+    if (!token) return;
     dispatch({
         type: Constants.POST_PUSH_TOKEN_REQUEST,
+        payload: token,
     });
     try {
-        await apiClient().post(`userprofiles/devices${token}`);
+        await apiClient().post(`userprofiles/devices/${token}`);
         dispatch({
             type: Constants.POST_PUSH_TOKEN_SUCCESS,
             payload: token,
@@ -123,7 +126,14 @@ export const postPushToken = (token) => async (dispatch) => {
  * @dispatches {@link updateProfileSuccess} on update success with response payload
  * @dispatches {@link updateProfileFailure} on update failure with error payload
  */
-export const deletePushToken = (token) => async (dispatch) => {
+export const deletePushToken = () => async (dispatch) => {
+    const response = await Notifications.getExpoPushTokenAsync();
+    const token = response.data;
+    if (!token) return;
+    dispatch({
+        type: Constants.DELETE_PUSH_TOKEN_REQUEST,
+        payload: token,
+    });
     try {
         await apiClient().delete(`userprofiles/devices/${token}`);
         dispatch({
