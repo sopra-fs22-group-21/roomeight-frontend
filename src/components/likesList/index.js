@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import React from 'react';
+import { FlatList, Pressable, View } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
-import { Profiles } from '../profiles';
 import { ProfilePicture } from '../profilePicture';
 import styles from './styles';
 import { Box } from '../theme';
@@ -9,24 +8,12 @@ import { Box } from '../theme';
 const LikesList = (props) => {
     const flatprofile = props.flatprofile;
     const userprofile = props.userprofile;
-    console.log('FLAAAAAAAAAAAAAAAAAAAATPROFILE');
 
     const roomiesLikedList = Object.values(
         flatprofile.likes.filter(
             (like) => Object.keys(like.likedUser)[0] === userprofile.profileId
         )[0].likes
     );
-
-    console.log('Roomies Liked:', roomiesLikedList);
-
-    /*  const roomiesLikedObj = Object.values(flatprofile.roomMates).map(
-        (roomie) => roomie.profileId === roomiesLikedList[0]
-    ); */
-
-    /*  Object.values(flatprofile.roomMates).filter(
-        (roomie) => roomie.profileId === roomiesLikedList[0]
-    );
- */
 
     function getRoomiesLiked() {
         const roomiesLikedObj = [];
@@ -37,10 +24,8 @@ const LikesList = (props) => {
                 )
             ) {
                 roomiesLikedObj.push(Object.values(flatprofile.roomMates)[i]);
-                console.log('RoomiesOBJECT:', roomiesLikedObj);
             }
         }
-        console.log('RoomiesObj:', roomiesLikedObj);
         return roomiesLikedObj;
     }
 
@@ -57,14 +42,9 @@ const LikesList = (props) => {
                 );
             }
         }
-        console.log('RoomiesDislikeObj:', roomiesDislikedObj);
         return roomiesDislikedObj;
     }
 
-    console.log('Roomies:', roomiesLikedList);
-
-    /* console.log('user:');
-    console.log(userprofile); */
     return (
         <View>
             <View style={styles.horizontal}>
@@ -80,8 +60,6 @@ const LikesList = (props) => {
                     data={getRoomiesLiked()}
                     keyExtractor={(item) => {
                         item;
-                        console.log('\nITEM:');
-                        console.log(item);
                     }}
                     renderItem={({ item }) => {
                         return item ? (
@@ -108,8 +86,6 @@ const LikesList = (props) => {
                         data={getRoomiesDisliked()}
                         keyExtractor={(item) => {
                             item;
-                            console.log('\nITEM:');
-                            console.log(item);
                         }}
                         renderItem={({ item }) => {
                             return item ? (

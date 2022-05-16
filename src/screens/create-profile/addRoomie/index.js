@@ -14,6 +14,7 @@ import {
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
 import { postRoommateToFlat } from '../../../redux/actions/postFlatprofile';
+import { getFlatprofile } from '../../../redux/actions/getFlatprofiles';
 
 const AddRoomie = ({ navigation, route }) => {
     const [emailValid, setEmailValid] = useState(null);
