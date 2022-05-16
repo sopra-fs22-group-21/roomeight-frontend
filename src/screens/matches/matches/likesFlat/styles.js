@@ -11,9 +11,10 @@ const styles = StyleSheet.create({
     modalView: {
         margin: 20,
         backgroundColor: 'white',
-        borderRadius: 20,
+        borderRadius: 10,
         padding: 35,
-        alignItems: 'center',
+        paddingTop: 8,
+        paddingRight: 8,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -36,6 +37,14 @@ const styles = StyleSheet.create({
     modalText: {
         marginBottom: 15,
         textAlign: 'center',
+    },
+    icon: {
+        alignSelf: 'flex-end',
+    },
+    modalInner: {
+        marginTop: 5,
+        marginRight: 30,
+        alignItems: 'center',
     },
 });
 export default styles;

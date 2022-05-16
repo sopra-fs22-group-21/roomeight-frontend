@@ -3,10 +3,18 @@ import { useSelector } from 'react-redux';
 import { ProfileInfoBox } from '../../../../components/profiles';
 import { Box, Title } from '../../../../components/theme';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
-import { Text, View, Modal, Pressable } from 'react-native';
+import {
+    Text,
+    View,
+    Modal,
+    Pressable,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+} from 'react-native';
 import { SecondaryButton } from '../../../../components/button';
 import styles from './styles';
 import LikesList from '../../../../components/likesList';
+import { Icon } from 'react-native-elements/dist/icons/Icon';
 
 const LikesFlat = ({ navigation }, props) => {
     const { likes, loading } = useSelector((state) => state.likesState);
@@ -74,23 +82,28 @@ const LikesFlat = ({ navigation }, props) => {
                     visible={modalVisible}
                     onRequestClose={() => {
                         console.log('Modal has been closed.');
-                        setModalVisible(!modalVisible);
+                        setModalVisible(false);
                     }}
                 >
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            <Title>Likes Overview</Title>
-                            <Box />
-                            <LikesList
-                                flatprofile={flatprofile}
-                                userprofile={likesOfProfile}
+                            <Icon
+                                style={styles.icon}
+                                name="x"
+                                type="feather"
+                                size={24}
+                                color={'black'}
+                                onPress={() => setModalVisible(false)}
                             />
-                            <Box />
-                            <SecondaryButton
-                                onPress={() => setModalVisible(!modalVisible)}
-                            >
-                                Hide Overview
-                            </SecondaryButton>
+                            <View style={styles.modalInner}>
+                                <Title>Likes Overview</Title>
+                                <Box />
+                                <LikesList
+                                    flatprofile={flatprofile}
+                                    userprofile={likesOfProfile}
+                                />
+                                <Box />
+                            </View>
                         </View>
                     </View>
                 </Modal>
