@@ -48,8 +48,11 @@ export default function Route() {
         console.log('pictures:', flatprofile.pictureReferences);
         console.log('userprofile.isComplete ', userprofile.isComplete);
         console.log('userprofile.flatId ', userprofile.flatId);
-        console.log('!flatprofile.pictureReferences: ', !flatprofile.pictureReferences );
-        
+        console.log(
+            '!flatprofile.pictureReferences: ',
+            !flatprofile.pictureReferences
+        );
+
         if (!loggedIn && !loading)
             setCurrentComponents(createScreens(loggedOutScreens));
         else if (Object.keys(userprofile).length === 0)
@@ -65,7 +68,7 @@ export default function Route() {
             userprofile.isComplete === false &&
             userprofile.flatId.length > 0 &&
             (!flatprofile.pictureReferences ||
-            flatprofile.pictureReferences.length <= 0)
+                flatprofile.pictureReferences.length <= 0)
         )
             setCurrentComponents(createScreens(incompleteScreens));
         else if (
@@ -87,8 +90,7 @@ export default function Route() {
             setCurrentComponents(
                 createScreens(homeScreens.concat(createFlatScreens))
             );
-        else 
-            setCurrentComponents(createScreens(loadingScreens));
+        else setCurrentComponents(createScreens(loadingScreens));
     }, [userprofile, loggedIn, loading]);
 
     return (

@@ -4,15 +4,16 @@ import { useDispatch } from 'react-redux';
 import { setTransitAttributes } from '../../redux/actions/setTransitAttributes';
 import { SecondaryButton } from '../button';
 import { Input } from '../input';
+import en from '../../resources/strings/en.json';
 
 //always writes emails into transitstate
 export const AddRoomieInput = (props) => {
     const dispatch = useDispatch();
     const emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
-    const [nrEmails, setNrEmails] = useState(0);
+    const [nrEmails, setNrEmails] = useState(1);
     const [emailValid, setEmailValid] = useState(null);
 
-    const [roomMates, setRoommates] = useState([]);
+    const [roomMates, setRoommates] = useState([{ id: 0 }]);
 
     const addElement = () => {
         var newArray = [...roomMates, { id: nrEmails }];
@@ -30,6 +31,7 @@ export const AddRoomieInput = (props) => {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 onChangeText={(text) => {
+                    setEmailValid(false);
                     const copy = [...roomMates];
                     copy[item.id].email = text;
                     setRoommates(copy);
@@ -69,7 +71,7 @@ export const AddRoomieInput = (props) => {
                     setEmailValid(false);
                 }}
             >
-                Add another room8
+                {en.addRoomie.addAnother}
             </SecondaryButton>
         </>
     );

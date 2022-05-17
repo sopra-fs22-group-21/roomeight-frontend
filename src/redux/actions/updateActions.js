@@ -44,11 +44,11 @@ const deletePushTokenFailure = (error) => ({
  * @dispatches {@link updateProfileSuccess} on update success with response payload
  * @dispatches {@link updateProfileFailure} on update failure with error payload
  */
-export const updateProfile = 
+export const updateProfile =
     (requestBody, profileType, profileId) => async (dispatch) => {
         dispatch(updateProfileRequest(profileType));
         console.log(requestBody);
-        console.log(profileId)
+        console.log(profileId);
 
         let emails = requestBody.roommateEmails;
         delete requestBody.roommateEmails;

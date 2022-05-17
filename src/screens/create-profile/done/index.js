@@ -47,7 +47,7 @@ const Done = ({ navigation, route }) => {
                     <PrimaryButton
                         onPress={async () => {
                             const flatId = flatprofile.profileId;
-                            console.log('flatid: '+flatId)
+                            console.log('flatid: ' + flatId);
                             if (route.params.includes('flat')) {
                                 dispatch(
                                     updateProfile(
@@ -55,13 +55,15 @@ const Done = ({ navigation, route }) => {
                                         'flatprofile',
                                         flatId
                                     )
-                                ).then(() => navigation.navigate('Discover'))
+                                ).then(() => navigation.navigate('Discover'));
                             }
                             if (
                                 route.params.includes('single') ||
                                 !userprofile.isComplete
                             ) {
-                                updateSingleprofile().then(() => navigation.navigate('Discover'))
+                                updateSingleprofile().then(() =>
+                                    navigation.navigate('Discover')
+                                );
                             }
                         }}
                     >
