@@ -30,12 +30,11 @@ const transitState = (state = initialState, action) => {
             };
 
         //case Constants.POST_FLATPROFILE_SUCCESS:
-        //case Constants.POST_USERPROFILE_SUCCESS:
+        case Constants.POST_USERPROFILE_SUCCESS:
         case Constants.UPDATE_USERPROFILE_SUCCESS:
             return {
                 ...state,
                 transitUserprofile: {},
-                transitFlatprofile: {},
             };
 
         default:

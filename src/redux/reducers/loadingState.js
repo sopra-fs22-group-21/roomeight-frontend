@@ -20,6 +20,8 @@ const loadingState = (state = initialState, action) => {
         //case Constants.POST_FLATPROFILE_REQUEST:
         //case Constants.LOGOUT_USER_REQUEST:
         //case Constants.LOGIN_USER_REQUEST:
+        case Constants.UPDATE_USERPROFILE_REQUEST:
+        case Constants.UPDATE_FLATPROFILE_REQUEST:
 
         case Constants.UPLOAD_IMAGE_REQUEST_USERPROFILE:
         case Constants.UPLOAD_IMAGE_REQUEST_FLATPROFILE:

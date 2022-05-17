@@ -45,7 +45,11 @@ export default function Route() {
     }, []);
 
     useEffect(() => {
-        console.log('loading:', loading);
+        console.log('pictures:', flatprofile.pictureReferences);
+        console.log('userprofile.isComplete ', userprofile.isComplete);
+        console.log('userprofile.flatId ', userprofile.flatId);
+        console.log('!flatprofile.pictureReferences: ', !flatprofile.pictureReferences );
+        
         if (!loggedIn && !loading)
             setCurrentComponents(createScreens(loggedOutScreens));
         else if (Object.keys(userprofile).length === 0)
@@ -60,8 +64,8 @@ export default function Route() {
         else if (
             userprofile.isComplete === false &&
             userprofile.flatId.length > 0 &&
-            flatprofile.pictureReferences &&
-            flatprofile.pictureReferences.length <= 0
+            (!flatprofile.pictureReferences ||
+            flatprofile.pictureReferences.length <= 0)
         )
             setCurrentComponents(createScreens(incompleteScreens));
         else if (
@@ -79,10 +83,12 @@ export default function Route() {
             setCurrentComponents(
                 createScreens(homeScreens.concat(addRoomieScreens))
             );
-        else if (Object.keys(userprofile).length > 0)
+        else if (Object.keys(userprofile).length > 0 && userprofile.isComplete)
             setCurrentComponents(
                 createScreens(homeScreens.concat(createFlatScreens))
             );
+        else 
+            setCurrentComponents(createScreens(loadingScreens));
     }, [userprofile, loggedIn, loading]);
 
     return (

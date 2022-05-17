@@ -44,10 +44,11 @@ const deletePushTokenFailure = (error) => ({
  * @dispatches {@link updateProfileSuccess} on update success with response payload
  * @dispatches {@link updateProfileFailure} on update failure with error payload
  */
-export const updateProfile =
+export const updateProfile = 
     (requestBody, profileType, profileId) => async (dispatch) => {
         dispatch(updateProfileRequest(profileType));
         console.log(requestBody);
+        console.log(profileId)
 
         let emails = requestBody.roommateEmails;
         delete requestBody.roommateEmails;
@@ -127,14 +128,14 @@ export const postPushToken = () => async (dispatch) => {
  * @dispatches {@link updateProfileFailure} on update failure with error payload
  */
 export const deletePushToken = () => async (dispatch) => {
-    const response = await Notifications.getExpoPushTokenAsync();
-    const token = response.data;
-    if (!token) return;
-    dispatch({
-        type: Constants.DELETE_PUSH_TOKEN_REQUEST,
-        payload: token,
-    });
     try {
+        const response = await Notifications.getExpoPushTokenAsync();
+        const token = response.data;
+        if (!token) return;
+        dispatch({
+            type: Constants.DELETE_PUSH_TOKEN_REQUEST,
+            payload: token,
+        });
         await apiClient().delete(`userprofiles/devices/${token}`);
         dispatch({
             type: Constants.DELETE_PUSH_TOKEN_SUCCESS,
