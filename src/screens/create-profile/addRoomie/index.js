@@ -48,10 +48,15 @@ const AddRoomie = ({ navigation, route }) => {
                 <View style={styles.saveButton}>
                     <PrimaryButton
                         onPress={() => {
-                            transitFlatprofile.roommateEmails.forEach((email) =>
-                                dispatch(postRoommateToFlat(email))
-                            );
-                            navigation.goBack();
+                            if (transitFlatprofile.roommateEmails) {
+                                transitFlatprofile.roommateEmails.forEach(
+                                    (email) =>
+                                        dispatch(postRoommateToFlat(email))
+                                );
+                                navigation.goBack();
+                            } else {
+                                null;
+                            }
                         }}
                     >
                         Save

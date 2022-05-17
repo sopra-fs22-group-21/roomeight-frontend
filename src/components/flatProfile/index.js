@@ -32,6 +32,7 @@ const FlatProfile = ({ navigation }, props) => {
     const [roomSizeValid, setRoomSizeValid] = useState(null);
     const [nrRoommatesValid, setNrRoommatesValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
+    const [emails, setEmailValid] = useState(null);
     const [editMode, setEditMode] = useState(false);
 
     function changeToTemporary() {
@@ -181,7 +182,11 @@ const FlatProfile = ({ navigation }, props) => {
                                 }
                             />
                         </InputBox>
-                        <AddRoomieInput />
+                        <InputLabel>{en.addRoomie.heading}</InputLabel>
+                        <Box />
+                        <AddRoomieInput
+                            onChange={(emails, valid) => setEmailValid(true)}
+                        />
                         <Box />
                         {
                             <Input
