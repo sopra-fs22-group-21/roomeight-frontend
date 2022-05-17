@@ -61,7 +61,7 @@ const addedScreen = [
         component: AccessExistingFlatProfile,
         options: options,
     },
-]
+];
 
 export const addedScreens = addedScreen.concat(createFlatScreens);
 
@@ -73,17 +73,19 @@ export const chooseStatus = [
     },
 ];
 
-const incompleteScreens = createFlatScreens.concat([
-    {
-        name: 'CompleteSingleProfile',
-        component: CompleteSingleProfile,
-        options: options,
-    },
-    {
-        name: 'CompletePersonalProfile',
-        component: CompletePersonalProfile,
-        options: options,
-    },
-]).concat(addedScreen);
+const incompleteScreens = createFlatScreens
+    .concat([
+        {
+            name: 'CompleteSingleProfile',
+            component: CompleteSingleProfile,
+            options: options,
+        },
+        {
+            name: 'CompletePersonalProfile',
+            component: CompletePersonalProfile,
+            options: options,
+        },
+    ])
+    .concat(addedScreen);
 
 export default incompleteScreens;
