@@ -8,7 +8,7 @@ import AddFlatInProfile from '../../components/addFlatInProfile';
 import FlatProfile from '../../components/flatProfile';
 import { ScreenContainer } from '../../components/screenContainer';
 import SingleProfile from '../../components/singleProfile';
-import { Box } from '../../components/theme';
+import { Box, SmallHeading } from '../../components/theme';
 import styles from './styles';
 
 const Profile = ({ navigation }) => {
@@ -24,9 +24,9 @@ const Profile = ({ navigation }) => {
     return (
         <ScreenContainer navigation={navigation} showNavBar>
             <View>
-                <Text style={styles.name}>
+                <SmallHeading style={styles.name}>
                     {userprofile.firstName + ' ' + userprofile.lastName}
-                </Text>
+                </SmallHeading>
 
                 <Pressable
                     onPress={() => navigation.navigate('Settings')}

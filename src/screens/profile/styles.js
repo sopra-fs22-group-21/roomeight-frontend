@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontFamily: 'SourceSans3SemiBold',
         fontSize: 16,
         lineHeight: 24,
     },
@@ -22,7 +21,7 @@ const styles = StyleSheet.create({
         bottom: 1,
         backgroundColor: 'transparent',
         paddingBottom: 0,
-        paddingTop: 0,
+        paddingTop: 10,
         margin: 0,
         marginTop: 0,
         marginBottom: 0,
