@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useSelector } from 'react-redux';
 import { ProfileInfoBox } from '../../../components/profiles';
+import { EmptyCard } from '../../../components/publicProfileCard';
 import { ScreenContainer } from '../../../components/screenContainer';
 import { Box, SmallHeading } from '../../../components/theme';
-import { Tab } from 'react-native-elements/dist/tab/Tab';
-import styles from './styles';
-import { Text } from 'react-native';
-import MatchesFlat from './matchesFlat';
-import LikesFlat from './likesFlat';
 import en from '../../../resources/strings/en.json';
+import LikesFlat from './likesFlat';
+import MatchesFlat from './matchesFlat';
+import styles from './styles';
 
 const Matches = ({ navigation }) => {
     const { matches } = useSelector((state) => state.matchesState);

@@ -5,9 +5,12 @@ import {
     onValue,
     orderByChild,
     query,
+    set,
     ref,
     remove,
     update,
+    serverTimestamp,
+    onDisconnect,
 } from 'firebase/database';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
@@ -323,4 +326,33 @@ export const deleteChat = (chatId) => (dispatch, getState) => {
             type: Constants.DELETE_CHAT_SUCCESS,
         });
     }
+};
+
+export const connectionChanges = () => (dispatch, getState) => {
+    dispatch({
+        type: 'CONNECTION_CHANGES_START',
+    });
+    const userId = getState().authState.auth.uid;
+    const statusRef = ref(database, `/memberships/${userId}/status`);
+    const offline = {
+        status: 'offline',
+        lastChanged: serverTimestamp(),
+    };
+    const online = {
+        status: 'online',
+        lastChanged: serverTimestamp(),
+    };
+    onValue(ref(database, '.info/connected'), (snapshot) => {
+        if (snapshot.val() === false) {
+            console.log('not connected');
+            return;
+        }
+        console.log('connected');
+        onDisconnect(statusRef)
+            .set(offline)
+            .then(() => {
+                console.log('set online');
+                set(statusRef, online);
+            });
+    });
 };
