@@ -10,27 +10,33 @@ import { sendMessage } from '../../redux/actions/chatActions';
 import { HStack } from 'native-base';
 
 export const Chatroom = ({ route, navigation }) => {
-    const chatInfo = useSelector((state) => state.chatState.chats[route.params.chatId]);
+    const chatInfo = useSelector(
+        (state) => state.chatState.chats[route.params.chatId]
+    );
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { auth } = useSelector((state) => state.authState);
     const dispatch = useDispatch();
     const previousMessages = useSelector(
         (state) => state.chatState.messages[chatId]
     );
-    const flatPresence = useSelector((state) => state.chatState.chats[route.params.chatId]?.presence.flat);
-    const userPresence = useSelector((state) => state.chatState.chats[route.params.chatId]?.presence.user);
+    const flatPresence = useSelector(
+        (state) => state.chatState.chats[route.params.chatId]?.presence.flat
+    );
+    const userPresence = useSelector(
+        (state) => state.chatState.chats[route.params.chatId]?.presence.user
+    );
     const [presence, setPresence] = useState('');
 
     useEffect(() => {
         let status;
-        if(userprofile.isSearchingRoom){
+        if (userprofile.isSearchingRoom) {
             status = flatPresence;
-        }else{
+        } else {
             status = userPresence;
         }
-        if(status === 'online'){
+        if (status === 'online') {
             setPresence('green');
-        }else{
+        } else {
             setPresence('red');
         }
     }, [chatInfo]);
@@ -68,7 +74,7 @@ export const Chatroom = ({ route, navigation }) => {
     }
     return (
         <ScreenContainer>
-            <HStack space={10}>    
+            <HStack space={10}>
                 <SmallHeadingWithBack
                     onPress={() => {
                         navigation.navigate('Match', {
@@ -81,7 +87,15 @@ export const Chatroom = ({ route, navigation }) => {
                         ? chatInfo.title.forUser
                         : chatInfo.title.forFlat}
                 </SmallHeadingWithBack>
-                <View style={{marginTop: 11, height: 20 , width: 20, backgroundColor: presence, borderRadius: 100}}></View>
+                <View
+                    style={{
+                        marginTop: 11,
+                        height: 20,
+                        width: 20,
+                        backgroundColor: presence,
+                        borderRadius: 100,
+                    }}
+                ></View>
             </HStack>
             <GiftedChat
                 messages={messages.sort((a, b) => b.createdAt - a.createdAt)}
