@@ -90,10 +90,14 @@ export const userAuthStateListener = () => (dispatch) => {
  * @see {@link userAuthStateListener} reacts if logout is successful
  */
 export const logoutUser = () => async (dispatch) => {
-    dispatch(logoutUserRequest());
     await dispatch(deletePushToken());
+    dispatch(logoutUserRequest());
 
-    signOut(auth).catch((error) => {
-        dispatch(logoutUserFailure(error));
-    });
+    signOut(auth)
+        .catch((error) => {
+            dispatch(logoutUserFailure(error));
+        })
+        .then(() => {
+            dispatch(logoutUserSuccess());
+        });
 };

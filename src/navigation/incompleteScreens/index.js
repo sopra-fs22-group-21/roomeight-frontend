@@ -55,14 +55,15 @@ export const createFlatScreens = [
         options: options,
     },
 ].concat(addRoomieScreens);
-
-export const addedScreens = [
+const addedScreen = [
     {
         name: 'AccessExistingFlatProfile',
         component: AccessExistingFlatProfile,
         options: options,
     },
-].concat(createFlatScreens);
+];
+
+export const addedScreens = addedScreen.concat(createFlatScreens);
 
 export const chooseStatus = [
     {
@@ -72,17 +73,19 @@ export const chooseStatus = [
     },
 ];
 
-const incompleteScreens = addedScreens.concat([
-    {
-        name: 'CompleteSingleProfile',
-        component: CompleteSingleProfile,
-        options: options,
-    },
-    {
-        name: 'CompletePersonalProfile',
-        component: CompletePersonalProfile,
-        options: options,
-    },
-]);
+const incompleteScreens = createFlatScreens
+    .concat([
+        {
+            name: 'CompleteSingleProfile',
+            component: CompleteSingleProfile,
+            options: options,
+        },
+        {
+            name: 'CompletePersonalProfile',
+            component: CompletePersonalProfile,
+            options: options,
+        },
+    ])
+    .concat(addedScreen);
 
 export default incompleteScreens;

@@ -18,13 +18,14 @@ import { StackActions } from '@react-navigation/native';
 const Done = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const { userprofile } = useSelector((state) => state.userprofileState);
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
 
     const { loading } = useSelector((state) => state.loadingState);
     const { transitUserprofile, transitFlatprofile } = useSelector(
         (state) => state.transitState
     );
 
-    const updateSingleprofile = () => {
+    const updateSingleprofile = async () => {
         return dispatch(
             updateProfile(
                 transitUserprofile,
@@ -44,24 +45,25 @@ const Done = ({ navigation, route }) => {
 
                     <Box />
                     <PrimaryButton
-                        onPress={() => {
-                            if (route.params.includes('join')) joinFlat();
-                            else if (
+                        onPress={async () => {
+                            const flatId = flatprofile.profileId;
+                            console.log('flatid: ' + flatId);
+                            if (route.params.includes('flat')) {
+                                dispatch(
+                                    updateProfile(
+                                        transitFlatprofile,
+                                        'flatprofile',
+                                        flatId
+                                    )
+                                ).then(() => navigation.navigate('Discover'));
+                            }
+                            if (
                                 route.params.includes('single') ||
                                 !userprofile.isComplete
                             ) {
-                                updateSingleprofile().then(() => {
-                                    navigation.navigate('Discover');
-                                });
-                            }
-                            if (route.params.includes('flat')) {
-                                dispatch(
-                                    postFlatprofile(transitFlatprofile)
-                                ).then(() => {
-                                    navigation.dispatch(
-                                        StackActions.popToTop()
-                                    );
-                                });
+                                updateSingleprofile().then(() =>
+                                    navigation.navigate('Discover')
+                                );
                             }
                         }}
                     >

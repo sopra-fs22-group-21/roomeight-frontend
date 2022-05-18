@@ -17,11 +17,8 @@ import en from '../../../resources/strings/en.json';
 
 const CreateFlat = ({ navigation }) => {
     const dispatch = useDispatch();
-    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const { transitFlatprofile } = useSelector((state) => state.transitState);
-    const [flat, setFlat] = useState(
-        flatprofile ? flatprofile : transitFlatprofile
-    );
+    const [flat, setFlat] = useState(transitFlatprofile);
 
     return (
         <ScreenContainer
