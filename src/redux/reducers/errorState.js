@@ -2,6 +2,7 @@ import en from '../../resources/strings/en.json';
 import * as Constants from '../constants';
 
 const initialState = {
+    request: {},
     authErrors: {},
     userprofileErrors: {},
     flatprofileErrors: {},
@@ -18,6 +19,11 @@ const initialState = {
 const errorState = (state = initialState, action) => {
     let info = undefined;
     switch (action.type) {
+        case Constants.API_CLIENT_REQUEST:
+            return {
+                ...state,
+                request: action.payload
+            }
         case Constants.LOGIN_USER_FAILURE:
             if (action.payload.code.includes('user-not-found'))
                 info = en.errors.userWithEmailNotFound;
@@ -186,6 +192,20 @@ const errorState = (state = initialState, action) => {
                 },
             };
 
+        case Constants.GET_DISCOVER_PROFILES_FAILURE:
+            return {
+                ...state,
+                discoverErrors: {
+                    ...state.discoverErrors,
+                    discover: action.payload,
+                },
+            };
+                   
+        case Constants.GET_DISCOVER_PROFILES_SUCCESS:
+            return {
+                ...state,
+                discoverErrors: {},
+            };     
         default:
             return state;
     }

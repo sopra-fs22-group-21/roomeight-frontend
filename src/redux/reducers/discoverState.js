@@ -17,24 +17,28 @@ const initialState = {
  */
 const userprofileState = (state = initialState, action) => {
     switch (action.type) {
-        case Constants.GET_ALL_FLATPROFILES_REQUEST:
-        case Constants.GET_ALL_USERPROFILES_REQUEST:
+        case Constants.GET_DISCOVER_PROFILES_REQUEST:
             return {
                 ...state,
                 loading: true,
             };
-        case Constants.GET_ALL_USERPROFILES_FAILURE:
-        case Constants.GET_ALL_FLATPROFILES_FAILURE:
+        case Constants.GET_DISCOVER_PROFILES_FAILURE:
             return {
                 ...state,
                 error: action.payload,
                 loading: false,
             };
-        case Constants.GET_ALL_USERPROFILES_SUCCESS:
-        case Constants.GET_ALL_FLATPROFILES_SUCCESS:
+        case Constants.GET_DISCOVER_PROFILES_SUCCESS:
+            const newProfiles = action.payload.map(
+                (data) => new Userprofile(data)
+            )
+            const newIds = newProfiles.map((profile) => profile.profileId)
+            const currentWithoutNew = state.discoverProfiles.filter((profile) => (!newIds.includes(profile.profileId)))
+            const updatedProfiles = currentWithoutNew.concat(newProfiles)
             return {
                 ...state,
                 error: undefined,
+                discoverProfiles: updatedProfiles,
                 loading: false,
             };
 
@@ -44,11 +48,11 @@ const userprofileState = (state = initialState, action) => {
                 discoverProfiles: action.payload.map(
                     (data) => new Userprofile(data)
                 ),
-                loading: false,
             };
 
         case Constants.POST_LIKE_FLAT_SUCCESS:
         case Constants.POST_LIKE_USER_SUCCESS:
+        // todo: jordi : case Constants.NEW_MATCH:
             if (action.payload.isMatch) {
                 return {
                     ...state,

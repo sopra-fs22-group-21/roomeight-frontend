@@ -8,6 +8,7 @@ import { auth } from '../../../firebase/firebase-config';
 import { registerForPushNotificationsAsync } from '../../helper/notificationsHelper';
 import * as Constants from '../constants';
 import { chatMemberShipListener } from './chatActions';
+import { getDiscoverProfiles } from './discoverActions';
 import { getCurrentUserprofile } from './getUserprofiles';
 import { notificationsListener } from './notificationActions';
 import { deletePushToken, postPushToken } from './updateActions';
@@ -73,6 +74,7 @@ export const userAuthStateListener = () => (dispatch) => {
             //user is logged in
             dispatch(loginUserSuccess(user));
             dispatch(getCurrentUserprofile());
+            //dispatch(getDiscoverProfiles());
             dispatch(chatMemberShipListener());
             dispatch(notificationsListener());
         } else {

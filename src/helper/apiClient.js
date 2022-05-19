@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Constants from 'expo-constants';
+import { useDispatch } from 'react-redux';
 import { auth } from '../../firebase/firebase-config';
 
 const API_URL = (_env = Constants.manifest.releaseChannel) => {
@@ -21,11 +22,11 @@ export async function userToken() {
 }
 
 const apiClient = () => {
+    //const dispatch = useDispatch();
     const axiosInstance = axios.create({
         baseURL: API_URL(),
         responseType: 'json',
     });
-
     axiosInstance.interceptors.request.use(async (req) => {
         const accessToken = await userToken();
         if (accessToken) {
@@ -33,6 +34,11 @@ const apiClient = () => {
         }
         return req;
     });
+/*
+    dispatch({
+        type: Constants.API_CLIENT_REQUEST,
+        payload: axiosInstance,
+    })*/
     return axiosInstance;
 };
 

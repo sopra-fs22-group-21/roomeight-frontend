@@ -3,49 +3,92 @@ import * as Constants from '../constants';
 import { getFlatprofile } from './getFlatprofiles';
 import { reloadCurrentUserprofile } from './getUserprofiles';
 
-const postLikeFlatRequest = () => ({
-    type: Constants.POST_LIKE_FLAT_REQUEST,
+const DISCOVER_QUANTITY = 5;
+
+const postLikeRequest = () => ({
+    type: Constants.POST_LIKE_REQUEST,
 });
 
-const postLikeFlatSuccess = (response) => ({
-    type: Constants.POST_LIKE_FLAT_SUCCESS,
+const postLikeSuccess = (response) => ({
+    type: Constants.POST_LIKE_SUCCESS,
     payload: response,
 });
 
-const postLikeFlatFailure = (error) => ({
-    type: Constants.POST_LIKE_FLAT_FAILURE,
+const postLikeFailure = (error) => ({
+    type: Constants.POST_LIKE_FAILURE,
     payload: error,
 });
 
-const postLikeUserRequest = () => ({
-    type: Constants.POST_LIKE_USER_REQUEST,
+const postDislikeRequest = () => ({
+    type: Constants.POST_DISLIKE_REQUEST,
 });
 
-const postLikeUserSuccess = (response) => ({
-    type: Constants.POST_LIKE_USER_SUCCESS,
+const postDislikeSuccess = (response) => ({
+    type: Constants.POST_DISLIKE_SUCCESS,
     payload: response,
 });
 
-const postLikeUserFailure = (error) => ({
-    type: Constants.POST_LIKE_USER_FAILURE,
+const postDislikeFailure = (error) => ({
+    type: Constants.POST_DISLIKE_FAILURE,
     payload: error,
 });
+
+const getDiscoverProfilesRequest = (request) => ({
+    type: Constants.GET_DISCOVER_PROFILES_REQUEST,
+    payload: request
+});
+
+const getDiscoverProfilesSuccess = (response) => ({
+    type: Constants.GET_DISCOVER_PROFILES_SUCCESS,
+    payload: response,
+});
+
+const getDiscoverProfilesFailure = (error) => ({
+    type: Constants.GET_DISCOVER_PROFILES_FAILURE,
+    payload: error,
+});
+
+
+
+/**
+ * sends a get Request to backend api to get all discover profiles that match the authenticated user
+ * @dispatches {@link getDiscoverProfilesRequest} on get request start with
+ * @dispatches {@link getDiscoverProfilesSuccess} on get success with response payload
+ * @dispatches {@link getDiscoverProfilesFailure} on get failure with error payload
+ */
+ export const getDiscoverProfiles = () => (dispatch, getState) => {
+    const url = '/discover/5/'
+    dispatch(getDiscoverProfilesRequest(url));
+
+    apiClient()
+        .get(url)
+        .then((response) => {
+            dispatch(
+                getDiscoverProfilesSuccess(response.data)
+            );
+        })
+        .catch((error) => {
+            console.warn('error getting discover profiles');
+            dispatch(getDiscoverProfilesFailure(error));
+        });
+};
+
 
 /**
  * sends a postRequest to backend api to like other profiles
  * @param string otherProfileId - the profile you want to like
- * @dispatches {@link postLikeFlatRequest} on post request start
- * @dispatches {@link postLikeFlatSuccess} on post success with response payload
- * @dispatches {@link postLikeFlatFailure} on post failure with error payload
+ * @dispatches {@link postLikeRequest} on post request start
+ * @dispatches {@link postLikeSuccess} on post success with response payload
+ * @dispatches {@link postLikeFailure} on post failure with error payload
  */
-export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
-    dispatch(postLikeFlatRequest());
+ export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
+    dispatch(postLikeRequest());
 
     apiClient()
         .post('/userprofiles/likeFlat/' + otherProfileId)
         .then((response) => {
             dispatch(
-                postLikeFlatSuccess({
+                postLikeSuccess({
                     ...response.data,
                     profileId: otherProfileId,
                 })
@@ -56,42 +99,70 @@ export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
         })
         .catch((error) => {
             console.warn('error liking flat');
-            dispatch(postLikeFlatFailure(error));
+            dispatch(postLikeFailure(error));
+        });
+};
+
+
+/**
+ * sends a postRequest to backend api to like other profiles
+ * @param string otherProfileId - the profile you want to like
+ * @dispatches {@link postDislikeRequest} on post request start
+ * @dispatches {@link postDislikeSuccess} on post success with response payload
+ * @dispatches {@link postDislikeFailure} on post failure with error payload
+ */
+ export const postDislike = (otherProfileId) => (dispatch, getState) => {
+    dispatch(postDislikeRequest());
+
+    apiClient()
+        .post('/userprofiles/dislike/' + otherProfileId)
+        .then((response) => {
+            dispatch(
+                postDislikeSuccess({
+                    ...response.data,
+                    profileId: otherProfileId,
+                })
+            );
+        })
+        .catch((error) => {
+            console.warn('error liking flat');
+            dispatch(postDislikeFailure(error));
         });
 };
 
 /**
  * sends a postRequest to backend api to like other profiles
  * @param string otherProfileId - the profile you want to like
- * @dispatches {@link postLikeUserRequest} on post request start
- * @dispatches {@link postLikeUserSuccess} on post success with response payload
- * @dispatches {@link postLikeUserFailure} on post failure with error payload
+ * @dispatches {@link postLikeRequest} on post request start
+ * @dispatches {@link postLikeSuccess} on post success with response payload
+ * @dispatches {@link postLikeFailure} on post failure with error payload
  */
 export const postLikeUser = (otherProfileId) => (dispatch) => {
-    dispatch(postLikeUserRequest());
+    dispatch(postLikeRequest());
 
     apiClient()
         .post('/userprofiles/likeUser/' + otherProfileId)
         .then((response) => {
             dispatch(
-                postLikeUserSuccess({
+                postLikeSuccess({
                     ...response.data,
                     profileId: otherProfileId,
                 })
             );
             if (response.data.isMatch) {
                 dispatch(
-                    getFlatprofile(response.data.updatedFlatProfile.profileId)
+                    getFlatprofile()
                 );
             }
         })
         .catch((error) => {
             console.warn('error liking user');
-            dispatch(postLikeUserFailure(error));
+            dispatch(postLikeFailure(error));
         });
 };
 
 export const updateDiscoverProfiles = (discoverProfiles) => (dispatch) => {
+    if(discoverProfiles.length < 3) dispatch(getDiscoverProfiles())
     dispatch({
         type: Constants.UPDATE_DISCOVER_PROFILES,
         payload: discoverProfiles,

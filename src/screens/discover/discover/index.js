@@ -18,6 +18,7 @@ import { goToChat } from '../../../redux/actions/chatActions';
 import {
     postLikeFlat,
     postLikeUser,
+    postDislike,
     updateDiscoverProfiles,
 } from '../../../redux/actions/discoverActions';
 import { updateProfile } from '../../../redux/actions/updateActions';
@@ -39,6 +40,7 @@ const Discover = ({ navigation }) => {
     const { flatprofile } = useSelector((state) => state.flatprofileState);
     const [profiles, setProfiles] = useState(discoverProfiles);
     const [like, setLike] = useState(false);
+    const [dislike, setDislike] = useState(false);
     const [showLikes, setShowLike] = useState(false);
     const { matches } = useSelector((state) => state.matchesState);
     const [match, setMatch] = useState(undefined);
@@ -53,8 +55,10 @@ const Discover = ({ navigation }) => {
 
     useEffect(() => {
         if (!isShowingSettings) {
-            if (loading || !discoverProfiles)
+            if (!discoverProfiles && loading)
                 setProfiles([{ textIfNoData: en.discover.loading }]);
+            else if (!discoverProfiles)
+                setProfiles([{ textIfNoData: en.discover.empty }]);
             else
                 setProfiles(
                     discoverProfiles.concat([
@@ -98,8 +102,13 @@ const Discover = ({ navigation }) => {
         }
     }
 
-    const handleDislike = () => {
-        carousel.current.snapToNext();
+    const handleDislike = async (profileId) => {
+        setDislike(true);
+        dispatch(postDislike(profileId));
+        setTimeout(() => {
+            setDislike(false);
+            carousel.current.snapToNext();
+        }, 500);
     };
 
     const card = ({ item }) => {
@@ -127,11 +136,17 @@ const Discover = ({ navigation }) => {
                     </Box>
                     <LikeButtons
                         onLike={() => handleLike(item.profileId)}
-                        onDislike={() => handleDislike()}
+                        onDislike={() => handleDislike(item.profileId)}
                     />
                     {like ? (
                         <View style={styles.like}>
                             <Icon name="favorite" size={200} color={'white'} />
+                        </View>
+                    ) : null}
+
+                    {dislike ? (
+                        <View style={styles.like}>
+                            <Icon name="close" size={200} color={'white'} />
                         </View>
                     ) : null}
                 </View>
