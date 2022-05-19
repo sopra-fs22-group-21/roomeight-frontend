@@ -101,7 +101,7 @@ export const postLeaveFlat = () => (dispatch) => {
         .post(`/flatprofiles/leaveFlat`, {})
         .then((response) => {
             console.log('You have successfully left the flat.');
-            dispatch(postFlatprofileSuccess(response.data));
+            dispatch(postLeaveFlatSuccess(response.data));
         })
         .catch((error) => {
             console.log('error post leave flat');
