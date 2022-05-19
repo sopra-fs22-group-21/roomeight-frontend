@@ -22,6 +22,7 @@ const AddRoomie = ({ navigation, route }) => {
     const { loading } = useSelector((state) => state.loadingState);
     const dispatch = useDispatch();
     const { transitFlatprofile } = useSelector((state) => state.transitState);
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
 
     if (profileRoot) {
         return (
@@ -53,6 +54,7 @@ const AddRoomie = ({ navigation, route }) => {
                                     (email) =>
                                         dispatch(postRoommateToFlat(email))
                                 );
+                                dispatch(getFlatprofile(flatprofile.profileId));
                                 navigation.goBack();
                             } else {
                                 null;

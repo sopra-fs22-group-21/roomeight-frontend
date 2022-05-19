@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../resources/colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -37,5 +38,6 @@ const styles = StyleSheet.create({
     space: {
         height: 5,
     },
+    leaveButton: { backgroundColor: colors.red },
 });
 export default styles;
