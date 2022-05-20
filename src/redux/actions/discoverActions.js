@@ -90,6 +90,10 @@ export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
             );
             if (response.data.isMatch) {
                 dispatch(reloadCurrentUserprofile());
+                dispatch({
+                    type: Constants.NEW_MATCH,
+                    payload: otherProfileId,
+                });
             }
         })
         .catch((error) => {
@@ -143,6 +147,12 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
                     profileId: otherProfileId,
                 })
             );
+            if (response.data.isMatch) {
+                dispatch({
+                    type: Constants.NEW_MATCH,
+                    payload: otherProfileId,
+                });
+            }
             dispatch(getFlatprofile());
         })
         .catch((error) => {

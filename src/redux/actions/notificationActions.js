@@ -3,7 +3,11 @@ import { onChildChanged, ref } from 'firebase/database';
 import { AppState } from 'react-native';
 import { database } from '../../../firebase/firebase-config';
 import * as Constants from '../constants';
-import { getCurrentUserprofile } from './getUserprofiles';
+import { getFlatprofile } from './getFlatprofiles';
+import {
+    getCurrentUserprofile,
+    reloadCurrentUserprofile,
+} from './getUserprofiles';
 
 /**
  * Listens to the changes in the database for new likes and new matches
@@ -80,7 +84,9 @@ export const notificationsListener = () => (dispatch, getState) => {
                     type: Constants.NEW_MATCH,
                 });
             }
-            dispatch(getCurrentUserprofile());
+            if (getState().userprofileState.userprofile.isAdvertisingRoom)
+                dispatch(getFlatprofile());
+            dispatch(reloadCurrentUserprofile());
         }
     );
 
@@ -98,7 +104,9 @@ export const notificationsListener = () => (dispatch, getState) => {
                         type: Constants.NEW_MATCH,
                     });
                 }
-                dispatch(getCurrentUserprofile());
+                if (getState().userprofileState.userprofile.isAdvertisingRoom)
+                    dispatch(getFlatprofile());
+                dispatch(reloadCurrentUserprofile());
             }
         }
     );

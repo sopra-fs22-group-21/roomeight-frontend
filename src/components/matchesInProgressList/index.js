@@ -1,25 +1,15 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ProfileInfoBox } from '../../../../components/profiles';
-import { Box, NormalText, Title } from '../../../../components/theme';
-import { Tab } from 'react-native-elements/dist/tab/Tab';
-import {
-    Text,
-    View,
-    Modal,
-    Pressable,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-} from 'react-native';
-import { SecondaryButton } from '../../../../components/button';
+import { View, Modal } from 'react-native';
 import styles from './styles';
-import LikesList from '../../../../components/likesList';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
-import en from '../../../../resources/strings/en.json';
-import M8Loader from '../../../../../assets/logo/M8Loader';
-import { EmptyCard } from '../../../../components/publicProfileCard';
+import en from '../../resources/strings/en.json';
+import { Box, NormalText, Title } from '../theme';
+import { EmptyCard } from '../publicProfileCard';
+import { ProfileInfoBox } from '../profiles';
+import LikesList from '../likesList';
 
-const LikesFlat = ({ navigation }, props) => {
+const MatchesInProgressList = ({ navigation }, props) => {
     const { likes, loading } = useSelector((state) => state.likesState);
     const [modalVisible, setModalVisible] = useState(false);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
@@ -66,7 +56,7 @@ const LikesFlat = ({ navigation }, props) => {
                                 id={profile.profileId}
                                 key={index}
                                 onPress={(id) => {
-                                    navigation.navigate('Match', {
+                                    navigation.navigate('MatchInProgress', {
                                         profile: profile,
                                     });
                                 }}
@@ -122,4 +112,4 @@ const LikesFlat = ({ navigation }, props) => {
     );
 };
 
-export default LikesFlat;
+export default MatchesInProgressList;

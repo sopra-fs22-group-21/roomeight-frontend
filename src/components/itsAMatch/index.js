@@ -16,7 +16,7 @@ export const ItsAMatch = ({ profile, onDiscard, navigation, isComplete }) => {
 
     const handlePress = () => {
         if (isComplete) navigation.navigate('Match', { profile: profile });
-        else navigation.navigate('IncompleteMatch', { profile: profile });
+        else navigation.navigate('MatchInProgress', { profile: profile });
     };
 
     return (

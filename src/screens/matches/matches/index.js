@@ -7,8 +7,8 @@ import { EmptyCard } from '../../../components/publicProfileCard';
 import { ScreenContainer } from '../../../components/screenContainer';
 import { SmallHeading } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
-import LikesFlat from './likesFlat';
-import MatchesFlat from './matchesFlat';
+import MatchesList from '../../../components/matchesList';
+import MatchesInProgressList from '../../../components/matchesInProgressList';
 import styles from './styles';
 
 const Matches = ({ navigation }) => {
@@ -17,7 +17,7 @@ const Matches = ({ navigation }) => {
     const [index, setIndex] = useState(0);
 
     const secondTab = userprofile.isAdvertisingRoom ? (
-        <LikesFlat navigation={navigation} profile={userprofile} />
+        <MatchesInProgressList navigation={navigation} profile={userprofile} />
     ) : (
         <MatchesMap navigation={navigation} />
     );
@@ -67,7 +67,7 @@ const Matches = ({ navigation }) => {
                         />
                     </Tab>
                     {index === 0 ? (
-                        <MatchesFlat navigation={navigation} />
+                        <MatchesList navigation={navigation} />
                     ) : (
                         secondTab
                     )}

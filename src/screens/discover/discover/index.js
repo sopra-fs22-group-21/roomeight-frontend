@@ -37,7 +37,7 @@ const Discover = ({ navigation }) => {
     const [cardSize, getCardSize] = useComponentSize();
     const dispatch = useDispatch();
     const carousel = useRef(null);
-    const { discoverProfiles, loading, lastLiked, newIncompleteMatch } =
+    const { discoverProfiles, loading, newMatch, newMatchInProgress } =
         useSelector((state) => state.discoverState);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
@@ -55,20 +55,23 @@ const Discover = ({ navigation }) => {
     //const [filterTags, setFilterTags] = useState(null);
 
     useEffect(() => {
-        if (lastLiked) {
+        if (newMatch) {
             setMatch(matches[lastLiked]);
             setMatchIsComplete(true);
         }
     }, [matches]);
 
     useEffect(() => {
-        if (lastLiked && likes.length > 0) {
+        if (newMatchInProgress && likes.length > 0) {
             const like = likes
-                .filter((like) => Object.keys(like.likedUser)[0] === lastLiked)
+                .filter(
+                    (like) =>
+                        Object.keys(like.likedUser)[0] === newMatchInProgress
+                )
                 .map((like) => Object.values(like.likedUser)[0]);
             setMatch(like[0]);
             setMatchIsComplete(false);
-        } else console.log(lastLiked, likes);
+        }
     }, [likes]);
 
     useEffect(() => {
