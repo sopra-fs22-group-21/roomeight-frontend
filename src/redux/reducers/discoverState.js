@@ -4,7 +4,7 @@ import * as Constants from '../constants';
 
 const initialState = {
     discoverProfiles: [],
-    newMatch: null,
+    lastLiked: null,
     newIncompleteMatch: null,
     lastViewedIds: [],
     loading: true,
@@ -74,20 +74,17 @@ const userprofileState = (state = initialState, action) => {
             };
 
         case Constants.POST_LIKE_SUCCESS:
-            const last = [
-                ...state.lastViewedIds,
-                action.payload.profileId,
-            ];
-                return {
-                    ...state,
-                    lastViewedIds: last,
-                    newMatch: action.payload.profileId,
-                };
+            const last = [...state.lastViewedIds, action.payload.profileId];
+            return {
+                ...state,
+                lastViewedIds: last,
+                lastLiked: action.payload.profileId,
+            };
 
         case Constants.MATCH_IS_VIEWED:
             return {
                 ...state,
-                newMatch: null,
+                lastLiked: null,
                 newIncompleteMatch: null,
             };
 

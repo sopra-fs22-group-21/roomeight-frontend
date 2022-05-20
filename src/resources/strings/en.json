@@ -160,7 +160,7 @@
     },
     "matches": {
         "heading": "Matches",
-        "incompleteMatches": "Incomplete Matches",
+        "incompleteMatches": "Matches in Progress",
         "itsAMatch": "It's a match!",
         "info": "",
         "incompleteInfo": "For the match to become complete, your room8s need to like the profile too...",
