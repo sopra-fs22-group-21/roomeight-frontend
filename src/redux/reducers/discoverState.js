@@ -74,11 +74,11 @@ const userprofileState = (state = initialState, action) => {
                 ],
             };
 
-        case Constants.POST_LIKE_SUCCESS:
-            const last = [...state.lastViewedIds, action.payload.profileId];
+        case Constants.POST_DISLIKE_REQUEST:
+        case Constants.POST_LIKE_REQUEST:
             return {
                 ...state,
-                lastViewedIds: last,
+                lastViewedIds: [...state.lastViewedIds, action.payload],
             };
 
         case Constants.NEW_MATCH:
