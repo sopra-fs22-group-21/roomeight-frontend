@@ -2,17 +2,16 @@ import {
     get,
     limitToLast,
     onChildAdded,
+    onDisconnect,
     onValue,
     orderByChild,
     query,
     ref,
-    remove,
     update,
 } from 'firebase/database';
 import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
 import { database } from '../../../firebase/firebase-config';
-import en from '../../resources/strings/en';
+import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 
 const chatMembershipChange = (chatId) => ({
@@ -197,11 +196,11 @@ export const goToChat = (profileId, navigation) => (dispatch, getState) => {
         });
     }
     if (!exists) {
-        dispatch(createChat(profileId)).then((chat) => {
-            navigation.navigate('Chatroom', { chatInfo: chat });
+        dispatch(createChat(profileId)).then((chatId) => {
+            navigation.navigate('Chatroom', { chatId: chatId });
         });
     } else {
-        navigation.navigate('Chatroom', { chatInfo: previousChat });
+        navigation.navigate('Chatroom', { chatId: previousChat._id });
     }
 };
 
@@ -212,82 +211,18 @@ export const goToChat = (profileId, navigation) => (dispatch, getState) => {
  * @dispatches {@link Constants.CREATE_CHAT_SUCCESS } on success
  * @dispatches {@link createNewChatFailure} on failure
  */
-export const createChat = (profileId) => (dispatch, getState) => {
+export const createChat = (profileId) => (dispatch) => {
     dispatch({
         type: Constants.CREATE_CHAT_REQUEST,
     });
-
-    //create unique chat id
-    const chatId = 'chat-' + uuidv4();
-    const firstMessageId = 'msg-' + uuidv4();
-
-    const chatUpdate = {};
-    const userprofile = getState().userprofileState.userprofile;
-    const matchprofile = getState().matchesState.matches[profileId];
-
-    let chatInfo = {
-        members: {},
-    };
-    chatInfo['_id'] = chatId;
-    chatInfo['createdAt'] = new Date().getTime();
-
-    if (profileId.startsWith('flt$')) {
-        //want to chat with flat
-        //let matchprofile = userprofile.matches[profileId];
-        let roomMates = matchprofile.roomMates;
-        roomMates.forEach((mateId) => (chatInfo['members'][mateId] = true));
-        chatInfo = {
-            ...chatInfo,
-            title: {
-                forFlat: userprofile.firstName + ' ' + userprofile.lastName,
-                forUser: matchprofile.name,
-            },
-            members: {
-                ...chatInfo.members,
-                [userprofile.profileId]: true,
-            },
-            flatId: profileId,
-            userId: userprofile.profileId,
-        };
-    } else {
-        //want to chat with user
-        let flatprofile = getState().flatprofileState.flatprofile;
-        let roomMates = Object.keys(flatprofile.roomMates);
-        roomMates.forEach((mateId) => (chatInfo['members'][mateId] = true));
-        chatInfo = {
-            ...chatInfo,
-            title: {
-                forFlat: matchprofile.firstName + ' ' + matchprofile.lastName,
-                forUser: flatprofile.name,
-            },
-            members: {
-                ...chatInfo.members,
-                [profileId]: true,
-            },
-            flatId: flatprofile.profileId,
-            userId: profileId,
-        };
-    }
-
-    chatUpdate[`/chats/${chatId}`] = chatInfo;
-    const firstMessage = {
-        _id: firstMessageId,
-        text: userprofile.firstName + ' ' + en.chat.startedChat,
-        createdAt: new Date().getTime(),
-        user: {
-            _id: userprofile.profileId,
-            name: userprofile.firstName + ' ' + userprofile.lastName,
-        },
-        system: true,
-    };
-
-    return update(ref(database), chatUpdate)
-        .then(() => {
+    return apiClient()
+        .post(`/chats/${profileId}`, {})
+        .then((response) => {
             dispatch({
                 type: Constants.CREATE_CHAT_SUCCESS,
+                payload: response.data,
             });
-            dispatch(sendMessage(firstMessage, chatId));
-            return chatInfo;
+            return response.data;
         })
         .catch((error) => {
             dispatch(createChatFailure(error));
@@ -300,27 +235,55 @@ export const createChat = (profileId) => (dispatch, getState) => {
  * @dispatches {@link Constants.DELETE_CHAT_SUCCESS } on success
  * @dispatches {@link deleteChatFailure} on failure
  */
-export const deleteChat = (chatId) => (dispatch, getState) => {
+export const deleteChat = (chatId) => (dispatch) => {
     dispatch({
         type: Constants.DELETE_CHAT_REQUEST,
     });
-    let errorOccured = false;
-    const references = [];
-    references.push(ref(database, `/chats/${chatId}`));
-    references.push(ref(database, `/messages/${chatId}`));
-    references.push(
-        ref(database, `/memberships/${getState().authState.auth.uid}/${chatId}`)
-    );
-
-    references.forEach((refrence) => {
-        remove(refrence).catch((error) => {
-            errorOccured = true;
+    return apiClient()
+        .delete(`/chats/${chatId}`, {})
+        .then((response) => {
+            dispatch({
+                type: Constants.DELETE_CHAT_SUCCESS,
+                payload: response.data,
+            });
+            return response.data;
+        })
+        .catch((error) => {
             dispatch(deleteChatFailure(error));
         });
-    });
-    if (!errorOccured) {
-        dispatch({
-            type: Constants.DELETE_CHAT_SUCCESS,
-        });
+};
+
+export const connectionChanges = () => (dispatch, getState) => {
+    if (getState().chatState.memberships === null) {
+        return;
     }
+    dispatch({
+        type: Constants.CONNECTION_CHANGE,
+    });
+    const memberships = Object.keys(getState().chatState.memberships);
+
+    const userId = getState().authState.auth.uid;
+    const chatsReference = ref(database, '/chats');
+
+    const setStatus = (status) => {
+        const updates = {};
+        memberships.forEach((chatId) => {
+            updates[`${chatId}/members/${userId}`] = status;
+        });
+        return updates;
+    };
+
+    onValue(ref(database, '.info/connected'), (snapshot) => {
+        if (snapshot.val() === false) {
+            console.log('not connected');
+            return;
+        }
+        console.log('connected');
+        onDisconnect(chatsReference)
+            .update(setStatus('offline'))
+            .then(() => {
+                console.log('set online');
+                update(chatsReference, setStatus('online'));
+            });
+    });
 };

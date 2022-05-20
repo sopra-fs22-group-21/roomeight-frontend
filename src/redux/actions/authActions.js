@@ -9,6 +9,7 @@ import { registerForPushNotificationsAsync } from '../../helper/notificationsHel
 import * as Constants from '../constants';
 import { chatMemberShipListener } from './chatActions';
 import { getDiscoverProfiles } from './discoverActions';
+import { chatMemberShipListener, connectionChanges } from './chatActions';
 import { getCurrentUserprofile } from './getUserprofiles';
 import { notificationsListener } from './notificationActions';
 import { deletePushToken, postPushToken } from './updateActions';
@@ -73,6 +74,7 @@ export const userAuthStateListener = () => (dispatch) => {
             dispatch(loginUserSuccess(user));
             dispatch(getCurrentUserprofile());
             dispatch(chatMemberShipListener());
+            dispatch(connectionChanges());
             dispatch(notificationsListener());
         } else {
             //no user logged in
