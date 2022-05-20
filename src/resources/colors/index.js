@@ -13,6 +13,7 @@ const colors = {
     secondary300: '#f9a8d4',
     secondary200: '#fbcfe8',
     secondary100: '#fce7f3',
+    red: '#BE123C',
 };
 
 export default colors;

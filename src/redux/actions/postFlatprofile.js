@@ -31,6 +31,20 @@ const postRoommateToFlatFailure = (error) => ({
     payload: error,
 });
 
+const postLeaveFlatRequest = () => ({
+    type: Constants.POST_LEAVE_FLAT_REQUEST,
+});
+
+const postLeaveFlatSuccess = (response) => ({
+    type: Constants.POST_LEAVE_FLAT_SUCCESS,
+    payload: response,
+});
+
+const postLeaveFlatFailure = (error) => ({
+    type: Constants.POST_LEAVE_FLAT_FAILURE,
+    payload: error,
+});
+
 /**
  * sends a postRequest to backend api to create a Flat belonging to the user that makes the request
  * @param {object} requestBody - the body of the postRequest
@@ -72,11 +86,26 @@ export const postRoommateToFlat = (email) => (dispatch) => {
             console.log(JSON.stringify(response.data));
 
             dispatch(postRoommateToFlatSuccess(response.data));
-            dispatch(getFlatprofile());
         })
         .catch((error) => {
             console.log('error post flatprofile');
             console.warn(error);
             dispatch(postRoommateToFlatFailure(error));
+        });
+};
+
+export const postLeaveFlat = () => (dispatch) => {
+    console.log('leave flat');
+    dispatch(postLeaveFlatRequest());
+    return apiClient()
+        .post(`/flatprofiles/leaveFlat`, {})
+        .then((response) => {
+            console.log('You have successfully left the flat.');
+            dispatch(postLeaveFlatSuccess(response.data));
+        })
+        .catch((error) => {
+            console.log('error post leave flat');
+            console.warn(error);
+            dispatch(postLeaveFlatFailure(error));
         });
 };

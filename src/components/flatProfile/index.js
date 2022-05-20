@@ -3,11 +3,14 @@ import { View } from 'react-native';
 import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryButton } from '../../components/button';
+import { PrimaryButton, SecondaryButton } from '../../components/button';
 import DateInput from '../../components/dateInput';
 import { Input, InputBox, InputLabel } from '../../components/input';
 import Tags from '../../components/tags';
-import { postRoommateToFlat } from '../../redux/actions/postFlatprofile';
+import {
+    postLeaveFlat,
+    postRoommateToFlat,
+} from '../../redux/actions/postFlatprofile';
 import { updateProfile } from '../../redux/actions/updateActions';
 import en from '../../resources/strings/en.json';
 import { AddRoomieInput } from '../addRoomieInput';
@@ -17,6 +20,7 @@ import { Box } from '../theme';
 import M8Loader from '../../../assets/logo/M8Loader';
 import styles from './styles';
 import { MoveInMoveOutInput } from '../moveInMoveOutInput';
+import { getFlatprofile } from '../../redux/actions/getFlatprofiles';
 
 const FlatProfile = ({ navigation }, props) => {
     useEffect(() => {}, []);
@@ -166,7 +170,9 @@ const FlatProfile = ({ navigation }, props) => {
                                 label={en.flatInfo.nrRoommates}
                                 keyboardType="number-pad"
                                 error={nrRoommatesValid === false}
-                                defaultValue={flatprofile.numberOfRoommates}
+                                defaultValue={
+                                    flatprofile.numberOfRoommates + ''
+                                }
                                 onChangeText={(text) => {
                                     setNrRoommatesValid(!isNaN(Number(text)));
                                     setFlat({
@@ -201,6 +207,16 @@ const FlatProfile = ({ navigation }, props) => {
                                 })
                             }
                         />
+                        <PrimaryButton
+                            style={styles.leaveButton}
+                            onPress={() => {
+                                dispatch(postLeaveFlat());
+
+                                navigation.navigate('Profile');
+                            }}
+                        >
+                            Leave Flat
+                        </PrimaryButton>
                     </View>
                 </KeyboardAwareScrollView>
                 <Box style={styles.space}></Box>
@@ -218,6 +234,7 @@ const FlatProfile = ({ navigation }, props) => {
                             transitFlatprofile.roommateEmails.forEach((email) =>
                                 dispatch(postRoommateToFlat(email))
                             );
+                        dispatch(getFlatprofile(flatprofile.profileId));
                     }}
                 >
                     Save
