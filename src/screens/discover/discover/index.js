@@ -63,9 +63,9 @@ const Discover = ({ navigation }) => {
 
     useEffect(() => {
         if (lastLiked && likes.length > 0) {
-            const like = likes.filter(
-                (like) => Object.keys(like.likedUser)[0] === lastLiked
-            ).map(like => Object.values(like.likedUser)[0])
+            const like = likes
+                .filter((like) => Object.keys(like.likedUser)[0] === lastLiked)
+                .map((like) => Object.values(like.likedUser)[0]);
             setMatch(like[0]);
             setMatchIsComplete(false);
         } else console.log(lastLiked, likes);
