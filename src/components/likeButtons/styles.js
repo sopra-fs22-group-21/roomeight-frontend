@@ -19,8 +19,6 @@ const styles = StyleSheet.create({
         borderColor: colors.secondary400,
         color: colors.secondary400,
         //borderWidth: 1,
-        
-
     },
     likeButton: {
         justifyContent: 'center',

@@ -7,7 +7,7 @@ const DISCOVER_QUANTITY = 5;
 
 const postLikeRequest = (profileId) => ({
     type: Constants.POST_LIKE_REQUEST,
-    payload: profileId
+    payload: profileId,
 });
 
 const postLikeSuccess = (response) => ({
@@ -22,7 +22,7 @@ const postLikeFailure = (error) => ({
 
 const postDislikeRequest = (profileId) => ({
     type: Constants.POST_DISLIKE_REQUEST,
-    payload: profileId
+    payload: profileId,
 });
 
 const postDislikeSuccess = (response) => ({
