@@ -7,7 +7,6 @@ import {
 import { auth } from '../../../firebase/firebase-config';
 import { registerForPushNotificationsAsync } from '../../helper/notificationsHelper';
 import * as Constants from '../constants';
-import { chatMemberShipListener } from './chatActions';
 import { getDiscoverProfiles } from './discoverActions';
 import { chatMemberShipListener, connectionChanges } from './chatActions';
 import { getCurrentUserprofile } from './getUserprofiles';

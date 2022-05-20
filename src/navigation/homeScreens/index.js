@@ -5,7 +5,6 @@ import Discover from '../../screens/discover/discover';
 import Match from '../../screens/matches/match';
 import Matches from '../../screens/matches/matches';
 import MatchInProgress from '../../screens/matches/matchInProgress';
-import Profile from '../../screens/profile';
 import Settings from '../../screens/profile/settings';
 import { createFlatScreens } from '../incompleteScreens';
 import Done from '../../screens/create-profile/done';
