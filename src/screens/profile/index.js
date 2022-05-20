@@ -14,13 +14,8 @@ import styles from './styles';
 const Profile = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
-    const loading = useSelector((state) => state.loadingState);
     const [index, setIndex] = useState(userprofile.isAdvertisingRoom ? 1 : 0);
 
-    if (!loading) {
-        console.log('loading: ' + loading);
-        console.log(userprofile);
-    }
     return (
         <ScreenContainer navigation={navigation} showNavBar>
             <View>

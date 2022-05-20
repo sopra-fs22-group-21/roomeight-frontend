@@ -4,6 +4,7 @@ import { View } from 'react-native-animatable';
 import { Icon } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 import { useDispatch, useSelector } from 'react-redux';
+import M8Loader from '../../../../assets/logo/M8Loader';
 import FilterSettings from '../../../components/filterSettings';
 import { ItsAMatch } from '../../../components/itsAMatch';
 import { LikeButtons } from '../../../components/likeButtons';
@@ -20,11 +21,14 @@ import {
     postLikeUser,
     postDislike,
     updateDiscoverProfiles,
+    getDiscoverProfiles,
+    reloadDiscoverProfiles,
 } from '../../../redux/actions/discoverActions';
 import { updateProfile } from '../../../redux/actions/updateActions';
 import * as Constants from '../../../redux/constants';
 import colors from '../../../resources/colors';
 import en from '../../../resources/strings/en.json';
+import Loading from '../../loading';
 import styles from './styles';
 
 const ITEM_HEIGHT = Dimensions.get('screen').height - 170;
@@ -40,6 +44,8 @@ const Discover = ({ navigation }) => {
     const { flatprofile } = useSelector((state) => state.flatprofileState);
     const [profiles, setProfiles] = useState(discoverProfiles);
     const [like, setLike] = useState(false);
+    const [likedPrevious, setLikedPrevious] = useState(false);
+    const [dislikedPrevious, setDislikedPrevious] = useState(false);
     const [dislike, setDislike] = useState(false);
     const [showLikes, setShowLike] = useState(false);
     const { matches } = useSelector((state) => state.matchesState);
@@ -55,10 +61,7 @@ const Discover = ({ navigation }) => {
 
     useEffect(() => {
         if (!isShowingSettings) {
-            if (!discoverProfiles && loading)
-                setProfiles([{ textIfNoData: en.discover.loading }]);
-            else if (!discoverProfiles)
-                setProfiles([{ textIfNoData: en.discover.empty }]);
+            if (loading) setProfiles([{ loading: true }]);
             else
                 setProfiles(
                     discoverProfiles.concat([
@@ -67,17 +70,22 @@ const Discover = ({ navigation }) => {
                 );
             carousel.current.snapToItem(0, false);
         }
-    }, [loading, discoverProfiles, isShowingSettings]);
+    }, [loading, discoverProfiles]);
 
     const removeProfile = (index) => {
         if (index >= 0 && profiles.length > 0) {
+            if (!likedPrevious && !dislikedPrevious)
+                dispatch(postDislike(profiles[index].profileId));
             const prof = [...discoverProfiles];
             prof.splice(index, 1);
             dispatch(updateDiscoverProfiles(prof));
         }
+        setLikedPrevious(false);
+        setDislikedPrevious(false);
     };
 
     const handleLike = async (profileId) => {
+        setLikedPrevious(true);
         setLike(true);
         if (userprofile.isSearchingRoom) dispatch(postLikeFlat(profileId));
         else dispatch(postLikeUser(profileId));
@@ -103,6 +111,7 @@ const Discover = ({ navigation }) => {
     }
 
     const handleDislike = async (profileId) => {
+        setDislikedPrevious(true);
         setDislike(true);
         dispatch(postDislike(profileId));
         setTimeout(() => {
@@ -115,42 +124,43 @@ const Discover = ({ navigation }) => {
         if (!item) return null;
         if (item && item.textIfNoData)
             return <EmptyCard textIfNoData={item.textIfNoData} />;
-        else
-            return (
-                <View style={{ height: '100%' }}>
-                    <Box style={{ flex: 1, flexGrow: 1 }}>
-                        <PublicProfileCard
-                            profile={item}
-                            key={item.profileId}
-                            onDoubleTap={() => handleLike(item.profileId)}
-                            onClickShowLikes={() => {
-                                setShowLike(true);
-                            }}
-                            nrLiked={countLikes(item.profileId)}
-                            nrRoommates={
-                                flatprofile.roomMates
-                                    ? Object.keys(flatprofile.roomMates).length
-                                    : null
-                            }
-                        />
-                    </Box>
-                    <LikeButtons
-                        onLike={() => handleLike(item.profileId)}
-                        onDislike={() => handleDislike(item.profileId)}
-                    />
-                    {like ? (
-                        <View style={styles.like}>
-                            <Icon name="favorite" size={200} color={'white'} />
-                        </View>
-                    ) : null}
+        if (item && item.loading) return <M8Loader />;
 
-                    {dislike ? (
-                        <View style={styles.like}>
-                            <Icon name="close" size={200} color={'white'} />
-                        </View>
-                    ) : null}
-                </View>
-            );
+        return (
+            <View style={{ height: '100%' }}>
+                <Box style={{ flex: 1, flexGrow: 1 }}>
+                    <PublicProfileCard
+                        profile={item}
+                        key={item.profileId}
+                        onDoubleTap={() => handleLike(item.profileId)}
+                        onClickShowLikes={() => {
+                            setShowLike(true);
+                        }}
+                        nrLiked={countLikes(item.profileId)}
+                        nrRoommates={
+                            flatprofile.roomMates
+                                ? Object.keys(flatprofile.roomMates).length
+                                : null
+                        }
+                    />
+                </Box>
+                <LikeButtons
+                    onLike={() => handleLike(item.profileId)}
+                    onDislike={() => handleDislike(item.profileId)}
+                />
+                {like ? (
+                    <View style={styles.like}>
+                        <Icon name="favorite" size={200} color={'white'} />
+                    </View>
+                ) : null}
+
+                {dislike ? (
+                    <View style={styles.like}>
+                        <Icon name="close" size={200} color={'white'} />
+                    </View>
+                ) : null}
+            </View>
+        );
     };
 
     const profileCarousel = (
@@ -186,9 +196,9 @@ const Discover = ({ navigation }) => {
                             'userprofile',
                             userprofile.profileId
                         )
-                    );
+                    ).then(() => dispatch(reloadDiscoverProfiles()));
+
                     setIsShowingSettings(false);
-                    console.log(fil);
                 }}
                 filters={userprofile.filters}
             />
@@ -197,16 +207,19 @@ const Discover = ({ navigation }) => {
 
     const filtersAreActive = () => {
         let active =
-            !isShowingSettings &&
-            userprofile.filters &&
-            Object.values(userprofile.filters).some(
-                (f) =>
-                    f != undefined &&
-                    f != null &&
-                    Object.values(f).some(
-                        (child) => child != undefined && child != null
-                    )
-            );
+            (!isShowingSettings &&
+                userprofile.filters &&
+                Object.values(userprofile.filters).some(
+                    (f) =>
+                        (f != undefined &&
+                            f != null &&
+                            Object.values(f).some(
+                                (child) => child != undefined && child != null
+                            )) ||
+                        f === true
+                )) ||
+            (userprofile.filters && userprofile.filters.permanent === false);
+        console.log(userprofile.filters);
         return active;
     };
 

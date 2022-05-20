@@ -19,7 +19,6 @@ import { getFlatprofile } from '../../../redux/actions/getFlatprofiles';
 const AddRoomie = ({ navigation, route }) => {
     const [emailValid, setEmailValid] = useState(null);
     const profileRoot = route.params.includes('profile');
-    const { loading } = useSelector((state) => state.loadingState);
     const dispatch = useDispatch();
     const { transitFlatprofile } = useSelector((state) => state.transitState);
 

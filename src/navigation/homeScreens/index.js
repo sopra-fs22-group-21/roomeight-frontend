@@ -7,6 +7,8 @@ import Profile from '../../screens/profile';
 import Settings from '../../screens/profile/settings';
 import LikesFlat from '../../screens/matches/matches/likesFlat';
 import MatchesFlat from '../../screens/matches/matches/matchesFlat';
+import { createFlatScreens } from '../incompleteScreens';
+import Done from '../../screens/create-profile/done';
 
 const options = {
     headerShown: false,
@@ -43,20 +45,9 @@ const homeScreens = [
         component: Matches,
         options: options,
     },
-
     {
         name: 'Match',
         component: Match,
-        options: options,
-    },
-    {
-        name: 'MatchesFlat',
-        component: MatchesFlat,
-        options: options,
-    },
-    {
-        name: 'LikesFlat',
-        component: LikesFlat,
         options: options,
     },
     {
@@ -69,6 +60,11 @@ const homeScreens = [
         component: Chat,
         options: options,
     },
-];
+    {
+        name: 'Done',
+        component: Done,
+        options: options,
+    },
+].concat(createFlatScreens);
 
 export default homeScreens;

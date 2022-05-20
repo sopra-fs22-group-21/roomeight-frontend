@@ -22,8 +22,8 @@ const errorState = (state = initialState, action) => {
         case Constants.API_CLIENT_REQUEST:
             return {
                 ...state,
-                request: action.payload
-            }
+                request: action.payload,
+            };
         case Constants.LOGIN_USER_FAILURE:
             if (action.payload.code.includes('user-not-found'))
                 info = en.errors.userWithEmailNotFound;
@@ -87,7 +87,6 @@ const errorState = (state = initialState, action) => {
         case Constants.POST_USERPROFILE_FAILURE:
             const pjson = JSON.stringify(action.payload);
             const payload = JSON.parse(pjson);
-            console.log('status: ' + payload.status);
             if (payload.status == 409) info = en.errors.userAlreadyExists;
             else if (payload.status == 500) info = en.errors.serverError;
             else info = en.errors.problemWithApplication;
@@ -200,12 +199,12 @@ const errorState = (state = initialState, action) => {
                     discover: action.payload,
                 },
             };
-                   
+
         case Constants.GET_DISCOVER_PROFILES_SUCCESS:
             return {
                 ...state,
                 discoverErrors: {},
-            };     
+            };
         default:
             return state;
     }

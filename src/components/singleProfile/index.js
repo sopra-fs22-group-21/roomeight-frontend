@@ -8,6 +8,7 @@ import { Input, InputBox } from '../../components/input';
 import Tags from '../../components/tags';
 import { updateProfile } from '../../redux/actions/updateActions';
 import en from '../../resources/strings/en.json';
+import { MoveInMoveOutInput } from '../moveInMoveOutInput';
 import { PictureInputGallery } from '../pictureInputGallery';
 import { PublicProfileCard } from '../publicProfileCard';
 import { Box } from '../theme';
@@ -16,9 +17,6 @@ import styles from './styles';
 const SingleProfile = (_props) => {
     const dispatch = useDispatch();
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const [moveInDateValid, setmoveInDateValid] = useState(
-        userprofile.moveInDate
-    );
     const [user, setUser] = useState({});
 
     const [editMode, setEditMode] = useState(false);
@@ -42,23 +40,37 @@ const SingleProfile = (_props) => {
                     />
                     <View>
                         {userprofile.isSearchingRoom ? (
-                            <DateInput
-                                label={en.completeSingleProfile.moveInDate}
-                                valid={moveInDateValid}
-                                defaultDate={
+                            <MoveInMoveOutInput
+                                allowPermanentNull={false}
+                                moveInDate={
                                     userprofile.moveInDate
                                         ? new Date(userprofile.moveInDate)
-                                        : null
+                                        : undefined
                                 }
-                                onChange={(date, valid) => {
-                                    if (valid)
+                                moveOutDate={
+                                    userprofile.moveOutDate
+                                        ? new Date(userprofile.moveOutDate)
+                                        : undefined
+                                }
+                                permanent={userprofile.moveOutDate == undefined}
+                                onSetMoveInDate={(date) => {
+                                    setUser({
+                                        ...user,
+                                        moveInDate: date.toJSON(),
+                                    });
+                                }}
+                                onChangePermanent={(permanent) => {
+                                    setUser({
+                                        ...user,
+                                        permanent: permanent,
+                                    });
+                                }}
+                                onSetMoveOutDate={(date) => {
+                                    if (date != '')
                                         setUser({
                                             ...user,
-                                            moveInDate: date,
+                                            moveOutDate: date.toJSON(),
                                         });
-                                    setmoveInDateValid(
-                                        valid && date > new Date()
-                                    );
                                 }}
                             />
                         ) : null}

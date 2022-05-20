@@ -22,11 +22,11 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const { authErrors } = useSelector((state) => state.errorState);
     const [dispatched, setDispatched] = useState(false);
-    const { loading } = useSelector((state) => state.authState);
+    const { loading, loggedIn } = useSelector((state) => state.authState);
 
     return (
         <>
-            {loading ? (
+            {loading || loggedIn ? (
                 <Loading />
             ) : (
                 <ScreenContainer onPressBack={() => navigation.goBack()}>

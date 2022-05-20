@@ -34,7 +34,7 @@ const apiClient = () => {
         }
         return req;
     });
-/*
+    /*
     dispatch({
         type: Constants.API_CLIENT_REQUEST,
         payload: axiosInstance,

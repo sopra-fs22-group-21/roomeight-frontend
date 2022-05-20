@@ -14,7 +14,6 @@ const initialState = {
 const authState = (state = initialState, action) => {
     switch (action.type) {
         case Constants.LOGIN_USER_REQUEST:
-        case Constants.POST_USERPROFILE_REQUEST:
         case Constants.LOGOUT_USER_REQUEST:
             return {
                 ...state,
@@ -26,6 +25,7 @@ const authState = (state = initialState, action) => {
                 ...state,
                 auth: action.payload,
                 loggedIn: true,
+                loading: false,
             };
 
         case Constants.POST_USERPROFILE_FAILURE:

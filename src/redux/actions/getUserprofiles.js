@@ -48,9 +48,8 @@ export const getCurrentUserprofile = () => (dispatch) => {
         .then(() => {
             dispatch(getDiscoverProfiles());
 
-            if (userprofile.isAdvertisingRoom)
-                dispatch(getFlatprofile());
-        })
+            if (userprofile.isAdvertisingRoom) dispatch(getFlatprofile());
+        });
 };
 
 export const reloadCurrentUserprofile = () => (dispatch) => {

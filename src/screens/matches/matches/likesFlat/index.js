@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ProfileInfoBox } from '../../../../components/profiles';
-import { Box, Title } from '../../../../components/theme';
+import { Box, NormalText, Title } from '../../../../components/theme';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import {
     Text,
@@ -15,17 +15,16 @@ import { SecondaryButton } from '../../../../components/button';
 import styles from './styles';
 import LikesList from '../../../../components/likesList';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
+import en from '../../../../resources/strings/en.json';
+import M8Loader from '../../../../../assets/logo/M8Loader';
+import { EmptyCard } from '../../../../components/publicProfileCard';
 
 const LikesFlat = ({ navigation }, props) => {
     const { likes, loading } = useSelector((state) => state.likesState);
     const [modalVisible, setModalVisible] = useState(false);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
     const [likesOfProfile, setLikesOfProfile] = useState(null);
-    if (loading) return <Text>loading</Text>;
-    else {
-        console.log('\n\n\n\nlikes:');
-        console.log(likes);
-    }
+    //if (loading) return <M8Loader/>;
     function countLikes(profileId) {
         if (flatprofile.likes) {
             const filtered = flatprofile.likes.filter((like) => {
@@ -40,10 +39,21 @@ const LikesFlat = ({ navigation }, props) => {
             return null;
         }
     }
+    if (likes.length < 1)
+        return (
+            <>
+                <Box />
+                <NormalText>{en.matches.incompleteMatchesInfo}</NormalText>
+                <EmptyCard textIfNoData={en.matches.noIncompleteMatches} />
+            </>
+        );
 
     return (
         <View>
             <Box />
+            <Box>
+                <NormalText>{en.matches.incompleteMatchesInfo}</NormalText>
+            </Box>
             {likes
                 .map((like) => like.likedUser)
                 .map((like) => Object.values(like)[0])

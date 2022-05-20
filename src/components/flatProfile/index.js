@@ -14,17 +14,20 @@ import { AddRoomieInput } from '../addRoomieInput';
 import { PictureInputGallery } from '../pictureInputGallery';
 import { PublicProfileCard } from '../publicProfileCard';
 import { Box } from '../theme';
+import M8Loader from '../../../assets/logo/M8Loader';
 import styles from './styles';
+import { MoveInMoveOutInput } from '../moveInMoveOutInput';
 
 const FlatProfile = ({ navigation }, props) => {
     useEffect(() => {}, []);
 
     const dispatch = useDispatch();
-    const loading = useSelector((state) => state.loadingState);
 
     const [moveInDateValid, setmoveInDateValid] = useState(null);
     const [moveOutDateValid, setMoveOutDateValid] = useState(null);
-    const { flatprofile } = useSelector((state) => state.flatprofileState);
+    const { flatprofile, loading } = useSelector(
+        (state) => state.flatprofileState
+    );
     const { transitFlatprofile } = useSelector((state) => state.transitState);
     const [flat, setFlat] = useState({});
     const [addressValid, setAddressValid] = useState(true);
@@ -50,6 +53,7 @@ const FlatProfile = ({ navigation }, props) => {
         });
     }
 
+    if (loading) return <M8Loader />;
     if (editMode) {
         return (
             <View style={styles.container}>
@@ -79,70 +83,39 @@ const FlatProfile = ({ navigation }, props) => {
                                 })
                             }
                         />
-                        <DateInput
-                            label={en.roomInfo.moveInDate}
-                            valid={moveInDateValid}
-                            defaultDate={
+                        <MoveInMoveOutInput
+                            allowPermanentNull={false}
+                            moveInDate={
                                 flatprofile.moveInDate
                                     ? new Date(flatprofile.moveInDate)
-                                    : null
+                                    : undefined
                             }
-                            onChange={(date, valid) => {
-                                if (valid)
+                            moveOutDate={
+                                flatprofile.moveOutDate
+                                    ? new Date(flatprofile.moveOutDate)
+                                    : undefined
+                            }
+                            permanent={flatprofile.permanent}
+                            onSetMoveInDate={(date) => {
+                                setFlat({
+                                    ...flat,
+                                    moveInDate: date.toJSON(),
+                                });
+                            }}
+                            onChangePermanent={(permanent) => {
+                                setFlat({
+                                    ...flat,
+                                    permanent: permanent,
+                                });
+                            }}
+                            onSetMoveOutDate={(date) => {
+                                if (date != '')
                                     setFlat({
                                         ...flat,
-                                        moveInDate: date,
+                                        moveOutDate: date.toJSON(),
                                     });
-                                setmoveInDateValid(valid && date > new Date());
                             }}
                         />
-                        <InputLabel>{en.roomInfo.duration}</InputLabel>
-                        <Box style={styles.box}>
-                            <CheckBox
-                                containerStyle={styles.choice}
-                                wrapperStyle={styles.wrapper}
-                                textStyle={styles.text}
-                                title={'Temporary'}
-                                checkedIcon="dot-circle-o"
-                                uncheckedIcon="circle-o"
-                                color="#0E7490"
-                                checked={!flat.permanent}
-                                onPress={() => changeToTemporary()}
-                            ></CheckBox>
-                            <CheckBox
-                                containerStyle={styles.choice}
-                                wrapperStyle={styles.wrapper}
-                                textStyle={styles.text}
-                                title="Permanent"
-                                checkedIcon="dot-circle-o"
-                                uncheckedIcon="circle-o"
-                                color="#0E7490"
-                                checked={flat.permanent}
-                                onPress={() => changeToPermanent()}
-                            ></CheckBox>
-                        </Box>
-                        {!flat.permanent ? (
-                            <DateInput
-                                label={en.roomInfo.moveOutDate}
-                                error={moveOutDateValid === false}
-                                defaultDate={
-                                    flatprofile.moveOutDate
-                                        ? new Date(flatprofile.moveOutDate)
-                                        : null
-                                }
-                                onChange={(date, valid) => {
-                                    const isValid =
-                                        valid &&
-                                        date > new Date(flatprofile.moveInDate);
-                                    if (isValid)
-                                        setFlat({
-                                            ...flat,
-                                            moveOutDate: date.toJSON(),
-                                        });
-                                    setMoveOutDateValid(isValid);
-                                }}
-                            />
-                        ) : null}
                         <Input
                             label={en.roomInfo.rent}
                             keyboardType="number-pad"

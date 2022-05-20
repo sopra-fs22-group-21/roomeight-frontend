@@ -47,7 +47,7 @@
     "completePersonalProfile": {
         "heading": "Complete your personal profile",
         "title": "",
-        "info": "Choose your profile picture and tell us something about yourself.",
+        "info": "Choose your profile picture and tell us about yourself.",
         "select": "Please select a picture",
         "upload": "Upload a picture",
         "take": "Take a picture",
@@ -59,10 +59,11 @@
         "descriptionPlaceholder": "Add a longer description of your job, hobbies or roomeight expectations"
     },
     "completeSingleProfile": {
-        "heading": "Tell us something about yourself",
+        "heading": "Tell us about yourself",
         "title": "",
         "info": "Which tags describe you best? When will you be able to move in?",
         "moveInDate": "Move-In Date",
+        "moveOutDate": "Move-Out Date",
         "tags": "Tags"
     },
     "tags": {
@@ -148,7 +149,7 @@
         "temporary": "Temporary until",
         "roommates": "Room8s",
         "location": "Location",
-        "empty": "Nothing to discover...",
+        "empty": "You have browsed through all the profiles!\n\nMaybe you'll find more if you adjust your filters?",
         "loading": "Loading profiles you might like...",
         "moveInDate": "Move-In Date",
         "nrRoommates": "Room8s in total"
@@ -159,11 +160,14 @@
     },
     "matches": {
         "heading": "Matches",
-        "noNewMatches": "sorry:(\nno new matches...",
-        "noMatches": "sorry :(\nno matches yet..."
+        "incompleteMatches": "Incomplete Matches",
+        "incompleteMatchesInfo": "At least half the room8s of your flat need to like a profile for it to become a match. Check out which profiles need your approval!",
+        "noNewMatches": "Sorry:(\nno new matches...",
+        "noMatches": "Sorry :(\nno matches yet...",
+        "noIncompleteMatches": "No new likes of your room8s"
     },
     "chat": {
-        "heading": "Chat",
+        "heading": "Chats",
         "noChats": "You haven't started\nany chats yet...",
         "startedChat": "started a chat with all of you"
     },

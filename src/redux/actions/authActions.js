@@ -66,9 +66,7 @@ export const loginUser = (email, password) => async (dispatch) => {
  * @dispatches {@link loginUserSuccess} if user is logged in
  */
 export const userAuthStateListener = () => (dispatch) => {
-    dispatch({
-        type: Constants.LOADING_STATE,
-    });
+    dispatch(loginUserRequest());
     onAuthStateChanged(auth, (user) => {
         if (user) {
             //user is logged in
@@ -92,14 +90,10 @@ export const userAuthStateListener = () => (dispatch) => {
  * @see {@link userAuthStateListener} reacts if logout is successful
  */
 export const logoutUser = () => async (dispatch) => {
-    await dispatch(deletePushToken());
     dispatch(logoutUserRequest());
+    await dispatch(deletePushToken());
 
-    signOut(auth)
-        .catch((error) => {
-            dispatch(logoutUserFailure(error));
-        })
-        .then(() => {
-            dispatch(logoutUserSuccess());
-        });
+    signOut(auth).catch((error) => {
+        dispatch(logoutUserFailure(error));
+    });
 };

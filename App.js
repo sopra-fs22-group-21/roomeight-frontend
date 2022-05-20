@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import Geocoder from 'react-native-geocoding';
 import { Provider } from 'react-redux';
 import { firebaseConfig } from './firebase/firebase-config';
-import Route from './src/navigation/main';
+import Route from './src/navigation';
 import reduxStore from './src/redux/reduxStore.js';
 
 export default function App() {

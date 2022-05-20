@@ -35,7 +35,7 @@ const postDislikeFailure = (error) => ({
 
 const getDiscoverProfilesRequest = (request) => ({
     type: Constants.GET_DISCOVER_PROFILES_REQUEST,
-    payload: request
+    payload: request,
 });
 
 const getDiscoverProfilesSuccess = (response) => ({
@@ -48,31 +48,26 @@ const getDiscoverProfilesFailure = (error) => ({
     payload: error,
 });
 
-
-
 /**
  * sends a get Request to backend api to get all discover profiles that match the authenticated user
  * @dispatches {@link getDiscoverProfilesRequest} on get request start with
  * @dispatches {@link getDiscoverProfilesSuccess} on get success with response payload
  * @dispatches {@link getDiscoverProfilesFailure} on get failure with error payload
  */
- export const getDiscoverProfiles = () => (dispatch, getState) => {
-    const url = '/discover/5/'
+export const getDiscoverProfiles = () => (dispatch, getState) => {
+    const url = '/discover/5/';
     dispatch(getDiscoverProfilesRequest(url));
 
     apiClient()
         .get(url)
-        .then((response) => {
-            dispatch(
-                getDiscoverProfilesSuccess(response.data)
-            );
-        })
         .catch((error) => {
             console.warn('error getting discover profiles');
             dispatch(getDiscoverProfilesFailure(error));
+        })
+        .then((response) => {
+            dispatch(getDiscoverProfilesSuccess(response.data));
         });
 };
-
 
 /**
  * sends a postRequest to backend api to like other profiles
@@ -81,7 +76,7 @@ const getDiscoverProfilesFailure = (error) => ({
  * @dispatches {@link postLikeSuccess} on post success with response payload
  * @dispatches {@link postLikeFailure} on post failure with error payload
  */
- export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
+export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
     dispatch(postLikeRequest());
 
     apiClient()
@@ -103,7 +98,6 @@ const getDiscoverProfilesFailure = (error) => ({
         });
 };
 
-
 /**
  * sends a postRequest to backend api to like other profiles
  * @param string otherProfileId - the profile you want to like
@@ -111,7 +105,7 @@ const getDiscoverProfilesFailure = (error) => ({
  * @dispatches {@link postDislikeSuccess} on post success with response payload
  * @dispatches {@link postDislikeFailure} on post failure with error payload
  */
- export const postDislike = (otherProfileId) => (dispatch, getState) => {
+export const postDislike = (otherProfileId) => (dispatch, getState) => {
     dispatch(postDislikeRequest());
 
     apiClient()
@@ -150,9 +144,7 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
                 })
             );
             if (response.data.isMatch) {
-                dispatch(
-                    getFlatprofile()
-                );
+                dispatch(getFlatprofile());
             }
         })
         .catch((error) => {
@@ -162,9 +154,16 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
 };
 
 export const updateDiscoverProfiles = (discoverProfiles) => (dispatch) => {
-    if(discoverProfiles.length < 3) dispatch(getDiscoverProfiles())
+    if (discoverProfiles.length < 3) dispatch(getDiscoverProfiles());
     dispatch({
         type: Constants.UPDATE_DISCOVER_PROFILES,
         payload: discoverProfiles,
+    });
+};
+
+export const reloadDiscoverProfiles = () => (dispatch) => {
+    dispatch(getDiscoverProfiles());
+    dispatch({
+        type: Constants.RELOAD_DISCOVER_PROFILES,
     });
 };

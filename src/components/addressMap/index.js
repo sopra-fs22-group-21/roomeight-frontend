@@ -4,6 +4,7 @@ import Geocoder from 'react-native-geocoding';
 import MapView, { Marker } from 'react-native-maps';
 import { useSelector } from 'react-redux';
 import { FlatDetailCard } from '../flatDetailCard';
+import { EmptyCard } from '../publicProfileCard';
 
 export const AddressMap = (props) => {
     const [coordinates, setCoordinates] = useState({
@@ -60,11 +61,10 @@ export const MatchesMap = ({ navigation }) => {
     const LAT = 47.3769;
     const LNG = 8.5417;
     const { matches } = useSelector((state) => state.matchesState);
-
     return (
         <View style={{ flex: 1, paddingVertical: 20 }}>
             <MapView
-                style={{ width: '100%', height: '100%' }}
+                style={{ width: '100%', height: '100%', borderRadius: 20 }}
                 region={{
                     latitude: LAT,
                     longitude: LNG,

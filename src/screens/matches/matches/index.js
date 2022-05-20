@@ -15,33 +15,18 @@ const Matches = ({ navigation }) => {
     const { matches } = useSelector((state) => state.matchesState);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const [index, setIndex] = useState(0);
+
     const secondTab = userprofile.isAdvertisingRoom ? (
         <LikesFlat navigation={navigation} profile={userprofile} />
     ) : (
         <MatchesMap navigation={navigation} />
     );
-    const secondHeading = userprofile.isAdvertisingRoom ? 'Likes' : 'Matches';
+    const secondHeading = userprofile.isAdvertisingRoom
+        ? en.matches.incompleteMatches
+        : en.matches.heading;
     const secondIcon = userprofile.isAdvertisingRoom
         ? 'heart-half-full'
         : 'map-marker-radius';
-
-    const matchesList = Object.values(matches).map((profile, index) => {
-        if (profile.profileId)
-            return (
-                <ProfileInfoBox
-                    profile={profile}
-                    id={profile.profileId}
-                    key={index}
-                    onPress={(id) => {
-                        navigation.navigate('Match', {
-                            profile: profile,
-                        });
-                    }}
-                />
-            );
-    });
-
-    const noMatches = <EmptyCard textIfNoData={en.matches.noMatches} />;
 
     return (
         <ScreenContainer navigation={navigation} showNavBar>
@@ -52,34 +37,42 @@ const Matches = ({ navigation }) => {
                     {secondHeading}
                 </SmallHeading>
             )}
-            <Tab
-                value={index}
-                onChange={(e) => {
-                    setIndex(e);
-                }}
-                indicatorStyle={styles.indicator}
-                variant="default"
-            >
-                <Tab.Item
-                    containerStyle={styles.tab}
-                    icon={{
-                        name: 'heart',
-                        type: 'material-community',
-                        color: 'black',
-                        size: 25,
-                    }}
-                />
-                <Tab.Item
-                    containerStyle={styles.tab}
-                    icon={{
-                        name: secondIcon,
-                        type: 'material-community',
-                        color: 'black',
-                        size: 24,
-                    }}
-                />
-            </Tab>
-            {index === 0 ? <MatchesFlat navigation={navigation} /> : secondTab}
+            {
+                <>
+                    <Tab
+                        value={index}
+                        onChange={(e) => {
+                            setIndex(e);
+                        }}
+                        indicatorStyle={styles.indicator}
+                        variant="default"
+                    >
+                        <Tab.Item
+                            containerStyle={styles.tab}
+                            icon={{
+                                name: 'heart',
+                                type: 'material-community',
+                                color: 'black',
+                                size: 25,
+                            }}
+                        />
+                        <Tab.Item
+                            containerStyle={styles.tab}
+                            icon={{
+                                name: secondIcon,
+                                type: 'material-community',
+                                color: 'black',
+                                size: 24,
+                            }}
+                        />
+                    </Tab>
+                    {index === 0 ? (
+                        <MatchesFlat navigation={navigation} />
+                    ) : (
+                        secondTab
+                    )}
+                </>
+            }
         </ScreenContainer>
     );
 };

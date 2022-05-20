@@ -50,8 +50,8 @@ export const CheckBox = (props) => (
 );
 
 export const OptionBoxes = (props) => {
-    const [option1Checked, setOption1Checked] = useState(props.option1Checked);
-    const [option2Checked, setOption2Checked] = useState(props.option2Checked);
+    const [option1Checked, setOption1Checked] = useState(false);
+    const [option2Checked, setOption2Checked] = useState(false);
 
     useEffect(() => {
         if (props.option1Checked != option1Checked)
@@ -59,6 +59,11 @@ export const OptionBoxes = (props) => {
         if (props.option2Checked != option2Checked)
             setOption2Checked(props.option2Checked);
     }, [props.option1Checked, props.option2Checked]);
+
+    useEffect(() => {
+        if (!props.nullable && !props.option1Checked && !props.option2Checked)
+            handlePress1();
+    }, []);
 
     const handlePress1 = () => {
         let one = option1Checked;

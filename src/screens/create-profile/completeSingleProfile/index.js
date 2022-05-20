@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DateInput from '../../../components/dateInput';
 import { InputBox } from '../../../components/input';
 import { ScreenContainer } from '../../../components/screenContainer';
+import { MoveInMoveOutInput } from '../../../components/moveInMoveOutInput';
 import Tags from '../../../components/tags';
 import {
     Box,
@@ -16,7 +17,6 @@ import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
 const CompleteSingleProfile = ({ navigation }) => {
-    const [moveInDateValid, setmoveInDateValid] = useState(null);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { transitUserprofile } = useSelector((state) => state.transitState);
     const [user, setUser] = useState(transitUserprofile);
@@ -36,24 +36,36 @@ const CompleteSingleProfile = ({ navigation }) => {
                         <Heading>{en.completeSingleProfile.heading}</Heading>
                         <NormalText>{en.completeSingleProfile.info}</NormalText>
                         <Box />
-                        <DateInput
-                            label={en.completeSingleProfile.moveInDate}
-                            valid={moveInDateValid}
-                            onChange={(date, valid) => {
-                                if (valid)
-                                    setUser({
-                                        ...user,
-                                        moveInDate: date.toJSON(),
-                                    });
-                                setmoveInDateValid(valid && date > new Date());
-                            }}
-                            defaultDate={
+                        <MoveInMoveOutInput
+                            allowPermanentNull={false}
+                            moveInDate={
                                 userprofile.moveInDate
                                     ? new Date(userprofile.moveInDate)
                                     : transitUserprofile.moveInDate
                                     ? new Date(transitUserprofile.moveInDate)
-                                    : null
+                                    : undefined
                             }
+                            moveOutDate={
+                                userprofile.moveOutDate
+                                    ? new Date(userprofile.moveOutDate)
+                                    : transitUserprofile.moveOutDate
+                                    ? new Date(transitUserprofile.moveOutDate)
+                                    : undefined
+                            }
+                            permanent={user.moveOutDate == undefined}
+                            onSetMoveInDate={(date) => {
+                                setUser({
+                                    ...user,
+                                    moveInDate: date.toJSON(),
+                                });
+                            }}
+                            onSetMoveOutDate={(date) => {
+                                if (date != '')
+                                    setUser({
+                                        ...user,
+                                        moveOutDate: date.toJSON(),
+                                    });
+                            }}
                         />
 
                         <InputBox label={'Tags'}>

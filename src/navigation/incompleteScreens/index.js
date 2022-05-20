@@ -9,10 +9,42 @@ import CreateFlat from '../../screens/create-profile/createFlat';
 import Done from '../../screens/create-profile/done';
 import FlatInfo from '../../screens/create-profile/flatInfo';
 import RoomInfo from '../../screens/create-profile/roomInfo';
+import addedToFlatScreens from '../addedToFlatScreens';
 
 const options = { headerShown: false };
+const interPolatedTransitions = {
+    headerShown: false,
+    gestureEnabled: false,
+    cardStyleInterpolator: ({ current: { progress } }) => {
+        return {
+            cardStyle: {
+                opacity: progress,
+            },
+        };
+    },
+};
 
-export const addRoomieScreens = [
+export const createFlatScreens = [
+    {
+        name: 'CreateFlat',
+        component: CreateFlat,
+        options: options,
+    },
+    {
+        name: 'RoomInfo',
+        component: RoomInfo,
+        options: options,
+    },
+    {
+        name: 'AddAddress',
+        component: AddAddress,
+        options: options,
+    },
+    {
+        name: 'FlatInfo',
+        component: FlatInfo,
+        options: options,
+    },
     {
         name: 'AddRoomie',
         component: AddRoomie,
@@ -20,72 +52,14 @@ export const addRoomieScreens = [
     },
 ];
 
-export const createFlatScreens = [
-    {
-        name: 'RoomInfo',
-        component: RoomInfo,
-        options: options,
-    },
-    {
-        name: 'AddPictures',
-        component: AddPictures,
-        options: options,
-    },
-
-    {
-        name: 'CreateFlat',
-        component: CreateFlat,
-        options: options,
-    },
-
-    {
-        name: 'AddAddress',
-        component: AddAddress,
-        options: options,
-    },
-
-    {
-        name: 'FlatInfo',
-        component: FlatInfo,
-        options: options,
-    },
-    {
-        name: 'Done',
-        component: Done,
-        options: options,
-    },
-].concat(addRoomieScreens);
-const addedScreen = [
-    {
-        name: 'AccessExistingFlatProfile',
-        component: AccessExistingFlatProfile,
-        options: options,
-    },
-];
-
-export const addedScreens = addedScreen.concat(createFlatScreens);
-
-export const chooseStatus = [
+const incompleteScreens = [
     {
         name: 'ChooseStatus',
         component: ChooseStatus,
-        options: options,
+        options: interPolatedTransitions,
     },
-];
-
-const incompleteScreens = createFlatScreens
-    .concat([
-        {
-            name: 'CompleteSingleProfile',
-            component: CompleteSingleProfile,
-            options: options,
-        },
-        {
-            name: 'CompletePersonalProfile',
-            component: CompletePersonalProfile,
-            options: options,
-        },
-    ])
-    .concat(addedScreen);
+]
+    .concat(createFlatScreens)
+    .concat(addedToFlatScreens);
 
 export default incompleteScreens;

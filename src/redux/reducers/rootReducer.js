@@ -5,7 +5,7 @@ import chatState from './chatState';
 import discoverState from './discoverState';
 import errorState from './errorState';
 import flatprofileState from './flatprofileState';
-import loadingState from './loadingState';
+import userState from './userState';
 import matchesState from './matchesState';
 import transitState from './transitState';
 import userprofileState from './userprofileState';
@@ -21,7 +21,7 @@ const combinedReducer = combineReducers({
     authState,
     errorState,
     transitState,
-    loadingState,
+    userState,
     chatState,
     discoverState,
     matchesState,

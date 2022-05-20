@@ -2,6 +2,7 @@ import * as Constants from '../constants';
 
 const initialState = {
     userprofile: {},
+    loading: false,
 };
 
 //TODO: error handling -> really set to null on every success?
@@ -14,6 +15,13 @@ const initialState = {
 const userprofileState = (state = initialState, action) => {
     const profile = { ...action.payload };
     switch (action.type) {
+        case Constants.GET_CURRENT_USER_REQUEST:
+        case Constants.UPDATE_USERPROFILE_REQUEST:
+        case Constants.POST_USERPROFILE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
         case Constants.GET_CURRENT_USER_SUCCESS:
         case Constants.UPDATE_USERPROFILE_SUCCESS:
             delete profile.matches;
@@ -21,6 +29,7 @@ const userprofileState = (state = initialState, action) => {
                 ...state,
                 userprofile: profile,
                 update: undefined,
+                loading: false,
             };
         case Constants.POST_LIKE_FLAT_SUCCESS:
             return {
@@ -33,20 +42,19 @@ const userprofileState = (state = initialState, action) => {
             return {
                 ...state,
                 userprofile: profile,
+                loading: false,
             };
 
-        case Constants.UPDATE_USERPROFILE_SUCCESS:
-            delete profile.matches;
-            return {
-                ...state,
-                update: profile,
-            };
         case Constants.GET_CURRENT_USER_FAILURE:
+        case Constants.POST_USERPROFILE_FAILURE:
+        case Constants.UPDATE_USERPROFILE_FAILURE:
         case Constants.GET_DOWNLOAD_URL_FAILURE:
             return {
                 ...state,
                 error: action.payload,
+                loading: false,
             };
+
         default:
             return state;
     }

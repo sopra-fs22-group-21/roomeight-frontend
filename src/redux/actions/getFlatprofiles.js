@@ -23,7 +23,7 @@ const getFlatprofileFailure = (error) => ({
  * @dispatches {@link getMatchesFailure} on request failure with error payload
  */
 export const getFlatprofile = () => (dispatch, getState) => {
-    const { flatId } = getState().userprofileState.userprofile
+    const { flatId } = getState().userprofileState.userprofile;
     dispatch(getFlatprofileRequest());
     let flatprofile = {};
     apiClient()

@@ -128,7 +128,7 @@ export const SingleDetailCard = (props) => {
         </>
     );
 
-    const moveInDate = (
+    const dates = (
         <>
             {userprofile.moveInDate ? (
                 <>
@@ -136,6 +136,19 @@ export const SingleDetailCard = (props) => {
                     <NormalText style={styles.text}>
                         {dateFormat(
                             new Date(userprofile.moveInDate),
+                            'dd. mm. yyyy'
+                        )}
+                    </NormalText>
+                    <Box />
+                </>
+            ) : null}
+
+            {userprofile.moveOutDate ? (
+                <>
+                    <Strong>{en.discover.temporary}</Strong>
+                    <NormalText style={styles.text}>
+                        {dateFormat(
+                            new Date(userprofile.moveOutDate),
                             'dd. mm. yyyy'
                         )}
                     </NormalText>
@@ -179,7 +192,7 @@ export const SingleDetailCard = (props) => {
                     ) : null}
                     <ScrollView>
                         {description()}
-                        {moveInDate}
+                        {dates}
                         {tags}
                     </ScrollView>
                 </View>

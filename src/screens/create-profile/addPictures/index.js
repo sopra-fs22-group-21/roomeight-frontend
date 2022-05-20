@@ -24,7 +24,6 @@ const AddPictures = ({ navigation, route }) => {
         (state) => state.transitState
     );
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const { loading } = useSelector((state) => state.loadingState);
 
     const [images, setImages] = useState(
         isFlat

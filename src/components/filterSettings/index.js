@@ -132,8 +132,8 @@ const FilterSettings = (props) => {
                 nullable
                 onChange={(permanent, temporary) => {
                     let perm = null;
-                    if (permanent) perm = true;
-                    else if (temporary) perm = false;
+                    if (permanent && !temporary) perm = true;
+                    else if (temporary && !permanent) perm = false;
                     setNewFilters({
                         ...newFilters,
                         permanent: perm,

@@ -14,13 +14,12 @@ import { postFlatprofile } from '../../../redux/actions/postFlatprofile';
 import { updateProfile } from '../../../redux/actions/updateActions';
 import en from '../../../resources/strings/en.json';
 import { StackActions } from '@react-navigation/native';
+import { ENTER_APP_LOADING } from '../../../redux/constants';
 
 const Done = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
-
-    const { loading } = useSelector((state) => state.loadingState);
     const { transitUserprofile, transitFlatprofile } = useSelector(
         (state) => state.transitState
     );
@@ -47,7 +46,9 @@ const Done = ({ navigation, route }) => {
                     <PrimaryButton
                         onPress={async () => {
                             const flatId = flatprofile.profileId;
-                            console.log('flatid: ' + flatId);
+                            dispatch({
+                                type: ENTER_APP_LOADING,
+                            });
                             if (route.params.includes('flat')) {
                                 dispatch(
                                     updateProfile(

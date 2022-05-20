@@ -6,15 +6,7 @@ import { Inner } from '../../components/theme';
 const Loading = ({ navigation }) => {
     return (
         <ScreenContainer>
-            <Inner
-                style={{
-                    paddingTop: '70%',
-                    height: '100%',
-                    paddingBottom: '100%',
-                }}
-            >
-                <M8Loader />
-            </Inner>
+            <M8Loader />
         </ScreenContainer>
     );
 };

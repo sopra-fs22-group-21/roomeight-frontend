@@ -15,7 +15,7 @@ export const MoveInMoveOutInput = (props) => {
     const [moveInDateValid, setMoveInDateValid] = useState(null);
     const [moveInDate, setMoveInDate] = useState(props.moveInDate);
     const [moveOutDateValid, setMoveOutDateValid] = useState(null);
-    const [permanent, setPermanent] = useState(props.permanent);
+    const [permanent, setPermanent] = useState(true);
 
     useEffect(() => {
         if (!props.moveOutDate) {
@@ -52,11 +52,16 @@ export const MoveInMoveOutInput = (props) => {
             <OptionBoxes
                 option1="Permanent"
                 option2="Temporary"
-                nullable
+                nullable={props.allowPermanentNull}
+                option1Checked={props.permanent}
+                option2Checked={props.permanent === false}
                 onChange={(permanent, temporary) => {
-                    if (permanent) setPermanent(true);
-                    else if (!temporary) setPermanent(null);
-                    else setPermanent(false);
+                    let perm;
+                    if (permanent) perm = true;
+                    else if (!temporary) perm = null;
+                    else perm = false;
+                    setPermanent(perm);
+                    if (props.onChangePermanent) props.onChangePermanent(perm);
                 }}
             />
             {permanent === false ? (
