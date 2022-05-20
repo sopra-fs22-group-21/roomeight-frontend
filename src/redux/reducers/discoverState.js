@@ -27,17 +27,19 @@ const userprofileState = (state = initialState, action) => {
             };
 
         case Constants.GET_DISCOVER_PROFILES_SUCCESS:
-            const newProfiles = action.payload
-                .map((data) => new Userprofile(data))
-                .filter(
-                    (profile) =>
-                        !state.lastViewedIds.includes(profile.profileId)
-                );
+            const newProfiles = action.payload.map(
+                (data) => new Userprofile(data)
+            );
             const newIds = newProfiles.map((profile) => profile.profileId);
             const currentWithoutNew = state.discoverProfiles.filter(
                 (profile) => !newIds.includes(profile.profileId)
             );
-            const updatedProfiles = currentWithoutNew.concat(newProfiles);
+            const updatedProfiles = currentWithoutNew
+                .concat(newProfiles)
+                .filter(
+                    (profile) =>
+                        !state.lastViewedIds.includes(profile.profileId)
+                );
             return {
                 ...state,
                 error: undefined,
@@ -70,22 +72,24 @@ const userprofileState = (state = initialState, action) => {
                 ],
             };
 
-        case Constants.POST_LIKE_FLAT_SUCCESS:
-        case Constants.POST_LIKE_USER_SUCCESS:
-            // todo: jordi : case Constants.NEW_MATCH:
-            newState = {
-                ...state,
-                lastViewedIds: [
-                    ...state.lastViewedIds,
-                    action.payload.profileId,
-                ],
-            };
+        case Constants.POST_LIKE_SUCCESS:
             if (action.payload.isMatch) {
                 return {
-                    ...newState,
+                    ...state,
+                    lastViewedIds: [
+                        ...state.lastViewedIds,
+                        action.payload.profileId,
+                    ],
                     newMatch: action.payload.profileId,
                 };
-            } else return newState;
+            } else
+                return {
+                    ...state,
+                    lastViewedIds: [
+                        ...state.lastViewedIds,
+                        action.payload.profileId,
+                    ],
+                };
 
         case Constants.MATCH_IS_VIEWED:
             return {
@@ -93,6 +97,12 @@ const userprofileState = (state = initialState, action) => {
                 newMatch: null,
             };
 
+        case Constants.GET_USERPROFILE_SUCCESS:
+        case Constants.UPDATE_USERPROFILE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            };
         default:
             return state;
     }

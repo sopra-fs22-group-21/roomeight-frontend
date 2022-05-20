@@ -56,7 +56,7 @@ export default function Route() {
                 setCurrentComponents(createScreens(incompleteScreens));
             else setCurrentComponents(createScreens(addedToFlatScreens));
         }
-    }, [userprofile, flatprofile, loggedIn, enterAppLoading]);
+    }, [userprofile, flatprofile, loggedIn, enterAppLoading, loading]);
 
     return (
         <NavigationContainer>

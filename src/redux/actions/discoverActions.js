@@ -143,9 +143,7 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
                     profileId: otherProfileId,
                 })
             );
-            if (response.data.isMatch) {
-                dispatch(getFlatprofile());
-            }
+            dispatch(getFlatprofile());
         })
         .catch((error) => {
             console.warn('error liking user');

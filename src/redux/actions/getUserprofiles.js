@@ -38,12 +38,12 @@ export const getCurrentUserprofile = () => (dispatch) => {
 
     apiClient()
         .get(url)
+        .catch((error) => {
+            dispatch(getCurrentUserprofileFailure(error));
+        })
         .then((response) => {
             userprofile = response.data;
             dispatch(getCurrentUserprofileSuccess(response.data));
-        })
-        .catch((error) => {
-            dispatch(getCurrentUserprofileFailure(error));
         })
         .then(() => {
             dispatch(getDiscoverProfiles());

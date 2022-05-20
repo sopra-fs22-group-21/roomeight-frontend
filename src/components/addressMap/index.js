@@ -39,8 +39,8 @@ export const AddressMap = (props) => {
                 region={{
                     latitude: coordinates.lat,
                     longitude: coordinates.lng,
-                    latitudeDelta: 0.03,
-                    longitudeDelta: 0.03,
+                    latitudeDelta: 0.05,
+                    longitudeDelta: 0.05,
                 }}
             >
                 {found ? (
@@ -58,34 +58,34 @@ export const AddressMap = (props) => {
 };
 
 export const MatchesMap = ({ navigation }) => {
-    const LAT = 47.3769;
-    const LNG = 8.5417;
     const { matches } = useSelector((state) => state.matchesState);
+    const coordinates =
+        Object.values(matches).length > 0
+            ? Object.values(matches)[0].addressCoordinates
+            : null;
+    const lat = coordinates ? coordinates.latitude : 47.3769;
+    const lng = coordinates ? coordinates.longitude : 8.5417;
     return (
         <View style={{ flex: 1, paddingVertical: 20 }}>
             <MapView
                 style={{ width: '100%', height: '100%', borderRadius: 20 }}
                 region={{
-                    latitude: LAT,
-                    longitude: LNG,
-                    latitudeDelta: 0.1,
-                    longitudeDelta: 0.1,
+                    latitude: lat,
+                    longitude: lng,
+                    latitudeDelta: 0.2,
+                    longitudeDelta: 0.2,
                 }}
             >
                 {Object.values(matches).map((match, index) => {
-                    console.log(match.address);
                     return (
                         <Marker
                             key={index}
                             onCalloutPress={() =>
                                 navigation.navigate('Match', { profile: match })
                             }
-                            coordinate={{
-                                latitude: match.addressCoordinates.latitude,
-                                longitude: match.addressCoordinates.longitude,
-                            }}
+                            coordinate={match.addressCoordinates}
                             title={match.name}
-                            description={match.description}
+                            description={match.biography}
                         />
                     );
                 })}

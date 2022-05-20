@@ -1,6 +1,6 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
-import { updateDiscoverProfiles } from './discoverActions';
+import { getDiscoverProfiles, updateDiscoverProfiles } from './discoverActions';
 
 const getFlatprofileRequest = () => ({
     type: Constants.GET_FLATPROFILE_REQUEST,
@@ -28,10 +28,11 @@ export const getFlatprofile = () => (dispatch, getState) => {
     let flatprofile = {};
     apiClient()
         .get(`/flatprofiles/${flatId}`)
-        .then((response) => {
-            dispatch(getFlatprofileSuccess(response.data));
-        })
         .catch((error) => {
             dispatch(getFlatprofileFailure(error));
+        })
+        .then((response) => {
+            dispatch(getFlatprofileSuccess(response.data));
+            dispatch(getDiscoverProfiles());
         });
 };

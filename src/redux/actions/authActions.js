@@ -72,7 +72,6 @@ export const userAuthStateListener = () => (dispatch) => {
             //user is logged in
             dispatch(loginUserSuccess(user));
             dispatch(getCurrentUserprofile());
-            //dispatch(getDiscoverProfiles());
             dispatch(chatMemberShipListener());
             dispatch(notificationsListener());
         } else {

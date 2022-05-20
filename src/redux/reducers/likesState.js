@@ -17,6 +17,7 @@ const initialState = {
 
 const likesState = (state = initialState, action) => {
     switch (action.type) {
+        case Constants.UPDATE_FLATPROFILE_SUCCESS:
         case Constants.GET_FLATPROFILE_SUCCESS:
             return {
                 ...state,

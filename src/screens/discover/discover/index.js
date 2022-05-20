@@ -57,7 +57,7 @@ const Discover = ({ navigation }) => {
         if (newMatch) setMatch(matches[newMatch]);
         console.log('newmatch: ');
         console.log(newMatch);
-    }, [matches]);
+    }, [matches, newMatch]);
 
     useEffect(() => {
         if (!isShowingSettings) {
@@ -219,7 +219,6 @@ const Discover = ({ navigation }) => {
                         f === true
                 )) ||
             (userprofile.filters && userprofile.filters.permanent === false);
-        console.log(userprofile.filters);
         return active;
     };
 
