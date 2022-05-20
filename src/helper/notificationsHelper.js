@@ -1,5 +1,20 @@
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import { goOnline, goOffline } from 'firebase/database';
+import { database } from '../../firebase/firebase-config';
+
+export function handleAppStateChange(currentState) {
+    switch (currentState) {
+        case 'active':
+            goOnline(database);
+            break;
+        case 'background':
+            goOffline(database);
+            break;
+        default:
+            break;
+    }
+}
 
 /**
  * Asks for permissions to send push notifications

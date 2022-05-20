@@ -1,3 +1,4 @@
+import Profile from '../../screens/profile';
 import Chat from '../../screens/chat';
 import Chatroom from '../../screens/chatRoom';
 import Discover from '../../screens/discover/discover';
