@@ -23,7 +23,9 @@ const loadingState = (state = initialState, action) => {
 
         case Constants.LOADING_STATE:
             return {
+                ...state,
                 loading: true,
+                object: action.payload,
             };
 
         //All request end types that set loading to false
@@ -48,6 +50,7 @@ const loadingState = (state = initialState, action) => {
         case Constants.UPLOAD_IMAGE_SUCCESS_FLATPROFILE:
         case Constants.UPLOAD_IMAGE_FAILURE_FLATPROFILE:
             return {
+                ...state,
                 loading: false,
             };
 

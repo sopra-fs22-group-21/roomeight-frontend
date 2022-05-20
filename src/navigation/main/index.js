@@ -1,8 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as Notifications from 'expo-notifications';
+import { goOffline, goOnline } from 'firebase/database';
 import React, { useEffect, useState } from 'react';
+import { AppState } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { database } from '../../../firebase/firebase-config';
 import { userAuthStateListener } from '../../redux/actions/authActions';
 import homeScreens from '../homeScreens';
 import incompleteScreens, {
@@ -11,6 +14,7 @@ import incompleteScreens, {
     createFlatScreens,
 } from '../incompleteScreens';
 import loadingScreens from '../loadingScreens';
+import { handleAppStateChange } from '../../helper/notificationsHelper';
 import loggedOutScreens from '../loggedOutScreens';
 
 export default function Route() {
@@ -31,6 +35,16 @@ export default function Route() {
         console.log('navigation dispatch');
         dispatch(userAuthStateListener());
     }, []);
+
+    useEffect(() => {
+        const _listener = AppState.addEventListener(
+            'change',
+            handleAppStateChange
+        );
+        return () => {
+            AppState.removeEventListener('change', handleAppStateChange);
+        };
+    });
 
     useEffect(() => {
         navigation.navigate('CurrentComponents', { screen: 'Matches' });

@@ -7,7 +7,7 @@ import {
 import { auth } from '../../../firebase/firebase-config';
 import { registerForPushNotificationsAsync } from '../../helper/notificationsHelper';
 import * as Constants from '../constants';
-import { chatMemberShipListener } from './chatActions';
+import { chatMemberShipListener, connectionChanges } from './chatActions';
 import { getCurrentUserprofile } from './getUserprofiles';
 import { notificationsListener } from './notificationActions';
 import { deletePushToken, postPushToken } from './updateActions';
@@ -68,6 +68,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 export const userAuthStateListener = () => (dispatch) => {
     dispatch({
         type: Constants.LOADING_STATE,
+        payload: true,
     });
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -75,6 +76,7 @@ export const userAuthStateListener = () => (dispatch) => {
             dispatch(loginUserSuccess(user));
             dispatch(getCurrentUserprofile());
             dispatch(chatMemberShipListener());
+            dispatch(connectionChanges());
             dispatch(notificationsListener());
         } else {
             //no user logged in

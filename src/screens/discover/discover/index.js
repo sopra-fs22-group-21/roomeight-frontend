@@ -4,6 +4,7 @@ import { View } from 'react-native-animatable';
 import { Icon } from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 import { useDispatch, useSelector } from 'react-redux';
+import FilterSettings from '../../../components/filterSettings';
 import { ItsAMatch } from '../../../components/itsAMatch';
 import { LikeButtons } from '../../../components/likeButtons';
 import {
@@ -19,12 +20,11 @@ import {
     postLikeUser,
     updateDiscoverProfiles,
 } from '../../../redux/actions/discoverActions';
+import { updateProfile } from '../../../redux/actions/updateActions';
+import * as Constants from '../../../redux/constants';
+import colors from '../../../resources/colors';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
-import * as Constants from '../../../redux/constants';
-import FilterSettings from '../../../components/filterSettings';
-import colors from '../../../resources/colors';
-import { updateProfile } from '../../../redux/actions/updateActions';
 
 const ITEM_HEIGHT = Dimensions.get('screen').height - 170;
 
