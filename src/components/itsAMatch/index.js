@@ -4,20 +4,31 @@ import { Icon } from 'react-native-elements/dist/icons/Icon';
 import HeartCutOut from '../../../assets/heartCutOut';
 import { SecondaryButton } from '../button';
 import { ProfilePicture } from '../profilePicture';
-import { Box, Heading, Strong } from '../theme';
+import { Box, Heading, NormalText, Strong } from '../theme';
+import en from '../../resources/strings/en.json';
 import styles from './styles';
 
 export const ItsAMatch = ({
     profile,
     onDiscard,
     navigation,
-    onPressMessage,
-}) => (
+    isComplete,
+}) => {
+    const heading = isComplete ? en.matches.itsAMatch : profile.firstName + en.matches.itsAnIncompleteMatch;
+    const info = isComplete ? en.matches.info : en.matches.incompleteInfo;
+
+    const handlePress = () => {
+        if(isComplete)
+        navigation.navigate('Match', { profile: profile })
+        else navigation.navigate('IncompleteMatch', {profile: profile})
+    }
+
+    return (
     <>
         <View style={styles.container} onPress={onDiscard}>
             <View style={styles.inner}>
                 <ProfilePicture
-                    image={profile.pictureReferences[0]}
+                    image={profile.pictureReferences ? profile.pictureReferences[0] : null}
                     style={styles.image}
                 />
                 <View
@@ -29,20 +40,22 @@ export const ItsAMatch = ({
                     }}
                 >
                     <HeartCutOut stlye={styles.heartOverlay} />
-                    <Heading style={styles.heading}>It's a match!</Heading>
+                    <Heading style={styles.heading}>{heading}</Heading>
+                    <NormalText style={styles.text}>{info}</NormalText>
                     <Pressable
                         style={styles.pressable}
-                        onPress={() =>
-                            navigation.navigate('Match', { profile: profile })
-                        }
+                        onPress={handlePress}
                     />
+                    {isComplete ? 
                     <SecondaryButton
                         style={styles.button}
-                        onPress={onPressMessage}
+                        onPress={() =>
+                                dispatch(goToChat(profile.profileId, navigation))
+                            }
                     >
-                        Message{' '}
-                        {profile.firstName ? profile.firstName : profile.name}
+                        Message{' ' + profile.firstName ? profile.firstName : profile.name}
                     </SecondaryButton>
+                    :null }
                     <Pressable onPress={onDiscard} style={styles.close}>
                         <Icon
                             name="close"
@@ -55,4 +68,4 @@ export const ItsAMatch = ({
             </View>
         </View>
     </>
-);
+)}

@@ -37,7 +37,7 @@ const Discover = ({ navigation }) => {
     const [cardSize, getCardSize] = useComponentSize();
     const dispatch = useDispatch();
     const carousel = useRef(null);
-    const { discoverProfiles, loading, newMatch } = useSelector(
+    const { discoverProfiles, loading, newMatch, newIncompleteMatch } = useSelector(
         (state) => state.discoverState
     );
     const { userprofile } = useSelector((state) => state.userprofileState);
@@ -49,15 +49,25 @@ const Discover = ({ navigation }) => {
     const [dislike, setDislike] = useState(false);
     const [showLikes, setShowLike] = useState(false);
     const { matches } = useSelector((state) => state.matchesState);
+    const { likes } = useSelector((state) => state.likesState);
     const [match, setMatch] = useState(undefined);
+    const [matchIsComplete, setMatchIsComplete] = useState(undefined);
     const [isShowingSettings, setIsShowingSettings] = useState(false);
     //const [filterTags, setFilterTags] = useState(null);
 
     useEffect(() => {
-        if (newMatch) setMatch(matches[newMatch]);
-        console.log('newmatch: ');
-        console.log(newMatch);
-    }, [matches, newMatch]);
+        if (newMatch) {setMatch(matches[newMatch]);
+            setMatchIsComplete(true)
+        }
+        }, [matches]);
+
+    useEffect(() => {
+        if (newMatch && likes.length>0) {
+            const like = likes.filter((like) => Object.keys(like.likedUser)[0] === newMatch)
+            setMatch(like);
+            setMatchIsComplete(false)
+        } else console.log(newMatch, likes)
+    }, [likes]);
 
     useEffect(() => {
         if (!isShowingSettings) {
@@ -259,9 +269,7 @@ const Discover = ({ navigation }) => {
                 <ItsAMatch
                     profile={match}
                     navigation={navigation}
-                    onPressMessage={() =>
-                        dispatch(goToChat(match.profileId, navigation))
-                    }
+                    isComplete={matchIsComplete}
                     onDiscard={() => {
                         setMatch(null);
                         dispatch({

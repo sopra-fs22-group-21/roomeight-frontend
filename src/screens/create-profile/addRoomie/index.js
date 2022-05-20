@@ -53,7 +53,7 @@ const AddRoomie = ({ navigation, route }) => {
                                     (email) =>
                                         dispatch(postRoommateToFlat(email))
                                 );
-                                dispatch(getFlatprofile(flatprofile.profileId));
+                                dispatch(getFlatprofile());
                                 navigation.goBack();
                             } else {
                                 null;

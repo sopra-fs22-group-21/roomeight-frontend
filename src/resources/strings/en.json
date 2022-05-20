@@ -161,6 +161,10 @@
     "matches": {
         "heading": "Matches",
         "incompleteMatches": "Incomplete Matches",
+        "itsAMatch": "It's a match!",
+        "info": "",
+        "incompleteInfo": "For the match to become complete, your room8s need to like the profile too...",
+        "itsAnIncompleteMatch": " likes you back!",
         "incompleteMatchesInfo": "At least half the room8s of your flat need to like a profile for it to become a match. Check out which profiles need your approval!",
         "noNewMatches": "Sorry:(\nno new matches...",
         "noMatches": "Sorry :(\nno matches yet...",
