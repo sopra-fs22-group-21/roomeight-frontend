@@ -1,3 +1,4 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { NativeBaseProvider } from 'native-base';
 import { StyleSheet } from 'react-native';
@@ -33,7 +34,9 @@ export default function App() {
     return (
         <NativeBaseProvider>
             <Provider store={reduxStore}>
-                <Route />
+                <NavigationContainer>
+                    <Route />
+                </NavigationContainer>
             </Provider>
         </NativeBaseProvider>
     );

@@ -24,6 +24,7 @@ export const notificationsListener = () => (dispatch, getState) => {
     const unsubF = Notifications.addNotificationReceivedListener(
         (notification) => {
             const { data } = notification.request.content;
+            console.log(notification);
             if (data.type === 'NEW_LIKE') {
                 dispatch({
                     type: Constants.NEW_LIKE,

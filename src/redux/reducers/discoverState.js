@@ -56,7 +56,7 @@ const userprofileState = (state = initialState, action) => {
                 discoverProfiles: action.payload.map(
                     (data) => new Userprofile(data)
                 ),
-                loading: false,
+                loading: true,
             };
 
         case Constants.RELOAD_DISCOVER_PROFILES:

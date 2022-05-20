@@ -11,10 +11,12 @@ import MatchesList from '../../../components/matchesList';
 import MatchesInProgressList from '../../../components/matchesInProgressList';
 import styles from './styles';
 
-const Matches = ({ navigation }) => {
+const Matches = ({ route, navigation }) => {
     const { matches } = useSelector((state) => state.matchesState);
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(
+        route.params && route.params.showMatchesInProgress ? 1 : 0
+    );
 
     const secondTab = userprofile.isAdvertisingRoom ? (
         <MatchesInProgressList navigation={navigation} profile={userprofile} />

@@ -56,7 +56,7 @@ const Discover = ({ navigation }) => {
 
     useEffect(() => {
         if (newMatch) {
-            setMatch(matches[lastLiked]);
+            setMatch(matches[newMatch]);
             setMatchIsComplete(true);
         }
     }, [matches]);

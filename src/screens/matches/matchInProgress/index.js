@@ -6,6 +6,7 @@ import { Box, SmallHeadingWithBack } from '../../../components/theme';
 import { LikeButtons } from '../../../components/likeButtons';
 import { goToChat } from '../../../redux/actions/chatActions';
 import en from '../../../resources/strings/en.json';
+import { postLikeUser } from '../../../redux/actions/discoverActions';
 
 const MatchInProgress = ({ route, navigation }) => {
     const { profile } = route.params;
@@ -14,9 +15,9 @@ const MatchInProgress = ({ route, navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { likes } = useSelector((state) => state.likesState);
 
-    const handleLike = async (profileId) => {
-        if (userprofile.isSearchingRoom) dispatch(postLikeFlat(profileId));
-        else dispatch(postLikeUser(profileId));
+    const handleLike = async () => {
+        dispatch(postLikeUser(profile.profileId));
+        navigation.goBack();
     };
 
     function countLikes() {
@@ -34,8 +35,9 @@ const MatchInProgress = ({ route, navigation }) => {
         }
     }
 
-    const handleDislike = async (profileId) => {
-        dispatch(postDislike(profileId));
+    const handleDislike = async () => {
+        dispatch(postDislike(profile.profileId));
+        navigation.goBack();
     };
 
     const isAlreadyLiked = () => {
@@ -62,8 +64,8 @@ const MatchInProgress = ({ route, navigation }) => {
                 <Box />
                 {!isAlreadyLiked() ? (
                     <LikeButtons
-                        onLike={() => handleLike(profile.profileId)}
-                        onDislike={() => handleDislike(profile.profileId)}
+                        onLike={handleLike}
+                        onDislike={handleDislike}
                     />
                 ) : null}
             </Box>
