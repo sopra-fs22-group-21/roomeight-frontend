@@ -87,6 +87,16 @@ const Discover = ({ navigation }) => {
         }
     }, [loading, discoverProfiles]);
 
+    const likedBack = (userprofile) => {
+        if (userprofile.likes !== null) {
+            if (userprofile.likes.includes(flatprofile.profileId)) {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    };
+
     const removeProfile = (index) => {
         if (index >= 0 && profiles.length > 0) {
             if (!likedPrevious && !dislikedPrevious)
@@ -109,21 +119,6 @@ const Discover = ({ navigation }) => {
             carousel.current.snapToNext();
         }, 500);
     };
-
-    function countLikes(profileId) {
-        if (flatprofile.likes) {
-            const filtered = flatprofile.likes.filter((like) => {
-                return Object.keys(like.likedUser)[0] === profileId;
-            });
-            if (filtered.length !== 0) {
-                return filtered[0].likes.length;
-            } else {
-                return 0;
-            }
-        } else {
-            return null;
-        }
-    }
 
     const handleDislike = async (profileId) => {
         setDislikedPrevious(true);
@@ -148,13 +143,11 @@ const Discover = ({ navigation }) => {
                         profile={item}
                         key={item.profileId}
                         onDoubleTap={() => handleLike(item.profileId)}
-                        onClickShowLikes={() => {
-                            setShowLike(true);
-                        }}
-                        nrLiked={countLikes(item.profileId)}
-                        nrRoommates={
-                            flatprofile.roomMates
-                                ? Object.keys(flatprofile.roomMates).length
+                        onClickShowLikes={
+                            likedBack(item)
+                                ? () => {
+                                      setShowLike(true);
+                                  }
                                 : null
                         }
                     />

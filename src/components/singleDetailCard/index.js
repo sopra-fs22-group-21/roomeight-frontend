@@ -10,6 +10,7 @@ import en from '../../resources/strings/en.json';
 import { SecondaryButton } from '../button';
 import { DoubleTap } from '../doubleTap';
 import { Gender } from '../gender';
+import LikeNumbers from '../likeNumbers';
 import { ProfilePicture } from '../profilePicture';
 import Tags from '../tags';
 import { Box, NormalText, PinkBackground, Strong, Title } from '../theme';
@@ -30,6 +31,8 @@ export const SingleDetailCard = (props) => {
         ? tagIcons.filter((tag) => userprofile.tags.includes(tag.name))
         : [];
     const [shortDescription, setShortDescription] = useState(false);
+
+    console.log(userprofile);
 
     useEffect(() => {
         setShortDescription(false);
@@ -80,19 +83,10 @@ export const SingleDetailCard = (props) => {
                 />
             ) : null}
             {props.onClickShowLikes ? (
-                <View style={styles.row}>
-                    <Icon
-                        style={styles.icon}
-                        name="like"
-                        type="foundation"
-                        size={20}
-                        color={styles.icon.color}
-                        onPress={props.onClickShowLikes}
-                    />
-                    <Text style={styles.liked}>
-                        {props.nrLiked}/{props.nrRoommates}
-                    </Text>
-                </View>
+                <LikeNumbers
+                    style={styles.icon}
+                    userprofile={userprofile}
+                ></LikeNumbers>
             ) : null}
         </View>
     );

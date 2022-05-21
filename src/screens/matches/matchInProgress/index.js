@@ -20,21 +20,6 @@ const MatchInProgress = ({ route, navigation }) => {
         navigation.goBack();
     };
 
-    function countLikes() {
-        if (flatprofile.likes) {
-            const filtered = flatprofile.likes.filter((like) => {
-                return Object.keys(like.likedUser)[0] === profile.profileId;
-            });
-            if (filtered.length !== 0) {
-                return filtered[0].likes.length;
-            } else {
-                return 0;
-            }
-        } else {
-            return null;
-        }
-    }
-
     const handleDislike = async () => {
         dispatch(postDislike(profile.profileId));
         navigation.goBack();
@@ -57,8 +42,6 @@ const MatchInProgress = ({ route, navigation }) => {
                 <PublicProfileCard
                     profile={profile}
                     isFlat={profile.isAdvertisingRoom}
-                    nrLiked={countLikes()}
-                    nrRoommates={Object.keys(flatprofile.roomMates).length}
                     onClickShowLikes={() => {}}
                 />
                 <Box />
