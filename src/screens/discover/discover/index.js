@@ -91,7 +91,7 @@ const Discover = ({ navigation }) => {
         if (index >= 0 && profiles.length > 0) {
             if (!likedPrevious && !dislikedPrevious)
                 dispatch(postDislike(profiles[index].profileId));
-            const prof = [...discoverProfiles];
+            const prof = [...profiles];
             prof.splice(index, 1);
             dispatch(updateDiscoverProfiles(prof));
         }

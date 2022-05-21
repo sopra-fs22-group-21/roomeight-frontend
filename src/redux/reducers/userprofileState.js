@@ -31,12 +31,6 @@ const userprofileState = (state = initialState, action) => {
                 update: undefined,
                 loading: false,
             };
-        case Constants.POST_LIKE_FLAT_SUCCESS:
-            return {
-                ...state,
-                //todo: userprofile: action.payload.updatedUserProfile,
-            };
-
         case Constants.POST_USERPROFILE_SUCCESS:
             delete profile.matches;
             return {

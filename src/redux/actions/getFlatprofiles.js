@@ -33,6 +33,5 @@ export const getFlatprofile = () => (dispatch, getState) => {
         })
         .then((response) => {
             dispatch(getFlatprofileSuccess(response.data));
-            dispatch(getDiscoverProfiles());
         });
 };

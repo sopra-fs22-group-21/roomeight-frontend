@@ -5,8 +5,9 @@ import { reloadCurrentUserprofile } from './getUserprofiles';
 
 const DISCOVER_QUANTITY = 5;
 
-const postLikeRequest = () => ({
+const postLikeRequest = (profileId) => ({
     type: Constants.POST_LIKE_REQUEST,
+    payload: profileId,
 });
 
 const postLikeSuccess = (response) => ({
@@ -19,8 +20,9 @@ const postLikeFailure = (error) => ({
     payload: error,
 });
 
-const postDislikeRequest = () => ({
+const postDislikeRequest = (profileId) => ({
     type: Constants.POST_DISLIKE_REQUEST,
+    payload: profileId,
 });
 
 const postDislikeSuccess = (response) => ({
@@ -55,7 +57,7 @@ const getDiscoverProfilesFailure = (error) => ({
  * @dispatches {@link getDiscoverProfilesFailure} on get failure with error payload
  */
 export const getDiscoverProfiles = () => (dispatch, getState) => {
-    const url = '/discover/5/';
+    const url = '/discover/' + DISCOVER_QUANTITY;
     dispatch(getDiscoverProfilesRequest(url));
 
     apiClient()
@@ -77,7 +79,7 @@ export const getDiscoverProfiles = () => (dispatch, getState) => {
  * @dispatches {@link postLikeFailure} on post failure with error payload
  */
 export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
-    dispatch(postLikeRequest());
+    dispatch(postLikeRequest(otherProfileId));
 
     apiClient()
         .post('/userprofiles/likeFlat/' + otherProfileId)
@@ -88,6 +90,7 @@ export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
                     profileId: otherProfileId,
                 })
             );
+            /*
             if (response.data.isMatch) {
                 dispatch(reloadCurrentUserprofile());
                 dispatch({
@@ -95,6 +98,7 @@ export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
                     payload: otherProfileId,
                 });
             }
+            */
         })
         .catch((error) => {
             console.warn('error liking flat');
@@ -110,7 +114,7 @@ export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
  * @dispatches {@link postDislikeFailure} on post failure with error payload
  */
 export const postDislike = (otherProfileId) => (dispatch, getState) => {
-    dispatch(postDislikeRequest());
+    dispatch(postDislikeRequest(otherProfileId));
 
     apiClient()
         .post('/userprofiles/dislike/' + otherProfileId)
@@ -136,7 +140,7 @@ export const postDislike = (otherProfileId) => (dispatch, getState) => {
  * @dispatches {@link postLikeFailure} on post failure with error payload
  */
 export const postLikeUser = (otherProfileId) => (dispatch) => {
-    dispatch(postLikeRequest());
+    dispatch(postLikeRequest(otherProfileId));
 
     apiClient()
         .post('/userprofiles/likeUser/' + otherProfileId)
@@ -147,6 +151,7 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
                     profileId: otherProfileId,
                 })
             );
+            /*
             if (response.data.isMatch) {
                 dispatch({
                     type: Constants.NEW_MATCH,
@@ -154,6 +159,7 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
                 });
             }
             dispatch(getFlatprofile());
+            */
         })
         .catch((error) => {
             console.warn('error liking user');
