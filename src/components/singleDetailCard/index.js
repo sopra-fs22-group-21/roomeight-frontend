@@ -32,8 +32,6 @@ export const SingleDetailCard = (props) => {
         : [];
     const [shortDescription, setShortDescription] = useState(false);
 
-    console.log(userprofile);
-
     useEffect(() => {
         setShortDescription(false);
     }, [userprofile]);
@@ -82,7 +80,7 @@ export const SingleDetailCard = (props) => {
                     onPress={props.onClickEdit}
                 />
             ) : null}
-            {props.onClickShowLikes ? (
+            {props.preMatch ? (
                 <LikeNumbers
                     style={styles.icon}
                     userprofile={userprofile}
@@ -165,7 +163,7 @@ export const SingleDetailCard = (props) => {
     );
 
     return (
-        <PinkBackground>
+        <PinkBackground style={props.preMatch ? styles.preMatch : null}>
             <DoubleTap
                 doubleTap={props.onDoubleTap}
                 delay={200}

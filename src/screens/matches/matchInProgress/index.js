@@ -42,7 +42,7 @@ const MatchInProgress = ({ route, navigation }) => {
                 <PublicProfileCard
                     profile={profile}
                     isFlat={profile.isAdvertisingRoom}
-                    onClickShowLikes={() => {}}
+                    preMatch={() => {}}
                 />
                 <Box />
                 {!isAlreadyLiked() ? (

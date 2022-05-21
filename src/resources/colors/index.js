@@ -7,6 +7,7 @@ const colors = {
     primary300: '#67e8f9',
     primary200: '#a5f3fc',
     primary100: '#cffafe',
+    primaryShadow: 'rgba(251,207,232,0.9)',
     secondary600: '#db2777',
     secondary500: '#ec4899',
     secondary400: '#f472b6',

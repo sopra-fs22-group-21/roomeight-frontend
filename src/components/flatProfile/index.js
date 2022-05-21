@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
-import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
+import { View, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton, SecondaryButton } from '../../components/button';
-import DateInput from '../../components/dateInput';
 import { Input, InputBox, InputLabel } from '../../components/input';
 import Tags from '../../components/tags';
 import {
@@ -26,9 +24,6 @@ const FlatProfile = ({ navigation }, props) => {
     useEffect(() => {}, []);
 
     const dispatch = useDispatch();
-
-    const [moveInDateValid, setmoveInDateValid] = useState(null);
-    const [moveOutDateValid, setMoveOutDateValid] = useState(null);
     const { flatprofile, loading } = useSelector(
         (state) => state.flatprofileState
     );
@@ -42,20 +37,22 @@ const FlatProfile = ({ navigation }, props) => {
     const [emails, setEmailValid] = useState(null);
     const [editMode, setEditMode] = useState(false);
 
-    function changeToTemporary() {
-        setFlat({
-            ...flat,
-            permanent: false,
-        });
-    }
-
-    function changeToPermanent() {
-        delete flat.moveOutDate;
-        setFlat({
-            ...flat,
-            permanent: true,
-        });
-    }
+    const createTwoButtonAlert = () =>
+        Alert.alert(en.leaveFlat.button, en.leaveFlat.sure, [
+            {
+                text: en.leaveFlat.cancel,
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            {
+                text: en.leaveFlat.ok,
+                onPress: () => {
+                    console.log('OK Pressed');
+                    dispatch(postLeaveFlat());
+                    navigation.navigate('Profile');
+                },
+            },
+        ]);
 
     if (loading) return <M8Loader />;
     if (editMode) {
@@ -210,12 +207,10 @@ const FlatProfile = ({ navigation }, props) => {
                         <PrimaryButton
                             style={styles.leaveButton}
                             onPress={() => {
-                                dispatch(postLeaveFlat());
-
-                                navigation.navigate('Profile');
+                                createTwoButtonAlert();
                             }}
                         >
-                            Leave Flat
+                            {en.leaveFlat.button}
                         </PrimaryButton>
                     </View>
                 </KeyboardAwareScrollView>

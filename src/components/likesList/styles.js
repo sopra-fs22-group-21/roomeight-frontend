@@ -15,8 +15,18 @@ const styles = StyleSheet.create({
         fontFamily: 'SourceSans3SemiBold',
         lineHeight: 30,
     },
+    row: {
+        flexDirection: 'row',
+    },
     icon: {
+        flex: 0,
+        color: colors.secondary400,
         paddingRight: 4,
+    },
+    liked: {
+        fontFamily: 'SourceSans3SemiBold',
+        fontSize: 15,
+        paddingLeft: 3,
     },
 });
 

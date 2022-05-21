@@ -184,5 +184,11 @@
     },
     "settings": {
         "heading": "Settings"
+    },
+    "leaveFlat": {
+        "button": "Leave Flat",
+        "sure": "Are you sure you want to leave your flat?",
+        "cancel": "Cancel",
+        "ok": "OK"
     }
 }

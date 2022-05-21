@@ -42,7 +42,7 @@ const LikeNumbers = (props) => {
                 type="foundation"
                 size={20}
                 color={styles.icon.color}
-                onPress={props.onClickShowLikes}
+                onPress={props.preMatch}
             />
             <Text style={styles.liked}>
                 {countLikes(userprofile.profileId)}/

@@ -143,7 +143,7 @@ const Discover = ({ navigation }) => {
                         profile={item}
                         key={item.profileId}
                         onDoubleTap={() => handleLike(item.profileId)}
-                        onClickShowLikes={
+                        preMatch={
                             likedBack(item)
                                 ? () => {
                                       setShowLike(true);
