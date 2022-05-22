@@ -55,6 +55,7 @@ export const loginUser = (email, password) => async (dispatch) => {
     try {
         await signInWithEmailAndPassword(auth, email, password);
         await dispatch(postPushToken());
+        dispatch(connectionChanges('online'));
     } catch (error) {
         dispatch(loginUserFailure(error));
     }
@@ -72,9 +73,8 @@ export const userAuthStateListener = () => (dispatch) => {
             //user is logged in
             dispatch(loginUserSuccess(user));
             dispatch(getCurrentUserprofile());
-            dispatch(chatMemberShipListener());
-            dispatch(connectionChanges());
             dispatch(notificationsListener());
+            dispatch(chatMemberShipListener());
         } else {
             //no user logged in
             dispatch(logoutUserSuccess());
@@ -92,7 +92,7 @@ export const userAuthStateListener = () => (dispatch) => {
 export const logoutUser = () => async (dispatch) => {
     dispatch(logoutUserRequest());
     await dispatch(deletePushToken());
-
+    dispatch(connectionChanges('offline'));
     signOut(auth).catch((error) => {
         dispatch(logoutUserFailure(error));
     });

@@ -13,6 +13,7 @@ import { handleAppStateChange } from '../helper/notificationsHelper';
 import { useNavigation } from '@react-navigation/native';
 import { AppState } from 'react-native';
 import { NEW_MATCH, NEW_MATCH_IN_PROGRESS } from '../redux/constants';
+import { connectionChanges } from '../redux/actions/chatActions';
 
 export default function Route() {
     const Stack = createStackNavigator();
@@ -46,10 +47,11 @@ export default function Route() {
     }, [lastNotificationResponse]);
 
     useEffect(() => {
-        const _listener = AppState.addEventListener(
-            'change',
-            handleAppStateChange
-        );
+        const _listener = AppState.addEventListener('change', (state) => {
+            if (state === 'active') dispatch(connectionChanges('online'));
+            else if (state === 'background')
+                dispatch(connectionChanges('offline'));
+        });
         return () => {
             AppState.removeEventListener('change', handleAppStateChange);
         };
