@@ -65,7 +65,7 @@ export default function Route() {
         //if the userprofile is not complete
         else if (userprofile.isComplete === false) {
             //status can be chosen if the user doesn't belong to a flat yet
-            if (userprofile.flatId == '')
+            if (userprofile.flatId === '')
                 setCurrentComponents(incompleteScreens);
             else setCurrentComponents(addedToFlatScreens);
         }
