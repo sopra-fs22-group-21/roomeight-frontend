@@ -6,9 +6,11 @@ import { database } from '../../firebase/firebase-config';
 export function handleAppStateChange(currentState) {
     switch (currentState) {
         case 'active':
+            console.log('foregrounded');
             goOnline(database);
             break;
         case 'background':
+            console.log('backgrounded');
             goOffline(database);
             break;
         default:

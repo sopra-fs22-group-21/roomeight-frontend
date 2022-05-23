@@ -2,7 +2,6 @@ import {
     get,
     limitToLast,
     onChildAdded,
-    onDisconnect,
     onValue,
     orderByChild,
     query,
@@ -51,6 +50,11 @@ const createChatFailure = (error) => ({
 
 const deleteChatFailure = (error) => ({
     type: Constants.DELETE_CHAT_FAILURE,
+    payload: error,
+});
+
+const connectionChangeFailure = (error) => ({
+    type: Constants.CONNECTION_CHANGE_FAILURE,
     payload: error,
 });
 
@@ -186,7 +190,6 @@ export const goToChat = (profileId, navigation) => (dispatch, getState) => {
     if (chats) {
         Object.values(chats).every((chat) => {
             if (chat.userId === profileId || chat.flatId === profileId) {
-                console.log('true');
                 exists = true;
                 previousChat = chat;
                 return false;
@@ -197,7 +200,7 @@ export const goToChat = (profileId, navigation) => (dispatch, getState) => {
     }
     if (!exists) {
         dispatch(createChat(profileId)).then((chatId) => {
-            navigation.navigate('Chatroom', { chatId: chatId });
+            navigation.navigate('Chat', { chatId: chatId });
         });
     } else {
         navigation.navigate('Chatroom', { chatId: previousChat._id });
@@ -253,16 +256,20 @@ export const deleteChat = (chatId) => (dispatch) => {
         });
 };
 
-export const connectionChanges = () => (dispatch, getState) => {
-    if (getState().chatState.memberships === null) {
+export const connectionChanges = (status) => (dispatch, getState) => {
+    const membershipsState = getState().chatState.memberships;
+    if (membershipsState === null) {
         return;
     }
-    dispatch({
-        type: Constants.CONNECTION_CHANGE,
-    });
-    const memberships = Object.keys(getState().chatState.memberships);
-
+    const chatState = getState().chatState;
     const userId = getState().authState.auth.uid;
+    const memberships = Object.keys(getState().chatState.memberships);
+    const firstChat = memberships[0];
+    const previous = chatState.chats[firstChat].members[userId];
+    if (previous === status) {
+        return;
+    }
+
     const chatsReference = ref(database, '/chats');
 
     const setStatus = (status) => {
@@ -272,18 +279,14 @@ export const connectionChanges = () => (dispatch, getState) => {
         });
         return updates;
     };
-
-    onValue(ref(database, '.info/connected'), (snapshot) => {
-        if (snapshot.val() === false) {
-            console.log('not connected');
-            return;
-        }
-        console.log('connected');
-        onDisconnect(chatsReference)
-            .update(setStatus('offline'))
-            .then(() => {
-                console.log('set online');
-                update(chatsReference, setStatus('online'));
+    console.log(setStatus(status));
+    update(chatsReference, setStatus(status))
+        .then(() => {
+            dispatch({
+                type: Constants.CONNECTION_CHANGE,
             });
-    });
+        })
+        .catch((error) => {
+            dispatch(connectionChangeFailure(error));
+        });
 };
