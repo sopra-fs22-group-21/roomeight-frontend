@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { View, Alert } from 'react-native';
+import { Alert, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryButton, SecondaryButton } from '../../components/button';
+import M8Loader from '../../../assets/logo/M8Loader';
+import { PrimaryButton } from '../../components/button';
 import { Input, InputBox, InputLabel } from '../../components/input';
 import Tags from '../../components/tags';
+import { getFlatprofile } from '../../redux/actions/getFlatprofiles';
 import {
     postLeaveFlat,
     postRoommateToFlat,
@@ -12,13 +14,11 @@ import {
 import { updateProfile } from '../../redux/actions/updateActions';
 import en from '../../resources/strings/en.json';
 import { AddRoomieInput } from '../addRoomieInput';
+import { MoveInMoveOutInput } from '../moveInMoveOutInput';
 import { PictureInputGallery } from '../pictureInputGallery';
 import { PublicProfileCard } from '../publicProfileCard';
 import { Box } from '../theme';
-import M8Loader from '../../../assets/logo/M8Loader';
 import styles from './styles';
-import { MoveInMoveOutInput } from '../moveInMoveOutInput';
-import { getFlatprofile } from '../../redux/actions/getFlatprofiles';
 
 const FlatProfile = ({ navigation }, props) => {
     useEffect(() => {}, []);
@@ -49,7 +49,8 @@ const FlatProfile = ({ navigation }, props) => {
                 onPress: () => {
                     console.log('OK Pressed');
                     dispatch(postLeaveFlat());
-                    navigation.navigate('Profile');
+                    //setEditMode(false);
+                    //navigation.navigate('Profile');
                 },
             },
         ]);

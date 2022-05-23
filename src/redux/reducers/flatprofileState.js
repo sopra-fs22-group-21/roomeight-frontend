@@ -11,6 +11,7 @@ const flatprofileState = (state = initialState, action) => {
         case Constants.GET_FLATPROFILE_REQUEST:
         case Constants.UPDATE_FLATPROFILE_REQUEST:
         case Constants.POST_FLATPROFILE_REQUEST:
+        case Constants.POST_LEAVE_FLAT_REQUEST:
             return {
                 ...state,
                 loading: true,
@@ -26,8 +27,14 @@ const flatprofileState = (state = initialState, action) => {
         case Constants.GET_FLATPROFILE_FAILURE:
         case Constants.UDPATE_FLATPROFILE_FAILURE:
         case Constants.POST_FLATPROFILE_FAILURE:
+        case Constants.POST_LEAVE_FLAT_FAILURE:
             return {
                 ...state,
+                loading: false,
+            };
+        case Constants.POST_LEAVE_FLAT_SUCCESS:
+            return {
+                flatprofile: {},
                 loading: false,
             };
         default:
