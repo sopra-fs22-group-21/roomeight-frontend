@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/sopra-fs22-group-21" target="_blank">
-    <img alt="roomeight-logo" height="100" src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/b3de2881db6579ee9322e9e8bc70634c94ad7414/room8.svg"/>
+    <img alt="roomeight-logo" height="150" src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/b3de2881db6579ee9322e9e8bc70634c94ad7414/room8.svg"/>
   </a>
 </p>
 <p align="center">
