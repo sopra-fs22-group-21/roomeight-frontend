@@ -65,6 +65,7 @@ export const reloadCurrentUserprofile = () => (dispatch) => {
         .then((response) => {
             userprofile = response.data;
             dispatch(getCurrentUserprofileSuccess(response.data));
+            if (userprofile.isAdvertisingRoom) dispatch(getFlatprofile());
         })
         .catch((error) => {
             dispatch(getCurrentUserprofileFailure(error));
