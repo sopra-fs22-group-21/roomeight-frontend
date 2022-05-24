@@ -10,7 +10,6 @@ import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
 const Matches = ({ route, navigation }) => {
-    const { matches } = useSelector((state) => state.matchesState);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const [index, setIndex] = useState(
         route.params && route.params.showMatchesInProgress ? 1 : 0

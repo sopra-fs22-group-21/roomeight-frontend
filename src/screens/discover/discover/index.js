@@ -49,7 +49,6 @@ const Discover = ({ navigation }) => {
     const [match, setMatch] = useState(undefined);
     const [matchIsComplete, setMatchIsComplete] = useState(undefined);
     const [isShowingSettings, setIsShowingSettings] = useState(false);
-    //const [filterTags, setFilterTags] = useState(null);
 
     useEffect(() => {
         if (newMatch) {

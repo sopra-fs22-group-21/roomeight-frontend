@@ -33,7 +33,6 @@ const FlatProfile = ({ navigation }, props) => {
     const [roomSizeValid, setRoomSizeValid] = useState(null);
     const [nrRoommatesValid, setNrRoommatesValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
-    const [emails, setEmailValid] = useState(null);
     const [editMode, setEditMode] = useState(false);
 
     const createTwoButtonAlert = () =>
@@ -48,8 +47,6 @@ const FlatProfile = ({ navigation }, props) => {
                 onPress: () => {
                     console.log('OK Pressed');
                     dispatch(postLeaveFlat());
-                    //setEditMode(false);
-                    //navigation.navigate('Profile');
                 },
             },
         ]);
@@ -158,9 +155,7 @@ const FlatProfile = ({ navigation }, props) => {
                         </InputBox>
                         <InputLabel>{en.addRoomie.heading}</InputLabel>
                         <Box />
-                        <AddRoomieInput
-                            onChange={(emails, valid) => setEmailValid(true)}
-                        />
+                        <AddRoomieInput onChange={setEmailValid(true)} />
                         <Box />
                         {
                             <Input

@@ -1,17 +1,13 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styles from './styles';
 
 const LikeNumbers = (props) => {
-    //const { profile } = route.params;
-    const dispatch = useDispatch();
     const { flatprofile } = useSelector((state) => state.flatprofileState);
     const userprofile = props.userprofile;
     const { likes } = useSelector((state) => state.likesState);
-
-    console.log(userprofile);
 
     function countLikes(profileId) {
         if (likes) {

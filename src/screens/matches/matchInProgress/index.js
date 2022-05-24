@@ -10,7 +10,6 @@ import en from '../../../resources/strings/en.json';
 const MatchInProgress = ({ route, navigation }) => {
     const { profile } = route.params;
     const dispatch = useDispatch();
-    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { likes } = useSelector((state) => state.likesState);
 

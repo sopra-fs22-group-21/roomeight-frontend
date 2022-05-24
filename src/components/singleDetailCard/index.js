@@ -18,8 +18,6 @@ const ITEM_WIDTH = Dimensions.get('window').width - 80;
 const MAX_DESCRIPTION_LENGTH = 50;
 
 export const SingleDetailCard = (props) => {
-    const [contentSize, getContentSize] = useComponentSize();
-    const [cardSize, getCardSize] = useComponentSize();
     const [showFullDescription, setShowFullDescription] = useState(false);
     const [profilePictureSize, getProfilePictureSize] = useComponentSize();
     const userprofile = props.userprofile;

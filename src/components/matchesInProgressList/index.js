@@ -10,11 +10,10 @@ import { Box, NormalText, Title } from '../theme';
 import styles from './styles';
 
 const MatchesInProgressList = ({ navigation }, props) => {
-    const { likes, loading } = useSelector((state) => state.likesState);
+    const { likes } = useSelector((state) => state.likesState);
     const [modalVisible, setModalVisible] = useState(false);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
     const [likesOfProfile, setLikesOfProfile] = useState(null);
-    //if (loading) return <M8Loader/>;
 
     if (likes.length < 1)
         return (

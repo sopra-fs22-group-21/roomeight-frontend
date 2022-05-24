@@ -25,7 +25,6 @@ export const NumberRange = (props) => {
         if (props.high == null) setHigh(props.max);
     }, [props.high]);
 
-    //const renderNotch = useCallback(() => <View style={styles.notch}/>, []);
     const handleValueChange = (newLow, newHigh) => {
         setLow(newLow);
         setHigh(newHigh);

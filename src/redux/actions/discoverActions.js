@@ -88,15 +88,6 @@ export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
                     profileId: otherProfileId,
                 })
             );
-            /*
-            if (response.data.isMatch) {
-                dispatch(reloadCurrentUserprofile());
-                dispatch({
-                    type: Constants.NEW_MATCH,
-                    payload: otherProfileId,
-                });
-            }
-            */
         })
         .catch((error) => {
             console.warn('error liking flat');
@@ -149,15 +140,6 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
                     profileId: otherProfileId,
                 })
             );
-            /*
-            if (response.data.isMatch) {
-                dispatch({
-                    type: Constants.NEW_MATCH,
-                    payload: otherProfileId,
-                });
-            }
-            dispatch(getFlatprofile());
-            */
         })
         .catch((error) => {
             console.warn('error liking user');
