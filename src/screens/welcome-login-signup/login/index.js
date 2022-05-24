@@ -13,8 +13,8 @@ import {
 } from '../../../components/theme';
 import { loginUser } from '../../../redux/actions/authActions';
 import en from '../../../resources/strings/en.json';
-import styles from './styles';
 import Loading from '../../loading';
+import styles from './styles';
 
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();

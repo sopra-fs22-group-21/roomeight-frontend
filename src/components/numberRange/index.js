@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
-import styles from './styles';
 import RangeSlider from 'rn-range-slider';
 import { InputLabel } from '../input';
 import { Box, NormalText } from '../theme';
+import styles from './styles';
 
 export const NumberRange = (props) => {
     const [low, setLow] = useState(props.low ? props.low : props.min);

@@ -1,7 +1,7 @@
 import { auth } from '../../../firebase/firebase-config';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
-import { getDiscoverProfiles, updateDiscoverProfiles } from './discoverActions';
+import { getDiscoverProfiles } from './discoverActions';
 import { getFlatprofile } from './getFlatprofiles';
 
 const getCurrentUserprofileRequest = (request) => ({

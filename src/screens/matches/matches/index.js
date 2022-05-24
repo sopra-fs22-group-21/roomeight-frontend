@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useSelector } from 'react-redux';
 import { MatchesMap } from '../../../components/addressMap';
-import { ProfileInfoBox } from '../../../components/profiles';
-import { EmptyCard } from '../../../components/publicProfileCard';
+import MatchesInProgressList from '../../../components/matchesInProgressList';
+import MatchesList from '../../../components/matchesList';
 import { ScreenContainer } from '../../../components/screenContainer';
 import { SmallHeading } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
-import MatchesList from '../../../components/matchesList';
-import MatchesInProgressList from '../../../components/matchesInProgressList';
 import styles from './styles';
 
 const Matches = ({ route, navigation }) => {

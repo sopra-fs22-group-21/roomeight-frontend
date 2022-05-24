@@ -5,11 +5,11 @@ import chatState from './chatState';
 import discoverState from './discoverState';
 import errorState from './errorState';
 import flatprofileState from './flatprofileState';
-import userState from './userState';
+import likesState from './likesState';
 import matchesState from './matchesState';
 import transitState from './transitState';
 import userprofileState from './userprofileState';
-import likesState from './likesState';
+import userState from './userState';
 /**
  * comines reducers together to create a single reducer
  * @see {@link combineReducers}

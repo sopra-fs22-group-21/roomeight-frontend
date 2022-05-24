@@ -1,4 +1,3 @@
-import Flatprofile from '../../models/Flatprofile';
 import Userprofile from '../../models/Userprofile';
 import * as Constants from '../constants';
 

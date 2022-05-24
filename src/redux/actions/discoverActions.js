@@ -1,7 +1,5 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
-import { getFlatprofile } from './getFlatprofiles';
-import { reloadCurrentUserprofile } from './getUserprofiles';
 
 const DISCOVER_QUANTITY = 5;
 

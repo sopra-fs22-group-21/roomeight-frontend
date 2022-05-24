@@ -1,18 +1,10 @@
 import { React, useState } from 'react';
-import {
-    Dimensions,
-    FlatList,
-    Pressable,
-    View,
-    Text,
-    Modal,
-} from 'react-native';
+import { Dimensions, FlatList, Pressable, View } from 'react-native';
 import { ImageGallery } from '../imageGallery';
+import LikeNumbers from '../likeNumbers';
 import { ProfilePicture } from '../profilePicture';
 import { NormalText, Strong } from '../theme';
 import styles from './styles';
-import { Icon } from 'react-native-elements';
-import LikeNumbers from '../likeNumbers';
 
 const SLIDER_WIDTH = Dimensions.get('window').width - 90;
 

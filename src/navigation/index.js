@@ -1,19 +1,18 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as Notifications from 'expo-notifications';
 import React, { useEffect, useState } from 'react';
+import { AppState } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { handleAppStateChange } from '../helper/notificationsHelper';
 import { userAuthStateListener } from '../redux/actions/authActions';
+import { connectionChanges } from '../redux/actions/chatActions';
+import { NEW_MATCH, NEW_MATCH_IN_PROGRESS } from '../redux/constants';
 import addedToFlatScreens from './addedToFlatScreens';
 import homeScreens from './homeScreens';
 import incompleteScreens from './incompleteScreens';
 import loadingScreens from './loadingScreens';
 import loggedOutScreens from './loggedOutScreens';
-import { handleAppStateChange } from '../helper/notificationsHelper';
-import { useNavigation } from '@react-navigation/native';
-import { AppState } from 'react-native';
-import { NEW_MATCH, NEW_MATCH_IN_PROGRESS } from '../redux/constants';
-import { connectionChanges } from '../redux/actions/chatActions';
 
 export default function Route() {
     const Stack = createStackNavigator();

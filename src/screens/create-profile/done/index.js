@@ -1,5 +1,4 @@
 import React from 'react';
-import { colors } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
 import { ScreenContainer } from '../../../components/screenContainer';
@@ -10,11 +9,9 @@ import {
     ScreenPadding,
     Title,
 } from '../../../components/theme';
-import { postFlatprofile } from '../../../redux/actions/postFlatprofile';
 import { updateProfile } from '../../../redux/actions/updateActions';
-import en from '../../../resources/strings/en.json';
-import { StackActions } from '@react-navigation/native';
 import { ENTER_APP_LOADING } from '../../../redux/constants';
+import en from '../../../resources/strings/en.json';
 
 const Done = ({ navigation, route }) => {
     const dispatch = useDispatch();

@@ -59,7 +59,7 @@ const LikesList = (props) => {
                     numColumns={5}
                     data={getRoomiesLiked()}
                     keyExtractor={(item) => {
-                        item;
+                        item.profileId;
                     }}
                     renderItem={({ item }) => {
                         return item ? (
@@ -85,7 +85,7 @@ const LikesList = (props) => {
                         numColumns={5}
                         data={getRoomiesDisliked()}
                         keyExtractor={(item) => {
-                            item;
+                            item.profileId;
                         }}
                         renderItem={({ item }) => {
                             return item ? (

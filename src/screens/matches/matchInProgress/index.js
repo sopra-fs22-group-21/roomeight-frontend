@@ -1,12 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { LikeButtons } from '../../../components/likeButtons';
 import { PublicProfileCard } from '../../../components/publicProfileCard';
 import { ScreenContainer } from '../../../components/screenContainer';
 import { Box, SmallHeadingWithBack } from '../../../components/theme';
-import { LikeButtons } from '../../../components/likeButtons';
-import { goToChat } from '../../../redux/actions/chatActions';
-import en from '../../../resources/strings/en.json';
 import { postLikeUser } from '../../../redux/actions/discoverActions';
+import en from '../../../resources/strings/en.json';
 
 const MatchInProgress = ({ route, navigation }) => {
     const { profile } = route.params;

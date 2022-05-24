@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { View, Modal } from 'react-native';
-import styles from './styles';
+import { Modal, View } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
+import { useSelector } from 'react-redux';
 import en from '../../resources/strings/en.json';
-import { Box, NormalText, Title } from '../theme';
-import { EmptyCard } from '../publicProfileCard';
-import { ProfileInfoBox } from '../profiles';
 import LikesList from '../likesList';
+import { ProfileInfoBox } from '../profiles';
+import { EmptyCard } from '../publicProfileCard';
+import { Box, NormalText, Title } from '../theme';
+import styles from './styles';
 
 const MatchesInProgressList = ({ navigation }, props) => {
     const { likes, loading } = useSelector((state) => state.likesState);

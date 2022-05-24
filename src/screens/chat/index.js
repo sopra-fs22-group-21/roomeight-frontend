@@ -1,4 +1,4 @@
-import { Center, FlatList, HStack, Spacer } from 'native-base';
+import { FlatList, HStack, Spacer } from 'native-base';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import M8Loader from '../../../assets/logo/M8Loader';

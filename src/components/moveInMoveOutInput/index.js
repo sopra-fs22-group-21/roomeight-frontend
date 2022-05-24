@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
-import { PrimaryButton } from '../button';
-import styles from './styles';
-import DateInput from '../dateInput';
-import { useSelector } from 'react-redux';
 import en from '../../resources/strings/en.json';
-import { KeyboardAvoidingView } from 'native-base';
-import { Box } from '../theme';
+import DateInput from '../dateInput';
 import { InputLabel, OptionBoxes } from '../input';
-import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
 
 //moveInDate, moveOutDate, permanent, onSetMoveInDate, onSetMoveOutDate
 export const MoveInMoveOutInput = (props) => {

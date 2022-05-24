@@ -1,13 +1,10 @@
-import * as Notifications from 'expo-notifications';
 import {
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signOut,
 } from 'firebase/auth';
 import { auth } from '../../../firebase/firebase-config';
-import { registerForPushNotificationsAsync } from '../../helper/notificationsHelper';
 import * as Constants from '../constants';
-import { getDiscoverProfiles } from './discoverActions';
 import { chatMemberShipListener, connectionChanges } from './chatActions';
 import { getCurrentUserprofile } from './getUserprofiles';
 import { notificationsListener } from './notificationActions';

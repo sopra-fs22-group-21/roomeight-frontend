@@ -1,14 +1,7 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { PublicProfileCard } from '../publicProfileCard';
-import { ScreenContainer } from '../screenContainer';
-import { Box, SmallHeadingWithBack } from '../theme';
-import { LikeButtons } from '../likeButtons';
-import { goToChat } from '../../redux/actions/chatActions';
-import en from '../../resources/strings/en.json';
-import { postLikeUser } from '../../redux/actions/discoverActions';
-import { View, Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles';
 
 const LikeNumbers = (props) => {
@@ -21,8 +14,8 @@ const LikeNumbers = (props) => {
     console.log(userprofile);
 
     function countLikes(profileId) {
-        if (flatprofile.likes) {
-            const filtered = flatprofile.likes.filter((like) => {
+        if (likes) {
+            const filtered = likes.filter((like) => {
                 return Object.keys(like.likedUser)[0] === profileId;
             });
             if (filtered.length !== 0) {

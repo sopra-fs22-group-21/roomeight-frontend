@@ -6,7 +6,6 @@ import M8Loader from '../../../assets/logo/M8Loader';
 import { PrimaryButton } from '../../components/button';
 import { Input, InputBox, InputLabel } from '../../components/input';
 import Tags from '../../components/tags';
-import { getFlatprofile } from '../../redux/actions/getFlatprofiles';
 import {
     postLeaveFlat,
     postRoommateToFlat,
@@ -230,7 +229,6 @@ const FlatProfile = ({ navigation }, props) => {
                             transitFlatprofile.roommateEmails.forEach((email) =>
                                 dispatch(postRoommateToFlat(email))
                             );
-                        dispatch(getFlatprofile(flatprofile.profileId));
                     }}
                 >
                     Save

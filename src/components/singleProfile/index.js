@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../components/button';
-import DateInput from '../../components/dateInput';
 import { Input, InputBox } from '../../components/input';
 import Tags from '../../components/tags';
 import { updateProfile } from '../../redux/actions/updateActions';

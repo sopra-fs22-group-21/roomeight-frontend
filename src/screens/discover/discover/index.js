@@ -15,20 +15,17 @@ import {
 import { ScreenContainer } from '../../../components/screenContainer';
 import { Box, SmallHeading } from '../../../components/theme';
 import { useComponentSize } from '../../../hooks/layout';
-import { goToChat } from '../../../redux/actions/chatActions';
 import {
+    postDislike,
     postLikeFlat,
     postLikeUser,
-    postDislike,
-    updateDiscoverProfiles,
-    getDiscoverProfiles,
     reloadDiscoverProfiles,
+    updateDiscoverProfiles,
 } from '../../../redux/actions/discoverActions';
 import { updateProfile } from '../../../redux/actions/updateActions';
 import * as Constants from '../../../redux/constants';
 import colors from '../../../resources/colors';
 import en from '../../../resources/strings/en.json';
-import Loading from '../../loading';
 import styles from './styles';
 
 const ITEM_HEIGHT = Dimensions.get('screen').height - 170;
