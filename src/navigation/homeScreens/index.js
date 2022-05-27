@@ -7,6 +7,7 @@ import Matches from '../../screens/matches/matches';
 import MatchInProgress from '../../screens/matches/matchInProgress';
 import Profile from '../../screens/profile';
 import Settings from '../../screens/profile/settings';
+import addedToFlatScreens from '../addedToFlatScreens';
 import { createFlatScreens } from '../incompleteScreens';
 
 const options = {
@@ -64,11 +65,6 @@ const homeScreens = [
         component: Chat,
         options: options,
     },
-    {
-        name: 'Done',
-        component: Done,
-        options: options,
-    },
-].concat(createFlatScreens);
+].concat(createFlatScreens).concat(addedToFlatScreens);
 
 export default homeScreens;

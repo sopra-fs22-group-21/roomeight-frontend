@@ -119,7 +119,7 @@ const FlatProfile = ({ navigation }, props) => {
                             keyboardType="number-pad"
                             error={rentValid === false}
                             placeholder="CHF"
-                            defaultValue={flatprofile.rent + ''}
+                            defaultValue={flatprofile.rent}
                             onChangeText={(text) => {
                                 setRentValid(!isNaN(Number(text)));
                                 setFlat({
@@ -133,7 +133,7 @@ const FlatProfile = ({ navigation }, props) => {
                             keyboardType="number-pad"
                             placeholder="m2"
                             error={roomSizeValid === false}
-                            defaultValue={flatprofile.roomSize + ''}
+                            defaultValue={flatprofile.roomSize}
                             onChangeText={(text) => {
                                 setRoomSizeValid(!isNaN(Number(text)));
                                 setFlat({
@@ -155,7 +155,7 @@ const FlatProfile = ({ navigation }, props) => {
                         </InputBox>
                         <InputLabel>{en.addRoomie.heading}</InputLabel>
                         <Box />
-                        <AddRoomieInput onChange={setEmailValid(true)} />
+                        <AddRoomieInput/>
                         <Box />
                         {
                             <Input
@@ -163,7 +163,7 @@ const FlatProfile = ({ navigation }, props) => {
                                 keyboardType="number-pad"
                                 error={nrRoommatesValid === false}
                                 defaultValue={
-                                    flatprofile.numberOfRoommates + ''
+                                    flatprofile.numberOfRoommates
                                 }
                                 onChangeText={(text) => {
                                     setNrRoommatesValid(!isNaN(Number(text)));
@@ -178,7 +178,7 @@ const FlatProfile = ({ navigation }, props) => {
                             label={en.roomInfo.nrBathrooms}
                             keyboardType="number-pad"
                             error={nrBathroomsValid === false}
-                            defaultValue={flatprofile.numberOfBaths + ''}
+                            defaultValue={flatprofile.numberOfBaths}
                             onChangeText={(text) => {
                                 setNrBathroomsValid(!isNaN(Number(text)));
                                 setFlat({
