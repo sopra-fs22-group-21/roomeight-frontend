@@ -25,6 +25,8 @@ const userState = (state = initialState, action) => {
         case Constants.GET_CURRENT_USER_FAILURE:
         case Constants.UPDATE_USERPROFILE_SUCCESS:
         case Constants.UPDATE_USERPROFILE_FAILURE:
+        case Constants.UPDATE_FLATPROFILE_SUCCESS:
+        case Constants.UPDATE_FLATPROFILE_FAILURE:
             return {
                 ...state,
                 enterAppLoading: false,

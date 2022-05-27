@@ -16,14 +16,11 @@ import en from '../../../resources/strings/en.json';
 import styles from './styles';
 
 const RoomInfo = ({ navigation }) => {
-    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const { transitFlatprofile } = useSelector((state) => state.transitState);
     const [moveInDateValid, setMoveInDateValid] = useState(null);
     const [moveOutDateValid, setMoveOutDateValid] = useState(null);
     const [rentValid, setRentValid] = useState(null);
-    const [flat, setFlat] = useState(
-        flatprofile ? flatprofile : transitFlatprofile
-    );
+    const [flat, setFlat] = useState(transitFlatprofile);
     const [roomSizeValid, setRoomSizeValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
     const [nrRoommatesValid, setNrRoommatessValid] = useState(null);
