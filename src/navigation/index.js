@@ -58,7 +58,7 @@ export default function Route() {
 
     useEffect(() => {
         //user is logged out
-        if (!loggedIn && !loading) setCurrentComponents(loggedOutScreens);
+        if (!loggedIn) setCurrentComponents(loggedOutScreens);
         //userprofile is loading, waiting to enter app
         else if (enterAppLoading) setCurrentComponents(loadingScreens);
         //if the userprofile is complete, the user is allowed to enter the main app
@@ -70,7 +70,7 @@ export default function Route() {
                 setCurrentComponents(incompleteScreens);
             else setCurrentComponents(addedToFlatScreens);
         }
-    }, [userprofile, flatprofile, loggedIn, enterAppLoading, loading]);
+    }, [userprofile, flatprofile, loggedIn, enterAppLoading]);
 
     const createScreens = (screens) => {
         return (

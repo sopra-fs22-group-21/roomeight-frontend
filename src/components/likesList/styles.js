@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         flex: 0,
-        color: colors.secondary400,
+        color: colors.red,
         paddingRight: 4,
     },
     liked: {

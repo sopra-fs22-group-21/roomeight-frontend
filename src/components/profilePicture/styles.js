@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     },
     placeholderProfile: {
         letterSpacing: 4,
-        marginRight: -4,
         fontSize: 40,
         fontFamily: 'SourceSans3Light',
         textAlign: 'center',

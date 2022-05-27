@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
@@ -17,6 +17,7 @@ import { postUserprofile } from '../../../redux/actions/postUserprofile';
 import en from '../../../resources/strings/en.json';
 import Loading from '../../loading';
 import styles from './styles';
+import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 
 const Signup = ({ navigation }) => {
     const [user, setUser] = useState({});
@@ -25,11 +26,12 @@ const Signup = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [repeatValid, setRepeatValid] = useState(null);
     const [phoneValid, setPhoneValid] = useState(null);
-    const [birthdayValid, setbirthdayValid] = useState(null);
+    const [birthdayValid, setBirthdayValid] = useState(null);
     const { userprofileErrors, authErrors } = useSelector(
         (state) => state.errorState
     );
     const { loading, loggedIn } = useSelector((state) => state.authState);
+    const { transitUserprofile } = useSelector((state) => state.transitState);
     const [heading, setHeading] = useState(en.signup.heading);
     const [title, setTitle] = useState(en.signup.title);
     const [text, setText] = useState(en.signup.enterDetails);
@@ -40,6 +42,12 @@ const Signup = ({ navigation }) => {
         /(\b(0041|0)|\B\+41)(\s?\(0\))?(\s)?[1-9]{2}(\s)?[0-9]{3}(\s)?[0-9]{2}(\s)?[0-9]{2}\b/;
 
     const dispatch = useDispatch();
+    useEffect(() => {
+        setUser({ ...user, ...transitUserprofile });
+        console.log(user.phoneNumber);
+        setPhoneValid(transitUserprofile.phoneNumber ? true : null);
+        setBirthdayValid(transitUserprofile.birthday ? true : null);
+    }, [transitUserprofile]);
 
     const firstPageInputs = (
         <>
@@ -149,7 +157,7 @@ const Signup = ({ navigation }) => {
                 }}
             />
             <DateInput
-                value={user.birthday}
+                defaultDate={user.birthday}
                 label={en.signup.birthday}
                 valid={birthdayValid}
                 error={birthdayValid === false}
@@ -159,7 +167,7 @@ const Signup = ({ navigation }) => {
                             ...user,
                             birthday: date,
                         });
-                    setbirthdayValid(valid && date <= new Date());
+                    setBirthdayValid(valid && date <= new Date());
                 }}
             />
             <Box />
@@ -173,6 +181,8 @@ const Signup = ({ navigation }) => {
                 }
                 onPress={() => {
                     dispatch(postUserprofile(user));
+                    let transitUser = { ...user, password: null };
+                    dispatch(setTransitAttributes(transitUser, 'userprofile'));
                     setIsSecondPage(false);
                     setEmailValid(false);
                 }}

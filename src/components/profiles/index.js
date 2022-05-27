@@ -31,6 +31,9 @@ export const ProfileInfoBox = (props) => {
                                 sliderWidth={SLIDER_WIDTH}
                                 height={100}
                                 activeSlideAlignment="start"
+                                textStyle={
+                                    props.expanded ? null : styles.avatarText
+                                }
                                 initials={initials}
                             />
                         </View>
@@ -48,7 +51,9 @@ export const ProfileInfoBox = (props) => {
                                     ? styles.expandedAvatar
                                     : styles.avatar
                             }
-                            textStyle={styles.avatarText}
+                            textStyle={
+                                props.expanded ? null : styles.avatarText
+                            }
                         />
                     )}
                 </View>
