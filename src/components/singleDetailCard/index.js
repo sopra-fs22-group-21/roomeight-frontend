@@ -1,15 +1,14 @@
 import dateFormat from 'dateformat';
-import { React, useEffect, useRef, useState } from 'react';
-import { ScrollView } from 'react-native';
-import { Dimensions, Pressable, View, Text } from 'react-native';
+import { React, useEffect, useState } from 'react';
+import { Dimensions, Pressable, ScrollView, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { useComponentSize } from '../../hooks/layout';
 import tagIcons from '../../resources/icons/tagIcons';
 import en from '../../resources/strings/en.json';
 import { SecondaryButton } from '../button';
 import { DoubleTap } from '../doubleTap';
 import { Gender } from '../gender';
+import LikeNumbers from '../likeNumbers';
 import { ProfilePicture } from '../profilePicture';
 import Tags from '../tags';
 import { Box, NormalText, PinkBackground, Strong, Title } from '../theme';
@@ -19,8 +18,6 @@ const ITEM_WIDTH = Dimensions.get('window').width - 80;
 const MAX_DESCRIPTION_LENGTH = 50;
 
 export const SingleDetailCard = (props) => {
-    const [contentSize, getContentSize] = useComponentSize();
-    const [cardSize, getCardSize] = useComponentSize();
     const [showFullDescription, setShowFullDescription] = useState(false);
     const [profilePictureSize, getProfilePictureSize] = useComponentSize();
     const userprofile = props.userprofile;
@@ -79,20 +76,11 @@ export const SingleDetailCard = (props) => {
                     onPress={props.onClickEdit}
                 />
             ) : null}
-            {props.onClickShowLikes ? (
-                <View style={styles.row}>
-                    <Icon
-                        style={styles.icon}
-                        name="like"
-                        type="foundation"
-                        size={20}
-                        color={styles.icon.color}
-                        onPress={props.onClickShowLikes}
-                    />
-                    <Text style={styles.liked}>
-                        {props.nrLiked}/{props.nrRoommates}
-                    </Text>
-                </View>
+            {props.preMatch ? (
+                <LikeNumbers
+                    style={styles.icon}
+                    userprofile={userprofile}
+                ></LikeNumbers>
             ) : null}
         </View>
     );
@@ -171,7 +159,7 @@ export const SingleDetailCard = (props) => {
     );
 
     return (
-        <PinkBackground>
+        <PinkBackground style={props.preMatch ? styles.preMatch : null}>
             <DoubleTap
                 doubleTap={props.onDoubleTap}
                 delay={200}

@@ -1,27 +1,28 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../resources/colors';
 const styles = StyleSheet.create({
-    profilePicture: {
-        height: 50,
-        width: 50,
-        marginRight: 4,
-    },
-    horizontal: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    name: {
-        fontSize: 20,
-        fontFamily: 'SourceSans3SemiBold',
-        lineHeight: 30,
-    },
     row: {
         flexDirection: 'row',
+    },
+    column1: {
+        paddingRight: 0,
+        flex: 1,
+        //flexShrink: 1,
+    },
+    column2: {
+        paddingLeft: -20,
+        paddingTop: 5,
+        paddingRight: 10,
+        flex: 1,
+        transform: [
+            {
+                translateX: 20,
+            },
+        ],
     },
     icon: {
         flex: 0,
         color: colors.secondary400,
-        paddingRight: 4,
     },
     liked: {
         fontFamily: 'SourceSans3SemiBold',

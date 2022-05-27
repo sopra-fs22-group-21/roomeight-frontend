@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import DateInput from '../../../components/dateInput';
 import { InputBox } from '../../../components/input';
-import { ScreenContainer } from '../../../components/screenContainer';
 import { MoveInMoveOutInput } from '../../../components/moveInMoveOutInput';
+import { ScreenContainer } from '../../../components/screenContainer';
 import Tags from '../../../components/tags';
 import {
     Box,

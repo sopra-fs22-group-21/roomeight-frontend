@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Pressable, Text } from 'react-native';
+import { Pressable } from 'react-native';
 import { View } from 'react-native-animatable';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import { Tab } from 'react-native-elements/dist/tab/Tab';

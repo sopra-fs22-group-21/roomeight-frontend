@@ -1,7 +1,7 @@
 import { auth } from '../../../firebase/firebase-config';
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
-import { getDiscoverProfiles, updateDiscoverProfiles } from './discoverActions';
+import { getDiscoverProfiles } from './discoverActions';
 import { getFlatprofile } from './getFlatprofiles';
 
 const getCurrentUserprofileRequest = (request) => ({
@@ -65,6 +65,7 @@ export const reloadCurrentUserprofile = () => (dispatch) => {
         .then((response) => {
             userprofile = response.data;
             dispatch(getCurrentUserprofileSuccess(response.data));
+            if (userprofile.isAdvertisingRoom) dispatch(getFlatprofile());
         })
         .catch((error) => {
             dispatch(getCurrentUserprofileFailure(error));

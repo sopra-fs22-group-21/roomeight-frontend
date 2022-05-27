@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { KeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddressMap } from '../../../components/addressMap';
 import { Input } from '../../../components/input';
-import PictureInput from '../../../components/pictureInput';
 import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
@@ -13,7 +11,6 @@ import {
     NormalText,
     ScreenPadding,
 } from '../../../components/theme';
-import { pickImage } from '../../../helper/imageHandler';
 import { postFlatprofile } from '../../../redux/actions/postFlatprofile';
 import { setTransitAttributes } from '../../../redux/actions/setTransitAttributes';
 import en from '../../../resources/strings/en.json';

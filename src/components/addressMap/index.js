@@ -3,8 +3,6 @@ import { View } from 'react-native';
 import Geocoder from 'react-native-geocoding';
 import MapView, { Marker } from 'react-native-maps';
 import { useSelector } from 'react-redux';
-import { FlatDetailCard } from '../flatDetailCard';
-import { EmptyCard } from '../publicProfileCard';
 
 export const AddressMap = (props) => {
     const [coordinates, setCoordinates] = useState({

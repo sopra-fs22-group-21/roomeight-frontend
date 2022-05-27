@@ -1,4 +1,3 @@
-import Flatprofile from '../../models/Flatprofile';
 import Userprofile from '../../models/Userprofile';
 import * as Constants from '../constants';
 
@@ -20,6 +19,7 @@ const initialState = {
  */
 const userprofileState = (state = initialState, action) => {
     switch (action.type) {
+        /*
         case Constants.GET_DISCOVER_PROFILES_REQUEST:
         case Constants.GET_USERPROFILE_REQUEST:
         case Constants.UPDATE_USERPROFILE_REQUEST:
@@ -27,7 +27,7 @@ const userprofileState = (state = initialState, action) => {
                 ...state,
                 loading: true,
             };
-
+        */
         case Constants.GET_DISCOVER_PROFILES_SUCCESS:
             const newProfiles = action.payload.map(
                 (data) => new Userprofile(data)
@@ -46,7 +46,6 @@ const userprofileState = (state = initialState, action) => {
                 ...state,
                 error: undefined,
                 discoverProfiles: updatedProfiles,
-                lastViewedIds: [],
                 loading: false,
             };
 
@@ -56,24 +55,15 @@ const userprofileState = (state = initialState, action) => {
                 discoverProfiles: action.payload.map(
                     (data) => new Userprofile(data)
                 ),
-                loading: false,
             };
 
         case Constants.RELOAD_DISCOVER_PROFILES:
             return {
                 ...state,
                 discoverProfiles: [],
+                lastViewedIds: [],
                 loading: true,
             };
-        case Constants.POST_DISLIKE_SUCCESS:
-            return {
-                ...state,
-                lastViewedIds: [
-                    ...state.lastViewedIds,
-                    action.payload.profileId,
-                ],
-            };
-
         case Constants.POST_DISLIKE_REQUEST:
         case Constants.POST_LIKE_REQUEST:
             return {

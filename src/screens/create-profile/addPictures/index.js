@@ -3,7 +3,6 @@ import * as ImagePicker from 'expo-image-picker';
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { View } from 'react-native-animatable';
-import { colors } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import PictureInput from '../../../components/pictureInput';
 import { ScreenContainer } from '../../../components/screenContainer';

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput, View } from 'react-native';
-import { Box, Strong } from '../theme';
-import styles from './styles';
 import { CheckBox as CB } from 'react-native-elements';
 import colors from '../../resources/colors';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Box, Strong } from '../theme';
+import styles from './styles';
 
 export const Input = (props) => (
     <Box>

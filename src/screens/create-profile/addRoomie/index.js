@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { AddRoomieInput } from '../../../components/addRoomieInput';
-import { ScreenContainer } from '../../../components/screenContainer';
 import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { AddRoomieInput } from '../../../components/addRoomieInput';
 import { PrimaryButton } from '../../../components/button';
+import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
     Heading,
@@ -11,10 +11,9 @@ import {
     ScreenPadding,
     SmallHeadingWithBack,
 } from '../../../components/theme';
+import { postRoommateToFlat } from '../../../redux/actions/postFlatprofile';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
-import { postRoommateToFlat } from '../../../redux/actions/postFlatprofile';
-import { getFlatprofile } from '../../../redux/actions/getFlatprofiles';
 
 const AddRoomie = ({ navigation, route }) => {
     const [emailValid, setEmailValid] = useState(null);
@@ -53,10 +52,7 @@ const AddRoomie = ({ navigation, route }) => {
                                     (email) =>
                                         dispatch(postRoommateToFlat(email))
                                 );
-                                dispatch(getFlatprofile());
                                 navigation.goBack();
-                            } else {
-                                null;
                             }
                         }}
                     >

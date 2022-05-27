@@ -1,13 +1,10 @@
-import * as Notifications from 'expo-notifications';
 import {
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signOut,
 } from 'firebase/auth';
 import { auth } from '../../../firebase/firebase-config';
-import { registerForPushNotificationsAsync } from '../../helper/notificationsHelper';
 import * as Constants from '../constants';
-import { getDiscoverProfiles } from './discoverActions';
 import { chatMemberShipListener, connectionChanges } from './chatActions';
 import { getCurrentUserprofile } from './getUserprofiles';
 import { notificationsListener } from './notificationActions';
@@ -55,6 +52,7 @@ export const loginUser = (email, password) => async (dispatch) => {
     try {
         await signInWithEmailAndPassword(auth, email, password);
         await dispatch(postPushToken());
+        dispatch(connectionChanges('online'));
     } catch (error) {
         dispatch(loginUserFailure(error));
     }
@@ -72,9 +70,8 @@ export const userAuthStateListener = () => (dispatch) => {
             //user is logged in
             dispatch(loginUserSuccess(user));
             dispatch(getCurrentUserprofile());
-            dispatch(chatMemberShipListener());
-            dispatch(connectionChanges());
             dispatch(notificationsListener());
+            dispatch(chatMemberShipListener());
         } else {
             //no user logged in
             dispatch(logoutUserSuccess());
@@ -92,7 +89,7 @@ export const userAuthStateListener = () => (dispatch) => {
 export const logoutUser = () => async (dispatch) => {
     dispatch(logoutUserRequest());
     await dispatch(deletePushToken());
-
+    dispatch(connectionChanges('offline'));
     signOut(auth).catch((error) => {
         dispatch(logoutUserFailure(error));
     });

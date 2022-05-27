@@ -1,13 +1,8 @@
 import * as Notifications from 'expo-notifications';
-import { onChildChanged, ref } from 'firebase/database';
 import { AppState } from 'react-native';
-import { database } from '../../../firebase/firebase-config';
 import * as Constants from '../constants';
 import { getFlatprofile } from './getFlatprofiles';
-import {
-    getCurrentUserprofile,
-    reloadCurrentUserprofile,
-} from './getUserprofiles';
+import { reloadCurrentUserprofile } from './getUserprofiles';
 
 export const notificationsListener = () => (dispatch, getState) => {
     dispatch({
@@ -24,6 +19,7 @@ export const notificationsListener = () => (dispatch, getState) => {
     const unsubF = Notifications.addNotificationReceivedListener(
         (notification) => {
             const { data } = notification.request.content;
+            console.log(notification);
             if (data.type === 'NEW_LIKE') {
                 dispatch({
                     type: Constants.NEW_LIKE,
@@ -31,6 +27,14 @@ export const notificationsListener = () => (dispatch, getState) => {
             } else if (data.type === 'NEW_MATCH') {
                 dispatch({
                     type: Constants.NEW_MATCH,
+                });
+            } else if (data.type === 'ROOMMATE_LEFT_FLAT') {
+                dispatch({
+                    type: Constants.ROOMMATE_LEFT_FLAT,
+                });
+            } else if (data.type === 'ROOMMATE_JOINED_FLAT') {
+                dispatch({
+                    type: Constants.ROOMMATE_JOINED_FLAT,
                 });
             }
             if (getState().userprofileState.userprofile.isAdvertisingRoom)
@@ -51,6 +55,14 @@ export const notificationsListener = () => (dispatch, getState) => {
                 } else if (data.type === 'NEW_MATCH') {
                     dispatch({
                         type: Constants.NEW_MATCH,
+                    });
+                } else if (data.type === 'ROOMMATE_LEFT_FLAT') {
+                    dispatch({
+                        type: Constants.ROOMMATE_LEFT_FLAT,
+                    });
+                } else if (data.type === 'ROOMMATE_JOINED_FLAT') {
+                    dispatch({
+                        type: Constants.ROOMMATE_JOINED_FLAT,
                     });
                 }
                 if (getState().userprofileState.userprofile.isAdvertisingRoom)

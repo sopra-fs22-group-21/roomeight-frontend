@@ -1,17 +1,10 @@
 import { React, useState } from 'react';
-import {
-    Dimensions,
-    FlatList,
-    Pressable,
-    View,
-    Text,
-    Modal,
-} from 'react-native';
+import { Dimensions, FlatList, Pressable, View } from 'react-native';
 import { ImageGallery } from '../imageGallery';
+import LikeNumbers from '../likeNumbers';
 import { ProfilePicture } from '../profilePicture';
 import { NormalText, Strong } from '../theme';
 import styles from './styles';
-import { Icon } from 'react-native-elements';
 
 const SLIDER_WIDTH = Dimensions.get('window').width - 90;
 
@@ -78,22 +71,13 @@ export const ProfileInfoBox = (props) => {
                         </>
                     ) : null}
                 </View>
-                {props.onClickShowLikes ? (
+                {props.preMatch ? (
                     <View>
-                        <Pressable
-                            style={styles.row}
-                            onPress={props.onClickShowLikes}
-                        >
-                            <Icon
+                        <Pressable style={styles.row} onPress={props.preMatch}>
+                            <LikeNumbers
                                 style={styles.icon}
-                                name="like"
-                                type="foundation"
-                                size={20}
-                                color={styles.icon.color}
-                            />
-                            <Text style={styles.liked}>
-                                {props.nrLiked}/{props.nrRoommates}
-                            </Text>
+                                userprofile={props.profile}
+                            ></LikeNumbers>
                         </Pressable>
                     </View>
                 ) : null}

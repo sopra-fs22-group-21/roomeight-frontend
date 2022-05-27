@@ -1,18 +1,18 @@
+import { KeyboardAvoidingView } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { PrimaryButton } from '../button';
-import styles from './styles';
+import { Icon } from 'react-native-elements/dist/icons/Icon';
+import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
+import colors from '../../resources/colors';
 import en from '../../resources/strings/en.json';
-import { KeyboardAvoidingView } from 'native-base';
-import { Box, NormalText } from '../theme';
+import { PrimaryButton } from '../button';
+import { GenderInput } from '../gender';
 import { CheckBox, InputBox, OptionBoxes } from '../input';
 import { NumberRange } from '../numberRange';
 import Tags from '../tags';
-import { ScrollView } from 'react-native-gesture-handler';
-import { GenderInput } from '../gender';
-import { Icon } from 'react-native-elements/dist/icons/Icon';
-import colors from '../../resources/colors';
+import { Box, NormalText } from '../theme';
+import styles from './styles';
 
 export const Filter = (props) => (
     <View style={styles.filter}>

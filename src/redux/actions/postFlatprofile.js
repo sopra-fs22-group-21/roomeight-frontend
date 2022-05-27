@@ -1,7 +1,7 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 import { getFlatprofile } from './getFlatprofiles';
-import { updateProfile } from './updateActions';
+import { getCurrentUserprofile } from './getUserprofiles';
 
 const postFlatprofileRequest = () => ({
     type: Constants.POST_FLATPROFILE_REQUEST,
@@ -84,8 +84,8 @@ export const postRoommateToFlat = (email) => (dispatch) => {
         .then((response) => {
             console.log('could add roommate with email ' + email);
             console.log(JSON.stringify(response.data));
-
             dispatch(postRoommateToFlatSuccess(response.data));
+            dispatch(getFlatprofile());
         })
         .catch((error) => {
             console.log('error post flatprofile');
@@ -102,6 +102,7 @@ export const postLeaveFlat = () => (dispatch) => {
         .then((response) => {
             console.log('You have successfully left the flat.');
             dispatch(postLeaveFlatSuccess(response.data));
+            dispatch(getCurrentUserprofile());
         })
         .catch((error) => {
             console.log('error post leave flat');

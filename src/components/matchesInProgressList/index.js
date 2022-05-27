@@ -1,34 +1,20 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { View, Modal } from 'react-native';
-import styles from './styles';
+import { Modal, View } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
+import { useSelector } from 'react-redux';
 import en from '../../resources/strings/en.json';
-import { Box, NormalText, Title } from '../theme';
-import { EmptyCard } from '../publicProfileCard';
-import { ProfileInfoBox } from '../profiles';
 import LikesList from '../likesList';
+import { ProfileInfoBox } from '../profiles';
+import { EmptyCard } from '../publicProfileCard';
+import { Box, NormalText, Title } from '../theme';
+import styles from './styles';
 
 const MatchesInProgressList = ({ navigation }, props) => {
-    const { likes, loading } = useSelector((state) => state.likesState);
+    const { likes } = useSelector((state) => state.likesState);
     const [modalVisible, setModalVisible] = useState(false);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
     const [likesOfProfile, setLikesOfProfile] = useState(null);
-    //if (loading) return <M8Loader/>;
-    function countLikes(profileId) {
-        if (flatprofile.likes) {
-            const filtered = flatprofile.likes.filter((like) => {
-                return Object.keys(like.likedUser)[0] === profileId;
-            });
-            if (filtered.length !== 0) {
-                return filtered[0].likes.length;
-            } else {
-                return 0;
-            }
-        } else {
-            return null;
-        }
-    }
+
     if (likes.length < 1)
         return (
             <>
@@ -60,17 +46,10 @@ const MatchesInProgressList = ({ navigation }, props) => {
                                         profile: profile,
                                     });
                                 }}
-                                onClickShowLikes={() => {
+                                preMatch={() => {
                                     setModalVisible(true);
                                     setLikesOfProfile(profile);
                                 }}
-                                nrLiked={countLikes(profile.profileId)}
-                                nrRoommates={
-                                    flatprofile.roomMates
-                                        ? Object.keys(flatprofile.roomMates)
-                                              .length
-                                        : null
-                                }
                             />
                         );
                 })}

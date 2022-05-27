@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 import { setTransitAttributes } from '../../redux/actions/setTransitAttributes';
+import en from '../../resources/strings/en.json';
 import { SecondaryButton } from '../button';
 import { Input } from '../input';
-import en from '../../resources/strings/en.json';
 
 //always writes emails into transitstate
 export const AddRoomieInput = (props) => {
@@ -37,7 +37,7 @@ export const AddRoomieInput = (props) => {
                     setRoommates(copy);
                     if (emailRegex.test(text)) {
                         setEmailValid(true);
-                        props.onChange(copy, true);
+                        if (props.onChange) props.onChange(copy, true);
                         dispatch(
                             setTransitAttributes(
                                 {

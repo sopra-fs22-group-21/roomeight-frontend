@@ -14,10 +14,9 @@ import {
     Title,
 } from '../../../components/theme';
 import { postUserprofile } from '../../../redux/actions/postUserprofile';
-import colors from '../../../resources/colors';
 import en from '../../../resources/strings/en.json';
-import styles from './styles';
 import Loading from '../../loading';
+import styles from './styles';
 
 const Signup = ({ navigation }) => {
     const [user, setUser] = useState({});

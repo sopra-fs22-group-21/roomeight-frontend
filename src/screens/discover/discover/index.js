@@ -15,20 +15,17 @@ import {
 import { ScreenContainer } from '../../../components/screenContainer';
 import { Box, SmallHeading } from '../../../components/theme';
 import { useComponentSize } from '../../../hooks/layout';
-import { goToChat } from '../../../redux/actions/chatActions';
 import {
+    postDislike,
     postLikeFlat,
     postLikeUser,
-    postDislike,
-    updateDiscoverProfiles,
-    getDiscoverProfiles,
     reloadDiscoverProfiles,
+    updateDiscoverProfiles,
 } from '../../../redux/actions/discoverActions';
 import { updateProfile } from '../../../redux/actions/updateActions';
 import * as Constants from '../../../redux/constants';
 import colors from '../../../resources/colors';
 import en from '../../../resources/strings/en.json';
-import Loading from '../../loading';
 import styles from './styles';
 
 const ITEM_HEIGHT = Dimensions.get('screen').height - 170;
@@ -52,11 +49,10 @@ const Discover = ({ navigation }) => {
     const [match, setMatch] = useState(undefined);
     const [matchIsComplete, setMatchIsComplete] = useState(undefined);
     const [isShowingSettings, setIsShowingSettings] = useState(false);
-    //const [filterTags, setFilterTags] = useState(null);
 
     useEffect(() => {
         if (newMatch) {
-            setMatch(matches[lastLiked]);
+            setMatch(matches[newMatch]);
             setMatchIsComplete(true);
         }
     }, [matches]);
@@ -87,11 +83,21 @@ const Discover = ({ navigation }) => {
         }
     }, [loading, discoverProfiles]);
 
+    const likedBack = (userprofile) => {
+        if (userprofile.likes !== null) {
+            if (userprofile.likes.includes(flatprofile.profileId)) {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    };
+
     const removeProfile = (index) => {
         if (index >= 0 && profiles.length > 0) {
             if (!likedPrevious && !dislikedPrevious)
                 dispatch(postDislike(profiles[index].profileId));
-            const prof = [...discoverProfiles];
+            const prof = [...profiles];
             prof.splice(index, 1);
             dispatch(updateDiscoverProfiles(prof));
         }
@@ -109,21 +115,6 @@ const Discover = ({ navigation }) => {
             carousel.current.snapToNext();
         }, 500);
     };
-
-    function countLikes(profileId) {
-        if (flatprofile.likes) {
-            const filtered = flatprofile.likes.filter((like) => {
-                return Object.keys(like.likedUser)[0] === profileId;
-            });
-            if (filtered.length !== 0) {
-                return filtered[0].likes.length;
-            } else {
-                return 0;
-            }
-        } else {
-            return null;
-        }
-    }
 
     const handleDislike = async (profileId) => {
         setDislikedPrevious(true);
@@ -148,13 +139,11 @@ const Discover = ({ navigation }) => {
                         profile={item}
                         key={item.profileId}
                         onDoubleTap={() => handleLike(item.profileId)}
-                        onClickShowLikes={() => {
-                            setShowLike(true);
-                        }}
-                        nrLiked={countLikes(item.profileId)}
-                        nrRoommates={
-                            flatprofile.roomMates
-                                ? Object.keys(flatprofile.roomMates).length
+                        preMatch={
+                            likedBack(item)
+                                ? () => {
+                                      setShowLike(true);
+                                  }
                                 : null
                         }
                     />

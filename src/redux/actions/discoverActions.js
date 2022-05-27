@@ -1,7 +1,5 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
-import { getFlatprofile } from './getFlatprofiles';
-import { reloadCurrentUserprofile } from './getUserprofiles';
 
 const DISCOVER_QUANTITY = 5;
 
@@ -57,7 +55,7 @@ const getDiscoverProfilesFailure = (error) => ({
  * @dispatches {@link getDiscoverProfilesFailure} on get failure with error payload
  */
 export const getDiscoverProfiles = () => (dispatch, getState) => {
-    const url = '/discover/5/';
+    const url = '/discover/' + DISCOVER_QUANTITY;
     dispatch(getDiscoverProfilesRequest(url));
 
     apiClient()
@@ -90,13 +88,6 @@ export const postLikeFlat = (otherProfileId) => (dispatch, getState) => {
                     profileId: otherProfileId,
                 })
             );
-            if (response.data.isMatch) {
-                dispatch(reloadCurrentUserprofile());
-                dispatch({
-                    type: Constants.NEW_MATCH,
-                    payload: otherProfileId,
-                });
-            }
         })
         .catch((error) => {
             console.warn('error liking flat');
@@ -149,13 +140,6 @@ export const postLikeUser = (otherProfileId) => (dispatch) => {
                     profileId: otherProfileId,
                 })
             );
-            if (response.data.isMatch) {
-                dispatch({
-                    type: Constants.NEW_MATCH,
-                    payload: otherProfileId,
-                });
-            }
-            dispatch(getFlatprofile());
         })
         .catch((error) => {
             console.warn('error liking user');

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Dimensions, Pressable, View, Text } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import HeartCutOut from '../../../assets/heartCutOut';
+import en from '../../resources/strings/en.json';
 import { SecondaryButton } from '../button';
 import { ProfilePicture } from '../profilePicture';
-import { Box, Heading, NormalText, Strong } from '../theme';
-import en from '../../resources/strings/en.json';
+import { Heading, NormalText } from '../theme';
 import styles from './styles';
 
 export const ItsAMatch = ({ profile, onDiscard, navigation, isComplete }) => {

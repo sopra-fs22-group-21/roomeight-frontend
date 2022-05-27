@@ -75,6 +75,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
+    preMatch: {
+        borderWidth: 8,
+        borderColor: colors.primaryShadow,
+    },
     /* messageButton: {
         position: 'absolute',
         bottom: 0,

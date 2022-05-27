@@ -2,8 +2,8 @@ import React from 'react';
 import { FlatList, Pressable, View } from 'react-native';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import { ProfilePicture } from '../profilePicture';
-import styles from './styles';
 import { Box } from '../theme';
+import styles from './styles';
 
 const LikesList = (props) => {
     const flatprofile = props.flatprofile;
@@ -58,9 +58,7 @@ const LikesList = (props) => {
                 <FlatList
                     numColumns={5}
                     data={getRoomiesLiked()}
-                    keyExtractor={(item) => {
-                        item;
-                    }}
+                    keyExtractor={(roomie) => roomie.profileId}
                     renderItem={({ item }) => {
                         return item ? (
                             <ProfilePicture
@@ -84,9 +82,7 @@ const LikesList = (props) => {
                     <FlatList
                         numColumns={5}
                         data={getRoomiesDisliked()}
-                        keyExtractor={(item) => {
-                            item;
-                        }}
+                        keyExtractor={(roomie) => roomie.profileId}
                         renderItem={({ item }) => {
                             return item ? (
                                 <ProfilePicture

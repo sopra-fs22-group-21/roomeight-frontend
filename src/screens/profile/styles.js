@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         bottom: 1,
         backgroundColor: 'transparent',
         paddingBottom: 0,
-        paddingTop: 10,
+        paddingTop: 0,
         margin: 0,
         marginTop: 0,
         marginBottom: 0,
@@ -69,9 +69,9 @@ const styles = StyleSheet.create({
         paddingRight: 5,
     },
     name: {
-        fontFamily: 'SourceSans3Bold',
         fontSize: 20,
-        lineHeight: 28,
+        lineHeight: 25,
+        paddingBottom: 10,
         alignSelf: 'center',
     },
 });

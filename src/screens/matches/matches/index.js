@@ -2,19 +2,18 @@ import React, { useState } from 'react';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
 import { useSelector } from 'react-redux';
 import { MatchesMap } from '../../../components/addressMap';
-import { ProfileInfoBox } from '../../../components/profiles';
-import { EmptyCard } from '../../../components/publicProfileCard';
+import MatchesInProgressList from '../../../components/matchesInProgressList';
+import MatchesList from '../../../components/matchesList';
 import { ScreenContainer } from '../../../components/screenContainer';
 import { SmallHeading } from '../../../components/theme';
 import en from '../../../resources/strings/en.json';
-import MatchesList from '../../../components/matchesList';
-import MatchesInProgressList from '../../../components/matchesInProgressList';
 import styles from './styles';
 
-const Matches = ({ navigation }) => {
-    const { matches } = useSelector((state) => state.matchesState);
+const Matches = ({ route, navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(
+        route.params && route.params.showMatchesInProgress ? 1 : 0
+    );
 
     const secondTab = userprofile.isAdvertisingRoom ? (
         <MatchesInProgressList navigation={navigation} profile={userprofile} />
