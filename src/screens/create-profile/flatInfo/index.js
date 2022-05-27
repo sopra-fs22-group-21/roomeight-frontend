@@ -50,7 +50,6 @@ const FlatInfo = ({ navigation }) => {
 
                         <Input
                             label={en.flatInfo.biography}
-                            multiline
                             defaultValue={flat.biography}
                             placeholder={en.flatInfo.biographyPlaceholder}
                             onChangeText={(text) => {

@@ -53,7 +53,18 @@ const Done = ({ navigation, route }) => {
                                         'flatprofile',
                                         flatId
                                     )
-                                ).then(() => navigation.navigate('Discover'));
+                                ).then(() => {
+                                    if (transitFlatprofile.roommateEmails) {
+                                        transitFlatprofile.roommateEmails.forEach(
+                                            (email) => {
+                                                dispatch(
+                                                    postRoommateToFlat(email)
+                                                );
+                                            }
+                                        );
+                                    }
+                                    navigation.navigate('Discover');
+                                });
                             }
                             if (
                                 route.params.includes('single') ||

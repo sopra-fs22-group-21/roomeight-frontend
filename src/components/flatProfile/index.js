@@ -70,17 +70,6 @@ const FlatProfile = ({ navigation }, props) => {
                         }
                     />
                     <View>
-                        <Input
-                            label={en.roomInfo.address}
-                            error={addressValid === false}
-                            defaultValue={flatprofile.address}
-                            onChangeText={(text) =>
-                                setFlat({
-                                    ...flat,
-                                    address: text,
-                                })
-                            }
-                        />
                         <MoveInMoveOutInput
                             allowPermanentNull={false}
                             moveInDate={
@@ -119,7 +108,9 @@ const FlatProfile = ({ navigation }, props) => {
                             keyboardType="number-pad"
                             error={rentValid === false}
                             placeholder="CHF"
-                            defaultValue={flatprofile.rent}
+                            defaultValue={
+                                flatprofile.rent ? flatprofile.rent + '' : null
+                            }
                             onChangeText={(text) => {
                                 setRentValid(!isNaN(Number(text)));
                                 setFlat({
@@ -133,7 +124,11 @@ const FlatProfile = ({ navigation }, props) => {
                             keyboardType="number-pad"
                             placeholder="m2"
                             error={roomSizeValid === false}
-                            defaultValue={flatprofile.roomSize}
+                            defaultValue={
+                                flatprofile.roomSize
+                                    ? flatprofile.roomSize + ''
+                                    : null
+                            }
                             onChangeText={(text) => {
                                 setRoomSizeValid(!isNaN(Number(text)));
                                 setFlat({
@@ -162,7 +157,11 @@ const FlatProfile = ({ navigation }, props) => {
                                 label={en.flatInfo.nrRoommates}
                                 keyboardType="number-pad"
                                 error={nrRoommatesValid === false}
-                                defaultValue={flatprofile.numberOfRoommates}
+                                defaultValue={
+                                    flatprofile.numberOfRoommates
+                                        ? flatprofile.numberOfRoommates + ''
+                                        : null
+                                }
                                 onChangeText={(text) => {
                                     setNrRoommatesValid(!isNaN(Number(text)));
                                     setFlat({
@@ -176,12 +175,31 @@ const FlatProfile = ({ navigation }, props) => {
                             label={en.roomInfo.nrBathrooms}
                             keyboardType="number-pad"
                             error={nrBathroomsValid === false}
-                            defaultValue={flatprofile.numberOfBaths}
+                            defaultValue={
+                                flatprofile.numberOfBaths
+                                    ? flatprofile.numberOfBaths + ''
+                                    : null
+                            }
                             onChangeText={(text) => {
                                 setNrBathroomsValid(!isNaN(Number(text)));
                                 setFlat({
                                     ...flat,
                                     numberOfBaths: Number(text),
+                                });
+                            }}
+                        />
+                        <Input
+                            label={en.flatInfo.biography}
+                            defaultValue={
+                                flatprofile.biography
+                                    ? flatprofile.biography
+                                    : null
+                            }
+                            placeholder={en.flatInfo.biographyPlaceholder}
+                            onChangeText={(text) => {
+                                setFlat({
+                                    ...flat,
+                                    biography: text,
                                 });
                             }}
                         />
