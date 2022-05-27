@@ -22,6 +22,7 @@ export const ImageGallery = (props) => {
                     <ProfilePicture
                         image={item}
                         style={styles.image}
+                        textStyle={props.textStyle}
                         initials={props.initials}
                     />
                     {props.overlay ? (

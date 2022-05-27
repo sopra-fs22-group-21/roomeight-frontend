@@ -2,19 +2,22 @@ import { StyleSheet } from 'react-native';
 import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     avatar: {
-        width: 40,
         marginRight: 15,
         borderRadius: 10,
+        width: 40,
+        padding: 0,
     },
     expandedAvatar: {
         aspectRatio: null,
         height: 100,
         marginRight: 5,
         borderRadius: 20,
+        marginBottom: 5,
     },
     avatarText: {
-        fontSize: 15,
+        fontSize: 20,
     },
+
     gallery: {
         paddingBottom: 10,
         paddingTop: 5,
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         flex: 0,
-        color: colors.secondary400,
+        color: colors.red,
     },
     row: {
         flexDirection: 'row',

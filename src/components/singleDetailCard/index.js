@@ -105,7 +105,7 @@ export const SingleDetailCard = (props) => {
                     >
                         <Strong>{en.discover.description}</Strong>
                         <NormalText style={styles.text}>
-                            {showFullDescription
+                            {true //showFullDescription
                                 ? userprofile.description
                                 : slicedDescription()}
                         </NormalText>

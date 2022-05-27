@@ -64,6 +64,11 @@ const LikesList = (props) => {
                             <ProfilePicture
                                 style={styles.profilePicture}
                                 image={item.pictureReferences[0]}
+                                initials={
+                                    item.firstName.charAt(0).toUpperCase() +
+                                    item.lastName.charAt(0).toUpperCase()
+                                }
+                                textStyle={{ fontSize: 20, padding: 0 }}
                             ></ProfilePicture>
                         ) : null;
                     }}

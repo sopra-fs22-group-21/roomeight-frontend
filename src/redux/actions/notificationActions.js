@@ -2,7 +2,10 @@ import * as Notifications from 'expo-notifications';
 import { AppState } from 'react-native';
 import * as Constants from '../constants';
 import { getFlatprofile } from './getFlatprofiles';
-import { reloadCurrentUserprofile } from './getUserprofiles';
+import {
+    getCurrentUserprofile,
+    reloadCurrentUserprofile,
+} from './getUserprofiles';
 
 export const notificationsListener = () => (dispatch, getState) => {
     dispatch({
@@ -37,9 +40,7 @@ export const notificationsListener = () => (dispatch, getState) => {
                     type: Constants.ROOMMATE_JOINED_FLAT,
                 });
             }
-            if (getState().userprofileState.userprofile.isAdvertisingRoom)
-                dispatch(getFlatprofile());
-            dispatch(reloadCurrentUserprofile());
+            dispatch(getCurrentUserprofile());
         }
     );
 
@@ -67,7 +68,7 @@ export const notificationsListener = () => (dispatch, getState) => {
                 }
                 if (getState().userprofileState.userprofile.isAdvertisingRoom)
                     dispatch(getFlatprofile());
-                dispatch(reloadCurrentUserprofile());
+                dispatch(getCurrentUserprofile());
             }
         }
     );

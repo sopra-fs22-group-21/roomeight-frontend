@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         flex: 0,
-        color: colors.secondary400,
+        color: colors.red,
     },
     card: {
         flex: 1,

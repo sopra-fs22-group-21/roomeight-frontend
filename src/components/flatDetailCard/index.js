@@ -75,6 +75,15 @@ export const FlatDetailCard = (props) => {
     const firstPage = (
         <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
             <View style={{ height: '100%' }}>
+                {flatprofile.biography ? (
+                    <Box>
+                        <NormalText
+                            style={{ ...styles.text, textAlign: 'center' }}
+                        >
+                            {flatprofile.biography}
+                        </NormalText>
+                    </Box>
+                ) : null}
                 <View style={{ flexShrink: 1 }}>
                     <Pressable onPress={props.onPress}>
                         <ProfilePicture
@@ -90,11 +99,18 @@ export const FlatDetailCard = (props) => {
                 </View>
                 <Box />
                 <View>
-                    {flatprofile.biography ? (
+                    {flatprofile.description ? (
                         <Box>
                             <NormalText style={styles.text}>
-                                {flatprofile.biography}
+                                {flatprofile.description}
                             </NormalText>
+                        </Box>
+                    ) : null}
+
+                    {flatprofile.tags && flatprofile.tags.length > 0 ? (
+                        <Box>
+                            <Strong>{en.discover.tags}</Strong>
+                            <Tags tags={selectedTags} style={styles.tags} />
                         </Box>
                     ) : null}
 
@@ -149,24 +165,6 @@ export const FlatDetailCard = (props) => {
                     delay={200}
                     style={{ flex: 1 }}
                 >
-                    {flatprofile.description ? (
-                        <Box>
-                            <Strong style={styles.title}>
-                                {en.discover.description}
-                            </Strong>
-                            <NormalText style={styles.text}>
-                                {flatprofile.description}
-                            </NormalText>
-                        </Box>
-                    ) : null}
-
-                    {flatprofile.tags && flatprofile.tags.length > 0 ? (
-                        <Box>
-                            <Strong>{en.discover.tags}</Strong>
-                            <Tags tags={selectedTags} style={styles.tags} />
-                        </Box>
-                    ) : null}
-
                     {flatprofile.numberOfRoommates ? (
                         <Box>
                             <Strong style={styles.title}>

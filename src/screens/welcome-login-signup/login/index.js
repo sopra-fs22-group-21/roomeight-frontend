@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
@@ -15,21 +16,24 @@ import { loginUser } from '../../../redux/actions/authActions';
 import en from '../../../resources/strings/en.json';
 import Loading from '../../loading';
 import styles from './styles';
+import Loader from 'react-native-modal-loader';
+import colors from '../../../resources/colors';
 
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [typing, setTyping] = useState(true);
     const { authErrors } = useSelector((state) => state.errorState);
-    const [dispatched, setDispatched] = useState(false);
     const { loading, loggedIn } = useSelector((state) => state.authState);
 
     return (
         <>
-            {loading || loggedIn ? (
+            {loggedIn ? (
                 <Loading />
             ) : (
                 <ScreenContainer onPressBack={() => navigation.goBack()}>
+                    <Loader loading={loading} color={colors.secondary200} />
                     <ScreenPadding>
                         <KeyboardAwareScrollView
                             showsVerticalScrollIndicator={false}
@@ -42,21 +46,33 @@ const Login = ({ navigation }) => {
                             <Input
                                 label={en.login.email}
                                 keyboardType="email-address"
+                                value={email}
                                 autoCapitalize="none"
                                 onChangeText={(text) => {
                                     setEmail(text);
-                                    setDispatched(false);
+                                    setTyping(true);
                                 }}
                             />
                             <Input
                                 label={en.login.password}
                                 secureTextEntry={true}
+                                defaultValue={password}
                                 onChangeText={(text) => {
                                     setPassword(text);
-                                    setDispatched(false);
+                                    setTyping(true);
                                 }}
                             />
-                            {authErrors.infoForUser && dispatched ? (
+                            <Box />
+                            <PrimaryButton
+                                onPress={() => {
+                                    setTyping(false);
+                                    dispatch(loginUser(email, password));
+                                }}
+                            >
+                                Login
+                            </PrimaryButton>
+                            <Box />
+                            {authErrors.infoForUser && typing ? (
                                 <>
                                     <Box />
                                     <TextBlock style={styles.error}>
@@ -64,16 +80,6 @@ const Login = ({ navigation }) => {
                                     </TextBlock>
                                 </>
                             ) : null}
-
-                            <Box />
-                            <PrimaryButton
-                                onPress={() => {
-                                    setDispatched(true);
-                                    dispatch(loginUser(email, password));
-                                }}
-                            >
-                                Login
-                            </PrimaryButton>
                         </KeyboardAwareScrollView>
                     </ScreenPadding>
                 </ScreenContainer>
