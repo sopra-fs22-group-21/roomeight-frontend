@@ -34,7 +34,12 @@ in a playful and fun way
   <img alt="Profile" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/Profile.PNG">
   <img alt="MAP" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/Map.PNG">
   <img alt="Discover" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/UsersDiscover.GIF">
+  <img alt="Chat" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/main/screenshots/Chat.GIF">
 </p>
+
+Roomeight allows each user to create a profile for themselves. Additionally they can create a profile for a flat to advertise it to future roommates.
+
+ Then they can discover new relevant profiles by customizing their filters. By liking other profiles they can create matches and get in contact with them through the chat. Happy matching!
 
 # Technologies
 
