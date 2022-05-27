@@ -31,7 +31,6 @@ in a playful and fun way
 <p align="center">
   <img alt="Welcome" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/Welcome.PNG">
   <img alt="Filters" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/Filters.GIF">
-  <img alt="Profile" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/Profile.PNG">
   <img alt="MAP" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/Map.PNG">
   <img alt="Discover" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/UsersDiscover.GIF">
   <img alt="Chat" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/main/screenshots/Chat.GIF">
