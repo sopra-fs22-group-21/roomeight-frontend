@@ -3,7 +3,6 @@ import colors from '../../resources/colors';
 
 const styles = StyleSheet.create({
     overview: {
-        backgroundColor: colors.secondary100,
         padding: 5,
         marginBottom: 10,
         justifyContent: 'flex-start',

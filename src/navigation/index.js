@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userAuthStateListener } from '../redux/actions/authActions';
+import colors from '../resources/colors';
 import addedToFlatScreens from './addedToFlatScreens';
 import homeScreens from './homeScreens';
 import incompleteScreens from './incompleteScreens';
@@ -61,7 +62,9 @@ export default function Route() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                screenOptions={{ cardStyle: { backgroundColor: 'white' } }}
+                screenOptions={{
+                    cardStyle: { backgroundColor: colors.backgroundColor },
+                }}
             >
                 {currentComponents}
             </Stack.Navigator>
