@@ -71,11 +71,11 @@ For local development you can start the server with:
 
 Now you can open [http://localhost:19002](http://localhost:19002) to view the developer tools.
 
-With your phone and Expo Go installed you can scan the qr code and start interacting with the app.
+With your *iPhone* and Expo Go installed from the Appstore you can scan the qr code and start interacting with the app.
 
 Expo supports fast refresh so you should be able to see any changes immediately. In doubt shake your phone and press `"Reload"` to force the client to reload the JavaScript bundle.
 
-You can also use Xcodes Simulator application to test but be aware that some features like Push Notifications will not work on a simulated device!
+You can also use Expo Go on an Android phone or use Xcodes Simulator application to test but be aware that some features like Push Notifications or the chat will not work on a simulated device!
 
 ## Debugging
 For debugging use [React Native Debugger](https://github.com/jhen0409/react-native-debugger) and connect the remote JS Debugger on port 19000. It is almost essential for redux debugging.
