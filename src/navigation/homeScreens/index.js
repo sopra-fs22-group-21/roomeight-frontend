@@ -65,6 +65,8 @@ const homeScreens = [
         component: Chat,
         options: options,
     },
-].concat(createFlatScreens).concat(addedToFlatScreens);
+]
+    .concat(createFlatScreens)
+    .concat(addedToFlatScreens);
 
 export default homeScreens;

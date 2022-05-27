@@ -37,7 +37,7 @@ export const AddRoomieInput = (props) => {
                     setRoommates(copy);
                     if (emailRegex.test(text)) {
                         setEmailValid(true);
-                        if(props.onChange) props.onChange(copy, true);
+                        if (props.onChange) props.onChange(copy, true);
                         dispatch(
                             setTransitAttributes(
                                 {

@@ -155,16 +155,14 @@ const FlatProfile = ({ navigation }, props) => {
                         </InputBox>
                         <InputLabel>{en.addRoomie.heading}</InputLabel>
                         <Box />
-                        <AddRoomieInput/>
+                        <AddRoomieInput />
                         <Box />
                         {
                             <Input
                                 label={en.flatInfo.nrRoommates}
                                 keyboardType="number-pad"
                                 error={nrRoommatesValid === false}
-                                defaultValue={
-                                    flatprofile.numberOfRoommates
-                                }
+                                defaultValue={flatprofile.numberOfRoommates}
                                 onChangeText={(text) => {
                                     setNrRoommatesValid(!isNaN(Number(text)));
                                     setFlat({
