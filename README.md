@@ -71,7 +71,7 @@ For local development you can start the server with:
 
 Now you can open [http://localhost:19002](http://localhost:19002) to view the developer tools.
 
-With your *iPhone* and Expo Go installed from the Appstore you can scan the qr code and start interacting with the app.
+With your **iPhone** and Expo Go installed from the Appstore you can scan the qr code and start interacting with the app.
 
 Expo supports fast refresh so you should be able to see any changes immediately. In doubt shake your phone and press `"Reload"` to force the client to reload the JavaScript bundle.
 
