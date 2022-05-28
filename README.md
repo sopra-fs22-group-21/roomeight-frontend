@@ -28,7 +28,17 @@ in a playful and fun way
 [Check it out!](https://expo.dev/@sopragroup21/roomeight)
 
 # Illustrations
-Screenshots & gifs to be inserted!
+<p align="center">
+  <img alt="Welcome" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/Welcome.PNG">
+  <img alt="Filters" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/Filters.GIF">
+  <img alt="MAP" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/Map.PNG">
+  <img alt="Discover" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/763fdcc073a4902e2c07698dcaf7d9d2d4e87564/screenshots/UsersDiscover.GIF">
+  <img alt="Chat" height=300 src="https://raw.githubusercontent.com/sopra-fs22-group-21/roomeight/main/screenshots/Chat.GIF">
+</p>
+
+Roomeight allows each user to create a profile for themselves. Additionally they can create a profile for a flat to advertise it to future roommates.
+
+ Then they can discover new relevant profiles by customizing their filters. By liking other profiles they can create matches and get in contact with them through the chat. Happy matching!
 
 # Technologies
 
@@ -71,11 +81,11 @@ For local development you can start the server with:
 
 Now you can open [http://localhost:19002](http://localhost:19002) to view the developer tools.
 
-With your phone and Expo Go installed you can scan the qr code and start interacting with the app.
+With your **iPhone** and Expo Go installed from the Appstore you can scan the qr code and start interacting with the app.
 
 Expo supports fast refresh so you should be able to see any changes immediately. In doubt shake your phone and press `"Reload"` to force the client to reload the JavaScript bundle.
 
-You can also use Xcodes Simulator application to test but be aware that some features like Push Notifications will not work on a simulated device!
+You can also use Expo Go on an Android phone or use Xcodes Simulator application to test but be aware that some features like Push Notifications or the chat will not work on a simulated device!
 
 ## Debugging
 For debugging use [React Native Debugger](https://github.com/jhen0409/react-native-debugger) and connect the remote JS Debugger on port 19000. It is almost essential for redux debugging.

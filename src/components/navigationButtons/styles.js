@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../resources/colors';
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
@@ -24,16 +25,16 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         width: 40,
         height: 40,
-        backgroundColor: '#0E7490',
+        backgroundColor: colors.primary700,
     },
     icon: {
         paddingLeft: 3,
     },
     disabled: {
-        backgroundColor: '#b0c8cf',
+        backgroundColor: colors.secondary300,
     },
     pressed: {
-        backgroundColor: '#0c6076',
+        backgroundColor: colors.primary600,
     },
 });
 

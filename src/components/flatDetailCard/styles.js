@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         right: 0,
         top: 0,
         position: 'absolute',
-        color: colors.secondary400,
+        color: colors.red,
     },
 });
 

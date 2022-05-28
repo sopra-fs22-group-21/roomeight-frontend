@@ -14,7 +14,9 @@ const colors = {
     secondary200: '#d9d8e6',
     secondary100: '#F2F1F9', //#ebebeb
     backgroundColor: 'white',
+    primaryShadow: '#c5c3d9',
     red: '#BE123C',
+    brightRed: '#F9F0F5',
 };
 
 export default colors;

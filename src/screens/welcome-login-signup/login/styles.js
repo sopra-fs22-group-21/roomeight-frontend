@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         paddingRight: 20,
     },
     error: {
-        color: colors.secondary600,
+        color: colors.red,
     },
 });
 

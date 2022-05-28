@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import colors from '../../resources/colors';
 import styles from './styles';
 
 export const BackButton = (props) => (
@@ -9,7 +10,7 @@ export const BackButton = (props) => (
             style={styles.icon}
             name="arrow-back"
             size={20}
-            color={props.disabled ? '#b0c8cf' : '#0E7490'}
+            color={props.disabled ? colors.secondary200 : colors.primary700}
         />
     </Pressable>
 );
