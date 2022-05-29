@@ -19,6 +19,8 @@ const flatprofileState = (state = initialState, action) => {
         case Constants.GET_FLATPROFILE_SUCCESS:
         case Constants.UPDATE_FLATPROFILE_SUCCESS:
         case Constants.POST_FLATPROFILE_SUCCESS:
+            console.log('got ' + action.type);
+            console.log('loading flatprofile');
             return {
                 ...state,
                 flatprofile: new Flatprofile(action.payload),

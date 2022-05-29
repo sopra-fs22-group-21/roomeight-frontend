@@ -151,7 +151,15 @@ const FlatProfile = ({ navigation }, props) => {
                         <InputLabel>{en.addRoomie.heading}</InputLabel>
                         <Box />
                         <AddRoomieInput
-                            onChange={(emails, valid) => setEmailValid(true)}
+                            onChange={(emails, valid) => {
+                                setEmailValid(true);
+                                setFlat({
+                                    ...flat,
+                                    roommateEmails: emails.map(
+                                        (email) => email.email
+                                    ),
+                                });
+                            }}
                         />
                         <Box />
                         {
@@ -238,10 +246,6 @@ const FlatProfile = ({ navigation }, props) => {
                                 flatprofile.profileId
                             )
                         );
-                        if (transitFlatprofile.roommateEmails)
-                            transitFlatprofile.roommateEmails.forEach((email) =>
-                                dispatch(postRoommateToFlat(email))
-                            );
                     }}
                 >
                     Save

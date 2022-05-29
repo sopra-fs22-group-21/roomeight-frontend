@@ -43,6 +43,7 @@ const Done = ({ navigation, route }) => {
                     <PrimaryButton
                         onPress={async () => {
                             const flatId = flatprofile.profileId;
+                            console.log('enter app loading');
                             dispatch({
                                 type: ENTER_APP_LOADING,
                             });
@@ -50,6 +51,7 @@ const Done = ({ navigation, route }) => {
                                 route.params.includes('flat') ||
                                 userprofile.isAdvertisingRoom
                             ) {
+                                console.log('dispatch update flat profile');
                                 dispatch(
                                     updateProfile(
                                         transitFlatprofile,
@@ -62,9 +64,8 @@ const Done = ({ navigation, route }) => {
                                 route.params.includes('single') ||
                                 !userprofile.isComplete
                             ) {
-                                updateSingleprofile().then(() =>
-                                    navigation.navigate('Discover')
-                                );
+                                console.log('dispatch update userprofile');
+                                updateSingleprofile();
                             }
                         }}
                     >

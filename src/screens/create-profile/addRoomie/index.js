@@ -11,6 +11,7 @@ import {
     ScreenPadding,
     SmallHeadingWithBack,
 } from '../../../components/theme';
+import { getFlatprofile } from '../../../redux/actions/getFlatprofiles';
 import { postRoommateToFlat } from '../../../redux/actions/postFlatprofile';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
@@ -48,10 +49,14 @@ const AddRoomie = ({ navigation, route }) => {
                     <PrimaryButton
                         onPress={() => {
                             if (transitFlatprofile.roommateEmails) {
-                                transitFlatprofile.roommateEmails.forEach(
-                                    (email) =>
-                                        dispatch(postRoommateToFlat(email))
-                                );
+                                Promise.all(
+                                    transitFlatprofile.roommateEmails.map(
+                                        (email) =>
+                                            dispatch(postRoommateToFlat(email))
+                                    )
+                                ).then(() => {
+                                    dispatch(getFlatprofile());
+                                });
                                 navigation.goBack();
                             }
                         }}

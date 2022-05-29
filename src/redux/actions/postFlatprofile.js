@@ -85,7 +85,7 @@ export const postRoommateToFlat = (email) => (dispatch) => {
             console.log('could add roommate with email ' + email);
             console.log(JSON.stringify(response.data));
             dispatch(postRoommateToFlatSuccess(response.data));
-            dispatch(getFlatprofile());
+            //dispatch(getFlatprofile());
         })
         .catch((error) => {
             console.log('error post flatprofile');

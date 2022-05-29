@@ -46,6 +46,9 @@ export const getCurrentUserprofile = () => (dispatch) => {
             dispatch(getCurrentUserprofileSuccess(response.data));
         })
         .then(() => {
+            console.log(
+                'dispatching getDiscoverProfiles in after getUserprofiles success'
+            );
             dispatch(getDiscoverProfiles());
 
             if (userprofile.isAdvertisingRoom) dispatch(getFlatprofile());

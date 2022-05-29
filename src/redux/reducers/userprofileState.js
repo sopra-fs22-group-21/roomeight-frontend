@@ -25,10 +25,11 @@ const userprofileState = (state = initialState, action) => {
         case Constants.GET_CURRENT_USER_SUCCESS:
         case Constants.UPDATE_USERPROFILE_SUCCESS:
             delete profile.matches;
+            console.log('got UPDATE_USERPROFILE_SUCCESS');
+            console.log('updating userprofile');
             return {
                 ...state,
                 userprofile: profile,
-                update: undefined,
                 loading: false,
             };
         case Constants.POST_USERPROFILE_SUCCESS:
