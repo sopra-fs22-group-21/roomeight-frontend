@@ -4,10 +4,22 @@ const initialState = {
     chats: null,
     messages: {},
     memberships: null,
+    loading: false,
 };
 
 const chatState = (state = initialState, action) => {
     switch (action.type) {
+        case Constants.CREATE_CHAT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case Constants.CREATE_CHAT_FAILURE:
+            return {
+                ...state,
+                loading: false,
+            };
+
         case Constants.CHAT_MEMBERSHIP_CHANGE:
             return {
                 ...state,
@@ -35,6 +47,7 @@ const chatState = (state = initialState, action) => {
                         [action.payload.messages._id]: action.payload.messages,
                     },
                 },
+                loading: false,
             };
         case Constants.LOAD_MESSAGES_SUCCESS:
             return {

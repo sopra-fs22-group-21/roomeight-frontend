@@ -35,22 +35,10 @@ function filterExisting(chats, matches) {
 
 const CreateNewChat = (_props) => {
     const { isOpen, onOpen, onClose } = useDisclose();
-    const { isSearchingRoom } = useSelector(
-        (state) => state.userprofileState.userprofile
-    );
     const { chats } = useSelector((state) => state.chatState);
     const dispatch = useDispatch();
 
-    let matches;
-    if (isSearchingRoom) {
-        matches = useSelector(
-            (state) => state.userprofileState.userprofile.matches
-        );
-    } else {
-        matches = useSelector(
-            (state) => state.flatprofileState.flatprofile.matches
-        );
-    }
+    const { matches } = useSelector((state) => state.matchesState);
 
     const renderItem = ({ item }) => {
         if (!item) {
@@ -92,7 +80,7 @@ const CreateNewChat = (_props) => {
                                 <FlatList
                                     data={filterExisting(chats, matches)}
                                     renderItem={renderItem}
-                                    keyExtractor={(index) => index}
+                                    keyExtractor={(item) => item.profileId}
                                 />
                             </Box>
                         </Center>

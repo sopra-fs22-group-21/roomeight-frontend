@@ -16,10 +16,10 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary700,
     },
     primaryPressed: {
-        backgroundColor: '#0c6076',
+        backgroundColor: colors.primary600,
     },
     primaryDisabled: {
-        backgroundColor: '#b0c8cf',
+        backgroundColor: colors.secondary200,
     },
     primaryLabel: {
         color: 'white',
@@ -27,14 +27,14 @@ const styles = StyleSheet.create({
     secondary: {
         borderRadius: 4,
         borderWidth: 1,
-        borderColor: colors.secondary300,
+        borderColor: colors.primary700,
         backgroundColor: 'white',
     },
     secondaryPressed: {
-        backgroundColor: '#FBCFE8',
+        backgroundColor: colors.secondary100,
     },
     secondaryLabel: {
-        color: colors.secondary500,
+        color: colors.primary700,
         fontFamily: 'SourceSans3SemiBold',
         fontSize: 16,
     },

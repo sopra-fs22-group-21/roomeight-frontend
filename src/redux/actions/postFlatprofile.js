@@ -1,7 +1,7 @@
 import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 import { getFlatprofile } from './getFlatprofiles';
-import { updateProfile } from './updateActions';
+import { getCurrentUserprofile } from './getUserprofiles';
 
 const postFlatprofileRequest = () => ({
     type: Constants.POST_FLATPROFILE_REQUEST,
@@ -31,6 +31,20 @@ const postRoommateToFlatFailure = (error) => ({
     payload: error,
 });
 
+const postLeaveFlatRequest = () => ({
+    type: Constants.POST_LEAVE_FLAT_REQUEST,
+});
+
+const postLeaveFlatSuccess = (response) => ({
+    type: Constants.POST_LEAVE_FLAT_SUCCESS,
+    payload: response,
+});
+
+const postLeaveFlatFailure = (error) => ({
+    type: Constants.POST_LEAVE_FLAT_FAILURE,
+    payload: error,
+});
+
 /**
  * sends a postRequest to backend api to create a Flat belonging to the user that makes the request
  * @param {object} requestBody - the body of the postRequest
@@ -40,23 +54,16 @@ const postRoommateToFlatFailure = (error) => ({
  */
 export const postFlatprofile = (requestBody) => (dispatch) => {
     dispatch(postFlatprofileRequest());
+    const flat = { ...requestBody };
 
-    dispatch({
-        type: Constants.LOADING_STATE,
-    });
-    let references = requestBody.pictureReferences;
-    delete requestBody.pictureReferences;
-
-    let emails = requestBody.roommateEmails;
-    delete requestBody.roommateEmails;
+    delete flat.pictureReferences;
+    delete flat.roommateEmails;
 
     console.log('post flat requestBody:');
-    console.log(requestBody);
-    let flatprofile = {};
+    console.log(flat);
     return apiClient()
-        .post('/flatprofiles', requestBody)
+        .post('/flatprofiles', flat)
         .then((response) => {
-            flatprofile = response.data;
             console.log(
                 'postFlatprofileSuccess: ' + JSON.stringify(response.data)
             );
@@ -67,30 +74,6 @@ export const postFlatprofile = (requestBody) => (dispatch) => {
         .catch((error) => {
             console.log('error post flatprofile');
             return Promise.resolve(dispatch(postFlatprofileFailure(error)));
-        })
-        .then(() => {
-            let update = { pictureReferences: references };
-            console.log('dispatching updateProfile');
-            console.log(update);
-            return dispatch(
-                updateProfile(update, 'flatprofile', flatprofile.profileId)
-            ).catch((error) => {
-                console.log('error uploading');
-                console.log(error);
-            });
-        })
-        .then(() => {
-            if (emails) {
-                console.log('adding users to flat');
-                console.log(emails);
-                return Promise.all(
-                    emails.map((email) => {
-                        return dispatch(postRoommateToFlat(email));
-                    })
-                ).catch((error) =>
-                    console.log('error posting roommates ' + error)
-                );
-            }
         });
 };
 
@@ -101,12 +84,29 @@ export const postRoommateToFlat = (email) => (dispatch) => {
         .then((response) => {
             console.log('could add roommate with email ' + email);
             console.log(JSON.stringify(response.data));
-
             dispatch(postRoommateToFlatSuccess(response.data));
-            dispatch(getFlatprofile());
+            //dispatch(getFlatprofile());
         })
         .catch((error) => {
             console.log('error post flatprofile');
+            console.warn(error);
             dispatch(postRoommateToFlatFailure(error));
+        });
+};
+
+export const postLeaveFlat = () => (dispatch) => {
+    console.log('leave flat');
+    dispatch(postLeaveFlatRequest());
+    return apiClient()
+        .post(`/flatprofiles/leaveFlat`, {})
+        .then((response) => {
+            console.log('You have successfully left the flat.');
+            dispatch(postLeaveFlatSuccess(response.data));
+            dispatch(getCurrentUserprofile());
+        })
+        .catch((error) => {
+            console.log('error post leave flat');
+            console.warn(error);
+            dispatch(postLeaveFlatFailure(error));
         });
 };

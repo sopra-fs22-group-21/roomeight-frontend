@@ -1,6 +1,4 @@
 import React from 'react';
-import { colors } from 'react-native-elements';
-import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton } from '../../../components/button';
 import { ScreenContainer } from '../../../components/screenContainer';
@@ -11,22 +9,20 @@ import {
     ScreenPadding,
     Title,
 } from '../../../components/theme';
-import { postFlatprofile } from '../../../redux/actions/postFlatprofile';
 import { updateProfile } from '../../../redux/actions/updateActions';
+import { ENTER_APP_LOADING } from '../../../redux/constants';
 import en from '../../../resources/strings/en.json';
-import { StackActions } from '@react-navigation/native';
 
 const Done = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const { userprofile } = useSelector((state) => state.userprofileState);
-
-    const { loading } = useSelector((state) => state.loadingState);
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
     const { transitUserprofile, transitFlatprofile } = useSelector(
         (state) => state.transitState
     );
 
-    const updateSingleprofile = () => {
-        dispatch(
+    const updateSingleprofile = async () => {
+        return dispatch(
             updateProfile(
                 transitUserprofile,
                 'userprofile',
@@ -37,7 +33,6 @@ const Done = ({ navigation, route }) => {
 
     return (
         <ScreenContainer onPressBack={() => navigation.goBack()}>
-            <Loader loading={loading} color={colors.secondary500} />
             <ScreenPadding>
                 <Inner>
                     <Heading>{en.done.heading}</Heading>
@@ -46,18 +41,31 @@ const Done = ({ navigation, route }) => {
 
                     <Box />
                     <PrimaryButton
-                        onPress={() => {
-                            if (route.params.includes('join')) joinFlat();
-                            else if (
+                        onPress={async () => {
+                            const flatId = flatprofile.profileId;
+                            console.log('enter app loading');
+                            dispatch({
+                                type: ENTER_APP_LOADING,
+                            });
+                            if (
+                                route.params.includes('flat') ||
+                                userprofile.isAdvertisingRoom
+                            ) {
+                                console.log('dispatch update flat profile');
+                                dispatch(
+                                    updateProfile(
+                                        transitFlatprofile,
+                                        'flatprofile',
+                                        flatId
+                                    )
+                                );
+                            }
+                            if (
                                 route.params.includes('single') ||
                                 !userprofile.isComplete
                             ) {
+                                console.log('dispatch update userprofile');
                                 updateSingleprofile();
-                                navigation.navigate('Discover');
-                            }
-                            if (route.params.includes('flat')) {
-                                dispatch(postFlatprofile(transitFlatprofile));
-                                navigation.dispatch(StackActions.popToTop());
                             }
                         }}
                     >

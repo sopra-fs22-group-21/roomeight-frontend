@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { Dimensions, FlatList, Pressable, View } from 'react-native';
 import { ImageGallery } from '../imageGallery';
+import LikeNumbers from '../likeNumbers';
 import { ProfilePicture } from '../profilePicture';
 import { NormalText, Strong } from '../theme';
 import styles from './styles';
@@ -12,6 +13,7 @@ export const ProfileInfoBox = (props) => {
         ? props.profile.firstName.substring(0, 1) +
           props.profile.lastName.substring(0, 1)
         : props.profile.name.substring(0, 1);
+
     return (
         <Pressable
             style={styles.profile}
@@ -29,6 +31,9 @@ export const ProfileInfoBox = (props) => {
                                 sliderWidth={SLIDER_WIDTH}
                                 height={100}
                                 activeSlideAlignment="start"
+                                textStyle={
+                                    props.expanded ? null : styles.avatarText
+                                }
                                 initials={initials}
                             />
                         </View>
@@ -46,7 +51,9 @@ export const ProfileInfoBox = (props) => {
                                     ? styles.expandedAvatar
                                     : styles.avatar
                             }
-                            textStyle={styles.avatarText}
+                            textStyle={
+                                props.expanded ? null : styles.avatarText
+                            }
                         />
                     )}
                 </View>
@@ -69,6 +76,16 @@ export const ProfileInfoBox = (props) => {
                         </>
                     ) : null}
                 </View>
+                {props.preMatch ? (
+                    <View>
+                        <Pressable style={styles.row} onPress={props.preMatch}>
+                            <LikeNumbers
+                                style={styles.icon}
+                                userprofile={props.profile}
+                            ></LikeNumbers>
+                        </Pressable>
+                    </View>
+                ) : null}
             </View>
         </Pressable>
     );

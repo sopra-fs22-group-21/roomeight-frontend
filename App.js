@@ -1,10 +1,11 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { NativeBaseProvider } from 'native-base';
 import { StyleSheet } from 'react-native';
 import Geocoder from 'react-native-geocoding';
 import { Provider } from 'react-redux';
 import { firebaseConfig } from './firebase/firebase-config';
-import Route from './src/navigation/main';
+import Route from './src/navigation';
 import reduxStore from './src/redux/reduxStore.js';
 
 export default function App() {
@@ -33,7 +34,9 @@ export default function App() {
     return (
         <NativeBaseProvider>
             <Provider store={reduxStore}>
-                <Route />
+                <NavigationContainer>
+                    <Route />
+                </NavigationContainer>
             </Provider>
         </NativeBaseProvider>
     );
@@ -42,7 +45,6 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },

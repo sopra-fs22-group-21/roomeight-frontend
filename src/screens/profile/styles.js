@@ -3,7 +3,6 @@ import colors from '../../resources/colors';
 
 const styles = StyleSheet.create({
     overview: {
-        backgroundColor: colors.secondary100,
         padding: 5,
         marginBottom: 10,
         justifyContent: 'flex-start',
@@ -14,7 +13,6 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontFamily: 'SourceSans3SemiBold',
         fontSize: 16,
         lineHeight: 24,
     },
@@ -71,9 +69,9 @@ const styles = StyleSheet.create({
         paddingRight: 5,
     },
     name: {
-        fontFamily: 'SourceSans3Bold',
         fontSize: 20,
-        lineHeight: 28,
+        lineHeight: 25,
+        paddingBottom: 10,
         alignSelf: 'center',
     },
 });

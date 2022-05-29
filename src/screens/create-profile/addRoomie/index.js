@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { AddRoomieInput } from '../../../components/addRoomieInput';
-import { ScreenContainer } from '../../../components/screenContainer';
 import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { AddRoomieInput } from '../../../components/addRoomieInput';
 import { PrimaryButton } from '../../../components/button';
+import { ScreenContainer } from '../../../components/screenContainer';
 import {
     Box,
     Heading,
@@ -11,16 +11,17 @@ import {
     ScreenPadding,
     SmallHeadingWithBack,
 } from '../../../components/theme';
+import { getFlatprofile } from '../../../redux/actions/getFlatprofiles';
+import { postRoommateToFlat } from '../../../redux/actions/postFlatprofile';
 import en from '../../../resources/strings/en.json';
 import styles from './styles';
-import { postRoommateToFlat } from '../../../redux/actions/postFlatprofile';
 
 const AddRoomie = ({ navigation, route }) => {
     const [emailValid, setEmailValid] = useState(null);
     const profileRoot = route.params.includes('profile');
-    const { loading } = useSelector((state) => state.loadingState);
     const dispatch = useDispatch();
     const { transitFlatprofile } = useSelector((state) => state.transitState);
+    const { flatprofile } = useSelector((state) => state.flatprofileState);
 
     if (profileRoot) {
         return (
@@ -47,10 +48,17 @@ const AddRoomie = ({ navigation, route }) => {
                 <View style={styles.saveButton}>
                     <PrimaryButton
                         onPress={() => {
-                            transitFlatprofile.roommateEmails.forEach((email) =>
-                                dispatch(postRoommateToFlat(email))
-                            );
-                            navigation.goBack();
+                            if (transitFlatprofile.roommateEmails) {
+                                Promise.all(
+                                    transitFlatprofile.roommateEmails.map(
+                                        (email) =>
+                                            dispatch(postRoommateToFlat(email))
+                                    )
+                                ).then(() => {
+                                    dispatch(getFlatprofile());
+                                });
+                                navigation.goBack();
+                            }
                         }}
                     >
                         Save

@@ -15,13 +15,14 @@ class Flatprofile {
         this.moveInDate = null;
         this.moveOutDate = null;
         this.address = '';
-        this.rent = 500;
+        this.rent = null;
         this.permanent = null;
         this.numberOfRoommates = null;
         this.roomSize = null;
         this.numberOfBaths = null;
         this.roomMates = [];
         this.matches = [];
+        this.likes = [];
         Object.assign(this, data);
     }
 }

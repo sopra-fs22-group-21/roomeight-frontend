@@ -25,7 +25,6 @@ const apiClient = () => {
         baseURL: API_URL(),
         responseType: 'json',
     });
-
     axiosInstance.interceptors.request.use(async (req) => {
         const accessToken = await userToken();
         if (accessToken) {

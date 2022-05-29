@@ -6,13 +6,11 @@ import {
     orderByChild,
     query,
     ref,
-    remove,
     update,
 } from 'firebase/database';
 import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
 import { database } from '../../../firebase/firebase-config';
-import en from '../../resources/strings/en';
+import apiClient from '../../helper/apiClient';
 import * as Constants from '../constants';
 
 const chatMembershipChange = (chatId) => ({
@@ -52,6 +50,11 @@ const createChatFailure = (error) => ({
 
 const deleteChatFailure = (error) => ({
     type: Constants.DELETE_CHAT_FAILURE,
+    payload: error,
+});
+
+const connectionChangeFailure = (error) => ({
+    type: Constants.CONNECTION_CHANGE_FAILURE,
     payload: error,
 });
 
@@ -120,7 +123,6 @@ export const chatInfoListener = (chatId) => (dispatch) => {
     const chatReference = ref(database, `/chats/${chatId}`);
     let listener = onValue(chatReference, (snapshot) => {
         const chatInfo = snapshot.val();
-        console.log(chatInfo);
         if (snapshot.exists()) {
             dispatch(chatInfoChange(chatInfo));
         }
@@ -170,9 +172,6 @@ export const sendMessage = (message, chatId) => async (dispatch) => {
     });
     const updates = {};
     updates[`/messages/${chatId}/${message._id}`] = message;
-    updates[`/chats/${chatId}/lastMessage`] = message.text;
-    updates[`/chats/${chatId}/timestamp`] = message.createdAt;
-    updates[`/chats/${chatId}/lastSender`] = message.user.name;
     update(ref(database), updates)
         .then(() => {
             dispatch({
@@ -184,6 +183,30 @@ export const sendMessage = (message, chatId) => async (dispatch) => {
         });
 };
 
+export const goToChat = (profileId, navigation) => (dispatch, getState) => {
+    const chats = getState().chatState.chats;
+    let exists = false;
+    let previousChat;
+    if (chats) {
+        Object.values(chats).every((chat) => {
+            if (chat.userId === profileId || chat.flatId === profileId) {
+                exists = true;
+                previousChat = chat;
+                return false;
+            } else {
+                return true;
+            }
+        });
+    }
+    if (!exists) {
+        dispatch(createChat(profileId)).then((chatId) => {
+            navigation.navigate('Chat', { chatId: chatId });
+        });
+    } else {
+        navigation.navigate('Chatroom', { chatId: previousChat._id });
+    }
+};
+
 /**
  * writes a new chatId to the db and updates the chats state via the {@link chatMembershipChange}
  * @param {chatInfoObject} chatInfo
@@ -191,99 +214,18 @@ export const sendMessage = (message, chatId) => async (dispatch) => {
  * @dispatches {@link Constants.CREATE_CHAT_SUCCESS } on success
  * @dispatches {@link createNewChatFailure} on failure
  */
-export const createChat = (profileId) => (dispatch, getState) => {
+export const createChat = (profileId) => (dispatch) => {
     dispatch({
         type: Constants.CREATE_CHAT_REQUEST,
     });
-
-    //create unique chat id
-    const chatId = 'chat-' + uuidv4();
-    const firstMessageId = 'msg-' + uuidv4();
-
-    const membershipUpdate = {};
-    const chatUpdate = {};
-    const userprofile = getState().userprofileState.userprofile;
-    let chatInfo = {
-        members: {},
-    };
-    chatInfo['_id'] = chatId;
-    chatInfo['createdAt'] = new Date().getTime();
-
-    if (profileId.startsWith('flt$')) {
-        //want to chat with flat
-        let matchprofile = userprofile.matches[profileId];
-        let roomMates = matchprofile.roomMates; //todo: object.keys
-        roomMates.forEach((mateId) => (chatInfo['members'][mateId] = true));
-        chatInfo = {
-            ...chatInfo,
-            title: {
-                forFlat: userprofile.firstName + ' ' + userprofile.lastName,
-                forUser: matchprofile.name,
-            },
-            members: {
-                ...chatInfo.members,
-                [userprofile.profileId]: true,
-            },
-            flatId: profileId,
-            userId: userprofile.profileId,
-        };
-
-        membershipUpdate[
-            `/memberships/${userprofile.profileId}/${chatId}`
-        ] = true;
-        matchprofile.roomMates.forEach((userId) => {
-            //todo: object.keys
-            membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
-        });
-    } else {
-        //want to chat with user
-        let matchprofile =
-            getState().flatprofileState.flatprofile.matches[profileId];
-        let flatprofile = getState().flatprofileState.flatprofile;
-        let roomMates = Object.keys(flatprofile.roomMates);
-        roomMates.forEach((mateId) => (chatInfo['members'][mateId] = true));
-        chatInfo = {
-            ...chatInfo,
-            title: {
-                forFlat: matchprofile.firstName + ' ' + matchprofile.lastName,
-                forUser: flatprofile.name,
-            },
-            members: {
-                ...chatInfo.members,
-                [profileId]: true,
-            },
-            flatId: flatprofile.profileId,
-            userId: profileId,
-        };
-
-        membershipUpdate[`/memberships/${profileId}/${chatId}`] = true;
-
-        Object.keys(flatprofile.roomMates).forEach((userId) => {
-            membershipUpdate[`/memberships/${userId}/${chatId}`] = true;
-        });
-    }
-
-    chatUpdate[`/chats/${chatId}`] = chatInfo;
-    chatUpdate[`/messages/${chatId}/${firstMessageId}`] = {
-        _id: firstMessageId,
-        text: userprofile.firstName + ' ' + en.chat.startedChat,
-        createdAt: new Date().getTime(),
-        user: {
-            _id: userprofile.profileId,
-            name: userprofile.firstName + ' ' + userprofile.lastName,
-        },
-        system: true,
-    };
-    chatInfo['lastMessage'] = userprofile.firstName + ' ' + en.chat.startedChat;
-    chatInfo['timestamp'] =
-        chatUpdate[`/messages/${chatId}/${firstMessageId}`].createdAt;
-    update(ref(database), membershipUpdate)
-        .then(() => {
-            update(ref(database), chatUpdate).then(
-                dispatch({
-                    type: Constants.CREATE_CHAT_SUCCESS,
-                })
-            );
+    return apiClient()
+        .post(`/chats/${profileId}`, {})
+        .then((response) => {
+            dispatch({
+                type: Constants.CREATE_CHAT_SUCCESS,
+                payload: response.data,
+            });
+            return response.data;
         })
         .catch((error) => {
             dispatch(createChatFailure(error));
@@ -296,27 +238,55 @@ export const createChat = (profileId) => (dispatch, getState) => {
  * @dispatches {@link Constants.DELETE_CHAT_SUCCESS } on success
  * @dispatches {@link deleteChatFailure} on failure
  */
-export const deleteChat = (chatId) => (dispatch, getState) => {
+export const deleteChat = (chatId) => (dispatch) => {
     dispatch({
         type: Constants.DELETE_CHAT_REQUEST,
     });
-    let errorOccured = false;
-    const references = [];
-    references.push(ref(database, `/chats/${chatId}`));
-    references.push(ref(database, `/messages/${chatId}`));
-    references.push(
-        ref(database, `/memberships/${getState().authState.auth.uid}/${chatId}`)
-    );
-
-    references.forEach((refrence) => {
-        remove(refrence).catch((error) => {
-            errorOccured = true;
+    return apiClient()
+        .delete(`/chats/${chatId}`, {})
+        .then((response) => {
+            dispatch({
+                type: Constants.DELETE_CHAT_SUCCESS,
+                payload: response.data,
+            });
+            return response.data;
+        })
+        .catch((error) => {
             dispatch(deleteChatFailure(error));
         });
-    });
-    if (!errorOccured) {
-        dispatch({
-            type: Constants.DELETE_CHAT_SUCCESS,
-        });
+};
+
+export const connectionChanges = (status) => (dispatch, getState) => {
+    const membershipsState = getState().chatState.memberships;
+    if (membershipsState === null) {
+        return;
     }
+    const chatState = getState().chatState;
+    const userId = getState().authState.auth.uid;
+    const memberships = Object.keys(getState().chatState.memberships);
+    const firstChat = memberships[0];
+    const previous = chatState.chats[firstChat].members[userId];
+    if (previous === status) {
+        return;
+    }
+
+    const chatsReference = ref(database, '/chats');
+
+    const setStatus = (status) => {
+        const updates = {};
+        memberships.forEach((chatId) => {
+            updates[`${chatId}/members/${userId}`] = status;
+        });
+        return updates;
+    };
+    console.log(setStatus(status));
+    update(chatsReference, setStatus(status))
+        .then(() => {
+            dispatch({
+                type: Constants.CONNECTION_CHANGE,
+            });
+        })
+        .catch((error) => {
+            dispatch(connectionChangeFailure(error));
+        });
 };

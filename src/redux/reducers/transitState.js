@@ -23,15 +23,18 @@ const transitState = (state = initialState, action) => {
                     ...action.payload,
                 },
             };
-
-        case Constants.POST_FLATPROFILE_SUCCESS:
-        case Constants.POST_USERPROFILE_SUCCESS:
-        case Constants.UPDATE_USERPROFILE_SUCCESS:
         case Constants.UPDATE_FLATPROFILE_SUCCESS:
             return {
                 ...state,
-                transitUserprofile: {},
                 transitFlatprofile: {},
+            };
+
+        //case Constants.POST_FLATPROFILE_SUCCESS:
+        case Constants.POST_USERPROFILE_SUCCESS:
+        case Constants.UPDATE_USERPROFILE_SUCCESS:
+            return {
+                ...state,
+                transitUserprofile: {},
             };
 
         default:

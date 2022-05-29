@@ -1,51 +1,39 @@
 import dateFormat from 'dateformat';
-import { React, useEffect, useRef, useState } from 'react';
-import { Dimensions, Pressable, View } from 'react-native';
+import { React, useEffect, useState } from 'react';
+import { Dimensions, Pressable, ScrollView, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { useComponentSize } from '../../hooks/layout';
 import tagIcons from '../../resources/icons/tagIcons';
 import en from '../../resources/strings/en.json';
 import { SecondaryButton } from '../button';
 import { DoubleTap } from '../doubleTap';
 import { Gender } from '../gender';
+import LikeNumbers from '../likeNumbers';
 import { ProfilePicture } from '../profilePicture';
 import Tags from '../tags';
 import { Box, NormalText, PinkBackground, Strong, Title } from '../theme';
 import styles from './styles';
 
 const ITEM_WIDTH = Dimensions.get('window').width - 80;
+const MAX_DESCRIPTION_LENGTH = 50;
 
 export const SingleDetailCard = (props) => {
-    const [contentSize, getContentSize] = useComponentSize();
-    const [cardSize, getCardSize] = useComponentSize();
+    const [showFullDescription, setShowFullDescription] = useState(false);
+    const [profilePictureSize, getProfilePictureSize] = useComponentSize();
     const userprofile = props.userprofile;
     const ageInMilliseconds = new Date() - new Date(userprofile.birthday);
     const age = Math.floor(ageInMilliseconds / 1000 / 60 / 60 / 24 / 365); // convert to years
     const selectedTags = userprofile.tags
         ? tagIcons.filter((tag) => userprofile.tags.includes(tag.name))
         : [];
-
-    const [secondPageNeeded, setSecondPageNeeded] = useState(false);
-    const carousel = useRef(null);
-    const [current, setCurrent] = useState(0);
+    const [shortDescription, setShortDescription] = useState(false);
 
     useEffect(() => {
-        if (
-            contentSize.height > 0 &&
-            cardSize.height > 0 &&
-            contentSize.height > cardSize.height
-        ) {
-            setSecondPageNeeded(true);
-        }
-    }, [contentSize, cardSize]);
-
-    useEffect(() => {
-        if (props.onClickEdit) setSecondPageNeeded(false);
+        setShortDescription(false);
     }, [userprofile]);
 
     const profilePictureAndBio = (
-        <View style={styles.row}>
+        <View style={styles.row} onLayout={getProfilePictureSize}>
             <View style={styles.column1}>
                 <Pressable onPress={props.onPress} style={styles.image}>
                     <ProfilePicture
@@ -88,29 +76,48 @@ export const SingleDetailCard = (props) => {
                     onPress={props.onClickEdit}
                 />
             ) : null}
+            {props.preMatch ? (
+                <LikeNumbers
+                    style={styles.icon}
+                    userprofile={userprofile}
+                ></LikeNumbers>
+            ) : null}
         </View>
     );
 
-    const firstPage = userprofile.description ? (
-        <>
-            <Strong>{en.discover.description}</Strong>
-            <NormalText style={styles.text}>
-                {userprofile.description}
-            </NormalText>
-            <Box />
-        </>
-    ) : null;
+    const slicedDescription = () => {
+        let sliced = userprofile.description;
+        if (userprofile.description.length > MAX_DESCRIPTION_LENGTH) {
+            sliced = sliced.replace(/(\r\n|\n|\r)/gm, ' ');
+            sliced = sliced.substring(0, MAX_DESCRIPTION_LENGTH) + ' ... ';
+        }
+        return sliced;
+    };
 
-    const secondPage = (
+    const description = () => (
         <>
-            {userprofile.tags && userprofile.tags.length > 0 ? (
+            {userprofile.description ? (
                 <>
-                    <Strong>{en.discover.tags}</Strong>
-                    <Tags tags={selectedTags} style={styles.tags} />
-                    <Box />
+                    <Pressable
+                        onPress={() =>
+                            setShowFullDescription(!showFullDescription)
+                        }
+                    >
+                        <Strong>{en.discover.description}</Strong>
+                        <NormalText style={styles.text}>
+                            {true //showFullDescription
+                                ? userprofile.description
+                                : slicedDescription()}
+                        </NormalText>
+                        <Box />
+                    </Pressable>
                 </>
             ) : null}
+        </>
+    );
 
+    const dates = (
+        <>
             {userprofile.moveInDate ? (
                 <>
                     <Strong>{en.discover.moveInDate}</Strong>
@@ -123,40 +130,42 @@ export const SingleDetailCard = (props) => {
                     <Box />
                 </>
             ) : null}
+
+            {userprofile.moveOutDate ? (
+                <>
+                    <Strong>{en.discover.temporary}</Strong>
+                    <NormalText style={styles.text}>
+                        {dateFormat(
+                            new Date(userprofile.moveOutDate),
+                            'dd. mm. yyyy'
+                        )}
+                    </NormalText>
+                    <Box />
+                </>
+            ) : null}
         </>
     );
 
-    const pagesCarousel = (
+    const tags = (
         <>
-            <Carousel
-                ref={carousel}
-                data={[firstPage, secondPage]}
-                renderItem={({ item }) => (
-                    <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
-                        {item}
-                    </DoubleTap>
-                )}
-                sliderWidth={ITEM_WIDTH}
-                itemWidth={ITEM_WIDTH}
-                inactiveSlideShift={0}
-                useScrollView={true}
-                onSnapToItem={(index) => setCurrent(index)}
-            />
-            <Pagination
-                dotsLength={2}
-                activeDotIndex={current}
-                containerStyle={styles.paginationContainer}
-                dotStyle={styles.paginationDots}
-                inactiveDotOpacity={0.4}
-                inactiveDotScale={0.6}
-            />
+            {userprofile.tags && userprofile.tags.length > 0 ? (
+                <>
+                    <Strong>{en.discover.tags}</Strong>
+                    <Tags tags={selectedTags} style={styles.tags} />
+                    <Box />
+                </>
+            ) : null}
         </>
     );
 
     return (
-        <PinkBackground>
-            <View style={styles.card} onLayout={getCardSize}>
-                <View style={{ flex: 0 }} onLayout={getContentSize}>
+        <PinkBackground style={props.preMatch ? styles.preMatch : null}>
+            <DoubleTap
+                doubleTap={props.onDoubleTap}
+                delay={200}
+                style={{ flex: 1 }}
+            >
+                <View style={styles.card}>
                     {profilePictureAndBio}
                     <Box />
                     {props.onClickMessage ? (
@@ -169,17 +178,13 @@ export const SingleDetailCard = (props) => {
                             </SecondaryButton>
                         </Box>
                     ) : null}
-
-                    {secondPageNeeded ? (
-                        pagesCarousel
-                    ) : (
-                        <>
-                            {firstPage}
-                            {secondPage}
-                        </>
-                    )}
+                    <ScrollView>
+                        {description()}
+                        {dates}
+                        {tags}
+                    </ScrollView>
                 </View>
-            </View>
+            </DoubleTap>
         </PinkBackground>
     );
 };

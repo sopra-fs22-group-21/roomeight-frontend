@@ -25,7 +25,7 @@ const CreateFlat = ({ navigation }) => {
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
                 dispatch(setTransitAttributes(flat, 'flatprofiles'));
-                navigation.navigate('RoomInfo');
+                navigation.navigate('AddAddress');
             }}
             nextDisabled={
                 !flat.name ||

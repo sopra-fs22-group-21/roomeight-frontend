@@ -27,7 +27,9 @@ const ChatListItem = ({ chat }) => {
     }, [chat]);
     return (
         <Pressable
-            onPress={() => navigation.navigate('Chatroom', { chatInfo: chat })}
+            onPress={() =>
+                navigation.navigate('Chatroom', { chatId: chat._id })
+            }
         >
             <Box
                 borderBottomWidth="1"
@@ -67,11 +69,11 @@ const ChatListItem = ({ chat }) => {
                             >
                                 {chat.lastSender +
                                     ': ' +
-                                    chat.lastMessage.substring(0, 20)}
+                                    chat.lastMessage?.substring(0, 20)}
                             </Text>
                         ) : (
                             <Text color="coolGray.600">
-                                {chat.lastMessage.substring(0, 20)}
+                                {chat.lastMessage?.substring(0, 20)}
                             </Text>
                         )}
                     </VStack>

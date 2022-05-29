@@ -1,5 +1,5 @@
 import dateFormat from 'dateformat';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
 import { InputLabel } from '../input';
 import { Box } from '../theme';
@@ -26,6 +26,18 @@ const DateInput = (props) => {
     };
     const monthInput = useRef(null);
     const yearInput = useRef(null);
+
+    useEffect(() => {
+        if (
+            props.defaultDate == null ||
+            props.defaultDate == undefined ||
+            props.defaultDate == ''
+        ) {
+            setDay('');
+            setMonth('');
+            setYear('');
+        }
+    }, [props.defaultDate]);
 
     const changeDate = (d, m, y) => {
         // create date and validate

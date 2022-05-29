@@ -13,7 +13,7 @@ export const DislikeButton = (props) => (
             style={styles.icon}
             name="x"
             size={30}
-            color="black"
+            color={styles.dislikeButton.color}
             type="feather"
         />
     </Pressable>
@@ -25,7 +25,7 @@ export const LikeButton = (props) => (
             style={styles.icon}
             name="heart"
             size={25}
-            color="black"
+            color={styles.likeButton.color}
             type="font-awesome-5"
         />
     </Pressable>

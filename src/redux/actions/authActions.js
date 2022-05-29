@@ -5,8 +5,10 @@ import {
 } from 'firebase/auth';
 import { auth } from '../../../firebase/firebase-config';
 import * as Constants from '../constants';
-import { chatMemberShipListener } from './chatActions';
+import { chatMemberShipListener, connectionChanges } from './chatActions';
 import { getCurrentUserprofile } from './getUserprofiles';
+import { notificationsListener } from './notificationActions';
+import { deletePushToken, postPushToken } from './updateActions';
 
 // intermediary actions for redux
 
@@ -42,14 +44,18 @@ const logoutUserFailure = (error) => ({
  * @param {String} email
  * @param {String} password
  * @dispatches {@link loginUserRequest} if login is requested
+ * @dispatches {@link postPushToken} to register the device for notifications in the backend
  * @dispatches {@link loginUserFailure} with error payload if login fails
  */
-export const loginUser = (email, password) => (dispatch) => {
+export const loginUser = (email, password) => async (dispatch) => {
     dispatch(loginUserRequest());
-
-    signInWithEmailAndPassword(auth, email, password).catch((error) => {
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        await dispatch(postPushToken());
+        dispatch(connectionChanges('online'));
+    } catch (error) {
         dispatch(loginUserFailure(error));
-    });
+    }
 };
 
 /**
@@ -58,15 +64,13 @@ export const loginUser = (email, password) => (dispatch) => {
  * @dispatches {@link loginUserSuccess} if user is logged in
  */
 export const userAuthStateListener = () => (dispatch) => {
-    dispatch({
-        type: Constants.LOADING_STATE,
-    });
+    dispatch(loginUserRequest());
     onAuthStateChanged(auth, (user) => {
         if (user) {
             //user is logged in
-            console.log('logged in');
             dispatch(loginUserSuccess(user));
             dispatch(getCurrentUserprofile());
+            dispatch(notificationsListener());
             dispatch(chatMemberShipListener());
         } else {
             //no user logged in
@@ -79,11 +83,13 @@ export const userAuthStateListener = () => (dispatch) => {
  * logs a user out from firebase authentication
  * @dispatches {@link logoutUserRequest} if logout is requested
  * @dispatches {@link logoutUserFailure} with error payload if logout fails
+ * @dispatches {@link deletePushToken} to deregister the device for notifications in the backend
  * @see {@link userAuthStateListener} reacts if logout is successful
  */
-export const logoutUser = () => (dispatch) => {
+export const logoutUser = () => async (dispatch) => {
     dispatch(logoutUserRequest());
-
+    await dispatch(deletePushToken());
+    dispatch(connectionChanges('offline'));
     signOut(auth).catch((error) => {
         dispatch(logoutUserFailure(error));
     });

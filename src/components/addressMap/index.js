@@ -1,27 +1,32 @@
 import { React, useEffect, useState } from 'react';
+import { View } from 'react-native';
 import Geocoder from 'react-native-geocoding';
 import MapView, { Marker } from 'react-native-maps';
+import { useSelector } from 'react-redux';
 
 export const AddressMap = (props) => {
     const [coordinates, setCoordinates] = useState({
-        lat: 47.3769,
-        lng: 8.5417,
+        lat: props.latitude ? props.latitude : 47.3769,
+        lng: props.longitude ? props.longitude : 8.5417,
     });
-    const [found, setFound] = useState(true);
+    const [found, setFound] = useState(props.latitude && props.longitude);
 
     useEffect(async () => {
-        try {
-            let json;
-            json = await Geocoder.from(props.address);
-            let location = json.results[0].geometry.location;
-            setCoordinates(location);
-            if (props.onSuccess) props.onSuccess(location);
-            console.log(location);
-            setFound(true);
-        } catch (error) {
-            console.warn(error);
-            if (props.onError) props.onError(error);
-            setFound(false);
+        if (props.address && props.resolveAddress) {
+            try {
+                let json;
+                json = await Geocoder.from(props.address);
+                let location = json.results[0].geometry.location;
+                setCoordinates(location);
+                if (props.onSuccess)
+                    props.onSuccess(location.lat, location.lng);
+                console.log(location);
+                setFound(true);
+            } catch (error) {
+                console.warn(error);
+                if (props.onError) props.onError(error);
+                setFound(false);
+            }
         }
     }, [props.address]);
 
@@ -32,8 +37,8 @@ export const AddressMap = (props) => {
                 region={{
                     latitude: coordinates.lat,
                     longitude: coordinates.lng,
-                    latitudeDelta: 0.03,
-                    longitudeDelta: 0.03,
+                    latitudeDelta: 0.05,
+                    longitudeDelta: 0.05,
                 }}
             >
                 {found ? (
@@ -47,5 +52,42 @@ export const AddressMap = (props) => {
                 ) : null}
             </MapView>
         </>
+    );
+};
+
+export const MatchesMap = ({ navigation }) => {
+    const { matches } = useSelector((state) => state.matchesState);
+    const coordinates =
+        Object.values(matches).length > 0
+            ? Object.values(matches)[0].addressCoordinates
+            : null;
+    const lat = coordinates ? coordinates.latitude : 47.3769;
+    const lng = coordinates ? coordinates.longitude : 8.5417;
+    return (
+        <View style={{ flex: 1, paddingVertical: 20 }}>
+            <MapView
+                style={{ width: '100%', height: '100%', borderRadius: 20 }}
+                region={{
+                    latitude: lat,
+                    longitude: lng,
+                    latitudeDelta: 0.2,
+                    longitudeDelta: 0.2,
+                }}
+            >
+                {Object.values(matches).map((match, index) => {
+                    return (
+                        <Marker
+                            key={index}
+                            onCalloutPress={() =>
+                                navigation.navigate('Match', { profile: match })
+                            }
+                            coordinate={match.addressCoordinates}
+                            title={match.name}
+                            description={match.biography}
+                        />
+                    );
+                })}
+            </MapView>
+        </View>
     );
 };

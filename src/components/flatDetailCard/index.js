@@ -75,6 +75,15 @@ export const FlatDetailCard = (props) => {
     const firstPage = (
         <DoubleTap doubleTap={props.onDoubleTap} delay={200}>
             <View style={{ height: '100%' }}>
+                {flatprofile.biography ? (
+                    <Box>
+                        <NormalText
+                            style={{ ...styles.text, textAlign: 'center' }}
+                        >
+                            {flatprofile.biography}
+                        </NormalText>
+                    </Box>
+                ) : null}
                 <View style={{ flexShrink: 1 }}>
                     <Pressable onPress={props.onPress}>
                         <ProfilePicture
@@ -90,19 +99,30 @@ export const FlatDetailCard = (props) => {
                 </View>
                 <Box />
                 <View>
-                    {flatprofile.biography ? (
+                    {flatprofile.description ? (
                         <Box>
                             <NormalText style={styles.text}>
-                                {flatprofile.biography}
+                                {flatprofile.description}
                             </NormalText>
+                        </Box>
+                    ) : null}
+
+                    {flatprofile.tags && flatprofile.tags.length > 0 ? (
+                        <Box>
+                            <Strong>{en.discover.tags}</Strong>
+                            <Tags tags={selectedTags} style={styles.tags} />
                         </Box>
                     ) : null}
 
                     <FlatList
                         data={flatInfos()}
                         numColumns={2}
-                        columnWrapperStyle={{
-                            paddingBottom: 30,
+                        columnWrapperStyle={{}}
+                        contentContainerStyle={{
+                            alignItems: 'stretch',
+                            justifyContent: 'space-between',
+                            maxHeight: '100%',
+                            flexGrow: 1,
                         }}
                         renderItem={({ item }) => {
                             return item ? (
@@ -145,27 +165,7 @@ export const FlatDetailCard = (props) => {
                     delay={200}
                     style={{ flex: 1 }}
                 >
-                    {flatprofile.description ? (
-                        <Box>
-                            <Strong style={styles.title}>
-                                {en.discover.description}
-                            </Strong>
-                            <NormalText style={styles.text}>
-                                {flatprofile.description}
-                            </NormalText>
-                        </Box>
-                    ) : null}
-
-                    {flatprofile.tags && flatprofile.tags.length > 0 ? (
-                        <Box>
-                            <Strong>{en.discover.tags}</Strong>
-                            <Tags tags={selectedTags} style={styles.tags} />
-                        </Box>
-                    ) : null}
-
-                    {flatprofile.roomMates &&
-                    flatprofile.numberOfRoommates ==
-                        flatprofile.roomMates.length ? (
+                    {flatprofile.numberOfRoommates ? (
                         <Box>
                             <Strong style={styles.title}>
                                 {en.discover.nrRoommates}
@@ -185,7 +185,13 @@ export const FlatDetailCard = (props) => {
             <Strong>{en.discover.location}</Strong>
             <NormalText>{flatprofile.address}</NormalText>
             <Box />
-            <AddressMap address={flatprofile.address} />
+            {flatprofile.addressCoordinates ? (
+                <AddressMap
+                    resolveAddress={false}
+                    latitude={flatprofile.addressCoordinates.latitude}
+                    longitude={flatprofile.addressCoordinates.longitude}
+                />
+            ) : null}
         </DoubleTap>
     );
 

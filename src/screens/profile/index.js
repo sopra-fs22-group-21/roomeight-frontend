@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Pressable, Text } from 'react-native';
+import { Pressable } from 'react-native';
 import { View } from 'react-native-animatable';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import { Tab } from 'react-native-elements/dist/tab/Tab';
@@ -8,25 +8,20 @@ import AddFlatInProfile from '../../components/addFlatInProfile';
 import FlatProfile from '../../components/flatProfile';
 import { ScreenContainer } from '../../components/screenContainer';
 import SingleProfile from '../../components/singleProfile';
-import { Box } from '../../components/theme';
+import { Box, SmallHeading } from '../../components/theme';
 import styles from './styles';
 
 const Profile = ({ navigation }) => {
     const { userprofile } = useSelector((state) => state.userprofileState);
     const { flatprofile } = useSelector((state) => state.flatprofileState);
-    const loading = useSelector((state) => state.loadingState);
     const [index, setIndex] = useState(userprofile.isAdvertisingRoom ? 1 : 0);
 
-    if (!loading) {
-        console.log('loading: ' + loading);
-        console.log(userprofile);
-    }
     return (
         <ScreenContainer navigation={navigation} showNavBar>
             <View>
-                <Text style={styles.name}>
+                <SmallHeading style={styles.name}>
                     {userprofile.firstName + ' ' + userprofile.lastName}
-                </Text>
+                </SmallHeading>
 
                 <Pressable
                     onPress={() => navigation.navigate('Settings')}

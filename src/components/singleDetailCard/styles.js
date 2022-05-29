@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     column2: {
         paddingLeft: -20,
         paddingTop: 5,
+        paddingRight: 10,
         flex: 1,
         transform: [
             {
@@ -20,16 +21,21 @@ const styles = StyleSheet.create({
         ],
     },
     icon: {
-        //position: 'absolute',
         flex: 0,
-        color: colors.secondary400,
+        color: colors.red,
     },
     card: {
         flex: 1,
+        overflow: 'scroll',
     },
     text: {
         fontSize: 15,
         paddingBottom: 4,
+    },
+    liked: {
+        fontFamily: 'SourceSans3SemiBold',
+        fontSize: 15,
+        paddingLeft: 3,
     },
     genderIcon: {
         fontSize: 15,
@@ -42,6 +48,7 @@ const styles = StyleSheet.create({
         aspectRatio: null,
         flex: 1,
         width: '100%',
+        padding: 0,
         borderColor: 'transparent',
         //flexShrink: 1,
     },
@@ -58,17 +65,19 @@ const styles = StyleSheet.create({
     },
     paginationContainer: {
         paddingTop: 20,
-        transform: [
-            {
-                translateY: -5,
-            },
-        ],
+        position: 'absolute',
+        alignSelf: 'center',
+        bottom: 0,
     },
     paginationDots: {
         width: 7,
         height: 7,
         borderRadius: 10,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    preMatch: {
+        borderWidth: 8,
+        borderColor: colors.primaryShadow,
     },
     /* messageButton: {
         position: 'absolute',

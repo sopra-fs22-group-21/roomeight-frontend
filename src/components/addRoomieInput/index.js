@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 import { setTransitAttributes } from '../../redux/actions/setTransitAttributes';
+import en from '../../resources/strings/en.json';
 import { SecondaryButton } from '../button';
 import { Input } from '../input';
 
@@ -9,10 +10,10 @@ import { Input } from '../input';
 export const AddRoomieInput = (props) => {
     const dispatch = useDispatch();
     const emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
-    const [nrEmails, setNrEmails] = useState(0);
+    const [nrEmails, setNrEmails] = useState(1);
     const [emailValid, setEmailValid] = useState(null);
 
-    const [roomMates, setRoommates] = useState([]);
+    const [roomMates, setRoommates] = useState([{ id: 0 }]);
 
     const addElement = () => {
         var newArray = [...roomMates, { id: nrEmails }];
@@ -30,12 +31,13 @@ export const AddRoomieInput = (props) => {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 onChangeText={(text) => {
+                    setEmailValid(false);
                     const copy = [...roomMates];
                     copy[item.id].email = text;
                     setRoommates(copy);
                     if (emailRegex.test(text)) {
                         setEmailValid(true);
-                        props.onChange(copy, true);
+                        if (props.onChange) props.onChange(copy, true);
                         dispatch(
                             setTransitAttributes(
                                 {
@@ -69,7 +71,7 @@ export const AddRoomieInput = (props) => {
                     setEmailValid(false);
                 }}
             >
-                Add another room8
+                {en.addRoomie.addAnother}
             </SecondaryButton>
         </>
     );

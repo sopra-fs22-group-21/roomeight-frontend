@@ -47,7 +47,7 @@
     "completePersonalProfile": {
         "heading": "Complete your personal profile",
         "title": "",
-        "info": "Choose your profile picture and tell us something about yourself.",
+        "info": "Choose your profile picture and tell us about yourself.",
         "select": "Please select a picture",
         "upload": "Upload a picture",
         "take": "Take a picture",
@@ -59,10 +59,11 @@
         "descriptionPlaceholder": "Add a longer description of your job, hobbies or roomeight expectations"
     },
     "completeSingleProfile": {
-        "heading": "Tell us something about yourself",
+        "heading": "Tell us about yourself",
         "title": "",
         "info": "Which tags describe you best? When will you be able to move in?",
         "moveInDate": "Move-In Date",
+        "moveOutDate": "Move-Out Date",
         "tags": "Tags"
     },
     "tags": {
@@ -103,16 +104,21 @@
         "heading": "Who are you and your roomies?",
         "info": "Tell your potential new roomeights something about your flat, so they can get an idea of what it's like to live with you!",
         "tags": "Tags",
-        "nrRoommates": "Number of roommates",
+        "nrRoommates": "Number of Roommates",
         "description": "Description",
         "descriptionPlaceholder": "Add a longer description of your jobs, hobbies or roomeight expectations",
         "biography": "Biography",
         "biographyPlaceholder": "That's your flat in one sentence"
     },
+    "addAddress": {
+        "heading": "Where are you located?",
+        "info": "Enter the address of your flat here. Only matches can see your address. To other profiles, the area where you live will be displayed on a map."
+    },
     "addRoomie": {
         "heading": "Add a room8 to your flat",
-        "info": "Type in the email of your room8 to allow him access to the app.",
-        "email": "Email"
+        "info": "Type in the email of your room8 to allow them access to the app.",
+        "email": "Email",
+        "addAnother": "Add another room8"
     },
     "accessExisting": {
         "heading": "Would you like to join a flat that already exists?",
@@ -143,18 +149,29 @@
         "temporary": "Temporary until",
         "roommates": "Room8s",
         "location": "Location",
-        "empty": "Nothing to discover...",
+        "empty": "You have browsed through all the profiles!\n\nMaybe you'll find more if you adjust your filters?",
         "loading": "Loading profiles you might like...",
         "moveInDate": "Move-In Date",
         "nrRoommates": "Room8s in total"
     },
+    "filter": {
+        "matchingTimeRangeExplanation": "If you activate the clever time range search, you will only be shown profiles that might be relevant according to your move-in and move-out date.",
+        "matchingTimeRange": "Clever time range"
+    },
     "matches": {
         "heading": "Matches",
-        "noNewMatches": "sorry:(\nno new matches...",
-        "noMatches": "sorry :(\nno matches yet..."
+        "incompleteMatches": "Matches in Progress",
+        "itsAMatch": "It's a match!",
+        "info": "",
+        "incompleteInfo": "For the match to become complete, your room8s need to like the profile too...",
+        "itsAnIncompleteMatch": " likes you back!",
+        "incompleteMatchesInfo": "At least half the room8s of your flat need to like a profile for it to become a match. Check out which profiles need your approval!",
+        "noNewMatches": "Sorry:(\nno new matches...",
+        "noMatches": "Sorry :(\nno matches yet...",
+        "noIncompleteMatches": "No new likes of your room8s"
     },
     "chat": {
-        "heading": "Chat",
+        "heading": "Chats",
         "noChats": "You haven't started\nany chats yet...",
         "startedChat": "started a chat with all of you"
     },
@@ -167,5 +184,11 @@
     },
     "settings": {
         "heading": "Settings"
+    },
+    "leaveFlat": {
+        "button": "Leave Flat",
+        "sure": "Are you sure you want to leave your flat?",
+        "cancel": "Cancel",
+        "ok": "OK"
     }
 }

@@ -3,8 +3,6 @@ import * as ImagePicker from 'expo-image-picker';
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { View } from 'react-native-animatable';
-import { colors } from 'react-native-elements';
-import Loader from 'react-native-modal-loader';
 import { useDispatch, useSelector } from 'react-redux';
 import PictureInput from '../../../components/pictureInput';
 import { ScreenContainer } from '../../../components/screenContainer';
@@ -19,13 +17,13 @@ import { setTransitAttributes } from '../../../redux/actions/setTransitAttribute
 import en from '../../../resources/strings/en.json';
 
 const AddPictures = ({ navigation, route }) => {
-    const isFlat = route.params.includes('flat');
+    const { userprofile } = useSelector((state) => state.userprofileState);
+    const isFlat =
+        route.params.includes('flat') || userprofile.isAdvertisingRoom;
     const profileType = isFlat ? 'flatprofile' : 'userprofile';
     const { transitUserprofile, transitFlatprofile } = useSelector(
         (state) => state.transitState
     );
-    const { userprofile } = useSelector((state) => state.userprofileState);
-    const { loading } = useSelector((state) => state.loadingState);
 
     const [images, setImages] = useState(
         isFlat
@@ -94,16 +92,12 @@ const AddPictures = ({ navigation, route }) => {
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
                 if (userprofile.isComplete && isFlat)
-                    navigation.navigate('Done', route.params);
+                    navigation.navigate('Done', 'flat');
                 else if (isFlat)
-                    navigation.navigate(
-                        'CompletePersonalProfile',
-                        route.params
-                    );
+                    navigation.navigate('CompletePersonalProfile', 'flat');
                 else navigation.navigate('Done', 'single');
             }}
         >
-            <Loader loading={loading} color={colors.secondary500} />
             <ScreenPadding>
                 <Heading>{en.addPictures.heading}</Heading>
                 <NormalText>

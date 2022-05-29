@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
-import { CheckBox } from 'react-native-elements/dist/checkbox/CheckBox';
+import { Alert, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
+import M8Loader from '../../../assets/logo/M8Loader';
 import { PrimaryButton } from '../../components/button';
-import DateInput from '../../components/dateInput';
 import { Input, InputBox, InputLabel } from '../../components/input';
 import Tags from '../../components/tags';
-import { postRoommateToFlat } from '../../redux/actions/postFlatprofile';
+import {
+    postLeaveFlat,
+    postRoommateToFlat,
+} from '../../redux/actions/postFlatprofile';
 import { updateProfile } from '../../redux/actions/updateActions';
 import en from '../../resources/strings/en.json';
 import { AddRoomieInput } from '../addRoomieInput';
+import { MoveInMoveOutInput } from '../moveInMoveOutInput';
 import { PictureInputGallery } from '../pictureInputGallery';
 import { PublicProfileCard } from '../publicProfileCard';
 import { Box } from '../theme';
@@ -20,34 +23,35 @@ const FlatProfile = ({ navigation }, props) => {
     useEffect(() => {}, []);
 
     const dispatch = useDispatch();
-    const loading = useSelector((state) => state.loadingState);
-
-    const [moveInDateValid, setmoveInDateValid] = useState(null);
-    const [moveOutDateValid, setMoveOutDateValid] = useState(null);
-    const { flatprofile } = useSelector((state) => state.flatprofileState);
+    const { flatprofile, loading } = useSelector(
+        (state) => state.flatprofileState
+    );
     const { transitFlatprofile } = useSelector((state) => state.transitState);
     const [flat, setFlat] = useState({});
-    const [addressValid, setAddressValid] = useState(true);
+    const [emailValid, setEmailValid] = useState(null);
     const [rentValid, setRentValid] = useState(null);
     const [roomSizeValid, setRoomSizeValid] = useState(null);
+    const [nrRoommatesValid, setNrRoommatesValid] = useState(null);
     const [nrBathroomsValid, setNrBathroomsValid] = useState(null);
     const [editMode, setEditMode] = useState(false);
 
-    function changeToTemporary() {
-        setFlat({
-            ...flat,
-            permanent: false,
-        });
-    }
+    const createTwoButtonAlert = () =>
+        Alert.alert(en.leaveFlat.button, en.leaveFlat.sure, [
+            {
+                text: en.leaveFlat.cancel,
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            {
+                text: en.leaveFlat.ok,
+                onPress: () => {
+                    console.log('OK Pressed');
+                    dispatch(postLeaveFlat());
+                },
+            },
+        ]);
 
-    function changeToPermanent() {
-        delete flat.moveOutDate;
-        setFlat({
-            ...flat,
-            permanent: true,
-        });
-    }
-
+    if (loading) return <M8Loader />;
     if (editMode) {
         return (
             <View style={styles.container}>
@@ -66,87 +70,47 @@ const FlatProfile = ({ navigation }, props) => {
                         }
                     />
                     <View>
-                        <Input
-                            label={en.roomInfo.address}
-                            error={addressValid === false}
-                            defaultValue={flatprofile.address}
-                            onChangeText={(text) =>
-                                setFlat({
-                                    ...flat,
-                                    address: text,
-                                })
-                            }
-                        />
-                        <DateInput
-                            label={en.roomInfo.moveInDate}
-                            valid={moveInDateValid}
-                            defaultDate={
+                        <MoveInMoveOutInput
+                            allowPermanentNull={false}
+                            moveInDate={
                                 flatprofile.moveInDate
                                     ? new Date(flatprofile.moveInDate)
-                                    : null
+                                    : undefined
                             }
-                            onChange={(date, valid) => {
-                                if (valid)
+                            moveOutDate={
+                                flatprofile.moveOutDate
+                                    ? new Date(flatprofile.moveOutDate)
+                                    : undefined
+                            }
+                            permanent={flatprofile.permanent}
+                            onSetMoveInDate={(date) => {
+                                setFlat({
+                                    ...flat,
+                                    moveInDate: date.toJSON(),
+                                });
+                            }}
+                            onChangePermanent={(permanent) => {
+                                setFlat({
+                                    ...flat,
+                                    permanent: permanent,
+                                });
+                            }}
+                            onSetMoveOutDate={(date) => {
+                                if (date != '')
                                     setFlat({
                                         ...flat,
-                                        moveInDate: date,
+                                        moveOutDate: date.toJSON(),
                                     });
-                                setmoveInDateValid(valid && date > new Date());
                             }}
                         />
-                        <InputLabel>{en.roomInfo.duration}</InputLabel>
-                        <Box style={styles.box}>
-                            <CheckBox
-                                containerStyle={styles.choice}
-                                wrapperStyle={styles.wrapper}
-                                textStyle={styles.text}
-                                title={'Temporary'}
-                                checkedIcon="dot-circle-o"
-                                uncheckedIcon="circle-o"
-                                color="#0E7490"
-                                checked={!flat.permanent}
-                                onPress={() => changeToTemporary()}
-                            ></CheckBox>
-                            <CheckBox
-                                containerStyle={styles.choice}
-                                wrapperStyle={styles.wrapper}
-                                textStyle={styles.text}
-                                title="Permanent"
-                                checkedIcon="dot-circle-o"
-                                uncheckedIcon="circle-o"
-                                color="#0E7490"
-                                checked={flat.permanent}
-                                onPress={() => changeToPermanent()}
-                            ></CheckBox>
-                        </Box>
-                        {!flat.permanent ? (
-                            <DateInput
-                                label={en.roomInfo.moveOutDate}
-                                error={moveOutDateValid === false}
-                                defaultDate={
-                                    flatprofile.moveOutDate
-                                        ? new Date(flatprofile.moveOutDate)
-                                        : null
-                                }
-                                onChange={(date, valid) => {
-                                    const isValid =
-                                        valid &&
-                                        date > new Date(flatprofile.moveInDate);
-                                    if (isValid)
-                                        setFlat({
-                                            ...flat,
-                                            moveOutDate: date.toJSON(),
-                                        });
-                                    setMoveOutDateValid(isValid);
-                                }}
-                            />
-                        ) : null}
                         <Input
                             label={en.roomInfo.rent}
                             keyboardType="number-pad"
                             error={rentValid === false}
                             placeholder="CHF"
-                            defaultValue={flatprofile.rent + ''}
+                            defaultValue={
+                                flatprofile.rent ? flatprofile.rent + '' : null
+                            }
                             onChangeText={(text) => {
                                 setRentValid(!isNaN(Number(text)));
                                 setFlat({
@@ -160,7 +124,11 @@ const FlatProfile = ({ navigation }, props) => {
                             keyboardType="number-pad"
                             placeholder="m2"
                             error={roomSizeValid === false}
-                            defaultValue={flatprofile.roomSize + ''}
+                            defaultValue={
+                                flatprofile.roomSize
+                                    ? flatprofile.roomSize + ''
+                                    : null
+                            }
                             onChangeText={(text) => {
                                 setRoomSizeValid(!isNaN(Number(text)));
                                 setFlat({
@@ -180,32 +148,68 @@ const FlatProfile = ({ navigation }, props) => {
                                 }
                             />
                         </InputBox>
-                        <AddRoomieInput />
+                        <InputLabel>{en.addRoomie.heading}</InputLabel>
                         <Box />
-                        {/*
-                        <Input
-                            label={en.flatInfo.nrRoommates}
-                            keyboardType="number-pad"
-                            error={nrRoommatesValid === false}
-                            defaultValue={flatprofile.numberOfRoommates}
-                            onChangeText={(text) => {
-                                setNrRoommatesValid(!isNaN(Number(text)));
+                        <AddRoomieInput
+                            onChange={(emails, valid) => {
+                                setEmailValid(true);
                                 setFlat({
                                     ...flat,
-                                    numberOfRoommates: Number(text),
+                                    roommateEmails: emails.map(
+                                        (email) => email.email
+                                    ),
                                 });
                             }}
-                        /> */}
+                        />
+                        <Box />
+                        {
+                            <Input
+                                label={en.flatInfo.nrRoommates}
+                                keyboardType="number-pad"
+                                error={nrRoommatesValid === false}
+                                defaultValue={
+                                    flatprofile.numberOfRoommates
+                                        ? flatprofile.numberOfRoommates + ''
+                                        : null
+                                }
+                                onChangeText={(text) => {
+                                    setNrRoommatesValid(!isNaN(Number(text)));
+                                    setFlat({
+                                        ...flat,
+                                        numberOfRoommates: Number(text),
+                                    });
+                                }}
+                            />
+                        }
                         <Input
                             label={en.roomInfo.nrBathrooms}
                             keyboardType="number-pad"
                             error={nrBathroomsValid === false}
-                            defaultValue={flatprofile.numberOfBaths + ''}
+                            defaultValue={
+                                flatprofile.numberOfBaths
+                                    ? flatprofile.numberOfBaths + ''
+                                    : null
+                            }
                             onChangeText={(text) => {
                                 setNrBathroomsValid(!isNaN(Number(text)));
                                 setFlat({
                                     ...flat,
                                     numberOfBaths: Number(text),
+                                });
+                            }}
+                        />
+                        <Input
+                            label={en.flatInfo.biography}
+                            defaultValue={
+                                flatprofile.biography
+                                    ? flatprofile.biography
+                                    : null
+                            }
+                            placeholder={en.flatInfo.biographyPlaceholder}
+                            onChangeText={(text) => {
+                                setFlat({
+                                    ...flat,
+                                    biography: text,
                                 });
                             }}
                         />
@@ -221,6 +225,14 @@ const FlatProfile = ({ navigation }, props) => {
                                 })
                             }
                         />
+                        <PrimaryButton
+                            style={styles.leaveButton}
+                            onPress={() => {
+                                createTwoButtonAlert();
+                            }}
+                        >
+                            {en.leaveFlat.button}
+                        </PrimaryButton>
                     </View>
                 </KeyboardAwareScrollView>
                 <Box style={styles.space}></Box>
@@ -233,9 +245,6 @@ const FlatProfile = ({ navigation }, props) => {
                                 'flatprofile',
                                 flatprofile.profileId
                             )
-                        );
-                        transitFlatprofile.roommateEmails.forEach((email) =>
-                            dispatch(postRoommateToFlat(email))
                         );
                     }}
                 >
