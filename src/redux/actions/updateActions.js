@@ -3,6 +3,7 @@ import apiClient from '../../helper/apiClient';
 import { registerForPushNotificationsAsync } from '../../helper/notificationsHelper';
 import * as Constants from '../constants';
 import { uploadImages } from './imageActions';
+import { postRoommateToFlat } from './postFlatprofile';
 
 const updateProfileRequest = (profileType) => ({
     type:
@@ -83,17 +84,19 @@ export const updateProfile =
                         console.log(requestBody);
                     });
             })
-            .then(() => {
+            .then(async () => {
                 if (emails) {
                     console.log('adding users to flat');
                     console.log(emails);
-                    return Promise.all(
-                        emails.map((email) => {
-                            return dispatch(postRoommateToFlat(email));
-                        })
-                    ).catch((error) =>
-                        console.log('error posting roommates ' + error)
-                    );
+                    try {
+                        return await Promise.all(
+                            emails.map((email) => {
+                                return dispatch(postRoommateToFlat(email));
+                            })
+                        );
+                    } catch (error) {
+                        return console.log('error posting roommates ' + error);
+                    }
                 }
             });
     };

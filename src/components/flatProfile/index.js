@@ -28,7 +28,7 @@ const FlatProfile = ({ navigation }, props) => {
     );
     const { transitFlatprofile } = useSelector((state) => state.transitState);
     const [flat, setFlat] = useState({});
-    const [addressValid, setAddressValid] = useState(true);
+    const [emailValid, setEmailValid] = useState(null);
     const [rentValid, setRentValid] = useState(null);
     const [roomSizeValid, setRoomSizeValid] = useState(null);
     const [nrRoommatesValid, setNrRoommatesValid] = useState(null);
@@ -150,7 +150,11 @@ const FlatProfile = ({ navigation }, props) => {
                         </InputBox>
                         <InputLabel>{en.addRoomie.heading}</InputLabel>
                         <Box />
-                        <AddRoomieInput />
+                        <AddRoomieInput 
+                            onChange={(emails, valid) =>
+                                setEmailValid(true)
+                            }
+                        />
                         <Box />
                         {
                             <Input
