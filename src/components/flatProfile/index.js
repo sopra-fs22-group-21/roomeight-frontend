@@ -150,10 +150,8 @@ const FlatProfile = ({ navigation }, props) => {
                         </InputBox>
                         <InputLabel>{en.addRoomie.heading}</InputLabel>
                         <Box />
-                        <AddRoomieInput 
-                            onChange={(emails, valid) =>
-                                setEmailValid(true)
-                            }
+                        <AddRoomieInput
+                            onChange={(emails, valid) => setEmailValid(true)}
                         />
                         <Box />
                         {
