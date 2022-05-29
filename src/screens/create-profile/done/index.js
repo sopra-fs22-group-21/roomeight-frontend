@@ -46,7 +46,10 @@ const Done = ({ navigation, route }) => {
                             dispatch({
                                 type: ENTER_APP_LOADING,
                             });
-                            if (route.params.includes('flat')) {
+                            if (
+                                route.params.includes('flat') ||
+                                userprofile.isAdvertisingRoom
+                            ) {
                                 dispatch(
                                     updateProfile(
                                         transitFlatprofile,

@@ -17,12 +17,13 @@ import { setTransitAttributes } from '../../../redux/actions/setTransitAttribute
 import en from '../../../resources/strings/en.json';
 
 const AddPictures = ({ navigation, route }) => {
-    const isFlat = route.params.includes('flat');
+    const { userprofile } = useSelector((state) => state.userprofileState);
+    const isFlat =
+        route.params.includes('flat') || userprofile.isAdvertisingRoom;
     const profileType = isFlat ? 'flatprofile' : 'userprofile';
     const { transitUserprofile, transitFlatprofile } = useSelector(
         (state) => state.transitState
     );
-    const { userprofile } = useSelector((state) => state.userprofileState);
 
     const [images, setImages] = useState(
         isFlat
@@ -91,12 +92,9 @@ const AddPictures = ({ navigation, route }) => {
             onPressBack={() => navigation.goBack()}
             onPressNext={() => {
                 if (userprofile.isComplete && isFlat)
-                    navigation.navigate('Done', route.params);
+                    navigation.navigate('Done', 'flat');
                 else if (isFlat)
-                    navigation.navigate(
-                        'CompletePersonalProfile',
-                        route.params
-                    );
+                    navigation.navigate('CompletePersonalProfile', 'flat');
                 else navigation.navigate('Done', 'single');
             }}
         >

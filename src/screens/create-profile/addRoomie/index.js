@@ -67,7 +67,7 @@ const AddRoomie = ({ navigation, route }) => {
                 navigation={navigation}
                 onPressBack={() => navigation.goBack()}
                 onPressNext={() => {
-                    navigation.navigate('Done');
+                    navigation.navigate('Done', 'flat');
                 }}
                 nextDisabled={emailValid === false}
             >
